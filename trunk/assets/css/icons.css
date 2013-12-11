@@ -1,0 +1,24 @@
+.icon16x16-add {
+    background-image: url('../images/icons/add.png') !important;
+}
+.icon16x16-edit {
+    background-image: url('../images/icons/edit.png') !important;
+}
+.icon16x16-delete {
+    background-image: url('../images/icons/delete.png') !important;
+}
+.icon16x16-refresh {
+    background-image: url('../images/icons/refresh.png') !important;
+}
+.icon16x16-search {
+    background-image: url('../images/icons/search.png') !important;
+}
+.icon16x16-print {
+    background-image: url('../images/icons/print.png') !important;
+}
+.icon16x16-table {
+    background-image: url('../images/icons/table.png') !important;
+}
+.mywindow{
+	position:absolute;
+}
