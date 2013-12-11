@@ -1,0 +1,91 @@
+@media print{
+	@page {
+		size: auto;
+		margin: 0mm;
+	}
+	body {
+		font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+	}
+}
+@media screen{
+	body {
+		font: normal 11px auto "Trebuchet MS", Verdana, Arial, Helvetica, sans-serif;
+		color: #4f6b72;
+		background: #E6EAE9;
+	}
+}
+table {
+	border-collapse: collapse;
+	border: 2px solid #3f7c5f;
+	font: normal arial, verdana, helvetica, sans-serif;
+	color: #000;
+	background: #fff;
+}
+caption {
+	padding: 0 0.6em 0.8em;
+	font-size: 1.3em;
+	font-weight: bold;
+	text-align: center;
+	color: #000;
+	background: transparent;
+}
+td, th {
+	border: 1px solid #e0e0e0;
+	padding: 0.2em;
+}
+thead th {
+	border: 1px solid #e0e0e0;
+	text-align: left;
+	font-weight: bold;
+	background: #c6d7cf;
+}
+tfoot th, tfoot td {
+	border: 1px solid #e0e0e0;
+	text-align: left;
+	background: #e8e8cf;
+}
+tfoot th {
+	font-weight: bold;
+}
+tbody td a {
+	background: transparent;
+	color: #00c;
+	text-decoration: underline;
+	text-align:inherit;
+}
+tbody td a:hover {
+	background: transparent;
+	color: #00c;
+	text-decoration: underline;
+}
+tbody th a {
+	background: transparent;
+	color: #3f7c5f;
+	text-decoration: underline;
+	font-weight: bold;
+}
+tbody th a:visited {
+	color: #b98b00;
+}
+tbody th, tbody td {
+	vertical-align: top;
+}
+tfoot td {
+	border: 1px solid #996;
+}
+tbody tr:hover {
+	background: #ffffd9;
+}
+
+.numeric{
+	text-align: right;
+}
+
+.numericsum{
+	text-align: right;
+	font-weight: bold;
+}
+
+.clear{
+	border: none;
+}
