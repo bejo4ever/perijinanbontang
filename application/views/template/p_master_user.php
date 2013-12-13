@@ -2,7 +2,7 @@
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Idam</title>
+	<title>Daftar Data Ster_user</title>
 	<xml>
 	 <x:ExcelWorkbook>
 	  <x:ExcelWorksheets>
@@ -24,19 +24,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Idam</title>
+	<title>Daftar Data Ster_user</title>
 	<link rel='stylesheet' type='text/css' href='../assets/css/printstyle.css'/>
 </head>
 <body onload="window.print();">
 <?php } ?>	<table>
-		<caption>Idam</caption>
+		<caption>Ster_user</caption>
 		<thead>
 			<tr>
 				<th align="center" width="50">No</td>
-				<th align="center">idam_usaha</td>
-				<th align="center">idam_jenisusaha</td>
-				<th align="center">idam_alamat</td>
-				<th align="center">idam_sertifikatpkp</td>
+				<th align="center">USER</td>
+				<th align="center">PASS</td>
+				<th align="center">NAMA</td>
+				<th align="center">NIP</td>
+				<th align="center">TELP</td>
+				<th align="center">EMAIL</td>
+				<th align="center">ID_HAK</td>
 				</tr>
 		</thead>
 		<tbody>
@@ -48,13 +51,16 @@
 			?>
 				<tr>
 					<td><?php echo $total_record; ?></td>
-					<td><?php echo $subrecord->idam_usaha; ?></td>
-					<td><?php echo $subrecord->idam_jenisusaha; ?></td>
-					<td><?php echo $subrecord->idam_alamat; ?></td>
-					<td><?php echo $subrecord->idam_sertifikatpkp; ?></td>
+					<td><?php echo $subrecord->USER; ?></td>
+					<td><?php echo $subrecord->PASS; ?></td>
+					<td><?php echo $subrecord->NAMA; ?></td>
+					<td><?php echo $subrecord->NIP; ?></td>
+					<td><?php echo $subrecord->TELP; ?></td>
+					<td><?php echo $subrecord->EMAIL; ?></td>
+					<td><?php echo $subrecord->ID_HAK; ?></td>
 					</tr>
 			<?php }} ?>			<tr>
-				<td colspan="4" align="left">Total</td>
+				<td colspan="7" align="left">Total</td>
 				<td><?php echo $total_record; ?></td>
 			</tr>
 		<tbody>

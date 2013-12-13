@@ -17,7 +17,7 @@ class App_model extends CI_Model{
 		if($key != null){
 			return @$_SESSION[$key];
 		}else{
-			return @$_SESSION['NVL_SIPKP_USERNAME'];
+			return @$_SESSION['PERIJINAN_USERNAME'];
 		}
 	}
 	

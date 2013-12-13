@@ -133,7 +133,7 @@
                 <div class="span3" id="sidebar">
                     <ul class="nav nav-list bs-docs-sidenav nav-collapse collapse" id="sidebarmenu">
                         <li>
-                            <a href="#c_t_idam"><i class="icon-chevron-right"></i> Depo Air Minum</a>
+                            <a href="#c_t_idam_det"><i class="icon-chevron-right"></i> Depo Air Minum</a>
                         </li>
                         <li>
                             <a href="#c_t_iujk"><i class="icon-chevron-right"></i> IUJK</a>
