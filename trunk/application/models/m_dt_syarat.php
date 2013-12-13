@@ -1,19 +1,17 @@
 <?php
-class M_t_idam extends App_model{
+class M_dt_syarat extends App_model{
 	var $mainSql = "SELECT 
-				idam_id,
-				idam_usaha,
-				idam_jenisusaha,
-				idam_alamat,
-				idam_sertifikatpkp
-				FROM t_idam 
-			WHERE idam_id IS NOT NULL 
+				ID_IJIN,
+				ID_SYARAT,
+				JUMLAH
+				FROM dt_syarat 
+			WHERE ID_SYARAT IS NOT NULL 
 	";
 	
 	function __construct(){
         parent::__construct();
-        $this->table_name = 't_idam';
-        $this->column_primary = 'idam_id';
+        $this->table_name = 'dt_syarat';
+        $this->column_primary = 'ID_SYARAT';
         $this->column_order = '';
 		$this->column_unique = '';
     }
@@ -24,10 +22,7 @@ class M_t_idam extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					idam_usaha LIKE '%".$searchText."%' OR 
-					idam_jenisusaha LIKE '%".$searchText."%' OR 
-					idam_alamat LIKE '%".$searchText."%' OR 
-					idam_sertifikatpkp LIKE '%".$searchText."%'
+					JUMLAH LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -43,17 +38,8 @@ class M_t_idam extends App_model{
 		
 		$sql = $this->mainSql;
 		
-		if(@$idam_usaha != ''){
-			$sql .= " AND idam_usaha LIKE '%".$idam_usaha."%' ";
-		}
-		if(@$idam_jenisusaha != ''){
-			$sql .= " AND idam_jenisusaha LIKE '%".$idam_jenisusaha."%' ";
-		}
-		if(@$idam_alamat != ''){
-			$sql .= " AND idam_alamat LIKE '%".$idam_alamat."%' ";
-		}
-		if(@$idam_sertifikatpkp != ''){
-			$sql .= " AND idam_sertifikatpkp LIKE '%".$idam_sertifikatpkp."%' ";
+		if(@$JUMLAH != ''){
+			$sql .= " AND JUMLAH LIKE '%".$JUMLAH."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

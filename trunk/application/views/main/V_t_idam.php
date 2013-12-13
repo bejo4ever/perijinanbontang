@@ -14,41 +14,15 @@
 		var idam_searchWindow;
 		
 		var idam_idField;
-		var idam_jenisField;
-		var idam_tanggalField;
-		var idam_statusField;
-		var idam_keteranganField;
-		var idam_bapField;
-		var idam_baptanggalField;
-		var idam_kelengkapanField;
-		var idam_terimaField;
-		var idam_terimatanggalField;
 		var idam_usahaField;
 		var idam_jenisusahaField;
 		var idam_alamatField;
 		var idam_sertifikatpkpField;
-		var idam_nomorijinField;
-		var idam_nomorurutField;
-		var idam_berlakuField;
-		var idam_kadaluarsaField;
 				
-		var idam_jenisSearchField;
-		var idam_tanggalSearchField;
-		var idam_statusSearchField;
-		var idam_keteranganSearchField;
-		var idam_bapSearchField;
-		var idam_baptanggalSearchField;
-		var idam_kelengkapanSearchField;
-		var idam_terimaSearchField;
-		var idam_terimatanggalSearchField;
 		var idam_usahaSearchField;
 		var idam_jenisusahaSearchField;
 		var idam_alamatSearchField;
 		var idam_sertifikatpkpSearchField;
-		var idam_nomorijinSearchField;
-		var idam_nomorurutSearchField;
-		var idam_berlakuSearchField;
-		var idam_kadaluarsaSearchField;
 				
 		var idam_dbTask = 'CREATE';
 		var idam_dbTaskMessage = 'Tambah';
@@ -123,65 +97,26 @@
 			}else{
 				if(idam_confirmFormValid()){
 					var idam_idValue = '';
-					var idam_jenisValue = '';
-					var idam_tanggalValue = '';
-					var idam_statusValue = '';
-					var idam_keteranganValue = '';
-					var idam_bapValue = '';
-					var idam_baptanggalValue = '';
-					var idam_kelengkapanValue = '';
-					var idam_terimaValue = '';
-					var idam_terimatanggalValue = '';
 					var idam_usahaValue = '';
 					var idam_jenisusahaValue = '';
 					var idam_alamatValue = '';
 					var idam_sertifikatpkpValue = '';
-					var idam_nomorijinValue = '';
-					var idam_nomorurutValue = '';
-					var idam_berlakuValue = '';
-					var idam_kadaluarsaValue = '';
 										
 					idam_idValue = idam_idField.getValue();
-					idam_jenisValue = idam_jenisField.getValue();
-					idam_tanggalValue = idam_tanggalField.getValue();
-					idam_statusValue = idam_statusField.getValue();
-					idam_keteranganValue = idam_keteranganField.getValue();
-					idam_bapValue = idam_bapField.getValue();
-					idam_baptanggalValue = idam_baptanggalField.getValue();
-					idam_kelengkapanValue = idam_kelengkapanField.getValue();
-					idam_terimaValue = idam_terimaField.getValue();
-					idam_terimatanggalValue = idam_terimatanggalField.getValue();
 					idam_usahaValue = idam_usahaField.getValue();
 					idam_jenisusahaValue = idam_jenisusahaField.getValue();
 					idam_alamatValue = idam_alamatField.getValue();
 					idam_sertifikatpkpValue = idam_sertifikatpkpField.getValue();
-					idam_nomorijinValue = idam_nomorijinField.getValue();
-					idam_nomorurutValue = idam_nomorurutField.getValue();
-					idam_berlakuValue = idam_berlakuField.getValue();
-					idam_kadaluarsaValue = idam_kadaluarsaField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_idam/switchAction',
 						params: {							
 							idam_id : idam_idValue,
-							idam_jenis : idam_jenisValue,
-							idam_tanggal : idam_tanggalValue,
-							idam_status : idam_statusValue,
-							idam_keterangan : idam_keteranganValue,
-							idam_bap : idam_bapValue,
-							idam_baptanggal : idam_baptanggalValue,
-							idam_kelengkapan : idam_kelengkapanValue,
-							idam_terima : idam_terimaValue,
-							idam_terimatanggal : idam_terimatanggalValue,
 							idam_usaha : idam_usahaValue,
 							idam_jenisusaha : idam_jenisusahaValue,
 							idam_alamat : idam_alamatValue,
 							idam_sertifikatpkp : idam_sertifikatpkpValue,
-							idam_nomorijin : idam_nomorijinValue,
-							idam_nomorurut : idam_nomorurutValue,
-							idam_berlaku : idam_berlakuValue,
-							idam_kadaluarsa : idam_kadaluarsaValue,
 							action : idam_dbTask
 						},
 						success: function(response){
@@ -335,23 +270,10 @@
 			
 			var record = idam_gridPanel.getSelectionModel().getSelection()[0];
 			idam_idField.setValue(record.data.idam_id);
-			idam_jenisField.setValue(record.data.idam_jenis);
-			idam_tanggalField.setValue(record.data.idam_tanggal);
-			idam_statusField.setValue(record.data.idam_status);
-			idam_keteranganField.setValue(record.data.idam_keterangan);
-			idam_bapField.setValue(record.data.idam_bap);
-			idam_baptanggalField.setValue(record.data.idam_baptanggal);
-			idam_kelengkapanField.setValue(record.data.idam_kelengkapan);
-			idam_terimaField.setValue(record.data.idam_terima);
-			idam_terimatanggalField.setValue(record.data.idam_terimatanggal);
 			idam_usahaField.setValue(record.data.idam_usaha);
 			idam_jenisusahaField.setValue(record.data.idam_jenisusaha);
 			idam_alamatField.setValue(record.data.idam_alamat);
 			idam_sertifikatpkpField.setValue(record.data.idam_sertifikatpkp);
-			idam_nomorijinField.setValue(record.data.idam_nomorijin);
-			idam_nomorurutField.setValue(record.data.idam_nomorurut);
-			idam_berlakuField.setValue(record.data.idam_berlaku);
-			idam_kadaluarsaField.setValue(record.data.idam_kadaluarsa);
 					}
 		
 		function idam_showSearchWindow(){
@@ -361,60 +283,21 @@
 		function idam_search(){
 			idam_gridSearchField.reset();
 			
-			var idam_jenisValue = '';
-			var idam_tanggalValue = '';
-			var idam_statusValue = '';
-			var idam_keteranganValue = '';
-			var idam_bapValue = '';
-			var idam_baptanggalValue = '';
-			var idam_kelengkapanValue = '';
-			var idam_terimaValue = '';
-			var idam_terimatanggalValue = '';
 			var idam_usahaValue = '';
 			var idam_jenisusahaValue = '';
 			var idam_alamatValue = '';
 			var idam_sertifikatpkpValue = '';
-			var idam_nomorijinValue = '';
-			var idam_nomorurutValue = '';
-			var idam_berlakuValue = '';
-			var idam_kadaluarsaValue = '';
 						
-			idam_jenisValue = idam_jenisSearchField.getValue();
-			idam_tanggalValue = idam_tanggalSearchField.getValue();
-			idam_statusValue = idam_statusSearchField.getValue();
-			idam_keteranganValue = idam_keteranganSearchField.getValue();
-			idam_bapValue = idam_bapSearchField.getValue();
-			idam_baptanggalValue = idam_baptanggalSearchField.getValue();
-			idam_kelengkapanValue = idam_kelengkapanSearchField.getValue();
-			idam_terimaValue = idam_terimaSearchField.getValue();
-			idam_terimatanggalValue = idam_terimatanggalSearchField.getValue();
 			idam_usahaValue = idam_usahaSearchField.getValue();
 			idam_jenisusahaValue = idam_jenisusahaSearchField.getValue();
 			idam_alamatValue = idam_alamatSearchField.getValue();
 			idam_sertifikatpkpValue = idam_sertifikatpkpSearchField.getValue();
-			idam_nomorijinValue = idam_nomorijinSearchField.getValue();
-			idam_nomorurutValue = idam_nomorurutSearchField.getValue();
-			idam_berlakuValue = idam_berlakuSearchField.getValue();
-			idam_kadaluarsaValue = idam_kadaluarsaSearchField.getValue();
 			idam_dbListAction = "SEARCH";
 			idam_dataStore.proxy.extraParams = { 
-				idam_jenis : idam_jenisValue,
-				idam_tanggal : idam_tanggalValue,
-				idam_status : idam_statusValue,
-				idam_keterangan : idam_keteranganValue,
-				idam_bap : idam_bapValue,
-				idam_baptanggal : idam_baptanggalValue,
-				idam_kelengkapan : idam_kelengkapanValue,
-				idam_terima : idam_terimaValue,
-				idam_terimatanggal : idam_terimatanggalValue,
 				idam_usaha : idam_usahaValue,
 				idam_jenisusaha : idam_jenisusahaValue,
 				idam_alamat : idam_alamatValue,
 				idam_sertifikatpkp : idam_sertifikatpkpValue,
-				idam_nomorijin : idam_nomorijinValue,
-				idam_nomorurut : idam_nomorurutValue,
-				idam_berlaku : idam_berlakuValue,
-				idam_kadaluarsa : idam_kadaluarsaValue,
 				action : 'SEARCH'
 			};
 			idam_dataStore.currentPage = 1;
@@ -428,42 +311,16 @@
 		
 		function idam_printExcel(outputType){
 			var searchText = "";
-			var idam_jenisValue = '';
-			var idam_tanggalValue = '';
-			var idam_statusValue = '';
-			var idam_keteranganValue = '';
-			var idam_bapValue = '';
-			var idam_baptanggalValue = '';
-			var idam_kelengkapanValue = '';
-			var idam_terimaValue = '';
-			var idam_terimatanggalValue = '';
 			var idam_usahaValue = '';
 			var idam_jenisusahaValue = '';
 			var idam_alamatValue = '';
 			var idam_sertifikatpkpValue = '';
-			var idam_nomorijinValue = '';
-			var idam_nomorurutValue = '';
-			var idam_berlakuValue = '';
-			var idam_kadaluarsaValue = '';
 			
 			if(idam_dataStore.proxy.extraParams.query!==null){searchText = idam_dataStore.proxy.extraParams.query;}
-			if(idam_dataStore.proxy.extraParams.idam_jenis!==null){idam_jenisValue = idam_dataStore.proxy.extraParams.idam_jenis;}
-			if(idam_dataStore.proxy.extraParams.idam_tanggal!==null){idam_tanggalValue = idam_dataStore.proxy.extraParams.idam_tanggal;}
-			if(idam_dataStore.proxy.extraParams.idam_status!==null){idam_statusValue = idam_dataStore.proxy.extraParams.idam_status;}
-			if(idam_dataStore.proxy.extraParams.idam_keterangan!==null){idam_keteranganValue = idam_dataStore.proxy.extraParams.idam_keterangan;}
-			if(idam_dataStore.proxy.extraParams.idam_bap!==null){idam_bapValue = idam_dataStore.proxy.extraParams.idam_bap;}
-			if(idam_dataStore.proxy.extraParams.idam_baptanggal!==null){idam_baptanggalValue = idam_dataStore.proxy.extraParams.idam_baptanggal;}
-			if(idam_dataStore.proxy.extraParams.idam_kelengkapan!==null){idam_kelengkapanValue = idam_dataStore.proxy.extraParams.idam_kelengkapan;}
-			if(idam_dataStore.proxy.extraParams.idam_terima!==null){idam_terimaValue = idam_dataStore.proxy.extraParams.idam_terima;}
-			if(idam_dataStore.proxy.extraParams.idam_terimatanggal!==null){idam_terimatanggalValue = idam_dataStore.proxy.extraParams.idam_terimatanggal;}
 			if(idam_dataStore.proxy.extraParams.idam_usaha!==null){idam_usahaValue = idam_dataStore.proxy.extraParams.idam_usaha;}
 			if(idam_dataStore.proxy.extraParams.idam_jenisusaha!==null){idam_jenisusahaValue = idam_dataStore.proxy.extraParams.idam_jenisusaha;}
 			if(idam_dataStore.proxy.extraParams.idam_alamat!==null){idam_alamatValue = idam_dataStore.proxy.extraParams.idam_alamat;}
 			if(idam_dataStore.proxy.extraParams.idam_sertifikatpkp!==null){idam_sertifikatpkpValue = idam_dataStore.proxy.extraParams.idam_sertifikatpkp;}
-			if(idam_dataStore.proxy.extraParams.idam_nomorijin!==null){idam_nomorijinValue = idam_dataStore.proxy.extraParams.idam_nomorijin;}
-			if(idam_dataStore.proxy.extraParams.idam_nomorurut!==null){idam_nomorurutValue = idam_dataStore.proxy.extraParams.idam_nomorurut;}
-			if(idam_dataStore.proxy.extraParams.idam_berlaku!==null){idam_berlakuValue = idam_dataStore.proxy.extraParams.idam_berlaku;}
-			if(idam_dataStore.proxy.extraParams.idam_kadaluarsa!==null){idam_kadaluarsaValue = idam_dataStore.proxy.extraParams.idam_kadaluarsa;}
 			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
 			Ext.Ajax.request({
 				waitMsg : 'Please Wait...',
@@ -471,23 +328,10 @@
 				params : {
 					action : outputType,
 					query : searchText,
-					idam_jenis : idam_jenisValue,
-					idam_tanggal : idam_tanggalValue,
-					idam_status : idam_statusValue,
-					idam_keterangan : idam_keteranganValue,
-					idam_bap : idam_bapValue,
-					idam_baptanggal : idam_baptanggalValue,
-					idam_kelengkapan : idam_kelengkapanValue,
-					idam_terima : idam_terimaValue,
-					idam_terimatanggal : idam_terimatanggalValue,
 					idam_usaha : idam_usahaValue,
 					idam_jenisusaha : idam_jenisusahaValue,
 					idam_alamat : idam_alamatValue,
 					idam_sertifikatpkp : idam_sertifikatpkpValue,
-					idam_nomorijin : idam_nomorijinValue,
-					idam_nomorurut : idam_nomorurutValue,
-					idam_berlaku : idam_berlakuValue,
-					idam_kadaluarsa : idam_kadaluarsaValue,
 					currentAction : idam_dbListAction
 				},
 				success: function(response){
@@ -548,23 +392,10 @@
 			}),
 			fields : [
 				{ name : 'idam_id', type : 'int', mapping : 'idam_id' },
-				{ name : 'idam_jenis', type : 'int', mapping : 'idam_jenis' },
-				{ name : 'idam_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'idam_tanggal' },
-				{ name : 'idam_status', type : 'string', mapping : 'idam_status' },
-				{ name : 'idam_keterangan', type : 'string', mapping : 'idam_keterangan' },
-				{ name : 'idam_bap', type : 'string', mapping : 'idam_bap' },
-				{ name : 'idam_baptanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'idam_baptanggal' },
-				{ name : 'idam_kelengkapan', type : 'int', mapping : 'idam_kelengkapan' },
-				{ name : 'idam_terima', type : 'string', mapping : 'idam_terima' },
-				{ name : 'idam_terimatanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'idam_terimatanggal' },
 				{ name : 'idam_usaha', type : 'string', mapping : 'idam_usaha' },
 				{ name : 'idam_jenisusaha', type : 'string', mapping : 'idam_jenisusaha' },
 				{ name : 'idam_alamat', type : 'string', mapping : 'idam_alamat' },
 				{ name : 'idam_sertifikatpkp', type : 'string', mapping : 'idam_sertifikatpkp' },
-				{ name : 'idam_nomorijin', type : 'string', mapping : 'idam_nomorijin' },
-				{ name : 'idam_nomorurut', type : 'int', mapping : 'idam_nomorurut' },
-				{ name : 'idam_berlaku', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'idam_berlaku' },
-				{ name : 'idam_kadaluarsa', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'idam_kadaluarsa' },
 				]
 		});
 /* End DataStore declaration */
@@ -744,60 +575,6 @@
 			keys : idam_shorcut,
 			columns : [
 				{
-					text : 'idam_jenis',
-					dataIndex : 'idam_jenis',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_tanggal',
-					dataIndex : 'idam_tanggal',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_status',
-					dataIndex : 'idam_status',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_keterangan',
-					dataIndex : 'idam_keterangan',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_bap',
-					dataIndex : 'idam_bap',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_baptanggal',
-					dataIndex : 'idam_baptanggal',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_kelengkapan',
-					dataIndex : 'idam_kelengkapan',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_terima',
-					dataIndex : 'idam_terima',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_terimatanggal',
-					dataIndex : 'idam_terimatanggal',
-					width : 100,
-					sortable : false
-				},
-				{
 					text : 'idam_usaha',
 					dataIndex : 'idam_usaha',
 					width : 100,
@@ -818,30 +595,6 @@
 				{
 					text : 'idam_sertifikatpkp',
 					dataIndex : 'idam_sertifikatpkp',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_nomorijin',
-					dataIndex : 'idam_nomorijin',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_nomorurut',
-					dataIndex : 'idam_nomorurut',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_berlaku',
-					dataIndex : 'idam_berlaku',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'idam_kadaluarsa',
-					dataIndex : 'idam_kadaluarsa',
 					width : 100,
 					sortable : false
 				},
@@ -879,66 +632,6 @@
 			allowDecimals : false,
 			hidden : true,
 			maskRe : /([0-9]+)$/});
-		idam_jenisField = Ext.create('Ext.form.NumberField',{
-			id : 'idam_jenisField',
-			name : 'idam_jenis',
-			fieldLabel : 'idam_jenis<font color=red>*</font>',
-			allowBlank : false,
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		idam_tanggalField = Ext.create('Ext.form.TextField',{
-			id : 'idam_tanggalField',
-			name : 'idam_tanggal',
-			fieldLabel : 'idam_tanggal<font color=red>*</font>',
-			allowBlank : false,
-			maxLength : 0
-		});
-		idam_statusField = Ext.create('Ext.form.TextField',{
-			id : 'idam_statusField',
-			name : 'idam_status',
-			fieldLabel : 'idam_status',
-			maxLength : 50
-		});
-		idam_keteranganField = Ext.create('Ext.form.TextField',{
-			id : 'idam_keteranganField',
-			name : 'idam_keterangan',
-			fieldLabel : 'idam_keterangan',
-			maxLength : 255
-		});
-		idam_bapField = Ext.create('Ext.form.TextField',{
-			id : 'idam_bapField',
-			name : 'idam_bap',
-			fieldLabel : 'idam_bap',
-			maxLength : 50
-		});
-		idam_baptanggalField = Ext.create('Ext.form.TextField',{
-			id : 'idam_baptanggalField',
-			name : 'idam_baptanggal',
-			fieldLabel : 'idam_baptanggal',
-			maxLength : 0
-		});
-		idam_kelengkapanField = Ext.create('Ext.form.NumberField',{
-			id : 'idam_kelengkapanField',
-			name : 'idam_kelengkapan',
-			fieldLabel : 'idam_kelengkapan',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		idam_terimaField = Ext.create('Ext.form.TextField',{
-			id : 'idam_terimaField',
-			name : 'idam_terima',
-			fieldLabel : 'idam_terima',
-			maxLength : 50
-		});
-		idam_terimatanggalField = Ext.create('Ext.form.TextField',{
-			id : 'idam_terimatanggalField',
-			name : 'idam_terimatanggal',
-			fieldLabel : 'idam_terimatanggal',
-			maxLength : 0
-		});
 		idam_usahaField = Ext.create('Ext.form.TextField',{
 			id : 'idam_usahaField',
 			name : 'idam_usaha',
@@ -962,32 +655,6 @@
 			name : 'idam_sertifikatpkp',
 			fieldLabel : 'idam_sertifikatpkp',
 			maxLength : 50
-		});
-		idam_nomorijinField = Ext.create('Ext.form.TextField',{
-			id : 'idam_nomorijinField',
-			name : 'idam_nomorijin',
-			fieldLabel : 'idam_nomorijin',
-			maxLength : 50
-		});
-		idam_nomorurutField = Ext.create('Ext.form.NumberField',{
-			id : 'idam_nomorurutField',
-			name : 'idam_nomorurut',
-			fieldLabel : 'idam_nomorurut',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		idam_berlakuField = Ext.create('Ext.form.TextField',{
-			id : 'idam_berlakuField',
-			name : 'idam_berlaku',
-			fieldLabel : 'idam_berlaku',
-			maxLength : 0
-		});
-		idam_kadaluarsaField = Ext.create('Ext.form.TextField',{
-			id : 'idam_kadaluarsaField',
-			name : 'idam_kadaluarsa',
-			fieldLabel : 'idam_kadaluarsa',
-			maxLength : 0
 		});
 		var idam_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
@@ -1021,23 +688,10 @@
 					flex : 2,
 					items : [
 						idam_idField,
-						idam_jenisField,
-						idam_tanggalField,
-						idam_statusField,
-						idam_keteranganField,
-						idam_bapField,
-						idam_baptanggalField,
-						idam_kelengkapanField,
-						idam_terimaField,
-						idam_terimatanggalField,
 						idam_usahaField,
 						idam_jenisusahaField,
 						idam_alamatField,
 						idam_sertifikatpkpField,
-						idam_nomorijinField,
-						idam_nomorurutField,
-						idam_berlakuField,
-						idam_kadaluarsaField,
 											]
 				}, {
 					xtype : 'splitter'
@@ -1063,71 +717,6 @@
 		});
 /* End FormPanel declaration */
 /* Start SearchPanel declaration */
-		idam_jenisSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'idam_jenisSearchField',
-			name : 'idam_jenis',
-			fieldLabel : 'idam_jenis',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		idam_tanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_tanggalSearchField',
-			name : 'idam_tanggal',
-			fieldLabel : 'idam_tanggal',
-			maxLength : 0
-		
-		});
-		idam_statusSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_statusSearchField',
-			name : 'idam_status',
-			fieldLabel : 'idam_status',
-			maxLength : 50
-		
-		});
-		idam_keteranganSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_keteranganSearchField',
-			name : 'idam_keterangan',
-			fieldLabel : 'idam_keterangan',
-			maxLength : 255
-		
-		});
-		idam_bapSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_bapSearchField',
-			name : 'idam_bap',
-			fieldLabel : 'idam_bap',
-			maxLength : 50
-		
-		});
-		idam_baptanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_baptanggalSearchField',
-			name : 'idam_baptanggal',
-			fieldLabel : 'idam_baptanggal',
-			maxLength : 0
-		
-		});
-		idam_kelengkapanSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'idam_kelengkapanSearchField',
-			name : 'idam_kelengkapan',
-			fieldLabel : 'idam_kelengkapan',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		idam_terimaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_terimaSearchField',
-			name : 'idam_terima',
-			fieldLabel : 'idam_terima',
-			maxLength : 50
-		
-		});
-		idam_terimatanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_terimatanggalSearchField',
-			name : 'idam_terimatanggal',
-			fieldLabel : 'idam_terimatanggal',
-			maxLength : 0
-		
-		});
 		idam_usahaSearchField = Ext.create('Ext.form.TextField',{
 			id : 'idam_usahaSearchField',
 			name : 'idam_usaha',
@@ -1156,35 +745,6 @@
 			maxLength : 50
 		
 		});
-		idam_nomorijinSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_nomorijinSearchField',
-			name : 'idam_nomorijin',
-			fieldLabel : 'idam_nomorijin',
-			maxLength : 50
-		
-		});
-		idam_nomorurutSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'idam_nomorurutSearchField',
-			name : 'idam_nomorurut',
-			fieldLabel : 'idam_nomorurut',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		idam_berlakuSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_berlakuSearchField',
-			name : 'idam_berlaku',
-			fieldLabel : 'idam_berlaku',
-			maxLength : 0
-		
-		});
-		idam_kadaluarsaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'idam_kadaluarsaSearchField',
-			name : 'idam_kadaluarsa',
-			fieldLabel : 'idam_kadaluarsa',
-			maxLength : 0
-		
-		});
 		var idam_searchingButton = Ext.create('Ext.Button',{
 			text : globalSearchingButtonTitle,
 			handler : idam_search
@@ -1211,23 +771,10 @@
 					layout : 'anchor',
 					flex : 2,
 					items : [
-						idam_jenisSearchField,
-						idam_tanggalSearchField,
-						idam_statusSearchField,
-						idam_keteranganSearchField,
-						idam_bapSearchField,
-						idam_baptanggalSearchField,
-						idam_kelengkapanSearchField,
-						idam_terimaSearchField,
-						idam_terimatanggalSearchField,
 						idam_usahaSearchField,
 						idam_jenisusahaSearchField,
 						idam_alamatSearchField,
 						idam_sertifikatpkpSearchField,
-						idam_nomorijinSearchField,
-						idam_nomorurutSearchField,
-						idam_berlakuSearchField,
-						idam_kadaluarsaSearchField,
 						]
 				}],
 			buttons : [idam_searchingButton,idam_cancelSearchButton]

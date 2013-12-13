@@ -2,7 +2,7 @@
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Idam</title>
+	<title>Daftar Data K_list_lokasi</title>
 	<xml>
 	 <x:ExcelWorkbook>
 	  <x:ExcelWorksheets>
@@ -24,19 +24,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Idam</title>
+	<title>Daftar Data K_list_lokasi</title>
 	<link rel='stylesheet' type='text/css' href='../assets/css/printstyle.css'/>
 </head>
 <body onload="window.print();">
 <?php } ?>	<table>
-		<caption>Idam</caption>
+		<caption>K_list_lokasi</caption>
 		<thead>
 			<tr>
 				<th align="center" width="50">No</td>
-				<th align="center">idam_usaha</td>
-				<th align="center">idam_jenisusaha</td>
-				<th align="center">idam_alamat</td>
-				<th align="center">idam_sertifikatpkp</td>
+				<th align="center">STATUS</td>
+				<th align="center">KETERANGAN</td>
 				</tr>
 		</thead>
 		<tbody>
@@ -48,13 +46,11 @@
 			?>
 				<tr>
 					<td><?php echo $total_record; ?></td>
-					<td><?php echo $subrecord->idam_usaha; ?></td>
-					<td><?php echo $subrecord->idam_jenisusaha; ?></td>
-					<td><?php echo $subrecord->idam_alamat; ?></td>
-					<td><?php echo $subrecord->idam_sertifikatpkp; ?></td>
+					<td><?php echo $subrecord->STATUS; ?></td>
+					<td><?php echo $subrecord->KETERANGAN; ?></td>
 					</tr>
 			<?php }} ?>			<tr>
-				<td colspan="4" align="left">Total</td>
+				<td colspan="2" align="left">Total</td>
 				<td><?php echo $total_record; ?></td>
 			</tr>
 		<tbody>

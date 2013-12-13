@@ -2,7 +2,7 @@
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Idam</title>
+	<title>Daftar Data In_lokasi</title>
 	<xml>
 	 <x:ExcelWorkbook>
 	  <x:ExcelWorksheets>
@@ -24,19 +24,26 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Idam</title>
+	<title>Daftar Data In_lokasi</title>
 	<link rel='stylesheet' type='text/css' href='../assets/css/printstyle.css'/>
 </head>
 <body onload="window.print();">
 <?php } ?>	<table>
-		<caption>Idam</caption>
+		<caption>In_lokasi</caption>
 		<thead>
 			<tr>
 				<th align="center" width="50">No</td>
-				<th align="center">idam_usaha</td>
-				<th align="center">idam_jenisusaha</td>
-				<th align="center">idam_alamat</td>
-				<th align="center">idam_sertifikatpkp</td>
+				<th align="center">ID_IJIN_LOKASI_INTI</td>
+				<th align="center">NO_KTP</td>
+				<th align="center">NAMA_LENGKAP</td>
+				<th align="center">TEMPAT_LAHIR</td>
+				<th align="center">TGL_LAHIR</td>
+				<th align="center">PEKERJAAN</td>
+				<th align="center">ALAMAT</td>
+				<th align="center">ID_DESA</td>
+				<th align="center">ID_KECAMATAN</td>
+				<th align="center">ID_KOTA</td>
+				<th align="center">TELEPON_PEMOHON</td>
 				</tr>
 		</thead>
 		<tbody>
@@ -48,13 +55,20 @@
 			?>
 				<tr>
 					<td><?php echo $total_record; ?></td>
-					<td><?php echo $subrecord->idam_usaha; ?></td>
-					<td><?php echo $subrecord->idam_jenisusaha; ?></td>
-					<td><?php echo $subrecord->idam_alamat; ?></td>
-					<td><?php echo $subrecord->idam_sertifikatpkp; ?></td>
+					<td><?php echo $subrecord->ID_IJIN_LOKASI_INTI; ?></td>
+					<td><?php echo $subrecord->NO_KTP; ?></td>
+					<td><?php echo $subrecord->NAMA_LENGKAP; ?></td>
+					<td><?php echo $subrecord->TEMPAT_LAHIR; ?></td>
+					<td><?php echo $subrecord->TGL_LAHIR; ?></td>
+					<td><?php echo $subrecord->PEKERJAAN; ?></td>
+					<td><?php echo $subrecord->ALAMAT; ?></td>
+					<td><?php echo $subrecord->ID_DESA; ?></td>
+					<td><?php echo $subrecord->ID_KECAMATAN; ?></td>
+					<td><?php echo $subrecord->ID_KOTA; ?></td>
+					<td><?php echo $subrecord->TELEPON_PEMOHON; ?></td>
 					</tr>
 			<?php }} ?>			<tr>
-				<td colspan="4" align="left">Total</td>
+				<td colspan="11" align="left">Total</td>
 				<td><?php echo $total_record; ?></td>
 			</tr>
 		<tbody>
