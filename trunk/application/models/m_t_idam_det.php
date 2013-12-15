@@ -4,6 +4,9 @@ class M_t_idam_det extends App_model{
 				det_idam_id,
 				det_idam_idam_id,
 				det_idam_jenis,
+				CASE WHEN det_idam_jenis = 1 THEN 'BARU'
+					ELSE 'PERPANJANGAN'
+					END AS det_idam_jenis_nama,
 				det_idam_tanggal,
 				det_idam_nama,
 				det_idam_alamat,
@@ -13,18 +16,32 @@ class M_t_idam_det extends App_model{
 				det_idam_pendidikan,
 				det_idam_tahunlulus,
 				det_idam_status,
+				CASE WHEN det_idam_status = 1 THEN 'DISETUJUI'
+					WHEN det_idam_status = 2 THEN 'DITOLAK'
+					ELSE 'DITANGGUHKAN'
+					END AS det_idam_status_nama,
 				det_idam_keterangan,
 				det_idam_bap,
 				det_idam_baptanggal,
 				det_idam_kelengkapan,
+				CASE WHEN det_idam_kelengkapan = 1 THEN 'LENGKAP'
+					ELSE 'TIDAK LENGKAP'
+					END AS det_idam_kelengkapan_nama,
 				det_idam_terima,
 				det_idam_terimatanggal,
 				det_idam_sk,
 				det_idam_skurut,
 				det_idam_berlaku,
 				det_idam_kadaluarsa,
-				det_idam_nomorreg
+				det_idam_nomorreg,
+				det_idam_proses,
+				det_idam_lulussurvey,
+				idam_usaha,
+				idam_jenisusaha,
+				idam_alamat,
+				idam_sertifikatpkp
 				FROM t_idam_det 
+				JOIN t_idam ON t_idam_det.det_idam_idam_id = t_idam.idam_id
 			WHERE det_idam_id IS NOT NULL 
 	";
 	
@@ -79,6 +96,9 @@ class M_t_idam_det extends App_model{
 		
 		$sql = $this->mainSql;
 		
+		if(@$det_idam_id != ''){
+			$sql .= " AND det_idam_id = ".$det_idam_id." ";
+		}
 		if(@$det_idam_idam_id != ''){
 			$sql .= " AND det_idam_idam_id LIKE '%".$det_idam_idam_id."%' ";
 		}
@@ -148,6 +168,7 @@ class M_t_idam_det extends App_model{
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
+		$this->firephp->log($sql);
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
@@ -164,7 +185,6 @@ class M_t_idam_det extends App_model{
 	
 	function getSyarat($params){
 		extract($params);
-		
 		if($currentAction == 'update'){
 			$sql = "
 				SELECT 
@@ -177,12 +197,14 @@ class M_t_idam_det extends App_model{
 					NAMA_SYARAT AS idam_cek_syarat_nama
 				FROM t_idam_ceklist 
 				LEFT JOIN master_syarat ON t_idam_ceklist.idam_cek_syarat_id = master_syarat.ID_SYARAT
-				WHERE idam_cek_idamdet_id = 1
+				WHERE idam_cek_idamdet_id = ".$idam_det_id."
+				AND idam_cek_idam_id = ".$idam_id."
 			";
 		}else{
 			$sql = "
 				SELECT 
 					0 AS idam_cek_id,
+					master_syarat.ID_SYARAT AS idam_cek_syarat_id,
 					NAMA_SYARAT AS idam_cek_syarat_nama
 				FROM dt_syarat 
 				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT

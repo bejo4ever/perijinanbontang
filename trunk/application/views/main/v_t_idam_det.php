@@ -1,8 +1,17 @@
+<style>
+	.checked{
+		background-image:url(../assets/images/icons/check.png) !important;
+	}
+	.unchecked{
+		background-image:url(../assets/images/icons/forward.png) !important;
+	}
+</style>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
 		var idam_det_componentItemTitle="Izin Depo Air Minum";
 		var idam_det_dataStore;
+		var idam_det_syaratDataStore;
 		
 		var idam_det_shorcut;
 		var idam_det_contextMenu;
@@ -191,7 +200,26 @@
 					det_idam_berlakuValue = det_idam_berlakuField.getValue();
 					det_idam_kadaluarsaValue = det_idam_kadaluarsaField.getValue();
 					det_idam_nomorregValue = det_idam_nomorregField.getValue();
-										
+					
+					var array_idam_cek_id=new Array();
+					var array_idam_cek_syarat_id=new Array();
+					var array_idam_cek_status=new Array();
+					var array_idam_cek_keterangan=new Array();
+					
+					if(idam_det_syaratDataStore.getCount() > 0){
+						for(var i=0;i<idam_det_syaratDataStore.getCount();i++){
+							array_idam_cek_id.push(idam_det_syaratDataStore.getAt(i).data.idam_cek_id);
+							array_idam_cek_syarat_id.push(idam_det_syaratDataStore.getAt(i).data.idam_cek_syarat_id);
+							array_idam_cek_status.push(idam_det_syaratDataStore.getAt(i).data.idam_cek_status);
+							array_idam_cek_keterangan.push(idam_det_syaratDataStore.getAt(i).data.idam_cek_keterangan);
+						}
+					}
+					
+					var encoded_idam_cek_id = Ext.encode(array_idam_cek_id);
+					var encoded_idam_cek_syarat_id = Ext.encode(array_idam_cek_syarat_id);
+					var encoded_idam_cek_status = Ext.encode(array_idam_cek_status);
+					var encoded_idam_cek_keterangan = Ext.encode(array_idam_cek_keterangan);
+
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_idam_det/switchAction',
@@ -223,6 +251,10 @@
 							det_idam_berlaku : det_idam_berlakuValue,
 							det_idam_kadaluarsa : det_idam_kadaluarsaValue,
 							det_idam_nomorreg : det_idam_nomorregValue,
+							idam_cek_id : encoded_idam_cek_id,
+							idam_cek_syarat_id : encoded_idam_cek_syarat_id,
+							idam_cek_status : encoded_idam_cek_status,
+							idam_cek_keterangan : encoded_idam_cek_keterangan,
 							action : idam_det_dbTask
 						},
 						success: function(response){
@@ -402,7 +434,19 @@
 			det_idam_berlakuField.setValue(record.data.det_idam_berlaku);
 			det_idam_kadaluarsaField.setValue(record.data.det_idam_kadaluarsa);
 			det_idam_nomorregField.setValue(record.data.det_idam_nomorreg);
-					}
+			
+			det_idam_namausahaField.setValue(record.data.idam_usaha);
+			det_idam_jenisusahaField.setValue(record.data.idam_jenisusaha);
+			det_idam_alamatusahaField.setValue(record.data.idam_alamat);
+			det_idam_nospkpField.setValue(record.data.idam_sertifikatpkp);
+			idam_det_syaratDataStore.proxy.extraParams = { 
+				idam_id : record.data.det_idam_idam_id,
+				idam_det_id : record.data.det_idam_id,
+				currentAction : 'update',
+				action : 'GETSYARAT'
+			};
+			idam_det_syaratDataStore.load();
+		}
 		
 		function idam_det_showSearchWindow(){
 			idam_det_searchWindow.show();
@@ -630,26 +674,33 @@
 				{ name : 'det_idam_id', type : 'int', mapping : 'det_idam_id' },
 				{ name : 'det_idam_idam_id', type : 'int', mapping : 'det_idam_idam_id' },
 				{ name : 'det_idam_jenis', type : 'int', mapping : 'det_idam_jenis' },
-				{ name : 'det_idam_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_idam_tanggal' },
+				{ name : 'det_idam_jenis_nama', type : 'string', mapping : 'det_idam_jenis_nama' },
+				{ name : 'det_idam_tanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_idam_tanggal' },
 				{ name : 'det_idam_nama', type : 'string', mapping : 'det_idam_nama' },
 				{ name : 'det_idam_alamat', type : 'string', mapping : 'det_idam_alamat' },
 				{ name : 'det_idam_telp', type : 'string', mapping : 'det_idam_telp' },
 				{ name : 'det_idam_tempatlahir', type : 'string', mapping : 'det_idam_tempatlahir' },
-				{ name : 'det_idam_tanggallahir', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_idam_tanggallahir' },
+				{ name : 'det_idam_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_idam_tanggallahir' },
 				{ name : 'det_idam_pendidikan', type : 'string', mapping : 'det_idam_pendidikan' },
 				{ name : 'det_idam_tahunlulus', type : 'int', mapping : 'det_idam_tahunlulus' },
-				{ name : 'det_idam_status', type : 'string', mapping : 'det_idam_status' },
+				{ name : 'det_idam_status', type : 'int', mapping : 'det_idam_status' },
 				{ name : 'det_idam_keterangan', type : 'string', mapping : 'det_idam_keterangan' },
 				{ name : 'det_idam_bap', type : 'string', mapping : 'det_idam_bap' },
-				{ name : 'det_idam_baptanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_idam_baptanggal' },
+				{ name : 'det_idam_baptanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_idam_baptanggal' },
 				{ name : 'det_idam_kelengkapan', type : 'int', mapping : 'det_idam_kelengkapan' },
 				{ name : 'det_idam_terima', type : 'string', mapping : 'det_idam_terima' },
-				{ name : 'det_idam_terimatanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_idam_terimatanggal' },
+				{ name : 'det_idam_terimatanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_idam_terimatanggal' },
 				{ name : 'det_idam_sk', type : 'string', mapping : 'det_idam_sk' },
 				{ name : 'det_idam_skurut', type : 'int', mapping : 'det_idam_skurut' },
-				{ name : 'det_idam_berlaku', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_idam_berlaku' },
-				{ name : 'det_idam_kadaluarsa', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_idam_kadaluarsa' },
+				{ name : 'det_idam_berlaku', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_idam_berlaku' },
+				{ name : 'det_idam_kadaluarsa', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_idam_kadaluarsa' },
 				{ name : 'det_idam_nomorreg', type : 'string', mapping : 'det_idam_nomorreg' },
+				{ name : 'det_idam_proses', type : 'int', mapping : 'det_idam_proses' },
+				{ name : 'det_idam_lulussurvey', type : 'int', mapping : 'det_idam_lulussurvey' },
+				{ name : 'idam_usaha', type : 'string', mapping : 'idam_usaha' },
+				{ name : 'idam_jenisusaha', type : 'string', mapping : 'idam_jenisusaha' },
+				{ name : 'idam_alamat', type : 'string', mapping : 'idam_alamat' },
+				{ name : 'idam_sertifikatpkp', type : 'string', mapping : 'idam_sertifikatpkp' }
 				]
 		});
 /* End DataStore declaration */
@@ -765,6 +816,60 @@
 				idam_det_printExcel('EXCEL');
 			}
 		});
+		var idam_det_lembarkontrolButton = Ext.create('Ext.Button',{
+			text : 'Lembar Kontrol',
+			tooltip : 'Cetak Lembar Kontrol',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_idam_det/switchAction',
+					params: {
+						idamdet_id : record.get('det_idam_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/idam_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var idam_det_bapButton = Ext.create('Ext.Button',{
+			text : 'BAP',
+			tooltip : 'Cetak BAP',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_idam_det/switchAction',
+					params: {
+						idamdet_id : record.get('det_idam_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/idam_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var idam_det_skButton = Ext.create('Ext.Button',{
+			text : 'Surat Keputusan',
+			tooltip : 'Cetak Surat Keputusan Depo Air Minum',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_idam_det/switchAction',
+					params: {
+						idamdet_id : record.get('det_idam_id'),
+						action : 'CETAKSK'
+					},success : function(){
+						window.open('../print/idam_sk.html');
+					}
+				});
+			}
+		});
 		
 		var idam_det_contextMenuEdit = Ext.create('Ext.menu.Item',{
 			text : globalEditButtonTitle,
@@ -837,7 +942,7 @@
 				},
 				{
 					text : 'Jenis',
-					dataIndex : 'det_idam_jenis',
+					dataIndex : 'det_idam_jenis_nama',
 					width : 100,
 					sortable : false
 				},
@@ -845,121 +950,183 @@
 					text : 'Tanggal',
 					dataIndex : 'det_idam_tanggal',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
 				{
 					text : 'Nama Pemohon',
 					dataIndex : 'det_idam_nama',
-					width : 100,
+					width : 200,
 					sortable : false
 				},
 				{
 					text : 'Alamat',
 					dataIndex : 'det_idam_alamat',
-					width : 100,
+					width : 300,
 					sortable : false
 				},
 				{
 					text : 'No. Telp',
 					dataIndex : 'det_idam_telp',
-					width : 100,
+					width : 150,
 					sortable : false
 				},
 				{
 					text : 'Tempat Lahir',
 					dataIndex : 'det_idam_tempatlahir',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tanggal Lahir',
 					dataIndex : 'det_idam_tanggallahir',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Pendidikan',
 					dataIndex : 'det_idam_pendidikan',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tahun Lulus',
 					dataIndex : 'det_idam_tahunlulus',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Status',
 					dataIndex : 'det_idam_status',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Keterangan',
 					dataIndex : 'det_idam_keterangan',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'BAP',
 					dataIndex : 'det_idam_bap',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tanggal BAP',
 					dataIndex : 'det_idam_baptanggal',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Kelengkapan Berkas',
 					dataIndex : 'det_idam_kelengkapan',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Penerima Berkas',
 					dataIndex : 'det_idam_terima',
-					width : 100,
+					width : 180,
 					sortable : false
 				},
 				{
 					text : 'Tanggal Terima',
 					dataIndex : 'det_idam_terimatanggal',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Nomor SK',
 					dataIndex : 'det_idam_sk',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'No. Urut SK',
 					dataIndex : 'det_idam_skurut',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tanggal Berlaku',
 					dataIndex : 'det_idam_berlaku',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Tanggal Kadaluarsa',
 					dataIndex : 'det_idam_kadaluarsa',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Nomor Reg',
 					dataIndex : 'det_idam_nomorreg',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
+				},
+				{
+					xtype:'actioncolumn',
+					width:50,
+					items: [{
+						getClass: function(v, meta, rec) {
+							if(rec.get('det_idam_lulussurvey') == 1){
+								return 'checked';
+							}else{
+								return 'unchecked';
+							}
+						},
+						getTip: function(v, meta, rec) {
+							if (rec.get('det_idam_lulussurvey') == 1) {
+								return 'Ubah Menjadi Tidak Lulus';
+							} else {
+								return 'Ubah Menjadi Lulus';
+							}
+						},
+						handler: function(grid, rowIndex, colIndex) {
+							var rec = grid.getStore().getAt(rowIndex);
+							var idamdet_id = rec.get('det_idam_id');
+							var lulus = 0;
+							if (rec.get('det_idam_lulussurvey') == 1) {
+								lulus=0;
+							} else {
+								lulus=1;
+							}
+							Ext.Ajax.request({
+								waitMsg: 'Please wait...',
+								url: 'c_t_idam_det/switchAction',
+								params: {
+									idamdet_id : idamdet_id,
+									lulus : lulus,
+									action : 'CHANGESURVEYSTATUS'
+								},success : function(){
+									idam_det_dataStore.reload();
+								}
+							});
+						}
+					}]
 				}
 			],
 			tbar : [
@@ -970,7 +1137,10 @@
 				idam_det_searchButton,
 				idam_det_refreshButton,
 				idam_det_printButton,
-				idam_det_excelButton
+				idam_det_excelButton,
+				idam_det_lembarkontrolButton,
+				idam_det_bapButton,
+				idam_det_skButton
 			],
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : idam_det_dataStore,
@@ -979,6 +1149,24 @@
 			listeners : {
 				afterrender : function(){
 					idam_det_dataStore.reload({params: {start: 0, limit: globalPageSize}});
+				},
+				itemclick : function(cmp, rec){
+					var record = rec.data;
+					if(record.det_idam_terima != '' && record.det_idam_terimatanggal != ''){
+						idam_det_lembarkontrolButton.enable();
+					}else{
+						idam_det_lembarkontrolButton.disable();
+					}
+					if(record.det_idam_bap != '' && record.det_idam_baptanggal != ''){
+						idam_det_bapButton.enable();
+					}else{
+						idam_det_bapButton.disable();
+					}
+					if(record.det_idam_lulussurvey == 1){
+						idam_det_skButton.enable();
+					}else{
+						idam_det_skButton.disable();
+					}
 				}
 			}
 		});
@@ -1007,10 +1195,10 @@
 		det_idam_jenisField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_idam_jenisField',
 			name : 'det_idam_jenis',
-			fieldLabel : 'Jenis Permohonan',
+			fieldLabel : 'Jenis',
 			store : new Ext.data.ArrayStore({
 				fields : ['jenispermohonan_id', 'jenispermohonan_nama'],
-				data : [['1','BARU'],['2','PERPANJANGAN']]
+				data : [[1,'BARU'],[2,'PERPANJANGAN']]
 			}),
 			displayField : 'jenispermohonan_nama',
 			valueField : 'jenispermohonan_id',
@@ -1021,8 +1209,16 @@
 				select : function(cmb, rec){
 					if(cmb.getValue() == '2'){
 						det_idam_sklamaField.show();
+						det_idam_namausahaField.disable();
+						det_idam_jenisusahaField.disable();
+						det_idam_alamatusahaField.disable();
+						det_idam_nospkpField.disable();
 					}else{
 						det_idam_sklamaField.hide();
+						det_idam_namausahaField.enable();
+						det_idam_jenisusahaField.enable();
+						det_idam_alamatusahaField.enable();
+						det_idam_nospkpField.enable();
 					}
 				}
 			}
@@ -1037,7 +1233,7 @@
 		det_idam_tanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_idam_tanggalField',
 			name : 'det_idam_tanggal',
-			fieldLabel : 'Tanggal Permohonan <font color=red>*</font>',
+			fieldLabel : 'Tanggal <font color=red>*</font>',
 			format : 'd-m-Y',
 			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>'),
 			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
@@ -1116,7 +1312,7 @@
 			fieldLabel : 'Status',
 			store : new Ext.data.ArrayStore({
 				fields : ['status_id', 'status_nama'],
-				data : [['1','DISETUJUI'],['2','DITOLAK'],['3','DITANGGUHKAN']]
+				data : [[1,'DISETUJUI'],[2,'DITOLAK'],[3,'DITANGGUHKAN']]
 			}),
 			displayField : 'status_nama',
 			valueField : 'status_id',
@@ -1149,7 +1345,7 @@
 			fieldLabel : 'Kelengkapan',
 			store : new Ext.data.ArrayStore({
 				fields : ['kelengkapan_id', 'kelengkapan_nama'],
-				data : [['1','LENGKAP'],['2','TIDAK LENGKAP']]
+				data : [[1,'LENGKAP'],[2,'TIDAK LENGKAP']]
 			}),
 			displayField : 'kelengkapan_nama',
 			valueField : 'kelengkapan_id',
@@ -1182,6 +1378,7 @@
 			fieldLabel : 'No. Urut',
 			allowNegatife : false,
 			blankText : '0',
+			hidden : true,
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/
 		});
@@ -1194,7 +1391,7 @@
 		det_idam_kadaluarsaField = Ext.create('Ext.form.field.Date',{
 			id : 'det_idam_kadaluarsaField',
 			name : 'det_idam_kadaluarsa',
-			fieldLabel : 'Tanggal Kadaluarsa',
+			fieldLabel : 'Kadaluarsa',
 			format : 'd-m-Y',
 			minValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
@@ -1202,7 +1399,8 @@
 			id : 'det_idam_nomorregField',
 			name : 'det_idam_nomorreg',
 			fieldLabel : 'Nomor Reg',
-			maxLength : 50
+			maxLength : 50,
+			hidden : true
 		});
 		idam_det_syaratDataStore = Ext.create('Ext.data.Store',{
 			id : 'idam_det_syaratDataStore',
@@ -1258,7 +1456,7 @@
 				{
 					text : 'Syarat',
 					dataIndex : 'idam_cek_syarat_nama',
-					width : 100,
+					width : 150,
 					sortable : false
 				},
 				{
@@ -1273,7 +1471,8 @@
 					dataIndex : 'idam_cek_keterangan',
 					width : 100,
 					sortable : false,
-					editor: 'textfield'
+					editor: 'textfield',
+					flex : 1
 				}
 			]
 		});
@@ -1301,8 +1500,8 @@
 				{
 					xtype : 'fieldset',
 					title : '1. Data Permohonan',
-					checkboxToggle : true,
-					collapsible : true,
+					checkboxToggle : false,
+					collapsible : false,
 					layout :'form',
 					items : [
 						det_idam_idField,
@@ -1314,8 +1513,8 @@
 				},{
 					xtype : 'fieldset',
 					title : '2. Data Pemohon',
-					checkboxToggle : true,
-					collapsible : true,
+					checkboxToggle : false,
+					collapsible : false,
 					layout :'form',
 					items : [
 						det_idam_namaField,
@@ -1330,8 +1529,8 @@
 					xtype : 'fieldset',
 					title : '3. Data Usaha',
 					columnWidth : 0.5,
-					checkboxToggle : true,
-					collapsible : true,
+					checkboxToggle : false,
+					collapsible : false,
 					layout :'form',
 					items : [
 						det_idam_namausahaField,
@@ -1343,8 +1542,8 @@
 					xtype : 'fieldset',
 					title : '4. Data Kelengkapan',
 					columnWidth : 0.5,
-					checkboxToggle : true,
-					collapsible : true,
+					checkboxToggle : false,
+					collapsible : false,
 					layout :'form',
 					items : [
 						det_idam_syaratGrid
@@ -1353,17 +1552,17 @@
 					xtype : 'fieldset',
 					title : '5. Data Pendukung',
 					columnWidth : 0.5,
-					checkboxToggle : true,
-					collapsible : true,
+					checkboxToggle : false,
+					collapsible : false,
 					layout :'form',
 					items : [
-						det_idam_statusField,
-						det_idam_keteranganField,
-						det_idam_bapField,
-						det_idam_baptanggalField,
-						det_idam_kelengkapanField,
 						det_idam_terimaField,
 						det_idam_terimatanggalField,
+						det_idam_kelengkapanField,
+						det_idam_bapField,
+						det_idam_baptanggalField,
+						det_idam_statusField,
+						det_idam_keteranganField,
 						det_idam_skField,
 						det_idam_skurutField,
 						det_idam_berlakuField,
@@ -1538,7 +1737,7 @@
 		det_idam_kadaluarsaSearchField = Ext.create('Ext.form.TextField',{
 			id : 'det_idam_kadaluarsaSearchField',
 			name : 'det_idam_kadaluarsa',
-			fieldLabel : 'Tanggal Kadaluarsa',
+			fieldLabel : 'Kadaluarsa',
 			maxLength : 0
 		
 		});
@@ -1617,4 +1816,4 @@
 </script>
 <div id="idam_detSaveWindow"></div>
 <div id="idam_detSearchWindow"></div>
-<div class="span12" id="idam_detGrid"></div>
+<div class="col-md-12" id="idam_detGrid"></div>
