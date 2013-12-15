@@ -50,20 +50,16 @@
                         <a class="navbar-brand" href="about.html">PERIJINAN</a>
                     </div>
                     <div class="collapse navbar-collapse main-navbar-collapse">
-                        <ul class="nav navbar-nav">
+                        <ul class="nav navbar-nav" id="mainmenu">
                             <li class="active"><a href="#">Link</a></li>
                             <li><a href="#">Link</a></li>
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-hover="dropdown">Dropdown <b class="caret"></b></a>
+                                <a href="#" class="dropdown-toggle" data-hover="dropdown">Perijinan <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
-                                    <li role="presentation" class="dropdown-header">Dropdown header</li>
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li><a href="#">Something else here</a></li>
+                                    <li><a href="#c_t_idam_det">Depo Air Minum</a></li>
+                                    <li><a href="#">IUJK</a></li>
+                                    <li><a href="#">Pengambilan Mineral</a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li role="presentation" class="dropdown-header">Dropdown header</li>
-                                    <li><a href="#">Separated link</a></li>
-                                    <li><a href="#">One more separated link</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -75,26 +71,9 @@
         <div class="container">
             <!-- left, vertical navbar & content -->
             <div class="row">
-                <!-- left, vertical navbar -->
-                <div class="col-md-2 bootstrap-admin-col-left">
-                    <ul class="nav navbar-collapse collapse bootstrap-admin-navbar-side" id="sidebarmenu">
-                        <li>
-							<a href="#c_t_idam_det">Depo Air Minum</a>
-                        </li>
-                        <li>
-							<a href="#c_t_iujk_det">IUJK</a>
-                        </li>
-                        <li>
-							<a href="#c_t_ipmbl_det">Pengambilan Mineral</a>
-                        </li>
-                    </ul>
-                </div>
                 <!-- content -->
-                <div class="col-md-10">
-                    <div class="row">
-                        <div id="mainpanel">
-                            
-                        </div>
+                <div class="col-md-12">
+                    <div class="row" id="mainpanel">
                     </div>
                 </div>
             </div>
@@ -116,7 +95,7 @@
 		<script src="<?php echo base_url(); ?>assets/js/src/ux/InputTextMask.js"></script>
 		<script>
 			$(document).ready(function(){
-				$("#sidebarmenu li a").click(function(){
+				$("#mainmenu li a").click(function(){
 					$("#mainpanel").empty();
 					var item = $(this);
 					var link = item.attr('href').replace('#','');
