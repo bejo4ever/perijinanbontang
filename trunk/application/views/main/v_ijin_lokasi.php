@@ -25,6 +25,8 @@
 		var ID_KECAMATANField;
 		var ID_KOTAField;
 		var TELEPON_PEMOHONField;
+		var TGL_PERMOHONANField;
+		var TGL_AKHIRField;
 				
 		var ID_IJIN_LOKASI_INTISearchField;
 		var NO_KTPSearchField;
@@ -37,6 +39,8 @@
 		var ID_KECAMATANSearchField;
 		var ID_KOTASearchField;
 		var TELEPON_PEMOHONSearchField;
+		var TGL_PERMOHONANSearchField;
+		var TGL_AKHIRSearchField;
 				
 		var in_lokasi_dbTask = 'CREATE';
 		var in_lokasi_dbTaskMessage = 'Tambah';
@@ -122,6 +126,8 @@
 					var ID_KECAMATANValue = '';
 					var ID_KOTAValue = '';
 					var TELEPON_PEMOHONValue = '';
+					var TGL_PERMOHONANValue = '';
+					var TGL_AKHIRValue = '';
 										
 					ID_IJIN_LOKASIValue = ID_IJIN_LOKASIField.getValue();
 					ID_IJIN_LOKASI_INTIValue = ID_IJIN_LOKASI_INTIField.getValue();
@@ -135,6 +141,8 @@
 					ID_KECAMATANValue = ID_KECAMATANField.getValue();
 					ID_KOTAValue = ID_KOTAField.getValue();
 					TELEPON_PEMOHONValue = TELEPON_PEMOHONField.getValue();
+					TGL_PERMOHONANValue = TGL_PERMOHONANField.getValue();
+					TGL_AKHIRValue = TGL_AKHIRField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -152,6 +160,8 @@
 							ID_KECAMATAN : ID_KECAMATANValue,
 							ID_KOTA : ID_KOTAValue,
 							TELEPON_PEMOHON : TELEPON_PEMOHONValue,
+							TGL_PERMOHONAN : TGL_PERMOHONANValue,
+							TGL_AKHIR : TGL_AKHIRValue,
 							action : in_lokasi_dbTask
 						},
 						success: function(response){
@@ -316,6 +326,8 @@
 			ID_KECAMATANField.setValue(record.data.ID_KECAMATAN);
 			ID_KOTAField.setValue(record.data.ID_KOTA);
 			TELEPON_PEMOHONField.setValue(record.data.TELEPON_PEMOHON);
+			TGL_PERMOHONANField.setValue(record.data.TGL_PERMOHONAN);
+			TGL_AKHIRField.setValue(record.data.TGL_AKHIR);
 					}
 		
 		function in_lokasi_showSearchWindow(){
@@ -336,6 +348,8 @@
 			var ID_KECAMATANValue = '';
 			var ID_KOTAValue = '';
 			var TELEPON_PEMOHONValue = '';
+			var TGL_PERMOHONANValue = '';
+			var TGL_AKHIRValue = '';
 						
 			ID_IJIN_LOKASI_INTIValue = ID_IJIN_LOKASI_INTISearchField.getValue();
 			NO_KTPValue = NO_KTPSearchField.getValue();
@@ -348,6 +362,8 @@
 			ID_KECAMATANValue = ID_KECAMATANSearchField.getValue();
 			ID_KOTAValue = ID_KOTASearchField.getValue();
 			TELEPON_PEMOHONValue = TELEPON_PEMOHONSearchField.getValue();
+			TGL_PERMOHONANValue = TGL_PERMOHONANSearchField.getValue();
+			TGL_AKHIRValue = TGL_AKHIRSearchField.getValue();
 			in_lokasi_dbListAction = "SEARCH";
 			in_lokasi_dataStore.proxy.extraParams = { 
 				ID_IJIN_LOKASI_INTI : ID_IJIN_LOKASI_INTIValue,
@@ -361,6 +377,8 @@
 				ID_KECAMATAN : ID_KECAMATANValue,
 				ID_KOTA : ID_KOTAValue,
 				TELEPON_PEMOHON : TELEPON_PEMOHONValue,
+				TGL_PERMOHONAN : TGL_PERMOHONANValue,
+				TGL_AKHIR : TGL_AKHIRValue,
 				action : 'SEARCH'
 			};
 			in_lokasi_dataStore.currentPage = 1;
@@ -385,6 +403,8 @@
 			var ID_KECAMATANValue = '';
 			var ID_KOTAValue = '';
 			var TELEPON_PEMOHONValue = '';
+			var TGL_PERMOHONANValue = '';
+			var TGL_AKHIRValue = '';
 			
 			if(in_lokasi_dataStore.proxy.extraParams.query!==null){searchText = in_lokasi_dataStore.proxy.extraParams.query;}
 			if(in_lokasi_dataStore.proxy.extraParams.ID_IJIN_LOKASI_INTI!==null){ID_IJIN_LOKASI_INTIValue = in_lokasi_dataStore.proxy.extraParams.ID_IJIN_LOKASI_INTI;}
@@ -398,6 +418,8 @@
 			if(in_lokasi_dataStore.proxy.extraParams.ID_KECAMATAN!==null){ID_KECAMATANValue = in_lokasi_dataStore.proxy.extraParams.ID_KECAMATAN;}
 			if(in_lokasi_dataStore.proxy.extraParams.ID_KOTA!==null){ID_KOTAValue = in_lokasi_dataStore.proxy.extraParams.ID_KOTA;}
 			if(in_lokasi_dataStore.proxy.extraParams.TELEPON_PEMOHON!==null){TELEPON_PEMOHONValue = in_lokasi_dataStore.proxy.extraParams.TELEPON_PEMOHON;}
+			if(in_lokasi_dataStore.proxy.extraParams.TGL_PERMOHONAN!==null){TGL_PERMOHONANValue = in_lokasi_dataStore.proxy.extraParams.TGL_PERMOHONAN;}
+			if(in_lokasi_dataStore.proxy.extraParams.TGL_AKHIR!==null){TGL_AKHIRValue = in_lokasi_dataStore.proxy.extraParams.TGL_AKHIR;}
 			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
 			Ext.Ajax.request({
 				waitMsg : 'Please Wait...',
@@ -416,6 +438,8 @@
 					ID_KECAMATAN : ID_KECAMATANValue,
 					ID_KOTA : ID_KOTAValue,
 					TELEPON_PEMOHON : TELEPON_PEMOHONValue,
+					TGL_PERMOHONAN : TGL_PERMOHONANValue,
+					TGL_AKHIR : TGL_AKHIRValue,
 					currentAction : in_lokasi_dbListAction
 				},
 				success: function(response){
@@ -487,6 +511,8 @@
 				{ name : 'ID_KECAMATAN', type : 'int', mapping : 'ID_KECAMATAN' },
 				{ name : 'ID_KOTA', type : 'int', mapping : 'ID_KOTA' },
 				{ name : 'TELEPON_PEMOHON', type : 'string', mapping : 'TELEPON_PEMOHON' },
+				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_PERMOHONAN' },
+				{ name : 'TGL_AKHIR', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_AKHIR' },
 				]
 		});
 /* End DataStore declaration */
@@ -731,6 +757,18 @@
 					width : 100,
 					sortable : false
 				},
+				{
+					text : 'TGL_PERMOHONAN',
+					dataIndex : 'TGL_PERMOHONAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TGL_AKHIR',
+					dataIndex : 'TGL_AKHIR',
+					width : 100,
+					sortable : false
+				},
 							
 			],
 			tbar : [
@@ -839,6 +877,18 @@
 			fieldLabel : 'TELEPON_PEMOHON',
 			maxLength : 255
 		});
+		TGL_PERMOHONANField = Ext.create('Ext.form.TextField',{
+			id : 'TGL_PERMOHONANField',
+			name : 'TGL_PERMOHONAN',
+			fieldLabel : 'TGL_PERMOHONAN',
+			maxLength : 0
+		});
+		TGL_AKHIRField = Ext.create('Ext.form.TextField',{
+			id : 'TGL_AKHIRField',
+			name : 'TGL_AKHIR',
+			fieldLabel : 'TGL_AKHIR',
+			maxLength : 0
+		});
 		var in_lokasi_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : in_lokasi_save
@@ -882,6 +932,8 @@
 						ID_KECAMATANField,
 						ID_KOTAField,
 						TELEPON_PEMOHONField,
+						TGL_PERMOHONANField,
+						TGL_AKHIRField,
 											]
 				}, {
 					xtype : 'splitter'
@@ -988,6 +1040,20 @@
 			maxLength : 255
 		
 		});
+		TGL_PERMOHONANSearchField = Ext.create('Ext.form.TextField',{
+			id : 'TGL_PERMOHONANSearchField',
+			name : 'TGL_PERMOHONAN',
+			fieldLabel : 'TGL_PERMOHONAN',
+			maxLength : 0
+		
+		});
+		TGL_AKHIRSearchField = Ext.create('Ext.form.TextField',{
+			id : 'TGL_AKHIRSearchField',
+			name : 'TGL_AKHIR',
+			fieldLabel : 'TGL_AKHIR',
+			maxLength : 0
+		
+		});
 		var in_lokasi_searchingButton = Ext.create('Ext.Button',{
 			text : globalSearchingButtonTitle,
 			handler : in_lokasi_search
@@ -1025,6 +1091,8 @@
 						ID_KECAMATANSearchField,
 						ID_KOTASearchField,
 						TELEPON_PEMOHONSearchField,
+						TGL_PERMOHONANSearchField,
+						TGL_AKHIRSearchField,
 						]
 				}],
 			buttons : [in_lokasi_searchingButton,in_lokasi_cancelSearchButton]

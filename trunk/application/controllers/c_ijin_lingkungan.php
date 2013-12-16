@@ -88,6 +88,8 @@ class C_ijin_lingkungan extends CI_Controller{
 		$TELP2 = htmlentities($this->input->post('TELP2'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$in_lingkungan_author = $this->m_ijin_lingkungan->__checkSession();
 		$in_lingkungan_created_date = date('Y-m-d H:i:s');
@@ -119,6 +121,8 @@ class C_ijin_lingkungan extends CI_Controller{
 				'ID_KOTA2'=>$ID_KOTA2,
 				'TELP2'=>$TELP2,
 				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'TGL_AKHIR'=>$TGL_AKHIR,
 				);
 			$result = $this->m_ijin_lingkungan->__insert($data, '', '');
 		}
@@ -159,6 +163,8 @@ class C_ijin_lingkungan extends CI_Controller{
 		$TELP2 = htmlentities($this->input->post('TELP2'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$in_lingkungan_updated_by = $this->m_ijin_lingkungan->__checkSession();
 		$in_lingkungan_updated_date = date('Y-m-d H:i:s');
@@ -189,6 +195,8 @@ class C_ijin_lingkungan extends CI_Controller{
 				'ID_KOTA2'=>$ID_KOTA2,
 				'TELP2'=>$TELP2,
 				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'TGL_AKHIR'=>$TGL_AKHIR,
 				);
 			$result = $this->m_ijin_lingkungan->__update($data, $ID_IJIN_LINGUKANGAN, '', '');
 		}
@@ -236,6 +244,8 @@ class C_ijin_lingkungan extends CI_Controller{
 		$TELP2 = htmlentities($this->input->post('TELP2'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$params = array(
 			'ID_IJIN_LINGKUNGAN_INTI'=>$ID_IJIN_LINGKUNGAN_INTI,
@@ -260,6 +270,8 @@ class C_ijin_lingkungan extends CI_Controller{
 			'ID_KOTA2'=>$ID_KOTA2,
 			'TELP2'=>$TELP2,
 			'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+			'TGL_AKHIR'=>$TGL_AKHIR,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -304,6 +316,8 @@ class C_ijin_lingkungan extends CI_Controller{
 		$TELP2 = htmlentities($this->input->post('TELP2'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$params = array(
 			'searchText' => $searchText,
@@ -329,6 +343,8 @@ class C_ijin_lingkungan extends CI_Controller{
 			'ID_KOTA2'=>$ID_KOTA2,
 			'TELP2'=>$TELP2,
 			'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+			'TGL_AKHIR'=>$TGL_AKHIR,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,

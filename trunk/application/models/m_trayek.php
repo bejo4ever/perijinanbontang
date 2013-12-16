@@ -7,7 +7,8 @@ class M_trayek extends App_model{
 				NOMOR_UB,
 				TGL_PERMOHONAN,
 				NAMA_PERUSAHAAN,
-				NAMA_PEMOHON
+				NAMA_PEMOHON,
+				TGL_AKHIR
 				FROM trayek 
 			WHERE ID_TRAYEK IS NOT NULL 
 	";
@@ -31,7 +32,8 @@ class M_trayek extends App_model{
 					NOMOR_UB LIKE '%".$searchText."%' OR 
 					TGL_PERMOHONAN LIKE '%".$searchText."%' OR 
 					NAMA_PERUSAHAAN LIKE '%".$searchText."%' OR 
-					NAMA_PEMOHON LIKE '%".$searchText."%'
+					NAMA_PEMOHON LIKE '%".$searchText."%' OR 
+					TGL_AKHIR LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -64,6 +66,9 @@ class M_trayek extends App_model{
 		}
 		if(@$NAMA_PEMOHON != ''){
 			$sql .= " AND NAMA_PEMOHON LIKE '%".$NAMA_PEMOHON."%' ";
+		}
+		if(@$TGL_AKHIR != ''){
+			$sql .= " AND TGL_AKHIR LIKE '%".$TGL_AKHIR."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

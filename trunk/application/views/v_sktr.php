@@ -207,7 +207,7 @@
 										animEl : 'save',
 										icon : Ext.MessageBox.WARNING,
 										fn : function(btn){
-											window.location="<?php echo base_url(); ?>";
+											window.location="index.php";
 										}
 									});
 									break;
@@ -536,10 +536,10 @@
 			}),
 			fields : [
 				{ name : 'ID_SKTR', type : 'int', mapping : 'ID_SKTR' },
-				{ name : 'USER', type : 'string', mapping : 'USER' },
+				{ name : 'ID_USER', type : 'int', mapping : 'ID_USER' },
 				{ name : 'NAMA_PEMOHON', type : 'string', mapping : 'NAMA_PEMOHON' },
 				{ name : 'NO_TELP', type : 'string', mapping : 'NO_TELP' },
-				{ name : 'HAK_MILIK', type : 'string', mapping : 'HAK_MILIK' },
+				{ name : 'HAK_MILIK', type : 'int', mapping : 'HAK_MILIK' },
 				{ name : 'NAMA_PEMILIK', type : 'string', mapping : 'NAMA_PEMILIK' },
 				{ name : 'NO_SURAT_TANAH', type : 'string', mapping : 'NO_SURAT_TANAH' },
 				{ name : 'ALAMAT_BANGUNAN', type : 'string', mapping : 'ALAMAT_BANGUNAN' },
@@ -551,7 +551,7 @@
 				{ name : 'BATAS_KANAN', type : 'string', mapping : 'BATAS_KANAN' },
 				{ name : 'BATAS_DEPAN', type : 'string', mapping : 'BATAS_DEPAN' },
 				{ name : 'BATAS_BELAKANG', type : 'string', mapping : 'BATAS_BELAKANG' },
-				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_PERMOHONAN' },
+				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_PERMOHONAN' },
 				]
 		});
 /* End DataStore declaration */
@@ -731,49 +731,49 @@
 			keys : tr_shorcut,
 			columns : [
 				{
-					text : 'Nama User',
-					dataIndex : 'USER',
+					text : 'ID_USER',
+					dataIndex : 'ID_USER',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'Nama Pemohon',
+					text : 'NAMA_PEMOHON',
 					dataIndex : 'NAMA_PEMOHON',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'No Telp.',
+					text : 'NO_TELP',
 					dataIndex : 'NO_TELP',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'Hak Milik',
+					text : 'HAK_MILIK',
 					dataIndex : 'HAK_MILIK',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'Nama Pemilik',
+					text : 'NAMA_PEMILIK',
 					dataIndex : 'NAMA_PEMILIK',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'No Surat Tanah',
+					text : 'NO_SURAT_TANAH',
 					dataIndex : 'NO_SURAT_TANAH',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'Alamat Bangunan',
+					text : 'ALAMAT_BANGUNAN',
 					dataIndex : 'ALAMAT_BANGUNAN',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'Tujuan Permohonan',
+					text : 'RENCANA_PERUNTUKAN',
 					dataIndex : 'RENCANA_PERUNTUKAN',
 					width : 100,
 					sortable : false
@@ -782,53 +782,46 @@
 					text : 'TINGGI_BANGUNAN',
 					dataIndex : 'TINGGI_BANGUNAN',
 					width : 100,
-					hidden:true,
 					sortable : false
 				},
 				{
 					text : 'LUAS_PERSIL',
 					dataIndex : 'LUAS_PERSIL',
 					width : 100,
-					hidden:true,
 					sortable : false
 				},
 				{
 					text : 'LUAS_BANGUNAN',
 					dataIndex : 'LUAS_BANGUNAN',
 					width : 100,
-					hidden:true,
 					sortable : false
 				},
 				{
 					text : 'BATAS_KIRI',
 					dataIndex : 'BATAS_KIRI',
 					width : 100,
-					hidden:true,
 					sortable : false
 				},
 				{
 					text : 'BATAS_KANAN',
 					dataIndex : 'BATAS_KANAN',
 					width : 100,
-					hidden:true,
 					sortable : false
 				},
 				{
 					text : 'BATAS_DEPAN',
 					dataIndex : 'BATAS_DEPAN',
 					width : 100,
-					hidden:true,
 					sortable : false
 				},
 				{
 					text : 'BATAS_BELAKANG',
 					dataIndex : 'BATAS_BELAKANG',
 					width : 100,
-					hidden:true,
 					sortable : false
 				},
 				{
-					text : 'Tanggal Permohonan',
+					text : 'TGL_PERMOHONAN',
 					dataIndex : 'TGL_PERMOHONAN',
 					width : 100,
 					sortable : false
@@ -873,7 +866,6 @@
 			fieldLabel : 'ID_USER',
 			allowNegatife : false,
 			blankText : '0',
-			hidden:true,
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
 		NAMA_PEMOHONField = Ext.create('Ext.form.TextField',{
@@ -888,25 +880,14 @@
 			fieldLabel : 'NO_TELP',
 			maxLength : 20
 		});
-		HAK_MILIKField = Ext.create('Ext.form.ComboBox',{
+		HAK_MILIKField = Ext.create('Ext.form.NumberField',{
 			id : 'HAK_MILIKField',
 			name : 'HAK_MILIK',
-			store : new Ext.data.ArrayStore({
-				fields : ['hak_id', 'hak_nama'],
-				data : [[1,'Sertifikat'],[0,'PPAT']]
-			}),
-			displayField : 'hak_nama',
-			valueField : 'hak_id',
-			queryMode : 'local',
-			triggerAction : 'all',
-			forceSelection : true,
-			fieldLabel : 'Jenis Hak Milik'
-			/* 
-			
+			fieldLabel : 'HAK_MILIK',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
-			maskRe : /([0-9]+)$/ */});
+			maskRe : /([0-9]+)$/});
 		NAMA_PEMILIKField = Ext.create('Ext.form.TextField',{
 			id : 'NAMA_PEMILIKField',
 			name : 'NAMA_PEMILIK',
@@ -979,13 +960,11 @@
 			fieldLabel : 'BATAS_BELAKANG',
 			maxLength : 100
 		});
-		TGL_PERMOHONANField = Ext.create('Ext.form.field.Date',{
+		TGL_PERMOHONANField = Ext.create('Ext.form.TextField',{
 			id : 'TGL_PERMOHONANField',
 			name : 'TGL_PERMOHONAN',
-			format:'d-m-Y',
 			fieldLabel : 'TGL_PERMOHONAN',
-			hidden:true,
-			maxLength : 100
+			maxLength : 0
 		});
 		var tr_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
@@ -998,94 +977,25 @@
 				tr_switchToGrid();
 			}
 		});
-		sktr_det_syaratDataStore = Ext.create('Ext.data.Store',{
-			id : 'sktr_det_syaratDataStore',
-			pageSize : globalPageSize,
-			autoLoad : true,
-			proxy : Ext.create('Ext.data.HttpProxy',{
-				url : 'c_dt_syarat/switchAction',
-				reader : {
-					type : 'json',
-					root : 'results',
-					rootProperty : 'results',
-					totalProperty : 'total'
-				},
-				actionMethods : {
-					read : 'POST'
-				},
-				extraParams : {
-					action : 'GETLIST'
-				}
-			}),
-			fields : [
-				{ name : 'SYARAT', type : 'string', mapping : 'SYARAT' },
-				{ name : 'KETERANGAN', type : 'int', mapping : 'idam_cek_syarat_id' },
-				// { name : 'idam_cek_idamdet_id', type : 'int', mapping : 'idam_cek_idamdet_id' },
-				// { name : 'idam_cek_idam_id', type : 'int', mapping : 'idam_cek_idam_id' },
-				// { name : 'idam_cek_status', type : 'boolean', mapping : 'idam_cek_status' },
-				// { name : 'idam_cek_keterangan', type : 'string', mapping : 'idam_cek_keterangan' },
-				// { name : 'idam_cek_syarat_nama', type : 'string', mapping : 'idam_cek_syarat_nama' }
-				]
-		});
-		det_sktr_syaratGrid = Ext.create('Ext.grid.Panel',{
-			id : 'sktr_det_syaratDataStore',
-			store : sktr_det_syaratDataStore,
-			loadMask : true,
-			width : '95%',
-			plugins : [
-				Ext.create('Ext.grid.plugin.CellEditing', {
-					clicksToEdit: 1
-				})
-			],
-			selType: 'cellmodel',
-			columns : [
-				// {
-					// text : 'Id',
-					// dataIndex : 'idam_cek_id',
-					// width : 100,
-					// hidden : true,
-					// sortable : false
-				// },
-				{
-					text : 'Syarat',
-					dataIndex : 'NAMA_SYARAT',
-					width : 150,
-					sortable : false
-				},
-				// {
-					// xtype: 'checkcolumn',
-					// text: 'Ada?',
-					// dataIndex: 'idam_cek_status',
-					// width: 55,
-					// stopSelection: false
-				// },
-				{
-					text : 'Keterangan',
-					dataIndex : 'KETERANGAN',
-					width : 100,
-					sortable : false,
-					editor: 'textfield',
-					flex : 1
-				}
-			]
-		});
 		tr_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
-			frame : true,
+			fieldDefaults: {
+				msgTarget: 'side'
+			},
 			layout : {
-				type : 'form',
+				type : 'vbox',
+				align : 'stretch',
 				padding : 5
 			},
-			// defaultType : 'textfield',
-			defaults : {anchor : '95%'},
 			items: [
 				{
-					xtype : 'fieldset',
-					title : '1. Data Permohonan',
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					// flex : 2,
+					xtype : 'container',
+					layout : 'hbox',
+					style : {borderWidth :'0px'},
+					defaultType : 'textfield',
+					defaults : {anchor : '95%'},
+					layout : 'anchor',
+					flex : 2,
 					items : [
 						ID_SKTRField,
 						ID_USERField,
@@ -1105,16 +1015,6 @@
 						BATAS_BELAKANGField,
 						TGL_PERMOHONANField,
 											]
-				},{
-					xtype : 'fieldset',
-					title : '2. Data Kelengkapan',
-					columnWidth : 0.5,
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-						det_sktr_syaratGrid
-					]
 				}, {
 					xtype : 'splitter'
 				}, {

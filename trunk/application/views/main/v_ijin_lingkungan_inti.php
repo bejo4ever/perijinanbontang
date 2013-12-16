@@ -14,6 +14,7 @@
 		var in_lingkungan_inti_searchWindow;
 		
 		var ID_IJIN_LINGKUNGAN_INTIField;
+		var ID_USERField;
 		var NO_REGField;
 		var JENIS_USAHAField;
 		var ALAMATField;
@@ -21,7 +22,7 @@
 		var ID_KECAMATANField;
 		var ID_KOTAField;
 		var STATUS_LOKASIField;
-		var LUAS USAHAField;
+		var LUAS_USAHAField;
 		var LUAS_BAHANField;
 		var LUAS_BANGUNANField;
 		var LUAS_RUANG_USAHAField;
@@ -29,6 +30,7 @@
 		var IZIN_SKTRField;
 		var IZIN_LOKASIField;
 				
+		var ID_USERSearchField;
 		var NO_REGSearchField;
 		var JENIS_USAHASearchField;
 		var ALAMATSearchField;
@@ -36,7 +38,7 @@
 		var ID_KECAMATANSearchField;
 		var ID_KOTASearchField;
 		var STATUS_LOKASISearchField;
-		var LUAS USAHASearchField;
+		var LUAS_USAHASearchField;
 		var LUAS_BAHANSearchField;
 		var LUAS_BANGUNANSearchField;
 		var LUAS_RUANG_USAHASearchField;
@@ -117,6 +119,7 @@
 			}else{
 				if(in_lingkungan_inti_confirmFormValid()){
 					var ID_IJIN_LINGKUNGAN_INTIValue = '';
+					var ID_USERValue = '';
 					var NO_REGValue = '';
 					var JENIS_USAHAValue = '';
 					var ALAMATValue = '';
@@ -124,7 +127,7 @@
 					var ID_KECAMATANValue = '';
 					var ID_KOTAValue = '';
 					var STATUS_LOKASIValue = '';
-					var LUAS USAHAValue = '';
+					var LUAS_USAHAValue = '';
 					var LUAS_BAHANValue = '';
 					var LUAS_BANGUNANValue = '';
 					var LUAS_RUANG_USAHAValue = '';
@@ -133,6 +136,7 @@
 					var IZIN_LOKASIValue = '';
 										
 					ID_IJIN_LINGKUNGAN_INTIValue = ID_IJIN_LINGKUNGAN_INTIField.getValue();
+					ID_USERValue = ID_USERField.getValue();
 					NO_REGValue = NO_REGField.getValue();
 					JENIS_USAHAValue = JENIS_USAHAField.getValue();
 					ALAMATValue = ALAMATField.getValue();
@@ -140,7 +144,7 @@
 					ID_KECAMATANValue = ID_KECAMATANField.getValue();
 					ID_KOTAValue = ID_KOTAField.getValue();
 					STATUS_LOKASIValue = STATUS_LOKASIField.getValue();
-					LUAS USAHAValue = LUAS USAHAField.getValue();
+					LUAS_USAHAValue = LUAS_USAHAField.getValue();
 					LUAS_BAHANValue = LUAS_BAHANField.getValue();
 					LUAS_BANGUNANValue = LUAS_BANGUNANField.getValue();
 					LUAS_RUANG_USAHAValue = LUAS_RUANG_USAHAField.getValue();
@@ -153,6 +157,7 @@
 						url: 'c_ijin_lingkungan_inti/switchAction',
 						params: {							
 							ID_IJIN_LINGKUNGAN_INTI : ID_IJIN_LINGKUNGAN_INTIValue,
+							ID_USER : ID_USERValue,
 							NO_REG : NO_REGValue,
 							JENIS_USAHA : JENIS_USAHAValue,
 							ALAMAT : ALAMATValue,
@@ -160,7 +165,7 @@
 							ID_KECAMATAN : ID_KECAMATANValue,
 							ID_KOTA : ID_KOTAValue,
 							STATUS_LOKASI : STATUS_LOKASIValue,
-							LUAS USAHA : LUAS USAHAValue,
+							LUAS_USAHA : LUAS_USAHAValue,
 							LUAS_BAHAN : LUAS_BAHANValue,
 							LUAS_BANGUNAN : LUAS_BANGUNANValue,
 							LUAS_RUANG_USAHA : LUAS_RUANG_USAHAValue,
@@ -320,6 +325,7 @@
 			
 			var record = in_lingkungan_inti_gridPanel.getSelectionModel().getSelection()[0];
 			ID_IJIN_LINGKUNGAN_INTIField.setValue(record.data.ID_IJIN_LINGKUNGAN_INTI);
+			ID_USERField.setValue(record.data.ID_USER);
 			NO_REGField.setValue(record.data.NO_REG);
 			JENIS_USAHAField.setValue(record.data.JENIS_USAHA);
 			ALAMATField.setValue(record.data.ALAMAT);
@@ -327,7 +333,7 @@
 			ID_KECAMATANField.setValue(record.data.ID_KECAMATAN);
 			ID_KOTAField.setValue(record.data.ID_KOTA);
 			STATUS_LOKASIField.setValue(record.data.STATUS_LOKASI);
-			LUAS USAHAField.setValue(record.data.LUAS USAHA);
+			LUAS_USAHAField.setValue(record.data.LUAS_USAHA);
 			LUAS_BAHANField.setValue(record.data.LUAS_BAHAN);
 			LUAS_BANGUNANField.setValue(record.data.LUAS_BANGUNAN);
 			LUAS_RUANG_USAHAField.setValue(record.data.LUAS_RUANG_USAHA);
@@ -343,6 +349,7 @@
 		function in_lingkungan_inti_search(){
 			in_lingkungan_inti_gridSearchField.reset();
 			
+			var ID_USERValue = '';
 			var NO_REGValue = '';
 			var JENIS_USAHAValue = '';
 			var ALAMATValue = '';
@@ -350,7 +357,7 @@
 			var ID_KECAMATANValue = '';
 			var ID_KOTAValue = '';
 			var STATUS_LOKASIValue = '';
-			var LUAS USAHAValue = '';
+			var LUAS_USAHAValue = '';
 			var LUAS_BAHANValue = '';
 			var LUAS_BANGUNANValue = '';
 			var LUAS_RUANG_USAHAValue = '';
@@ -358,6 +365,7 @@
 			var IZIN_SKTRValue = '';
 			var IZIN_LOKASIValue = '';
 						
+			ID_USERValue = ID_USERSearchField.getValue();
 			NO_REGValue = NO_REGSearchField.getValue();
 			JENIS_USAHAValue = JENIS_USAHASearchField.getValue();
 			ALAMATValue = ALAMATSearchField.getValue();
@@ -365,7 +373,7 @@
 			ID_KECAMATANValue = ID_KECAMATANSearchField.getValue();
 			ID_KOTAValue = ID_KOTASearchField.getValue();
 			STATUS_LOKASIValue = STATUS_LOKASISearchField.getValue();
-			LUAS USAHAValue = LUAS USAHASearchField.getValue();
+			LUAS_USAHAValue = LUAS_USAHASearchField.getValue();
 			LUAS_BAHANValue = LUAS_BAHANSearchField.getValue();
 			LUAS_BANGUNANValue = LUAS_BANGUNANSearchField.getValue();
 			LUAS_RUANG_USAHAValue = LUAS_RUANG_USAHASearchField.getValue();
@@ -374,6 +382,7 @@
 			IZIN_LOKASIValue = IZIN_LOKASISearchField.getValue();
 			in_lingkungan_inti_dbListAction = "SEARCH";
 			in_lingkungan_inti_dataStore.proxy.extraParams = { 
+				ID_USER : ID_USERValue,
 				NO_REG : NO_REGValue,
 				JENIS_USAHA : JENIS_USAHAValue,
 				ALAMAT : ALAMATValue,
@@ -381,7 +390,7 @@
 				ID_KECAMATAN : ID_KECAMATANValue,
 				ID_KOTA : ID_KOTAValue,
 				STATUS_LOKASI : STATUS_LOKASIValue,
-				LUAS USAHA : LUAS USAHAValue,
+				LUAS_USAHA : LUAS_USAHAValue,
 				LUAS_BAHAN : LUAS_BAHANValue,
 				LUAS_BANGUNAN : LUAS_BANGUNANValue,
 				LUAS_RUANG_USAHA : LUAS_RUANG_USAHAValue,
@@ -401,6 +410,7 @@
 		
 		function in_lingkungan_inti_printExcel(outputType){
 			var searchText = "";
+			var ID_USERValue = '';
 			var NO_REGValue = '';
 			var JENIS_USAHAValue = '';
 			var ALAMATValue = '';
@@ -408,7 +418,7 @@
 			var ID_KECAMATANValue = '';
 			var ID_KOTAValue = '';
 			var STATUS_LOKASIValue = '';
-			var LUAS USAHAValue = '';
+			var LUAS_USAHAValue = '';
 			var LUAS_BAHANValue = '';
 			var LUAS_BANGUNANValue = '';
 			var LUAS_RUANG_USAHAValue = '';
@@ -417,6 +427,7 @@
 			var IZIN_LOKASIValue = '';
 			
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.query!==null){searchText = in_lingkungan_inti_dataStore.proxy.extraParams.query;}
+			if(in_lingkungan_inti_dataStore.proxy.extraParams.ID_USER!==null){ID_USERValue = in_lingkungan_inti_dataStore.proxy.extraParams.ID_USER;}
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.NO_REG!==null){NO_REGValue = in_lingkungan_inti_dataStore.proxy.extraParams.NO_REG;}
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.JENIS_USAHA!==null){JENIS_USAHAValue = in_lingkungan_inti_dataStore.proxy.extraParams.JENIS_USAHA;}
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.ALAMAT!==null){ALAMATValue = in_lingkungan_inti_dataStore.proxy.extraParams.ALAMAT;}
@@ -424,7 +435,7 @@
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.ID_KECAMATAN!==null){ID_KECAMATANValue = in_lingkungan_inti_dataStore.proxy.extraParams.ID_KECAMATAN;}
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.ID_KOTA!==null){ID_KOTAValue = in_lingkungan_inti_dataStore.proxy.extraParams.ID_KOTA;}
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.STATUS_LOKASI!==null){STATUS_LOKASIValue = in_lingkungan_inti_dataStore.proxy.extraParams.STATUS_LOKASI;}
-			if(in_lingkungan_inti_dataStore.proxy.extraParams.LUAS USAHA!==null){LUAS USAHAValue = in_lingkungan_inti_dataStore.proxy.extraParams.LUAS USAHA;}
+			if(in_lingkungan_inti_dataStore.proxy.extraParams.LUAS_USAHA!==null){LUAS_USAHAValue = in_lingkungan_inti_dataStore.proxy.extraParams.LUAS_USAHA;}
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.LUAS_BAHAN!==null){LUAS_BAHANValue = in_lingkungan_inti_dataStore.proxy.extraParams.LUAS_BAHAN;}
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.LUAS_BANGUNAN!==null){LUAS_BANGUNANValue = in_lingkungan_inti_dataStore.proxy.extraParams.LUAS_BANGUNAN;}
 			if(in_lingkungan_inti_dataStore.proxy.extraParams.LUAS_RUANG_USAHA!==null){LUAS_RUANG_USAHAValue = in_lingkungan_inti_dataStore.proxy.extraParams.LUAS_RUANG_USAHA;}
@@ -438,6 +449,7 @@
 				params : {
 					action : outputType,
 					query : searchText,
+					ID_USER : ID_USERValue,
 					NO_REG : NO_REGValue,
 					JENIS_USAHA : JENIS_USAHAValue,
 					ALAMAT : ALAMATValue,
@@ -445,7 +457,7 @@
 					ID_KECAMATAN : ID_KECAMATANValue,
 					ID_KOTA : ID_KOTAValue,
 					STATUS_LOKASI : STATUS_LOKASIValue,
-					LUAS USAHA : LUAS USAHAValue,
+					LUAS_USAHA : LUAS_USAHAValue,
 					LUAS_BAHAN : LUAS_BAHANValue,
 					LUAS_BANGUNAN : LUAS_BANGUNANValue,
 					LUAS_RUANG_USAHA : LUAS_RUANG_USAHAValue,
@@ -512,14 +524,15 @@
 			}),
 			fields : [
 				{ name : 'ID_IJIN_LINGKUNGAN_INTI', type : 'int', mapping : 'ID_IJIN_LINGKUNGAN_INTI' },
-				{ name : 'NO_REG', type : 'int', mapping : 'NO_REG' },
+				{ name : 'ID_USER', type : 'int', mapping : 'ID_USER' },
+				{ name : 'NO_REG', type : 'string', mapping : 'NO_REG' },
 				{ name : 'JENIS_USAHA', type : 'string', mapping : 'JENIS_USAHA' },
 				{ name : 'ALAMAT', type : 'string', mapping : 'ALAMAT' },
 				{ name : 'ID_KELURAHAN', type : 'int', mapping : 'ID_KELURAHAN' },
 				{ name : 'ID_KECAMATAN', type : 'int', mapping : 'ID_KECAMATAN' },
 				{ name : 'ID_KOTA', type : 'int', mapping : 'ID_KOTA' },
 				{ name : 'STATUS_LOKASI', type : 'int', mapping : 'STATUS_LOKASI' },
-				{ name : 'LUAS USAHA', type : 'float', mapping : 'LUAS USAHA' },
+				{ name : 'LUAS_USAHA', type : 'float', mapping : 'LUAS_USAHA' },
 				{ name : 'LUAS_BAHAN', type : 'float', mapping : 'LUAS_BAHAN' },
 				{ name : 'LUAS_BANGUNAN', type : 'float', mapping : 'LUAS_BANGUNAN' },
 				{ name : 'LUAS_RUANG_USAHA', type : 'float', mapping : 'LUAS_RUANG_USAHA' },
@@ -705,6 +718,12 @@
 			keys : in_lingkungan_inti_shorcut,
 			columns : [
 				{
+					text : 'ID_USER',
+					dataIndex : 'ID_USER',
+					width : 100,
+					sortable : false
+				},
+				{
 					text : 'NO_REG',
 					dataIndex : 'NO_REG',
 					width : 100,
@@ -747,8 +766,8 @@
 					sortable : false
 				},
 				{
-					text : 'LUAS USAHA',
-					dataIndex : 'LUAS USAHA',
+					text : 'LUAS_USAHA',
+					dataIndex : 'LUAS_USAHA',
 					width : 100,
 					sortable : false
 				},
@@ -822,14 +841,20 @@
 			allowDecimals : false,
 			hidden : true,
 			maskRe : /([0-9]+)$/});
-		NO_REGField = Ext.create('Ext.form.NumberField',{
-			id : 'NO_REGField',
-			name : 'NO_REG',
-			fieldLabel : 'NO_REG',
+		ID_USERField = Ext.create('Ext.form.NumberField',{
+			id : 'ID_USERField',
+			name : 'ID_USER',
+			fieldLabel : 'ID_USER',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
+		NO_REGField = Ext.create('Ext.form.TextField',{
+			id : 'NO_REGField',
+			name : 'NO_REG',
+			fieldLabel : 'NO_REG',
+			maxLength : 11
+		});
 		JENIS_USAHAField = Ext.create('Ext.form.TextField',{
 			id : 'JENIS_USAHAField',
 			name : 'JENIS_USAHA',
@@ -874,10 +899,10 @@
 			blankText : '0',
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
-		LUAS USAHAField = Ext.create('Ext.form.NumberField',{
-			id : 'LUAS USAHAField',
-			name : 'LUAS USAHA',
-			fieldLabel : 'LUAS USAHA',
+		LUAS_USAHAField = Ext.create('Ext.form.NumberField',{
+			id : 'LUAS_USAHAField',
+			name : 'LUAS_USAHA',
+			fieldLabel : 'LUAS_USAHA',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
@@ -962,6 +987,7 @@
 					flex : 2,
 					items : [
 						ID_IJIN_LINGKUNGAN_INTIField,
+						ID_USERField,
 						NO_REGField,
 						JENIS_USAHAField,
 						ALAMATField,
@@ -969,7 +995,7 @@
 						ID_KECAMATANField,
 						ID_KOTAField,
 						STATUS_LOKASIField,
-						LUAS USAHAField,
+						LUAS_USAHAField,
 						LUAS_BAHANField,
 						LUAS_BANGUNANField,
 						LUAS_RUANG_USAHAField,
@@ -1001,13 +1027,20 @@
 		});
 /* End FormPanel declaration */
 /* Start SearchPanel declaration */
-		NO_REGSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'NO_REGSearchField',
-			name : 'NO_REG',
-			fieldLabel : 'NO_REG',
+		ID_USERSearchField = Ext.create('Ext.form.NumberField',{
+			id : 'ID_USERSearchField',
+			name : 'ID_USER',
+			fieldLabel : 'ID_USER',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,maskRe : /([0-9]+)$/
+		});
+		NO_REGSearchField = Ext.create('Ext.form.TextField',{
+			id : 'NO_REGSearchField',
+			name : 'NO_REG',
+			fieldLabel : 'NO_REG',
+			maxLength : 11
+		
 		});
 		JENIS_USAHASearchField = Ext.create('Ext.form.TextField',{
 			id : 'JENIS_USAHASearchField',
@@ -1055,10 +1088,10 @@
 			blankText : '0',
 			allowDecimals : false,maskRe : /([0-9]+)$/
 		});
-		LUAS USAHASearchField = Ext.create('Ext.form.NumberField',{
-			id : 'LUAS USAHASearchField',
-			name : 'LUAS USAHA',
-			fieldLabel : 'LUAS USAHA',
+		LUAS_USAHASearchField = Ext.create('Ext.form.NumberField',{
+			id : 'LUAS_USAHASearchField',
+			name : 'LUAS_USAHA',
+			fieldLabel : 'LUAS_USAHA',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,maskRe : /([0-9]+)$/
@@ -1137,6 +1170,7 @@
 					layout : 'anchor',
 					flex : 2,
 					items : [
+						ID_USERSearchField,
 						NO_REGSearchField,
 						JENIS_USAHASearchField,
 						ALAMATSearchField,
@@ -1144,7 +1178,7 @@
 						ID_KECAMATANSearchField,
 						ID_KOTASearchField,
 						STATUS_LOKASISearchField,
-						LUAS USAHASearchField,
+						LUAS_USAHASearchField,
 						LUAS_BAHANSearchField,
 						LUAS_BANGUNANSearchField,
 						LUAS_RUANG_USAHASearchField,

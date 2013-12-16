@@ -23,7 +23,9 @@ class M_ijin_lingkungan extends App_model{
 				ID_KECAMATAN2,
 				ID_KOTA2,
 				TELP2,
-				JENIS_PERMOHONAN
+				JENIS_PERMOHONAN,
+				TGL_PERMOHONAN,
+				TGL_AKHIR
 				FROM ijin_lingkungan 
 			WHERE ID_IJIN_LINGUKANGAN IS NOT NULL 
 	";
@@ -63,7 +65,9 @@ class M_ijin_lingkungan extends App_model{
 					ID_KECAMATAN2 LIKE '%".$searchText."%' OR 
 					ID_KOTA2 LIKE '%".$searchText."%' OR 
 					TELP2 LIKE '%".$searchText."%' OR 
-					JENIS_PERMOHONAN LIKE '%".$searchText."%'
+					JENIS_PERMOHONAN LIKE '%".$searchText."%' OR 
+					TGL_PERMOHONAN LIKE '%".$searchText."%' OR 
+					TGL_AKHIR LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -144,6 +148,12 @@ class M_ijin_lingkungan extends App_model{
 		}
 		if(@$JENIS_PERMOHONAN != ''){
 			$sql .= " AND JENIS_PERMOHONAN LIKE '%".$JENIS_PERMOHONAN."%' ";
+		}
+		if(@$TGL_PERMOHONAN != ''){
+			$sql .= " AND TGL_PERMOHONAN LIKE '%".$TGL_PERMOHONAN."%' ";
+		}
+		if(@$TGL_AKHIR != ''){
+			$sql .= " AND TGL_AKHIR LIKE '%".$TGL_AKHIR."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

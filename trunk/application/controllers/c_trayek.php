@@ -64,6 +64,7 @@ class C_trayek extends CI_Controller{
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$ayek_author = $this->m_trayek->__checkSession();
 		$ayek_created_date = date('Y-m-d H:i:s');
@@ -79,6 +80,7 @@ class C_trayek extends CI_Controller{
 				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
 				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 				'NAMA_PEMOHON'=>$NAMA_PEMOHON,
+				'TGL_AKHIR'=>$TGL_AKHIR,
 				);
 			$result = $this->m_trayek->__insert($data, '', '');
 		}
@@ -95,6 +97,7 @@ class C_trayek extends CI_Controller{
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$ayek_updated_by = $this->m_trayek->__checkSession();
 		$ayek_updated_date = date('Y-m-d H:i:s');
@@ -109,6 +112,7 @@ class C_trayek extends CI_Controller{
 				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
 				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 				'NAMA_PEMOHON'=>$NAMA_PEMOHON,
+				'TGL_AKHIR'=>$TGL_AKHIR,
 				);
 			$result = $this->m_trayek->__update($data, $ID_TRAYEK, '', '');
 		}
@@ -132,6 +136,7 @@ class C_trayek extends CI_Controller{
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$params = array(
 			'ID_TRAYEK_INTI'=>$ID_TRAYEK_INTI,
@@ -140,6 +145,7 @@ class C_trayek extends CI_Controller{
 			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
 			'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 			'NAMA_PEMOHON'=>$NAMA_PEMOHON,
+			'TGL_AKHIR'=>$TGL_AKHIR,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -160,6 +166,7 @@ class C_trayek extends CI_Controller{
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$params = array(
 			'searchText' => $searchText,
@@ -169,6 +176,7 @@ class C_trayek extends CI_Controller{
 			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
 			'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 			'NAMA_PEMOHON'=>$NAMA_PEMOHON,
+			'TGL_AKHIR'=>$TGL_AKHIR,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,

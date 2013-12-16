@@ -12,7 +12,9 @@ class M_ijin_lokasi extends App_model{
 				ID_DESA,
 				ID_KECAMATAN,
 				ID_KOTA,
-				TELEPON_PEMOHON
+				TELEPON_PEMOHON,
+				TGL_PERMOHONAN,
+				TGL_AKHIR
 				FROM ijin_lokasi 
 			WHERE ID_IJIN_LOKASI IS NOT NULL 
 	";
@@ -41,7 +43,9 @@ class M_ijin_lokasi extends App_model{
 					ID_DESA LIKE '%".$searchText."%' OR 
 					ID_KECAMATAN LIKE '%".$searchText."%' OR 
 					ID_KOTA LIKE '%".$searchText."%' OR 
-					TELEPON_PEMOHON LIKE '%".$searchText."%'
+					TELEPON_PEMOHON LIKE '%".$searchText."%' OR 
+					TGL_PERMOHONAN LIKE '%".$searchText."%' OR 
+					TGL_AKHIR LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -89,6 +93,12 @@ class M_ijin_lokasi extends App_model{
 		}
 		if(@$TELEPON_PEMOHON != ''){
 			$sql .= " AND TELEPON_PEMOHON LIKE '%".$TELEPON_PEMOHON."%' ";
+		}
+		if(@$TGL_PERMOHONAN != ''){
+			$sql .= " AND TGL_PERMOHONAN LIKE '%".$TGL_PERMOHONAN."%' ";
+		}
+		if(@$TGL_AKHIR != ''){
+			$sql .= " AND TGL_AKHIR LIKE '%".$TGL_AKHIR."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

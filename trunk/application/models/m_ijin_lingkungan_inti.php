@@ -2,6 +2,7 @@
 class M_ijin_lingkungan_inti extends App_model{
 	var $mainSql = "SELECT 
 				ID_IJIN_LINGKUNGAN_INTI,
+				ID_USER,
 				NO_REG,
 				JENIS_USAHA,
 				ALAMAT,
@@ -9,7 +10,7 @@ class M_ijin_lingkungan_inti extends App_model{
 				ID_KECAMATAN,
 				ID_KOTA,
 				STATUS_LOKASI,
-				LUAS USAHA,
+				LUAS_USAHA,
 				LUAS_BAHAN,
 				LUAS_BANGUNAN,
 				LUAS_RUANG_USAHA,
@@ -34,6 +35,7 @@ class M_ijin_lingkungan_inti extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
+					ID_USER LIKE '%".$searchText."%' OR 
 					NO_REG LIKE '%".$searchText."%' OR 
 					JENIS_USAHA LIKE '%".$searchText."%' OR 
 					ALAMAT LIKE '%".$searchText."%' OR 
@@ -41,7 +43,7 @@ class M_ijin_lingkungan_inti extends App_model{
 					ID_KECAMATAN LIKE '%".$searchText."%' OR 
 					ID_KOTA LIKE '%".$searchText."%' OR 
 					STATUS_LOKASI LIKE '%".$searchText."%' OR 
-					LUAS USAHA LIKE '%".$searchText."%' OR 
+					LUAS_USAHA LIKE '%".$searchText."%' OR 
 					LUAS_BAHAN LIKE '%".$searchText."%' OR 
 					LUAS_BANGUNAN LIKE '%".$searchText."%' OR 
 					LUAS_RUANG_USAHA LIKE '%".$searchText."%' OR 
@@ -63,6 +65,9 @@ class M_ijin_lingkungan_inti extends App_model{
 		
 		$sql = $this->mainSql;
 		
+		if(@$ID_USER != ''){
+			$sql .= " AND ID_USER LIKE '%".$ID_USER."%' ";
+		}
 		if(@$NO_REG != ''){
 			$sql .= " AND NO_REG LIKE '%".$NO_REG."%' ";
 		}
@@ -84,8 +89,8 @@ class M_ijin_lingkungan_inti extends App_model{
 		if(@$STATUS_LOKASI != ''){
 			$sql .= " AND STATUS_LOKASI LIKE '%".$STATUS_LOKASI."%' ";
 		}
-		if(@$LUAS USAHA != ''){
-			$sql .= " AND LUAS USAHA LIKE '%".$LUAS USAHA."%' ";
+		if(@$LUAS_USAHA != ''){
+			$sql .= " AND LUAS_USAHA LIKE '%".$LUAS_USAHA."%' ";
 		}
 		if(@$LUAS_BAHAN != ''){
 			$sql .= " AND LUAS_BAHAN LIKE '%".$LUAS_BAHAN."%' ";

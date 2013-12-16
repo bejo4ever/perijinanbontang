@@ -16,9 +16,16 @@ class M_dt_syarat extends App_model{
 		$this->column_unique = '';
     }
 	
-	function getList($params){
+	function getList($params,$conditions=FALSE){
 		extract($params);
 		$sql = $this->mainSql;
+		if($conditions == TRUE){
+			$sql .="
+				AND (
+					ID_IIN = '" . $conditions . "'
+				)
+			";
+		}
 		if(@$searchText != ''){
 			$sql .= "
 				AND (

@@ -72,11 +72,13 @@ class C_ijin_lokasi extends CI_Controller{
 		$ID_KOTA = htmlentities($this->input->post('ID_KOTA'),ENT_QUOTES);
 		$ID_KOTA = is_numeric($ID_KOTA) ? $ID_KOTA : 0;
 		$TELEPON_PEMOHON = htmlentities($this->input->post('TELEPON_PEMOHON'),ENT_QUOTES);
+		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$in_lokasi_author = $this->m_ijin_lokasi->__checkSession();
 		$in_lokasi_created_date = date('Y-m-d H:i:s');
 		
-		if(!$in_lokasi_author){
+		if($in_lokasi_author != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -92,6 +94,8 @@ class C_ijin_lokasi extends CI_Controller{
 				'ID_KECAMATAN'=>$ID_KECAMATAN,
 				'ID_KOTA'=>$ID_KOTA,
 				'TELEPON_PEMOHON'=>$TELEPON_PEMOHON,
+				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'TGL_AKHIR'=>$TGL_AKHIR,
 				);
 			$result = $this->m_ijin_lokasi->__insert($data, '', '');
 		}
@@ -116,11 +120,13 @@ class C_ijin_lokasi extends CI_Controller{
 		$ID_KOTA = htmlentities($this->input->post('ID_KOTA'),ENT_QUOTES);
 		$ID_KOTA = is_numeric($ID_KOTA) ? $ID_KOTA : 0;
 		$TELEPON_PEMOHON = htmlentities($this->input->post('TELEPON_PEMOHON'),ENT_QUOTES);
+		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$in_lokasi_updated_by = $this->m_ijin_lokasi->__checkSession();
 		$in_lokasi_updated_date = date('Y-m-d H:i:s');
 		
-		if(!$in_lokasi_updated_by){
+		if($in_lokasi_updated_by != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -135,6 +141,8 @@ class C_ijin_lokasi extends CI_Controller{
 				'ID_KECAMATAN'=>$ID_KECAMATAN,
 				'ID_KOTA'=>$ID_KOTA,
 				'TELEPON_PEMOHON'=>$TELEPON_PEMOHON,
+				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'TGL_AKHIR'=>$TGL_AKHIR,
 				);
 			$result = $this->m_ijin_lokasi->__update($data, $ID_IJIN_LOKASI, '', '');
 		}
@@ -166,6 +174,8 @@ class C_ijin_lokasi extends CI_Controller{
 		$ID_KOTA = htmlentities($this->input->post('ID_KOTA'),ENT_QUOTES);
 		$ID_KOTA = is_numeric($ID_KOTA) ? $ID_KOTA : 0;
 		$TELEPON_PEMOHON = htmlentities($this->input->post('TELEPON_PEMOHON'),ENT_QUOTES);
+		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$params = array(
 			'ID_IJIN_LOKASI_INTI'=>$ID_IJIN_LOKASI_INTI,
@@ -179,6 +189,8 @@ class C_ijin_lokasi extends CI_Controller{
 			'ID_KECAMATAN'=>$ID_KECAMATAN,
 			'ID_KOTA'=>$ID_KOTA,
 			'TELEPON_PEMOHON'=>$TELEPON_PEMOHON,
+			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+			'TGL_AKHIR'=>$TGL_AKHIR,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -207,6 +219,8 @@ class C_ijin_lokasi extends CI_Controller{
 		$ID_KOTA = htmlentities($this->input->post('ID_KOTA'),ENT_QUOTES);
 		$ID_KOTA = is_numeric($ID_KOTA) ? $ID_KOTA : 0;
 		$TELEPON_PEMOHON = htmlentities($this->input->post('TELEPON_PEMOHON'),ENT_QUOTES);
+		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 				
 		$params = array(
 			'searchText' => $searchText,
@@ -221,13 +235,16 @@ class C_ijin_lokasi extends CI_Controller{
 			'ID_KECAMATAN'=>$ID_KECAMATAN,
 			'ID_KOTA'=>$ID_KOTA,
 			'TELEPON_PEMOHON'=>$TELEPON_PEMOHON,
+			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+			'TGL_AKHIR'=>$TGL_AKHIR,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
 			'limit_end' => 0
 		);
 		
-		$data['records'] = $this->m_ijin_lokasi->printExcel($params)[1];
+		$record = $this->m_ijin_lokasi->printExcel($params);
+		$data['records'] = $record[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_ijin_lokasi.php',$data,TRUE);

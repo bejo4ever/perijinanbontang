@@ -50,7 +50,7 @@ class C_dt_syarat extends CI_Controller{
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
-		$result = $this->m_dt_syarat->getList($params);
+		$result = $this->m_dt_syarat->getList($params,6);
 		echo $result;
 	}
 	
