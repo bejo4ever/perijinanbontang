@@ -4,6 +4,9 @@ class M_t_ipmbl_det extends App_model{
 				det_ipmbl_id,
 				det_ipmbl_ipmbl_id,
 				det_ipmbl_jenis,
+				CASE WHEN det_ipmbl_jenis = 1 THEN 'BARU'
+					ELSE 'PERPANJANGAN'
+					END AS det_ipmbl_jenis_nama,
 				det_ipmbl_tanggal,
 				det_ipmbl_nama,
 				det_ipmbl_alamat,
@@ -16,6 +19,10 @@ class M_t_ipmbl_det extends App_model{
 				det_ipmbl_surveytanggal,
 				det_ipmbl_surveylulus,
 				det_ipmbl_status,
+				CASE WHEN det_ipmbl_status = 1 THEN 'DISETUJUI'
+					WHEN det_ipmbl_status = 2 THEN 'DITOLAK'
+					ELSE 'DITANGGUHKAN'
+				END AS det_ipmbl_status_nama,
 				det_ipmbl_surveypetugas,
 				det_ipmbl_surveydinas,
 				det_ipmbl_surveynip,

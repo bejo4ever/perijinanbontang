@@ -1,3 +1,11 @@
+<style>
+	.checked{
+		background-image:url(../assets/images/icons/check.png) !important;
+	}
+	.unchecked{
+		background-image:url(../assets/images/icons/forward.png) !important;
+	}
+</style>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -570,17 +578,18 @@
 				{ name : 'det_iujt_id', type : 'int', mapping : 'det_iujt_id' },
 				{ name : 'det_iujt_iujt_id', type : 'int', mapping : 'det_iujt_iujt_id' },
 				{ name : 'det_iujt_jenis', type : 'int', mapping : 'det_iujt_jenis' },
+				{ name : 'det_iujt_jenis_nama', type : 'string', mapping : 'det_iujt_jenis_nama' },
 				{ name : 'det_iujt_nama', type : 'string', mapping : 'det_iujt_nama' },
 				{ name : 'det_iujt_npwp', type : 'string', mapping : 'det_iujt_npwp' },
 				{ name : 'det_iujt_alamat', type : 'string', mapping : 'det_iujt_alamat' },
 				{ name : 'det_iujt_sk', type : 'string', mapping : 'det_iujt_sk' },
-				{ name : 'det_iujt_berlaku', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujt_berlaku' },
-				{ name : 'det_iujt_kadaluarsa', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujt_kadaluarsa' },
+				{ name : 'det_iujt_berlaku', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_iujt_berlaku' },
+				{ name : 'det_iujt_kadaluarsa', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_iujt_kadaluarsa' },
 				{ name : 'det_iujt_surveylulus', type : 'int', mapping : 'det_iujt_surveylulus' },
-				{ name : 'det_iujt_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujt_tanggal' },
+				{ name : 'det_iujt_tanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_iujt_tanggal' },
 				{ name : 'det_iujt_nopermohonan', type : 'string', mapping : 'det_iujt_nopermohonan' },
 				{ name : 'det_iujt_cekpetugas', type : 'string', mapping : 'det_iujt_cekpetugas' },
-				{ name : 'det_iujt_cektanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujt_cektanggal' },
+				{ name : 'det_iujt_cektanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_iujt_cektanggal' },
 				{ name : 'det_iujt_ceknip', type : 'string', mapping : 'det_iujt_ceknip' },
 				{ name : 'det_iujt_catatan', type : 'string', mapping : 'det_iujt_catatan' },
 				]
@@ -699,6 +708,62 @@
 			}
 		});
 		
+		
+		var iujt_det_lembarkontrolButton = Ext.create('Ext.Button',{
+			text : 'Lembar Kontrol',
+			tooltip : 'Cetak Lembar Kontrol',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujt_det/switchAction',
+					params: {
+						iujtdet_id : record.get('det_iujt_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/iujt_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var iujt_det_bapButton = Ext.create('Ext.Button',{
+			text : 'Rekomendasi',
+			tooltip : 'Cetak Rekomendasi',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujt_det/switchAction',
+					params: {
+						iujtdet_id : record.get('det_iujt_id'),
+						action : 'REKOMENDASI'
+					},success : function(){
+						window.open('../print/iujt_rekom.html');
+					}
+				});
+			}
+		});
+		var iujt_det_skButton = Ext.create('Ext.Button',{
+			text : 'Surat Keputusan',
+			tooltip : 'Cetak Surat Keputusan Depo Air Minum',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujt_det/switchAction',
+					params: {
+						iujtdet_id : record.get('det_iujt_id'),
+						action : 'CETAKSK'
+					},success : function(){
+						window.open('../print/iujt_sk.html');
+					}
+				});
+			}
+		});
+		
 		var iujt_det_contextMenuEdit = Ext.create('Ext.menu.Item',{
 			text : globalEditButtonTitle,
 			tooltip : globalEditTooltip,
@@ -770,71 +835,70 @@
 				},
 				{
 					text : 'Jenis',
-					dataIndex : 'det_iujt_jenis',
-					width : 100,
+					dataIndex : 'det_iujt_jenis_nama',
+					width : 150,
 					sortable : false
 				},
 				{
 					text : 'Nama',
 					dataIndex : 'det_iujt_nama',
-					width : 100,
+					width : 200,
 					sortable : false
 				},
 				{
 					text : 'NPWP',
 					dataIndex : 'det_iujt_npwp',
-					width : 100,
+					width : 150,
 					sortable : false
 				},
 				{
 					text : 'Alamat',
 					dataIndex : 'det_iujt_alamat',
-					width : 100,
+					width : 250,
 					sortable : false
 				},
 				{
 					text : 'Nomor SK',
 					dataIndex : 'det_iujt_sk',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tgl Berlaku',
 					dataIndex : 'det_iujt_berlaku',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Tgl Kadaluarsa',
 					dataIndex : 'det_iujt_kadaluarsa',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
-				},
-				{
-					text : 'Lulus Survey ?',
-					dataIndex : 'det_iujt_surveylulus',
-					width : 100,
-					sortable : false
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Tanggal Survey',
 					dataIndex : 'det_iujt_tanggal',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Nomor Permohonan',
 					dataIndex : 'det_iujt_nopermohonan',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Petugas Cek',
 					dataIndex : 'det_iujt_cekpetugas',
-					width : 100,
+					width : 150,
 					sortable : false
 				},
 				{
@@ -842,19 +906,63 @@
 					dataIndex : 'det_iujt_cektanggal',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'NIP Petugas',
 					dataIndex : 'det_iujt_ceknip',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Catatan',
 					dataIndex : 'det_iujt_catatan',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
+				},
+				{
+					xtype:'actioncolumn',
+					width:50,
+					items: [{
+						getClass: function(v, meta, rec) {
+							if(rec.get('det_iujt_surveylulus') == 1){
+								return 'checked';
+							}else{
+								return 'unchecked';
+							}
+						},
+						getTip: function(v, meta, rec) {
+							if (rec.get('det_iujt_surveylulus') == 1) {
+								return 'Ubah Menjadi Tidak Lulus';
+							} else {
+								return 'Ubah Menjadi Lulus';
+							}
+						},
+						handler: function(grid, rowIndex, colIndex) {
+							var rec = grid.getStore().getAt(rowIndex);
+							var iujtdet_id = rec.get('det_iujt_id');
+							var lulus = 0;
+							if (rec.get('det_iujt_surveylulus') == 1) {
+								lulus=0;
+							} else {
+								lulus=1;
+							}
+							Ext.Ajax.request({
+								waitMsg: 'Please wait...',
+								url: 'c_t_iujt_det/switchAction',
+								params: {
+									iujtdet_id : iujtdet_id,
+									lulus : lulus,
+									action : 'CHANGESURVEYSTATUS'
+								},success : function(){
+									iujt_det_dataStore.reload();
+								}
+							});
+						}
+					}]
 				}
 			],
 			tbar : [
@@ -865,7 +973,10 @@
 				iujt_det_searchButton,
 				iujt_det_refreshButton,
 				iujt_det_printButton,
-				iujt_det_excelButton
+				iujt_det_excelButton,
+				iujt_det_lembarkontrolButton,
+				iujt_det_bapButton,
+				iujt_det_skButton
 			],
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : iujt_det_dataStore,
@@ -1033,7 +1144,7 @@
 		iujt_penanggungjawabField = Ext.create('Ext.form.TextField',{
 			id : 'iujt_penanggungjawabField',
 			name : 'iujt_penanggungjawab',
-			fieldLabel : 'Alamat',
+			fieldLabel : 'Penanggung Jawab',
 			maxLength : 50
 		});
 		iujt_det_syaratDataStore = Ext.create('Ext.data.Store',{
