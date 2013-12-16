@@ -80,6 +80,17 @@
 		var det_apotek_spnomorField;
 		var det_apotek_sptanggalField;
 		var det_apotek_notarisField;
+		
+		var apotek_namaField;
+		var apotek_alamatField;
+		var apotek_telpField;
+		var apotek_kelField;
+		var apotek_kecField;
+		var apotek_kepemilikanField;
+		var apotek_pemilikField;
+		var apotek_pemilikalamatField;
+		var apotek_pemiliknpwpField;
+		var apotek_siupField;
 				
 		var det_apotek_apotek_idSearchField;
 		var det_apotek_jenisSearchField;
@@ -287,6 +298,17 @@
 					var det_apotek_spnomorValue = '';
 					var det_apotek_sptanggalValue = '';
 					var det_apotek_notarisValue = '';
+					
+					var apotek_namaValue = '';
+					var apotek_alamatValue = '';
+					var apotek_telpValue = '';
+					var apotek_kelValue = '';
+					var apotek_kecValue = '';
+					var apotek_kepemilikanValue = '';
+					var apotek_pemilikValue = '';
+					var apotek_pemilikalamatValue = '';
+					var apotek_pemiliknpwpValue = '';
+					var apotek_siupValue = '';
 										
 					det_apotek_idValue = det_apotek_idField.getValue();
 					det_apotek_apotek_idValue = det_apotek_apotek_idField.getValue();
@@ -355,6 +377,17 @@
 					det_apotek_spnomorValue = det_apotek_spnomorField.getValue();
 					det_apotek_sptanggalValue = det_apotek_sptanggalField.getValue();
 					det_apotek_notarisValue = det_apotek_notarisField.getValue();
+					
+					apotek_namaValue = apotek_namaField.getValue();
+					apotek_alamatValue = apotek_alamatField.getValue();
+					apotek_telpValue = apotek_telpField.getValue();
+					apotek_kelValue = apotek_kelField.getValue();
+					apotek_kecValue = apotek_kecField.getValue();
+					apotek_kepemilikanValue = apotek_kepemilikanField.getValue();
+					apotek_pemilikValue = apotek_pemilikField.getValue();
+					apotek_pemilikalamatValue = apotek_pemilikalamatField.getValue();
+					apotek_pemiliknpwpValue = apotek_pemiliknpwpField.getValue();
+					apotek_siupValue = apotek_siupField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -427,6 +460,18 @@
 							det_apotek_spnomor : det_apotek_spnomorValue,
 							det_apotek_sptanggal : det_apotek_sptanggalValue,
 							det_apotek_notaris : det_apotek_notarisValue,
+							
+							apotek_nama : apotek_namaValue,
+							apotek_alamat : apotek_alamatValue,
+							apotek_telp : apotek_telpValue,
+							apotek_kel : apotek_kelValue,
+							apotek_kec : apotek_kecValue,
+							apotek_kepemilikan : apotek_kepemilikanValue,
+							apotek_pemilik : apotek_pemilikValue,
+							apotek_pemilikalamat : apotek_pemilikalamatValue,
+							apotek_pemiliknpwp : apotek_pemiliknpwpValue,
+							apotek_siup : apotek_siupValue,
+							
 							action : apotek_det_dbTask
 						},
 						success: function(response){
@@ -646,7 +691,18 @@
 			det_apotek_spnomorField.setValue(record.data.det_apotek_spnomor);
 			det_apotek_sptanggalField.setValue(record.data.det_apotek_sptanggal);
 			det_apotek_notarisField.setValue(record.data.det_apotek_notaris);
-					}
+			
+			apotek_namaField.setValue(record.data.apotek_nama);
+			apotek_alamatField.setValue(record.data.apotek_alamat);
+			apotek_telpField.setValue(record.data.apotek_telp);
+			apotek_kelField.setValue(record.data.apotek_kel);
+			apotek_kecField.setValue(record.data.apotek_kec);
+			apotek_kepemilikanField.setValue(record.data.apotek_kepemilikan);
+			apotek_pemilikField.setValue(record.data.apotek_pemilik);
+			apotek_pemilikalamatField.setValue(record.data.apotek_pemilikalamat);
+			apotek_pemiliknpwpField.setValue(record.data.apotek_pemiliknpwp);
+			apotek_siupField.setValue(record.data.apotek_siup);
+		}
 		
 		function apotek_det_showSearchWindow(){
 			apotek_det_searchWindow.show();
@@ -1202,6 +1258,17 @@
 				{ name : 'det_apotek_spnomor', type : 'string', mapping : 'det_apotek_spnomor' },
 				{ name : 'det_apotek_sptanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_apotek_sptanggal' },
 				{ name : 'det_apotek_notaris', type : 'string', mapping : 'det_apotek_notaris' },
+				
+				{ name : 'apotek_nama', type : 'string', mapping : 'apotek_nama' },
+				{ name : 'apotek_alamat', type : 'string', mapping : 'apotek_alamat' },
+				{ name : 'apotek_telp', type : 'string', mapping : 'apotek_telp' },
+				{ name : 'apotek_kel', type : 'string', mapping : 'apotek_kel' },
+				{ name : 'apotek_kec', type : 'string', mapping : 'apotek_kec' },
+				{ name : 'apotek_kepemilikan', type : 'int', mapping : 'apotek_kepemilikan' },
+				{ name : 'apotek_pemilik', type : 'string', mapping : 'apotek_pemilik' },
+				{ name : 'apotek_pemilikalamat', type : 'string', mapping : 'apotek_pemilikalamat' },
+				{ name : 'apotek_pemiliknpwp', type : 'string', mapping : 'apotek_pemiliknpwp' },
+				{ name : 'apotek_siup', type : 'string', mapping : 'apotek_siup' },
 				]
 		});
 /* End DataStore declaration */
@@ -1654,11 +1721,12 @@
 			fieldLabel : 'Tempat Lahir',
 			maxLength : 50
 		});
-		det_apotek_tanggallahirField = Ext.create('Ext.form.TextField',{
+		det_apotek_tanggallahirField = Ext.create('Ext.form.field.Date',{
 			id : 'det_apotek_tanggallahirField',
 			name : 'det_apotek_tanggallahir',
 			fieldLabel : 'Tanggal Lahir',
-			maxLength : 0
+			format : 'd-m-Y',
+			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_apotek_pekerjaanField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_pekerjaanField',
@@ -1756,46 +1824,76 @@
 			fieldLabel : 'Jarak apotek terdekat',
 			maskRe : /([0-9]+)$/
 		});
-		det_apotek_rracikField = Ext.create('Ext.form.NumberField',{
+		det_apotek_rracikField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_rracikField',
 			name : 'det_apotek_rracik',
 			fieldLabel : 'Ruang Racik',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_radminField = Ext.create('Ext.form.NumberField',{
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		det_apotek_radminField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_radminField',
 			name : 'det_apotek_radmin',
 			fieldLabel : 'Ruang Admin',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_rkerjaField = Ext.create('Ext.form.NumberField',{
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		det_apotek_rkerjaField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_rkerjaField',
 			name : 'det_apotek_rkerja',
 			fieldLabel : 'Ruang Kerja',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_rtungguField = Ext.create('Ext.form.NumberField',{
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		det_apotek_rtungguField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_rtungguField',
 			name : 'det_apotek_rtunggu',
 			fieldLabel : 'Ruang Tunggu',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_rwcField = Ext.create('Ext.form.NumberField',{
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		det_apotek_rwcField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_rwcField',
 			name : 'det_apotek_rwc',
 			fieldLabel : 'Kamar Mandi',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
 		det_apotek_airField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_airField',
 			name : 'det_apotek_air',
@@ -1808,97 +1906,102 @@
 			fieldLabel : 'Penerangan',
 			maxLength : 20
 		});
-		det_apotek_apkField = Ext.create('Ext.form.NumberField',{
+		det_apotek_apkField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_apkField',
 			name : 'det_apotek_apk',
-			fieldLabel : 'Alat Pemadam kebakaran',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
+			fieldLabel : 'Jumlah Alat Pemadam kebakaran',
+			maskRe : /([0-9]+)$/
+		});
 		det_apotek_apkukuranField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_apkukuranField',
 			name : 'det_apotek_apkukuran',
 			fieldLabel : 'Ukuran Alat Pemadam',
 			maxLength : 20
 		});
-		det_apotek_jendelaField = Ext.create('Ext.form.NumberField',{
+		det_apotek_jendelaField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_jendelaField',
 			name : 'det_apotek_jendela',
-			fieldLabel : 'Jendela',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_limbahField = Ext.create('Ext.form.NumberField',{
+			fieldLabel : 'Jumlah Jendela',
+			maskRe : /([0-9]+)$/
+		});
+		det_apotek_limbahField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_limbahField',
 			name : 'det_apotek_limbah',
 			fieldLabel : 'Pembuangan Limbah',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_baksampahField = Ext.create('Ext.form.NumberField',{
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		det_apotek_baksampahField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_baksampahField',
 			name : 'det_apotek_baksampah',
 			fieldLabel : 'Bak Sampah',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_parkirField = Ext.create('Ext.form.NumberField',{
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		det_apotek_parkirField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_parkirField',
 			name : 'det_apotek_parkir',
 			fieldLabel : 'Tempat Parkir',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_papannamaField = Ext.create('Ext.form.NumberField',{
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		det_apotek_papannamaField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_apotek_papannamaField',
 			name : 'det_apotek_papannama',
 			fieldLabel : 'Papan Nama',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_pengelolaField = Ext.create('Ext.form.NumberField',{
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status_nama'],
+				data : [[1,'ADA'],[2,'TIDAK ADA']]
+			}),
+			displayField : 'status_nama',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		det_apotek_pengelolaField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_pengelolaField',
 			name : 'det_apotek_pengelola',
-			fieldLabel : 'Pengelola',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_pendampingField = Ext.create('Ext.form.NumberField',{
+			fieldLabel : 'Jumlah Apoteker Pengelola',
+			maskRe : /([0-9]+)$/
+		});
+		det_apotek_pendampingField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_pendampingField',
 			name : 'det_apotek_pendamping',
-			fieldLabel : 'Pendamping',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_apotek_asistenField = Ext.create('Ext.form.NumberField',{
+			fieldLabel : 'Jumlah Pendamping',
+			maskRe : /([0-9]+)$/
+		});
+		det_apotek_asistenField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_asistenField',
 			name : 'det_apotek_asisten',
-			fieldLabel : 'Asisten',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
+			fieldLabel : 'Jumlah Asisten',
+			maskRe : /([0-9]+)$/
+		});
 		det_apotek_luasField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_luasField',
 			name : 'det_apotek_luas',
 			fieldLabel : 'Luas',
-			maskRe : /([0-9]+)$/
-		});
-		det_apotek_statustanahField = Ext.create('Ext.form.NumberField',{
-			id : 'det_apotek_statustanahField',
-			name : 'det_apotek_statustanah',
-			fieldLabel : 'det_apotek_statustanah',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
 			maskRe : /([0-9]+)$/
 		});
 		det_apotek_statustanahField = Ext.create('Ext.form.ComboBox',{
@@ -1951,13 +2054,10 @@
 			fieldLabel : 'No. Sertifikat',
 			maxLength : 50
 		});
-		det_apotek_shtahunField = Ext.create('Ext.form.NumberField',{
+		det_apotek_shtahunField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_shtahunField',
 			name : 'det_apotek_shtahun',
 			fieldLabel : 'Tahun',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
 			maskRe : /([0-9]+)$/
 		});
 		det_apotek_shgssuField = Ext.create('Ext.form.TextField',{
@@ -1966,11 +2066,12 @@
 			fieldLabel : 'GS/SU No.',
 			maxLength : 50
 		});
-		det_apotek_shtanggalField = Ext.create('Ext.form.TextField',{
+		det_apotek_shtanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_apotek_shtanggalField',
 			name : 'det_apotek_shtanggal',
 			fieldLabel : 'Tanggal',
-			maxLength : 0
+			format : 'd-m-Y',
+			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_apotek_shanField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_shanField',
@@ -1984,13 +2085,10 @@
 			fieldLabel : 'Nomor Akta',
 			maxLength : 50
 		});
-		det_apotek_aktatahunField = Ext.create('Ext.form.NumberField',{
+		det_apotek_aktatahunField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_aktatahunField',
 			name : 'det_apotek_aktatahun',
 			fieldLabel : 'Tahun',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
 			maskRe : /([0-9]+)$/
 		});
 		det_apotek_aktanotarisField = Ext.create('Ext.form.TextField',{
@@ -2017,11 +2115,12 @@
 			fieldLabel : 'Kecamatan',
 			maxLength : 50
 		});
-		det_apotek_ctanggalField = Ext.create('Ext.form.TextField',{
+		det_apotek_ctanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_apotek_ctanggalField',
 			name : 'det_apotek_ctanggal',
 			fieldLabel : 'Tanggal',
-			maxLength : 0
+			format : 'd-m-Y',
+			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_apotek_cpetokField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_cpetokField',
@@ -2065,17 +2164,166 @@
 			fieldLabel : 'Nomor Perjanjian',
 			maxLength : 50
 		});
-		det_apotek_sptanggalField = Ext.create('Ext.form.TextField',{
+		det_apotek_sptanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_apotek_sptanggalField',
 			name : 'det_apotek_sptanggal',
 			fieldLabel : 'Tanggal',
-			maxLength : 0
+			format : 'd-m-Y',
+			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_apotek_notarisField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_notarisField',
 			name : 'det_apotek_notaris',
 			fieldLabel : 'Notaris',
 			maxLength : 50
+		});
+		
+		/* field apotek */
+		
+		apotek_namaField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_namaField',
+			name : 'apotek_nama',
+			fieldLabel : 'Nama',
+			maxLength : 50
+		});
+		apotek_alamatField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_alamatField',
+			name : 'apotek_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		apotek_telpField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_telpField',
+			name : 'apotek_telp',
+			fieldLabel : 'Telp',
+			maxLength : 20,
+			maskRe : /([0-9]+)$/
+		});
+		apotek_kelField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_kelField',
+			name : 'apotek_kel',
+			fieldLabel : 'Kelurahan',
+			maxLength : 50
+		});
+		apotek_kecField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_kecField',
+			name : 'apotek_kec',
+			fieldLabel : 'Kecamatan',
+			maxLength : 50
+		});
+		apotek_kepemilikanField = Ext.create('Ext.form.ComboBox',{
+			id : 'apotek_kepemilikanField',
+			name : 'apotek_kepemilikan',
+			fieldLabel : 'Kepemilikan',
+			store : new Ext.data.ArrayStore({
+				fields : ['kepemilikan_id', 'kepemilikan_nama'],
+				data : [[1,'MILIK SENDIRI'],[2,'KEPEMILIKAN ORANG LAIN']]
+			}),
+			displayField : 'kepemilikan_nama',
+			valueField : 'kepemilikan_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		apotek_pemilikField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_pemilikField',
+			name : 'apotek_pemilik',
+			fieldLabel : 'Pemilik',
+			maxLength : 50
+		});
+		apotek_pemilikalamatField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_pemilikalamatField',
+			name : 'apotek_pemilikalamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		apotek_pemiliknpwpField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_pemiliknpwpField',
+			name : 'apotek_pemiliknpwp',
+			fieldLabel : 'NPWP Pemilik',
+			maxLength : 50
+		});
+		apotek_siupField = Ext.create('Ext.form.TextField',{
+			id : 'apotek_siupField',
+			name : 'apotek_siup',
+			fieldLabel : 'SIUP',
+			maxLength : 50
+		});
+		/* end field apotek */
+		
+		apotek_det_syaratDataStore = Ext.create('Ext.data.Store',{
+			id : 'apotek_det_syaratDataStore',
+			pageSize : globalPageSize,
+			autoLoad : true,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_t_apotek_det/switchAction',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total'
+				},
+				actionMethods : {
+					read : 'POST'
+				},
+				extraParams : {
+					action : 'GETSYARAT'
+				}
+			}),
+			fields : [
+				{ name : 'apotek_cek_id', type : 'int', mapping : 'apotek_cek_id' },
+				{ name : 'apotek_cek_syarat_id', type : 'int', mapping : 'apotek_cek_syarat_id' },
+				{ name : 'apotek_cek_apotekdet_id', type : 'int', mapping : 'apotek_cek_apotekdet_id' },
+				{ name : 'apotek_cek_apotek_id', type : 'int', mapping : 'apotek_cek_apotek_id' },
+				{ name : 'apotek_cek_status', type : 'boolean', mapping : 'apotek_cek_status' },
+				{ name : 'apotek_cek_keterangan', type : 'string', mapping : 'apotek_cek_keterangan' },
+				{ name : 'apotek_cek_syarat_nama', type : 'string', mapping : 'apotek_cek_syarat_nama' }
+				]
+		});
+		var det_apotek_syaratGridEditor = new Ext.grid.plugin.CellEditing({
+			clicksToEdit: 1
+		});
+		det_apotek_syaratGrid = Ext.create('Ext.grid.Panel',{
+			id : 'det_apotek_syaratGrid',
+			store : apotek_det_syaratDataStore,
+			loadMask : true,
+			width : '95%',
+			plugins : [
+				Ext.create('Ext.grid.plugin.CellEditing', {
+					clicksToEdit: 1
+				})
+			],
+			selType: 'cellmodel',
+			columns : [
+				{
+					text : 'Id',
+					dataIndex : 'apotek_cek_id',
+					width : 100,
+					hidden : true,
+					sortable : false
+				},
+				{
+					text : 'Syarat',
+					dataIndex : 'apotek_cek_syarat_nama',
+					width : 150,
+					sortable : false
+				},
+				{
+					xtype: 'checkcolumn',
+					text: 'Ada?',
+					dataIndex: 'apotek_cek_status',
+					width: 55,
+					stopSelection: false
+				},
+				{
+					text : 'Keterangan',
+					dataIndex : 'apotek_cek_keterangan',
+					width : 100,
+					sortable : false,
+					editor: 'textfield',
+					flex : 1
+				}
+			]
 		});
 		var apotek_det_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
@@ -2090,14 +2338,13 @@
 		});
 		apotek_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
-			fieldDefaults: {
-				msgTarget: 'side'
-			},
+			frame : true,
 			layout : {
-				type : 'vbox',
-				align : 'stretch',
+				type : 'form',
 				padding : 5
 			},
+			defaultType : 'textfield',
+			defaults : {anchor : '95%'},
 			items: [
 				{
 					xtype : 'container',
@@ -2108,81 +2355,142 @@
 					layout : 'anchor',
 					flex : 2,
 					items : [
-						det_apotek_idField,
-						det_apotek_apotek_idField,
-						det_apotek_jenisField,
-						det_apotek_surveylulusField,
-						det_apotek_namaField,
-						det_apotek_alamatField,
-						det_apotek_telpField,
-						det_apotek_spField,
-						det_apotek_ktpField,
-						det_apotek_tempatlahirField,
-						det_apotek_tanggallahirField,
-						det_apotek_pekerjaanField,
-						det_apotek_npwpField,
-						det_apotek_straField,
-						det_apotek_pendidikanField,
-						det_apotek_tahunlulusField,
-						det_apotek_terimaField,
-						det_apotek_terimatanggalField,
-						det_apotek_kelengkapanField,
-						det_apotek_bapField,
-						det_apotek_baptanggalField,
-						det_apotek_keputusanField,
-						det_apotek_keteranganField,
-						det_apotek_jarakField,
-						det_apotek_rracikField,
-						det_apotek_radminField,
-						det_apotek_rkerjaField,
-						det_apotek_rtungguField,
-						det_apotek_rwcField,
-						det_apotek_airField,
-						det_apotek_listrikField,
-						det_apotek_apkField,
-						det_apotek_apkukuranField,
-						det_apotek_jendelaField,
-						det_apotek_limbahField,
-						det_apotek_baksampahField,
-						det_apotek_parkirField,
-						det_apotek_papannamaField,
-						det_apotek_pengelolaField,
-						det_apotek_pendampingField,
-						det_apotek_asistenField,
-						det_apotek_luasField,
-						det_apotek_statustanahField,
-						det_apotek_sewalamaField,
-						det_apotek_sewaawalField,
-						det_apotek_sewaakhirField,
-						det_apotek_shnomorField,
-						det_apotek_shtahunField,
-						det_apotek_shgssuField,
-						det_apotek_shtanggalField,
-						det_apotek_shanField,
-						det_apotek_aktanoField,
-						det_apotek_aktatahunField,
-						det_apotek_aktanotarisField,
-						det_apotek_aktaanField,
-						det_apotek_ckutipanField,
-						det_apotek_ckecField,
-						det_apotek_ctanggalField,
-						det_apotek_cpetokField,
-						det_apotek_cpersilField,
-						det_apotek_ckelasField,
-						det_apotek_canField,
-						det_apotek_sppihak1Field,
-						det_apotek_sppihak2Field,
-						det_apotek_spnomorField,
-						det_apotek_sptanggalField,
-						det_apotek_notarisField,
-											]
-				}, {
-					xtype : 'splitter'
-				}, {
-					bodyPadding : 5,
-					items : [Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })],
-					flex : 2
-				}],
+						{
+							xtype : 'fieldset',
+							title : '1. Data Permohonan',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_apotek_idField,
+								det_apotek_apotek_idField,
+								det_apotek_jenisField,
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '2. Data Pemohon',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_apotek_namaField,
+								det_apotek_alamatField,
+								det_apotek_telpField,
+								det_apotek_spField,
+								det_apotek_ktpField,
+								det_apotek_tempatlahirField,
+								det_apotek_tanggallahirField,
+								det_apotek_pekerjaanField,
+								det_apotek_npwpField,
+								det_apotek_straField,
+								det_apotek_pendidikanField,
+								det_apotek_tahunlulusField								
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '3. Data Apotek',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								apotek_namaField,
+								apotek_alamatField,
+								apotek_telpField,
+								apotek_kelField,
+								apotek_kecField,
+								apotek_kepemilikanField,
+								apotek_pemilikField,
+								apotek_pemilikalamatField,
+								apotek_pemiliknpwpField,
+								apotek_siupField,
+								det_apotek_jarakField,
+								det_apotek_rracikField,
+								det_apotek_radminField,
+								det_apotek_rkerjaField,
+								det_apotek_rtungguField,
+								det_apotek_rwcField,
+								det_apotek_airField,
+								det_apotek_listrikField,
+								det_apotek_apkField,
+								det_apotek_apkukuranField,
+								det_apotek_jendelaField,
+								det_apotek_limbahField,
+								det_apotek_baksampahField,
+								det_apotek_parkirField,
+								det_apotek_papannamaField,
+								det_apotek_pengelolaField,
+								det_apotek_pendampingField,
+								det_apotek_asistenField,
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '4. Data Bangunan',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_apotek_luasField,
+								det_apotek_statustanahField,
+								det_apotek_sewalamaField,
+								det_apotek_sewaawalField,
+								det_apotek_sewaakhirField,
+								det_apotek_shnomorField,
+								det_apotek_shtahunField,
+								det_apotek_shgssuField,
+								det_apotek_shtanggalField,
+								det_apotek_shanField,
+								det_apotek_aktanoField,
+								det_apotek_aktatahunField,
+								det_apotek_aktanotarisField,
+								det_apotek_aktaanField,
+								det_apotek_ckutipanField,
+								det_apotek_ckecField,
+								det_apotek_ctanggalField,
+								det_apotek_cpetokField,
+								det_apotek_cpersilField,
+								det_apotek_ckelasField,
+								det_apotek_canField,
+								det_apotek_sppihak1Field,
+								det_apotek_sppihak2Field,
+								det_apotek_spnomorField,
+								det_apotek_sptanggalField,
+								det_apotek_notarisField,
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '5. Data Ceklist',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_apotek_syaratGrid
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '6. Data Pendukung',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_apotek_surveylulusField,
+								det_apotek_terimaField,
+								det_apotek_terimatanggalField,
+								det_apotek_kelengkapanField,
+								det_apotek_bapField,
+								det_apotek_baptanggalField,
+								det_apotek_keputusanField,
+								det_apotek_keteranganField,
+							]
+						},
+						Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
+					],
+				}
+			],
 			buttons : [apotek_det_saveButton,apotek_det_cancelButton]
 		});
 		apotek_det_formWindow = Ext.create('Ext.window.Window',{

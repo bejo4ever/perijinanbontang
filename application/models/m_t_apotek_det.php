@@ -381,5 +381,36 @@ class M_t_apotek_det extends App_model{
 		}
 		return $result;
 	}
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT 
+					apotek_cek_id,
+					apotek_cek_syarat_id,
+					apotek_cek_apotekdet_id,
+					apotek_cek_apotek_id,
+					apotek_cek_status,
+					apotek_cek_keterangan,
+					NAMA_SYARAT AS apotek_cek_syarat_nama
+				FROM t_apotek_ceklist 
+				LEFT JOIN master_syarat ON t_apotek_ceklist.apotek_cek_syarat_id = master_syarat.ID_SYARAT
+				WHERE apotek_cek_apotekdet_id = ".$apotek_det_id."
+				AND apotek_cek_apotek_id = ".$apotek_id."
+			";
+		}else{
+			$sql = "
+				SELECT 
+					0 AS apotek_cek_id,
+					master_syarat.ID_SYARAT AS apotek_cek_syarat_id,
+					NAMA_SYARAT AS apotek_cek_syarat_nama
+				FROM dt_syarat 
+				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT
+				WHERE ID_IJIN = 1
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
 	
 }

@@ -126,5 +126,36 @@ class M_t_iujk_det extends App_model{
 		}
 		return $result;
 	}
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT 
+					iujk_cek_id,
+					iujk_cek_syarat_id,
+					iujk_cek_iujkdet_id,
+					iujk_cek_iujk_id,
+					iujk_cek_status,
+					iujk_cek_keterangan,
+					NAMA_SYARAT AS iujk_cek_syarat_nama
+				FROM t_iujk_ceklist 
+				LEFT JOIN master_syarat ON t_iujk_ceklist.iujk_cek_syarat_id = master_syarat.ID_SYARAT
+				WHERE iujk_cek_iujkdet_id = ".$iujk_det_id."
+				AND iujk_cek_iujk_id = ".$iujk_id."
+			";
+		}else{
+			$sql = "
+				SELECT 
+					0 AS iujk_cek_id,
+					master_syarat.ID_SYARAT AS iujk_cek_syarat_id,
+					NAMA_SYARAT AS iujk_cek_syarat_nama
+				FROM dt_syarat 
+				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT
+				WHERE ID_IJIN = 1
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
 	
 }
