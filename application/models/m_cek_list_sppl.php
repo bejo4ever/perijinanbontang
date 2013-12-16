@@ -1,15 +1,17 @@
 <?php
-class M_master_ijin extends App_model{
+class M_cek_list_sppl extends App_model{
 	var $mainSql = "SELECT 
+				ID_SYARAT,
 				ID_IJIN,
-				NAMA_IJIN
-				FROM master_ijin 
+				STATUS,
+				KETERANGAN
+				FROM cek_list_sppl 
 			WHERE ID_IJIN IS NOT NULL 
 	";
 	
 	function __construct(){
         parent::__construct();
-        $this->table_name = 'master_ijin';
+        $this->table_name = 'cek_list_sppl';
         $this->column_primary = 'ID_IJIN';
         $this->column_order = '';
 		$this->column_unique = '';
@@ -21,7 +23,8 @@ class M_master_ijin extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					NAMA_IJIN LIKE '%".$searchText."%'
+					STATUS LIKE '%".$searchText."%' OR 
+					KETERANGAN LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -37,8 +40,11 @@ class M_master_ijin extends App_model{
 		
 		$sql = $this->mainSql;
 		
-		if(@$NAMA_IJIN != ''){
-			$sql .= " AND NAMA_IJIN LIKE '%".$NAMA_IJIN."%' ";
+		if(@$STATUS != ''){
+			$sql .= " AND STATUS LIKE '%".$STATUS."%' ";
+		}
+		if(@$KETERANGAN != ''){
+			$sql .= " AND KETERANGAN LIKE '%".$KETERANGAN."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

@@ -50,7 +50,7 @@ $active_record = TRUE;
 
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
-$db['default']['password'] = 'nvlroot';
+$db['default']['password'] = '';
 $db['default']['database'] = 'db_bontang';
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';

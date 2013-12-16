@@ -1,14 +1,14 @@
 <?php
-class C_master_ijin extends CI_Controller{
+class C_cek_list_trayek extends CI_Controller{
 	
 	public function __construct(){
 		parent::__construct();
 		session_start();
-		$this->load->model('m_master_ijin');
+		$this->load->model('m_cek_list_trayek');
 	}
 	
 	function index(){
-		$this->load->view('main/v_master_ijin');
+		$this->load->view('main/v_cek_list_trayek');
 	}
 	
 	function switchAction(){
@@ -50,45 +50,56 @@ class C_master_ijin extends CI_Controller{
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
-		$result = $this->m_master_ijin->getList($params);
+		$result = $this->m_cek_list_trayek->getList($params);
 		echo $result;
 	}
 	
 	function create(){
+		$ID_SYARAT = htmlentities($this->input->post('ID_SYARAT'),ENT_QUOTES);
+		$ID_SYARAT = is_numeric($ID_SYARAT) ? $ID_SYARAT : 0;
 		$ID_IJIN = htmlentities($this->input->post('ID_IJIN'),ENT_QUOTES);
 		$ID_IJIN = is_numeric($ID_IJIN) ? $ID_IJIN : 0;
-		$NAMA_IJIN = htmlentities($this->input->post('NAMA_IJIN'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$KETERANGAN = htmlentities($this->input->post('KETERANGAN'),ENT_QUOTES);
 				
-		$ster_ijin_author = $this->m_master_ijin->__checkSession();
-		$ster_ijin_created_date = date('Y-m-d H:i:s');
+		$k_list_trayek_author = $this->m_cek_list_trayek->__checkSession();
+		$k_list_trayek_created_date = date('Y-m-d H:i:s');
 		
-		if(!$ster_ijin_author){
+		if($k_list_trayek_author != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
+				'ID_SYARAT'=>$ID_SYARAT,
 				'ID_IJIN'=>$ID_IJIN,
-				'NAMA_IJIN'=>$NAMA_IJIN,
+				'STATUS'=>$STATUS,
+				'KETERANGAN'=>$KETERANGAN,
 				);
-			$result = $this->m_master_ijin->__insert($data, '', '');
+			$result = $this->m_cek_list_trayek->__insert($data, '', '');
 		}
 		echo $result;
 	}
 	
 	function update(){
+		$ID_SYARAT = htmlentities($this->input->post('ID_SYARAT'),ENT_QUOTES);
+		$ID_SYARAT = is_numeric($ID_SYARAT) ? $ID_SYARAT : 0;
 		$ID_IJIN = htmlentities($this->input->post('ID_IJIN'),ENT_QUOTES);
 		$ID_IJIN = is_numeric($ID_IJIN) ? $ID_IJIN : 0;
-		$NAMA_IJIN = htmlentities($this->input->post('NAMA_IJIN'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$KETERANGAN = htmlentities($this->input->post('KETERANGAN'),ENT_QUOTES);
 				
-		$ster_ijin_updated_by = $this->m_master_ijin->__checkSession();
-		$ster_ijin_updated_date = date('Y-m-d H:i:s');
+		$k_list_trayek_updated_by = $this->m_cek_list_trayek->__checkSession();
+		$k_list_trayek_updated_date = date('Y-m-d H:i:s');
 		
-		if(!$ster_ijin_updated_by){
+		if($k_list_trayek_updated_by != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
-				'NAMA_IJIN'=>$NAMA_IJIN,
+				'STATUS'=>$STATUS,
+				'KETERANGAN'=>$KETERANGAN,
 				);
-			$result = $this->m_master_ijin->__update($data, $ID_IJIN, '', '');
+			$result = $this->m_cek_list_trayek->__update($data, $ID_SYARATID_IJIN, '', '');
 		}
 		echo $result;
 	}
@@ -96,22 +107,25 @@ class C_master_ijin extends CI_Controller{
 	function delete(){
 		$ids = $this->input->post('ids');
 		$arrayId = json_decode($ids);
-		$result = $this->m_master_ijin->__delete($arrayId,'');
+		$result = $this->m_cek_list_trayek->__delete($arrayId,'');
 		echo $result;
 	}
 	
 	function search(){
 		$limit_start = (integer)$this->input->post('start');
 		$limit_end = (integer)$this->input->post('limit');
-		$NAMA_IJIN = htmlentities($this->input->post('NAMA_IJIN'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$KETERANGAN = htmlentities($this->input->post('KETERANGAN'),ENT_QUOTES);
 				
 		$params = array(
-			'NAMA_IJIN'=>$NAMA_IJIN,
+			'STATUS'=>$STATUS,
+			'KETERANGAN'=>$KETERANGAN,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
 		
-		$result = $this->m_master_ijin->search($params);
+		$result = $this->m_cek_list_trayek->search($params);
 		echo $result;
 	}
 	
@@ -120,27 +134,31 @@ class C_master_ijin extends CI_Controller{
 		
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
-		$NAMA_IJIN = htmlentities($this->input->post('NAMA_IJIN'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$KETERANGAN = htmlentities($this->input->post('KETERANGAN'),ENT_QUOTES);
 				
 		$params = array(
 			'searchText' => $searchText,
-			'NAMA_IJIN'=>$NAMA_IJIN,
+			'STATUS'=>$STATUS,
+			'KETERANGAN'=>$KETERANGAN,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
 			'limit_end' => 0
 		);
 		
-		$data['records'] = $this->m_master_ijin->printExcel($params)[1];
+		$record = $this->m_cek_list_trayek->printExcel($params);
+		$data['records'] = $record[1];
 		$data['type']=$outputType;
 		
-		$print_view=$this->load->view('template/p_master_ijin.php',$data,TRUE);
+		$print_view=$this->load->view('template/p_cek_list_trayek.php',$data,TRUE);
 		
 		if(!file_exists('print')){ mkdir('print'); }
 		if($outputType == 'PRINT'){
-			$print_file=fopen('print/master_ijin_list.html','w+');
+			$print_file=fopen('print/cek_list_trayek_list.html','w+');
 		}elseif($outputType == 'EXCEL'){
-			$print_file=fopen('print/master_ijin_list.xls','w+');
+			$print_file=fopen('print/cek_list_trayek_list.xls','w+');
 		}
 		fwrite($print_file, $print_view);
 		echo 'success';

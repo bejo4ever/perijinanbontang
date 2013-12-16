@@ -35,21 +35,6 @@ class C_t_ipmbl_det extends CI_Controller{
 			case 'EXCEL':
 				$this->printExcel();
 			break;
-			case 'GETSYARAT':
-				$this->getSyarat();
-			break;
-			case 'CHANGESURVEYSTATUS':
-				$this->changeSurveyStatus();
-			break;
-			case 'CETAKLEMBARKONTROL':
-				$this->cetakLembarKontrol();
-			break;
-			case 'CETAKBAP':
-				$this->cetakBap();
-			break;
-			case 'CETAKSK':
-				$this->cetakSk();
-			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -74,9 +59,6 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_id = is_numeric($det_ipmbl_id) ? $det_ipmbl_id : 0;
 		$det_ipmbl_ipmbl_id = htmlentities($this->input->post('det_ipmbl_ipmbl_id'),ENT_QUOTES);
 		$det_ipmbl_ipmbl_id = is_numeric($det_ipmbl_ipmbl_id) ? $det_ipmbl_ipmbl_id : 0;
-		$det_ipmbl_jenis = htmlentities($this->input->post('det_ipmbl_jenis'),ENT_QUOTES);
-		$det_ipmbl_jenis = is_numeric($det_ipmbl_jenis) ? $det_ipmbl_jenis : 0;
-		$det_ipmbl_tanggal = htmlentities($this->input->post('det_ipmbl_tanggal'),ENT_QUOTES);
 		$det_ipmbl_nama = htmlentities($this->input->post('det_ipmbl_nama'),ENT_QUOTES);
 		$det_ipmbl_alamat = htmlentities($this->input->post('det_ipmbl_alamat'),ENT_QUOTES);
 		$det_ipmbl_kelurahan = htmlentities($this->input->post('det_ipmbl_kelurahan'),ENT_QUOTES);
@@ -86,100 +68,30 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_kota = htmlentities($this->input->post('det_ipmbl_kota'),ENT_QUOTES);
 		$det_ipmbl_kota = is_numeric($det_ipmbl_kota) ? $det_ipmbl_kota : 0;
 		$det_ipmbl_telp = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
-		$det_ipmbl_usaha = htmlentities($this->input->post('det_ipmbl_usaha'),ENT_QUOTES);
+		$det_ipmbl_namausaha = htmlentities($this->input->post('det_ipmbl_namausaha'),ENT_QUOTES);
 		$det_ipmbl_alamatusaha = htmlentities($this->input->post('det_ipmbl_alamatusaha'),ENT_QUOTES);
-		$det_ipmbl_kelurahanusaha = htmlentities($this->input->post('det_ipmbl_kelurahanusaha'),ENT_QUOTES);
-		$det_ipmbl_kecamatanusaha = htmlentities($this->input->post('det_ipmbl_kecamatanusaha'),ENT_QUOTES);
-		$det_ipmbl_luas = $this->input->post('det_ipmbl_luas');
-		$det_ipmbl_volume = $this->input->post('det_ipmbl_volume');
-		$det_ipmbl_keperluan = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
-		$det_ipmbl_nomoragenda = htmlentities($this->input->post('det_ipmbl_nomoragenda'),ENT_QUOTES);
-		$det_ipmbl_nomoragenda = is_numeric($det_ipmbl_nomoragenda) ? $det_ipmbl_nomoragenda : 0;
-		$det_ipmbl_berkasmasuk = htmlentities($this->input->post('det_ipmbl_berkasmasuk'),ENT_QUOTES);
-		$det_ipmbl_surveytanggal = htmlentities($this->input->post('det_ipmbl_surveytanggal'),ENT_QUOTES);
-		$det_ipmbl_surveylulus = htmlentities($this->input->post('det_ipmbl_surveylulus'),ENT_QUOTES);
-		$det_ipmbl_status = htmlentities($this->input->post('det_ipmbl_status'),ENT_QUOTES);
-		$det_ipmbl_surveypetugas = htmlentities($this->input->post('det_ipmbl_surveypetugas'),ENT_QUOTES);
-		$det_ipmbl_surveydinas = htmlentities($this->input->post('det_ipmbl_surveydinas'),ENT_QUOTES);
-		$det_ipmbl_surveynip = htmlentities($this->input->post('det_ipmbl_surveynip'),ENT_QUOTES);
-		$det_ipmbl_surveypendapat = htmlentities($this->input->post('det_ipmbl_surveypendapat'),ENT_QUOTES);
-		$det_ipmbl_rekombl = htmlentities($this->input->post('det_ipmbl_rekombl'),ENT_QUOTES);
-		$det_ipmbl_rekomblhtanggal = htmlentities($this->input->post('det_ipmbl_rekomblhtanggal'),ENT_QUOTES);
-		$det_ipmbl_rekomkel = htmlentities($this->input->post('det_ipmbl_rekomkel'),ENT_QUOTES);
-		$det_ipmbl_rekomkeltanggal = htmlentities($this->input->post('det_ipmbl_rekomkeltanggal'),ENT_QUOTES);
-		$det_ipmbl_rekomkec = htmlentities($this->input->post('det_ipmbl_rekomkec'),ENT_QUOTES);
-		$det_ipmbl_rekomkectanggal = htmlentities($this->input->post('det_ipmbl_rekomkectanggal'),ENT_QUOTES);
-		$det_ipmbl_sk = htmlentities($this->input->post('det_ipmbl_sk'),ENT_QUOTES);
-		$det_ipmbl_kadaluarsa = htmlentities($this->input->post('det_ipmbl_kadaluarsa'),ENT_QUOTES);
-		$det_ipmbl_berlaku = htmlentities($this->input->post('det_ipmbl_berlaku'),ENT_QUOTES);
-		
-		$ipmbl_cek_id = json_decode($this->input->post('ipmbl_cek_id'));
-		$ipmbl_cek_syarat_id = json_decode($this->input->post('ipmbl_cek_syarat_id'));
-		$ipmbl_cek_status = json_decode($this->input->post('ipmbl_cek_status'));
-		$ipmbl_cek_keterangan = json_decode($this->input->post('ipmbl_cek_keterangan'));
-			
+		$det_ipmbl_namapimpinan = htmlentities($this->input->post('det_ipmbl_namapimpinan'),ENT_QUOTES);
+				
 		$ipmbl_det_author = $this->m_t_ipmbl_det->__checkSession();
 		$ipmbl_det_created_date = date('Y-m-d H:i:s');
 		
-		if($ipmbl_det_author != ''){
+		if(!$ipmbl_det_author){
 			$result = 'sessionExpired';
 		}else{
-			$dataInti = array(
-				'ipmbl_usaha'=>$det_ipmbl_usaha,
-				'ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
-				'ipmbl_kelurahan'=>$det_ipmbl_kelurahanusaha,
-				'ipmbl_kecamatan'=>$det_ipmbl_kecamatanusaha,
-				'ipmbl_luas'=>$det_ipmbl_luas,
-				'ipmbl_volume'=>$det_ipmbl_volume,
-				'ipmbl_keperluan'=>$det_ipmbl_keperluan
-			);
-			$resultInti = $this->m_t_ipmbl_det->__insert($dataInti, 't_ipmbl', 'insertId');
-			if($resultInti != 0){
-				$result = 'success';
-				$data = array(
-					'det_ipmbl_ipmbl_id'=>$resultInti,
-					'det_ipmbl_jenis'=>$det_ipmbl_jenis,
-					'det_ipmbl_tanggal'=>$det_ipmbl_tanggal,
-					'det_ipmbl_nama'=>$det_ipmbl_nama,
-					'det_ipmbl_alamat'=>$det_ipmbl_alamat,
-					'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
-					'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
-					'det_ipmbl_kota'=>$det_ipmbl_kota,
-					'det_ipmbl_telp'=>$det_ipmbl_telp,
-					'det_ipmbl_nomoragenda'=>$det_ipmbl_nomoragenda,
-					'det_ipmbl_berkasmasuk'=>$det_ipmbl_berkasmasuk,
-					'det_ipmbl_surveytanggal'=>$det_ipmbl_surveytanggal,
-					'det_ipmbl_surveylulus'=>$det_ipmbl_surveylulus,
-					'det_ipmbl_status'=>$det_ipmbl_status,
-					'det_ipmbl_surveypetugas'=>$det_ipmbl_surveypetugas,
-					'det_ipmbl_surveydinas'=>$det_ipmbl_surveydinas,
-					'det_ipmbl_surveynip'=>$det_ipmbl_surveynip,
-					'det_ipmbl_surveypendapat'=>$det_ipmbl_surveypendapat,
-					'det_ipmbl_rekombl'=>$det_ipmbl_rekombl,
-					'det_ipmbl_rekomblhtanggal'=>$det_ipmbl_rekomblhtanggal,
-					'det_ipmbl_rekomkel'=>$det_ipmbl_rekomkel,
-					'det_ipmbl_rekomkeltanggal'=>$det_ipmbl_rekomkeltanggal,
-					'det_ipmbl_rekomkec'=>$det_ipmbl_rekomkec,
-					'det_ipmbl_rekomkectanggal'=>$det_ipmbl_rekomkectanggal,
-					'det_ipmbl_sk'=>$det_ipmbl_sk,
-					'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
-					'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
-					);
-				$resultdet = $this->m_t_ipmbl_det->__insert($data, false, 'insertId');
-				for($i=0;$i<count($ipmbl_cek_syarat_id);$i++){
-					$datacek = array(
-						'ipmbl_cek_syarat_id'=>$ipmbl_cek_syarat_id[$i],
-						'ipmbl_cek_ipmbl_id'=>$resultInti,
-						'ipmbl_cek_ipmbldet_id'=>$resultdet,
-						'ipmbl_cek_status'=>$ipmbl_cek_status[$i],
-						'ipmbl_cek_keterangan'=>$ipmbl_cek_keterangan[$i]
-					);
-					$resultcek = $this->m_t_ipmbl_det->__insert($datacek, 't_ipmbl_ceklist', 'insertId');
-				}
-		
-			}else{
-				$result = 'fail';
-			}
+			$data = array(
+				'det_ipmbl_id'=>$det_ipmbl_id,
+				'det_ipmbl_ipmbl_id'=>$det_ipmbl_ipmbl_id,
+				'det_ipmbl_nama'=>$det_ipmbl_nama,
+				'det_ipmbl_alamat'=>$det_ipmbl_alamat,
+				'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
+				'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
+				'det_ipmbl_kota'=>$det_ipmbl_kota,
+				'det_ipmbl_telp'=>$det_ipmbl_telp,
+				'det_ipmbl_namausaha'=>$det_ipmbl_namausaha,
+				'det_ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
+				'det_ipmbl_namapimpinan'=>$det_ipmbl_namapimpinan,
+				);
+			$result = $this->m_t_ipmbl_det->__insert($data, '', '');
 		}
 		echo $result;
 	}
@@ -189,9 +101,6 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_id = is_numeric($det_ipmbl_id) ? $det_ipmbl_id : 0;
 		$det_ipmbl_ipmbl_id = htmlentities($this->input->post('det_ipmbl_ipmbl_id'),ENT_QUOTES);
 		$det_ipmbl_ipmbl_id = is_numeric($det_ipmbl_ipmbl_id) ? $det_ipmbl_ipmbl_id : 0;
-		$det_ipmbl_jenis = htmlentities($this->input->post('det_ipmbl_jenis'),ENT_QUOTES);
-		$det_ipmbl_jenis = is_numeric($det_ipmbl_jenis) ? $det_ipmbl_jenis : 0;
-		$det_ipmbl_tanggal = htmlentities($this->input->post('det_ipmbl_tanggal'),ENT_QUOTES);
 		$det_ipmbl_nama = htmlentities($this->input->post('det_ipmbl_nama'),ENT_QUOTES);
 		$det_ipmbl_alamat = htmlentities($this->input->post('det_ipmbl_alamat'),ENT_QUOTES);
 		$det_ipmbl_kelurahan = htmlentities($this->input->post('det_ipmbl_kelurahan'),ENT_QUOTES);
@@ -201,60 +110,27 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_kota = htmlentities($this->input->post('det_ipmbl_kota'),ENT_QUOTES);
 		$det_ipmbl_kota = is_numeric($det_ipmbl_kota) ? $det_ipmbl_kota : 0;
 		$det_ipmbl_telp = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
-		$det_ipmbl_nomoragenda = htmlentities($this->input->post('det_ipmbl_nomoragenda'),ENT_QUOTES);
-		$det_ipmbl_nomoragenda = is_numeric($det_ipmbl_nomoragenda) ? $det_ipmbl_nomoragenda : 0;
-		$det_ipmbl_berkasmasuk = htmlentities($this->input->post('det_ipmbl_berkasmasuk'),ENT_QUOTES);
-		$det_ipmbl_surveytanggal = htmlentities($this->input->post('det_ipmbl_surveytanggal'),ENT_QUOTES);
-		$det_ipmbl_surveylulus = htmlentities($this->input->post('det_ipmbl_surveylulus'),ENT_QUOTES);
-		$det_ipmbl_status = htmlentities($this->input->post('det_ipmbl_status'),ENT_QUOTES);
-		$det_ipmbl_surveypetugas = htmlentities($this->input->post('det_ipmbl_surveypetugas'),ENT_QUOTES);
-		$det_ipmbl_surveydinas = htmlentities($this->input->post('det_ipmbl_surveydinas'),ENT_QUOTES);
-		$det_ipmbl_surveynip = htmlentities($this->input->post('det_ipmbl_surveynip'),ENT_QUOTES);
-		$det_ipmbl_surveypendapat = htmlentities($this->input->post('det_ipmbl_surveypendapat'),ENT_QUOTES);
-		$det_ipmbl_rekombl = htmlentities($this->input->post('det_ipmbl_rekombl'),ENT_QUOTES);
-		$det_ipmbl_rekomblhtanggal = htmlentities($this->input->post('det_ipmbl_rekomblhtanggal'),ENT_QUOTES);
-		$det_ipmbl_rekomkel = htmlentities($this->input->post('det_ipmbl_rekomkel'),ENT_QUOTES);
-		$det_ipmbl_rekomkeltanggal = htmlentities($this->input->post('det_ipmbl_rekomkeltanggal'),ENT_QUOTES);
-		$det_ipmbl_rekomkec = htmlentities($this->input->post('det_ipmbl_rekomkec'),ENT_QUOTES);
-		$det_ipmbl_rekomkectanggal = htmlentities($this->input->post('det_ipmbl_rekomkectanggal'),ENT_QUOTES);
-		$det_ipmbl_sk = htmlentities($this->input->post('det_ipmbl_sk'),ENT_QUOTES);
-		$det_ipmbl_kadaluarsa = htmlentities($this->input->post('det_ipmbl_kadaluarsa'),ENT_QUOTES);
-		$det_ipmbl_berlaku = htmlentities($this->input->post('det_ipmbl_berlaku'),ENT_QUOTES);
+		$det_ipmbl_namausaha = htmlentities($this->input->post('det_ipmbl_namausaha'),ENT_QUOTES);
+		$det_ipmbl_alamatusaha = htmlentities($this->input->post('det_ipmbl_alamatusaha'),ENT_QUOTES);
+		$det_ipmbl_namapimpinan = htmlentities($this->input->post('det_ipmbl_namapimpinan'),ENT_QUOTES);
 				
 		$ipmbl_det_updated_by = $this->m_t_ipmbl_det->__checkSession();
 		$ipmbl_det_updated_date = date('Y-m-d H:i:s');
 		
-		if($ipmbl_det_updated_by != ''){
+		if(!$ipmbl_det_updated_by){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
 				'det_ipmbl_ipmbl_id'=>$det_ipmbl_ipmbl_id,
-				'det_ipmbl_jenis'=>$det_ipmbl_jenis,
-				'det_ipmbl_tanggal'=>$det_ipmbl_tanggal,
 				'det_ipmbl_nama'=>$det_ipmbl_nama,
 				'det_ipmbl_alamat'=>$det_ipmbl_alamat,
 				'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
 				'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
 				'det_ipmbl_kota'=>$det_ipmbl_kota,
 				'det_ipmbl_telp'=>$det_ipmbl_telp,
-				'det_ipmbl_nomoragenda'=>$det_ipmbl_nomoragenda,
-				'det_ipmbl_berkasmasuk'=>$det_ipmbl_berkasmasuk,
-				'det_ipmbl_surveytanggal'=>$det_ipmbl_surveytanggal,
-				'det_ipmbl_surveylulus'=>$det_ipmbl_surveylulus,
-				'det_ipmbl_status'=>$det_ipmbl_status,
-				'det_ipmbl_surveypetugas'=>$det_ipmbl_surveypetugas,
-				'det_ipmbl_surveydinas'=>$det_ipmbl_surveydinas,
-				'det_ipmbl_surveynip'=>$det_ipmbl_surveynip,
-				'det_ipmbl_surveypendapat'=>$det_ipmbl_surveypendapat,
-				'det_ipmbl_rekombl'=>$det_ipmbl_rekombl,
-				'det_ipmbl_rekomblhtanggal'=>$det_ipmbl_rekomblhtanggal,
-				'det_ipmbl_rekomkel'=>$det_ipmbl_rekomkel,
-				'det_ipmbl_rekomkeltanggal'=>$det_ipmbl_rekomkeltanggal,
-				'det_ipmbl_rekomkec'=>$det_ipmbl_rekomkec,
-				'det_ipmbl_rekomkectanggal'=>$det_ipmbl_rekomkectanggal,
-				'det_ipmbl_sk'=>$det_ipmbl_sk,
-				'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
-				'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
+				'det_ipmbl_namausaha'=>$det_ipmbl_namausaha,
+				'det_ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
+				'det_ipmbl_namapimpinan'=>$det_ipmbl_namapimpinan,
 				);
 			$result = $this->m_t_ipmbl_det->__update($data, $det_ipmbl_id, '', '');
 		}
@@ -273,9 +149,6 @@ class C_t_ipmbl_det extends CI_Controller{
 		$limit_end = (integer)$this->input->post('limit');
 		$det_ipmbl_ipmbl_id = htmlentities($this->input->post('det_ipmbl_ipmbl_id'),ENT_QUOTES);
 		$det_ipmbl_ipmbl_id = is_numeric($det_ipmbl_ipmbl_id) ? $det_ipmbl_ipmbl_id : 0;
-		$det_ipmbl_jenis = htmlentities($this->input->post('det_ipmbl_jenis'),ENT_QUOTES);
-		$det_ipmbl_jenis = is_numeric($det_ipmbl_jenis) ? $det_ipmbl_jenis : 0;
-		$det_ipmbl_tanggal = htmlentities($this->input->post('det_ipmbl_tanggal'),ENT_QUOTES);
 		$det_ipmbl_nama = htmlentities($this->input->post('det_ipmbl_nama'),ENT_QUOTES);
 		$det_ipmbl_alamat = htmlentities($this->input->post('det_ipmbl_alamat'),ENT_QUOTES);
 		$det_ipmbl_kelurahan = htmlentities($this->input->post('det_ipmbl_kelurahan'),ENT_QUOTES);
@@ -285,54 +158,21 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_kota = htmlentities($this->input->post('det_ipmbl_kota'),ENT_QUOTES);
 		$det_ipmbl_kota = is_numeric($det_ipmbl_kota) ? $det_ipmbl_kota : 0;
 		$det_ipmbl_telp = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
-		$det_ipmbl_nomoragenda = htmlentities($this->input->post('det_ipmbl_nomoragenda'),ENT_QUOTES);
-		$det_ipmbl_nomoragenda = is_numeric($det_ipmbl_nomoragenda) ? $det_ipmbl_nomoragenda : 0;
-		$det_ipmbl_berkasmasuk = htmlentities($this->input->post('det_ipmbl_berkasmasuk'),ENT_QUOTES);
-		$det_ipmbl_surveytanggal = htmlentities($this->input->post('det_ipmbl_surveytanggal'),ENT_QUOTES);
-		$det_ipmbl_surveylulus = htmlentities($this->input->post('det_ipmbl_surveylulus'),ENT_QUOTES);
-		$det_ipmbl_status = htmlentities($this->input->post('det_ipmbl_status'),ENT_QUOTES);
-		$det_ipmbl_surveypetugas = htmlentities($this->input->post('det_ipmbl_surveypetugas'),ENT_QUOTES);
-		$det_ipmbl_surveydinas = htmlentities($this->input->post('det_ipmbl_surveydinas'),ENT_QUOTES);
-		$det_ipmbl_surveynip = htmlentities($this->input->post('det_ipmbl_surveynip'),ENT_QUOTES);
-		$det_ipmbl_surveypendapat = htmlentities($this->input->post('det_ipmbl_surveypendapat'),ENT_QUOTES);
-		$det_ipmbl_rekombl = htmlentities($this->input->post('det_ipmbl_rekombl'),ENT_QUOTES);
-		$det_ipmbl_rekomblhtanggal = htmlentities($this->input->post('det_ipmbl_rekomblhtanggal'),ENT_QUOTES);
-		$det_ipmbl_rekomkel = htmlentities($this->input->post('det_ipmbl_rekomkel'),ENT_QUOTES);
-		$det_ipmbl_rekomkeltanggal = htmlentities($this->input->post('det_ipmbl_rekomkeltanggal'),ENT_QUOTES);
-		$det_ipmbl_rekomkec = htmlentities($this->input->post('det_ipmbl_rekomkec'),ENT_QUOTES);
-		$det_ipmbl_rekomkectanggal = htmlentities($this->input->post('det_ipmbl_rekomkectanggal'),ENT_QUOTES);
-		$det_ipmbl_sk = htmlentities($this->input->post('det_ipmbl_sk'),ENT_QUOTES);
-		$det_ipmbl_kadaluarsa = htmlentities($this->input->post('det_ipmbl_kadaluarsa'),ENT_QUOTES);
-		$det_ipmbl_berlaku = htmlentities($this->input->post('det_ipmbl_berlaku'),ENT_QUOTES);
+		$det_ipmbl_namausaha = htmlentities($this->input->post('det_ipmbl_namausaha'),ENT_QUOTES);
+		$det_ipmbl_alamatusaha = htmlentities($this->input->post('det_ipmbl_alamatusaha'),ENT_QUOTES);
+		$det_ipmbl_namapimpinan = htmlentities($this->input->post('det_ipmbl_namapimpinan'),ENT_QUOTES);
 				
 		$params = array(
 			'det_ipmbl_ipmbl_id'=>$det_ipmbl_ipmbl_id,
-			'det_ipmbl_jenis'=>$det_ipmbl_jenis,
-			'det_ipmbl_tanggal'=>$det_ipmbl_tanggal,
 			'det_ipmbl_nama'=>$det_ipmbl_nama,
 			'det_ipmbl_alamat'=>$det_ipmbl_alamat,
 			'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
 			'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
 			'det_ipmbl_kota'=>$det_ipmbl_kota,
 			'det_ipmbl_telp'=>$det_ipmbl_telp,
-			'det_ipmbl_nomoragenda'=>$det_ipmbl_nomoragenda,
-			'det_ipmbl_berkasmasuk'=>$det_ipmbl_berkasmasuk,
-			'det_ipmbl_surveytanggal'=>$det_ipmbl_surveytanggal,
-			'det_ipmbl_surveylulus'=>$det_ipmbl_surveylulus,
-			'det_ipmbl_status'=>$det_ipmbl_status,
-			'det_ipmbl_surveypetugas'=>$det_ipmbl_surveypetugas,
-			'det_ipmbl_surveydinas'=>$det_ipmbl_surveydinas,
-			'det_ipmbl_surveynip'=>$det_ipmbl_surveynip,
-			'det_ipmbl_surveypendapat'=>$det_ipmbl_surveypendapat,
-			'det_ipmbl_rekombl'=>$det_ipmbl_rekombl,
-			'det_ipmbl_rekomblhtanggal'=>$det_ipmbl_rekomblhtanggal,
-			'det_ipmbl_rekomkel'=>$det_ipmbl_rekomkel,
-			'det_ipmbl_rekomkeltanggal'=>$det_ipmbl_rekomkeltanggal,
-			'det_ipmbl_rekomkec'=>$det_ipmbl_rekomkec,
-			'det_ipmbl_rekomkectanggal'=>$det_ipmbl_rekomkectanggal,
-			'det_ipmbl_sk'=>$det_ipmbl_sk,
-			'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
-			'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
+			'det_ipmbl_namausaha'=>$det_ipmbl_namausaha,
+			'det_ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
+			'det_ipmbl_namapimpinan'=>$det_ipmbl_namapimpinan,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -348,9 +188,6 @@ class C_t_ipmbl_det extends CI_Controller{
 		$currentAction = $this->input->post('currentAction');
 		$det_ipmbl_ipmbl_id = htmlentities($this->input->post('det_ipmbl_ipmbl_id'),ENT_QUOTES);
 		$det_ipmbl_ipmbl_id = is_numeric($det_ipmbl_ipmbl_id) ? $det_ipmbl_ipmbl_id : 0;
-		$det_ipmbl_jenis = htmlentities($this->input->post('det_ipmbl_jenis'),ENT_QUOTES);
-		$det_ipmbl_jenis = is_numeric($det_ipmbl_jenis) ? $det_ipmbl_jenis : 0;
-		$det_ipmbl_tanggal = htmlentities($this->input->post('det_ipmbl_tanggal'),ENT_QUOTES);
 		$det_ipmbl_nama = htmlentities($this->input->post('det_ipmbl_nama'),ENT_QUOTES);
 		$det_ipmbl_alamat = htmlentities($this->input->post('det_ipmbl_alamat'),ENT_QUOTES);
 		$det_ipmbl_kelurahan = htmlentities($this->input->post('det_ipmbl_kelurahan'),ENT_QUOTES);
@@ -360,63 +197,29 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_kota = htmlentities($this->input->post('det_ipmbl_kota'),ENT_QUOTES);
 		$det_ipmbl_kota = is_numeric($det_ipmbl_kota) ? $det_ipmbl_kota : 0;
 		$det_ipmbl_telp = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
-		$det_ipmbl_nomoragenda = htmlentities($this->input->post('det_ipmbl_nomoragenda'),ENT_QUOTES);
-		$det_ipmbl_nomoragenda = is_numeric($det_ipmbl_nomoragenda) ? $det_ipmbl_nomoragenda : 0;
-		$det_ipmbl_berkasmasuk = htmlentities($this->input->post('det_ipmbl_berkasmasuk'),ENT_QUOTES);
-		$det_ipmbl_surveytanggal = htmlentities($this->input->post('det_ipmbl_surveytanggal'),ENT_QUOTES);
-		$det_ipmbl_surveylulus = htmlentities($this->input->post('det_ipmbl_surveylulus'),ENT_QUOTES);
-		$det_ipmbl_status = htmlentities($this->input->post('det_ipmbl_status'),ENT_QUOTES);
-		$det_ipmbl_surveypetugas = htmlentities($this->input->post('det_ipmbl_surveypetugas'),ENT_QUOTES);
-		$det_ipmbl_surveydinas = htmlentities($this->input->post('det_ipmbl_surveydinas'),ENT_QUOTES);
-		$det_ipmbl_surveynip = htmlentities($this->input->post('det_ipmbl_surveynip'),ENT_QUOTES);
-		$det_ipmbl_surveypendapat = htmlentities($this->input->post('det_ipmbl_surveypendapat'),ENT_QUOTES);
-		$det_ipmbl_rekombl = htmlentities($this->input->post('det_ipmbl_rekombl'),ENT_QUOTES);
-		$det_ipmbl_rekomblhtanggal = htmlentities($this->input->post('det_ipmbl_rekomblhtanggal'),ENT_QUOTES);
-		$det_ipmbl_rekomkel = htmlentities($this->input->post('det_ipmbl_rekomkel'),ENT_QUOTES);
-		$det_ipmbl_rekomkeltanggal = htmlentities($this->input->post('det_ipmbl_rekomkeltanggal'),ENT_QUOTES);
-		$det_ipmbl_rekomkec = htmlentities($this->input->post('det_ipmbl_rekomkec'),ENT_QUOTES);
-		$det_ipmbl_rekomkectanggal = htmlentities($this->input->post('det_ipmbl_rekomkectanggal'),ENT_QUOTES);
-		$det_ipmbl_sk = htmlentities($this->input->post('det_ipmbl_sk'),ENT_QUOTES);
-		$det_ipmbl_kadaluarsa = htmlentities($this->input->post('det_ipmbl_kadaluarsa'),ENT_QUOTES);
-		$det_ipmbl_berlaku = htmlentities($this->input->post('det_ipmbl_berlaku'),ENT_QUOTES);
+		$det_ipmbl_namausaha = htmlentities($this->input->post('det_ipmbl_namausaha'),ENT_QUOTES);
+		$det_ipmbl_alamatusaha = htmlentities($this->input->post('det_ipmbl_alamatusaha'),ENT_QUOTES);
+		$det_ipmbl_namapimpinan = htmlentities($this->input->post('det_ipmbl_namapimpinan'),ENT_QUOTES);
 				
 		$params = array(
 			'searchText' => $searchText,
 			'det_ipmbl_ipmbl_id'=>$det_ipmbl_ipmbl_id,
-			'det_ipmbl_jenis'=>$det_ipmbl_jenis,
-			'det_ipmbl_tanggal'=>$det_ipmbl_tanggal,
 			'det_ipmbl_nama'=>$det_ipmbl_nama,
 			'det_ipmbl_alamat'=>$det_ipmbl_alamat,
 			'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
 			'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
 			'det_ipmbl_kota'=>$det_ipmbl_kota,
 			'det_ipmbl_telp'=>$det_ipmbl_telp,
-			'det_ipmbl_nomoragenda'=>$det_ipmbl_nomoragenda,
-			'det_ipmbl_berkasmasuk'=>$det_ipmbl_berkasmasuk,
-			'det_ipmbl_surveytanggal'=>$det_ipmbl_surveytanggal,
-			'det_ipmbl_surveylulus'=>$det_ipmbl_surveylulus,
-			'det_ipmbl_status'=>$det_ipmbl_status,
-			'det_ipmbl_surveypetugas'=>$det_ipmbl_surveypetugas,
-			'det_ipmbl_surveydinas'=>$det_ipmbl_surveydinas,
-			'det_ipmbl_surveynip'=>$det_ipmbl_surveynip,
-			'det_ipmbl_surveypendapat'=>$det_ipmbl_surveypendapat,
-			'det_ipmbl_rekombl'=>$det_ipmbl_rekombl,
-			'det_ipmbl_rekomblhtanggal'=>$det_ipmbl_rekomblhtanggal,
-			'det_ipmbl_rekomkel'=>$det_ipmbl_rekomkel,
-			'det_ipmbl_rekomkeltanggal'=>$det_ipmbl_rekomkeltanggal,
-			'det_ipmbl_rekomkec'=>$det_ipmbl_rekomkec,
-			'det_ipmbl_rekomkectanggal'=>$det_ipmbl_rekomkectanggal,
-			'det_ipmbl_sk'=>$det_ipmbl_sk,
-			'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
-			'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
+			'det_ipmbl_namausaha'=>$det_ipmbl_namausaha,
+			'det_ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
+			'det_ipmbl_namapimpinan'=>$det_ipmbl_namapimpinan,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
 			'limit_end' => 0
 		);
-		
-		$record = $this->m_t_ipmbl_det->printExcel($params);
-		$data['records'] = $record[1];
+		$record			= $this->m_t_ipmbl_det->printExcel($params);
+		$data['records']= $record[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_t_ipmbl_det.php',$data,TRUE);
@@ -430,6 +233,7 @@ class C_t_ipmbl_det extends CI_Controller{
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
+
 	function getSyarat(){
 		$currentAction = $this->input->post('currentAction');
 		$ipmbl_id = $this->input->post('ipmbl_id');
