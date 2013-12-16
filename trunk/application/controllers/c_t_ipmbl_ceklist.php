@@ -70,7 +70,7 @@ class C_t_ipmbl_ceklist extends CI_Controller{
 		$ipmbl_ceklist_author = $this->m_t_ipmbl_ceklist->__checkSession();
 		$ipmbl_ceklist_created_date = date('Y-m-d H:i:s');
 		
-		if(!$ipmbl_ceklist_author){
+		if($ipmbl_ceklist_author != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -102,7 +102,7 @@ class C_t_ipmbl_ceklist extends CI_Controller{
 		$ipmbl_ceklist_updated_by = $this->m_t_ipmbl_ceklist->__checkSession();
 		$ipmbl_ceklist_updated_date = date('Y-m-d H:i:s');
 		
-		if(!$ipmbl_ceklist_updated_by){
+		if($ipmbl_ceklist_updated_by != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -179,7 +179,8 @@ class C_t_ipmbl_ceklist extends CI_Controller{
 			'limit_end' => 0
 		);
 		
-		$data['records'] = $this->m_t_ipmbl_ceklist->printExcel($params)[1];
+		$record = $this->m_t_ipmbl_ceklist->printExcel($params);
+		$data['records'] = $record[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_t_ipmbl_ceklist.php',$data,TRUE);
