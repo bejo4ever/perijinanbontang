@@ -29,6 +29,22 @@
 		var det_iujk_pjteknisField;
 		var det_iujk_pjtbuField;
 		var det_iujk_surveylulusField;
+		
+		var iujk_perusahaanField;
+		var iujk_alamatField;
+		var iujk_direkturField;
+		var iujk_golonganField;
+		var iujk_kualifikasiField;
+		var iujk_bidangusahaField;
+		var iujk_rtField;
+		var iujk_rwField;
+		var iujk_kelurahanField;
+		var iujk_kotaField;
+		var iujk_propinsiField;
+		var iujk_teleponField;
+		var iujk_kodeposField;
+		var iujk_faxField;
+		var iujk_npwpField;
 				
 		var det_iujk_iujk_idSearchField;
 		var det_iujk_jenisSearchField;
@@ -134,6 +150,22 @@
 					var det_iujk_pjteknisValue = '';
 					var det_iujk_pjtbuValue = '';
 					var det_iujk_surveylulusValue = '';
+					
+					var iujk_perusahaanValue = '';
+					var iujk_alamatValue = '';
+					var iujk_direkturValue = '';
+					var iujk_golonganValue = '';
+					var iujk_kualifikasiValue = '';
+					var iujk_bidangusahaValue = '';
+					var iujk_rtValue = '';
+					var iujk_rwValue = '';
+					var iujk_kelurahanValue = '';
+					var iujk_kotaValue = '';
+					var iujk_propinsiValue = '';
+					var iujk_teleponValue = '';
+					var iujk_kodeposValue = '';
+					var iujk_faxValue = '';
+					var iujk_npwpValue = '';
 										
 					det_iujk_idValue = det_iujk_idField.getValue();
 					det_iujk_iujk_idValue = det_iujk_iujk_idField.getValue();
@@ -151,6 +183,22 @@
 					det_iujk_pjteknisValue = det_iujk_pjteknisField.getValue();
 					det_iujk_pjtbuValue = det_iujk_pjtbuField.getValue();
 					det_iujk_surveylulusValue = det_iujk_surveylulusField.getValue();
+					
+					iujk_perusahaanValue = iujk_perusahaanField.getValue();
+					iujk_alamatValue = iujk_alamatField.getValue();
+					iujk_direkturValue = iujk_direkturField.getValue();
+					iujk_golonganValue = iujk_golonganField.getValue();
+					iujk_kualifikasiValue = iujk_kualifikasiField.getValue();
+					iujk_bidangusahaValue = iujk_bidangusahaField.getValue();
+					iujk_rtValue = iujk_rtField.getValue();
+					iujk_rwValue = iujk_rwField.getValue();
+					iujk_kelurahanValue = iujk_kelurahanField.getValue();
+					iujk_kotaValue = iujk_kotaField.getValue();
+					iujk_propinsiValue = iujk_propinsiField.getValue();
+					iujk_teleponValue = iujk_teleponField.getValue();
+					iujk_kodeposValue = iujk_kodeposField.getValue();
+					iujk_faxValue = iujk_faxField.getValue();
+					iujk_npwpValue = iujk_npwpField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -172,6 +220,23 @@
 							det_iujk_pjteknis : det_iujk_pjteknisValue,
 							det_iujk_pjtbu : det_iujk_pjtbuValue,
 							det_iujk_surveylulus : det_iujk_surveylulusValue,
+							
+							iujk_perusahaan : iujk_perusahaanValue,
+							iujk_alamat : iujk_alamatValue,
+							iujk_direktur : iujk_direkturValue,
+							iujk_golongan : iujk_golonganValue,
+							iujk_kualifikasi : iujk_kualifikasiValue,
+							iujk_bidangusaha : iujk_bidangusahaValue,
+							iujk_rt : iujk_rtValue,
+							iujk_rw : iujk_rwValue,
+							iujk_kelurahan : iujk_kelurahanValue,
+							iujk_kota : iujk_kotaValue,
+							iujk_propinsi : iujk_propinsiValue,
+							iujk_telepon : iujk_teleponValue,
+							iujk_kodepos : iujk_kodeposValue,
+							iujk_fax : iujk_faxValue,
+							iujk_npwp : iujk_npwpValue,
+							
 							action : iujk_det_dbTask
 						},
 						success: function(response){
@@ -340,7 +405,23 @@
 			det_iujk_pjteknisField.setValue(record.data.det_iujk_pjteknis);
 			det_iujk_pjtbuField.setValue(record.data.det_iujk_pjtbu);
 			det_iujk_surveylulusField.setValue(record.data.det_iujk_surveylulus);
-					}
+			
+			iujk_perusahaanField.setValue(record.data.iujk_perusahaan);
+			iujk_alamatField.setValue(record.data.iujk_alamat);
+			iujk_direkturField.setValue(record.data.iujk_direktur);
+			iujk_golonganField.setValue(record.data.iujk_golongan);
+			iujk_kualifikasiField.setValue(record.data.iujk_kualifikasi);
+			iujk_bidangusahaField.setValue(record.data.iujk_bidangusaha);
+			iujk_rtField.setValue(record.data.iujk_rt);
+			iujk_rwField.setValue(record.data.iujk_rw);
+			iujk_kelurahanField.setValue(record.data.iujk_kelurahan);
+			iujk_kotaField.setValue(record.data.iujk_kota);
+			iujk_propinsiField.setValue(record.data.iujk_propinsi);
+			iujk_teleponField.setValue(record.data.iujk_telepon);
+			iujk_kodeposField.setValue(record.data.iujk_kodepos);
+			iujk_faxField.setValue(record.data.iujk_fax);
+			iujk_npwpField.setValue(record.data.iujk_npwp);
+		}
 		
 		function iujk_det_showSearchWindow(){
 			iujk_det_searchWindow.show();
@@ -539,6 +620,22 @@
 				{ name : 'det_iujk_pjteknis', type : 'string', mapping : 'det_iujk_pjteknis' },
 				{ name : 'det_iujk_pjtbu', type : 'string', mapping : 'det_iujk_pjtbu' },
 				{ name : 'det_iujk_surveylulus', type : 'int', mapping : 'det_iujk_surveylulus' },
+				
+				{ name : 'iujk_perusahaan', type : 'string', mapping : 'iujk_perusahaan' },
+				{ name : 'iujk_alamat', type : 'string', mapping : 'iujk_alamat' },
+				{ name : 'iujk_direktur', type : 'string', mapping : 'iujk_direktur' },
+				{ name : 'iujk_golongan', type : 'string', mapping : 'iujk_golongan' },
+				{ name : 'iujk_kualifikasi', type : 'string', mapping : 'iujk_kualifikasi' },
+				{ name : 'iujk_bidangusaha', type : 'string', mapping : 'iujk_bidangusaha' },
+				{ name : 'iujk_rt', type : 'int', mapping : 'iujk_rt' },
+				{ name : 'iujk_rw', type : 'int', mapping : 'iujk_rw' },
+				{ name : 'iujk_kelurahan', type : 'int', mapping : 'iujk_kelurahan' },
+				{ name : 'iujk_kota', type : 'int', mapping : 'iujk_kota' },
+				{ name : 'iujk_propinsi', type : 'int', mapping : 'iujk_propinsi' },
+				{ name : 'iujk_telepon', type : 'string', mapping : 'iujk_telepon' },
+				{ name : 'iujk_kodepos', type : 'string', mapping : 'iujk_kodepos' },
+				{ name : 'iujk_fax', type : 'string', mapping : 'iujk_fax' },
+				{ name : 'iujk_npwp', type : 'string', mapping : 'iujk_npwp' },
 				]
 		});
 /* End DataStore declaration */
@@ -966,6 +1063,182 @@
 			triggerAction : 'all',
 			forceSelection : true
 		});
+		/* field IUJK */
+		iujk_perusahaanField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_perusahaanField',
+			name : 'iujk_perusahaan',
+			fieldLabel : 'Nama Perusahaan',
+			maxLength : 50
+		});
+		iujk_alamatField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_alamatField',
+			name : 'iujk_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		iujk_direkturField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_direkturField',
+			name : 'iujk_direktur',
+			fieldLabel : 'Direktur',
+			maxLength : 50
+		});
+		iujk_golonganField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_golonganField',
+			name : 'iujk_golongan',
+			fieldLabel : 'Golongan',
+			maxLength : 50
+		});
+		iujk_kualifikasiField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_kualifikasiField',
+			name : 'iujk_kualifikasi',
+			fieldLabel : 'Kualifikasi',
+			maxLength : 50
+		});
+		iujk_bidangusahaField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_bidangusahaField',
+			name : 'iujk_bidangusaha',
+			fieldLabel : 'Bidang Usaha',
+			maxLength : 50
+		});
+		iujk_rtField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_rtField',
+			name : 'iujk_rt',
+			fieldLabel : 'RT',
+			maskRe : /([0-9]+)$/
+		});
+		iujk_rwField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_rwField',
+			name : 'iujk_rw',
+			fieldLabel : 'RW',
+			maskRe : /([0-9]+)$/
+		});
+		iujk_kelurahanField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_kelurahanField',
+			name : 'iujk_kelurahan',
+			fieldLabel : 'Kelurahan',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/
+		});
+		iujk_kotaField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_kotaField',
+			name : 'iujk_kota',
+			fieldLabel : 'Kota',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/
+		});
+		iujk_propinsiField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_propinsiField',
+			name : 'iujk_propinsi',
+			fieldLabel : 'Propinsi',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/
+		});
+		iujk_teleponField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_teleponField',
+			name : 'iujk_telepon',
+			fieldLabel : 'Telepon',
+			maxLength : 20
+		});
+		iujk_kodeposField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_kodeposField',
+			name : 'iujk_kodepos',
+			fieldLabel : 'Kodepos',
+			maxLength : 7
+		});
+		iujk_faxField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_faxField',
+			name : 'iujk_fax',
+			fieldLabel : 'Fax',
+			maxLength : 20
+		});
+		iujk_npwpField = Ext.create('Ext.form.TextField',{
+			id : 'iujk_npwpField',
+			name : 'iujk_npwp',
+			fieldLabel : 'NPWP',
+			maxLength : 50
+		});
+		/* end field IUJK */
+		
+		iujk_det_syaratDataStore = Ext.create('Ext.data.Store',{
+			id : 'iujk_det_syaratDataStore',
+			pageSize : globalPageSize,
+			autoLoad : true,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_t_iujk_det/switchAction',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total'
+				},
+				actionMethods : {
+					read : 'POST'
+				},
+				extraParams : {
+					action : 'GETSYARAT'
+				}
+			}),
+			fields : [
+				{ name : 'iujk_cek_id', type : 'int', mapping : 'iujk_cek_id' },
+				{ name : 'iujk_cek_syarat_id', type : 'int', mapping : 'iujk_cek_syarat_id' },
+				{ name : 'iujk_cek_iujkdet_id', type : 'int', mapping : 'iujk_cek_iujkdet_id' },
+				{ name : 'iujk_cek_iujk_id', type : 'int', mapping : 'iujk_cek_iujk_id' },
+				{ name : 'iujk_cek_status', type : 'boolean', mapping : 'iujk_cek_status' },
+				{ name : 'iujk_cek_keterangan', type : 'string', mapping : 'iujk_cek_keterangan' },
+				{ name : 'iujk_cek_syarat_nama', type : 'string', mapping : 'iujk_cek_syarat_nama' }
+				]
+		});
+		var det_iujk_syaratGridEditor = new Ext.grid.plugin.CellEditing({
+			clicksToEdit: 1
+		});
+		det_iujk_syaratGrid = Ext.create('Ext.grid.Panel',{
+			id : 'det_iujk_syaratGrid',
+			store : iujk_det_syaratDataStore,
+			loadMask : true,
+			width : '95%',
+			plugins : [
+				Ext.create('Ext.grid.plugin.CellEditing', {
+					clicksToEdit: 1
+				})
+			],
+			selType: 'cellmodel',
+			columns : [
+				{
+					text : 'Id',
+					dataIndex : 'iujk_cek_id',
+					width : 100,
+					hidden : true,
+					sortable : false
+				},
+				{
+					text : 'Syarat',
+					dataIndex : 'iujk_cek_syarat_nama',
+					width : 150,
+					sortable : false
+				},
+				{
+					xtype: 'checkcolumn',
+					text: 'Ada?',
+					dataIndex: 'iujk_cek_status',
+					width: 55,
+					stopSelection: false
+				},
+				{
+					text : 'Keterangan',
+					dataIndex : 'iujk_cek_keterangan',
+					width : 100,
+					sortable : false,
+					editor: 'textfield',
+					flex : 1
+				}
+			]
+		});
 		var iujk_det_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : iujk_det_save
@@ -997,30 +1270,78 @@
 					layout : 'anchor',
 					flex : 2,
 					items : [
-						det_iujk_idField,
-						det_iujk_iujk_idField,
-						det_iujk_jenisField,
-						det_iujk_tanggalField,
-						det_iujk_namaField,
-						det_iujk_nomorregField,
-						det_iujk_rekomnomorField,
-						det_iujk_rekomtanggalField,
-						det_iujk_berlakuField,
-						det_iujk_kadaluarsaField,
-						det_iujk_pj1Field,
-						det_iujk_pj2Field,
-						det_iujk_pj3Field,
-						det_iujk_pjteknisField,
-						det_iujk_pjtbuField,
-						det_iujk_surveylulusField,
-											]
-				}, {
-					xtype : 'splitter'
-				}, {
-					bodyPadding : 5,
-					items : [Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })],
-					flex : 2
-				}],
+						{
+							xtype : 'fieldset',
+							title : '1. Data Permohonan',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_iujk_idField,
+								det_iujk_iujk_idField,
+								det_iujk_jenisField,
+								det_iujk_tanggalField
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '2. Data Pemohon & Perusahaan',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_iujk_namaField,
+								iujk_perusahaanField,
+								iujk_alamatField,
+								iujk_direkturField,
+								iujk_golonganField,
+								iujk_kualifikasiField,
+								iujk_bidangusahaField,
+								iujk_rtField,
+								iujk_rwField,
+								iujk_kelurahanField,
+								iujk_kotaField,
+								iujk_propinsiField,
+								iujk_teleponField,
+								iujk_kodeposField,
+								iujk_faxField,
+								iujk_npwpField,
+								det_iujk_pj1Field,
+								det_iujk_pj2Field,
+								det_iujk_pj3Field,
+								det_iujk_pjteknisField,
+								det_iujk_pjtbuField
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '3. Data Ceklist',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_iujk_syaratGrid
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '4. Data Pendukung',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_iujk_nomorregField,
+								det_iujk_rekomnomorField,
+								det_iujk_rekomtanggalField,
+								det_iujk_berlakuField,
+								det_iujk_kadaluarsaField,
+								det_iujk_surveylulusField,
+							]
+						},
+						Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
+					]
+				}
+			],
 			buttons : [iujk_det_saveButton,iujk_det_cancelButton]
 		});
 		iujk_det_formWindow = Ext.create('Ext.window.Window',{
