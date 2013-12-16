@@ -35,6 +35,21 @@ class C_t_ipmbl_det extends CI_Controller{
 			case 'EXCEL':
 				$this->printExcel();
 			break;
+			case 'GETSYARAT':
+				$this->getSyarat();
+			break;
+			case 'CHANGESURVEYSTATUS':
+				$this->changeSurveyStatus();
+			break;
+			case 'CETAKLEMBARKONTROL':
+				$this->cetakLembarKontrol();
+			break;
+			case 'CETAKBAP':
+				$this->cetakBap();
+			break;
+			case 'CETAKSK':
+				$this->cetakSk();
+			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -71,6 +86,13 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_kota = htmlentities($this->input->post('det_ipmbl_kota'),ENT_QUOTES);
 		$det_ipmbl_kota = is_numeric($det_ipmbl_kota) ? $det_ipmbl_kota : 0;
 		$det_ipmbl_telp = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
+		$det_ipmbl_usaha = htmlentities($this->input->post('det_ipmbl_usaha'),ENT_QUOTES);
+		$det_ipmbl_alamatusaha = htmlentities($this->input->post('det_ipmbl_alamatusaha'),ENT_QUOTES);
+		$det_ipmbl_kelurahanusaha = htmlentities($this->input->post('det_ipmbl_kelurahanusaha'),ENT_QUOTES);
+		$det_ipmbl_kecamatanusaha = htmlentities($this->input->post('det_ipmbl_kecamatanusaha'),ENT_QUOTES);
+		$det_ipmbl_luas = $this->input->post('det_ipmbl_luas');
+		$det_ipmbl_volume = $this->input->post('det_ipmbl_volume');
+		$det_ipmbl_keperluan = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
 		$det_ipmbl_nomoragenda = htmlentities($this->input->post('det_ipmbl_nomoragenda'),ENT_QUOTES);
 		$det_ipmbl_nomoragenda = is_numeric($det_ipmbl_nomoragenda) ? $det_ipmbl_nomoragenda : 0;
 		$det_ipmbl_berkasmasuk = htmlentities($this->input->post('det_ipmbl_berkasmasuk'),ENT_QUOTES);
@@ -90,44 +112,74 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_sk = htmlentities($this->input->post('det_ipmbl_sk'),ENT_QUOTES);
 		$det_ipmbl_kadaluarsa = htmlentities($this->input->post('det_ipmbl_kadaluarsa'),ENT_QUOTES);
 		$det_ipmbl_berlaku = htmlentities($this->input->post('det_ipmbl_berlaku'),ENT_QUOTES);
-				
+		
+		$ipmbl_cek_id = json_decode($this->input->post('ipmbl_cek_id'));
+		$ipmbl_cek_syarat_id = json_decode($this->input->post('ipmbl_cek_syarat_id'));
+		$ipmbl_cek_status = json_decode($this->input->post('ipmbl_cek_status'));
+		$ipmbl_cek_keterangan = json_decode($this->input->post('ipmbl_cek_keterangan'));
+			
 		$ipmbl_det_author = $this->m_t_ipmbl_det->__checkSession();
 		$ipmbl_det_created_date = date('Y-m-d H:i:s');
 		
 		if($ipmbl_det_author != ''){
 			$result = 'sessionExpired';
 		}else{
-			$data = array(
-				'det_ipmbl_id'=>$det_ipmbl_id,
-				'det_ipmbl_ipmbl_id'=>$det_ipmbl_ipmbl_id,
-				'det_ipmbl_jenis'=>$det_ipmbl_jenis,
-				'det_ipmbl_tanggal'=>$det_ipmbl_tanggal,
-				'det_ipmbl_nama'=>$det_ipmbl_nama,
-				'det_ipmbl_alamat'=>$det_ipmbl_alamat,
-				'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
-				'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
-				'det_ipmbl_kota'=>$det_ipmbl_kota,
-				'det_ipmbl_telp'=>$det_ipmbl_telp,
-				'det_ipmbl_nomoragenda'=>$det_ipmbl_nomoragenda,
-				'det_ipmbl_berkasmasuk'=>$det_ipmbl_berkasmasuk,
-				'det_ipmbl_surveytanggal'=>$det_ipmbl_surveytanggal,
-				'det_ipmbl_surveylulus'=>$det_ipmbl_surveylulus,
-				'det_ipmbl_status'=>$det_ipmbl_status,
-				'det_ipmbl_surveypetugas'=>$det_ipmbl_surveypetugas,
-				'det_ipmbl_surveydinas'=>$det_ipmbl_surveydinas,
-				'det_ipmbl_surveynip'=>$det_ipmbl_surveynip,
-				'det_ipmbl_surveypendapat'=>$det_ipmbl_surveypendapat,
-				'det_ipmbl_rekombl'=>$det_ipmbl_rekombl,
-				'det_ipmbl_rekomblhtanggal'=>$det_ipmbl_rekomblhtanggal,
-				'det_ipmbl_rekomkel'=>$det_ipmbl_rekomkel,
-				'det_ipmbl_rekomkeltanggal'=>$det_ipmbl_rekomkeltanggal,
-				'det_ipmbl_rekomkec'=>$det_ipmbl_rekomkec,
-				'det_ipmbl_rekomkectanggal'=>$det_ipmbl_rekomkectanggal,
-				'det_ipmbl_sk'=>$det_ipmbl_sk,
-				'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
-				'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
-				);
-			$result = $this->m_t_ipmbl_det->__insert($data, '', '');
+			$dataInti = array(
+				'ipmbl_usaha'=>$det_ipmbl_usaha,
+				'ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
+				'ipmbl_kelurahan'=>$det_ipmbl_kelurahanusaha,
+				'ipmbl_kecamatan'=>$det_ipmbl_kecamatanusaha,
+				'ipmbl_luas'=>$det_ipmbl_luas,
+				'ipmbl_volume'=>$det_ipmbl_volume,
+				'ipmbl_keperluan'=>$det_ipmbl_keperluan
+			);
+			$resultInti = $this->m_t_ipmbl_det->__insert($dataInti, 't_ipmbl', 'insertId');
+			if($resultInti != 0){
+				$result = 'success';
+				$data = array(
+					'det_ipmbl_ipmbl_id'=>$resultInti,
+					'det_ipmbl_jenis'=>$det_ipmbl_jenis,
+					'det_ipmbl_tanggal'=>$det_ipmbl_tanggal,
+					'det_ipmbl_nama'=>$det_ipmbl_nama,
+					'det_ipmbl_alamat'=>$det_ipmbl_alamat,
+					'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
+					'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
+					'det_ipmbl_kota'=>$det_ipmbl_kota,
+					'det_ipmbl_telp'=>$det_ipmbl_telp,
+					'det_ipmbl_nomoragenda'=>$det_ipmbl_nomoragenda,
+					'det_ipmbl_berkasmasuk'=>$det_ipmbl_berkasmasuk,
+					'det_ipmbl_surveytanggal'=>$det_ipmbl_surveytanggal,
+					'det_ipmbl_surveylulus'=>$det_ipmbl_surveylulus,
+					'det_ipmbl_status'=>$det_ipmbl_status,
+					'det_ipmbl_surveypetugas'=>$det_ipmbl_surveypetugas,
+					'det_ipmbl_surveydinas'=>$det_ipmbl_surveydinas,
+					'det_ipmbl_surveynip'=>$det_ipmbl_surveynip,
+					'det_ipmbl_surveypendapat'=>$det_ipmbl_surveypendapat,
+					'det_ipmbl_rekombl'=>$det_ipmbl_rekombl,
+					'det_ipmbl_rekomblhtanggal'=>$det_ipmbl_rekomblhtanggal,
+					'det_ipmbl_rekomkel'=>$det_ipmbl_rekomkel,
+					'det_ipmbl_rekomkeltanggal'=>$det_ipmbl_rekomkeltanggal,
+					'det_ipmbl_rekomkec'=>$det_ipmbl_rekomkec,
+					'det_ipmbl_rekomkectanggal'=>$det_ipmbl_rekomkectanggal,
+					'det_ipmbl_sk'=>$det_ipmbl_sk,
+					'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
+					'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
+					);
+				$resultdet = $this->m_t_ipmbl_det->__insert($data, false, 'insertId');
+				for($i=0;$i<count($ipmbl_cek_syarat_id);$i++){
+					$datacek = array(
+						'ipmbl_cek_syarat_id'=>$ipmbl_cek_syarat_id[$i],
+						'ipmbl_cek_ipmbl_id'=>$resultInti,
+						'ipmbl_cek_ipmbldet_id'=>$resultdet,
+						'ipmbl_cek_status'=>$ipmbl_cek_status[$i],
+						'ipmbl_cek_keterangan'=>$ipmbl_cek_keterangan[$i]
+					);
+					$resultcek = $this->m_t_ipmbl_det->__insert($datacek, 't_ipmbl_ceklist', 'insertId');
+				}
+		
+			}else{
+				$result = 'fail';
+			}
 		}
 		echo $result;
 	}
@@ -375,6 +427,68 @@ class C_t_ipmbl_det extends CI_Controller{
 		}elseif($outputType == 'EXCEL'){
 			$print_file=fopen('print/t_ipmbl_det_list.xls','w+');
 		}
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function getSyarat(){
+		$currentAction = $this->input->post('currentAction');
+		$ipmbl_id = $this->input->post('ipmbl_id');
+		$ipmbl_det_id = $this->input->post('ipmbl_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"ipmbl_id"=>$ipmbl_id,
+			"ipmbl_det_id"=>$ipmbl_det_id
+		);
+		$result = $this->m_t_ipmbl_det->getSyarat($params);
+		echo $result;
+	}
+	function changeSurveyStatus(){
+		$ipmbldet_id  = $this->input->post('ipmbldet_id');
+		$lulus  = $this->input->post('lulus');
+		$data = array(
+			"det_ipmbl_lulussurvey"=>$lulus
+		);
+		$result = $this->m_t_ipmbl_det->__update($data, $ipmbldet_id, '', '');
+		echo $result;
+	}
+	function cetakLembarKontrol(){
+		$ipmbldet_id  = $this->input->post('ipmbldet_id');
+		$params = array(
+			"det_ipmbl_id"=>$ipmbldet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_ipmbl_det->search($params);
+		$dataceklist = $this->db->where('ipmbl_cek_ipmbldet_id', $ipmbldet_id)->join('master_syarat','ipmbl_cek_syarat_id = ID_SYARAT')->get('t_ipmbl_ceklist')->result();
+		$data['printrecord'] = $printrecord[1];
+		$data['dataceklist'] = $dataceklist;
+		$print_view=$this->load->view('template/p_ipmbl_lembarkontrol.php',$data,TRUE);
+		$print_file=fopen('print/ipmbl_lembarkontrol.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakBap(){
+		$ipmbldet_id  = $this->input->post('ipmbldet_id');
+		$params = array(
+			"det_ipmbl_id"=>$ipmbldet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_ipmbl_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_ipmbl_bapeninjauan.php',$data,TRUE);
+		$print_file=fopen('print/ipmbl_bap.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakSk(){
+		$ipmbldet_id  = $this->input->post('ipmbldet_id');
+		$params = array(
+			"det_ipmbl_id"=>$ipmbldet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_ipmbl_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_ipmbl_sk.php',$data,TRUE);
+		$print_file=fopen('print/ipmbl_sk.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
