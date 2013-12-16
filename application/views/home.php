@@ -59,6 +59,8 @@
                                     <li><a href="#c_t_idam_det">Depo Air Minum</a></li>
                                     <li><a href="#c_t_ipmbl_det">Pengambilan Mineral Bukan Logam</a></li>
                                     <li><a href="#c_t_iujt_det">Usaha Jasa Titipan</a></li>
+                                    <li><a href="#c_t_iujk_det">Usaha Jasa Konstruksi</a></li>
+                                    <li><a href="#c_t_apotek_det">Izin Apotek</a></li>
                                     <li role="presentation" class="divider"></li>
                                 </ul>
                             </li>
