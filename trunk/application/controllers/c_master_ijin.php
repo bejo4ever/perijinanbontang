@@ -58,6 +58,11 @@ class C_master_ijin extends CI_Controller{
 		$ID_IJIN = htmlentities($this->input->post('ID_IJIN'),ENT_QUOTES);
 		$ID_IJIN = is_numeric($ID_IJIN) ? $ID_IJIN : 0;
 		$NAMA_IJIN = htmlentities($this->input->post('NAMA_IJIN'),ENT_QUOTES);
+		$NAMA_PEJABAT = htmlentities($this->input->post('NAMA_PEJABAT'),ENT_QUOTES);
+		$NIP_PEJABAT = htmlentities($this->input->post('NIP_PEJABAT'),ENT_QUOTES);
+		$JABATAN = htmlentities($this->input->post('JABATAN'),ENT_QUOTES);
+		$PANGKAT = htmlentities($this->input->post('PANGKAT'),ENT_QUOTES);
+		$ATASNAMA = htmlentities($this->input->post('ATASNAMA'),ENT_QUOTES);
 				
 		$ster_ijin_author = $this->m_master_ijin->__checkSession();
 		$ster_ijin_created_date = date('Y-m-d H:i:s');
@@ -68,6 +73,11 @@ class C_master_ijin extends CI_Controller{
 			$data = array(
 				'ID_IJIN'=>$ID_IJIN,
 				'NAMA_IJIN'=>$NAMA_IJIN,
+				'NAMA_PEJABAT'=>$NAMA_PEJABAT,
+				'NIP_PEJABAT'=>$NIP_PEJABAT,
+				'JABATAN'=>$JABATAN,
+				'PANGKAT'=>$PANGKAT,
+				'ATASNAMA'=>$ATASNAMA,
 				);
 			$result = $this->m_master_ijin->__insert($data, '', '');
 		}
@@ -78,6 +88,11 @@ class C_master_ijin extends CI_Controller{
 		$ID_IJIN = htmlentities($this->input->post('ID_IJIN'),ENT_QUOTES);
 		$ID_IJIN = is_numeric($ID_IJIN) ? $ID_IJIN : 0;
 		$NAMA_IJIN = htmlentities($this->input->post('NAMA_IJIN'),ENT_QUOTES);
+		$NAMA_PEJABAT = htmlentities($this->input->post('NAMA_PEJABAT'),ENT_QUOTES);
+		$NIP_PEJABAT = htmlentities($this->input->post('NIP_PEJABAT'),ENT_QUOTES);
+		$JABATAN = htmlentities($this->input->post('JABATAN'),ENT_QUOTES);
+		$PANGKAT = htmlentities($this->input->post('PANGKAT'),ENT_QUOTES);
+		$ATASNAMA = htmlentities($this->input->post('ATASNAMA'),ENT_QUOTES);
 				
 		$ster_ijin_updated_by = $this->m_master_ijin->__checkSession();
 		$ster_ijin_updated_date = date('Y-m-d H:i:s');
@@ -87,6 +102,11 @@ class C_master_ijin extends CI_Controller{
 		}else{
 			$data = array(
 				'NAMA_IJIN'=>$NAMA_IJIN,
+				'NAMA_PEJABAT'=>$NAMA_PEJABAT,
+				'NIP_PEJABAT'=>$NIP_PEJABAT,
+				'JABATAN'=>$JABATAN,
+				'PANGKAT'=>$PANGKAT,
+				'ATASNAMA'=>$ATASNAMA,
 				);
 			$result = $this->m_master_ijin->__update($data, $ID_IJIN, '', '');
 		}
@@ -104,9 +124,19 @@ class C_master_ijin extends CI_Controller{
 		$limit_start = (integer)$this->input->post('start');
 		$limit_end = (integer)$this->input->post('limit');
 		$NAMA_IJIN = htmlentities($this->input->post('NAMA_IJIN'),ENT_QUOTES);
+		$NAMA_PEJABAT = htmlentities($this->input->post('NAMA_PEJABAT'),ENT_QUOTES);
+		$NIP_PEJABAT = htmlentities($this->input->post('NIP_PEJABAT'),ENT_QUOTES);
+		$JABATAN = htmlentities($this->input->post('JABATAN'),ENT_QUOTES);
+		$PANGKAT = htmlentities($this->input->post('PANGKAT'),ENT_QUOTES);
+		$ATASNAMA = htmlentities($this->input->post('ATASNAMA'),ENT_QUOTES);
 				
 		$params = array(
 			'NAMA_IJIN'=>$NAMA_IJIN,
+			'NAMA_PEJABAT'=>$NAMA_PEJABAT,
+			'NIP_PEJABAT'=>$NIP_PEJABAT,
+			'JABATAN'=>$JABATAN,
+			'PANGKAT'=>$PANGKAT,
+			'ATASNAMA'=>$ATASNAMA,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -121,10 +151,20 @@ class C_master_ijin extends CI_Controller{
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
 		$NAMA_IJIN = htmlentities($this->input->post('NAMA_IJIN'),ENT_QUOTES);
+		$NAMA_PEJABAT = htmlentities($this->input->post('NAMA_PEJABAT'),ENT_QUOTES);
+		$NIP_PEJABAT = htmlentities($this->input->post('NIP_PEJABAT'),ENT_QUOTES);
+		$JABATAN = htmlentities($this->input->post('JABATAN'),ENT_QUOTES);
+		$PANGKAT = htmlentities($this->input->post('PANGKAT'),ENT_QUOTES);
+		$ATASNAMA = htmlentities($this->input->post('ATASNAMA'),ENT_QUOTES);
 				
 		$params = array(
 			'searchText' => $searchText,
 			'NAMA_IJIN'=>$NAMA_IJIN,
+			'NAMA_PEJABAT'=>$NAMA_PEJABAT,
+			'NIP_PEJABAT'=>$NIP_PEJABAT,
+			'JABATAN'=>$JABATAN,
+			'PANGKAT'=>$PANGKAT,
+			'ATASNAMA'=>$ATASNAMA,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,

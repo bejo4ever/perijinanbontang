@@ -2,7 +2,12 @@
 class M_master_ijin extends App_model{
 	var $mainSql = "SELECT 
 				ID_IJIN,
-				NAMA_IJIN
+				NAMA_IJIN,
+				NAMA_PEJABAT,
+				NIP_PEJABAT,
+				JABATAN,
+				PANGKAT,
+				ATASNAMA
 				FROM master_ijin 
 			WHERE ID_IJIN IS NOT NULL 
 	";
@@ -21,7 +26,12 @@ class M_master_ijin extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					NAMA_IJIN LIKE '%".$searchText."%'
+					NAMA_IJIN LIKE '%".$searchText."%' OR 
+					NAMA_PEJABAT LIKE '%".$searchText."%' OR 
+					NIP_PEJABAT LIKE '%".$searchText."%' OR 
+					JABATAN LIKE '%".$searchText."%' OR 
+					PANGKAT LIKE '%".$searchText."%' OR 
+					ATASNAMA LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -39,6 +49,21 @@ class M_master_ijin extends App_model{
 		
 		if(@$NAMA_IJIN != ''){
 			$sql .= " AND NAMA_IJIN LIKE '%".$NAMA_IJIN."%' ";
+		}
+		if(@$NAMA_PEJABAT != ''){
+			$sql .= " AND NAMA_PEJABAT LIKE '%".$NAMA_PEJABAT."%' ";
+		}
+		if(@$NIP_PEJABAT != ''){
+			$sql .= " AND NIP_PEJABAT LIKE '%".$NIP_PEJABAT."%' ";
+		}
+		if(@$JABATAN != ''){
+			$sql .= " AND JABATAN LIKE '%".$JABATAN."%' ";
+		}
+		if(@$PANGKAT != ''){
+			$sql .= " AND PANGKAT LIKE '%".$PANGKAT."%' ";
+		}
+		if(@$ATASNAMA != ''){
+			$sql .= " AND ATASNAMA LIKE '%".$ATASNAMA."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
