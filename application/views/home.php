@@ -96,10 +96,10 @@
 		<script>
 			$(document).ready(function(){
 				$("#mainmenu li a").click(function(){
-					$("#mainpanel").empty();
 					var item = $(this);
 					var link = item.attr('href').replace('#','');
 					if(link != ''){
+						$("#mainpanel").empty();
 						$("#mainpanel").load('' + link);
 					}
 				});

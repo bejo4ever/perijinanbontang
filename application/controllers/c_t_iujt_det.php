@@ -44,6 +44,9 @@ class C_t_iujt_det extends CI_Controller{
 			case 'CETAKLEMBARKONTROL':
 				$this->cetakLembarKontrol();
 			break;
+			case 'REKOMENDASI':
+				$this->cetakRekomendasi();
+			break;
 			case 'CETAKSK':
 				$this->cetakSk();
 			break;
@@ -326,7 +329,7 @@ class C_t_iujt_det extends CI_Controller{
 		$iujtdet_id  = $this->input->post('iujtdet_id');
 		$lulus  = $this->input->post('lulus');
 		$data = array(
-			"det_iujt_lulussurvey"=>$lulus
+			"det_iujt_surveylulus"=>$lulus
 		);
 		$result = $this->m_t_iujt_det->__update($data, $iujtdet_id, '', '');
 		echo $result;
@@ -343,6 +346,19 @@ class C_t_iujt_det extends CI_Controller{
 		$data['dataceklist'] = $dataceklist;
 		$print_view=$this->load->view('template/p_iujt_lembarkontrol.php',$data,TRUE);
 		$print_file=fopen('print/iujt_lembarkontrol.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakRekomendasi(){
+		$iujtdet_id  = $this->input->post('iujtdet_id');
+		$params = array(
+			"det_iujt_id"=>$iujtdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_iujt_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_iujt_rekomendasi.php',$data,TRUE);
+		$print_file=fopen('print/iujt_rekom.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}

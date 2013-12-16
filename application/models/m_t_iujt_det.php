@@ -4,6 +4,9 @@ class M_t_iujt_det extends App_model{
 				det_iujt_id,
 				det_iujt_iujt_id,
 				det_iujt_jenis,
+				CASE WHEN det_iujt_jenis = 1 THEN 'BARU'
+					ELSE 'PERPANJANGAN'
+					END AS det_iujt_jenis_nama,
 				det_iujt_nama,
 				det_iujt_npwp,
 				det_iujt_alamat,
@@ -16,8 +19,13 @@ class M_t_iujt_det extends App_model{
 				det_iujt_cekpetugas,
 				det_iujt_cektanggal,
 				det_iujt_ceknip,
-				det_iujt_catatan
+				det_iujt_catatan,
+				iujt_usaha,
+				iujt_alamatusaha,
+				iujt_penanggungjawab,
+				iujt_statusperusahaan
 				FROM t_iujt_det 
+				JOIN t_iujt ON t_iujt_det.det_iujt_iujt_id = t_iujt.iujt_id
 			WHERE det_iujt_id IS NOT NULL 
 	";
 	

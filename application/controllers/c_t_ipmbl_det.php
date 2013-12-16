@@ -446,7 +446,7 @@ class C_t_ipmbl_det extends CI_Controller{
 		$ipmbldet_id  = $this->input->post('ipmbldet_id');
 		$lulus  = $this->input->post('lulus');
 		$data = array(
-			"det_ipmbl_lulussurvey"=>$lulus
+			"det_ipmbl_surveylulus"=>$lulus
 		);
 		$result = $this->m_t_ipmbl_det->__update($data, $ipmbldet_id, '', '');
 		echo $result;

@@ -737,6 +737,7 @@
 				{ name : 'det_ipmbl_id', type : 'int', mapping : 'det_ipmbl_id' },
 				{ name : 'det_ipmbl_ipmbl_id', type : 'int', mapping : 'det_ipmbl_ipmbl_id' },
 				{ name : 'det_ipmbl_jenis', type : 'int', mapping : 'det_ipmbl_jenis' },
+				{ name : 'det_ipmbl_jenis_nama', type : 'string', mapping : 'det_ipmbl_jenis_nama' },
 				{ name : 'det_ipmbl_tanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_ipmbl_tanggal' },
 				{ name : 'det_ipmbl_nama', type : 'string', mapping : 'det_ipmbl_nama' },
 				{ name : 'det_ipmbl_alamat', type : 'string', mapping : 'det_ipmbl_alamat' },
@@ -748,7 +749,8 @@
 				{ name : 'det_ipmbl_berkasmasuk', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_ipmbl_berkasmasuk' },
 				{ name : 'det_ipmbl_surveytanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_ipmbl_surveytanggal' },
 				{ name : 'det_ipmbl_surveylulus', type : 'string', mapping : 'det_ipmbl_surveylulus' },
-				{ name : 'det_ipmbl_status', type : 'string', mapping : 'det_ipmbl_status' },
+				{ name : 'det_ipmbl_status', type : 'int', mapping : 'det_ipmbl_status' },
+				{ name : 'det_ipmbl_status_nama', type : 'string', mapping : 'det_ipmbl_status_nama' },
 				{ name : 'det_ipmbl_surveypetugas', type : 'string', mapping : 'det_ipmbl_surveypetugas' },
 				{ name : 'det_ipmbl_surveydinas', type : 'string', mapping : 'det_ipmbl_surveydinas' },
 				{ name : 'det_ipmbl_surveynip', type : 'string', mapping : 'det_ipmbl_surveynip' },
@@ -1004,8 +1006,8 @@
 				},
 				{
 					text : 'Jenis',
-					dataIndex : 'det_ipmbl_jenis',
-					width : 100,
+					dataIndex : 'det_ipmbl_jenis_nama',
+					width : 150,
 					sortable : false
 				},
 				{
@@ -1018,153 +1020,167 @@
 				{
 					text : 'Nama',
 					dataIndex : 'det_ipmbl_nama',
-					width : 100,
+					width : 200,
 					sortable : false
 				},
 				{
 					text : 'Alamat',
 					dataIndex : 'det_ipmbl_alamat',
-					width : 100,
+					width : 300,
 					sortable : false
 				},
 				{
 					text : 'Kelurahan',
 					dataIndex : 'det_ipmbl_kelurahan',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Kecamatan',
 					dataIndex : 'det_ipmbl_kecamatan',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Kota',
 					dataIndex : 'det_ipmbl_kota',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Telp',
 					dataIndex : 'det_ipmbl_telp',
-					width : 100,
+					width : 150,
 					sortable : false
 				},
 				{
 					text : 'Nomor Agenda',
 					dataIndex : 'det_ipmbl_nomoragenda',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tgl Masuk Berkas',
 					dataIndex : 'det_ipmbl_berkasmasuk',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Tgl Survey',
 					dataIndex : 'det_ipmbl_surveytanggal',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
-				},
-				{
-					text : 'Lulus survey',
-					dataIndex : 'det_ipmbl_surveylulus',
-					width : 100,
-					sortable : false
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Status',
-					dataIndex : 'det_ipmbl_status',
+					dataIndex : 'det_ipmbl_status_nama',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Petugas Survey',
 					dataIndex : 'det_ipmbl_surveypetugas',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Dinas',
 					dataIndex : 'det_ipmbl_surveydinas',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'NIP',
 					dataIndex : 'det_ipmbl_surveynip',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Pendapat',
 					dataIndex : 'det_ipmbl_surveypendapat',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Rekomendasi BLH',
 					dataIndex : 'det_ipmbl_rekombl',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tanggal',
 					dataIndex : 'det_ipmbl_rekomblhtanggal',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Rekomendasi Kelurahan',
 					dataIndex : 'det_ipmbl_rekomkel',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tanggal',
 					dataIndex : 'det_ipmbl_rekomkeltanggal',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Rekomendasi Kecamatan',
 					dataIndex : 'det_ipmbl_rekomkec',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tanggal',
 					dataIndex : 'det_ipmbl_rekomkectanggal',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Nomor SK',
 					dataIndex : 'det_ipmbl_sk',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Kadaluarsa',
 					dataIndex : 'det_ipmbl_kadaluarsa',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Berlaku',
 					dataIndex : 'det_ipmbl_berlaku',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					xtype:'actioncolumn',
