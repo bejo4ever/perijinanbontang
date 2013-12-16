@@ -99,7 +99,9 @@
 					$("#mainpanel").empty();
 					var item = $(this);
 					var link = item.attr('href').replace('#','');
-					$("#mainpanel").load('' + link);
+					if(link != ''){
+						$("#mainpanel").load('' + link);
+					}
 				});
 			});
 		</script>
