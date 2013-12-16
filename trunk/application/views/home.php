@@ -59,6 +59,10 @@
                                     <li><a href="#c_t_idam_det">Depo Air Minum</a></li>
                                     <li><a href="#c_t_ipmbl_det">Pengambilan Mineral Bukan Logam</a></li>
                                     <li><a href="#c_t_iujt_det">Usaha Jasa Titipan</a></li>
+                                    <li><a href="#c_sktr">SKTR</a></li>
+                                    <li><a href="#c_trayek_inti">Trayek</a></li>
+                                    <li><a href="#c_sppl">SPPL</a></li>
+                                    <li><a href="#c_ijin_lingkungan_inti">Lingkungan</a></li>
                                     <li role="presentation" class="divider"></li>
                                 </ul>
                             </li>

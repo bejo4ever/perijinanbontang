@@ -57,6 +57,9 @@ class C_t_ipmbl extends CI_Controller{
 	function create(){
 		$ipmbl_id = htmlentities($this->input->post('ipmbl_id'),ENT_QUOTES);
 		$ipmbl_id = is_numeric($ipmbl_id) ? $ipmbl_id : 0;
+		$ipmbl_jenis = htmlentities($this->input->post('ipmbl_jenis'),ENT_QUOTES);
+		$ipmbl_jenis = is_numeric($ipmbl_jenis) ? $ipmbl_jenis : 0;
+		$ipmbl_tanggal = htmlentities($this->input->post('ipmbl_tanggal'),ENT_QUOTES);
 		$ipmbl_luas = htmlentities($this->input->post('ipmbl_luas'),ENT_QUOTES);
 		$ipmbl_luas = is_numeric($ipmbl_luas) ? $ipmbl_luas : 0;
 		$ipmbl_volume = htmlentities($this->input->post('ipmbl_volume'),ENT_QUOTES);
@@ -67,30 +70,52 @@ class C_t_ipmbl extends CI_Controller{
 		$ipmbl_kelurahan = is_numeric($ipmbl_kelurahan) ? $ipmbl_kelurahan : 0;
 		$ipmbl_kecamatan = htmlentities($this->input->post('ipmbl_kecamatan'),ENT_QUOTES);
 		$ipmbl_kecamatan = is_numeric($ipmbl_kecamatan) ? $ipmbl_kecamatan : 0;
+		$ipmbl_nomoragenda = htmlentities($this->input->post('ipmbl_nomoragenda'),ENT_QUOTES);
+		$ipmbl_nomoragenda = is_numeric($ipmbl_nomoragenda) ? $ipmbl_nomoragenda : 0;
 		$ipmbl_status = htmlentities($this->input->post('ipmbl_status'),ENT_QUOTES);
 		$ipmbl_status = is_numeric($ipmbl_status) ? $ipmbl_status : 0;
 		$ipmbl_tanggalsurvey = htmlentities($this->input->post('ipmbl_tanggalsurvey'),ENT_QUOTES);
-		$ipmbl_usaha = htmlentities($this->input->post('ipmbl_usaha'),ENT_QUOTES);
-		$ipmbl_alamatusaha = htmlentities($this->input->post('ipmbl_alamatusaha'),ENT_QUOTES);
+		$ipmbl_rekomblh = htmlentities($this->input->post('ipmbl_rekomblh'),ENT_QUOTES);
+		$ipmbl_rekomblh_tanggal = htmlentities($this->input->post('ipmbl_rekomblh_tanggal'),ENT_QUOTES);
+		$ipmbl_rekomkec = htmlentities($this->input->post('ipmbl_rekomkec'),ENT_QUOTES);
+		$ipmbl_rekomkec_tanggal = htmlentities($this->input->post('ipmbl_rekomkec_tanggal'),ENT_QUOTES);
+		$ipmbl_rekomkel = htmlentities($this->input->post('ipmbl_rekomkel'),ENT_QUOTES);
+		$ipmbl_rekomkel_tanggal = htmlentities($this->input->post('ipmbl_rekomkel_tanggal'),ENT_QUOTES);
+		$ipmbl_berlaku = htmlentities($this->input->post('ipmbl_berlaku'),ENT_QUOTES);
+		$ipmbl_kadaluarsa = htmlentities($this->input->post('ipmbl_kadaluarsa'),ENT_QUOTES);
+		$ipmbl_nomorijin = htmlentities($this->input->post('ipmbl_nomorijin'),ENT_QUOTES);
+		$ipmbl_nomorurut = htmlentities($this->input->post('ipmbl_nomorurut'),ENT_QUOTES);
+		$ipmbl_nomorurut = is_numeric($ipmbl_nomorurut) ? $ipmbl_nomorurut : 0;
 				
 		$ipmbl_author = $this->m_t_ipmbl->__checkSession();
 		$ipmbl_created_date = date('Y-m-d H:i:s');
 		
-		if($ipmbl_author != ''){
+		if(!$ipmbl_author){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
 				'ipmbl_id'=>$ipmbl_id,
+				'ipmbl_jenis'=>$ipmbl_jenis,
+				'ipmbl_tanggal'=>$ipmbl_tanggal,
 				'ipmbl_luas'=>$ipmbl_luas,
 				'ipmbl_volume'=>$ipmbl_volume,
 				'ipmbl_keperluan'=>$ipmbl_keperluan,
 				'ipmbl_alamat'=>$ipmbl_alamat,
 				'ipmbl_kelurahan'=>$ipmbl_kelurahan,
 				'ipmbl_kecamatan'=>$ipmbl_kecamatan,
+				'ipmbl_nomoragenda'=>$ipmbl_nomoragenda,
 				'ipmbl_status'=>$ipmbl_status,
 				'ipmbl_tanggalsurvey'=>$ipmbl_tanggalsurvey,
-				'ipmbl_usaha'=>$ipmbl_usaha,
-				'ipmbl_alamatusaha'=>$ipmbl_alamatusaha,
+				'ipmbl_rekomblh'=>$ipmbl_rekomblh,
+				'ipmbl_rekomblh_tanggal'=>$ipmbl_rekomblh_tanggal,
+				'ipmbl_rekomkec'=>$ipmbl_rekomkec,
+				'ipmbl_rekomkec_tanggal'=>$ipmbl_rekomkec_tanggal,
+				'ipmbl_rekomkel'=>$ipmbl_rekomkel,
+				'ipmbl_rekomkel_tanggal'=>$ipmbl_rekomkel_tanggal,
+				'ipmbl_berlaku'=>$ipmbl_berlaku,
+				'ipmbl_kadaluarsa'=>$ipmbl_kadaluarsa,
+				'ipmbl_nomorijin'=>$ipmbl_nomorijin,
+				'ipmbl_nomorurut'=>$ipmbl_nomorurut,
 				);
 			$result = $this->m_t_ipmbl->__insert($data, '', '');
 		}
@@ -100,6 +125,9 @@ class C_t_ipmbl extends CI_Controller{
 	function update(){
 		$ipmbl_id = htmlentities($this->input->post('ipmbl_id'),ENT_QUOTES);
 		$ipmbl_id = is_numeric($ipmbl_id) ? $ipmbl_id : 0;
+		$ipmbl_jenis = htmlentities($this->input->post('ipmbl_jenis'),ENT_QUOTES);
+		$ipmbl_jenis = is_numeric($ipmbl_jenis) ? $ipmbl_jenis : 0;
+		$ipmbl_tanggal = htmlentities($this->input->post('ipmbl_tanggal'),ENT_QUOTES);
 		$ipmbl_luas = htmlentities($this->input->post('ipmbl_luas'),ENT_QUOTES);
 		$ipmbl_luas = is_numeric($ipmbl_luas) ? $ipmbl_luas : 0;
 		$ipmbl_volume = htmlentities($this->input->post('ipmbl_volume'),ENT_QUOTES);
@@ -110,29 +138,51 @@ class C_t_ipmbl extends CI_Controller{
 		$ipmbl_kelurahan = is_numeric($ipmbl_kelurahan) ? $ipmbl_kelurahan : 0;
 		$ipmbl_kecamatan = htmlentities($this->input->post('ipmbl_kecamatan'),ENT_QUOTES);
 		$ipmbl_kecamatan = is_numeric($ipmbl_kecamatan) ? $ipmbl_kecamatan : 0;
+		$ipmbl_nomoragenda = htmlentities($this->input->post('ipmbl_nomoragenda'),ENT_QUOTES);
+		$ipmbl_nomoragenda = is_numeric($ipmbl_nomoragenda) ? $ipmbl_nomoragenda : 0;
 		$ipmbl_status = htmlentities($this->input->post('ipmbl_status'),ENT_QUOTES);
 		$ipmbl_status = is_numeric($ipmbl_status) ? $ipmbl_status : 0;
 		$ipmbl_tanggalsurvey = htmlentities($this->input->post('ipmbl_tanggalsurvey'),ENT_QUOTES);
-		$ipmbl_usaha = htmlentities($this->input->post('ipmbl_usaha'),ENT_QUOTES);
-		$ipmbl_alamatusaha = htmlentities($this->input->post('ipmbl_alamatusaha'),ENT_QUOTES);
+		$ipmbl_rekomblh = htmlentities($this->input->post('ipmbl_rekomblh'),ENT_QUOTES);
+		$ipmbl_rekomblh_tanggal = htmlentities($this->input->post('ipmbl_rekomblh_tanggal'),ENT_QUOTES);
+		$ipmbl_rekomkec = htmlentities($this->input->post('ipmbl_rekomkec'),ENT_QUOTES);
+		$ipmbl_rekomkec_tanggal = htmlentities($this->input->post('ipmbl_rekomkec_tanggal'),ENT_QUOTES);
+		$ipmbl_rekomkel = htmlentities($this->input->post('ipmbl_rekomkel'),ENT_QUOTES);
+		$ipmbl_rekomkel_tanggal = htmlentities($this->input->post('ipmbl_rekomkel_tanggal'),ENT_QUOTES);
+		$ipmbl_berlaku = htmlentities($this->input->post('ipmbl_berlaku'),ENT_QUOTES);
+		$ipmbl_kadaluarsa = htmlentities($this->input->post('ipmbl_kadaluarsa'),ENT_QUOTES);
+		$ipmbl_nomorijin = htmlentities($this->input->post('ipmbl_nomorijin'),ENT_QUOTES);
+		$ipmbl_nomorurut = htmlentities($this->input->post('ipmbl_nomorurut'),ENT_QUOTES);
+		$ipmbl_nomorurut = is_numeric($ipmbl_nomorurut) ? $ipmbl_nomorurut : 0;
 				
 		$ipmbl_updated_by = $this->m_t_ipmbl->__checkSession();
 		$ipmbl_updated_date = date('Y-m-d H:i:s');
 		
-		if($ipmbl_updated_by != ''){
+		if(!$ipmbl_updated_by){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
+				'ipmbl_jenis'=>$ipmbl_jenis,
+				'ipmbl_tanggal'=>$ipmbl_tanggal,
 				'ipmbl_luas'=>$ipmbl_luas,
 				'ipmbl_volume'=>$ipmbl_volume,
 				'ipmbl_keperluan'=>$ipmbl_keperluan,
 				'ipmbl_alamat'=>$ipmbl_alamat,
 				'ipmbl_kelurahan'=>$ipmbl_kelurahan,
 				'ipmbl_kecamatan'=>$ipmbl_kecamatan,
+				'ipmbl_nomoragenda'=>$ipmbl_nomoragenda,
 				'ipmbl_status'=>$ipmbl_status,
 				'ipmbl_tanggalsurvey'=>$ipmbl_tanggalsurvey,
-				'ipmbl_usaha'=>$ipmbl_usaha,
-				'ipmbl_alamatusaha'=>$ipmbl_alamatusaha,
+				'ipmbl_rekomblh'=>$ipmbl_rekomblh,
+				'ipmbl_rekomblh_tanggal'=>$ipmbl_rekomblh_tanggal,
+				'ipmbl_rekomkec'=>$ipmbl_rekomkec,
+				'ipmbl_rekomkec_tanggal'=>$ipmbl_rekomkec_tanggal,
+				'ipmbl_rekomkel'=>$ipmbl_rekomkel,
+				'ipmbl_rekomkel_tanggal'=>$ipmbl_rekomkel_tanggal,
+				'ipmbl_berlaku'=>$ipmbl_berlaku,
+				'ipmbl_kadaluarsa'=>$ipmbl_kadaluarsa,
+				'ipmbl_nomorijin'=>$ipmbl_nomorijin,
+				'ipmbl_nomorurut'=>$ipmbl_nomorurut,
 				);
 			$result = $this->m_t_ipmbl->__update($data, $ipmbl_id, '', '');
 		}
@@ -149,6 +199,9 @@ class C_t_ipmbl extends CI_Controller{
 	function search(){
 		$limit_start = (integer)$this->input->post('start');
 		$limit_end = (integer)$this->input->post('limit');
+		$ipmbl_jenis = htmlentities($this->input->post('ipmbl_jenis'),ENT_QUOTES);
+		$ipmbl_jenis = is_numeric($ipmbl_jenis) ? $ipmbl_jenis : 0;
+		$ipmbl_tanggal = htmlentities($this->input->post('ipmbl_tanggal'),ENT_QUOTES);
 		$ipmbl_luas = htmlentities($this->input->post('ipmbl_luas'),ENT_QUOTES);
 		$ipmbl_luas = is_numeric($ipmbl_luas) ? $ipmbl_luas : 0;
 		$ipmbl_volume = htmlentities($this->input->post('ipmbl_volume'),ENT_QUOTES);
@@ -159,23 +212,45 @@ class C_t_ipmbl extends CI_Controller{
 		$ipmbl_kelurahan = is_numeric($ipmbl_kelurahan) ? $ipmbl_kelurahan : 0;
 		$ipmbl_kecamatan = htmlentities($this->input->post('ipmbl_kecamatan'),ENT_QUOTES);
 		$ipmbl_kecamatan = is_numeric($ipmbl_kecamatan) ? $ipmbl_kecamatan : 0;
+		$ipmbl_nomoragenda = htmlentities($this->input->post('ipmbl_nomoragenda'),ENT_QUOTES);
+		$ipmbl_nomoragenda = is_numeric($ipmbl_nomoragenda) ? $ipmbl_nomoragenda : 0;
 		$ipmbl_status = htmlentities($this->input->post('ipmbl_status'),ENT_QUOTES);
 		$ipmbl_status = is_numeric($ipmbl_status) ? $ipmbl_status : 0;
 		$ipmbl_tanggalsurvey = htmlentities($this->input->post('ipmbl_tanggalsurvey'),ENT_QUOTES);
-		$ipmbl_usaha = htmlentities($this->input->post('ipmbl_usaha'),ENT_QUOTES);
-		$ipmbl_alamatusaha = htmlentities($this->input->post('ipmbl_alamatusaha'),ENT_QUOTES);
+		$ipmbl_rekomblh = htmlentities($this->input->post('ipmbl_rekomblh'),ENT_QUOTES);
+		$ipmbl_rekomblh_tanggal = htmlentities($this->input->post('ipmbl_rekomblh_tanggal'),ENT_QUOTES);
+		$ipmbl_rekomkec = htmlentities($this->input->post('ipmbl_rekomkec'),ENT_QUOTES);
+		$ipmbl_rekomkec_tanggal = htmlentities($this->input->post('ipmbl_rekomkec_tanggal'),ENT_QUOTES);
+		$ipmbl_rekomkel = htmlentities($this->input->post('ipmbl_rekomkel'),ENT_QUOTES);
+		$ipmbl_rekomkel_tanggal = htmlentities($this->input->post('ipmbl_rekomkel_tanggal'),ENT_QUOTES);
+		$ipmbl_berlaku = htmlentities($this->input->post('ipmbl_berlaku'),ENT_QUOTES);
+		$ipmbl_kadaluarsa = htmlentities($this->input->post('ipmbl_kadaluarsa'),ENT_QUOTES);
+		$ipmbl_nomorijin = htmlentities($this->input->post('ipmbl_nomorijin'),ENT_QUOTES);
+		$ipmbl_nomorurut = htmlentities($this->input->post('ipmbl_nomorurut'),ENT_QUOTES);
+		$ipmbl_nomorurut = is_numeric($ipmbl_nomorurut) ? $ipmbl_nomorurut : 0;
 				
 		$params = array(
+			'ipmbl_jenis'=>$ipmbl_jenis,
+			'ipmbl_tanggal'=>$ipmbl_tanggal,
 			'ipmbl_luas'=>$ipmbl_luas,
 			'ipmbl_volume'=>$ipmbl_volume,
 			'ipmbl_keperluan'=>$ipmbl_keperluan,
 			'ipmbl_alamat'=>$ipmbl_alamat,
 			'ipmbl_kelurahan'=>$ipmbl_kelurahan,
 			'ipmbl_kecamatan'=>$ipmbl_kecamatan,
+			'ipmbl_nomoragenda'=>$ipmbl_nomoragenda,
 			'ipmbl_status'=>$ipmbl_status,
 			'ipmbl_tanggalsurvey'=>$ipmbl_tanggalsurvey,
-			'ipmbl_usaha'=>$ipmbl_usaha,
-			'ipmbl_alamatusaha'=>$ipmbl_alamatusaha,
+			'ipmbl_rekomblh'=>$ipmbl_rekomblh,
+			'ipmbl_rekomblh_tanggal'=>$ipmbl_rekomblh_tanggal,
+			'ipmbl_rekomkec'=>$ipmbl_rekomkec,
+			'ipmbl_rekomkec_tanggal'=>$ipmbl_rekomkec_tanggal,
+			'ipmbl_rekomkel'=>$ipmbl_rekomkel,
+			'ipmbl_rekomkel_tanggal'=>$ipmbl_rekomkel_tanggal,
+			'ipmbl_berlaku'=>$ipmbl_berlaku,
+			'ipmbl_kadaluarsa'=>$ipmbl_kadaluarsa,
+			'ipmbl_nomorijin'=>$ipmbl_nomorijin,
+			'ipmbl_nomorurut'=>$ipmbl_nomorurut,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -189,6 +264,9 @@ class C_t_ipmbl extends CI_Controller{
 		
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
+		$ipmbl_jenis = htmlentities($this->input->post('ipmbl_jenis'),ENT_QUOTES);
+		$ipmbl_jenis = is_numeric($ipmbl_jenis) ? $ipmbl_jenis : 0;
+		$ipmbl_tanggal = htmlentities($this->input->post('ipmbl_tanggal'),ENT_QUOTES);
 		$ipmbl_luas = htmlentities($this->input->post('ipmbl_luas'),ENT_QUOTES);
 		$ipmbl_luas = is_numeric($ipmbl_luas) ? $ipmbl_luas : 0;
 		$ipmbl_volume = htmlentities($this->input->post('ipmbl_volume'),ENT_QUOTES);
@@ -199,32 +277,53 @@ class C_t_ipmbl extends CI_Controller{
 		$ipmbl_kelurahan = is_numeric($ipmbl_kelurahan) ? $ipmbl_kelurahan : 0;
 		$ipmbl_kecamatan = htmlentities($this->input->post('ipmbl_kecamatan'),ENT_QUOTES);
 		$ipmbl_kecamatan = is_numeric($ipmbl_kecamatan) ? $ipmbl_kecamatan : 0;
+		$ipmbl_nomoragenda = htmlentities($this->input->post('ipmbl_nomoragenda'),ENT_QUOTES);
+		$ipmbl_nomoragenda = is_numeric($ipmbl_nomoragenda) ? $ipmbl_nomoragenda : 0;
 		$ipmbl_status = htmlentities($this->input->post('ipmbl_status'),ENT_QUOTES);
 		$ipmbl_status = is_numeric($ipmbl_status) ? $ipmbl_status : 0;
 		$ipmbl_tanggalsurvey = htmlentities($this->input->post('ipmbl_tanggalsurvey'),ENT_QUOTES);
-		$ipmbl_usaha = htmlentities($this->input->post('ipmbl_usaha'),ENT_QUOTES);
-		$ipmbl_alamatusaha = htmlentities($this->input->post('ipmbl_alamatusaha'),ENT_QUOTES);
+		$ipmbl_rekomblh = htmlentities($this->input->post('ipmbl_rekomblh'),ENT_QUOTES);
+		$ipmbl_rekomblh_tanggal = htmlentities($this->input->post('ipmbl_rekomblh_tanggal'),ENT_QUOTES);
+		$ipmbl_rekomkec = htmlentities($this->input->post('ipmbl_rekomkec'),ENT_QUOTES);
+		$ipmbl_rekomkec_tanggal = htmlentities($this->input->post('ipmbl_rekomkec_tanggal'),ENT_QUOTES);
+		$ipmbl_rekomkel = htmlentities($this->input->post('ipmbl_rekomkel'),ENT_QUOTES);
+		$ipmbl_rekomkel_tanggal = htmlentities($this->input->post('ipmbl_rekomkel_tanggal'),ENT_QUOTES);
+		$ipmbl_berlaku = htmlentities($this->input->post('ipmbl_berlaku'),ENT_QUOTES);
+		$ipmbl_kadaluarsa = htmlentities($this->input->post('ipmbl_kadaluarsa'),ENT_QUOTES);
+		$ipmbl_nomorijin = htmlentities($this->input->post('ipmbl_nomorijin'),ENT_QUOTES);
+		$ipmbl_nomorurut = htmlentities($this->input->post('ipmbl_nomorurut'),ENT_QUOTES);
+		$ipmbl_nomorurut = is_numeric($ipmbl_nomorurut) ? $ipmbl_nomorurut : 0;
 				
 		$params = array(
 			'searchText' => $searchText,
+			'ipmbl_jenis'=>$ipmbl_jenis,
+			'ipmbl_tanggal'=>$ipmbl_tanggal,
 			'ipmbl_luas'=>$ipmbl_luas,
 			'ipmbl_volume'=>$ipmbl_volume,
 			'ipmbl_keperluan'=>$ipmbl_keperluan,
 			'ipmbl_alamat'=>$ipmbl_alamat,
 			'ipmbl_kelurahan'=>$ipmbl_kelurahan,
 			'ipmbl_kecamatan'=>$ipmbl_kecamatan,
+			'ipmbl_nomoragenda'=>$ipmbl_nomoragenda,
 			'ipmbl_status'=>$ipmbl_status,
 			'ipmbl_tanggalsurvey'=>$ipmbl_tanggalsurvey,
-			'ipmbl_usaha'=>$ipmbl_usaha,
-			'ipmbl_alamatusaha'=>$ipmbl_alamatusaha,
+			'ipmbl_rekomblh'=>$ipmbl_rekomblh,
+			'ipmbl_rekomblh_tanggal'=>$ipmbl_rekomblh_tanggal,
+			'ipmbl_rekomkec'=>$ipmbl_rekomkec,
+			'ipmbl_rekomkec_tanggal'=>$ipmbl_rekomkec_tanggal,
+			'ipmbl_rekomkel'=>$ipmbl_rekomkel,
+			'ipmbl_rekomkel_tanggal'=>$ipmbl_rekomkel_tanggal,
+			'ipmbl_berlaku'=>$ipmbl_berlaku,
+			'ipmbl_kadaluarsa'=>$ipmbl_kadaluarsa,
+			'ipmbl_nomorijin'=>$ipmbl_nomorijin,
+			'ipmbl_nomorurut'=>$ipmbl_nomorurut,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
 			'limit_end' => 0
 		);
 		
-		$record = $this->m_t_ipmbl->printExcel($params);
-		$data['records'] = $record[1];
+		$data['records'] = $this->m_t_ipmbl->printExcel($params)[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_t_ipmbl.php',$data,TRUE);

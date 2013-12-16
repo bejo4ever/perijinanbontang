@@ -263,8 +263,7 @@ class C_t_iujk extends CI_Controller{
 			'limit_end' => 0
 		);
 		
-		$record = $this->m_t_iujk->printExcel($params);
-		$data['records'] = $record[1];
+		$data['records'] = $this->m_t_iujk->printExcel($params)[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_t_iujk.php',$data,TRUE);
