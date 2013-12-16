@@ -14,49 +14,27 @@
 		var ipmbl_searchWindow;
 		
 		var ipmbl_idField;
-		var ipmbl_jenisField;
-		var ipmbl_tanggalField;
 		var ipmbl_luasField;
 		var ipmbl_volumeField;
 		var ipmbl_keperluanField;
 		var ipmbl_alamatField;
 		var ipmbl_kelurahanField;
 		var ipmbl_kecamatanField;
-		var ipmbl_nomoragendaField;
 		var ipmbl_statusField;
 		var ipmbl_tanggalsurveyField;
-		var ipmbl_rekomblhField;
-		var ipmbl_rekomblh_tanggalField;
-		var ipmbl_rekomkecField;
-		var ipmbl_rekomkec_tanggalField;
-		var ipmbl_rekomkelField;
-		var ipmbl_rekomkel_tanggalField;
-		var ipmbl_berlakuField;
-		var ipmbl_kadaluarsaField;
-		var ipmbl_nomorijinField;
-		var ipmbl_nomorurutField;
+		var ipmbl_usahaField;
+		var ipmbl_alamatusahaField;
 				
-		var ipmbl_jenisSearchField;
-		var ipmbl_tanggalSearchField;
 		var ipmbl_luasSearchField;
 		var ipmbl_volumeSearchField;
 		var ipmbl_keperluanSearchField;
 		var ipmbl_alamatSearchField;
 		var ipmbl_kelurahanSearchField;
 		var ipmbl_kecamatanSearchField;
-		var ipmbl_nomoragendaSearchField;
 		var ipmbl_statusSearchField;
 		var ipmbl_tanggalsurveySearchField;
-		var ipmbl_rekomblhSearchField;
-		var ipmbl_rekomblh_tanggalSearchField;
-		var ipmbl_rekomkecSearchField;
-		var ipmbl_rekomkec_tanggalSearchField;
-		var ipmbl_rekomkelSearchField;
-		var ipmbl_rekomkel_tanggalSearchField;
-		var ipmbl_berlakuSearchField;
-		var ipmbl_kadaluarsaSearchField;
-		var ipmbl_nomorijinSearchField;
-		var ipmbl_nomorurutSearchField;
+		var ipmbl_usahaSearchField;
+		var ipmbl_alamatusahaSearchField;
 				
 		var ipmbl_dbTask = 'CREATE';
 		var ipmbl_dbTaskMessage = 'Tambah';
@@ -131,77 +109,44 @@
 			}else{
 				if(ipmbl_confirmFormValid()){
 					var ipmbl_idValue = '';
-					var ipmbl_jenisValue = '';
-					var ipmbl_tanggalValue = '';
 					var ipmbl_luasValue = '';
 					var ipmbl_volumeValue = '';
 					var ipmbl_keperluanValue = '';
 					var ipmbl_alamatValue = '';
 					var ipmbl_kelurahanValue = '';
 					var ipmbl_kecamatanValue = '';
-					var ipmbl_nomoragendaValue = '';
 					var ipmbl_statusValue = '';
 					var ipmbl_tanggalsurveyValue = '';
-					var ipmbl_rekomblhValue = '';
-					var ipmbl_rekomblh_tanggalValue = '';
-					var ipmbl_rekomkecValue = '';
-					var ipmbl_rekomkec_tanggalValue = '';
-					var ipmbl_rekomkelValue = '';
-					var ipmbl_rekomkel_tanggalValue = '';
-					var ipmbl_berlakuValue = '';
-					var ipmbl_kadaluarsaValue = '';
-					var ipmbl_nomorijinValue = '';
-					var ipmbl_nomorurutValue = '';
+					var ipmbl_usahaValue = '';
+					var ipmbl_alamatusahaValue = '';
 										
 					ipmbl_idValue = ipmbl_idField.getValue();
-					ipmbl_jenisValue = ipmbl_jenisField.getValue();
-					ipmbl_tanggalValue = ipmbl_tanggalField.getValue();
 					ipmbl_luasValue = ipmbl_luasField.getValue();
 					ipmbl_volumeValue = ipmbl_volumeField.getValue();
 					ipmbl_keperluanValue = ipmbl_keperluanField.getValue();
 					ipmbl_alamatValue = ipmbl_alamatField.getValue();
 					ipmbl_kelurahanValue = ipmbl_kelurahanField.getValue();
 					ipmbl_kecamatanValue = ipmbl_kecamatanField.getValue();
-					ipmbl_nomoragendaValue = ipmbl_nomoragendaField.getValue();
 					ipmbl_statusValue = ipmbl_statusField.getValue();
 					ipmbl_tanggalsurveyValue = ipmbl_tanggalsurveyField.getValue();
-					ipmbl_rekomblhValue = ipmbl_rekomblhField.getValue();
-					ipmbl_rekomblh_tanggalValue = ipmbl_rekomblh_tanggalField.getValue();
-					ipmbl_rekomkecValue = ipmbl_rekomkecField.getValue();
-					ipmbl_rekomkec_tanggalValue = ipmbl_rekomkec_tanggalField.getValue();
-					ipmbl_rekomkelValue = ipmbl_rekomkelField.getValue();
-					ipmbl_rekomkel_tanggalValue = ipmbl_rekomkel_tanggalField.getValue();
-					ipmbl_berlakuValue = ipmbl_berlakuField.getValue();
-					ipmbl_kadaluarsaValue = ipmbl_kadaluarsaField.getValue();
-					ipmbl_nomorijinValue = ipmbl_nomorijinField.getValue();
-					ipmbl_nomorurutValue = ipmbl_nomorurutField.getValue();
+					ipmbl_usahaValue = ipmbl_usahaField.getValue();
+					ipmbl_alamatusahaValue = ipmbl_alamatusahaField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_ipmbl/switchAction',
 						params: {							
 							ipmbl_id : ipmbl_idValue,
-							ipmbl_jenis : ipmbl_jenisValue,
-							ipmbl_tanggal : ipmbl_tanggalValue,
 							ipmbl_luas : ipmbl_luasValue,
 							ipmbl_volume : ipmbl_volumeValue,
 							ipmbl_keperluan : ipmbl_keperluanValue,
 							ipmbl_alamat : ipmbl_alamatValue,
 							ipmbl_kelurahan : ipmbl_kelurahanValue,
 							ipmbl_kecamatan : ipmbl_kecamatanValue,
-							ipmbl_nomoragenda : ipmbl_nomoragendaValue,
 							ipmbl_status : ipmbl_statusValue,
 							ipmbl_tanggalsurvey : ipmbl_tanggalsurveyValue,
-							ipmbl_rekomblh : ipmbl_rekomblhValue,
-							ipmbl_rekomblh_tanggal : ipmbl_rekomblh_tanggalValue,
-							ipmbl_rekomkec : ipmbl_rekomkecValue,
-							ipmbl_rekomkec_tanggal : ipmbl_rekomkec_tanggalValue,
-							ipmbl_rekomkel : ipmbl_rekomkelValue,
-							ipmbl_rekomkel_tanggal : ipmbl_rekomkel_tanggalValue,
-							ipmbl_berlaku : ipmbl_berlakuValue,
-							ipmbl_kadaluarsa : ipmbl_kadaluarsaValue,
-							ipmbl_nomorijin : ipmbl_nomorijinValue,
-							ipmbl_nomorurut : ipmbl_nomorurutValue,
+							ipmbl_usaha : ipmbl_usahaValue,
+							ipmbl_alamatusaha : ipmbl_alamatusahaValue,
 							action : ipmbl_dbTask
 						},
 						success: function(response){
@@ -355,27 +300,16 @@
 			
 			var record = ipmbl_gridPanel.getSelectionModel().getSelection()[0];
 			ipmbl_idField.setValue(record.data.ipmbl_id);
-			ipmbl_jenisField.setValue(record.data.ipmbl_jenis);
-			ipmbl_tanggalField.setValue(record.data.ipmbl_tanggal);
 			ipmbl_luasField.setValue(record.data.ipmbl_luas);
 			ipmbl_volumeField.setValue(record.data.ipmbl_volume);
 			ipmbl_keperluanField.setValue(record.data.ipmbl_keperluan);
 			ipmbl_alamatField.setValue(record.data.ipmbl_alamat);
 			ipmbl_kelurahanField.setValue(record.data.ipmbl_kelurahan);
 			ipmbl_kecamatanField.setValue(record.data.ipmbl_kecamatan);
-			ipmbl_nomoragendaField.setValue(record.data.ipmbl_nomoragenda);
 			ipmbl_statusField.setValue(record.data.ipmbl_status);
 			ipmbl_tanggalsurveyField.setValue(record.data.ipmbl_tanggalsurvey);
-			ipmbl_rekomblhField.setValue(record.data.ipmbl_rekomblh);
-			ipmbl_rekomblh_tanggalField.setValue(record.data.ipmbl_rekomblh_tanggal);
-			ipmbl_rekomkecField.setValue(record.data.ipmbl_rekomkec);
-			ipmbl_rekomkec_tanggalField.setValue(record.data.ipmbl_rekomkec_tanggal);
-			ipmbl_rekomkelField.setValue(record.data.ipmbl_rekomkel);
-			ipmbl_rekomkel_tanggalField.setValue(record.data.ipmbl_rekomkel_tanggal);
-			ipmbl_berlakuField.setValue(record.data.ipmbl_berlaku);
-			ipmbl_kadaluarsaField.setValue(record.data.ipmbl_kadaluarsa);
-			ipmbl_nomorijinField.setValue(record.data.ipmbl_nomorijin);
-			ipmbl_nomorurutField.setValue(record.data.ipmbl_nomorurut);
+			ipmbl_usahaField.setValue(record.data.ipmbl_usaha);
+			ipmbl_alamatusahaField.setValue(record.data.ipmbl_alamatusaha);
 					}
 		
 		function ipmbl_showSearchWindow(){
@@ -385,72 +319,39 @@
 		function ipmbl_search(){
 			ipmbl_gridSearchField.reset();
 			
-			var ipmbl_jenisValue = '';
-			var ipmbl_tanggalValue = '';
 			var ipmbl_luasValue = '';
 			var ipmbl_volumeValue = '';
 			var ipmbl_keperluanValue = '';
 			var ipmbl_alamatValue = '';
 			var ipmbl_kelurahanValue = '';
 			var ipmbl_kecamatanValue = '';
-			var ipmbl_nomoragendaValue = '';
 			var ipmbl_statusValue = '';
 			var ipmbl_tanggalsurveyValue = '';
-			var ipmbl_rekomblhValue = '';
-			var ipmbl_rekomblh_tanggalValue = '';
-			var ipmbl_rekomkecValue = '';
-			var ipmbl_rekomkec_tanggalValue = '';
-			var ipmbl_rekomkelValue = '';
-			var ipmbl_rekomkel_tanggalValue = '';
-			var ipmbl_berlakuValue = '';
-			var ipmbl_kadaluarsaValue = '';
-			var ipmbl_nomorijinValue = '';
-			var ipmbl_nomorurutValue = '';
+			var ipmbl_usahaValue = '';
+			var ipmbl_alamatusahaValue = '';
 						
-			ipmbl_jenisValue = ipmbl_jenisSearchField.getValue();
-			ipmbl_tanggalValue = ipmbl_tanggalSearchField.getValue();
 			ipmbl_luasValue = ipmbl_luasSearchField.getValue();
 			ipmbl_volumeValue = ipmbl_volumeSearchField.getValue();
 			ipmbl_keperluanValue = ipmbl_keperluanSearchField.getValue();
 			ipmbl_alamatValue = ipmbl_alamatSearchField.getValue();
 			ipmbl_kelurahanValue = ipmbl_kelurahanSearchField.getValue();
 			ipmbl_kecamatanValue = ipmbl_kecamatanSearchField.getValue();
-			ipmbl_nomoragendaValue = ipmbl_nomoragendaSearchField.getValue();
 			ipmbl_statusValue = ipmbl_statusSearchField.getValue();
 			ipmbl_tanggalsurveyValue = ipmbl_tanggalsurveySearchField.getValue();
-			ipmbl_rekomblhValue = ipmbl_rekomblhSearchField.getValue();
-			ipmbl_rekomblh_tanggalValue = ipmbl_rekomblh_tanggalSearchField.getValue();
-			ipmbl_rekomkecValue = ipmbl_rekomkecSearchField.getValue();
-			ipmbl_rekomkec_tanggalValue = ipmbl_rekomkec_tanggalSearchField.getValue();
-			ipmbl_rekomkelValue = ipmbl_rekomkelSearchField.getValue();
-			ipmbl_rekomkel_tanggalValue = ipmbl_rekomkel_tanggalSearchField.getValue();
-			ipmbl_berlakuValue = ipmbl_berlakuSearchField.getValue();
-			ipmbl_kadaluarsaValue = ipmbl_kadaluarsaSearchField.getValue();
-			ipmbl_nomorijinValue = ipmbl_nomorijinSearchField.getValue();
-			ipmbl_nomorurutValue = ipmbl_nomorurutSearchField.getValue();
+			ipmbl_usahaValue = ipmbl_usahaSearchField.getValue();
+			ipmbl_alamatusahaValue = ipmbl_alamatusahaSearchField.getValue();
 			ipmbl_dbListAction = "SEARCH";
 			ipmbl_dataStore.proxy.extraParams = { 
-				ipmbl_jenis : ipmbl_jenisValue,
-				ipmbl_tanggal : ipmbl_tanggalValue,
 				ipmbl_luas : ipmbl_luasValue,
 				ipmbl_volume : ipmbl_volumeValue,
 				ipmbl_keperluan : ipmbl_keperluanValue,
 				ipmbl_alamat : ipmbl_alamatValue,
 				ipmbl_kelurahan : ipmbl_kelurahanValue,
 				ipmbl_kecamatan : ipmbl_kecamatanValue,
-				ipmbl_nomoragenda : ipmbl_nomoragendaValue,
 				ipmbl_status : ipmbl_statusValue,
 				ipmbl_tanggalsurvey : ipmbl_tanggalsurveyValue,
-				ipmbl_rekomblh : ipmbl_rekomblhValue,
-				ipmbl_rekomblh_tanggal : ipmbl_rekomblh_tanggalValue,
-				ipmbl_rekomkec : ipmbl_rekomkecValue,
-				ipmbl_rekomkec_tanggal : ipmbl_rekomkec_tanggalValue,
-				ipmbl_rekomkel : ipmbl_rekomkelValue,
-				ipmbl_rekomkel_tanggal : ipmbl_rekomkel_tanggalValue,
-				ipmbl_berlaku : ipmbl_berlakuValue,
-				ipmbl_kadaluarsa : ipmbl_kadaluarsaValue,
-				ipmbl_nomorijin : ipmbl_nomorijinValue,
-				ipmbl_nomorurut : ipmbl_nomorurutValue,
+				ipmbl_usaha : ipmbl_usahaValue,
+				ipmbl_alamatusaha : ipmbl_alamatusahaValue,
 				action : 'SEARCH'
 			};
 			ipmbl_dataStore.currentPage = 1;
@@ -464,50 +365,28 @@
 		
 		function ipmbl_printExcel(outputType){
 			var searchText = "";
-			var ipmbl_jenisValue = '';
-			var ipmbl_tanggalValue = '';
 			var ipmbl_luasValue = '';
 			var ipmbl_volumeValue = '';
 			var ipmbl_keperluanValue = '';
 			var ipmbl_alamatValue = '';
 			var ipmbl_kelurahanValue = '';
 			var ipmbl_kecamatanValue = '';
-			var ipmbl_nomoragendaValue = '';
 			var ipmbl_statusValue = '';
 			var ipmbl_tanggalsurveyValue = '';
-			var ipmbl_rekomblhValue = '';
-			var ipmbl_rekomblh_tanggalValue = '';
-			var ipmbl_rekomkecValue = '';
-			var ipmbl_rekomkec_tanggalValue = '';
-			var ipmbl_rekomkelValue = '';
-			var ipmbl_rekomkel_tanggalValue = '';
-			var ipmbl_berlakuValue = '';
-			var ipmbl_kadaluarsaValue = '';
-			var ipmbl_nomorijinValue = '';
-			var ipmbl_nomorurutValue = '';
+			var ipmbl_usahaValue = '';
+			var ipmbl_alamatusahaValue = '';
 			
 			if(ipmbl_dataStore.proxy.extraParams.query!==null){searchText = ipmbl_dataStore.proxy.extraParams.query;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_jenis!==null){ipmbl_jenisValue = ipmbl_dataStore.proxy.extraParams.ipmbl_jenis;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_tanggal!==null){ipmbl_tanggalValue = ipmbl_dataStore.proxy.extraParams.ipmbl_tanggal;}
 			if(ipmbl_dataStore.proxy.extraParams.ipmbl_luas!==null){ipmbl_luasValue = ipmbl_dataStore.proxy.extraParams.ipmbl_luas;}
 			if(ipmbl_dataStore.proxy.extraParams.ipmbl_volume!==null){ipmbl_volumeValue = ipmbl_dataStore.proxy.extraParams.ipmbl_volume;}
 			if(ipmbl_dataStore.proxy.extraParams.ipmbl_keperluan!==null){ipmbl_keperluanValue = ipmbl_dataStore.proxy.extraParams.ipmbl_keperluan;}
 			if(ipmbl_dataStore.proxy.extraParams.ipmbl_alamat!==null){ipmbl_alamatValue = ipmbl_dataStore.proxy.extraParams.ipmbl_alamat;}
 			if(ipmbl_dataStore.proxy.extraParams.ipmbl_kelurahan!==null){ipmbl_kelurahanValue = ipmbl_dataStore.proxy.extraParams.ipmbl_kelurahan;}
 			if(ipmbl_dataStore.proxy.extraParams.ipmbl_kecamatan!==null){ipmbl_kecamatanValue = ipmbl_dataStore.proxy.extraParams.ipmbl_kecamatan;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_nomoragenda!==null){ipmbl_nomoragendaValue = ipmbl_dataStore.proxy.extraParams.ipmbl_nomoragenda;}
 			if(ipmbl_dataStore.proxy.extraParams.ipmbl_status!==null){ipmbl_statusValue = ipmbl_dataStore.proxy.extraParams.ipmbl_status;}
 			if(ipmbl_dataStore.proxy.extraParams.ipmbl_tanggalsurvey!==null){ipmbl_tanggalsurveyValue = ipmbl_dataStore.proxy.extraParams.ipmbl_tanggalsurvey;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_rekomblh!==null){ipmbl_rekomblhValue = ipmbl_dataStore.proxy.extraParams.ipmbl_rekomblh;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_rekomblh_tanggal!==null){ipmbl_rekomblh_tanggalValue = ipmbl_dataStore.proxy.extraParams.ipmbl_rekomblh_tanggal;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_rekomkec!==null){ipmbl_rekomkecValue = ipmbl_dataStore.proxy.extraParams.ipmbl_rekomkec;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_rekomkec_tanggal!==null){ipmbl_rekomkec_tanggalValue = ipmbl_dataStore.proxy.extraParams.ipmbl_rekomkec_tanggal;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_rekomkel!==null){ipmbl_rekomkelValue = ipmbl_dataStore.proxy.extraParams.ipmbl_rekomkel;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_rekomkel_tanggal!==null){ipmbl_rekomkel_tanggalValue = ipmbl_dataStore.proxy.extraParams.ipmbl_rekomkel_tanggal;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_berlaku!==null){ipmbl_berlakuValue = ipmbl_dataStore.proxy.extraParams.ipmbl_berlaku;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_kadaluarsa!==null){ipmbl_kadaluarsaValue = ipmbl_dataStore.proxy.extraParams.ipmbl_kadaluarsa;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_nomorijin!==null){ipmbl_nomorijinValue = ipmbl_dataStore.proxy.extraParams.ipmbl_nomorijin;}
-			if(ipmbl_dataStore.proxy.extraParams.ipmbl_nomorurut!==null){ipmbl_nomorurutValue = ipmbl_dataStore.proxy.extraParams.ipmbl_nomorurut;}
+			if(ipmbl_dataStore.proxy.extraParams.ipmbl_usaha!==null){ipmbl_usahaValue = ipmbl_dataStore.proxy.extraParams.ipmbl_usaha;}
+			if(ipmbl_dataStore.proxy.extraParams.ipmbl_alamatusaha!==null){ipmbl_alamatusahaValue = ipmbl_dataStore.proxy.extraParams.ipmbl_alamatusaha;}
 			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
 			Ext.Ajax.request({
 				waitMsg : 'Please Wait...',
@@ -515,27 +394,16 @@
 				params : {
 					action : outputType,
 					query : searchText,
-					ipmbl_jenis : ipmbl_jenisValue,
-					ipmbl_tanggal : ipmbl_tanggalValue,
 					ipmbl_luas : ipmbl_luasValue,
 					ipmbl_volume : ipmbl_volumeValue,
 					ipmbl_keperluan : ipmbl_keperluanValue,
 					ipmbl_alamat : ipmbl_alamatValue,
 					ipmbl_kelurahan : ipmbl_kelurahanValue,
 					ipmbl_kecamatan : ipmbl_kecamatanValue,
-					ipmbl_nomoragenda : ipmbl_nomoragendaValue,
 					ipmbl_status : ipmbl_statusValue,
 					ipmbl_tanggalsurvey : ipmbl_tanggalsurveyValue,
-					ipmbl_rekomblh : ipmbl_rekomblhValue,
-					ipmbl_rekomblh_tanggal : ipmbl_rekomblh_tanggalValue,
-					ipmbl_rekomkec : ipmbl_rekomkecValue,
-					ipmbl_rekomkec_tanggal : ipmbl_rekomkec_tanggalValue,
-					ipmbl_rekomkel : ipmbl_rekomkelValue,
-					ipmbl_rekomkel_tanggal : ipmbl_rekomkel_tanggalValue,
-					ipmbl_berlaku : ipmbl_berlakuValue,
-					ipmbl_kadaluarsa : ipmbl_kadaluarsaValue,
-					ipmbl_nomorijin : ipmbl_nomorijinValue,
-					ipmbl_nomorurut : ipmbl_nomorurutValue,
+					ipmbl_usaha : ipmbl_usahaValue,
+					ipmbl_alamatusaha : ipmbl_alamatusahaValue,
 					currentAction : ipmbl_dbListAction
 				},
 				success: function(response){
@@ -596,27 +464,16 @@
 			}),
 			fields : [
 				{ name : 'ipmbl_id', type : 'int', mapping : 'ipmbl_id' },
-				{ name : 'ipmbl_jenis', type : 'int', mapping : 'ipmbl_jenis' },
-				{ name : 'ipmbl_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_tanggal' },
 				{ name : 'ipmbl_luas', type : 'float', mapping : 'ipmbl_luas' },
 				{ name : 'ipmbl_volume', type : 'float', mapping : 'ipmbl_volume' },
 				{ name : 'ipmbl_keperluan', type : 'string', mapping : 'ipmbl_keperluan' },
 				{ name : 'ipmbl_alamat', type : 'string', mapping : 'ipmbl_alamat' },
 				{ name : 'ipmbl_kelurahan', type : 'int', mapping : 'ipmbl_kelurahan' },
 				{ name : 'ipmbl_kecamatan', type : 'int', mapping : 'ipmbl_kecamatan' },
-				{ name : 'ipmbl_nomoragenda', type : 'int', mapping : 'ipmbl_nomoragenda' },
 				{ name : 'ipmbl_status', type : 'int', mapping : 'ipmbl_status' },
 				{ name : 'ipmbl_tanggalsurvey', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_tanggalsurvey' },
-				{ name : 'ipmbl_rekomblh', type : 'string', mapping : 'ipmbl_rekomblh' },
-				{ name : 'ipmbl_rekomblh_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_rekomblh_tanggal' },
-				{ name : 'ipmbl_rekomkec', type : 'string', mapping : 'ipmbl_rekomkec' },
-				{ name : 'ipmbl_rekomkec_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_rekomkec_tanggal' },
-				{ name : 'ipmbl_rekomkel', type : 'string', mapping : 'ipmbl_rekomkel' },
-				{ name : 'ipmbl_rekomkel_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_rekomkel_tanggal' },
-				{ name : 'ipmbl_berlaku', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_berlaku' },
-				{ name : 'ipmbl_kadaluarsa', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_kadaluarsa' },
-				{ name : 'ipmbl_nomorijin', type : 'string', mapping : 'ipmbl_nomorijin' },
-				{ name : 'ipmbl_nomorurut', type : 'int', mapping : 'ipmbl_nomorurut' },
+				{ name : 'ipmbl_usaha', type : 'string', mapping : 'ipmbl_usaha' },
+				{ name : 'ipmbl_alamatusaha', type : 'string', mapping : 'ipmbl_alamatusaha' },
 				]
 		});
 /* End DataStore declaration */
@@ -796,18 +653,6 @@
 			keys : ipmbl_shorcut,
 			columns : [
 				{
-					text : 'ipmbl_jenis',
-					dataIndex : 'ipmbl_jenis',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_tanggal',
-					dataIndex : 'ipmbl_tanggal',
-					width : 100,
-					sortable : false
-				},
-				{
 					text : 'ipmbl_luas',
 					dataIndex : 'ipmbl_luas',
 					width : 100,
@@ -844,12 +689,6 @@
 					sortable : false
 				},
 				{
-					text : 'ipmbl_nomoragenda',
-					dataIndex : 'ipmbl_nomoragenda',
-					width : 100,
-					sortable : false
-				},
-				{
 					text : 'ipmbl_status',
 					dataIndex : 'ipmbl_status',
 					width : 100,
@@ -862,62 +701,14 @@
 					sortable : false
 				},
 				{
-					text : 'ipmbl_rekomblh',
-					dataIndex : 'ipmbl_rekomblh',
+					text : 'ipmbl_usaha',
+					dataIndex : 'ipmbl_usaha',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'ipmbl_rekomblh_tanggal',
-					dataIndex : 'ipmbl_rekomblh_tanggal',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_rekomkec',
-					dataIndex : 'ipmbl_rekomkec',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_rekomkec_tanggal',
-					dataIndex : 'ipmbl_rekomkec_tanggal',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_rekomkel',
-					dataIndex : 'ipmbl_rekomkel',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_rekomkel_tanggal',
-					dataIndex : 'ipmbl_rekomkel_tanggal',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_berlaku',
-					dataIndex : 'ipmbl_berlaku',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_kadaluarsa',
-					dataIndex : 'ipmbl_kadaluarsa',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_nomorijin',
-					dataIndex : 'ipmbl_nomorijin',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ipmbl_nomorurut',
-					dataIndex : 'ipmbl_nomorurut',
+					text : 'ipmbl_alamatusaha',
+					dataIndex : 'ipmbl_alamatusaha',
 					width : 100,
 					sortable : false
 				},
@@ -955,22 +746,6 @@
 			allowDecimals : false,
 			hidden : true,
 			maskRe : /([0-9]+)$/});
-		ipmbl_jenisField = Ext.create('Ext.form.NumberField',{
-			id : 'ipmbl_jenisField',
-			name : 'ipmbl_jenis',
-			fieldLabel : 'ipmbl_jenis<font color=red>*</font>',
-			allowBlank : false,
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		ipmbl_tanggalField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_tanggalField',
-			name : 'ipmbl_tanggal',
-			fieldLabel : 'ipmbl_tanggal<font color=red>*</font>',
-			allowBlank : false,
-			maxLength : 0
-		});
 		ipmbl_luasField = Ext.create('Ext.form.NumberField',{
 			id : 'ipmbl_luasField',
 			name : 'ipmbl_luas',
@@ -1015,14 +790,6 @@
 			blankText : '0',
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
-		ipmbl_nomoragendaField = Ext.create('Ext.form.NumberField',{
-			id : 'ipmbl_nomoragendaField',
-			name : 'ipmbl_nomoragenda',
-			fieldLabel : 'ipmbl_nomoragenda',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
 		ipmbl_statusField = Ext.create('Ext.form.NumberField',{
 			id : 'ipmbl_statusField',
 			name : 'ipmbl_status',
@@ -1037,68 +804,18 @@
 			fieldLabel : 'ipmbl_tanggalsurvey',
 			maxLength : 0
 		});
-		ipmbl_rekomblhField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomblhField',
-			name : 'ipmbl_rekomblh',
-			fieldLabel : 'ipmbl_rekomblh',
-			maxLength : 255
+		ipmbl_usahaField = Ext.create('Ext.form.TextField',{
+			id : 'ipmbl_usahaField',
+			name : 'ipmbl_usaha',
+			fieldLabel : 'ipmbl_usaha',
+			maxLength : 50
 		});
-		ipmbl_rekomblh_tanggalField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomblh_tanggalField',
-			name : 'ipmbl_rekomblh_tanggal',
-			fieldLabel : 'ipmbl_rekomblh_tanggal',
-			maxLength : 0
+		ipmbl_alamatusahaField = Ext.create('Ext.form.TextField',{
+			id : 'ipmbl_alamatusahaField',
+			name : 'ipmbl_alamatusaha',
+			fieldLabel : 'ipmbl_alamatusaha',
+			maxLength : 100
 		});
-		ipmbl_rekomkecField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomkecField',
-			name : 'ipmbl_rekomkec',
-			fieldLabel : 'ipmbl_rekomkec',
-			maxLength : 255
-		});
-		ipmbl_rekomkec_tanggalField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomkec_tanggalField',
-			name : 'ipmbl_rekomkec_tanggal',
-			fieldLabel : 'ipmbl_rekomkec_tanggal',
-			maxLength : 0
-		});
-		ipmbl_rekomkelField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomkelField',
-			name : 'ipmbl_rekomkel',
-			fieldLabel : 'ipmbl_rekomkel',
-			maxLength : 255
-		});
-		ipmbl_rekomkel_tanggalField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomkel_tanggalField',
-			name : 'ipmbl_rekomkel_tanggal',
-			fieldLabel : 'ipmbl_rekomkel_tanggal',
-			maxLength : 0
-		});
-		ipmbl_berlakuField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_berlakuField',
-			name : 'ipmbl_berlaku',
-			fieldLabel : 'ipmbl_berlaku',
-			maxLength : 0
-		});
-		ipmbl_kadaluarsaField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_kadaluarsaField',
-			name : 'ipmbl_kadaluarsa',
-			fieldLabel : 'ipmbl_kadaluarsa',
-			maxLength : 0
-		});
-		ipmbl_nomorijinField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_nomorijinField',
-			name : 'ipmbl_nomorijin',
-			fieldLabel : 'ipmbl_nomorijin',
-			maxLength : 255
-		});
-		ipmbl_nomorurutField = Ext.create('Ext.form.NumberField',{
-			id : 'ipmbl_nomorurutField',
-			name : 'ipmbl_nomorurut',
-			fieldLabel : 'ipmbl_nomorurut',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
 		var ipmbl_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : ipmbl_save
@@ -1131,27 +848,16 @@
 					flex : 2,
 					items : [
 						ipmbl_idField,
-						ipmbl_jenisField,
-						ipmbl_tanggalField,
 						ipmbl_luasField,
 						ipmbl_volumeField,
 						ipmbl_keperluanField,
 						ipmbl_alamatField,
 						ipmbl_kelurahanField,
 						ipmbl_kecamatanField,
-						ipmbl_nomoragendaField,
 						ipmbl_statusField,
 						ipmbl_tanggalsurveyField,
-						ipmbl_rekomblhField,
-						ipmbl_rekomblh_tanggalField,
-						ipmbl_rekomkecField,
-						ipmbl_rekomkec_tanggalField,
-						ipmbl_rekomkelField,
-						ipmbl_rekomkel_tanggalField,
-						ipmbl_berlakuField,
-						ipmbl_kadaluarsaField,
-						ipmbl_nomorijinField,
-						ipmbl_nomorurutField,
+						ipmbl_usahaField,
+						ipmbl_alamatusahaField,
 											]
 				}, {
 					xtype : 'splitter'
@@ -1177,21 +883,6 @@
 		});
 /* End FormPanel declaration */
 /* Start SearchPanel declaration */
-		ipmbl_jenisSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'ipmbl_jenisSearchField',
-			name : 'ipmbl_jenis',
-			fieldLabel : 'ipmbl_jenis',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		ipmbl_tanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_tanggalSearchField',
-			name : 'ipmbl_tanggal',
-			fieldLabel : 'ipmbl_tanggal',
-			maxLength : 0
-		
-		});
 		ipmbl_luasSearchField = Ext.create('Ext.form.NumberField',{
 			id : 'ipmbl_luasSearchField',
 			name : 'ipmbl_luas',
@@ -1238,14 +929,6 @@
 			blankText : '0',
 			allowDecimals : false,maskRe : /([0-9]+)$/
 		});
-		ipmbl_nomoragendaSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'ipmbl_nomoragendaSearchField',
-			name : 'ipmbl_nomoragenda',
-			fieldLabel : 'ipmbl_nomoragenda',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
 		ipmbl_statusSearchField = Ext.create('Ext.form.NumberField',{
 			id : 'ipmbl_statusSearchField',
 			name : 'ipmbl_status',
@@ -1261,76 +944,19 @@
 			maxLength : 0
 		
 		});
-		ipmbl_rekomblhSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomblhSearchField',
-			name : 'ipmbl_rekomblh',
-			fieldLabel : 'ipmbl_rekomblh',
-			maxLength : 255
+		ipmbl_usahaSearchField = Ext.create('Ext.form.TextField',{
+			id : 'ipmbl_usahaSearchField',
+			name : 'ipmbl_usaha',
+			fieldLabel : 'ipmbl_usaha',
+			maxLength : 50
 		
 		});
-		ipmbl_rekomblh_tanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomblh_tanggalSearchField',
-			name : 'ipmbl_rekomblh_tanggal',
-			fieldLabel : 'ipmbl_rekomblh_tanggal',
-			maxLength : 0
+		ipmbl_alamatusahaSearchField = Ext.create('Ext.form.TextField',{
+			id : 'ipmbl_alamatusahaSearchField',
+			name : 'ipmbl_alamatusaha',
+			fieldLabel : 'ipmbl_alamatusaha',
+			maxLength : 100
 		
-		});
-		ipmbl_rekomkecSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomkecSearchField',
-			name : 'ipmbl_rekomkec',
-			fieldLabel : 'ipmbl_rekomkec',
-			maxLength : 255
-		
-		});
-		ipmbl_rekomkec_tanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomkec_tanggalSearchField',
-			name : 'ipmbl_rekomkec_tanggal',
-			fieldLabel : 'ipmbl_rekomkec_tanggal',
-			maxLength : 0
-		
-		});
-		ipmbl_rekomkelSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomkelSearchField',
-			name : 'ipmbl_rekomkel',
-			fieldLabel : 'ipmbl_rekomkel',
-			maxLength : 255
-		
-		});
-		ipmbl_rekomkel_tanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_rekomkel_tanggalSearchField',
-			name : 'ipmbl_rekomkel_tanggal',
-			fieldLabel : 'ipmbl_rekomkel_tanggal',
-			maxLength : 0
-		
-		});
-		ipmbl_berlakuSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_berlakuSearchField',
-			name : 'ipmbl_berlaku',
-			fieldLabel : 'ipmbl_berlaku',
-			maxLength : 0
-		
-		});
-		ipmbl_kadaluarsaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_kadaluarsaSearchField',
-			name : 'ipmbl_kadaluarsa',
-			fieldLabel : 'ipmbl_kadaluarsa',
-			maxLength : 0
-		
-		});
-		ipmbl_nomorijinSearchField = Ext.create('Ext.form.TextField',{
-			id : 'ipmbl_nomorijinSearchField',
-			name : 'ipmbl_nomorijin',
-			fieldLabel : 'ipmbl_nomorijin',
-			maxLength : 255
-		
-		});
-		ipmbl_nomorurutSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'ipmbl_nomorurutSearchField',
-			name : 'ipmbl_nomorurut',
-			fieldLabel : 'ipmbl_nomorurut',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
 		});
 		var ipmbl_searchingButton = Ext.create('Ext.Button',{
 			text : globalSearchingButtonTitle,
@@ -1358,27 +984,16 @@
 					layout : 'anchor',
 					flex : 2,
 					items : [
-						ipmbl_jenisSearchField,
-						ipmbl_tanggalSearchField,
 						ipmbl_luasSearchField,
 						ipmbl_volumeSearchField,
 						ipmbl_keperluanSearchField,
 						ipmbl_alamatSearchField,
 						ipmbl_kelurahanSearchField,
 						ipmbl_kecamatanSearchField,
-						ipmbl_nomoragendaSearchField,
 						ipmbl_statusSearchField,
 						ipmbl_tanggalsurveySearchField,
-						ipmbl_rekomblhSearchField,
-						ipmbl_rekomblh_tanggalSearchField,
-						ipmbl_rekomkecSearchField,
-						ipmbl_rekomkec_tanggalSearchField,
-						ipmbl_rekomkelSearchField,
-						ipmbl_rekomkel_tanggalSearchField,
-						ipmbl_berlakuSearchField,
-						ipmbl_kadaluarsaSearchField,
-						ipmbl_nomorijinSearchField,
-						ipmbl_nomorurutSearchField,
+						ipmbl_usahaSearchField,
+						ipmbl_alamatusahaSearchField,
 						]
 				}],
 			buttons : [ipmbl_searchingButton,ipmbl_cancelSearchButton]

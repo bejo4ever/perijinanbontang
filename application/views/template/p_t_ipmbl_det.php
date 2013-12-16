@@ -34,15 +34,32 @@
 			<tr>
 				<th align="center" width="50">No</td>
 				<th align="center">det_ipmbl_ipmbl_id</td>
+				<th align="center">det_ipmbl_jenis</td>
+				<th align="center">det_ipmbl_tanggal</td>
 				<th align="center">det_ipmbl_nama</td>
 				<th align="center">det_ipmbl_alamat</td>
 				<th align="center">det_ipmbl_kelurahan</td>
 				<th align="center">det_ipmbl_kecamatan</td>
 				<th align="center">det_ipmbl_kota</td>
 				<th align="center">det_ipmbl_telp</td>
-				<th align="center">det_ipmbl_namausaha</td>
-				<th align="center">det_ipmbl_alamatusaha</td>
-				<th align="center">det_ipmbl_namapimpinan</td>
+				<th align="center">det_ipmbl_nomoragenda</td>
+				<th align="center">det_ipmbl_berkasmasuk</td>
+				<th align="center">det_ipmbl_surveytanggal</td>
+				<th align="center">det_ipmbl_surveylulus</td>
+				<th align="center">det_ipmbl_status</td>
+				<th align="center">det_ipmbl_surveypetugas</td>
+				<th align="center">det_ipmbl_surveydinas</td>
+				<th align="center">det_ipmbl_surveynip</td>
+				<th align="center">det_ipmbl_surveypendapat</td>
+				<th align="center">det_ipmbl_rekombl</td>
+				<th align="center">det_ipmbl_rekomblhtanggal</td>
+				<th align="center">det_ipmbl_rekomkel</td>
+				<th align="center">det_ipmbl_rekomkeltanggal</td>
+				<th align="center">det_ipmbl_rekomkec</td>
+				<th align="center">det_ipmbl_rekomkectanggal</td>
+				<th align="center">det_ipmbl_sk</td>
+				<th align="center">det_ipmbl_kadaluarsa</td>
+				<th align="center">det_ipmbl_berlaku</td>
 				</tr>
 		</thead>
 		<tbody>
@@ -55,18 +72,35 @@
 				<tr>
 					<td><?php echo $total_record; ?></td>
 					<td><?php echo $subrecord->det_ipmbl_ipmbl_id; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_jenis; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_tanggal; ?></td>
 					<td><?php echo $subrecord->det_ipmbl_nama; ?></td>
 					<td><?php echo $subrecord->det_ipmbl_alamat; ?></td>
 					<td><?php echo $subrecord->det_ipmbl_kelurahan; ?></td>
 					<td><?php echo $subrecord->det_ipmbl_kecamatan; ?></td>
 					<td><?php echo $subrecord->det_ipmbl_kota; ?></td>
 					<td><?php echo $subrecord->det_ipmbl_telp; ?></td>
-					<td><?php echo $subrecord->det_ipmbl_namausaha; ?></td>
-					<td><?php echo $subrecord->det_ipmbl_alamatusaha; ?></td>
-					<td><?php echo $subrecord->det_ipmbl_namapimpinan; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_nomoragenda; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_berkasmasuk; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_surveytanggal; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_surveylulus; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_status; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_surveypetugas; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_surveydinas; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_surveynip; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_surveypendapat; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_rekombl; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_rekomblhtanggal; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_rekomkel; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_rekomkeltanggal; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_rekomkec; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_rekomkectanggal; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_sk; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_kadaluarsa; ?></td>
+					<td><?php echo $subrecord->det_ipmbl_berlaku; ?></td>
 					</tr>
 			<?php }} ?>			<tr>
-				<td colspan="10" align="left">Total</td>
+				<td colspan="27" align="left">Total</td>
 				<td><?php echo $total_record; ?></td>
 			</tr>
 		<tbody>
