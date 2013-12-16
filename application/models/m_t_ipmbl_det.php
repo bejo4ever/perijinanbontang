@@ -28,8 +28,17 @@ class M_t_ipmbl_det extends App_model{
 				det_ipmbl_rekomkectanggal,
 				det_ipmbl_sk,
 				det_ipmbl_kadaluarsa,
-				det_ipmbl_berlaku
+				det_ipmbl_berlaku,
+				ipmbl_luas,
+				ipmbl_volume,
+				ipmbl_keperluan,
+				ipmbl_kelurahan,
+				ipmbl_kecamatan,
+				ipmbl_usaha,
+				ipmbl_alamatusaha,
+				ipmbl_lokasi
 				FROM t_ipmbl_det 
+				JOIN t_ipmbl ON t_ipmbl.ipmbl_id = t_ipmbl_det.det_ipmbl_ipmbl_id
 			WHERE det_ipmbl_id IS NOT NULL 
 	";
 	
@@ -184,6 +193,38 @@ class M_t_ipmbl_det extends App_model{
 		}else if(@$currentAction == "SEARCH"){
 			$result = $this->search($params);
 		}
+		return $result;
+	}
+	
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT 
+					ipmbl_cek_id,
+					ipmbl_cek_syarat_id,
+					ipmbl_cek_ipmbldet_id,
+					ipmbl_cek_ipmbl_id,
+					ipmbl_cek_status,
+					ipmbl_cek_keterangan,
+					NAMA_SYARAT AS ipmbl_cek_syarat_nama
+				FROM t_ipmbl_ceklist 
+				LEFT JOIN master_syarat ON t_ipmbl_ceklist.ipmbl_cek_syarat_id = master_syarat.ID_SYARAT
+				WHERE ipmbl_cek_ipmbldet_id = ".$ipmbl_det_id."
+				AND ipmbl_cek_ipmbl_id = ".$ipmbl_id."
+			";
+		}else{
+			$sql = "
+				SELECT 
+					0 AS ipmbl_cek_id,
+					master_syarat.ID_SYARAT AS ipmbl_cek_syarat_id,
+					NAMA_SYARAT AS ipmbl_cek_syarat_nama
+				FROM dt_syarat 
+				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT
+				WHERE ID_IJIN = 1
+			";
+		}
+		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
 	
