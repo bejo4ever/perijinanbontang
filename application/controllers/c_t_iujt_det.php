@@ -35,6 +35,18 @@ class C_t_iujt_det extends CI_Controller{
 			case 'EXCEL':
 				$this->printExcel();
 			break;
+			case 'GETSYARAT':
+				$this->getSyarat();
+			break;
+			case 'CHANGESURVEYSTATUS':
+				$this->changeSurveyStatus();
+			break;
+			case 'CETAKLEMBARKONTROL':
+				$this->cetakLembarKontrol();
+			break;
+			case 'CETAKSK':
+				$this->cetakSk();
+			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -75,6 +87,16 @@ class C_t_iujt_det extends CI_Controller{
 		$det_iujt_cektanggal = htmlentities($this->input->post('det_iujt_cektanggal'),ENT_QUOTES);
 		$det_iujt_ceknip = htmlentities($this->input->post('det_iujt_ceknip'),ENT_QUOTES);
 		$det_iujt_catatan = htmlentities($this->input->post('det_iujt_catatan'),ENT_QUOTES);
+		
+		$iujt_usaha = htmlentities($this->input->post('iujt_usaha'),ENT_QUOTES);
+		$iujt_alamatusaha = htmlentities($this->input->post('iujt_alamatusaha'),ENT_QUOTES);
+		$iujt_penanggungjawab = htmlentities($this->input->post('iujt_penanggungjawab'),ENT_QUOTES);
+		
+		$iujt_cek_id = json_decode($this->input->post('iujt_cek_id'));
+		$iujt_cek_syarat_id = json_decode($this->input->post('iujt_cek_syarat_id'));
+		$iujt_cek_status = json_decode($this->input->post('iujt_cek_status'));
+		$iujt_cek_keterangan = json_decode($this->input->post('iujt_cek_keterangan'));
+		
 				
 		$iujt_det_author = $this->m_t_iujt_det->__checkSession();
 		$iujt_det_created_date = date('Y-m-d H:i:s');
@@ -82,25 +104,43 @@ class C_t_iujt_det extends CI_Controller{
 		if($iujt_det_author != ''){
 			$result = 'sessionExpired';
 		}else{
-			$data = array(
-				'det_iujt_id'=>$det_iujt_id,
-				'det_iujt_iujt_id'=>$det_iujt_iujt_id,
-				'det_iujt_jenis'=>$det_iujt_jenis,
-				'det_iujt_nama'=>$det_iujt_nama,
-				'det_iujt_npwp'=>$det_iujt_npwp,
-				'det_iujt_alamat'=>$det_iujt_alamat,
-				'det_iujt_sk'=>$det_iujt_sk,
-				'det_iujt_berlaku'=>$det_iujt_berlaku,
-				'det_iujt_kadaluarsa'=>$det_iujt_kadaluarsa,
-				'det_iujt_surveylulus'=>$det_iujt_surveylulus,
-				'det_iujt_tanggal'=>$det_iujt_tanggal,
-				'det_iujt_nopermohonan'=>$det_iujt_nopermohonan,
-				'det_iujt_cekpetugas'=>$det_iujt_cekpetugas,
-				'det_iujt_cektanggal'=>$det_iujt_cektanggal,
-				'det_iujt_ceknip'=>$det_iujt_ceknip,
-				'det_iujt_catatan'=>$det_iujt_catatan,
-				);
-			$result = $this->m_t_iujt_det->__insert($data, '', '');
+			$dataInti = array(
+				'iujt_usaha'=>$iujt_usaha,
+				'iujt_alamatusaha'=>$iujt_alamatusaha,
+				'iujt_penanggungjawab'=>$iujt_penanggungjawab
+			);
+			$resultInti = $this->m_t_iujt_det->__insert($dataInti, 't_iujt', 'insertId');
+			if($resultInti != 0){
+				$result = 'success';
+				$data = array(
+					'det_iujt_iujt_id'=>$resultInti,
+					'det_iujt_jenis'=>$det_iujt_jenis,
+					'det_iujt_nama'=>$det_iujt_nama,
+					'det_iujt_npwp'=>$det_iujt_npwp,
+					'det_iujt_alamat'=>$det_iujt_alamat,
+					'det_iujt_sk'=>$det_iujt_sk,
+					'det_iujt_berlaku'=>$det_iujt_berlaku,
+					'det_iujt_kadaluarsa'=>$det_iujt_kadaluarsa,
+					'det_iujt_surveylulus'=>$det_iujt_surveylulus,
+					'det_iujt_tanggal'=>$det_iujt_tanggal,
+					'det_iujt_nopermohonan'=>$det_iujt_nopermohonan,
+					'det_iujt_cekpetugas'=>$det_iujt_cekpetugas,
+					'det_iujt_cektanggal'=>$det_iujt_cektanggal,
+					'det_iujt_ceknip'=>$det_iujt_ceknip,
+					'det_iujt_catatan'=>$det_iujt_catatan,
+					);
+				$resultdet = $this->m_t_iujt_det->__insert($data, '', '');
+				for($i=0;$i<count($iujt_cek_syarat_id);$i++){
+					$datacek = array(
+						'iujt_cek_syarat_id'=>$iujt_cek_syarat_id[$i],
+						'iujt_cek_iujt_id'=>$resultInti,
+						'iujt_cek_iujtdet_id'=>$resultdet,
+						'iujt_cek_status'=>$iujt_cek_status[$i],
+						'iujt_cek_keterangan'=>$iujt_cek_keterangan[$i]
+					);
+					$resultcek = $this->m_t_iujt_det->__insert($datacek, 't_iujt_ceklist', 'insertId');
+				}
+			}
 		}
 		echo $result;
 	}
@@ -267,6 +307,55 @@ class C_t_iujt_det extends CI_Controller{
 		}elseif($outputType == 'EXCEL'){
 			$print_file=fopen('print/t_iujt_det_list.xls','w+');
 		}
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function getSyarat(){
+		$currentAction = $this->input->post('currentAction');
+		$iujt_id = $this->input->post('iujt_id');
+		$iujt_det_id = $this->input->post('iujt_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"iujt_id"=>$iujt_id,
+			"iujt_det_id"=>$iujt_det_id
+		);
+		$result = $this->m_t_iujt_det->getSyarat($params);
+		echo $result;
+	}
+	function changeSurveyStatus(){
+		$iujtdet_id  = $this->input->post('iujtdet_id');
+		$lulus  = $this->input->post('lulus');
+		$data = array(
+			"det_iujt_lulussurvey"=>$lulus
+		);
+		$result = $this->m_t_iujt_det->__update($data, $iujtdet_id, '', '');
+		echo $result;
+	}
+	function cetakLembarKontrol(){
+		$iujtdet_id  = $this->input->post('iujtdet_id');
+		$params = array(
+			"det_iujt_id"=>$iujtdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_iujt_det->search($params);
+		$dataceklist = $this->db->where('iujt_cek_iujtdet_id', $iujtdet_id)->join('master_syarat','iujt_cek_syarat_id = ID_SYARAT')->get('t_iujt_ceklist')->result();
+		$data['printrecord'] = $printrecord[1];
+		$data['dataceklist'] = $dataceklist;
+		$print_view=$this->load->view('template/p_iujt_lembarkontrol.php',$data,TRUE);
+		$print_file=fopen('print/iujt_lembarkontrol.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakSk(){
+		$iujtdet_id  = $this->input->post('iujtdet_id');
+		$params = array(
+			"det_iujt_id"=>$iujtdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_iujt_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_iujt_sk.php',$data,TRUE);
+		$print_file=fopen('print/iujt_sk.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
