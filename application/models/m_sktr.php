@@ -2,10 +2,11 @@
 class M_sktr extends App_model{
 	var $mainSql = "SELECT 
 				ID_SKTR,
-				ID_USER,
+				sktr.ID_USER,
+				USER,
 				NAMA_PEMOHON,
 				NO_TELP,
-				HAK_MILIK,
+				if(HAK_MILIK = 1, 'Sertifikat','PPAT') as HAK_MILIK,
 				NAMA_PEMILIK,
 				NO_SURAT_TANAH,
 				ALAMAT_BANGUNAN,
@@ -18,8 +19,8 @@ class M_sktr extends App_model{
 				BATAS_DEPAN,
 				BATAS_BELAKANG,
 				TGL_PERMOHONAN
-				FROM sktr 
-			WHERE ID_SKTR IS NOT NULL 
+				FROM sktr LEFT JOIN master_user ON master_user.ID_USER = sktr.ID_USER
+				WHERE ID_SKTR IS NOT NULL 
 	";
 	
 	function __construct(){

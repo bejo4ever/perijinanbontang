@@ -57,8 +57,9 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 	function create(){
 		$ID_IJIN_LINGKUNGAN_INTI = htmlentities($this->input->post('ID_IJIN_LINGKUNGAN_INTI'),ENT_QUOTES);
 		$ID_IJIN_LINGKUNGAN_INTI = is_numeric($ID_IJIN_LINGKUNGAN_INTI) ? $ID_IJIN_LINGKUNGAN_INTI : 0;
+		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NO_REG = htmlentities($this->input->post('NO_REG'),ENT_QUOTES);
-		$NO_REG = is_numeric($NO_REG) ? $NO_REG : 0;
 		$JENIS_USAHA = htmlentities($this->input->post('JENIS_USAHA'),ENT_QUOTES);
 		$ALAMAT = htmlentities($this->input->post('ALAMAT'),ENT_QUOTES);
 		$ID_KELURAHAN = htmlentities($this->input->post('ID_KELURAHAN'),ENT_QUOTES);
@@ -69,8 +70,8 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 		$ID_KOTA = is_numeric($ID_KOTA) ? $ID_KOTA : 0;
 		$STATUS_LOKASI = htmlentities($this->input->post('STATUS_LOKASI'),ENT_QUOTES);
 		$STATUS_LOKASI = is_numeric($STATUS_LOKASI) ? $STATUS_LOKASI : 0;
-		$LUAS USAHA = htmlentities($this->input->post('LUAS USAHA'),ENT_QUOTES);
-		$LUAS USAHA = is_numeric($LUAS USAHA) ? $LUAS USAHA : 0;
+		$LUAS_USAHA = htmlentities($this->input->post('LUAS_USAHA'),ENT_QUOTES);
+		$LUAS_USAHA = is_numeric($LUAS_USAHA) ? $LUAS_USAHA : 0;
 		$LUAS_BAHAN = htmlentities($this->input->post('LUAS_BAHAN'),ENT_QUOTES);
 		$LUAS_BAHAN = is_numeric($LUAS_BAHAN) ? $LUAS_BAHAN : 0;
 		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
@@ -92,6 +93,7 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 		}else{
 			$data = array(
 				'ID_IJIN_LINGKUNGAN_INTI'=>$ID_IJIN_LINGKUNGAN_INTI,
+				'ID_USER'=>$ID_USER,
 				'NO_REG'=>$NO_REG,
 				'JENIS_USAHA'=>$JENIS_USAHA,
 				'ALAMAT'=>$ALAMAT,
@@ -99,7 +101,7 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 				'ID_KECAMATAN'=>$ID_KECAMATAN,
 				'ID_KOTA'=>$ID_KOTA,
 				'STATUS_LOKASI'=>$STATUS_LOKASI,
-				'LUAS USAHA'=>$LUAS USAHA,
+				'LUAS_USAHA'=>$LUAS_USAHA,
 				'LUAS_BAHAN'=>$LUAS_BAHAN,
 				'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 				'LUAS_RUANG_USAHA'=>$LUAS_RUANG_USAHA,
@@ -115,8 +117,9 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 	function update(){
 		$ID_IJIN_LINGKUNGAN_INTI = htmlentities($this->input->post('ID_IJIN_LINGKUNGAN_INTI'),ENT_QUOTES);
 		$ID_IJIN_LINGKUNGAN_INTI = is_numeric($ID_IJIN_LINGKUNGAN_INTI) ? $ID_IJIN_LINGKUNGAN_INTI : 0;
+		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NO_REG = htmlentities($this->input->post('NO_REG'),ENT_QUOTES);
-		$NO_REG = is_numeric($NO_REG) ? $NO_REG : 0;
 		$JENIS_USAHA = htmlentities($this->input->post('JENIS_USAHA'),ENT_QUOTES);
 		$ALAMAT = htmlentities($this->input->post('ALAMAT'),ENT_QUOTES);
 		$ID_KELURAHAN = htmlentities($this->input->post('ID_KELURAHAN'),ENT_QUOTES);
@@ -127,8 +130,8 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 		$ID_KOTA = is_numeric($ID_KOTA) ? $ID_KOTA : 0;
 		$STATUS_LOKASI = htmlentities($this->input->post('STATUS_LOKASI'),ENT_QUOTES);
 		$STATUS_LOKASI = is_numeric($STATUS_LOKASI) ? $STATUS_LOKASI : 0;
-		$LUAS USAHA = htmlentities($this->input->post('LUAS USAHA'),ENT_QUOTES);
-		$LUAS USAHA = is_numeric($LUAS USAHA) ? $LUAS USAHA : 0;
+		$LUAS_USAHA = htmlentities($this->input->post('LUAS_USAHA'),ENT_QUOTES);
+		$LUAS_USAHA = is_numeric($LUAS_USAHA) ? $LUAS_USAHA : 0;
 		$LUAS_BAHAN = htmlentities($this->input->post('LUAS_BAHAN'),ENT_QUOTES);
 		$LUAS_BAHAN = is_numeric($LUAS_BAHAN) ? $LUAS_BAHAN : 0;
 		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
@@ -149,6 +152,7 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
+				'ID_USER'=>$ID_USER,
 				'NO_REG'=>$NO_REG,
 				'JENIS_USAHA'=>$JENIS_USAHA,
 				'ALAMAT'=>$ALAMAT,
@@ -156,7 +160,7 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 				'ID_KECAMATAN'=>$ID_KECAMATAN,
 				'ID_KOTA'=>$ID_KOTA,
 				'STATUS_LOKASI'=>$STATUS_LOKASI,
-				'LUAS USAHA'=>$LUAS USAHA,
+				'LUAS_USAHA'=>$LUAS_USAHA,
 				'LUAS_BAHAN'=>$LUAS_BAHAN,
 				'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 				'LUAS_RUANG_USAHA'=>$LUAS_RUANG_USAHA,
@@ -179,8 +183,9 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 	function search(){
 		$limit_start = (integer)$this->input->post('start');
 		$limit_end = (integer)$this->input->post('limit');
+		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NO_REG = htmlentities($this->input->post('NO_REG'),ENT_QUOTES);
-		$NO_REG = is_numeric($NO_REG) ? $NO_REG : 0;
 		$JENIS_USAHA = htmlentities($this->input->post('JENIS_USAHA'),ENT_QUOTES);
 		$ALAMAT = htmlentities($this->input->post('ALAMAT'),ENT_QUOTES);
 		$ID_KELURAHAN = htmlentities($this->input->post('ID_KELURAHAN'),ENT_QUOTES);
@@ -191,8 +196,8 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 		$ID_KOTA = is_numeric($ID_KOTA) ? $ID_KOTA : 0;
 		$STATUS_LOKASI = htmlentities($this->input->post('STATUS_LOKASI'),ENT_QUOTES);
 		$STATUS_LOKASI = is_numeric($STATUS_LOKASI) ? $STATUS_LOKASI : 0;
-		$LUAS USAHA = htmlentities($this->input->post('LUAS USAHA'),ENT_QUOTES);
-		$LUAS USAHA = is_numeric($LUAS USAHA) ? $LUAS USAHA : 0;
+		$LUAS_USAHA = htmlentities($this->input->post('LUAS_USAHA'),ENT_QUOTES);
+		$LUAS_USAHA = is_numeric($LUAS_USAHA) ? $LUAS_USAHA : 0;
 		$LUAS_BAHAN = htmlentities($this->input->post('LUAS_BAHAN'),ENT_QUOTES);
 		$LUAS_BAHAN = is_numeric($LUAS_BAHAN) ? $LUAS_BAHAN : 0;
 		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
@@ -207,6 +212,7 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 		$IZIN_LOKASI = is_numeric($IZIN_LOKASI) ? $IZIN_LOKASI : 0;
 				
 		$params = array(
+			'ID_USER'=>$ID_USER,
 			'NO_REG'=>$NO_REG,
 			'JENIS_USAHA'=>$JENIS_USAHA,
 			'ALAMAT'=>$ALAMAT,
@@ -214,7 +220,7 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 			'ID_KECAMATAN'=>$ID_KECAMATAN,
 			'ID_KOTA'=>$ID_KOTA,
 			'STATUS_LOKASI'=>$STATUS_LOKASI,
-			'LUAS USAHA'=>$LUAS USAHA,
+			'LUAS_USAHA'=>$LUAS_USAHA,
 			'LUAS_BAHAN'=>$LUAS_BAHAN,
 			'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 			'LUAS_RUANG_USAHA'=>$LUAS_RUANG_USAHA,
@@ -234,8 +240,9 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 		
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
+		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NO_REG = htmlentities($this->input->post('NO_REG'),ENT_QUOTES);
-		$NO_REG = is_numeric($NO_REG) ? $NO_REG : 0;
 		$JENIS_USAHA = htmlentities($this->input->post('JENIS_USAHA'),ENT_QUOTES);
 		$ALAMAT = htmlentities($this->input->post('ALAMAT'),ENT_QUOTES);
 		$ID_KELURAHAN = htmlentities($this->input->post('ID_KELURAHAN'),ENT_QUOTES);
@@ -246,8 +253,8 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 		$ID_KOTA = is_numeric($ID_KOTA) ? $ID_KOTA : 0;
 		$STATUS_LOKASI = htmlentities($this->input->post('STATUS_LOKASI'),ENT_QUOTES);
 		$STATUS_LOKASI = is_numeric($STATUS_LOKASI) ? $STATUS_LOKASI : 0;
-		$LUAS USAHA = htmlentities($this->input->post('LUAS USAHA'),ENT_QUOTES);
-		$LUAS USAHA = is_numeric($LUAS USAHA) ? $LUAS USAHA : 0;
+		$LUAS_USAHA = htmlentities($this->input->post('LUAS_USAHA'),ENT_QUOTES);
+		$LUAS_USAHA = is_numeric($LUAS_USAHA) ? $LUAS_USAHA : 0;
 		$LUAS_BAHAN = htmlentities($this->input->post('LUAS_BAHAN'),ENT_QUOTES);
 		$LUAS_BAHAN = is_numeric($LUAS_BAHAN) ? $LUAS_BAHAN : 0;
 		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
@@ -263,6 +270,7 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 				
 		$params = array(
 			'searchText' => $searchText,
+			'ID_USER'=>$ID_USER,
 			'NO_REG'=>$NO_REG,
 			'JENIS_USAHA'=>$JENIS_USAHA,
 			'ALAMAT'=>$ALAMAT,
@@ -270,7 +278,7 @@ class C_ijin_lingkungan_inti extends CI_Controller{
 			'ID_KECAMATAN'=>$ID_KECAMATAN,
 			'ID_KOTA'=>$ID_KOTA,
 			'STATUS_LOKASI'=>$STATUS_LOKASI,
-			'LUAS USAHA'=>$LUAS USAHA,
+			'LUAS_USAHA'=>$LUAS_USAHA,
 			'LUAS_BAHAN'=>$LUAS_BAHAN,
 			'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 			'LUAS_RUANG_USAHA'=>$LUAS_RUANG_USAHA,

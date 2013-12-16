@@ -14,6 +14,7 @@
 		var in_lokasi_inti_searchWindow;
 		
 		var ID_IJIN_LOKASI_INTIField;
+		var ID_USERField;
 		var NPWPDField;
 		var NAMA_PERUSAHAANField;
 		var NO_AKTEField;
@@ -31,6 +32,7 @@
 		var ID_DESA_LETAKField;
 		var ID_KECAMATAN_LETAKField;
 				
+		var ID_USERSearchField;
 		var NPWPDSearchField;
 		var NAMA_PERUSAHAANSearchField;
 		var NO_AKTESearchField;
@@ -121,6 +123,7 @@
 			}else{
 				if(in_lokasi_inti_confirmFormValid()){
 					var ID_IJIN_LOKASI_INTIValue = '';
+					var ID_USERValue = '';
 					var NPWPDValue = '';
 					var NAMA_PERUSAHAANValue = '';
 					var NO_AKTEValue = '';
@@ -139,6 +142,7 @@
 					var ID_KECAMATAN_LETAKValue = '';
 										
 					ID_IJIN_LOKASI_INTIValue = ID_IJIN_LOKASI_INTIField.getValue();
+					ID_USERValue = ID_USERField.getValue();
 					NPWPDValue = NPWPDField.getValue();
 					NAMA_PERUSAHAANValue = NAMA_PERUSAHAANField.getValue();
 					NO_AKTEValue = NO_AKTEField.getValue();
@@ -161,6 +165,7 @@
 						url: 'c_ijin_lokasi_inti/switchAction',
 						params: {							
 							ID_IJIN_LOKASI_INTI : ID_IJIN_LOKASI_INTIValue,
+							ID_USER : ID_USERValue,
 							NPWPD : NPWPDValue,
 							NAMA_PERUSAHAAN : NAMA_PERUSAHAANValue,
 							NO_AKTE : NO_AKTEValue,
@@ -330,6 +335,7 @@
 			
 			var record = in_lokasi_inti_gridPanel.getSelectionModel().getSelection()[0];
 			ID_IJIN_LOKASI_INTIField.setValue(record.data.ID_IJIN_LOKASI_INTI);
+			ID_USERField.setValue(record.data.ID_USER);
 			NPWPDField.setValue(record.data.NPWPD);
 			NAMA_PERUSAHAANField.setValue(record.data.NAMA_PERUSAHAAN);
 			NO_AKTEField.setValue(record.data.NO_AKTE);
@@ -355,6 +361,7 @@
 		function in_lokasi_inti_search(){
 			in_lokasi_inti_gridSearchField.reset();
 			
+			var ID_USERValue = '';
 			var NPWPDValue = '';
 			var NAMA_PERUSAHAANValue = '';
 			var NO_AKTEValue = '';
@@ -372,6 +379,7 @@
 			var ID_DESA_LETAKValue = '';
 			var ID_KECAMATAN_LETAKValue = '';
 						
+			ID_USERValue = ID_USERSearchField.getValue();
 			NPWPDValue = NPWPDSearchField.getValue();
 			NAMA_PERUSAHAANValue = NAMA_PERUSAHAANSearchField.getValue();
 			NO_AKTEValue = NO_AKTESearchField.getValue();
@@ -390,6 +398,7 @@
 			ID_KECAMATAN_LETAKValue = ID_KECAMATAN_LETAKSearchField.getValue();
 			in_lokasi_inti_dbListAction = "SEARCH";
 			in_lokasi_inti_dataStore.proxy.extraParams = { 
+				ID_USER : ID_USERValue,
 				NPWPD : NPWPDValue,
 				NAMA_PERUSAHAAN : NAMA_PERUSAHAANValue,
 				NO_AKTE : NO_AKTEValue,
@@ -419,6 +428,7 @@
 		
 		function in_lokasi_inti_printExcel(outputType){
 			var searchText = "";
+			var ID_USERValue = '';
 			var NPWPDValue = '';
 			var NAMA_PERUSAHAANValue = '';
 			var NO_AKTEValue = '';
@@ -437,6 +447,7 @@
 			var ID_KECAMATAN_LETAKValue = '';
 			
 			if(in_lokasi_inti_dataStore.proxy.extraParams.query!==null){searchText = in_lokasi_inti_dataStore.proxy.extraParams.query;}
+			if(in_lokasi_inti_dataStore.proxy.extraParams.ID_USER!==null){ID_USERValue = in_lokasi_inti_dataStore.proxy.extraParams.ID_USER;}
 			if(in_lokasi_inti_dataStore.proxy.extraParams.NPWPD!==null){NPWPDValue = in_lokasi_inti_dataStore.proxy.extraParams.NPWPD;}
 			if(in_lokasi_inti_dataStore.proxy.extraParams.NAMA_PERUSAHAAN!==null){NAMA_PERUSAHAANValue = in_lokasi_inti_dataStore.proxy.extraParams.NAMA_PERUSAHAAN;}
 			if(in_lokasi_inti_dataStore.proxy.extraParams.NO_AKTE!==null){NO_AKTEValue = in_lokasi_inti_dataStore.proxy.extraParams.NO_AKTE;}
@@ -460,6 +471,7 @@
 				params : {
 					action : outputType,
 					query : searchText,
+					ID_USER : ID_USERValue,
 					NPWPD : NPWPDValue,
 					NAMA_PERUSAHAAN : NAMA_PERUSAHAANValue,
 					NO_AKTE : NO_AKTEValue,
@@ -536,6 +548,7 @@
 			}),
 			fields : [
 				{ name : 'ID_IJIN_LOKASI_INTI', type : 'int', mapping : 'ID_IJIN_LOKASI_INTI' },
+				{ name : 'ID_USER', type : 'int', mapping : 'ID_USER' },
 				{ name : 'NPWPD', type : 'string', mapping : 'NPWPD' },
 				{ name : 'NAMA_PERUSAHAAN', type : 'string', mapping : 'NAMA_PERUSAHAAN' },
 				{ name : 'NO_AKTE', type : 'string', mapping : 'NO_AKTE' },
@@ -731,6 +744,12 @@
 			keys : in_lokasi_inti_shorcut,
 			columns : [
 				{
+					text : 'ID_USER',
+					dataIndex : 'ID_USER',
+					width : 100,
+					sortable : false
+				},
+				{
 					text : 'NPWPD',
 					dataIndex : 'NPWPD',
 					width : 100,
@@ -859,6 +878,14 @@
 			blankText : '0',
 			allowDecimals : false,
 			hidden : true,
+			maskRe : /([0-9]+)$/});
+		ID_USERField = Ext.create('Ext.form.NumberField',{
+			id : 'ID_USERField',
+			name : 'ID_USER',
+			fieldLabel : 'ID_USER',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
 		NPWPDField = Ext.create('Ext.form.TextField',{
 			id : 'NPWPDField',
@@ -1002,6 +1029,7 @@
 					flex : 2,
 					items : [
 						ID_IJIN_LOKASI_INTIField,
+						ID_USERField,
 						NPWPDField,
 						NAMA_PERUSAHAANField,
 						NO_AKTEField,
@@ -1043,6 +1071,14 @@
 		});
 /* End FormPanel declaration */
 /* Start SearchPanel declaration */
+		ID_USERSearchField = Ext.create('Ext.form.NumberField',{
+			id : 'ID_USERSearchField',
+			name : 'ID_USER',
+			fieldLabel : 'ID_USER',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,maskRe : /([0-9]+)$/
+		});
 		NPWPDSearchField = Ext.create('Ext.form.TextField',{
 			id : 'NPWPDSearchField',
 			name : 'NPWPD',
@@ -1188,6 +1224,7 @@
 					layout : 'anchor',
 					flex : 2,
 					items : [
+						ID_USERSearchField,
 						NPWPDSearchField,
 						NAMA_PERUSAHAANSearchField,
 						NO_AKTESearchField,

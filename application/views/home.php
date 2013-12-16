@@ -27,9 +27,9 @@
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> Username <i class="caret"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Ubah Password</a></li>
+                                    <li><a href="#">Ubah Password <?php echo $_SESSION['PERIJINAN_USERNAME']; ?></a></li>
                                     <li role="presentation" class="divider"></li>
-                                    <li><a href="#index.html">Logout</a></li>
+                                    <li><a href="<?php echo site_url("c_login/logout"); ?>">Logout</a></li>
                                 </ul>
                             </li>
                         </ul>
@@ -59,6 +59,11 @@
                                     <li><a href="#c_t_idam_det">Depo Air Minum</a></li>
                                     <li><a href="#c_t_ipmbl_det">Pengambilan Mineral Bukan Logam</a></li>
                                     <li><a href="#c_t_iujt_det">Usaha Jasa Titipan</a></li>
+                                    <li><a href="#c_sktr">SKTR</a></li>
+                                    <li><a href="#c_sppl">SPPL</a></li>
+                                    <li><a href="#c_trayek">Trayek</a></li>
+                                    <li><a href="#c_ijin_lingkungan_inti">Lingkungan</a></li>
+                                    <li><a href="#c_ijin_lokasi_inti">Lokasi</a></li>
                                     <li><a href="#c_t_iujk_det">Usaha Jasa Konstruksi</a></li>
                                     <li><a href="#c_t_apotek_det">Izin Apotek</a></li>
                                     <li role="presentation" class="divider"></li>

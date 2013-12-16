@@ -57,8 +57,8 @@ class C_sktr extends CI_Controller{
 	function create(){
 		$ID_SKTR = htmlentities($this->input->post('ID_SKTR'),ENT_QUOTES);
 		$ID_SKTR = is_numeric($ID_SKTR) ? $ID_SKTR : 0;
-		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
-		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
+		// $ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		// $ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
 		$NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
 		$HAK_MILIK = htmlentities($this->input->post('HAK_MILIK'),ENT_QUOTES);
@@ -82,12 +82,12 @@ class C_sktr extends CI_Controller{
 		$tr_author = $this->m_sktr->__checkSession();
 		$tr_created_date = date('Y-m-d H:i:s');
 		
-		if($tr_author != ''){
+		if($tr_author == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
 				'ID_SKTR'=>$ID_SKTR,
-				'ID_USER'=>$ID_USER,
+				'ID_USER'=>$_SESSION['USERID'],
 				'NAMA_PEMOHON'=>$NAMA_PEMOHON,
 				'NO_TELP'=>$NO_TELP,
 				'HAK_MILIK'=>$HAK_MILIK,
@@ -102,7 +102,7 @@ class C_sktr extends CI_Controller{
 				'BATAS_KANAN'=>$BATAS_KANAN,
 				'BATAS_DEPAN'=>$BATAS_DEPAN,
 				'BATAS_BELAKANG'=>$BATAS_BELAKANG,
-				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'TGL_PERMOHONAN'=>date("Y-m-d"),
 				);
 			$result = $this->m_sktr->__insert($data, '', '');
 		}
@@ -137,11 +137,11 @@ class C_sktr extends CI_Controller{
 		$tr_updated_by = $this->m_sktr->__checkSession();
 		$tr_updated_date = date('Y-m-d H:i:s');
 		
-		if($tr_updated_by != ''){
+		if($tr_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
-				'ID_USER'=>$ID_USER,
+				'ID_USER'=>$_SESSION['USERID'],
 				'NAMA_PEMOHON'=>$NAMA_PEMOHON,
 				'NO_TELP'=>$NO_TELP,
 				'HAK_MILIK'=>$HAK_MILIK,
@@ -156,7 +156,7 @@ class C_sktr extends CI_Controller{
 				'BATAS_KANAN'=>$BATAS_KANAN,
 				'BATAS_DEPAN'=>$BATAS_DEPAN,
 				'BATAS_BELAKANG'=>$BATAS_BELAKANG,
-				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				//'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
 				);
 			$result = $this->m_sktr->__update($data, $ID_SKTR, '', '');
 		}

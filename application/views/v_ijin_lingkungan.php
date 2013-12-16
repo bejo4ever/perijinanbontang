@@ -36,6 +36,8 @@
 		var ID_KOTA2Field;
 		var TELP2Field;
 		var JENIS_PERMOHONANField;
+		var TGL_PERMOHONANField;
+		var TGL_AKHIRField;
 				
 		var ID_IJIN_LINGKUNGAN_INTISearchField;
 		var NO_KTPSearchField;
@@ -59,6 +61,8 @@
 		var ID_KOTA2SearchField;
 		var TELP2SearchField;
 		var JENIS_PERMOHONANSearchField;
+		var TGL_PERMOHONANSearchField;
+		var TGL_AKHIRSearchField;
 				
 		var in_lingkungan_dbTask = 'CREATE';
 		var in_lingkungan_dbTaskMessage = 'Tambah';
@@ -155,6 +159,8 @@
 					var ID_KOTA2Value = '';
 					var TELP2Value = '';
 					var JENIS_PERMOHONANValue = '';
+					var TGL_PERMOHONANValue = '';
+					var TGL_AKHIRValue = '';
 										
 					ID_IJIN_LINGUKANGANValue = ID_IJIN_LINGUKANGANField.getValue();
 					ID_IJIN_LINGKUNGAN_INTIValue = ID_IJIN_LINGKUNGAN_INTIField.getValue();
@@ -179,6 +185,8 @@
 					ID_KOTA2Value = ID_KOTA2Field.getValue();
 					TELP2Value = TELP2Field.getValue();
 					JENIS_PERMOHONANValue = JENIS_PERMOHONANField.getValue();
+					TGL_PERMOHONANValue = TGL_PERMOHONANField.getValue();
+					TGL_AKHIRValue = TGL_AKHIRField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -207,6 +215,8 @@
 							ID_KOTA2 : ID_KOTA2Value,
 							TELP2 : TELP2Value,
 							JENIS_PERMOHONAN : JENIS_PERMOHONANValue,
+							TGL_PERMOHONAN : TGL_PERMOHONANValue,
+							TGL_AKHIR : TGL_AKHIRValue,
 							action : in_lingkungan_dbTask
 						},
 						success: function(response){
@@ -382,6 +392,8 @@
 			ID_KOTA2Field.setValue(record.data.ID_KOTA2);
 			TELP2Field.setValue(record.data.TELP2);
 			JENIS_PERMOHONANField.setValue(record.data.JENIS_PERMOHONAN);
+			TGL_PERMOHONANField.setValue(record.data.TGL_PERMOHONAN);
+			TGL_AKHIRField.setValue(record.data.TGL_AKHIR);
 					}
 		
 		function in_lingkungan_showSearchWindow(){
@@ -413,6 +425,8 @@
 			var ID_KOTA2Value = '';
 			var TELP2Value = '';
 			var JENIS_PERMOHONANValue = '';
+			var TGL_PERMOHONANValue = '';
+			var TGL_AKHIRValue = '';
 						
 			ID_IJIN_LINGKUNGAN_INTIValue = ID_IJIN_LINGKUNGAN_INTISearchField.getValue();
 			NO_KTPValue = NO_KTPSearchField.getValue();
@@ -436,6 +450,8 @@
 			ID_KOTA2Value = ID_KOTA2SearchField.getValue();
 			TELP2Value = TELP2SearchField.getValue();
 			JENIS_PERMOHONANValue = JENIS_PERMOHONANSearchField.getValue();
+			TGL_PERMOHONANValue = TGL_PERMOHONANSearchField.getValue();
+			TGL_AKHIRValue = TGL_AKHIRSearchField.getValue();
 			in_lingkungan_dbListAction = "SEARCH";
 			in_lingkungan_dataStore.proxy.extraParams = { 
 				ID_IJIN_LINGKUNGAN_INTI : ID_IJIN_LINGKUNGAN_INTIValue,
@@ -460,6 +476,8 @@
 				ID_KOTA2 : ID_KOTA2Value,
 				TELP2 : TELP2Value,
 				JENIS_PERMOHONAN : JENIS_PERMOHONANValue,
+				TGL_PERMOHONAN : TGL_PERMOHONANValue,
+				TGL_AKHIR : TGL_AKHIRValue,
 				action : 'SEARCH'
 			};
 			in_lingkungan_dataStore.currentPage = 1;
@@ -495,6 +513,8 @@
 			var ID_KOTA2Value = '';
 			var TELP2Value = '';
 			var JENIS_PERMOHONANValue = '';
+			var TGL_PERMOHONANValue = '';
+			var TGL_AKHIRValue = '';
 			
 			if(in_lingkungan_dataStore.proxy.extraParams.query!==null){searchText = in_lingkungan_dataStore.proxy.extraParams.query;}
 			if(in_lingkungan_dataStore.proxy.extraParams.ID_IJIN_LINGKUNGAN_INTI!==null){ID_IJIN_LINGKUNGAN_INTIValue = in_lingkungan_dataStore.proxy.extraParams.ID_IJIN_LINGKUNGAN_INTI;}
@@ -519,6 +539,8 @@
 			if(in_lingkungan_dataStore.proxy.extraParams.ID_KOTA2!==null){ID_KOTA2Value = in_lingkungan_dataStore.proxy.extraParams.ID_KOTA2;}
 			if(in_lingkungan_dataStore.proxy.extraParams.TELP2!==null){TELP2Value = in_lingkungan_dataStore.proxy.extraParams.TELP2;}
 			if(in_lingkungan_dataStore.proxy.extraParams.JENIS_PERMOHONAN!==null){JENIS_PERMOHONANValue = in_lingkungan_dataStore.proxy.extraParams.JENIS_PERMOHONAN;}
+			if(in_lingkungan_dataStore.proxy.extraParams.TGL_PERMOHONAN!==null){TGL_PERMOHONANValue = in_lingkungan_dataStore.proxy.extraParams.TGL_PERMOHONAN;}
+			if(in_lingkungan_dataStore.proxy.extraParams.TGL_AKHIR!==null){TGL_AKHIRValue = in_lingkungan_dataStore.proxy.extraParams.TGL_AKHIR;}
 			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
 			Ext.Ajax.request({
 				waitMsg : 'Please Wait...',
@@ -548,6 +570,8 @@
 					ID_KOTA2 : ID_KOTA2Value,
 					TELP2 : TELP2Value,
 					JENIS_PERMOHONAN : JENIS_PERMOHONANValue,
+					TGL_PERMOHONAN : TGL_PERMOHONANValue,
+					TGL_AKHIR : TGL_AKHIRValue,
 					currentAction : in_lingkungan_dbListAction
 				},
 				success: function(response){
@@ -630,6 +654,8 @@
 				{ name : 'ID_KOTA2', type : 'int', mapping : 'ID_KOTA2' },
 				{ name : 'TELP2', type : 'string', mapping : 'TELP2' },
 				{ name : 'JENIS_PERMOHONAN', type : 'int', mapping : 'JENIS_PERMOHONAN' },
+				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_PERMOHONAN' },
+				{ name : 'TGL_AKHIR', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_AKHIR' },
 				]
 		});
 /* End DataStore declaration */
@@ -940,6 +966,18 @@
 					width : 100,
 					sortable : false
 				},
+				{
+					text : 'TGL_PERMOHONAN',
+					dataIndex : 'TGL_PERMOHONAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TGL_AKHIR',
+					dataIndex : 'TGL_AKHIR',
+					width : 100,
+					sortable : false
+				},
 							
 			],
 			tbar : [
@@ -1124,6 +1162,18 @@
 			blankText : '0',
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
+		TGL_PERMOHONANField = Ext.create('Ext.form.TextField',{
+			id : 'TGL_PERMOHONANField',
+			name : 'TGL_PERMOHONAN',
+			fieldLabel : 'TGL_PERMOHONAN',
+			maxLength : 0
+		});
+		TGL_AKHIRField = Ext.create('Ext.form.TextField',{
+			id : 'TGL_AKHIRField',
+			name : 'TGL_AKHIR',
+			fieldLabel : 'TGL_AKHIR',
+			maxLength : 0
+		});
 		var in_lingkungan_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : in_lingkungan_save
@@ -1178,6 +1228,8 @@
 						ID_KOTA2Field,
 						TELP2Field,
 						JENIS_PERMOHONANField,
+						TGL_PERMOHONANField,
+						TGL_AKHIRField,
 											]
 				}, {
 					xtype : 'splitter'
@@ -1366,6 +1418,20 @@
 			blankText : '0',
 			allowDecimals : false,maskRe : /([0-9]+)$/
 		});
+		TGL_PERMOHONANSearchField = Ext.create('Ext.form.TextField',{
+			id : 'TGL_PERMOHONANSearchField',
+			name : 'TGL_PERMOHONAN',
+			fieldLabel : 'TGL_PERMOHONAN',
+			maxLength : 0
+		
+		});
+		TGL_AKHIRSearchField = Ext.create('Ext.form.TextField',{
+			id : 'TGL_AKHIRSearchField',
+			name : 'TGL_AKHIR',
+			fieldLabel : 'TGL_AKHIR',
+			maxLength : 0
+		
+		});
 		var in_lingkungan_searchingButton = Ext.create('Ext.Button',{
 			text : globalSearchingButtonTitle,
 			handler : in_lingkungan_search
@@ -1414,6 +1480,8 @@
 						ID_KOTA2SearchField,
 						TELP2SearchField,
 						JENIS_PERMOHONANSearchField,
+						TGL_PERMOHONANSearchField,
+						TGL_AKHIRSearchField,
 						]
 				}],
 			buttons : [in_lingkungan_searchingButton,in_lingkungan_cancelSearchButton]

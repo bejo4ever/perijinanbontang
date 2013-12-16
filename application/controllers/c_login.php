@@ -15,9 +15,10 @@ class C_login extends CI_Controller{
 		echo $result;
 	}
 	function logout(){
-		$_SESSION['PERIJINAN_USERNAME']='';
-		$_SESSION['PERIJINAN_NAMA']='';
-		$_SESSION['PERIJINAN_NIP']='';
+		$_SESSION['USERID']	='';
+		$_SESSION['PERIJINAN_USERNAME']	='';
+		$_SESSION['PERIJINAN_NAMA']		='';
+		$_SESSION['PERIJINAN_NIP']		='';
 		session_destroy();
 		redirect('/home');
 	}

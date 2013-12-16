@@ -57,6 +57,8 @@ class C_ijin_lokasi_inti extends CI_Controller{
 	function create(){
 		$ID_IJIN_LOKASI_INTI = htmlentities($this->input->post('ID_IJIN_LOKASI_INTI'),ENT_QUOTES);
 		$ID_IJIN_LOKASI_INTI = is_numeric($ID_IJIN_LOKASI_INTI) ? $ID_IJIN_LOKASI_INTI : 0;
+		// $ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		// $ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NPWPD = htmlentities($this->input->post('NPWPD'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NO_AKTE = htmlentities($this->input->post('NO_AKTE'),ENT_QUOTES);
@@ -84,11 +86,12 @@ class C_ijin_lokasi_inti extends CI_Controller{
 		$in_lokasi_inti_author = $this->m_ijin_lokasi_inti->__checkSession();
 		$in_lokasi_inti_created_date = date('Y-m-d H:i:s');
 		
-		if(!$in_lokasi_inti_author){
+		if($in_lokasi_inti_author != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
 				'ID_IJIN_LOKASI_INTI'=>$ID_IJIN_LOKASI_INTI,
+				'ID_USER'=>$this->session->userdata("ID_USER"),
 				'NPWPD'=>$NPWPD,
 				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 				'NO_AKTE'=>$NO_AKTE,
@@ -114,6 +117,8 @@ class C_ijin_lokasi_inti extends CI_Controller{
 	function update(){
 		$ID_IJIN_LOKASI_INTI = htmlentities($this->input->post('ID_IJIN_LOKASI_INTI'),ENT_QUOTES);
 		$ID_IJIN_LOKASI_INTI = is_numeric($ID_IJIN_LOKASI_INTI) ? $ID_IJIN_LOKASI_INTI : 0;
+		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NPWPD = htmlentities($this->input->post('NPWPD'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NO_AKTE = htmlentities($this->input->post('NO_AKTE'),ENT_QUOTES);
@@ -141,10 +146,11 @@ class C_ijin_lokasi_inti extends CI_Controller{
 		$in_lokasi_inti_updated_by = $this->m_ijin_lokasi_inti->__checkSession();
 		$in_lokasi_inti_updated_date = date('Y-m-d H:i:s');
 		
-		if(!$in_lokasi_inti_updated_by){
+		if($in_lokasi_inti_updated_by != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
+				'ID_USER'=>$ID_USER,
 				'NPWPD'=>$NPWPD,
 				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 				'NO_AKTE'=>$NO_AKTE,
@@ -177,6 +183,8 @@ class C_ijin_lokasi_inti extends CI_Controller{
 	function search(){
 		$limit_start = (integer)$this->input->post('start');
 		$limit_end = (integer)$this->input->post('limit');
+		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NPWPD = htmlentities($this->input->post('NPWPD'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NO_AKTE = htmlentities($this->input->post('NO_AKTE'),ENT_QUOTES);
@@ -202,6 +210,7 @@ class C_ijin_lokasi_inti extends CI_Controller{
 		$ID_KECAMATAN_LETAK = is_numeric($ID_KECAMATAN_LETAK) ? $ID_KECAMATAN_LETAK : 0;
 				
 		$params = array(
+			'ID_USER'=>$ID_USER,
 			'NPWPD'=>$NPWPD,
 			'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 			'NO_AKTE'=>$NO_AKTE,
@@ -231,6 +240,8 @@ class C_ijin_lokasi_inti extends CI_Controller{
 		
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
+		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$NPWPD = htmlentities($this->input->post('NPWPD'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NO_AKTE = htmlentities($this->input->post('NO_AKTE'),ENT_QUOTES);
@@ -257,6 +268,7 @@ class C_ijin_lokasi_inti extends CI_Controller{
 				
 		$params = array(
 			'searchText' => $searchText,
+			'ID_USER'=>$ID_USER,
 			'NPWPD'=>$NPWPD,
 			'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 			'NO_AKTE'=>$NO_AKTE,
@@ -279,7 +291,8 @@ class C_ijin_lokasi_inti extends CI_Controller{
 			'limit_end' => 0
 		);
 		
-		$data['records'] = $this->m_ijin_lokasi_inti->printExcel($params)[1];
+		$record = $this->m_ijin_lokasi_inti->printExcel($params);
+		$data['records'] = $record[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_ijin_lokasi_inti.php',$data,TRUE);

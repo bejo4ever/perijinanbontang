@@ -66,7 +66,7 @@ class C_cek_list_lokasi extends CI_Controller{
 		$k_list_lokasi_author = $this->m_cek_list_lokasi->__checkSession();
 		$k_list_lokasi_created_date = date('Y-m-d H:i:s');
 		
-		if(!$k_list_lokasi_author){
+		if($k_list_lokasi_author != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -92,7 +92,7 @@ class C_cek_list_lokasi extends CI_Controller{
 		$k_list_lokasi_updated_by = $this->m_cek_list_lokasi->__checkSession();
 		$k_list_lokasi_updated_date = date('Y-m-d H:i:s');
 		
-		if(!$k_list_lokasi_updated_by){
+		if($k_list_lokasi_updated_by != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -148,7 +148,8 @@ class C_cek_list_lokasi extends CI_Controller{
 			'limit_end' => 0
 		);
 		
-		$data['records'] = $this->m_cek_list_lokasi->printExcel($params)[1];
+		$record = $this->m_cek_list_lokasi->printExcel($params);
+		$data['records'] = $record[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_cek_list_lokasi.php',$data,TRUE);

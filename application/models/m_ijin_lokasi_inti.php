@@ -2,6 +2,7 @@
 class M_ijin_lokasi_inti extends App_model{
 	var $mainSql = "SELECT 
 				ID_IJIN_LOKASI_INTI,
+				ID_USER,
 				NPWPD,
 				NAMA_PERUSAHAAN,
 				NO_AKTE,
@@ -36,6 +37,7 @@ class M_ijin_lokasi_inti extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
+					ID_USER LIKE '%".$searchText."%' OR 
 					NPWPD LIKE '%".$searchText."%' OR 
 					NAMA_PERUSAHAAN LIKE '%".$searchText."%' OR 
 					NO_AKTE LIKE '%".$searchText."%' OR 
@@ -67,6 +69,9 @@ class M_ijin_lokasi_inti extends App_model{
 		
 		$sql = $this->mainSql;
 		
+		if(@$ID_USER != ''){
+			$sql .= " AND ID_USER LIKE '%".$ID_USER."%' ";
+		}
 		if(@$NPWPD != ''){
 			$sql .= " AND NPWPD LIKE '%".$NPWPD."%' ";
 		}
