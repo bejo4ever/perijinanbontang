@@ -59,28 +59,46 @@ class C_t_iujk_det extends CI_Controller{
 		$det_iujk_id = is_numeric($det_iujk_id) ? $det_iujk_id : 0;
 		$det_iujk_iujk_id = htmlentities($this->input->post('det_iujk_iujk_id'),ENT_QUOTES);
 		$det_iujk_iujk_id = is_numeric($det_iujk_iujk_id) ? $det_iujk_iujk_id : 0;
+		$det_iujk_jenis = htmlentities($this->input->post('det_iujk_jenis'),ENT_QUOTES);
+		$det_iujk_jenis = is_numeric($det_iujk_jenis) ? $det_iujk_jenis : 0;
+		$det_iujk_tanggal = htmlentities($this->input->post('det_iujk_tanggal'),ENT_QUOTES);
 		$det_iujk_nama = htmlentities($this->input->post('det_iujk_nama'),ENT_QUOTES);
-		$det_iujk_perusahaan = htmlentities($this->input->post('det_iujk_perusahaan'),ENT_QUOTES);
-		$det_iujk_direktur = htmlentities($this->input->post('det_iujk_direktur'),ENT_QUOTES);
-		$det_iujk_alamatusaha = htmlentities($this->input->post('det_iujk_alamatusaha'),ENT_QUOTES);
 		$det_iujk_nomorreg = htmlentities($this->input->post('det_iujk_nomorreg'),ENT_QUOTES);
-		$det_iujk_tanggalreg = htmlentities($this->input->post('det_iujk_tanggalreg'),ENT_QUOTES);
+		$det_iujk_rekomnomor = htmlentities($this->input->post('det_iujk_rekomnomor'),ENT_QUOTES);
+		$det_iujk_rekomtanggal = htmlentities($this->input->post('det_iujk_rekomtanggal'),ENT_QUOTES);
+		$det_iujk_berlaku = htmlentities($this->input->post('det_iujk_berlaku'),ENT_QUOTES);
+		$det_iujk_kadaluarsa = htmlentities($this->input->post('det_iujk_kadaluarsa'),ENT_QUOTES);
+		$det_iujk_pj1 = htmlentities($this->input->post('det_iujk_pj1'),ENT_QUOTES);
+		$det_iujk_pj2 = htmlentities($this->input->post('det_iujk_pj2'),ENT_QUOTES);
+		$det_iujk_pj3 = htmlentities($this->input->post('det_iujk_pj3'),ENT_QUOTES);
+		$det_iujk_pjteknis = htmlentities($this->input->post('det_iujk_pjteknis'),ENT_QUOTES);
+		$det_iujk_pjtbu = htmlentities($this->input->post('det_iujk_pjtbu'),ENT_QUOTES);
+		$det_iujk_surveylulus = htmlentities($this->input->post('det_iujk_surveylulus'),ENT_QUOTES);
+		$det_iujk_surveylulus = is_numeric($det_iujk_surveylulus) ? $det_iujk_surveylulus : 0;
 				
 		$iujk_det_author = $this->m_t_iujk_det->__checkSession();
 		$iujk_det_created_date = date('Y-m-d H:i:s');
 		
-		if(!$iujk_det_author){
+		if($iujk_det_author != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
 				'det_iujk_id'=>$det_iujk_id,
 				'det_iujk_iujk_id'=>$det_iujk_iujk_id,
+				'det_iujk_jenis'=>$det_iujk_jenis,
+				'det_iujk_tanggal'=>$det_iujk_tanggal,
 				'det_iujk_nama'=>$det_iujk_nama,
-				'det_iujk_perusahaan'=>$det_iujk_perusahaan,
-				'det_iujk_direktur'=>$det_iujk_direktur,
-				'det_iujk_alamatusaha'=>$det_iujk_alamatusaha,
 				'det_iujk_nomorreg'=>$det_iujk_nomorreg,
-				'det_iujk_tanggalreg'=>$det_iujk_tanggalreg,
+				'det_iujk_rekomnomor'=>$det_iujk_rekomnomor,
+				'det_iujk_rekomtanggal'=>$det_iujk_rekomtanggal,
+				'det_iujk_berlaku'=>$det_iujk_berlaku,
+				'det_iujk_kadaluarsa'=>$det_iujk_kadaluarsa,
+				'det_iujk_pj1'=>$det_iujk_pj1,
+				'det_iujk_pj2'=>$det_iujk_pj2,
+				'det_iujk_pj3'=>$det_iujk_pj3,
+				'det_iujk_pjteknis'=>$det_iujk_pjteknis,
+				'det_iujk_pjtbu'=>$det_iujk_pjtbu,
+				'det_iujk_surveylulus'=>$det_iujk_surveylulus,
 				);
 			$result = $this->m_t_iujk_det->__insert($data, '', '');
 		}
@@ -92,27 +110,45 @@ class C_t_iujk_det extends CI_Controller{
 		$det_iujk_id = is_numeric($det_iujk_id) ? $det_iujk_id : 0;
 		$det_iujk_iujk_id = htmlentities($this->input->post('det_iujk_iujk_id'),ENT_QUOTES);
 		$det_iujk_iujk_id = is_numeric($det_iujk_iujk_id) ? $det_iujk_iujk_id : 0;
+		$det_iujk_jenis = htmlentities($this->input->post('det_iujk_jenis'),ENT_QUOTES);
+		$det_iujk_jenis = is_numeric($det_iujk_jenis) ? $det_iujk_jenis : 0;
+		$det_iujk_tanggal = htmlentities($this->input->post('det_iujk_tanggal'),ENT_QUOTES);
 		$det_iujk_nama = htmlentities($this->input->post('det_iujk_nama'),ENT_QUOTES);
-		$det_iujk_perusahaan = htmlentities($this->input->post('det_iujk_perusahaan'),ENT_QUOTES);
-		$det_iujk_direktur = htmlentities($this->input->post('det_iujk_direktur'),ENT_QUOTES);
-		$det_iujk_alamatusaha = htmlentities($this->input->post('det_iujk_alamatusaha'),ENT_QUOTES);
 		$det_iujk_nomorreg = htmlentities($this->input->post('det_iujk_nomorreg'),ENT_QUOTES);
-		$det_iujk_tanggalreg = htmlentities($this->input->post('det_iujk_tanggalreg'),ENT_QUOTES);
+		$det_iujk_rekomnomor = htmlentities($this->input->post('det_iujk_rekomnomor'),ENT_QUOTES);
+		$det_iujk_rekomtanggal = htmlentities($this->input->post('det_iujk_rekomtanggal'),ENT_QUOTES);
+		$det_iujk_berlaku = htmlentities($this->input->post('det_iujk_berlaku'),ENT_QUOTES);
+		$det_iujk_kadaluarsa = htmlentities($this->input->post('det_iujk_kadaluarsa'),ENT_QUOTES);
+		$det_iujk_pj1 = htmlentities($this->input->post('det_iujk_pj1'),ENT_QUOTES);
+		$det_iujk_pj2 = htmlentities($this->input->post('det_iujk_pj2'),ENT_QUOTES);
+		$det_iujk_pj3 = htmlentities($this->input->post('det_iujk_pj3'),ENT_QUOTES);
+		$det_iujk_pjteknis = htmlentities($this->input->post('det_iujk_pjteknis'),ENT_QUOTES);
+		$det_iujk_pjtbu = htmlentities($this->input->post('det_iujk_pjtbu'),ENT_QUOTES);
+		$det_iujk_surveylulus = htmlentities($this->input->post('det_iujk_surveylulus'),ENT_QUOTES);
+		$det_iujk_surveylulus = is_numeric($det_iujk_surveylulus) ? $det_iujk_surveylulus : 0;
 				
 		$iujk_det_updated_by = $this->m_t_iujk_det->__checkSession();
 		$iujk_det_updated_date = date('Y-m-d H:i:s');
 		
-		if(!$iujk_det_updated_by){
+		if($iujk_det_updated_by != ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
 				'det_iujk_iujk_id'=>$det_iujk_iujk_id,
+				'det_iujk_jenis'=>$det_iujk_jenis,
+				'det_iujk_tanggal'=>$det_iujk_tanggal,
 				'det_iujk_nama'=>$det_iujk_nama,
-				'det_iujk_perusahaan'=>$det_iujk_perusahaan,
-				'det_iujk_direktur'=>$det_iujk_direktur,
-				'det_iujk_alamatusaha'=>$det_iujk_alamatusaha,
 				'det_iujk_nomorreg'=>$det_iujk_nomorreg,
-				'det_iujk_tanggalreg'=>$det_iujk_tanggalreg,
+				'det_iujk_rekomnomor'=>$det_iujk_rekomnomor,
+				'det_iujk_rekomtanggal'=>$det_iujk_rekomtanggal,
+				'det_iujk_berlaku'=>$det_iujk_berlaku,
+				'det_iujk_kadaluarsa'=>$det_iujk_kadaluarsa,
+				'det_iujk_pj1'=>$det_iujk_pj1,
+				'det_iujk_pj2'=>$det_iujk_pj2,
+				'det_iujk_pj3'=>$det_iujk_pj3,
+				'det_iujk_pjteknis'=>$det_iujk_pjteknis,
+				'det_iujk_pjtbu'=>$det_iujk_pjtbu,
+				'det_iujk_surveylulus'=>$det_iujk_surveylulus,
 				);
 			$result = $this->m_t_iujk_det->__update($data, $det_iujk_id, '', '');
 		}
@@ -131,21 +167,39 @@ class C_t_iujk_det extends CI_Controller{
 		$limit_end = (integer)$this->input->post('limit');
 		$det_iujk_iujk_id = htmlentities($this->input->post('det_iujk_iujk_id'),ENT_QUOTES);
 		$det_iujk_iujk_id = is_numeric($det_iujk_iujk_id) ? $det_iujk_iujk_id : 0;
+		$det_iujk_jenis = htmlentities($this->input->post('det_iujk_jenis'),ENT_QUOTES);
+		$det_iujk_jenis = is_numeric($det_iujk_jenis) ? $det_iujk_jenis : 0;
+		$det_iujk_tanggal = htmlentities($this->input->post('det_iujk_tanggal'),ENT_QUOTES);
 		$det_iujk_nama = htmlentities($this->input->post('det_iujk_nama'),ENT_QUOTES);
-		$det_iujk_perusahaan = htmlentities($this->input->post('det_iujk_perusahaan'),ENT_QUOTES);
-		$det_iujk_direktur = htmlentities($this->input->post('det_iujk_direktur'),ENT_QUOTES);
-		$det_iujk_alamatusaha = htmlentities($this->input->post('det_iujk_alamatusaha'),ENT_QUOTES);
 		$det_iujk_nomorreg = htmlentities($this->input->post('det_iujk_nomorreg'),ENT_QUOTES);
-		$det_iujk_tanggalreg = htmlentities($this->input->post('det_iujk_tanggalreg'),ENT_QUOTES);
+		$det_iujk_rekomnomor = htmlentities($this->input->post('det_iujk_rekomnomor'),ENT_QUOTES);
+		$det_iujk_rekomtanggal = htmlentities($this->input->post('det_iujk_rekomtanggal'),ENT_QUOTES);
+		$det_iujk_berlaku = htmlentities($this->input->post('det_iujk_berlaku'),ENT_QUOTES);
+		$det_iujk_kadaluarsa = htmlentities($this->input->post('det_iujk_kadaluarsa'),ENT_QUOTES);
+		$det_iujk_pj1 = htmlentities($this->input->post('det_iujk_pj1'),ENT_QUOTES);
+		$det_iujk_pj2 = htmlentities($this->input->post('det_iujk_pj2'),ENT_QUOTES);
+		$det_iujk_pj3 = htmlentities($this->input->post('det_iujk_pj3'),ENT_QUOTES);
+		$det_iujk_pjteknis = htmlentities($this->input->post('det_iujk_pjteknis'),ENT_QUOTES);
+		$det_iujk_pjtbu = htmlentities($this->input->post('det_iujk_pjtbu'),ENT_QUOTES);
+		$det_iujk_surveylulus = htmlentities($this->input->post('det_iujk_surveylulus'),ENT_QUOTES);
+		$det_iujk_surveylulus = is_numeric($det_iujk_surveylulus) ? $det_iujk_surveylulus : 0;
 				
 		$params = array(
 			'det_iujk_iujk_id'=>$det_iujk_iujk_id,
+			'det_iujk_jenis'=>$det_iujk_jenis,
+			'det_iujk_tanggal'=>$det_iujk_tanggal,
 			'det_iujk_nama'=>$det_iujk_nama,
-			'det_iujk_perusahaan'=>$det_iujk_perusahaan,
-			'det_iujk_direktur'=>$det_iujk_direktur,
-			'det_iujk_alamatusaha'=>$det_iujk_alamatusaha,
 			'det_iujk_nomorreg'=>$det_iujk_nomorreg,
-			'det_iujk_tanggalreg'=>$det_iujk_tanggalreg,
+			'det_iujk_rekomnomor'=>$det_iujk_rekomnomor,
+			'det_iujk_rekomtanggal'=>$det_iujk_rekomtanggal,
+			'det_iujk_berlaku'=>$det_iujk_berlaku,
+			'det_iujk_kadaluarsa'=>$det_iujk_kadaluarsa,
+			'det_iujk_pj1'=>$det_iujk_pj1,
+			'det_iujk_pj2'=>$det_iujk_pj2,
+			'det_iujk_pj3'=>$det_iujk_pj3,
+			'det_iujk_pjteknis'=>$det_iujk_pjteknis,
+			'det_iujk_pjtbu'=>$det_iujk_pjtbu,
+			'det_iujk_surveylulus'=>$det_iujk_surveylulus,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -161,29 +215,48 @@ class C_t_iujk_det extends CI_Controller{
 		$currentAction = $this->input->post('currentAction');
 		$det_iujk_iujk_id = htmlentities($this->input->post('det_iujk_iujk_id'),ENT_QUOTES);
 		$det_iujk_iujk_id = is_numeric($det_iujk_iujk_id) ? $det_iujk_iujk_id : 0;
+		$det_iujk_jenis = htmlentities($this->input->post('det_iujk_jenis'),ENT_QUOTES);
+		$det_iujk_jenis = is_numeric($det_iujk_jenis) ? $det_iujk_jenis : 0;
+		$det_iujk_tanggal = htmlentities($this->input->post('det_iujk_tanggal'),ENT_QUOTES);
 		$det_iujk_nama = htmlentities($this->input->post('det_iujk_nama'),ENT_QUOTES);
-		$det_iujk_perusahaan = htmlentities($this->input->post('det_iujk_perusahaan'),ENT_QUOTES);
-		$det_iujk_direktur = htmlentities($this->input->post('det_iujk_direktur'),ENT_QUOTES);
-		$det_iujk_alamatusaha = htmlentities($this->input->post('det_iujk_alamatusaha'),ENT_QUOTES);
 		$det_iujk_nomorreg = htmlentities($this->input->post('det_iujk_nomorreg'),ENT_QUOTES);
-		$det_iujk_tanggalreg = htmlentities($this->input->post('det_iujk_tanggalreg'),ENT_QUOTES);
+		$det_iujk_rekomnomor = htmlentities($this->input->post('det_iujk_rekomnomor'),ENT_QUOTES);
+		$det_iujk_rekomtanggal = htmlentities($this->input->post('det_iujk_rekomtanggal'),ENT_QUOTES);
+		$det_iujk_berlaku = htmlentities($this->input->post('det_iujk_berlaku'),ENT_QUOTES);
+		$det_iujk_kadaluarsa = htmlentities($this->input->post('det_iujk_kadaluarsa'),ENT_QUOTES);
+		$det_iujk_pj1 = htmlentities($this->input->post('det_iujk_pj1'),ENT_QUOTES);
+		$det_iujk_pj2 = htmlentities($this->input->post('det_iujk_pj2'),ENT_QUOTES);
+		$det_iujk_pj3 = htmlentities($this->input->post('det_iujk_pj3'),ENT_QUOTES);
+		$det_iujk_pjteknis = htmlentities($this->input->post('det_iujk_pjteknis'),ENT_QUOTES);
+		$det_iujk_pjtbu = htmlentities($this->input->post('det_iujk_pjtbu'),ENT_QUOTES);
+		$det_iujk_surveylulus = htmlentities($this->input->post('det_iujk_surveylulus'),ENT_QUOTES);
+		$det_iujk_surveylulus = is_numeric($det_iujk_surveylulus) ? $det_iujk_surveylulus : 0;
 				
 		$params = array(
 			'searchText' => $searchText,
 			'det_iujk_iujk_id'=>$det_iujk_iujk_id,
+			'det_iujk_jenis'=>$det_iujk_jenis,
+			'det_iujk_tanggal'=>$det_iujk_tanggal,
 			'det_iujk_nama'=>$det_iujk_nama,
-			'det_iujk_perusahaan'=>$det_iujk_perusahaan,
-			'det_iujk_direktur'=>$det_iujk_direktur,
-			'det_iujk_alamatusaha'=>$det_iujk_alamatusaha,
 			'det_iujk_nomorreg'=>$det_iujk_nomorreg,
-			'det_iujk_tanggalreg'=>$det_iujk_tanggalreg,
+			'det_iujk_rekomnomor'=>$det_iujk_rekomnomor,
+			'det_iujk_rekomtanggal'=>$det_iujk_rekomtanggal,
+			'det_iujk_berlaku'=>$det_iujk_berlaku,
+			'det_iujk_kadaluarsa'=>$det_iujk_kadaluarsa,
+			'det_iujk_pj1'=>$det_iujk_pj1,
+			'det_iujk_pj2'=>$det_iujk_pj2,
+			'det_iujk_pj3'=>$det_iujk_pj3,
+			'det_iujk_pjteknis'=>$det_iujk_pjteknis,
+			'det_iujk_pjtbu'=>$det_iujk_pjtbu,
+			'det_iujk_surveylulus'=>$det_iujk_surveylulus,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
 			'limit_end' => 0
 		);
 		
-		$data['records'] = $this->m_t_iujk_det->printExcel($params)[1];
+		$record = $this->m_t_iujk_det->printExcel($params);
+		$data['records'] = $record[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_t_iujk_det.php',$data,TRUE);

@@ -15,20 +15,36 @@
 		
 		var det_iujk_idField;
 		var det_iujk_iujk_idField;
+		var det_iujk_jenisField;
+		var det_iujk_tanggalField;
 		var det_iujk_namaField;
-		var det_iujk_perusahaanField;
-		var det_iujk_direkturField;
-		var det_iujk_alamatusahaField;
 		var det_iujk_nomorregField;
-		var det_iujk_tanggalregField;
+		var det_iujk_rekomnomorField;
+		var det_iujk_rekomtanggalField;
+		var det_iujk_berlakuField;
+		var det_iujk_kadaluarsaField;
+		var det_iujk_pj1Field;
+		var det_iujk_pj2Field;
+		var det_iujk_pj3Field;
+		var det_iujk_pjteknisField;
+		var det_iujk_pjtbuField;
+		var det_iujk_surveylulusField;
 				
 		var det_iujk_iujk_idSearchField;
+		var det_iujk_jenisSearchField;
+		var det_iujk_tanggalSearchField;
 		var det_iujk_namaSearchField;
-		var det_iujk_perusahaanSearchField;
-		var det_iujk_direkturSearchField;
-		var det_iujk_alamatusahaSearchField;
 		var det_iujk_nomorregSearchField;
-		var det_iujk_tanggalregSearchField;
+		var det_iujk_rekomnomorSearchField;
+		var det_iujk_rekomtanggalSearchField;
+		var det_iujk_berlakuSearchField;
+		var det_iujk_kadaluarsaSearchField;
+		var det_iujk_pj1SearchField;
+		var det_iujk_pj2SearchField;
+		var det_iujk_pj3SearchField;
+		var det_iujk_pjteknisSearchField;
+		var det_iujk_pjtbuSearchField;
+		var det_iujk_surveylulusSearchField;
 				
 		var iujk_det_dbTask = 'CREATE';
 		var iujk_det_dbTaskMessage = 'Tambah';
@@ -104,21 +120,37 @@
 				if(iujk_det_confirmFormValid()){
 					var det_iujk_idValue = '';
 					var det_iujk_iujk_idValue = '';
+					var det_iujk_jenisValue = '';
+					var det_iujk_tanggalValue = '';
 					var det_iujk_namaValue = '';
-					var det_iujk_perusahaanValue = '';
-					var det_iujk_direkturValue = '';
-					var det_iujk_alamatusahaValue = '';
 					var det_iujk_nomorregValue = '';
-					var det_iujk_tanggalregValue = '';
+					var det_iujk_rekomnomorValue = '';
+					var det_iujk_rekomtanggalValue = '';
+					var det_iujk_berlakuValue = '';
+					var det_iujk_kadaluarsaValue = '';
+					var det_iujk_pj1Value = '';
+					var det_iujk_pj2Value = '';
+					var det_iujk_pj3Value = '';
+					var det_iujk_pjteknisValue = '';
+					var det_iujk_pjtbuValue = '';
+					var det_iujk_surveylulusValue = '';
 										
 					det_iujk_idValue = det_iujk_idField.getValue();
 					det_iujk_iujk_idValue = det_iujk_iujk_idField.getValue();
+					det_iujk_jenisValue = det_iujk_jenisField.getValue();
+					det_iujk_tanggalValue = det_iujk_tanggalField.getValue();
 					det_iujk_namaValue = det_iujk_namaField.getValue();
-					det_iujk_perusahaanValue = det_iujk_perusahaanField.getValue();
-					det_iujk_direkturValue = det_iujk_direkturField.getValue();
-					det_iujk_alamatusahaValue = det_iujk_alamatusahaField.getValue();
 					det_iujk_nomorregValue = det_iujk_nomorregField.getValue();
-					det_iujk_tanggalregValue = det_iujk_tanggalregField.getValue();
+					det_iujk_rekomnomorValue = det_iujk_rekomnomorField.getValue();
+					det_iujk_rekomtanggalValue = det_iujk_rekomtanggalField.getValue();
+					det_iujk_berlakuValue = det_iujk_berlakuField.getValue();
+					det_iujk_kadaluarsaValue = det_iujk_kadaluarsaField.getValue();
+					det_iujk_pj1Value = det_iujk_pj1Field.getValue();
+					det_iujk_pj2Value = det_iujk_pj2Field.getValue();
+					det_iujk_pj3Value = det_iujk_pj3Field.getValue();
+					det_iujk_pjteknisValue = det_iujk_pjteknisField.getValue();
+					det_iujk_pjtbuValue = det_iujk_pjtbuField.getValue();
+					det_iujk_surveylulusValue = det_iujk_surveylulusField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -126,12 +158,20 @@
 						params: {							
 							det_iujk_id : det_iujk_idValue,
 							det_iujk_iujk_id : det_iujk_iujk_idValue,
+							det_iujk_jenis : det_iujk_jenisValue,
+							det_iujk_tanggal : det_iujk_tanggalValue,
 							det_iujk_nama : det_iujk_namaValue,
-							det_iujk_perusahaan : det_iujk_perusahaanValue,
-							det_iujk_direktur : det_iujk_direkturValue,
-							det_iujk_alamatusaha : det_iujk_alamatusahaValue,
 							det_iujk_nomorreg : det_iujk_nomorregValue,
-							det_iujk_tanggalreg : det_iujk_tanggalregValue,
+							det_iujk_rekomnomor : det_iujk_rekomnomorValue,
+							det_iujk_rekomtanggal : det_iujk_rekomtanggalValue,
+							det_iujk_berlaku : det_iujk_berlakuValue,
+							det_iujk_kadaluarsa : det_iujk_kadaluarsaValue,
+							det_iujk_pj1 : det_iujk_pj1Value,
+							det_iujk_pj2 : det_iujk_pj2Value,
+							det_iujk_pj3 : det_iujk_pj3Value,
+							det_iujk_pjteknis : det_iujk_pjteknisValue,
+							det_iujk_pjtbu : det_iujk_pjtbuValue,
+							det_iujk_surveylulus : det_iujk_surveylulusValue,
 							action : iujk_det_dbTask
 						},
 						success: function(response){
@@ -286,12 +326,20 @@
 			var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
 			det_iujk_idField.setValue(record.data.det_iujk_id);
 			det_iujk_iujk_idField.setValue(record.data.det_iujk_iujk_id);
+			det_iujk_jenisField.setValue(record.data.det_iujk_jenis);
+			det_iujk_tanggalField.setValue(record.data.det_iujk_tanggal);
 			det_iujk_namaField.setValue(record.data.det_iujk_nama);
-			det_iujk_perusahaanField.setValue(record.data.det_iujk_perusahaan);
-			det_iujk_direkturField.setValue(record.data.det_iujk_direktur);
-			det_iujk_alamatusahaField.setValue(record.data.det_iujk_alamatusaha);
 			det_iujk_nomorregField.setValue(record.data.det_iujk_nomorreg);
-			det_iujk_tanggalregField.setValue(record.data.det_iujk_tanggalreg);
+			det_iujk_rekomnomorField.setValue(record.data.det_iujk_rekomnomor);
+			det_iujk_rekomtanggalField.setValue(record.data.det_iujk_rekomtanggal);
+			det_iujk_berlakuField.setValue(record.data.det_iujk_berlaku);
+			det_iujk_kadaluarsaField.setValue(record.data.det_iujk_kadaluarsa);
+			det_iujk_pj1Field.setValue(record.data.det_iujk_pj1);
+			det_iujk_pj2Field.setValue(record.data.det_iujk_pj2);
+			det_iujk_pj3Field.setValue(record.data.det_iujk_pj3);
+			det_iujk_pjteknisField.setValue(record.data.det_iujk_pjteknis);
+			det_iujk_pjtbuField.setValue(record.data.det_iujk_pjtbu);
+			det_iujk_surveylulusField.setValue(record.data.det_iujk_surveylulus);
 					}
 		
 		function iujk_det_showSearchWindow(){
@@ -302,29 +350,53 @@
 			iujk_det_gridSearchField.reset();
 			
 			var det_iujk_iujk_idValue = '';
+			var det_iujk_jenisValue = '';
+			var det_iujk_tanggalValue = '';
 			var det_iujk_namaValue = '';
-			var det_iujk_perusahaanValue = '';
-			var det_iujk_direkturValue = '';
-			var det_iujk_alamatusahaValue = '';
 			var det_iujk_nomorregValue = '';
-			var det_iujk_tanggalregValue = '';
+			var det_iujk_rekomnomorValue = '';
+			var det_iujk_rekomtanggalValue = '';
+			var det_iujk_berlakuValue = '';
+			var det_iujk_kadaluarsaValue = '';
+			var det_iujk_pj1Value = '';
+			var det_iujk_pj2Value = '';
+			var det_iujk_pj3Value = '';
+			var det_iujk_pjteknisValue = '';
+			var det_iujk_pjtbuValue = '';
+			var det_iujk_surveylulusValue = '';
 						
 			det_iujk_iujk_idValue = det_iujk_iujk_idSearchField.getValue();
+			det_iujk_jenisValue = det_iujk_jenisSearchField.getValue();
+			det_iujk_tanggalValue = det_iujk_tanggalSearchField.getValue();
 			det_iujk_namaValue = det_iujk_namaSearchField.getValue();
-			det_iujk_perusahaanValue = det_iujk_perusahaanSearchField.getValue();
-			det_iujk_direkturValue = det_iujk_direkturSearchField.getValue();
-			det_iujk_alamatusahaValue = det_iujk_alamatusahaSearchField.getValue();
 			det_iujk_nomorregValue = det_iujk_nomorregSearchField.getValue();
-			det_iujk_tanggalregValue = det_iujk_tanggalregSearchField.getValue();
+			det_iujk_rekomnomorValue = det_iujk_rekomnomorSearchField.getValue();
+			det_iujk_rekomtanggalValue = det_iujk_rekomtanggalSearchField.getValue();
+			det_iujk_berlakuValue = det_iujk_berlakuSearchField.getValue();
+			det_iujk_kadaluarsaValue = det_iujk_kadaluarsaSearchField.getValue();
+			det_iujk_pj1Value = det_iujk_pj1SearchField.getValue();
+			det_iujk_pj2Value = det_iujk_pj2SearchField.getValue();
+			det_iujk_pj3Value = det_iujk_pj3SearchField.getValue();
+			det_iujk_pjteknisValue = det_iujk_pjteknisSearchField.getValue();
+			det_iujk_pjtbuValue = det_iujk_pjtbuSearchField.getValue();
+			det_iujk_surveylulusValue = det_iujk_surveylulusSearchField.getValue();
 			iujk_det_dbListAction = "SEARCH";
 			iujk_det_dataStore.proxy.extraParams = { 
 				det_iujk_iujk_id : det_iujk_iujk_idValue,
+				det_iujk_jenis : det_iujk_jenisValue,
+				det_iujk_tanggal : det_iujk_tanggalValue,
 				det_iujk_nama : det_iujk_namaValue,
-				det_iujk_perusahaan : det_iujk_perusahaanValue,
-				det_iujk_direktur : det_iujk_direkturValue,
-				det_iujk_alamatusaha : det_iujk_alamatusahaValue,
 				det_iujk_nomorreg : det_iujk_nomorregValue,
-				det_iujk_tanggalreg : det_iujk_tanggalregValue,
+				det_iujk_rekomnomor : det_iujk_rekomnomorValue,
+				det_iujk_rekomtanggal : det_iujk_rekomtanggalValue,
+				det_iujk_berlaku : det_iujk_berlakuValue,
+				det_iujk_kadaluarsa : det_iujk_kadaluarsaValue,
+				det_iujk_pj1 : det_iujk_pj1Value,
+				det_iujk_pj2 : det_iujk_pj2Value,
+				det_iujk_pj3 : det_iujk_pj3Value,
+				det_iujk_pjteknis : det_iujk_pjteknisValue,
+				det_iujk_pjtbu : det_iujk_pjtbuValue,
+				det_iujk_surveylulus : det_iujk_surveylulusValue,
 				action : 'SEARCH'
 			};
 			iujk_det_dataStore.currentPage = 1;
@@ -339,21 +411,37 @@
 		function iujk_det_printExcel(outputType){
 			var searchText = "";
 			var det_iujk_iujk_idValue = '';
+			var det_iujk_jenisValue = '';
+			var det_iujk_tanggalValue = '';
 			var det_iujk_namaValue = '';
-			var det_iujk_perusahaanValue = '';
-			var det_iujk_direkturValue = '';
-			var det_iujk_alamatusahaValue = '';
 			var det_iujk_nomorregValue = '';
-			var det_iujk_tanggalregValue = '';
+			var det_iujk_rekomnomorValue = '';
+			var det_iujk_rekomtanggalValue = '';
+			var det_iujk_berlakuValue = '';
+			var det_iujk_kadaluarsaValue = '';
+			var det_iujk_pj1Value = '';
+			var det_iujk_pj2Value = '';
+			var det_iujk_pj3Value = '';
+			var det_iujk_pjteknisValue = '';
+			var det_iujk_pjtbuValue = '';
+			var det_iujk_surveylulusValue = '';
 			
 			if(iujk_det_dataStore.proxy.extraParams.query!==null){searchText = iujk_det_dataStore.proxy.extraParams.query;}
 			if(iujk_det_dataStore.proxy.extraParams.det_iujk_iujk_id!==null){det_iujk_iujk_idValue = iujk_det_dataStore.proxy.extraParams.det_iujk_iujk_id;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_jenis!==null){det_iujk_jenisValue = iujk_det_dataStore.proxy.extraParams.det_iujk_jenis;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_tanggal!==null){det_iujk_tanggalValue = iujk_det_dataStore.proxy.extraParams.det_iujk_tanggal;}
 			if(iujk_det_dataStore.proxy.extraParams.det_iujk_nama!==null){det_iujk_namaValue = iujk_det_dataStore.proxy.extraParams.det_iujk_nama;}
-			if(iujk_det_dataStore.proxy.extraParams.det_iujk_perusahaan!==null){det_iujk_perusahaanValue = iujk_det_dataStore.proxy.extraParams.det_iujk_perusahaan;}
-			if(iujk_det_dataStore.proxy.extraParams.det_iujk_direktur!==null){det_iujk_direkturValue = iujk_det_dataStore.proxy.extraParams.det_iujk_direktur;}
-			if(iujk_det_dataStore.proxy.extraParams.det_iujk_alamatusaha!==null){det_iujk_alamatusahaValue = iujk_det_dataStore.proxy.extraParams.det_iujk_alamatusaha;}
 			if(iujk_det_dataStore.proxy.extraParams.det_iujk_nomorreg!==null){det_iujk_nomorregValue = iujk_det_dataStore.proxy.extraParams.det_iujk_nomorreg;}
-			if(iujk_det_dataStore.proxy.extraParams.det_iujk_tanggalreg!==null){det_iujk_tanggalregValue = iujk_det_dataStore.proxy.extraParams.det_iujk_tanggalreg;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_rekomnomor!==null){det_iujk_rekomnomorValue = iujk_det_dataStore.proxy.extraParams.det_iujk_rekomnomor;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_rekomtanggal!==null){det_iujk_rekomtanggalValue = iujk_det_dataStore.proxy.extraParams.det_iujk_rekomtanggal;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_berlaku!==null){det_iujk_berlakuValue = iujk_det_dataStore.proxy.extraParams.det_iujk_berlaku;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_kadaluarsa!==null){det_iujk_kadaluarsaValue = iujk_det_dataStore.proxy.extraParams.det_iujk_kadaluarsa;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_pj1!==null){det_iujk_pj1Value = iujk_det_dataStore.proxy.extraParams.det_iujk_pj1;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_pj2!==null){det_iujk_pj2Value = iujk_det_dataStore.proxy.extraParams.det_iujk_pj2;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_pj3!==null){det_iujk_pj3Value = iujk_det_dataStore.proxy.extraParams.det_iujk_pj3;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_pjteknis!==null){det_iujk_pjteknisValue = iujk_det_dataStore.proxy.extraParams.det_iujk_pjteknis;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_pjtbu!==null){det_iujk_pjtbuValue = iujk_det_dataStore.proxy.extraParams.det_iujk_pjtbu;}
+			if(iujk_det_dataStore.proxy.extraParams.det_iujk_surveylulus!==null){det_iujk_surveylulusValue = iujk_det_dataStore.proxy.extraParams.det_iujk_surveylulus;}
 			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
 			Ext.Ajax.request({
 				waitMsg : 'Please Wait...',
@@ -362,12 +450,20 @@
 					action : outputType,
 					query : searchText,
 					det_iujk_iujk_id : det_iujk_iujk_idValue,
+					det_iujk_jenis : det_iujk_jenisValue,
+					det_iujk_tanggal : det_iujk_tanggalValue,
 					det_iujk_nama : det_iujk_namaValue,
-					det_iujk_perusahaan : det_iujk_perusahaanValue,
-					det_iujk_direktur : det_iujk_direkturValue,
-					det_iujk_alamatusaha : det_iujk_alamatusahaValue,
 					det_iujk_nomorreg : det_iujk_nomorregValue,
-					det_iujk_tanggalreg : det_iujk_tanggalregValue,
+					det_iujk_rekomnomor : det_iujk_rekomnomorValue,
+					det_iujk_rekomtanggal : det_iujk_rekomtanggalValue,
+					det_iujk_berlaku : det_iujk_berlakuValue,
+					det_iujk_kadaluarsa : det_iujk_kadaluarsaValue,
+					det_iujk_pj1 : det_iujk_pj1Value,
+					det_iujk_pj2 : det_iujk_pj2Value,
+					det_iujk_pj3 : det_iujk_pj3Value,
+					det_iujk_pjteknis : det_iujk_pjteknisValue,
+					det_iujk_pjtbu : det_iujk_pjtbuValue,
+					det_iujk_surveylulus : det_iujk_surveylulusValue,
 					currentAction : iujk_det_dbListAction
 				},
 				success: function(response){
@@ -429,12 +525,20 @@
 			fields : [
 				{ name : 'det_iujk_id', type : 'int', mapping : 'det_iujk_id' },
 				{ name : 'det_iujk_iujk_id', type : 'int', mapping : 'det_iujk_iujk_id' },
+				{ name : 'det_iujk_jenis', type : 'int', mapping : 'det_iujk_jenis' },
+				{ name : 'det_iujk_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_tanggal' },
 				{ name : 'det_iujk_nama', type : 'string', mapping : 'det_iujk_nama' },
-				{ name : 'det_iujk_perusahaan', type : 'string', mapping : 'det_iujk_perusahaan' },
-				{ name : 'det_iujk_direktur', type : 'string', mapping : 'det_iujk_direktur' },
-				{ name : 'det_iujk_alamatusaha', type : 'string', mapping : 'det_iujk_alamatusaha' },
 				{ name : 'det_iujk_nomorreg', type : 'string', mapping : 'det_iujk_nomorreg' },
-				{ name : 'det_iujk_tanggalreg', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_tanggalreg' },
+				{ name : 'det_iujk_rekomnomor', type : 'string', mapping : 'det_iujk_rekomnomor' },
+				{ name : 'det_iujk_rekomtanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_rekomtanggal' },
+				{ name : 'det_iujk_berlaku', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_berlaku' },
+				{ name : 'det_iujk_kadaluarsa', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_kadaluarsa' },
+				{ name : 'det_iujk_pj1', type : 'string', mapping : 'det_iujk_pj1' },
+				{ name : 'det_iujk_pj2', type : 'string', mapping : 'det_iujk_pj2' },
+				{ name : 'det_iujk_pj3', type : 'string', mapping : 'det_iujk_pj3' },
+				{ name : 'det_iujk_pjteknis', type : 'string', mapping : 'det_iujk_pjteknis' },
+				{ name : 'det_iujk_pjtbu', type : 'string', mapping : 'det_iujk_pjtbu' },
+				{ name : 'det_iujk_surveylulus', type : 'int', mapping : 'det_iujk_surveylulus' },
 				]
 		});
 /* End DataStore declaration */
@@ -620,26 +724,20 @@
 					sortable : false
 				},
 				{
+					text : 'det_iujk_jenis',
+					dataIndex : 'det_iujk_jenis',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_tanggal',
+					dataIndex : 'det_iujk_tanggal',
+					width : 100,
+					sortable : false
+				},
+				{
 					text : 'det_iujk_nama',
 					dataIndex : 'det_iujk_nama',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'det_iujk_perusahaan',
-					dataIndex : 'det_iujk_perusahaan',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'det_iujk_direktur',
-					dataIndex : 'det_iujk_direktur',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'det_iujk_alamatusaha',
-					dataIndex : 'det_iujk_alamatusaha',
 					width : 100,
 					sortable : false
 				},
@@ -650,8 +748,62 @@
 					sortable : false
 				},
 				{
-					text : 'det_iujk_tanggalreg',
-					dataIndex : 'det_iujk_tanggalreg',
+					text : 'det_iujk_rekomnomor',
+					dataIndex : 'det_iujk_rekomnomor',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_rekomtanggal',
+					dataIndex : 'det_iujk_rekomtanggal',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_berlaku',
+					dataIndex : 'det_iujk_berlaku',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_kadaluarsa',
+					dataIndex : 'det_iujk_kadaluarsa',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_pj1',
+					dataIndex : 'det_iujk_pj1',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_pj2',
+					dataIndex : 'det_iujk_pj2',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_pj3',
+					dataIndex : 'det_iujk_pj3',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_pjteknis',
+					dataIndex : 'det_iujk_pjteknis',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_pjtbu',
+					dataIndex : 'det_iujk_pjtbu',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'det_iujk_surveylulus',
+					dataIndex : 'det_iujk_surveylulus',
 					width : 100,
 					sortable : false
 				},
@@ -697,29 +849,25 @@
 			blankText : '0',
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
+		det_iujk_jenisField = Ext.create('Ext.form.NumberField',{
+			id : 'det_iujk_jenisField',
+			name : 'det_iujk_jenis',
+			fieldLabel : 'det_iujk_jenis',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		det_iujk_tanggalField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_tanggalField',
+			name : 'det_iujk_tanggal',
+			fieldLabel : 'det_iujk_tanggal',
+			maxLength : 0
+		});
 		det_iujk_namaField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_namaField',
 			name : 'det_iujk_nama',
 			fieldLabel : 'det_iujk_nama',
 			maxLength : 50
-		});
-		det_iujk_perusahaanField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujk_perusahaanField',
-			name : 'det_iujk_perusahaan',
-			fieldLabel : 'det_iujk_perusahaan',
-			maxLength : 50
-		});
-		det_iujk_direkturField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujk_direkturField',
-			name : 'det_iujk_direktur',
-			fieldLabel : 'det_iujk_direktur',
-			maxLength : 50
-		});
-		det_iujk_alamatusahaField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujk_alamatusahaField',
-			name : 'det_iujk_alamatusaha',
-			fieldLabel : 'det_iujk_alamatusaha',
-			maxLength : 100
 		});
 		det_iujk_nomorregField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_nomorregField',
@@ -727,12 +875,68 @@
 			fieldLabel : 'det_iujk_nomorreg',
 			maxLength : 50
 		});
-		det_iujk_tanggalregField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujk_tanggalregField',
-			name : 'det_iujk_tanggalreg',
-			fieldLabel : 'det_iujk_tanggalreg',
+		det_iujk_rekomnomorField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_rekomnomorField',
+			name : 'det_iujk_rekomnomor',
+			fieldLabel : 'det_iujk_rekomnomor',
+			maxLength : 255
+		});
+		det_iujk_rekomtanggalField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_rekomtanggalField',
+			name : 'det_iujk_rekomtanggal',
+			fieldLabel : 'det_iujk_rekomtanggal',
 			maxLength : 0
 		});
+		det_iujk_berlakuField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_berlakuField',
+			name : 'det_iujk_berlaku',
+			fieldLabel : 'det_iujk_berlaku',
+			maxLength : 0
+		});
+		det_iujk_kadaluarsaField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_kadaluarsaField',
+			name : 'det_iujk_kadaluarsa',
+			fieldLabel : 'det_iujk_kadaluarsa',
+			maxLength : 0
+		});
+		det_iujk_pj1Field = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pj1Field',
+			name : 'det_iujk_pj1',
+			fieldLabel : 'det_iujk_pj1',
+			maxLength : 50
+		});
+		det_iujk_pj2Field = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pj2Field',
+			name : 'det_iujk_pj2',
+			fieldLabel : 'det_iujk_pj2',
+			maxLength : 50
+		});
+		det_iujk_pj3Field = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pj3Field',
+			name : 'det_iujk_pj3',
+			fieldLabel : 'det_iujk_pj3',
+			maxLength : 50
+		});
+		det_iujk_pjteknisField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pjteknisField',
+			name : 'det_iujk_pjteknis',
+			fieldLabel : 'det_iujk_pjteknis',
+			maxLength : 50
+		});
+		det_iujk_pjtbuField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pjtbuField',
+			name : 'det_iujk_pjtbu',
+			fieldLabel : 'det_iujk_pjtbu',
+			maxLength : 50
+		});
+		det_iujk_surveylulusField = Ext.create('Ext.form.NumberField',{
+			id : 'det_iujk_surveylulusField',
+			name : 'det_iujk_surveylulus',
+			fieldLabel : 'det_iujk_surveylulus',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
 		var iujk_det_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : iujk_det_save
@@ -766,12 +970,20 @@
 					items : [
 						det_iujk_idField,
 						det_iujk_iujk_idField,
+						det_iujk_jenisField,
+						det_iujk_tanggalField,
 						det_iujk_namaField,
-						det_iujk_perusahaanField,
-						det_iujk_direkturField,
-						det_iujk_alamatusahaField,
 						det_iujk_nomorregField,
-						det_iujk_tanggalregField,
+						det_iujk_rekomnomorField,
+						det_iujk_rekomtanggalField,
+						det_iujk_berlakuField,
+						det_iujk_kadaluarsaField,
+						det_iujk_pj1Field,
+						det_iujk_pj2Field,
+						det_iujk_pj3Field,
+						det_iujk_pjteknisField,
+						det_iujk_pjtbuField,
+						det_iujk_surveylulusField,
 											]
 				}, {
 					xtype : 'splitter'
@@ -805,32 +1017,26 @@
 			blankText : '0',
 			allowDecimals : false,maskRe : /([0-9]+)$/
 		});
+		det_iujk_jenisSearchField = Ext.create('Ext.form.NumberField',{
+			id : 'det_iujk_jenisSearchField',
+			name : 'det_iujk_jenis',
+			fieldLabel : 'det_iujk_jenis',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,maskRe : /([0-9]+)$/
+		});
+		det_iujk_tanggalSearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_tanggalSearchField',
+			name : 'det_iujk_tanggal',
+			fieldLabel : 'det_iujk_tanggal',
+			maxLength : 0
+		
+		});
 		det_iujk_namaSearchField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_namaSearchField',
 			name : 'det_iujk_nama',
 			fieldLabel : 'det_iujk_nama',
 			maxLength : 50
-		
-		});
-		det_iujk_perusahaanSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujk_perusahaanSearchField',
-			name : 'det_iujk_perusahaan',
-			fieldLabel : 'det_iujk_perusahaan',
-			maxLength : 50
-		
-		});
-		det_iujk_direkturSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujk_direkturSearchField',
-			name : 'det_iujk_direktur',
-			fieldLabel : 'det_iujk_direktur',
-			maxLength : 50
-		
-		});
-		det_iujk_alamatusahaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujk_alamatusahaSearchField',
-			name : 'det_iujk_alamatusaha',
-			fieldLabel : 'det_iujk_alamatusaha',
-			maxLength : 100
 		
 		});
 		det_iujk_nomorregSearchField = Ext.create('Ext.form.TextField',{
@@ -840,12 +1046,76 @@
 			maxLength : 50
 		
 		});
-		det_iujk_tanggalregSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujk_tanggalregSearchField',
-			name : 'det_iujk_tanggalreg',
-			fieldLabel : 'det_iujk_tanggalreg',
+		det_iujk_rekomnomorSearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_rekomnomorSearchField',
+			name : 'det_iujk_rekomnomor',
+			fieldLabel : 'det_iujk_rekomnomor',
+			maxLength : 255
+		
+		});
+		det_iujk_rekomtanggalSearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_rekomtanggalSearchField',
+			name : 'det_iujk_rekomtanggal',
+			fieldLabel : 'det_iujk_rekomtanggal',
 			maxLength : 0
 		
+		});
+		det_iujk_berlakuSearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_berlakuSearchField',
+			name : 'det_iujk_berlaku',
+			fieldLabel : 'det_iujk_berlaku',
+			maxLength : 0
+		
+		});
+		det_iujk_kadaluarsaSearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_kadaluarsaSearchField',
+			name : 'det_iujk_kadaluarsa',
+			fieldLabel : 'det_iujk_kadaluarsa',
+			maxLength : 0
+		
+		});
+		det_iujk_pj1SearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pj1SearchField',
+			name : 'det_iujk_pj1',
+			fieldLabel : 'det_iujk_pj1',
+			maxLength : 50
+		
+		});
+		det_iujk_pj2SearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pj2SearchField',
+			name : 'det_iujk_pj2',
+			fieldLabel : 'det_iujk_pj2',
+			maxLength : 50
+		
+		});
+		det_iujk_pj3SearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pj3SearchField',
+			name : 'det_iujk_pj3',
+			fieldLabel : 'det_iujk_pj3',
+			maxLength : 50
+		
+		});
+		det_iujk_pjteknisSearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pjteknisSearchField',
+			name : 'det_iujk_pjteknis',
+			fieldLabel : 'det_iujk_pjteknis',
+			maxLength : 50
+		
+		});
+		det_iujk_pjtbuSearchField = Ext.create('Ext.form.TextField',{
+			id : 'det_iujk_pjtbuSearchField',
+			name : 'det_iujk_pjtbu',
+			fieldLabel : 'det_iujk_pjtbu',
+			maxLength : 50
+		
+		});
+		det_iujk_surveylulusSearchField = Ext.create('Ext.form.NumberField',{
+			id : 'det_iujk_surveylulusSearchField',
+			name : 'det_iujk_surveylulus',
+			fieldLabel : 'det_iujk_surveylulus',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,maskRe : /([0-9]+)$/
 		});
 		var iujk_det_searchingButton = Ext.create('Ext.Button',{
 			text : globalSearchingButtonTitle,
@@ -874,12 +1144,20 @@
 					flex : 2,
 					items : [
 						det_iujk_iujk_idSearchField,
+						det_iujk_jenisSearchField,
+						det_iujk_tanggalSearchField,
 						det_iujk_namaSearchField,
-						det_iujk_perusahaanSearchField,
-						det_iujk_direkturSearchField,
-						det_iujk_alamatusahaSearchField,
 						det_iujk_nomorregSearchField,
-						det_iujk_tanggalregSearchField,
+						det_iujk_rekomnomorSearchField,
+						det_iujk_rekomtanggalSearchField,
+						det_iujk_berlakuSearchField,
+						det_iujk_kadaluarsaSearchField,
+						det_iujk_pj1SearchField,
+						det_iujk_pj2SearchField,
+						det_iujk_pj3SearchField,
+						det_iujk_pjteknisSearchField,
+						det_iujk_pjtbuSearchField,
+						det_iujk_surveylulusSearchField,
 						]
 				}],
 			buttons : [iujk_det_searchingButton,iujk_det_cancelSearchButton]
