@@ -1,7 +1,7 @@
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
-		var iujk_det_componentItemTitle="IUJK_DET";
+		var iujk_det_componentItemTitle="Ijin Usaha Jasa Konstruksi";
 		var iujk_det_dataStore;
 		
 		var iujk_det_shorcut;
@@ -718,96 +718,100 @@
 			keys : iujk_det_shorcut,
 			columns : [
 				{
-					text : 'det_iujk_iujk_id',
+					text : 'Id',
 					dataIndex : 'det_iujk_iujk_id',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
-					text : 'det_iujk_jenis',
+					text : 'Jenis',
 					dataIndex : 'det_iujk_jenis',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_tanggal',
+					text : 'Tanggal',
 					dataIndex : 'det_iujk_tanggal',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
 				{
-					text : 'det_iujk_nama',
+					text : 'Nama',
 					dataIndex : 'det_iujk_nama',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_nomorreg',
+					text : 'Nomor Reg',
 					dataIndex : 'det_iujk_nomorreg',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_rekomnomor',
+					text : 'Nomor Rekomendasi',
 					dataIndex : 'det_iujk_rekomnomor',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_rekomtanggal',
+					text : 'Tanggal Rekomendasi',
 					dataIndex : 'det_iujk_rekomtanggal',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
 				{
-					text : 'det_iujk_berlaku',
+					text : 'Tgl Berlaku',
 					dataIndex : 'det_iujk_berlaku',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
 				{
-					text : 'det_iujk_kadaluarsa',
+					text : 'Tgl Kadaluarsa',
 					dataIndex : 'det_iujk_kadaluarsa',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
 				{
-					text : 'det_iujk_pj1',
+					text : 'Penanggung Jawab 1',
 					dataIndex : 'det_iujk_pj1',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_pj2',
+					text : 'Penanggung Jawab 2',
 					dataIndex : 'det_iujk_pj2',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_pj3',
+					text : 'Penanggung Jawab 3',
 					dataIndex : 'det_iujk_pj3',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_pjteknis',
+					text : 'Penanggung Jawab Teknis',
 					dataIndex : 'det_iujk_pjteknis',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_pjtbu',
+					text : 'NO. PJT -BU',
 					dataIndex : 'det_iujk_pjtbu',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'det_iujk_surveylulus',
+					text : 'Lulus Survey',
 					dataIndex : 'det_iujk_surveylulus',
 					width : 100,
 					sortable : false
-				},
-							
+				}
 			],
 			tbar : [
 				iujk_det_addButton,
@@ -834,7 +838,7 @@
 		det_iujk_idField = Ext.create('Ext.form.NumberField',{
 			id : 'det_iujk_idField',
 			name : 'det_iujk_id',
-			fieldLabel : 'det_iujk_id<font color=red>*</font>',
+			fieldLabel : 'Id <font color=red>*</font>',
 			allowBlank : false,
 			allowNegatife : false,
 			blankText : '0',
@@ -844,99 +848,124 @@
 		det_iujk_iujk_idField = Ext.create('Ext.form.NumberField',{
 			id : 'det_iujk_iujk_idField',
 			name : 'det_iujk_iujk_id',
-			fieldLabel : 'det_iujk_iujk_id',
+			fieldLabel : 'Id ',
 			allowNegatife : false,
 			blankText : '0',
+			hidden : true,
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
-		det_iujk_jenisField = Ext.create('Ext.form.NumberField',{
+		det_iujk_jenisField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_iujk_jenisField',
 			name : 'det_iujk_jenis',
-			fieldLabel : 'det_iujk_jenis',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		det_iujk_tanggalField = Ext.create('Ext.form.TextField',{
+			fieldLabel : 'Jenis',
+			store : new Ext.data.ArrayStore({
+				fields : ['jenispermohonan_id', 'jenispermohonan_nama'],
+				data : [[1,'BARU'],[2,'PERPANJANGAN']]
+			}),
+			displayField : 'jenispermohonan_nama',
+			valueField : 'jenispermohonan_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true,
+			listeners : {
+				select : function(cmb, rec){
+					if(cmb.getValue() == '2'){
+						// det_idam_sklamaField.show();
+					}else{
+						// det_idam_sklamaField.hide();
+					}
+				}
+			}
+		});
+		det_iujk_tanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_iujk_tanggalField',
 			name : 'det_iujk_tanggal',
-			fieldLabel : 'det_iujk_tanggal',
-			maxLength : 0
+			fieldLabel : 'Tanggal',
+			format : 'd-m-Y',
+			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_iujk_namaField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_namaField',
 			name : 'det_iujk_nama',
-			fieldLabel : 'det_iujk_nama',
+			fieldLabel : 'Nama',
 			maxLength : 50
 		});
 		det_iujk_nomorregField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_nomorregField',
 			name : 'det_iujk_nomorreg',
-			fieldLabel : 'det_iujk_nomorreg',
+			fieldLabel : 'Nomor Reg',
 			maxLength : 50
 		});
 		det_iujk_rekomnomorField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_rekomnomorField',
 			name : 'det_iujk_rekomnomor',
-			fieldLabel : 'det_iujk_rekomnomor',
+			fieldLabel : 'Nomor Rekom',
 			maxLength : 255
 		});
-		det_iujk_rekomtanggalField = Ext.create('Ext.form.TextField',{
+		det_iujk_rekomtanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_iujk_rekomtanggalField',
 			name : 'det_iujk_rekomtanggal',
-			fieldLabel : 'det_iujk_rekomtanggal',
-			maxLength : 0
+			fieldLabel : 'Tanggal Rekom',
+			format : 'd-m-Y',
+			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
-		det_iujk_berlakuField = Ext.create('Ext.form.TextField',{
+		det_iujk_berlakuField = Ext.create('Ext.form.field.Date',{
 			id : 'det_iujk_berlakuField',
 			name : 'det_iujk_berlaku',
-			fieldLabel : 'det_iujk_berlaku',
-			maxLength : 0
+			fieldLabel : 'Tanggal Berlaku',
+			format : 'd-m-Y'
 		});
-		det_iujk_kadaluarsaField = Ext.create('Ext.form.TextField',{
+		det_iujk_kadaluarsaField = Ext.create('Ext.form.field.Date',{
 			id : 'det_iujk_kadaluarsaField',
 			name : 'det_iujk_kadaluarsa',
-			fieldLabel : 'det_iujk_kadaluarsa',
-			maxLength : 0
+			fieldLabel : 'Tanggal Kadaluarsa',
+			format : 'd-m-Y',
+			minValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_iujk_pj1Field = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_pj1Field',
 			name : 'det_iujk_pj1',
-			fieldLabel : 'det_iujk_pj1',
+			fieldLabel : 'Penanggung Jawab 1',
 			maxLength : 50
 		});
 		det_iujk_pj2Field = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_pj2Field',
 			name : 'det_iujk_pj2',
-			fieldLabel : 'det_iujk_pj2',
+			fieldLabel : 'Penanggung Jawab 2',
 			maxLength : 50
 		});
 		det_iujk_pj3Field = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_pj3Field',
 			name : 'det_iujk_pj3',
-			fieldLabel : 'det_iujk_pj3',
+			fieldLabel : 'Penanggung Jawab 3',
 			maxLength : 50
 		});
 		det_iujk_pjteknisField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_pjteknisField',
 			name : 'det_iujk_pjteknis',
-			fieldLabel : 'det_iujk_pjteknis',
+			fieldLabel : 'Penanggung Jawab Teknis',
 			maxLength : 50
 		});
 		det_iujk_pjtbuField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujk_pjtbuField',
 			name : 'det_iujk_pjtbu',
-			fieldLabel : 'det_iujk_pjtbu',
+			fieldLabel : 'No. PJT - BU',
 			maxLength : 50
 		});
-		det_iujk_surveylulusField = Ext.create('Ext.form.NumberField',{
+		det_iujk_surveylulusField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_iujk_surveylulusField',
 			name : 'det_iujk_surveylulus',
-			fieldLabel : 'det_iujk_surveylulus',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
+			fieldLabel : 'Lulus Survey ?',
+			store : new Ext.data.ArrayStore({
+				fields : ['lulus_id', 'lulus_nama'],
+				data : [[1,'LULUS'],[2,'TIDAK LULUS']]
+			}),
+			displayField : 'lulus_nama',
+			valueField : 'lulus_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
 		var iujk_det_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : iujk_det_save
