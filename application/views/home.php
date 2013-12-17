@@ -51,8 +51,6 @@
                     </div>
                     <div class="collapse navbar-collapse main-navbar-collapse">
                         <ul class="nav navbar-nav" id="mainmenu">
-                            <li class="active"><a href="#">Link</a></li>
-                            <li><a href="#">Link</a></li>
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-hover="dropdown">Perijinan <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
