@@ -122,8 +122,6 @@ class C_t_ipmbl_det extends CI_Controller{
 		$ipmbl_det_created_date = date('Y-m-d H:i:s');
 		
 		if($ipmbl_det_author != ''){
-			$result = 'sessionExpired';
-		}else{
 			$dataInti = array(
 				'ipmbl_usaha'=>$det_ipmbl_usaha,
 				'ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
@@ -180,6 +178,8 @@ class C_t_ipmbl_det extends CI_Controller{
 			}else{
 				$result = 'fail';
 			}
+		}else{
+			$result = 'sessionExpired';
 		}
 		echo $result;
 	}

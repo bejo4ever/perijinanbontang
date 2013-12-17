@@ -4,6 +4,7 @@
 	<title>Surat Keputusan IUJK</title>
 </head>
 <body onLoad="window.print();">
+	<?php extract((array)$printrecord[0]); ?>
 	<table width="720px" align="center" cellpadding="0" cellspacing="0">
 		<tr>
 			<td colspan="4" align="center"><h4 style="margin:0px;">PEMERINTAH KOTA BONTANG</h4></td>
@@ -24,14 +25,14 @@
 			<td colspan="4" align="center"><h3 style="margin:0px;"><u>IJIN USAHA JASA KONSTRUKSI</u></h3></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center">No. Reg. : ##noreg</td>
+			<td colspan="4" align="center">No. Reg. : <?php echo $det_iujk_nomorreg; ?></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">&nbsp;</td>
 		</tr>
 		<tr>
 			<td colspan="2">Nama Badan Usaha</td>
-			<td colspan="2">: <b>##namausaha</b></td>
+			<td colspan="2">: <b><?php echo $iujk_perusahaan; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="2">Alamat Kantor Badan Usaha</td>
@@ -40,22 +41,22 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>Jalan, Nomor</td>
-			<td colspan="2">: <b>##jalan</b></td>
+			<td colspan="2">: <b><?php echo $iujk_alamat; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Kelurahan</td>
-			<td colspan="2">: <b>##kelurahan</b></td>
+			<td colspan="2">: <b><?php echo $iujk_kelurahan; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>RT/RW</td>
-			<td colspan="2">: <b>##rtrw</b></td>
+			<td colspan="2">: <b><?php echo $iujk_rt.' / '.$iujk_rw; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Kota</td>
-			<td colspan="2">: <b>##kota</b></td>
+			<td colspan="2">: <b><?php echo $iujk_kota; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
@@ -65,17 +66,17 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>Kode Pos</td>
-			<td colspan="2">: <b>##kodepos</b></td>
+			<td colspan="2">: <b><?php echo $iujk_kodepos; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nomor Telepon</td>
-			<td colspan="2">: <b>##notelp</b></td>
+			<td colspan="2">: <b><?php echo $iujk_telepon; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Fax</td>
-			<td colspan="2">: <b>##nofax</b></td>
+			<td colspan="2">: <b><?php echo $iujk_fax; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="4">Nama Penanggung Jawab Badan Usaha / Direktur Utama / Direktur :</td>
@@ -83,22 +84,22 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nama1</td>
-			<td colspan="2">: <b>##nama1</b></td>
+			<td colspan="2">: <b><?php echo $det_iujk_pj1; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nama2</td>
-			<td colspan="2">: <b>##nama2</b></td>
+			<td colspan="2">: <b><?php echo $det_iujk_pj2; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nama3</td>
-			<td colspan="2">: <b>##nama3</b></td>
+			<td colspan="2">: <b><?php echo $det_iujk_pj3; ?></b></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>N.P.W.P Badan Usaha</td>
-			<td colspan="2">: <b>##npwp</b></td>
+			<td colspan="2">: <b><?php echo $iujk_npwp; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="justify">Izin Usaha Jasa Konstruksi (IUJK) ini berlaku untuk melakukan Kegiatan Usaha Jasa Pelaksana Konstruksi 
@@ -106,15 +107,15 @@
 		</tr>
 		<tr>
 			<td colspan="2">Kualifikasi</td>
-			<td colspan="2">: <b>##kualifikasi</b></td>
+			<td colspan="2">: <b><?php echo $iujk_kualifikasi; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="2">Nama Penanggung Jawab-Teknis</td>
-			<td colspan="2">: <b>##namapenanggung</b></td>
+			<td colspan="2">: <b><?php echo $det_iujk_pjteknis; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="2">No. PJT - BU</td>
-			<td colspan="2">: <b>##nopjtbu</b></td>
+			<td colspan="2">: <b><?php echo $det_iujk_pjtbu; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="2">Klasifikasi</td>
@@ -124,7 +125,7 @@
 			<td colspan="4">&nbsp;</td>
 		</tr>
 		<tr>
-			<td colspan="4">Berlaku sampai dengan tanggal : <b>##tanggalkadaluarsa</b></td>
+			<td colspan="4">Berlaku sampai dengan tanggal : <b><?php echo date('d-m-Y',strtotime($det_iujk_kadaluarsa)); ?></b></td>
 		</tr>
 		<tr>
 			<td width="100px">&nbsp;</td>
@@ -142,7 +143,7 @@
 					</tr>
 					<tr>
 						<td>Pada Tanggal</td>
-						<td><b>: ##tanggalpenetapan</b></td>
+						<td><b>: <?php echo date('d-m-Y',strtotime($det_iujk_berlaku)); ?></b></td>
 					</tr>
 					<tr>
 						<td colspan="3"><hr></td>

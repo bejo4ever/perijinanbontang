@@ -44,8 +44,8 @@ class C_t_iujk_det extends CI_Controller{
 			case 'CETAKLEMBARKONTROL':
 				$this->cetakLembarKontrol();
 			break;
-			case 'CETAKBAP':
-				$this->cetakBap();
+			case 'CETAKREKOMENDASI':
+				$this->cetakRekomendasi();
 			break;
 			case 'CETAKSK':
 				$this->cetakSk();
@@ -117,13 +117,10 @@ class C_t_iujk_det extends CI_Controller{
 		$iujk_cek_status = json_decode($this->input->post('iujk_cek_status'));
 		$iujk_cek_keterangan = json_decode($this->input->post('iujk_cek_keterangan'));
 		
-		
 		$iujk_det_author = $this->m_t_iujk_det->__checkSession();
 		$iujk_det_created_date = date('Y-m-d H:i:s');
 		
 		if($iujk_det_author != ''){
-			$result = 'sessionExpired';
-		}else{
 			$dataInti = array(
 				'iujk_perusahaan'=>$iujk_perusahaan,
 				'iujk_alamat'=>$iujk_alamat,
@@ -176,6 +173,8 @@ class C_t_iujk_det extends CI_Controller{
 			}else{
 				$result = 'fail';
 			}
+		}else{
+			$result = 'sessionExpired';
 		}
 		echo $result;
 	}
@@ -376,12 +375,12 @@ class C_t_iujk_det extends CI_Controller{
 		$dataceklist = $this->db->where('iujk_cek_iujkdet_id', $iujkdet_id)->join('master_syarat','iujk_cek_syarat_id = ID_SYARAT')->get('t_iujk_ceklist')->result();
 		$data['printrecord'] = $printrecord[1];
 		$data['dataceklist'] = $dataceklist;
-		$print_view=$this->load->view('template/p_iujk_lembarkontrol.php',$data,TRUE);
+		$print_view=$this->load->view('template/p_iujk_kelengkapan.php',$data,TRUE);
 		$print_file=fopen('print/iujk_lembarkontrol.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
-	function cetakBap(){
+	function cetakRekomendasi(){
 		$iujkdet_id  = $this->input->post('iujkdet_id');
 		$params = array(
 			"det_iujk_id"=>$iujkdet_id,
@@ -389,8 +388,8 @@ class C_t_iujk_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_iujk_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$print_view=$this->load->view('template/p_iujk_bapeninjauan.php',$data,TRUE);
-		$print_file=fopen('print/iujk_bap.html','w+');
+		$print_view=$this->load->view('template/p_iujk_rekomendasi.php',$data,TRUE);
+		$print_file=fopen('print/iujk_rekomendasi.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}

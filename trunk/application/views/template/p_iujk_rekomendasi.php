@@ -10,9 +10,10 @@
 	</style>
 </head>
 <body onLoad="window.print();">
+	<?php extract((array)$printrecord[0]); ?>
 	<table width="720px" align="center" cellpadding="0" cellspacing="0">
 		<tr>
-			<td colspan="5" align="center"><img src="logo-bontang.jpg" width="50px" height="60px"></td>
+			<td colspan="5" align="center"><img src="<?php echo base_url(); ?>assets/images/logo-bontang.jpg" width="50px" height="60px"></td>
 		</tr>
 		<tr>
 			<td colspan="5" align="center"><h4 style="margin:0px;">PEMERINTAH KOTA BONTANG</h4></td>
@@ -37,7 +38,7 @@
 		</tr>
 		<tr>
 			<td colspan="4">&nbsp;</td>
-			<td>Bontang, ##tanggalijin</td>
+			<td>Bontang, <?php echo date('d-m-Y', strtotime($det_iujk_rekomtanggal)); ?></td>
 		</tr>
 		<tr>
 			<td colspan="4">&nbsp;</td>
@@ -45,7 +46,7 @@
 		</tr>
 		<tr>
 			<td>Nomor</td>
-			<td colspan="3">: ##nomor</td>
+			<td colspan="3">: <?php echo $det_iujk_rekomnomor; ?></td>
 			<td>Yth Kepada Badan Perijinan Terpadu Dan</td>
 		</tr>
 		<tr>
@@ -70,19 +71,19 @@
 		</tr>
 		<tr>
 			<td colspan="2">Nama Perusahaan</td>
-			<td colspan="3">: ##namaperusahaan</td>
+			<td colspan="3">: <?php echo $iujk_perusahaan; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">Direktur</td>
-			<td colspan="3">: ##direktur</td>
+			<td colspan="3">: <?php echo $iujk_direktur; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">Gol Usaha</td>
-			<td colspan="3">: ##golusaha</td>
+			<td colspan="3">: <?php echo $iujk_golongan; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">Kualifikasi</td>
-			<td colspan="3">: ##kualifikasi</td>
+			<td colspan="3">: <?php echo $iujk_kualifikasi; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">Bidang Usaha</td>
@@ -94,7 +95,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">Alamat</td>
-			<td colspan="3">: ##alamat</td>
+			<td colspan="3">: <?php echo $iujk_alamat; ?></td>
 		</tr>
 		<tr>
 			<td colspan="5">&nbsp;</td>

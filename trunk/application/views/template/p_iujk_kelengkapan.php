@@ -10,9 +10,10 @@
 	</style>
 </head>
 <body onLoad="window.print();">
+	<?php extract((array)$printrecord[0]); ?>
 	<table width="720px" align="center" cellpadding="0" cellspacing="0">
 		<tr>
-			<td colspan="4" align="center"><img src="logo-bontang.jpg" width="50px" height="60px"></td>
+			<td colspan="4" align="center"><img src="<?php echo base_url(); ?>assets/images/logo-bontang.jpg" width="50px" height="60px"></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center"><h4 style="margin:0px;">PEMERINTAH KOTA BONTANG</h4></td>
@@ -32,32 +33,32 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nama Perusahaan</td>
-			<td colspan="2">: ##namausaha</td>
+			<td colspan="2">: <?php echo $iujk_perusahaan; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nama Direktur</td>
-			<td colspan="2">: ##namadirektur</td>
+			<td colspan="2">: <?php echo $iujk_direktur; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Alamat Perusahaan</td>
-			<td colspan="2">: ##alamatusaha</td>
+			<td colspan="2">: <?php echo $iujk_alamat; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nomor Registrasi</td>
-			<td colspan="2">: ##noreg</td>
+			<td colspan="2">: <?php echo $det_iujk_nomorreg; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Tanggal</td>
-			<td colspan="2">: ##tglreg</td>
+			<td colspan="2">: <?php echo date('d-m-Y', strtotime($det_iujk_tanggal)); ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Jenis Permohonan</td>
-			<td colspan="2">: ##jenispermohonan</td>
+			<td colspan="2">: <?php echo $det_iujk_jenis_nama; ?></td>
 		</tr>
 		<tr>
 			<td width="40px">&nbsp;</td>

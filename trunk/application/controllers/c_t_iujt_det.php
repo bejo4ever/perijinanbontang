@@ -105,8 +105,6 @@ class C_t_iujt_det extends CI_Controller{
 		$iujt_det_created_date = date('Y-m-d H:i:s');
 		
 		if($iujt_det_author != ''){
-			$result = 'sessionExpired';
-		}else{
 			$dataInti = array(
 				'iujt_usaha'=>$iujt_usaha,
 				'iujt_alamatusaha'=>$iujt_alamatusaha,
@@ -143,7 +141,11 @@ class C_t_iujt_det extends CI_Controller{
 					);
 					$resultcek = $this->m_t_iujt_det->__insert($datacek, 't_iujt_ceklist', 'insertId');
 				}
+			}else{
+				$result = 'fail';
 			}
+		}else{
+			$result = 'sessionExpired';
 		}
 		echo $result;
 	}
