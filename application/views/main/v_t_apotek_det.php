@@ -1384,6 +1384,61 @@
 				apotek_det_printExcel('EXCEL');
 			}
 		});
+		var apotek_det_lembarkontrolButton = Ext.create('Ext.Button',{
+			text : 'Lembar Kontrol',
+			tooltip : 'Cetak Lembar Kontrol',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/apotek_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var apotek_det_bapButton = Ext.create('Ext.Button',{
+			text : 'BAP',
+			tooltip : 'Cetak BAP',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/apotek_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var apotek_det_skButton = Ext.create('Ext.Button',{
+			text : 'Surat Keputusan',
+			tooltip : 'Cetak Surat Keputusan Depo Air Minum',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKSK'
+					},success : function(){
+						window.open('../print/apotek_sk.html');
+					}
+				});
+			}
+		});
+		
 		
 		var apotek_det_contextMenuEdit = Ext.create('Ext.menu.Item',{
 			text : globalEditButtonTitle,
@@ -1615,7 +1670,10 @@
 				apotek_det_searchButton,
 				apotek_det_refreshButton,
 				apotek_det_printButton,
-				apotek_det_excelButton
+				apotek_det_excelButton,
+				apotek_det_lembarkontrolButton,
+				apotek_det_bapButton,
+				apotek_det_skButton
 			],
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : apotek_det_dataStore,
@@ -1664,9 +1722,9 @@
 			listeners : {
 				select : function(cmb, rec){
 					if(cmb.getValue() == '2'){
-						// det_idam_sklamaField.show();
+						// det_apotek_sklamaField.show();
 					}else{
-						// det_idam_sklamaField.hide();
+						// det_apotek_sklamaField.hide();
 					}
 				}
 			}

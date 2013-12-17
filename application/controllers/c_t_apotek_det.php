@@ -186,8 +186,6 @@ class C_t_apotek_det extends CI_Controller{
 		$apotek_det_created_date = date('Y-m-d H:i:s');
 		
 		if($apotek_det_author != ''){
-			$result = 'sessionExpired';
-		}else{
 			$dataInti = array(
 				'apotek_nama'=>$apotek_nama,
 				'apotek_alamat'=>$apotek_alamat,
@@ -286,6 +284,9 @@ class C_t_apotek_det extends CI_Controller{
 			}else{
 				$result = 'fail';
 			}
+			
+		}else{
+			$result = 'sessionExpired';
 		}
 		echo $result;
 	}

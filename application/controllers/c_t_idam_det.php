@@ -111,8 +111,6 @@ class C_t_idam_det extends CI_Controller{
 		$idam_det_created_date = date('Y-m-d H:i:s');
 		
 		if($idam_det_author != ''){
-			$result = 'sessionExpired';
-		}else{
 			$dataInti = array(
 				'idam_usaha'=>$det_idam_namausaha,
 				'idam_jenisusaha'=>$det_idam_jenisusaha,
@@ -160,6 +158,9 @@ class C_t_idam_det extends CI_Controller{
 			}else{
 				$result = 'fail';
 			}
+			
+		}else{
+			$result = 'sessionExpired';
 		}
 		echo $result;
 	}

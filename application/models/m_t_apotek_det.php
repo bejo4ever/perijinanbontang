@@ -4,6 +4,9 @@ class M_t_apotek_det extends App_model{
 				det_apotek_id,
 				det_apotek_apotek_id,
 				det_apotek_jenis,
+				CASE WHEN det_apotek_jenis = 1 THEN 'BARU'
+					ELSE 'PERPANJANGAN'
+					END AS det_apotek_jenis_nama,
 				det_apotek_surveylulus,
 				det_apotek_nama,
 				det_apotek_alamat,
@@ -20,9 +23,16 @@ class M_t_apotek_det extends App_model{
 				det_apotek_terima,
 				det_apotek_terimatanggal,
 				det_apotek_kelengkapan,
+				CASE WHEN det_apotek_kelengkapan = 1 THEN 'LENGKAP'
+					ELSE 'TIDAK LENGKAP'
+					END AS det_apotek_kelengkapan_nama,
 				det_apotek_bap,
 				det_apotek_baptanggal,
 				det_apotek_keputusan,
+				CASE WHEN det_apotek_keputusan = 1 THEN 'DISETUJUI'
+					WHEN det_apotek_keputusan = 2 THEN 'DITOLAK'
+					ELSE 'DITANGGUHKAN'
+					END AS det_apotek_keputusan_nama,
 				det_apotek_keterangan,
 				det_apotek_jarak,
 				det_apotek_rracik,
@@ -67,8 +77,22 @@ class M_t_apotek_det extends App_model{
 				det_apotek_sppihak2,
 				det_apotek_spnomor,
 				det_apotek_sptanggal,
-				det_apotek_notaris
+				det_apotek_notaris,
+				det_apotek_nomorsk,
+				det_apotek_berlaku,
+				det_apotek_kadaluarsa,
+				apotek_nama,
+				apotek_alamat,
+				apotek_telp,
+				apotek_kel,
+				apotek_kec,
+				apotek_kepemilikan,
+				apotek_pemilik,
+				apotek_pemilikalamat,
+				apotek_pemiliknpwp,
+				apotek_siup
 				FROM t_apotek_det 
+				JOIN t_apotek ON t_apotek.apotek_id = t_apotek_det.det_apotek_apotek_id
 			WHERE det_apotek_id IS NOT NULL 
 	";
 	

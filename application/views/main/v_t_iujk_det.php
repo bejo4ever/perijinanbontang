@@ -607,13 +607,13 @@
 				{ name : 'det_iujk_id', type : 'int', mapping : 'det_iujk_id' },
 				{ name : 'det_iujk_iujk_id', type : 'int', mapping : 'det_iujk_iujk_id' },
 				{ name : 'det_iujk_jenis', type : 'int', mapping : 'det_iujk_jenis' },
-				{ name : 'det_iujk_tanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_tanggal' },
+				{ name : 'det_iujk_tanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_iujk_tanggal' },
 				{ name : 'det_iujk_nama', type : 'string', mapping : 'det_iujk_nama' },
 				{ name : 'det_iujk_nomorreg', type : 'string', mapping : 'det_iujk_nomorreg' },
 				{ name : 'det_iujk_rekomnomor', type : 'string', mapping : 'det_iujk_rekomnomor' },
-				{ name : 'det_iujk_rekomtanggal', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_rekomtanggal' },
-				{ name : 'det_iujk_berlaku', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_berlaku' },
-				{ name : 'det_iujk_kadaluarsa', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'det_iujk_kadaluarsa' },
+				{ name : 'det_iujk_rekomtanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_iujk_rekomtanggal' },
+				{ name : 'det_iujk_berlaku', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_iujk_berlaku' },
+				{ name : 'det_iujk_kadaluarsa', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_iujk_kadaluarsa' },
 				{ name : 'det_iujk_pj1', type : 'string', mapping : 'det_iujk_pj1' },
 				{ name : 'det_iujk_pj2', type : 'string', mapping : 'det_iujk_pj2' },
 				{ name : 'det_iujk_pj3', type : 'string', mapping : 'det_iujk_pj3' },
@@ -751,6 +751,61 @@
 				iujk_det_printExcel('EXCEL');
 			}
 		});
+		var iujk_det_lembarkontrolButton = Ext.create('Ext.Button',{
+			text : 'Lembar Kontrol',
+			tooltip : 'Cetak Lembar Kontrol',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujk_det/switchAction',
+					params: {
+						iujkdet_id : record.get('det_iujk_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/iujk_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var iujk_det_rekomButton = Ext.create('Ext.Button',{
+			text : 'Rekomendasi',
+			tooltip : 'Cetak Rekomendasi',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujk_det/switchAction',
+					params: {
+						iujkdet_id : record.get('det_iujk_id'),
+						action : 'CETAKREKOMENDASI'
+					},success : function(){
+						window.open('../print/iujk_rekomendasi.html');
+					}
+				});
+			}
+		});
+		var iujk_det_skButton = Ext.create('Ext.Button',{
+			text : 'Surat Keputusan',
+			tooltip : 'Cetak Surat Keputusan Ijin Usaha Jasa Konstruksi',
+			iconCls : 'icon16x16-print',
+			handler : function(){
+				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujk_det/switchAction',
+					params: {
+						iujkdet_id : record.get('det_iujk_id'),
+						action : 'CETAKSK'
+					},success : function(){
+						window.open('../print/iujk_sk.html');
+					}
+				});
+			}
+		});
+		
 		
 		var iujk_det_contextMenuEdit = Ext.create('Ext.menu.Item',{
 			text : globalEditButtonTitle,
@@ -918,7 +973,10 @@
 				iujk_det_searchButton,
 				iujk_det_refreshButton,
 				iujk_det_printButton,
-				iujk_det_excelButton
+				iujk_det_excelButton,
+				iujk_det_lembarkontrolButton,
+				iujk_det_rekomButton,
+				iujk_det_skButton
 			],
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : iujk_det_dataStore,
@@ -967,9 +1025,9 @@
 			listeners : {
 				select : function(cmb, rec){
 					if(cmb.getValue() == '2'){
-						// det_idam_sklamaField.show();
+						// det_iujk_sklamaField.show();
 					}else{
-						// det_idam_sklamaField.hide();
+						// det_iujk_sklamaField.hide();
 					}
 				}
 			}
