@@ -26,6 +26,9 @@ class C_sktr extends CI_Controller{
 			case 'DELETE':
 				$this->delete();
 			break;
+			case 'GETSYARAT':
+				$this->getSyarat();
+			break;
 			case 'SEARCH':
 				$this->search();
 			break;
@@ -286,5 +289,16 @@ class C_sktr extends CI_Controller{
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
-	
+	function getSyarat(){
+		$currentAction = $this->input->post('currentAction');
+		$idam_id = $this->input->post('ID_SKTR');
+		$idam_det_id = $this->input->post('idam_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"idam_id"=>$idam_id,
+			"idam_det_id"=>$idam_det_id
+		);
+		$result = $this->m_t_idam_det->getSyarat($params);
+		echo $result;
+	}
 }

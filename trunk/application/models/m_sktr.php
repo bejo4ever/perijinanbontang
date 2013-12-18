@@ -132,5 +132,34 @@ class M_sktr extends App_model{
 		}
 		return $result;
 	}
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT 
+					ID_SYARAT,
+					ID_IJIN,
+					STATUS,
+					KETERANGAN,
+					NAMA_SYARAT AS sktr_cek_syarat_nama
+				FROM cek_list_sktr 
+				LEFT JOIN master_syarat ON cek_list_sktr.ID_SYARAT = master_syarat.ID_SYARAT
+				WHERE idam_cek_idamdet_id = ".$idam_det_id."
+				AND idam_cek_idam_id = ".$idam_id."
+			";
+		}else{
+			$sql = "
+				SELECT 
+					0 AS sktr_cek_id,
+					master_syarat.ID_SYARAT AS sktr_cek_syarat_id,
+					NAMA_SYARAT AS sktr_cek_syarat_nama
+				FROM dt_syarat 
+				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT
+				WHERE ID_IJIN = 6
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
 	
 }
