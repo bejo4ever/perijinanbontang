@@ -1003,7 +1003,7 @@
 			pageSize : globalPageSize,
 			autoLoad : true,
 			proxy : Ext.create('Ext.data.HttpProxy',{
-				url : 'c_dt_syarat/switchAction',
+				url : 'c_sktr_syarat/switchAction',
 				reader : {
 					type : 'json',
 					root : 'results',
@@ -1014,7 +1014,7 @@
 					read : 'POST'
 				},
 				extraParams : {
-					action : 'GETLIST'
+					action : 'GETSYARAT'
 				}
 			}),
 			fields : [
