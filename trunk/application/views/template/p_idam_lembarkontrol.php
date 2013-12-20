@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td>Nama Pemohon</td>
-			<td>: <?php echo $printrecord[0]->det_idam_nama; ?></td>
+			<td>: <?php echo $printrecord[0]->pemohon_nama; ?></td>
 		</tr>
 		<tr>
 			<td>Nama Sarana</td>
@@ -29,7 +29,7 @@
 		</tr>
 		<tr>
 			<td>No Telepon</td>
-			<td>: <?php echo $printrecord[0]->det_idam_telp; ?></td>
+			<td>: <?php echo $printrecord[0]->pemohon_telp; ?></td>
 		</tr>
 		<tr>
 			<td>Jenis Permohonan</td>
@@ -62,8 +62,8 @@
 			<td width="220px">&nbsp;</td>
 			<td width="100px">&nbsp;</td>
 			<td width="150px">&nbsp;</td>
-			<td width="100px">&nbsp;</td>
-			<td width="150px">&nbsp;</td>
+			<td width="70px">&nbsp;</td>
+			<td width="180px">&nbsp;</td>
 		</tr>
 		<?php if($printrecord[0]->det_idam_terima != ''){ ?>
 		<tr>
