@@ -88,7 +88,7 @@
 		<tr>
 			<td valign="top">2. </td>
 			<td valign="top">Nama Pengusaha/Penanggung Jawab</td>
-			<td colspan="2">: <?php echo $det_idam_nama; ?></td>
+			<td colspan="2">: <?php echo $pemohon_nama; ?></td>
 		</tr>
 		<tr>
 			<td valign="top">3. </td>
@@ -137,13 +137,13 @@
 						<td colspan="3"><b>Kota Bontang</b></td>
 					</tr>
 					<tr>
-						<td colspan="3" height="100" valign="bottom"><b><u>dr. Indriati As'ad. MM</u></b></td>
+						<td colspan="3" height="100" valign="bottom"><b><u><?php echo @$dataijin[0]->NAMA_PEJABAT; ?></u></b></td>
 					</tr>
 					<tr>
-						<td colspan="3"><b>Pembina Tk I</b></td>
+						<td colspan="3"><b><?php echo @$dataijin[0]->PANGKAT; ?></b></td>
 					</tr>
 					<tr>
-						<td colspan="3"><b>NIP. 19620209 198803 2 006</b></td>
+						<td colspan="3"><b>NIP. <?php echo @$dataijin[0]->NIP_PEJABAT; ?></b></td>
 					</tr>
 				</table>
 			</td>

@@ -14,7 +14,7 @@ class App_model extends CI_Model{
 	
 	/* Fungsi untuk mengecek session apakah masih terisi atau sudah hangus */
 	public function __checkSession($key = null){
-		if($key != null){
+		if($key != ''){
 			return @$_SESSION[$key];
 		}else{
 			return @$_SESSION['PERIJINAN_USERNAME'];
@@ -90,12 +90,13 @@ class App_model extends CI_Model{
 		return $result;
 	}
 	
-	public function __update($dataValue, $id, $table=FALSE, $return_type = FALSE){
+	public function __update($dataValue, $id, $table=FALSE, $return_type = FALSE, $prim=FALSE){
 		$table = ($table!=FALSE) ? $table : $this->table_name ;
+		$prim = ($prim!=FALSE) ? $prim : $this->column_primary ;
 		$result = 'fail';
 		if($this->__checkCodeExisting($dataValue, $id)){
 			$filter = $this->primary_filter;
-			$this->db->set($dataValue)->where($this->column_primary, $filter($id))->update($table);
+			$this->db->set($dataValue)->where($prim, $filter($id))->update($table);
 			if($this->db->affected_rows()){			
 				$result = 'success';
 				if($return_type == 'updateId'){

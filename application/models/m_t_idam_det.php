@@ -4,17 +4,10 @@ class M_t_idam_det extends App_model{
 				det_idam_id,
 				det_idam_idam_id,
 				det_idam_jenis,
-				CASE WHEN det_idam_jenis = 1 THEN 'BARU'
+				CASE WHEN det_idam_jenis = 1 THEN 'PERPANJANGAN'
 					ELSE 'PERPANJANGAN'
 					END AS det_idam_jenis_nama,
 				det_idam_tanggal,
-				det_idam_nama,
-				det_idam_alamat,
-				det_idam_telp,
-				det_idam_tempatlahir,
-				det_idam_tanggallahir,
-				det_idam_pendidikan,
-				det_idam_tahunlulus,
 				det_idam_status,
 				CASE WHEN det_idam_status = 1 THEN 'DISETUJUI'
 					WHEN det_idam_status = 2 THEN 'DITOLAK'
@@ -30,18 +23,38 @@ class M_t_idam_det extends App_model{
 				det_idam_terima,
 				det_idam_terimatanggal,
 				det_idam_sk,
-				det_idam_skurut,
 				det_idam_berlaku,
 				det_idam_kadaluarsa,
 				det_idam_nomorreg,
-				det_idam_proses,
 				det_idam_lulussurvey,
 				idam_usaha,
 				idam_jenisusaha,
 				idam_alamat,
-				idam_sertifikatpkp
+				idam_sertifikatpkp,
+				CONCAT(5 * (DATEDIFF(NOW(), det_idam_tanggal) DIV 7) + 
+					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_idam_tanggal) + 
+						1, 1),' Hari') as lamaproses,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id,
+				pemohon_pendidikan,
+				pemohon_tahunlulus
 				FROM t_idam_det 
 				JOIN t_idam ON t_idam_det.det_idam_idam_id = t_idam.idam_id
+				JOIN m_pemohon ON t_idam_det.det_idam_pemohon_id = m_pemohon.pemohon_id
 			WHERE det_idam_id IS NOT NULL 
 	";
 	
@@ -77,7 +90,6 @@ class M_t_idam_det extends App_model{
 					det_idam_terima LIKE '%".$searchText."%' OR 
 					det_idam_terimatanggal LIKE '%".$searchText."%' OR 
 					det_idam_sk LIKE '%".$searchText."%' OR 
-					det_idam_skurut LIKE '%".$searchText."%' OR 
 					det_idam_berlaku LIKE '%".$searchText."%' OR 
 					det_idam_kadaluarsa LIKE '%".$searchText."%' OR 
 					det_idam_nomorreg LIKE '%".$searchText."%'
@@ -152,9 +164,6 @@ class M_t_idam_det extends App_model{
 		}
 		if(@$det_idam_sk != ''){
 			$sql .= " AND det_idam_sk LIKE '%".$det_idam_sk."%' ";
-		}
-		if(@$det_idam_skurut != ''){
-			$sql .= " AND det_idam_skurut LIKE '%".$det_idam_skurut."%' ";
 		}
 		if(@$det_idam_berlaku != ''){
 			$sql .= " AND det_idam_berlaku LIKE '%".$det_idam_berlaku."%' ";
