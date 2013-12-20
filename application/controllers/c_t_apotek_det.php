@@ -50,6 +50,9 @@ class C_t_apotek_det extends CI_Controller{
 			case 'CETAKSK':
 				$this->cetakSk();
 			break;
+			case 'CETAKBP':
+				$this->cetakBp();
+			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -890,6 +893,19 @@ class C_t_apotek_det extends CI_Controller{
 		$data['printrecord'] = $printrecord[1];
 		$print_view=$this->load->view('template/p_apotek_sk.php',$data,TRUE);
 		$print_file=fopen('print/apotek_sk.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakBp(){
+		$apotekdet_id  = $this->input->post('apotekdet_id');
+		$params = array(
+			"det_apotek_id"=>$apotekdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_apotek_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_apotek_buktiterima.php',$data,TRUE);
+		$print_file=fopen('print/apotek_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}

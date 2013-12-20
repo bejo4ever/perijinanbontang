@@ -47,6 +47,9 @@ class C_t_idam_det extends CI_Controller{
 			case 'CETAKSK':
 				$this->cetakSk();
 			break;
+			case 'CETAKBP':
+				$this->cetakBp();
+			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -398,6 +401,19 @@ class C_t_idam_det extends CI_Controller{
 		);
 		$result = $this->m_t_idam_det->__update($data, $idamdet_id, '', '');
 		echo $result;
+	}
+	function cetakBp(){
+		$idamdet_id  = $this->input->post('idamdet_id');
+		$params = array(
+			"det_idam_id"=>$idamdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_idam_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_idam_buktiterima.php',$data,TRUE);
+		$print_file=fopen('print/idam_buktipenerimaan.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
 	}
 	function cetakLembarKontrol(){
 		$idamdet_id  = $this->input->post('idamdet_id');

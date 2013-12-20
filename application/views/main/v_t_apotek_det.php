@@ -1384,61 +1384,6 @@
 				apotek_det_printExcel('EXCEL');
 			}
 		});
-		var apotek_det_lembarkontrolButton = Ext.create('Ext.Button',{
-			text : 'Lembar Kontrol',
-			tooltip : 'Cetak Lembar Kontrol',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_apotek_det/switchAction',
-					params: {
-						apotekdet_id : record.get('det_apotek_id'),
-						action : 'CETAKLEMBARKONTROL'
-					},success : function(){
-						window.open('../print/apotek_lembarkontrol.html');
-					}
-				});
-			}
-		});
-		var apotek_det_bapButton = Ext.create('Ext.Button',{
-			text : 'BAP',
-			tooltip : 'Cetak BAP',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_apotek_det/switchAction',
-					params: {
-						apotekdet_id : record.get('det_apotek_id'),
-						action : 'CETAKLEMBARKONTROL'
-					},success : function(){
-						window.open('../print/apotek_lembarkontrol.html');
-					}
-				});
-			}
-		});
-		var apotek_det_skButton = Ext.create('Ext.Button',{
-			text : 'Surat Keputusan',
-			tooltip : 'Cetak Surat Keputusan Depo Air Minum',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_apotek_det/switchAction',
-					params: {
-						apotekdet_id : record.get('det_apotek_id'),
-						action : 'CETAKSK'
-					},success : function(){
-						window.open('../print/apotek_sk.html');
-					}
-				});
-			}
-		});
-		
 		
 		var apotek_det_contextMenuEdit = Ext.create('Ext.menu.Item',{
 			text : globalEditButtonTitle,
@@ -1480,6 +1425,82 @@
 			},
 			width: 150
 		});
+		/* Start ContextMenu For Action Column */
+		var apotek_det_bp_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Bukti Penerimaan',
+			tooltip : 'Cetak Bukti Penerimaan',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKBP'
+					},success : function(){
+						window.open('../print/apotek_buktipenerimaan.html');
+					}
+				});
+			}
+		});
+		var apotek_det_sk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Surat Keputusan',
+			tooltip : 'Cetak Surat Keputusan',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKSK'
+					},success : function(){
+						window.open('../print/apotek_sk.html');
+					}
+				});
+			}
+		});
+		var apotek_det_bap_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Berita Acara Penerimaan',
+			tooltip : 'Cetak Berita Acara Pemeriksaan',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/apotek_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var apotek_det_lk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Lembar Kontrol',
+			tooltip : 'Cetak Lembar Kontrol',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/apotek_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var apotek_det_printContextMenu = Ext.create('Ext.menu.Menu',{
+			items: [
+				apotek_det_bp_printCM,apotek_det_lk_printCM,apotek_det_bap_printCM,apotek_det_sk_printCM
+			]
+		});
+		
+		/* End ContextMenu For Action Column */
 		apotek_det_gridPanel = Ext.create('Ext.grid.Panel',{
 			id : 'apotek_det_gridPanel',
 			constrain : true,
@@ -1519,8 +1540,8 @@
 					text : 'Lulus Survey ?',
 					dataIndex : 'det_apotek_surveylulus',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Nama',
@@ -1544,8 +1565,8 @@
 					text : 'Surat Penugasan',
 					dataIndex : 'det_apotek_sp',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'NIK',
@@ -1557,8 +1578,8 @@
 					text : 'Tempat Lahir',
 					dataIndex : 'det_apotek_tempatlahir',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tgl Lahir',
@@ -1572,108 +1593,137 @@
 					text : 'Pekerjaan',
 					dataIndex : 'det_apotek_pekerjaan',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'NPWP',
 					dataIndex : 'det_apotek_npwp',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'STRA',
 					dataIndex : 'det_apotek_stra',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Pendidikan',
 					dataIndex : 'det_apotek_pendidikan',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tahun Lulus',
 					dataIndex : 'det_apotek_tahunlulus',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Penerima Berkas',
 					dataIndex : 'det_apotek_terima',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tgl Terima',
 					dataIndex : 'det_apotek_terimatanggal',
 					width : 100,
-					hidden : true,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Kelengkapan',
 					dataIndex : 'det_apotek_kelengkapan',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'BAP',
 					dataIndex : 'det_apotek_bap',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tanggal BAP',
 					dataIndex : 'det_apotek_baptanggal',
 					width : 100,
-					hidden : true,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Keputusan',
 					dataIndex : 'det_apotek_keputusan',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Keterangan',
 					dataIndex : 'det_apotek_keterangan',
 					width : 100,
-					hidden : true,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Jarak',
 					dataIndex : 'det_apotek_jarak',
 					width : 100,
-					hidden : true,
-					sortable : false
-				}
+					sortable : false,
+					hidden : true
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							apotek_det_printContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Action',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-edit',
+						tooltip: 'Ubah Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							apotek_det_confirmUpdate();
+						}
+					},{
+						iconCls: 'icon16x16-delete',
+						tooltip: 'Hapus Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							apotek_det_confirmDelete();
+						}
+					}]
+				},
 			],
 			tbar : [
 				apotek_det_addButton,
-				apotek_det_editButton,
-				apotek_det_deleteButton,
 				apotek_det_gridSearchField,
 				apotek_det_searchButton,
 				apotek_det_refreshButton,
 				apotek_det_printButton,
-				apotek_det_excelButton,
-				apotek_det_lembarkontrolButton,
-				apotek_det_bapButton,
-				apotek_det_skButton
+				apotek_det_excelButton
 			],
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : apotek_det_dataStore,

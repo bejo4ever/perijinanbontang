@@ -751,61 +751,6 @@
 				iujk_det_printExcel('EXCEL');
 			}
 		});
-		var iujk_det_lembarkontrolButton = Ext.create('Ext.Button',{
-			text : 'Lembar Kontrol',
-			tooltip : 'Cetak Lembar Kontrol',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_iujk_det/switchAction',
-					params: {
-						iujkdet_id : record.get('det_iujk_id'),
-						action : 'CETAKLEMBARKONTROL'
-					},success : function(){
-						window.open('../print/iujk_lembarkontrol.html');
-					}
-				});
-			}
-		});
-		var iujk_det_rekomButton = Ext.create('Ext.Button',{
-			text : 'Rekomendasi',
-			tooltip : 'Cetak Rekomendasi',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_iujk_det/switchAction',
-					params: {
-						iujkdet_id : record.get('det_iujk_id'),
-						action : 'CETAKREKOMENDASI'
-					},success : function(){
-						window.open('../print/iujk_rekomendasi.html');
-					}
-				});
-			}
-		});
-		var iujk_det_skButton = Ext.create('Ext.Button',{
-			text : 'Surat Keputusan',
-			tooltip : 'Cetak Surat Keputusan Ijin Usaha Jasa Konstruksi',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_iujk_det/switchAction',
-					params: {
-						iujkdet_id : record.get('det_iujk_id'),
-						action : 'CETAKSK'
-					},success : function(){
-						window.open('../print/iujk_sk.html');
-					}
-				});
-			}
-		});
-		
 		
 		var iujk_det_contextMenuEdit = Ext.create('Ext.menu.Item',{
 			text : globalEditButtonTitle,
@@ -826,7 +771,6 @@
 			handler : iujk_det_refresh
 		});
 		iujk_det_contextMenu = Ext.create('Ext.menu.Menu',{
-			id: 'iujk_det_contextMenu',
 			items: [
 				iujk_det_contextMenuEdit,iujk_det_contextMenuDelete,'-',iujk_det_contextMenuRefresh
 			]
@@ -847,6 +791,82 @@
 			},
 			width: 150
 		});
+		/* Start ContextMenu For Action Column */
+		var iujk_det_bp_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Bukti Penerimaan',
+			tooltip : 'Cetak Bukti Penerimaan',
+			handler : function(){
+				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujk_det/switchAction',
+					params: {
+						iujkdet_id : record.get('det_iujk_id'),
+						action : 'CETAKBP'
+					},success : function(){
+						window.open('../print/iujk_buktipenerimaan.html');
+					}
+				});
+			}
+		});
+		var iujk_det_sk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Surat Keputusan',
+			tooltip : 'Cetak Surat Keputusan',
+			handler : function(){
+				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujk_det/switchAction',
+					params: {
+						iujkdet_id : record.get('det_iujk_id'),
+						action : 'CETAKSK'
+					},success : function(){
+						window.open('../print/iujk_sk.html');
+					}
+				});
+			}
+		});
+		var iujk_det_rekom_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Rekomendasi',
+			tooltip : 'Cetak Surat Rekomendasi',
+			handler : function(){
+				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujk_det/switchAction',
+					params: {
+						iujkdet_id : record.get('det_iujk_id'),
+						action : 'CETAKREKOMENDASI'
+					},success : function(){
+						window.open('../print/iujk_rekomendasi.html');
+					}
+				});
+			}
+		});
+		var iujk_det_lk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Lembar Kontrol',
+			tooltip : 'Cetak Lembar Kontrol',
+			handler : function(){
+				var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujk_det/switchAction',
+					params: {
+						iujkdet_id : record.get('det_iujk_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/iujk_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var iujk_det_printContextMenu = Ext.create('Ext.menu.Menu',{
+			items: [
+				iujk_det_bp_printCM,iujk_det_lk_printCM,iujk_det_rekom_printCM,iujk_det_sk_printCM
+			]
+		});
+		
+		/* End ContextMenu For Action Column */
 		iujk_det_gridPanel = Ext.create('Ext.grid.Panel',{
 			id : 'iujk_det_gridPanel',
 			constrain : true,
@@ -899,84 +919,124 @@
 					text : 'Nomor Reg',
 					dataIndex : 'det_iujk_nomorreg',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Nomor Rekomendasi',
 					dataIndex : 'det_iujk_rekomnomor',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tanggal Rekomendasi',
 					dataIndex : 'det_iujk_rekomtanggal',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Tgl Berlaku',
 					dataIndex : 'det_iujk_berlaku',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Tgl Kadaluarsa',
 					dataIndex : 'det_iujk_kadaluarsa',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
 				},
 				{
 					text : 'Penanggung Jawab 1',
 					dataIndex : 'det_iujk_pj1',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Penanggung Jawab 2',
 					dataIndex : 'det_iujk_pj2',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Penanggung Jawab 3',
 					dataIndex : 'det_iujk_pj3',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Penanggung Jawab Teknis',
 					dataIndex : 'det_iujk_pjteknis',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'NO. PJT -BU',
 					dataIndex : 'det_iujk_pjtbu',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Lulus Survey',
 					dataIndex : 'det_iujk_surveylulus',
 					width : 100,
-					sortable : false
-				}
+					sortable : false,
+					hidden : true
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							iujk_det_printContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Action',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-edit',
+						tooltip: 'Ubah Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							iujk_det_confirmUpdate();
+						}
+					},{
+						iconCls: 'icon16x16-delete',
+						tooltip: 'Hapus Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							iujk_det_confirmDelete();
+						}
+					}]
+				},
 			],
 			tbar : [
 				iujk_det_addButton,
-				iujk_det_editButton,
-				iujk_det_deleteButton,
 				iujk_det_gridSearchField,
 				iujk_det_searchButton,
 				iujk_det_refreshButton,
 				iujk_det_printButton,
-				iujk_det_excelButton,
-				iujk_det_lembarkontrolButton,
-				iujk_det_rekomButton,
-				iujk_det_skButton
+				iujk_det_excelButton
 			],
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : iujk_det_dataStore,
