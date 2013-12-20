@@ -6,6 +6,7 @@
 		background-image:url(../assets/images/icons/forward.png) !important;
 	}
 </style>
+<div id="context"></div>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -816,61 +817,6 @@
 				idam_det_printExcel('EXCEL');
 			}
 		});
-		var idam_det_lembarkontrolButton = Ext.create('Ext.Button',{
-			text : 'Lembar Kontrol',
-			tooltip : 'Cetak Lembar Kontrol',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_idam_det/switchAction',
-					params: {
-						idamdet_id : record.get('det_idam_id'),
-						action : 'CETAKLEMBARKONTROL'
-					},success : function(){
-						window.open('../print/idam_lembarkontrol.html');
-					}
-				});
-			}
-		});
-		var idam_det_bapButton = Ext.create('Ext.Button',{
-			text : 'BAP',
-			tooltip : 'Cetak BAP',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_idam_det/switchAction',
-					params: {
-						idamdet_id : record.get('det_idam_id'),
-						action : 'CETAKLEMBARKONTROL'
-					},success : function(){
-						window.open('../print/idam_lembarkontrol.html');
-					}
-				});
-			}
-		});
-		var idam_det_skButton = Ext.create('Ext.Button',{
-			text : 'Surat Keputusan',
-			tooltip : 'Cetak Surat Keputusan Depo Air Minum',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_idam_det/switchAction',
-					params: {
-						idamdet_id : record.get('det_idam_id'),
-						action : 'CETAKSK'
-					},success : function(){
-						window.open('../print/idam_sk.html');
-					}
-				});
-			}
-		});
-		
 		var idam_det_contextMenuEdit = Ext.create('Ext.menu.Item',{
 			text : globalEditButtonTitle,
 			tooltip : globalEditTooltip,
@@ -890,7 +836,6 @@
 			handler : idam_det_refresh
 		});
 		idam_det_contextMenu = Ext.create('Ext.menu.Menu',{
-			id: 'idam_det_contextMenu',
 			items: [
 				idam_det_contextMenuEdit,idam_det_contextMenuDelete,'-',idam_det_contextMenuRefresh
 			]
@@ -911,6 +856,82 @@
 			},
 			width: 150
 		});
+		/* Start ContextMenu For Action Column */
+		var idam_det_bp_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Bukti Penerimaan',
+			tooltip : 'Cetak Bukti Penerimaan',
+			handler : function(){
+				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_idam_det/switchAction',
+					params: {
+						idamdet_id : record.get('det_idam_id'),
+						action : 'CETAKBP'
+					},success : function(){
+						window.open('../print/idam_buktipenerimaan.html');
+					}
+				});
+			}
+		});
+		var idam_det_sk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Surat Keputusan',
+			tooltip : 'Cetak Surat Keputusan',
+			handler : function(){
+				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_idam_det/switchAction',
+					params: {
+						idamdet_id : record.get('det_idam_id'),
+						action : 'CETAKSK'
+					},success : function(){
+						window.open('../print/idam_sk.html');
+					}
+				});
+			}
+		});
+		var idam_det_bap_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Berita Acara Penerimaan',
+			tooltip : 'Cetak Berita Acara Pemeriksaan',
+			handler : function(){
+				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_idam_det/switchAction',
+					params: {
+						idamdet_id : record.get('det_idam_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/idam_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var idam_det_lk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Lembar Kontrol',
+			tooltip : 'Cetak Lembar Kontrol',
+			handler : function(){
+				var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_idam_det/switchAction',
+					params: {
+						idamdet_id : record.get('det_idam_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/idam_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var idam_det_printContextMenu = Ext.create('Ext.menu.Menu',{
+			items: [
+				idam_det_bp_printCM,idam_det_lk_printCM,idam_det_bap_printCM,idam_det_sk_printCM
+			]
+		});
+		
+		/* End ContextMenu For Action Column */
 		idam_det_gridPanel = Ext.create('Ext.grid.Panel',{
 			id : 'idam_det_gridPanel',
 			constrain : true,
@@ -920,16 +941,6 @@
 			renderTo : 'idam_detGrid',
 			width : '95%',
 			selModel : Ext.selection.Model(),
-			viewConfig : { 
-				forceFit:true,
-				listeners: {
-					itemcontextmenu: function(view, rec, node, index, e) {
-						e.stopEvent();
-						idam_det_contextMenu.showAt(e.getXY());
-						return false;
-					}
-				}
-			},
 			multiSelect : true,
 			keys : idam_det_shorcut,
 			columns : [
@@ -962,7 +973,7 @@
 				{
 					text : 'Alamat',
 					dataIndex : 'det_idam_alamat',
-					width : 300,
+					width : 200,
 					sortable : false
 				},
 				{
@@ -1089,7 +1100,41 @@
 				},
 				{
 					xtype:'actioncolumn',
+					text : 'Cetak',
 					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							idam_det_printContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Action',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-edit',
+						tooltip: 'Ubah Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							idam_det_confirmUpdate();
+						}
+					},{
+						iconCls: 'icon16x16-delete',
+						tooltip: 'Hapus Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							idam_det_confirmDelete();
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
+					width:30,
 					items: [{
 						getClass: function(v, meta, rec) {
 							if(rec.get('det_idam_lulussurvey') == 1){
@@ -1105,8 +1150,12 @@
 								return 'Ubah Menjadi Lulus';
 							}
 						},
-						handler: function(grid, rowIndex, colIndex) {
-							var rec = grid.getStore().getAt(rowIndex);
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							idam_det_contextMenu.showAt(e.getXY());
+							return false;
+							
+							/* var rec = grid.getStore().getAt(rowIndex);
 							var idamdet_id = rec.get('det_idam_id');
 							var lulus = 0;
 							if (rec.get('det_idam_lulussurvey') == 1) {
@@ -1124,23 +1173,17 @@
 								},success : function(){
 									idam_det_dataStore.reload();
 								}
-							});
+							}); */
 						}
 					}]
 				}
 			],
 			tbar : [
 				idam_det_addButton,
-				idam_det_editButton,
-				idam_det_deleteButton,
 				idam_det_gridSearchField,
-				idam_det_searchButton,
 				idam_det_refreshButton,
 				idam_det_printButton,
-				idam_det_excelButton,
-				idam_det_lembarkontrolButton,
-				idam_det_bapButton,
-				idam_det_skButton
+				idam_det_excelButton
 			],
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : idam_det_dataStore,
@@ -1149,24 +1192,6 @@
 			listeners : {
 				afterrender : function(){
 					idam_det_dataStore.reload({params: {start: 0, limit: globalPageSize}});
-				},
-				itemclick : function(cmp, rec){
-					var record = rec.data;
-					if(record.det_idam_terima != '' && record.det_idam_terimatanggal != ''){
-						idam_det_lembarkontrolButton.enable();
-					}else{
-						idam_det_lembarkontrolButton.disable();
-					}
-					if(record.det_idam_bap != '' && record.det_idam_baptanggal != ''){
-						idam_det_bapButton.enable();
-					}else{
-						idam_det_bapButton.disable();
-					}
-					if(record.det_idam_lulussurvey == 1){
-						idam_det_skButton.enable();
-					}else{
-						idam_det_skButton.disable();
-					}
 				}
 			}
 		});

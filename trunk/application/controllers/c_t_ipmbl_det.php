@@ -50,6 +50,9 @@ class C_t_ipmbl_det extends CI_Controller{
 			case 'CETAKSK':
 				$this->cetakSk();
 			break;
+			case 'CETAKBP':
+				$this->cetakBp();
+			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -476,6 +479,19 @@ class C_t_ipmbl_det extends CI_Controller{
 		$data['printrecord'] = $printrecord[1];
 		$print_view=$this->load->view('template/p_ipmbl_bapeninjauan.php',$data,TRUE);
 		$print_file=fopen('print/ipmbl_bap.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakBp(){
+		$ipmbldet_id  = $this->input->post('ipmbldet_id');
+		$params = array(
+			"det_ipmbl_id"=>$ipmbldet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_ipmbl_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_ipmbl_buktiterima.php',$data,TRUE);
+		$print_file=fopen('print/ipmbl_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}

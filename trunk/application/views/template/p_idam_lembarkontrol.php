@@ -12,7 +12,8 @@
 			<td colspan="2" align="center"><h3 style="margin:0px;"><u>LAIK HYGIENE DEPO AIR MINUM KOTA BONTANG</u></h3></td>
 		</tr>
 		<tr>
-			<td colspan="2">&nbsp;</td>
+			<td width="200px">&nbsp;</td>
+			<td>&nbsp;</td>
 		</tr>
 		<tr>
 			<td>Nama Pemohon</td>
@@ -38,22 +39,35 @@
 	<br><br>
 	<table width="720px" align="center" cellpadding="0" cellspacing="0">
 		<tr>
-			<td colspan="4"><b>DAFTAR LAMPIRAN</b></td>
+			<td colspan="3"><b>DAFTAR LAMPIRAN</b></td>
+			<td colspan="3"><b>KET</b></td>
 		</tr>
 		<?php $i=1; foreach($dataceklist as $subdataceklist){ ?>
 		<tr>
-			<td><?php echo $i; ?></td>
+			<td valign="top"><?php echo $i; ?></td>
 			<td><?php echo $subdataceklist->NAMA_SYARAT; ?></td>
-			<td>: <?php echo ($subdataceklist->idam_cek_status == 1) ? 'ADA' : 'TIDAK ADA'; ?></td>
+			<td valign="top">: <?php echo ($subdataceklist->idam_cek_status == 1) ? 'ADA' : 'TIDAK ADA'; ?></td>
 			<td><?php echo $subdataceklist->idam_cek_keterangan; ?></td>
 		</tr>
 		<?php $i++; } ?>
+		<tr>
+			<td width="20px">&nbsp;</td>
+			<td width="350px">&nbsp;</td>
+			<td width="100px">&nbsp;</td>
+			<td width="150px">&nbsp;</td>
+		</tr>
 	</table>
-	<br><br>
 	<table width="720px" align="center" cellpadding="0" cellspacing="0">
+		<tr>
+			<td width="220px">&nbsp;</td>
+			<td width="100px">&nbsp;</td>
+			<td width="150px">&nbsp;</td>
+			<td width="100px">&nbsp;</td>
+			<td width="150px">&nbsp;</td>
+		</tr>
 		<?php if($printrecord[0]->det_idam_terima != ''){ ?>
 		<tr>
-			<td colspan="4"><b>Kolom ini diisi oleh petugas :</b></td>
+			<td colspan="5"><b>Kolom ini diisi oleh petugas :</b></td>
 		</tr>
 		<tr>
 			<td>Penerimaan Berkas Permohonan</td>

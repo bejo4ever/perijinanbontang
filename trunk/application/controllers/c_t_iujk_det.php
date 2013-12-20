@@ -50,6 +50,9 @@ class C_t_iujk_det extends CI_Controller{
 			case 'CETAKSK':
 				$this->cetakSk();
 			break;
+			case 'CETAKBP':
+				$this->cetakBp();
+			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -390,6 +393,19 @@ class C_t_iujk_det extends CI_Controller{
 		$data['printrecord'] = $printrecord[1];
 		$print_view=$this->load->view('template/p_iujk_rekomendasi.php',$data,TRUE);
 		$print_file=fopen('print/iujk_rekomendasi.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakBp(){
+		$iujkdet_id  = $this->input->post('iujkdet_id');
+		$params = array(
+			"det_iujk_id"=>$iujkdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_iujk_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_iujk_buktiterima.php',$data,TRUE);
+		$print_file=fopen('print/iujk_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}

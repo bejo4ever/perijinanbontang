@@ -708,62 +708,6 @@
 			}
 		});
 		
-		
-		var iujt_det_lembarkontrolButton = Ext.create('Ext.Button',{
-			text : 'Lembar Kontrol',
-			tooltip : 'Cetak Lembar Kontrol',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_iujt_det/switchAction',
-					params: {
-						iujtdet_id : record.get('det_iujt_id'),
-						action : 'CETAKLEMBARKONTROL'
-					},success : function(){
-						window.open('../print/iujt_lembarkontrol.html');
-					}
-				});
-			}
-		});
-		var iujt_det_bapButton = Ext.create('Ext.Button',{
-			text : 'Rekomendasi',
-			tooltip : 'Cetak Rekomendasi',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_iujt_det/switchAction',
-					params: {
-						iujtdet_id : record.get('det_iujt_id'),
-						action : 'REKOMENDASI'
-					},success : function(){
-						window.open('../print/iujt_rekom.html');
-					}
-				});
-			}
-		});
-		var iujt_det_skButton = Ext.create('Ext.Button',{
-			text : 'Surat Keputusan',
-			tooltip : 'Cetak Surat Keputusan Depo Air Minum',
-			iconCls : 'icon16x16-print',
-			handler : function(){
-				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_t_iujt_det/switchAction',
-					params: {
-						iujtdet_id : record.get('det_iujt_id'),
-						action : 'CETAKSK'
-					},success : function(){
-						window.open('../print/iujt_sk.html');
-					}
-				});
-			}
-		});
-		
 		var iujt_det_contextMenuEdit = Ext.create('Ext.menu.Item',{
 			text : globalEditButtonTitle,
 			tooltip : globalEditTooltip,
@@ -783,7 +727,6 @@
 			handler : iujt_det_refresh
 		});
 		iujt_det_contextMenu = Ext.create('Ext.menu.Menu',{
-			id: 'iujt_det_contextMenu',
 			items: [
 				iujt_det_contextMenuEdit,iujt_det_contextMenuDelete,'-',iujt_det_contextMenuRefresh
 			]
@@ -804,6 +747,82 @@
 			},
 			width: 150
 		});
+		/* Start ContextMenu For Action Column */
+		var iujt_det_bp_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Bukti Penerimaan',
+			tooltip : 'Cetak Bukti Penerimaan',
+			handler : function(){
+				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujt_det/switchAction',
+					params: {
+						iujtdet_id : record.get('det_iujt_id'),
+						action : 'CETAKBP'
+					},success : function(){
+						window.open('../print/iujt_buktipenerimaan.html');
+					}
+				});
+			}
+		});
+		var iujt_det_sk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Surat Keputusan',
+			tooltip : 'Cetak Surat Keputusan',
+			handler : function(){
+				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujt_det/switchAction',
+					params: {
+						iujtdet_id : record.get('det_iujt_id'),
+						action : 'CETAKSK'
+					},success : function(){
+						window.open('../print/iujt_sk.html');
+					}
+				});
+			}
+		});
+		var iujt_det_rekom_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Rekomendasi',
+			tooltip : 'Cetak Surat Rekomendasi',
+			handler : function(){
+				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujt_det/switchAction',
+					params: {
+						iujtdet_id : record.get('det_iujt_id'),
+						action : 'REKOMENDASI'
+					},success : function(){
+						window.open('../print/iujt_rekom.html');
+					}
+				});
+			}
+		});
+		var iujt_det_lk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Lembar Kontrol',
+			tooltip : 'Cetak Lembar Kontrol',
+			handler : function(){
+				var record = iujt_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_iujt_det/switchAction',
+					params: {
+						iujtdet_id : record.get('det_iujt_id'),
+						action : 'CETAKLEMBARKONTROL'
+					},success : function(){
+						window.open('../print/iujt_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var iujt_det_printContextMenu = Ext.create('Ext.menu.Menu',{
+			items: [
+				iujt_det_bp_printCM,iujt_det_lk_printCM,iujt_det_rekom_printCM,iujt_det_sk_printCM
+			]
+		});
+		
+		/* End ContextMenu For Action Column */
 		iujt_det_gridPanel = Ext.create('Ext.grid.Panel',{
 			id : 'iujt_det_gridPanel',
 			constrain : true,
@@ -925,6 +944,40 @@
 				},
 				{
 					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							iujt_det_printContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Action',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-edit',
+						tooltip: 'Ubah Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							iujt_det_confirmUpdate();
+						}
+					},{
+						iconCls: 'icon16x16-delete',
+						tooltip: 'Hapus Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							iujt_det_confirmDelete();
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
 					width:50,
 					items: [{
 						getClass: function(v, meta, rec) {
@@ -967,16 +1020,11 @@
 			],
 			tbar : [
 				iujt_det_addButton,
-				iujt_det_editButton,
-				iujt_det_deleteButton,
 				iujt_det_gridSearchField,
 				iujt_det_searchButton,
 				iujt_det_refreshButton,
 				iujt_det_printButton,
-				iujt_det_excelButton,
-				iujt_det_lembarkontrolButton,
-				iujt_det_bapButton,
-				iujt_det_skButton
+				iujt_det_excelButton
 			],
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : iujt_det_dataStore,
