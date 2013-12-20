@@ -739,6 +739,7 @@
 				{ name : 'det_idam_kadaluarsa', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_idam_kadaluarsa' },
 				{ name : 'det_idam_nomorreg', type : 'string', mapping : 'det_idam_nomorreg' },
 				{ name : 'det_idam_lulussurvey', type : 'int', mapping : 'det_idam_lulussurvey' },
+				{ name : 'det_idam_proses', type : 'string', mapping : 'det_idam_proses' },
 				{ name : 'idam_usaha', type : 'string', mapping : 'idam_usaha' },
 				{ name : 'idam_jenisusaha', type : 'string', mapping : 'idam_jenisusaha' },
 				{ name : 'idam_alamat', type : 'string', mapping : 'idam_alamat' },
@@ -992,6 +993,47 @@
 			]
 		});
 		
+		function idam_det_ubahProses(proses){
+			var record = idam_det_gridPanel.getSelectionModel().getSelection()[0];
+			Ext.Ajax.request({
+				waitMsg: 'Please wait...',
+				url: 'c_t_idam_det/switchAction',
+				params: {
+					idamdet_id : record.get('det_idam_id'),
+					proses : proses,
+					action : 'UBAHPROSES'
+				},success : function(){
+					idam_det_dataStore.reload();
+				}
+			});
+		}
+		
+		var idam_det_prosesContextMenu = Ext.create('Ext.menu.Menu',{
+			items: [
+				{
+					text : 'Selesai, belum diambil',
+					tooltip : 'Ubah Menjadi Selesai, belum diambil',
+					handler : function(){
+						idam_det_ubahProses('Selesai, belum diambil');
+					}
+				},
+				{
+					text : 'Selesai, sudah diambil',
+					tooltip : 'Ubah Menjadi Selesai, sudah diambil',
+					handler : function(){
+						idam_det_ubahProses('Selesai, sudah diambil');
+					}
+				},
+				{
+					text : 'Ditolak',
+					tooltip : 'Ubah Menjadi Ditolak',
+					handler : function(){
+						idam_det_ubahProses('Ditolak');
+					}
+				}
+			]
+		});
+		
 		/* End ContextMenu For Action Column */
 		idam_det_gridPanel = Ext.create('Ext.grid.Panel',{
 			id : 'idam_det_gridPanel',
@@ -1160,6 +1202,12 @@
 					sortable : false
 				},
 				{
+					text : 'Status',
+					dataIndex : 'det_idam_proses',
+					width : 125,
+					sortable : false
+				},
+				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
 					width:50,
@@ -1201,28 +1249,8 @@
 						tooltip : 'Ubah Status',
 						handler: function(grid, rowIndex, colIndex, node, e) {
 							e.stopEvent();
-							idam_det_contextMenu.showAt(e.getXY());
+							idam_det_prosesContextMenu.showAt(e.getXY());
 							return false;
-							
-							/* var rec = grid.getStore().getAt(rowIndex);
-							var idamdet_id = rec.get('det_idam_id');
-							var lulus = 0;
-							if (rec.get('det_idam_lulussurvey') == 1) {
-								lulus=0;
-							} else {
-								lulus=1;
-							}
-							Ext.Ajax.request({
-								waitMsg: 'Please wait...',
-								url: 'c_t_idam_det/switchAction',
-								params: {
-									idamdet_id : idamdet_id,
-									lulus : lulus,
-									action : 'CHANGESURVEYSTATUS'
-								},success : function(){
-									idam_det_dataStore.reload();
-								}
-							}); */
 						}
 					}]
 				}
