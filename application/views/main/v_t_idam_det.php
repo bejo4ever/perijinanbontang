@@ -763,8 +763,7 @@
 				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
 				{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
 				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
-				
-				]
+			]
 		});
 /* End DataStore declaration */
 /* Start Shorcut Declaration */

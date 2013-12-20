@@ -40,6 +40,7 @@
 		var det_ipmbl_luasField;
 		var det_ipmbl_volumeField;
 		var det_ipmbl_keperluanField;
+		var det_ipmbl_lokasiField;
 		var det_ipmbl_berkasmasukField;
 		var det_ipmbl_surveytanggalField;
 		var det_ipmbl_surveylulusField;
@@ -108,6 +109,11 @@
 			ipmbl_det_dbTask = 'CREATE';
 			ipmbl_det_dbTaskMessage = 'created';
 			ipmbl_det_resetForm();
+			ipmbl_det_syaratDataStore.proxy.extraParams = { 
+				currentAction : 'create',
+				action : 'GETSYARAT'
+			};
+			ipmbl_det_syaratDataStore.load();
 			ipmbl_det_switchToForm();
 		}
 		
@@ -193,6 +199,7 @@
 					var det_ipmbl_luasValue = '';
 					var det_ipmbl_volumeValue = '';
 					var det_ipmbl_keperluanValue = '';
+					var det_ipmbl_lokasiValue = '';
 										
 					det_ipmbl_idValue = det_ipmbl_idField.getValue();
 					det_ipmbl_ipmbl_idValue = det_ipmbl_ipmbl_idField.getValue();
@@ -212,6 +219,7 @@
 					det_ipmbl_luasValue = det_ipmbl_luasField.getValue();
 					det_ipmbl_volumeValue = det_ipmbl_volumeField.getValue();
 					det_ipmbl_keperluanValue = det_ipmbl_keperluanField.getValue();
+					det_ipmbl_lokasiValue = det_ipmbl_lokasiField.getValue();
 					det_ipmbl_berkasmasukValue = det_ipmbl_berkasmasukField.getValue();
 					det_ipmbl_surveytanggalValue = det_ipmbl_surveytanggalField.getValue();
 					det_ipmbl_surveylulusValue = det_ipmbl_surveylulusField.getValue();
@@ -249,6 +257,25 @@
 					var encoded_ipmbl_cek_status = Ext.encode(array_ipmbl_cek_status);
 					var encoded_ipmbl_cek_keterangan = Ext.encode(array_ipmbl_cek_keterangan);
 					
+					var pemohon_idValue = ipmbl_det_pemohon_idField.getValue();
+					var pemohon_namaValue = ipmbl_det_pemohon_namaField.getValue();
+					var pemohon_alamatValue = ipmbl_det_pemohon_alamatField.getValue();
+					var pemohon_telpValue = ipmbl_det_pemohon_telpField.getValue();
+					var pemohon_npwpValue = ipmbl_det_pemohon_npwpField.getValue();
+					var pemohon_rtValue = ipmbl_det_pemohon_rtField.getValue();
+					var pemohon_rwValue = ipmbl_det_pemohon_rwField.getValue();
+					var pemohon_kelValue = ipmbl_det_pemohon_kelField.getValue();
+					var pemohon_kecValue = ipmbl_det_pemohon_kecField.getValue();
+					var pemohon_nikValue = ipmbl_det_pemohon_nikField.getValue();
+					var pemohon_straValue = ipmbl_det_pemohon_straField.getValue();
+					var pemohon_surattugasValue = ipmbl_det_pemohon_surattugasField.getValue();
+					var pemohon_pekerjaanValue = ipmbl_det_pemohon_pekerjaanField.getValue();
+					var pemohon_tempatlahirValue = ipmbl_det_pemohon_tempatlahirField.getValue();
+					var pemohon_tanggallahirValue = ipmbl_det_pemohon_tanggallahirField.getValue();
+					var pemohon_user_idValue = ipmbl_det_pemohon_user_idField.getValue();
+					var pemohon_pendidikanValue = ipmbl_det_pemohon_pendidikanField.getValue();
+					var pemohon_tahunlulusValue = ipmbl_det_pemohon_tahunlulusField.getValue();
+					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_ipmbl_det/switchAction',
@@ -271,6 +298,7 @@
 							det_ipmbl_luas : det_ipmbl_luasValue,
 							det_ipmbl_volume : det_ipmbl_volumeValue,
 							det_ipmbl_keperluan : det_ipmbl_keperluanValue,
+							det_ipmbl_lokasi : det_ipmbl_lokasiValue,
 							det_ipmbl_berkasmasuk : det_ipmbl_berkasmasukValue,
 							det_ipmbl_surveytanggal : det_ipmbl_surveytanggalValue,
 							det_ipmbl_surveylulus : det_ipmbl_surveylulusValue,
@@ -292,6 +320,24 @@
 							ipmbl_cek_syarat_id : encoded_ipmbl_cek_syarat_id,
 							ipmbl_cek_status : encoded_ipmbl_cek_status,
 							ipmbl_cek_keterangan : encoded_ipmbl_cek_keterangan,
+							pemohon_id : pemohon_idValue,
+							pemohon_nama : pemohon_namaValue,
+							pemohon_alamat : pemohon_alamatValue,
+							pemohon_telp : pemohon_telpValue,
+							pemohon_npwp : pemohon_npwpValue,
+							pemohon_rt : pemohon_rtValue,
+							pemohon_rw : pemohon_rwValue,
+							pemohon_kel : pemohon_kelValue,
+							pemohon_kec : pemohon_kecValue,
+							pemohon_nik : pemohon_nikValue,
+							pemohon_stra : pemohon_straValue,
+							pemohon_surattugas : pemohon_surattugasValue,
+							pemohon_pekerjaan : pemohon_pekerjaanValue,
+							pemohon_tempatlahir : pemohon_tempatlahirValue,
+							pemohon_tanggallahir : pemohon_tanggallahirValue,
+							pemohon_user_id : pemohon_user_idValue,
+							pemohon_pendidikan : pemohon_pendidikanValue,
+							pemohon_tahunlulus : pemohon_tahunlulusValue,
 							action : ipmbl_det_dbTask
 						},
 						success: function(response){
@@ -462,6 +508,7 @@
 			det_ipmbl_luasField.setValue(record.data.ipmbl_luas);
 			det_ipmbl_volumeField.setValue(record.data.ipmbl_volume);
 			det_ipmbl_keperluanField.setValue(record.data.ipmbl_keperluan);
+			det_ipmbl_lokasiField.setValue(record.data.ipmbl_lokasi);
 			det_ipmbl_berkasmasukField.setValue(record.data.det_ipmbl_berkasmasuk);
 			det_ipmbl_surveytanggalField.setValue(record.data.det_ipmbl_surveytanggal);
 			det_ipmbl_surveylulusField.setValue(record.data.det_ipmbl_surveylulus);
@@ -479,7 +526,35 @@
 			det_ipmbl_skField.setValue(record.data.det_ipmbl_sk);
 			det_ipmbl_kadaluarsaField.setValue(record.data.det_ipmbl_kadaluarsa);
 			det_ipmbl_berlakuField.setValue(record.data.det_ipmbl_berlaku);
-					}
+			
+			ipmbl_det_pemohon_idField.setValue(record.data.pemohon_id);
+			ipmbl_det_pemohon_namaField.setValue(record.data.pemohon_nama);
+			ipmbl_det_pemohon_alamatField.setValue(record.data.pemohon_alamat);
+			ipmbl_det_pemohon_telpField.setValue(record.data.pemohon_telp);
+			ipmbl_det_pemohon_npwpField.setValue(record.data.pemohon_npwp);
+			ipmbl_det_pemohon_rtField.setValue(record.data.pemohon_rt);
+			ipmbl_det_pemohon_rwField.setValue(record.data.pemohon_rw);
+			ipmbl_det_pemohon_kelField.setValue(record.data.pemohon_kel);
+			ipmbl_det_pemohon_kecField.setValue(record.data.pemohon_kec);
+			ipmbl_det_pemohon_nikField.setValue(record.data.pemohon_nik);
+			ipmbl_det_pemohon_straField.setValue(record.data.pemohon_stra);
+			ipmbl_det_pemohon_surattugasField.setValue(record.data.pemohon_surattugas);
+			ipmbl_det_pemohon_pekerjaanField.setValue(record.data.pemohon_pekerjaan);
+			ipmbl_det_pemohon_tempatlahirField.setValue(record.data.pemohon_tempatlahir);
+			ipmbl_det_pemohon_tanggallahirField.setValue(record.data.pemohon_tanggallahir);
+			ipmbl_det_pemohon_user_idField.setValue(record.data.pemohon_user_id);
+			ipmbl_det_pemohon_pendidikanField.setValue(record.data.pemohon_pendidikan);
+			ipmbl_det_pemohon_tahunlulusField.setValue(record.data.pemohon_tahunlulus);
+			
+			ipmbl_det_syaratDataStore.proxy.extraParams = { 
+				ipmbl_id : record.data.det_ipmbl_ipmbl_id,
+				ipmbl_det_id : record.data.det_ipmbl_id,
+				currentAction : 'update',
+				action : 'GETSYARAT'
+			};
+			ipmbl_det_syaratDataStore.load();
+			
+		}
 		
 		function ipmbl_det_showSearchWindow(){
 			ipmbl_det_searchWindow.show();
@@ -764,7 +839,38 @@
 				{ name : 'det_ipmbl_sk', type : 'string', mapping : 'det_ipmbl_sk' },
 				{ name : 'det_ipmbl_kadaluarsa', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_ipmbl_kadaluarsa' },
 				{ name : 'det_ipmbl_berlaku', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_ipmbl_berlaku' },
-				]
+				{ name : 'lamaproses', type : 'string', mapping : 'lamaproses' },
+				{ name : 'det_ipmbl_proses', type : 'string', mapping : 'det_ipmbl_proses' },
+				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+				{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+				{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+				{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+				{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+				{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
+				{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+				{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+				{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+				{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+				{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+				{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
+				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+				{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
+				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
+				{ name : 'ipmbl_luas', type : 'float', mapping : 'ipmbl_luas' },
+				{ name : 'ipmbl_volume', type : 'float', mapping : 'ipmbl_volume' },
+				{ name : 'ipmbl_keperluan', type : 'string', mapping : 'ipmbl_keperluan' },
+				{ name : 'ipmbl_lokasi', type : 'string', mapping : 'ipmbl_lokasi' },
+				{ name : 'ipmbl_alamat', type : 'string', mapping : 'ipmbl_alamat' },
+				{ name : 'ipmbl_kelurahan', type : 'string', mapping : 'ipmbl_kelurahan' },
+				{ name : 'ipmbl_kecamatan', type : 'string', mapping : 'ipmbl_kecamatan' },
+				{ name : 'ipmbl_status', type : 'int', mapping : 'ipmbl_status' },
+				{ name : 'ipmbl_tanggalsurvey', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_tanggalsurvey' },
+				{ name : 'ipmbl_usaha', type : 'string', mapping : 'ipmbl_usaha' },
+				{ name : 'ipmbl_alamatusaha', type : 'string', mapping : 'ipmbl_alamatusaha' }
+			]
 		});
 /* End DataStore declaration */
 /* Start Shorcut Declaration */
@@ -955,7 +1061,7 @@
 			}
 		});
 		var ipmbl_det_bap_printCM = Ext.create('Ext.menu.Item',{
-			text : 'Berita Acara Penerimaan',
+			text : 'Berita Acara Pemeriksaan',
 			tooltip : 'Cetak Berita Acara Pemeriksaan',
 			handler : function(){
 				var record = ipmbl_det_gridPanel.getSelectionModel().getSelection()[0];
@@ -994,6 +1100,47 @@
 			]
 		});
 		
+		function ipmbl_det_ubahProses(proses){
+			var record = ipmbl_det_gridPanel.getSelectionModel().getSelection()[0];
+			Ext.Ajax.request({
+				waitMsg: 'Please wait...',
+				url: 'c_t_ipmbl_det/switchAction',
+				params: {
+					ipmbldet_id : record.get('det_ipmbl_id'),
+					proses : proses,
+					action : 'UBAHPROSES'
+				},success : function(){
+					ipmbl_det_dataStore.reload();
+				}
+			});
+		}
+		
+		var ipmbl_det_prosesContextMenu = Ext.create('Ext.menu.Menu',{
+			items: [
+				{
+					text : 'Selesai, belum diambil',
+					tooltip : 'Ubah Menjadi Selesai, belum diambil',
+					handler : function(){
+						ipmbl_det_ubahProses('Selesai, belum diambil');
+					}
+				},
+				{
+					text : 'Selesai, sudah diambil',
+					tooltip : 'Ubah Menjadi Selesai, sudah diambil',
+					handler : function(){
+						ipmbl_det_ubahProses('Selesai, sudah diambil');
+					}
+				},
+				{
+					text : 'Ditolak',
+					tooltip : 'Ubah Menjadi Ditolak',
+					handler : function(){
+						ipmbl_det_ubahProses('Ditolak');
+					}
+				}
+			]
+		});
+		
 		/* End ContextMenu For Action Column */
 		ipmbl_det_gridPanel = Ext.create('Ext.grid.Panel',{
 			id : 'ipmbl_det_gridPanel',
@@ -1027,52 +1174,45 @@
 				{
 					text : 'Jenis',
 					dataIndex : 'det_ipmbl_jenis_nama',
-					width : 150,
+					width : 100,
 					sortable : false
 				},
 				{
 					text : 'Tanggal',
 					dataIndex : 'det_ipmbl_tanggal',
-					width : 100,
+					width : 80,
 					sortable : false,
 					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
 				{
 					text : 'Nama',
-					dataIndex : 'det_ipmbl_nama',
-					width : 200,
+					dataIndex : 'pemohon_nama',
+					width : 150,
 					sortable : false
 				},
 				{
 					text : 'Alamat',
-					dataIndex : 'det_ipmbl_alamat',
-					width : 300,
+					dataIndex : 'pemohon_alamat',
+					width : 200,
 					sortable : false
 				},
 				{
 					text : 'Kelurahan',
-					dataIndex : 'det_ipmbl_kelurahan',
+					dataIndex : 'pemohon_kel',
 					width : 100,
 					sortable : false,
 					hidden : true
 				},
 				{
 					text : 'Kecamatan',
-					dataIndex : 'det_ipmbl_kecamatan',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Kota',
-					dataIndex : 'det_ipmbl_kota',
+					dataIndex : 'pemohon_kec',
 					width : 100,
 					sortable : false,
 					hidden : true
 				},
 				{
 					text : 'Telp',
-					dataIndex : 'det_ipmbl_telp',
+					dataIndex : 'pemohon_telp',
 					width : 150,
 					sortable : false
 				},
@@ -1203,6 +1343,18 @@
 					hidden : true
 				},
 				{
+					text : 'Lama Proses',
+					dataIndex : 'lamaproses',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'Status',
+					dataIndex : 'det_ipmbl_proses',
+					width : 125,
+					sortable : false
+				},
+				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
 					width:50,
@@ -1240,40 +1392,12 @@
 					xtype:'actioncolumn',
 					width:50,
 					items: [{
-						getClass: function(v, meta, rec) {
-							if(rec.get('det_ipmbl_surveylulus') == 1){
-								return 'checked';
-							}else{
-								return 'unchecked';
-							}
-						},
-						getTip: function(v, meta, rec) {
-							if (rec.get('det_ipmbl_surveylulus') == 1) {
-								return 'Ubah Menjadi Tidak Lulus';
-							} else {
-								return 'Ubah Menjadi Lulus';
-							}
-						},
-						handler: function(grid, rowIndex, colIndex) {
-							var rec = grid.getStore().getAt(rowIndex);
-							var ipmbldet_id = rec.get('det_ipmbl_id');
-							var lulus = 0;
-							if (rec.get('det_ipmbl_surveylulus') == 1) {
-								lulus=0;
-							} else {
-								lulus=1;
-							}
-							Ext.Ajax.request({
-								waitMsg: 'Please wait...',
-								url: 'c_t_ipmbl_det/switchAction',
-								params: {
-									ipmbldet_id : ipmbldet_id,
-									lulus : lulus,
-									action : 'CHANGESURVEYSTATUS'
-								},success : function(){
-									ipmbl_det_dataStore.reload();
-								}
-							});
+						iconCls : 'checked',
+						tooltip : 'Ubah Status',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							ipmbl_det_prosesContextMenu.showAt(e.getXY());
+							return false;
 						}
 					}]
 				}
@@ -1281,7 +1405,6 @@
 			tbar : [
 				ipmbl_det_addButton,
 				ipmbl_det_gridSearchField,
-				ipmbl_det_searchButton,
 				ipmbl_det_refreshButton,
 				ipmbl_det_printButton,
 				ipmbl_det_excelButton
@@ -1433,19 +1556,25 @@
 		det_ipmbl_luasField = Ext.create('Ext.form.TextField',{
 			id : 'det_ipmbl_luasField',
 			name : 'det_ipmbl_luas',
-			fieldLabel : 'Luas',
+			fieldLabel : 'Luas (m)',
 			maskRe : /([0-9]+)$/
 		});
 		det_ipmbl_volumeField = Ext.create('Ext.form.TextField',{
 			id : 'det_ipmbl_volumeField',
 			name : 'det_ipmbl_volume',
-			fieldLabel : 'Volume',
+			fieldLabel : 'Volume (m3)',
 			maskRe : /([0-9]+)$/
 		});
 		det_ipmbl_keperluanField = Ext.create('Ext.form.TextField',{
 			id : 'det_ipmbl_keperluanField',
 			name : 'det_ipmbl_keperluan',
 			fieldLabel : 'Keperluan',
+			maxLength : 255
+		});
+		det_ipmbl_lokasiField = Ext.create('Ext.form.TextField',{
+			id : 'det_ipmbl_lokasiField',
+			name : 'det_ipmbl_lokasi',
+			fieldLabel : 'Lokasi',
 			maxLength : 100
 		});
 		det_ipmbl_berkasmasukField = Ext.create('Ext.form.field.Date',{
@@ -1575,7 +1704,6 @@
 		ipmbl_det_syaratDataStore = Ext.create('Ext.data.Store',{
 			id : 'ipmbl_det_syaratDataStore',
 			pageSize : globalPageSize,
-			autoLoad : true,
 			proxy : Ext.create('Ext.data.HttpProxy',{
 				url : 'c_t_ipmbl_det/switchAction',
 				reader : {
@@ -1626,7 +1754,7 @@
 				{
 					text : 'Syarat',
 					dataIndex : 'ipmbl_cek_syarat_nama',
-					width : 150,
+					width : 400,
 					sortable : false
 				},
 				{
@@ -1634,6 +1762,7 @@
 					text: 'Ada?',
 					dataIndex: 'ipmbl_cek_status',
 					width: 55,
+					hidden : true,
 					stopSelection: false
 				},
 				{
@@ -1657,6 +1786,97 @@
 				ipmbl_det_switchToGrid();
 			}
 		});
+		/* START DATA PEMOHON */
+		var ipmbl_det_pemohon_idField = Ext.create('Ext.form.Hidden',{
+			name : 'pemohon_id'
+		});
+		var ipmbl_det_pemohon_namaField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_nama',
+			fieldLabel : 'Nama',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_alamatField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		var ipmbl_det_pemohon_telpField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_telp',
+			fieldLabel : 'Telp',
+			maxLength : 20,
+			maskRe : /([0-9]+)$/
+		});
+		var ipmbl_det_pemohon_npwpField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_npwp',
+			fieldLabel : 'NPWP',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_rtField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_rt',
+			fieldLabel : 'RT',
+			maskRe : /([0-9]+)$/
+		});
+		var ipmbl_det_pemohon_rwField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_rw',
+			fieldLabel : 'RW',
+			maskRe : /([0-9]+)$/
+		});
+		var ipmbl_det_pemohon_kelField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_kel',
+			fieldLabel : 'Kelurahan',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_kecField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_kec',
+			fieldLabel : 'Kecamatan',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_nikField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_nik',
+			fieldLabel : 'NIK',
+			maxLength : 20,
+			maskRe : /([0-9]+)$/
+		});
+		var ipmbl_det_pemohon_straField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_stra',
+			fieldLabel : 'STRA',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_surattugasField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_surattugas',
+			fieldLabel : 'Surat Tugas',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_pekerjaanField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_pekerjaan',
+			fieldLabel : 'Pekerjaan',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_tempatlahirField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_tempatlahir',
+			fieldLabel : 'Tempat Lahir',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_tanggallahirField = Ext.create('Ext.form.field.Date',{
+			name : 'pemohon_tanggallahir',
+			fieldLabel : 'Tanggal Lahir',
+			format : 'd-m-Y'
+		});
+		var ipmbl_det_pemohon_user_idField = Ext.create('Ext.form.Hidden',{
+			name : 'pemohon_user_id',
+		});
+		var ipmbl_det_pemohon_pendidikanField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_pendidikan',
+			fieldLabel : 'Pendidikan',
+			maxLength : 50
+		});
+		var ipmbl_det_pemohon_tahunlulusField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_tahunlulus',
+			fieldLabel : 'Tahun Lulus',
+			maxLength : 4,
+			maskRe : /([0-9]+)$/
+		});
+		/* END DATA PEMOHON */
 		ipmbl_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -1697,12 +1917,24 @@
 							collapsible : false,
 							layout :'form',
 							items : [
-								det_ipmbl_namaField,
-								det_ipmbl_alamatField,
-								det_ipmbl_kelurahanField,
-								det_ipmbl_kecamatanField,
-								det_ipmbl_kotaField,
-								det_ipmbl_telpField								
+								ipmbl_det_pemohon_idField,
+								ipmbl_det_pemohon_nikField,
+								ipmbl_det_pemohon_namaField,
+								ipmbl_det_pemohon_alamatField,
+								ipmbl_det_pemohon_telpField,
+								ipmbl_det_pemohon_npwpField,
+								ipmbl_det_pemohon_rtField,
+								ipmbl_det_pemohon_rwField,
+								ipmbl_det_pemohon_kelField,
+								ipmbl_det_pemohon_kecField,
+								ipmbl_det_pemohon_straField,
+								ipmbl_det_pemohon_surattugasField,
+								ipmbl_det_pemohon_pekerjaanField,
+								ipmbl_det_pemohon_tempatlahirField,
+								ipmbl_det_pemohon_tanggallahirField,
+								ipmbl_det_pemohon_user_idField,
+								ipmbl_det_pemohon_pendidikanField,
+								ipmbl_det_pemohon_tahunlulusField						
 							]
 						},
 						{
@@ -1718,7 +1950,8 @@
 								det_ipmbl_kecamatanusahaField,
 								det_ipmbl_luasField,
 								det_ipmbl_volumeField,
-								det_ipmbl_keperluanField
+								det_ipmbl_keperluanField,
+								det_ipmbl_lokasiField
 							]
 						},
 						{
@@ -1763,8 +1996,8 @@
 								det_ipmbl_surveynipField,
 								det_ipmbl_surveypendapatField,
 								det_ipmbl_skField,
-								det_ipmbl_kadaluarsaField,
-								det_ipmbl_berlakuField
+								det_ipmbl_berlakuField,
+								det_ipmbl_kadaluarsaField
 							]
 						},
 						Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
@@ -1776,7 +2009,7 @@
 			id : 'ipmbl_det_formWindow',
 			renderTo : 'ipmbl_detSaveWindow',
 			title : globalFormAddEditTitle + ' ' + ipmbl_det_componentItemTitle,
-			width : 500,
+			width : 700,
 			minHeight : 300,
 			autoHeight : true,
 			constrain : true,

@@ -8,12 +8,6 @@ class M_t_ipmbl_det extends App_model{
 					ELSE 'PERPANJANGAN'
 					END AS det_ipmbl_jenis_nama,
 				det_ipmbl_tanggal,
-				det_ipmbl_nama,
-				det_ipmbl_alamat,
-				det_ipmbl_kelurahan,
-				det_ipmbl_kecamatan,
-				det_ipmbl_kota,
-				det_ipmbl_telp,
 				det_ipmbl_nomoragenda,
 				det_ipmbl_berkasmasuk,
 				det_ipmbl_surveytanggal,
@@ -36,16 +30,40 @@ class M_t_ipmbl_det extends App_model{
 				det_ipmbl_sk,
 				det_ipmbl_kadaluarsa,
 				det_ipmbl_berlaku,
+				det_ipmbl_proses,
 				ipmbl_luas,
 				ipmbl_volume,
 				ipmbl_keperluan,
+				ipmbl_lokasi,
 				ipmbl_kelurahan,
 				ipmbl_kecamatan,
 				ipmbl_usaha,
 				ipmbl_alamatusaha,
-				ipmbl_lokasi
+				ipmbl_lokasi,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id,
+				pemohon_pendidikan,
+				pemohon_tahunlulus,
+				CONCAT(5 * (DATEDIFF(NOW(), det_ipmbl_tanggal) DIV 7) + 
+					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_ipmbl_tanggal) + 
+						1, 1),' Hari') as lamaproses
 				FROM t_ipmbl_det 
 				JOIN t_ipmbl ON t_ipmbl.ipmbl_id = t_ipmbl_det.det_ipmbl_ipmbl_id
+				JOIN m_pemohon ON t_ipmbl_det.det_ipmbl_pemohon_id = m_pemohon.pemohon_id
 			WHERE det_ipmbl_id IS NOT NULL 
 	";
 	
@@ -66,12 +84,6 @@ class M_t_ipmbl_det extends App_model{
 					det_ipmbl_ipmbl_id LIKE '%".$searchText."%' OR 
 					det_ipmbl_jenis LIKE '%".$searchText."%' OR 
 					det_ipmbl_tanggal LIKE '%".$searchText."%' OR 
-					det_ipmbl_nama LIKE '%".$searchText."%' OR 
-					det_ipmbl_alamat LIKE '%".$searchText."%' OR 
-					det_ipmbl_kelurahan LIKE '%".$searchText."%' OR 
-					det_ipmbl_kecamatan LIKE '%".$searchText."%' OR 
-					det_ipmbl_kota LIKE '%".$searchText."%' OR 
-					det_ipmbl_telp LIKE '%".$searchText."%' OR 
 					det_ipmbl_nomoragenda LIKE '%".$searchText."%' OR 
 					det_ipmbl_berkasmasuk LIKE '%".$searchText."%' OR 
 					det_ipmbl_surveytanggal LIKE '%".$searchText."%' OR 

@@ -25,23 +25,19 @@
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Nama Perusahaan</span></td>
-			<td colspan="3">##perusahaan</td>
-		</tr>
-		<tr>
-			<td colspan="2"><span style="margin-left:50px">Nama Direktur</span></td>
-			<td colspan="3">##direktur</td>
+			<td colspan="3">: <?php echo $ipmbl_usaha; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Alamat</span></td>
-			<td colspan="3">##alamat</td>
+			<td colspan="3">: <?php echo $ipmbl_alamatusaha; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Tanggal Masuk</span></td>
-			<td colspan="3">##tanggalmasuk</td>
+			<td colspan="3">: <?php echo date('d-m-Y', strtotime($det_ipmbl_tanggal)); ?></td>
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Perkiraan Selesai</span></td>
-			<td colspan="3">##perkiraan</td>
+			<td colspan="3">: <?php echo $dataijin->WAKTUSELESAI; ?></td>
 		</tr>
 		<tr>
 			<td width="75px">&nbsp;</td>
