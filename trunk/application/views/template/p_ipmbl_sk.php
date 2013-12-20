@@ -47,11 +47,11 @@
 		</tr>
 		<tr>
 			<td colspan="2">Nama</td>
-			<td colspan="2">: <?php echo $det_ipmbl_nama; ?></td>
+			<td colspan="2">: <?php echo $pemohon_nama; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">Alamat</td>
-			<td colspan="2">: <?php echo $det_ipmbl_alamat; ?></td>
+			<td colspan="2">: <?php echo $pemohon_alamat; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2">Kelurahan</td>
@@ -67,11 +67,11 @@
 		</tr>
 		<tr>
 			<td colspan="2">Luas kerukan</td>
-			<td colspan="2">: <?php echo $ipmbl_luas; ?></td>
+			<td colspan="2">: <?php echo $ipmbl_luas; ?> M</td>
 		</tr>
 		<tr>
 			<td colspan="2">Volume Kerukan</td>
-			<td colspan="2">: <?php echo $ipmbl_volume; ?></td>
+			<td colspan="2">: <?php echo $ipmbl_volume; ?> M<sup>3</sup></td>
 		</tr>
 		<tr>
 			<td colspan="2">Lokasi</td>

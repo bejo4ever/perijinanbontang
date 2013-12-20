@@ -38,8 +38,8 @@ class C_t_ipmbl_det extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
-			case 'CHANGESURVEYSTATUS':
-				$this->changeSurveyStatus();
+			case 'UBAHPROSES':
+				$this->ubahProses();
 			break;
 			case 'CETAKLEMBARKONTROL':
 				$this->cetakLembarKontrol();
@@ -95,7 +95,8 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_kecamatanusaha = htmlentities($this->input->post('det_ipmbl_kecamatanusaha'),ENT_QUOTES);
 		$det_ipmbl_luas = $this->input->post('det_ipmbl_luas');
 		$det_ipmbl_volume = $this->input->post('det_ipmbl_volume');
-		$det_ipmbl_keperluan = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
+		$det_ipmbl_keperluan = htmlentities($this->input->post('det_ipmbl_keperluan'),ENT_QUOTES);
+		$det_ipmbl_lokasi = htmlentities($this->input->post('det_ipmbl_lokasi'),ENT_QUOTES);
 		$det_ipmbl_nomoragenda = htmlentities($this->input->post('det_ipmbl_nomoragenda'),ENT_QUOTES);
 		$det_ipmbl_nomoragenda = is_numeric($det_ipmbl_nomoragenda) ? $det_ipmbl_nomoragenda : 0;
 		$det_ipmbl_berkasmasuk = htmlentities($this->input->post('det_ipmbl_berkasmasuk'),ENT_QUOTES);
@@ -124,6 +125,54 @@ class C_t_ipmbl_det extends CI_Controller{
 		$ipmbl_det_author = $this->m_t_ipmbl_det->__checkSession();
 		$ipmbl_det_created_date = date('Y-m-d H:i:s');
 		
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
+		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
+		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
+		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
+		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
+		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
+		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
+		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
+		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
+		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
+		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
+		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
+		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
+		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
+		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
+		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
+		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		$datapemohon = array(
+			'pemohon_nama'=>$pemohon_nama,
+			'pemohon_alamat'=>$pemohon_alamat,
+			'pemohon_telp'=>$pemohon_telp,
+			'pemohon_npwp'=>$pemohon_npwp,
+			'pemohon_rt'=>$pemohon_rt,
+			'pemohon_rw'=>$pemohon_rw,
+			'pemohon_kel'=>$pemohon_kel,
+			'pemohon_kec'=>$pemohon_kec,
+			'pemohon_nik'=>$pemohon_nik,
+			'pemohon_stra'=>$pemohon_stra,
+			'pemohon_surattugas'=>$pemohon_surattugas,
+			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
+			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
+			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
+			'pemohon_user_id'=>$pemohon_user_id,
+			'pemohon_pendidikan'=>$pemohon_pendidikan,
+			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+		);
+		if($pemohon_id != 0){
+			$resultpemohon = $this->m_t_ipmbl_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+		}else{
+			$resultpemohon = $this->m_t_ipmbl_det->__insert($datapemohon, 'm_pemohon', 'insertId');
+		}
+		
 		if($ipmbl_det_author != ''){
 			$dataInti = array(
 				'ipmbl_usaha'=>$det_ipmbl_usaha,
@@ -132,7 +181,8 @@ class C_t_ipmbl_det extends CI_Controller{
 				'ipmbl_kecamatan'=>$det_ipmbl_kecamatanusaha,
 				'ipmbl_luas'=>$det_ipmbl_luas,
 				'ipmbl_volume'=>$det_ipmbl_volume,
-				'ipmbl_keperluan'=>$det_ipmbl_keperluan
+				'ipmbl_keperluan'=>$det_ipmbl_keperluan,
+				'ipmbl_lokasi'=>$det_ipmbl_lokasi
 			);
 			$resultInti = $this->m_t_ipmbl_det->__insert($dataInti, 't_ipmbl', 'insertId');
 			if($resultInti != 0){
@@ -141,12 +191,6 @@ class C_t_ipmbl_det extends CI_Controller{
 					'det_ipmbl_ipmbl_id'=>$resultInti,
 					'det_ipmbl_jenis'=>$det_ipmbl_jenis,
 					'det_ipmbl_tanggal'=>$det_ipmbl_tanggal,
-					'det_ipmbl_nama'=>$det_ipmbl_nama,
-					'det_ipmbl_alamat'=>$det_ipmbl_alamat,
-					'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
-					'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
-					'det_ipmbl_kota'=>$det_ipmbl_kota,
-					'det_ipmbl_telp'=>$det_ipmbl_telp,
 					'det_ipmbl_nomoragenda'=>$det_ipmbl_nomoragenda,
 					'det_ipmbl_berkasmasuk'=>$det_ipmbl_berkasmasuk,
 					'det_ipmbl_surveytanggal'=>$det_ipmbl_surveytanggal,
@@ -165,6 +209,7 @@ class C_t_ipmbl_det extends CI_Controller{
 					'det_ipmbl_sk'=>$det_ipmbl_sk,
 					'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
 					'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
+					'det_ipmbl_pemohon_id'=>$resultpemohon,
 					);
 				$resultdet = $this->m_t_ipmbl_det->__insert($data, false, 'insertId');
 				for($i=0;$i<count($ipmbl_cek_syarat_id);$i++){
@@ -195,15 +240,6 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_jenis = htmlentities($this->input->post('det_ipmbl_jenis'),ENT_QUOTES);
 		$det_ipmbl_jenis = is_numeric($det_ipmbl_jenis) ? $det_ipmbl_jenis : 0;
 		$det_ipmbl_tanggal = htmlentities($this->input->post('det_ipmbl_tanggal'),ENT_QUOTES);
-		$det_ipmbl_nama = htmlentities($this->input->post('det_ipmbl_nama'),ENT_QUOTES);
-		$det_ipmbl_alamat = htmlentities($this->input->post('det_ipmbl_alamat'),ENT_QUOTES);
-		$det_ipmbl_kelurahan = htmlentities($this->input->post('det_ipmbl_kelurahan'),ENT_QUOTES);
-		$det_ipmbl_kelurahan = is_numeric($det_ipmbl_kelurahan) ? $det_ipmbl_kelurahan : 0;
-		$det_ipmbl_kecamatan = htmlentities($this->input->post('det_ipmbl_kecamatan'),ENT_QUOTES);
-		$det_ipmbl_kecamatan = is_numeric($det_ipmbl_kecamatan) ? $det_ipmbl_kecamatan : 0;
-		$det_ipmbl_kota = htmlentities($this->input->post('det_ipmbl_kota'),ENT_QUOTES);
-		$det_ipmbl_kota = is_numeric($det_ipmbl_kota) ? $det_ipmbl_kota : 0;
-		$det_ipmbl_telp = htmlentities($this->input->post('det_ipmbl_telp'),ENT_QUOTES);
 		$det_ipmbl_nomoragenda = htmlentities($this->input->post('det_ipmbl_nomoragenda'),ENT_QUOTES);
 		$det_ipmbl_nomoragenda = is_numeric($det_ipmbl_nomoragenda) ? $det_ipmbl_nomoragenda : 0;
 		$det_ipmbl_berkasmasuk = htmlentities($this->input->post('det_ipmbl_berkasmasuk'),ENT_QUOTES);
@@ -223,23 +259,90 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_sk = htmlentities($this->input->post('det_ipmbl_sk'),ENT_QUOTES);
 		$det_ipmbl_kadaluarsa = htmlentities($this->input->post('det_ipmbl_kadaluarsa'),ENT_QUOTES);
 		$det_ipmbl_berlaku = htmlentities($this->input->post('det_ipmbl_berlaku'),ENT_QUOTES);
-				
+		$det_ipmbl_usaha = htmlentities($this->input->post('det_ipmbl_usaha'),ENT_QUOTES);
+		$det_ipmbl_alamatusaha = htmlentities($this->input->post('det_ipmbl_alamatusaha'),ENT_QUOTES);
+		$det_ipmbl_kelurahanusaha = htmlentities($this->input->post('det_ipmbl_kelurahanusaha'),ENT_QUOTES);
+		$det_ipmbl_kecamatanusaha = htmlentities($this->input->post('det_ipmbl_kecamatanusaha'),ENT_QUOTES);
+		$det_ipmbl_luas = $this->input->post('det_ipmbl_luas');
+		$det_ipmbl_volume = $this->input->post('det_ipmbl_volume');
+		$det_ipmbl_keperluan = htmlentities($this->input->post('det_ipmbl_keperluan'),ENT_QUOTES);
+		$det_ipmbl_lokasi = htmlentities($this->input->post('det_ipmbl_lokasi'),ENT_QUOTES);
+		
 		$ipmbl_det_updated_by = $this->m_t_ipmbl_det->__checkSession();
 		$ipmbl_det_updated_date = date('Y-m-d H:i:s');
 		
-		if($ipmbl_det_updated_by != ''){
-			$result = 'sessionExpired';
+		$ipmbl_cek_id = json_decode($this->input->post('ipmbl_cek_id'));
+		$ipmbl_cek_syarat_id = json_decode($this->input->post('ipmbl_cek_syarat_id'));
+		$ipmbl_cek_status = json_decode($this->input->post('ipmbl_cek_status'));
+		$ipmbl_cek_keterangan = json_decode($this->input->post('ipmbl_cek_keterangan'));
+		
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
+		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
+		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
+		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
+		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
+		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
+		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
+		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
+		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
+		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
+		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
+		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
+		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
+		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
+		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
+		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
+		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		
+		$datapemohon = array(
+			'pemohon_nama'=>$pemohon_nama,
+			'pemohon_alamat'=>$pemohon_alamat,
+			'pemohon_telp'=>$pemohon_telp,
+			'pemohon_npwp'=>$pemohon_npwp,
+			'pemohon_rt'=>$pemohon_rt,
+			'pemohon_rw'=>$pemohon_rw,
+			'pemohon_kel'=>$pemohon_kel,
+			'pemohon_kec'=>$pemohon_kec,
+			'pemohon_nik'=>$pemohon_nik,
+			'pemohon_stra'=>$pemohon_stra,
+			'pemohon_surattugas'=>$pemohon_surattugas,
+			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
+			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
+			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
+			'pemohon_user_id'=>$pemohon_user_id,
+			'pemohon_pendidikan'=>$pemohon_pendidikan,
+			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+		);
+		if($pemohon_id != 0){
+			$resultpemohon = $this->m_t_ipmbl_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+			$resultpemohon = $pemohon_id;
 		}else{
+			$resultpemohon = $this->m_t_ipmbl_det->__insert($datapemohon, 'm_pemohon', 'insertId');
+		}
+		
+		if($ipmbl_det_updated_by != ''){
+			$dataInti = array(
+				'ipmbl_usaha'=>$det_ipmbl_usaha,
+				'ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
+				'ipmbl_kelurahan'=>$det_ipmbl_kelurahanusaha,
+				'ipmbl_kecamatan'=>$det_ipmbl_kecamatanusaha,
+				'ipmbl_luas'=>$det_ipmbl_luas,
+				'ipmbl_volume'=>$det_ipmbl_volume,
+				'ipmbl_keperluan'=>$det_ipmbl_keperluan,
+				'ipmbl_lokasi'=>$det_ipmbl_lokasi
+			);
+			$resultInti = $this->m_t_ipmbl_det->__update($dataInti, $det_ipmbl_ipmbl_id, 't_ipmbl', 'updateId', 'ipmbl_id');
+			$result = 'success';
 			$data = array(
 				'det_ipmbl_ipmbl_id'=>$det_ipmbl_ipmbl_id,
 				'det_ipmbl_jenis'=>$det_ipmbl_jenis,
 				'det_ipmbl_tanggal'=>$det_ipmbl_tanggal,
-				'det_ipmbl_nama'=>$det_ipmbl_nama,
-				'det_ipmbl_alamat'=>$det_ipmbl_alamat,
-				'det_ipmbl_kelurahan'=>$det_ipmbl_kelurahan,
-				'det_ipmbl_kecamatan'=>$det_ipmbl_kecamatan,
-				'det_ipmbl_kota'=>$det_ipmbl_kota,
-				'det_ipmbl_telp'=>$det_ipmbl_telp,
 				'det_ipmbl_nomoragenda'=>$det_ipmbl_nomoragenda,
 				'det_ipmbl_berkasmasuk'=>$det_ipmbl_berkasmasuk,
 				'det_ipmbl_surveytanggal'=>$det_ipmbl_surveytanggal,
@@ -258,8 +361,21 @@ class C_t_ipmbl_det extends CI_Controller{
 				'det_ipmbl_sk'=>$det_ipmbl_sk,
 				'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
 				'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
+				'det_ipmbl_pemohon_id'=>$resultpemohon
 				);
-			$result = $this->m_t_ipmbl_det->__update($data, $det_ipmbl_id, '', '');
+			$resultdet = $this->m_t_ipmbl_det->__update($data, $det_ipmbl_id, '', 'updateId','');
+			for($i=0;$i<count($ipmbl_cek_syarat_id);$i++){
+				$datacek = array(
+					'ipmbl_cek_syarat_id'=>$ipmbl_cek_syarat_id[$i],
+					'ipmbl_cek_ipmbl_id'=>$det_ipmbl_ipmbl_id,
+					'ipmbl_cek_ipmbldet_id'=>$det_ipmbl_id,
+					'ipmbl_cek_status'=>$ipmbl_cek_status[$i],
+					'ipmbl_cek_keterangan'=>$ipmbl_cek_keterangan[$i]
+				);
+				$resultcek = $this->m_t_ipmbl_det->__update($datacek, $ipmbl_cek_id[$i], 't_ipmbl_ceklist', 'updateId','ipmbl_cek_id');
+			}
+		}else{
+			$result = 'sessionExpired';
 		}
 		echo $result;
 	}
@@ -445,13 +561,13 @@ class C_t_ipmbl_det extends CI_Controller{
 		$result = $this->m_t_ipmbl_det->getSyarat($params);
 		echo $result;
 	}
-	function changeSurveyStatus(){
+	function ubahProses(){
 		$ipmbldet_id  = $this->input->post('ipmbldet_id');
-		$lulus  = $this->input->post('lulus');
+		$proses  = $this->input->post('proses');
 		$data = array(
-			"det_ipmbl_surveylulus"=>$lulus
+			"det_ipmbl_proses"=>$proses
 		);
-		$result = $this->m_t_ipmbl_det->__update($data, $ipmbldet_id, '', '');
+		$result = $this->m_t_ipmbl_det->__update($data, $ipmbldet_id, '', '','');
 		echo $result;
 	}
 	function cetakLembarKontrol(){
@@ -490,6 +606,7 @@ class C_t_ipmbl_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_ipmbl_det->search($params);
 		$data['printrecord'] = $printrecord[1];
+		$data['dataijin'] = $this->db->where('ID_IJIN',1)->get('master_ijin')->row();
 		$print_view=$this->load->view('template/p_ipmbl_buktiterima.php',$data,TRUE);
 		$print_file=fopen('print/ipmbl_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);

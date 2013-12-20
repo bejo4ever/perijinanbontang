@@ -63,12 +63,12 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td valign="top">1.2 Nama Pemohon</td>
-			<td colspan="2">: <?php echo $det_ipmbl_nama; ?></td>
+			<td colspan="2">: <?php echo $pemohon_nama; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td valign="top">1.3 Alamat Pemohon</td>
-			<td colspan="2">: <?php echo $det_ipmbl_alamat; ?></td>
+			<td colspan="2">: <?php echo $pemohon_alamat; ?></td>
 		</tr>
 		<tr>
 			<td>2</td>

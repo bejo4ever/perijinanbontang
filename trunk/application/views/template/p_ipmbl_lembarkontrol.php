@@ -41,11 +41,11 @@
 				<table>
 					<tr>
 						<td>Nama Pemohon</td>
-						<td>: <?php echo $det_ipmbl_nama; ?></td>
+						<td>: <?php echo $pemohon_nama; ?></td>
 					</tr>
 					<tr>
 						<td>Alamat</td>
-						<td>: <?php echo $det_ipmbl_alamat; ?></td>
+						<td>: <?php echo $pemohon_alamat; ?></td>
 					</tr>
 					<tr>
 						<td>Nama Perusahaan</td>
@@ -86,6 +86,13 @@
 						<td align="center" width="440px">Jenis Permohonan</td>
 						<td align="center" width="250px">Keterangan</td>
 					</tr>
+					<?php $i=1; foreach($dataceklist as $subdataceklist){ ?>
+					<tr>
+						<td valign="top"><?php echo $i; ?></td>
+						<td><?php echo $subdataceklist->NAMA_SYARAT; ?></td>
+						<td><?php echo $subdataceklist->ipmbl_cek_keterangan; ?></td>
+					</tr>
+					<?php $i++; } ?>
 				</table>
 			</td>
 		</tr>
