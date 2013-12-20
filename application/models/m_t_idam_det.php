@@ -27,6 +27,7 @@ class M_t_idam_det extends App_model{
 				det_idam_kadaluarsa,
 				det_idam_nomorreg,
 				det_idam_lulussurvey,
+				det_idam_proses,
 				idam_usaha,
 				idam_jenisusaha,
 				idam_alamat,

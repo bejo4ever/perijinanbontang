@@ -38,8 +38,8 @@ class C_t_idam_det extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
-			case 'CHANGESURVEYSTATUS':
-				$this->changeSurveyStatus();
+			case 'UBAHPROSES':
+				$this->ubahProses();
 			break;
 			case 'CETAKLEMBARKONTROL':
 				$this->cetakLembarKontrol();
@@ -480,13 +480,13 @@ class C_t_idam_det extends CI_Controller{
 		$result = $this->m_t_idam_det->getSyarat($params);
 		echo $result;
 	}
-	function changeSurveyStatus(){
+	function ubahProses(){
 		$idamdet_id  = $this->input->post('idamdet_id');
-		$lulus  = $this->input->post('lulus');
+		$proses  = $this->input->post('proses');
 		$data = array(
-			"det_idam_lulussurvey"=>$lulus
+			"det_idam_proses"=>$proses
 		);
-		$result = $this->m_t_idam_det->__update($data, $idamdet_id, '', '');
+		$result = $this->m_t_idam_det->__update($data, $idamdet_id, '', '','');
 		echo $result;
 	}
 	function cetakBp(){
