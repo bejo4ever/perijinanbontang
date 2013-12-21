@@ -86,6 +86,13 @@
 						<td align="center" width="500px">Jenis Lampiran</td>
 						<td align="center" width="180px">Keterangan</td>
 					</tr>
+					<?php $i=1; foreach($dataceklist as $subdataceklist){ ?>
+					<tr>
+						<td valign="top"><?php echo $i; ?></td>
+						<td><?php echo $subdataceklist->NAMA_SYARAT; ?></td>
+						<td><?php echo $subdataceklist->iujk_cek_keterangan; ?></td>
+					</tr>
+					<?php $i++; } ?>
 				</table>
 			</td>
 		</tr>

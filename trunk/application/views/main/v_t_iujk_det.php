@@ -1,3 +1,8 @@
+<style>
+	.checked{
+		background-image:url(../assets/images/icons/check.png) !important;
+	}
+</style>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -223,6 +228,24 @@
 					var pemohon_user_idValue = iujk_det_pemohon_user_idField.getValue();
 					var pemohon_pendidikanValue = iujk_det_pemohon_pendidikanField.getValue();
 					var pemohon_tahunlulusValue = iujk_det_pemohon_tahunlulusField.getValue();
+					var array_iujk_cek_id=new Array();
+					var array_iujk_cek_syarat_id=new Array();
+					var array_iujk_cek_status=new Array();
+					var array_iujk_cek_keterangan=new Array();
+					
+					if(iujk_det_syaratDataStore.getCount() > 0){
+						for(var i=0;i<iujk_det_syaratDataStore.getCount();i++){
+							array_iujk_cek_id.push(iujk_det_syaratDataStore.getAt(i).data.iujk_cek_id);
+							array_iujk_cek_syarat_id.push(iujk_det_syaratDataStore.getAt(i).data.iujk_cek_syarat_id);
+							array_iujk_cek_status.push(iujk_det_syaratDataStore.getAt(i).data.iujk_cek_status);
+							array_iujk_cek_keterangan.push(iujk_det_syaratDataStore.getAt(i).data.iujk_cek_keterangan);
+						}
+					}
+					
+					var encoded_iujk_cek_id = Ext.encode(array_iujk_cek_id);
+					var encoded_iujk_cek_syarat_id = Ext.encode(array_iujk_cek_syarat_id);
+					var encoded_iujk_cek_status = Ext.encode(array_iujk_cek_status);
+					var encoded_iujk_cek_keterangan = Ext.encode(array_iujk_cek_keterangan);
 					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -260,6 +283,12 @@
 							iujk_kodepos : iujk_kodeposValue,
 							iujk_fax : iujk_faxValue,
 							iujk_npwp : iujk_npwpValue,pemohon_id : pemohon_idValue,
+							
+							iujk_cek_id : encoded_iujk_cek_id,
+							iujk_cek_syarat_id : encoded_iujk_cek_syarat_id,
+							iujk_cek_status : encoded_iujk_cek_status,
+							iujk_cek_keterangan : encoded_iujk_cek_keterangan,
+							
 							pemohon_nama : pemohon_namaValue,
 							pemohon_alamat : pemohon_alamatValue,
 							pemohon_telp : pemohon_telpValue,
@@ -703,7 +732,7 @@
 				{ name : 'iujk_kodepos', type : 'string', mapping : 'iujk_kodepos' },
 				{ name : 'iujk_fax', type : 'string', mapping : 'iujk_fax' },
 				{ name : 'iujk_npwp', type : 'string', mapping : 'iujk_npwp' },
-				{ name : 'det_idam_proses', type : 'string', mapping : 'det_idam_proses' },
+				{ name : 'det_iujk_proses', type : 'string', mapping : 'det_iujk_proses' },
 				{ name : 'lamaproses', type : 'string', mapping : 'lamaproses' },
 				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
 				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
@@ -723,6 +752,7 @@
 				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
 				{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
 				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
+				{ name : 'det_iujk_proses', type : 'string', mapping : 'det_iujk_proses' },
 				]
 		});
 /* End DataStore declaration */
@@ -1027,7 +1057,14 @@
 					text : 'Jenis',
 					dataIndex : 'det_iujk_jenis',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : function(value){
+						if(value == 1){
+							return 'BARU';
+						}else{
+							return 'PERPANJANGAN';
+						}
+					}
 				},
 				{
 					text : 'Tanggal',
@@ -1038,16 +1075,15 @@
 				},
 				{
 					text : 'Nama',
-					dataIndex : 'det_iujk_nama',
-					width : 100,
+					dataIndex : 'pemohon_nama',
+					width : 150,
 					sortable : false
 				},
 				{
-					text : 'Nomor Reg',
-					dataIndex : 'det_iujk_nomorreg',
-					width : 100,
-					sortable : false,
-					hidden : true
+					text : 'Perusahaan',
+					dataIndex : 'iujk_perusahaan',
+					width : 150,
+					sortable : false
 				},
 				{
 					text : 'Nomor Rekomendasi',
@@ -1130,7 +1166,7 @@
 				},
 				{
 					text : 'Status',
-					dataIndex : 'det_idam_proses',
+					dataIndex : 'det_iujk_proses',
 					width : 125,
 					sortable : false
 				},
@@ -1185,7 +1221,6 @@
 			tbar : [
 				iujk_det_addButton,
 				iujk_det_gridSearchField,
-				iujk_det_searchButton,
 				iujk_det_refreshButton,
 				iujk_det_printButton,
 				iujk_det_excelButton
@@ -1588,7 +1623,8 @@
 					text: 'Ada?',
 					dataIndex: 'iujk_cek_status',
 					width: 55,
-					stopSelection: false
+					stopSelection: false,
+					hidden : true
 				},
 				{
 					text : 'Keterangan',

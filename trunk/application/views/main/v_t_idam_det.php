@@ -6,7 +6,6 @@
 		background-image:url(../assets/images/icons/forward.png) !important;
 	}
 </style>
-<div id="context"></div>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
