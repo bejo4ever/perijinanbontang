@@ -38,8 +38,8 @@ class C_t_apotek_det extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
-			case 'CHANGESURVEYSTATUS':
-				$this->changeSurveyStatus();
+			case 'UBAHPROSES':
+				$this->ubahProses();
 			break;
 			case 'CETAKLEMBARKONTROL':
 				$this->cetakLembarKontrol();
@@ -188,6 +188,55 @@ class C_t_apotek_det extends CI_Controller{
 		$apotek_det_author = $this->m_t_apotek_det->__checkSession();
 		$apotek_det_created_date = date('Y-m-d H:i:s');
 		
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
+		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
+		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
+		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
+		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
+		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
+		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
+		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
+		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
+		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
+		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
+		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
+		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
+		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
+		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
+		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
+		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		$datapemohon = array(
+			'pemohon_nama'=>$pemohon_nama,
+			'pemohon_alamat'=>$pemohon_alamat,
+			'pemohon_telp'=>$pemohon_telp,
+			'pemohon_npwp'=>$pemohon_npwp,
+			'pemohon_rt'=>$pemohon_rt,
+			'pemohon_rw'=>$pemohon_rw,
+			'pemohon_kel'=>$pemohon_kel,
+			'pemohon_kec'=>$pemohon_kec,
+			'pemohon_nik'=>$pemohon_nik,
+			'pemohon_stra'=>$pemohon_stra,
+			'pemohon_surattugas'=>$pemohon_surattugas,
+			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
+			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
+			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
+			'pemohon_user_id'=>$pemohon_user_id,
+			'pemohon_pendidikan'=>$pemohon_pendidikan,
+			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+		);
+		if($pemohon_id != 0){
+			$resultpemohon = $this->m_t_apotek_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+		}else{
+			$resultpemohon = $this->m_t_apotek_det->__insert($datapemohon, 'm_pemohon', 'insertId');
+		}
+		
+		
 		if($apotek_det_author != ''){
 			$dataInti = array(
 				'apotek_nama'=>$apotek_nama,
@@ -272,6 +321,7 @@ class C_t_apotek_det extends CI_Controller{
 					'det_apotek_spnomor'=>$det_apotek_spnomor,
 					'det_apotek_sptanggal'=>$det_apotek_sptanggal,
 					'det_apotek_notaris'=>$det_apotek_notaris,
+					'det_apotek_pemohon_id'=>$resultpemohon,
 					);
 				$resultdet = $this->m_t_apotek_det->__insert($data, '', '');
 				for($i=0;$i<count($apotek_cek_syarat_id);$i++){
@@ -389,13 +439,67 @@ class C_t_apotek_det extends CI_Controller{
 		$det_apotek_spnomor = htmlentities($this->input->post('det_apotek_spnomor'),ENT_QUOTES);
 		$det_apotek_sptanggal = htmlentities($this->input->post('det_apotek_sptanggal'),ENT_QUOTES);
 		$det_apotek_notaris = htmlentities($this->input->post('det_apotek_notaris'),ENT_QUOTES);
-				
+		$apotek_nama = htmlentities($this->input->post('apotek_nama'),ENT_QUOTES);
+		$apotek_alamat = htmlentities($this->input->post('apotek_alamat'),ENT_QUOTES);
+		$apotek_telp = htmlentities($this->input->post('apotek_telp'),ENT_QUOTES);
+		$apotek_kel = htmlentities($this->input->post('apotek_kel'),ENT_QUOTES);
+		$apotek_kec = htmlentities($this->input->post('apotek_kec'),ENT_QUOTES);
+		$apotek_kepemilikan = htmlentities($this->input->post('apotek_kepemilikan'),ENT_QUOTES);
+		$apotek_kepemilikan = is_numeric($apotek_kepemilikan) ? $apotek_kepemilikan : 0;
+		$apotek_pemilik = htmlentities($this->input->post('apotek_pemilik'),ENT_QUOTES);
+		$apotek_pemilikalamat = htmlentities($this->input->post('apotek_pemilikalamat'),ENT_QUOTES);
+		$apotek_pemiliknpwp = htmlentities($this->input->post('apotek_pemiliknpwp'),ENT_QUOTES);
+		$apotek_siup = htmlentities($this->input->post('apotek_siup'),ENT_QUOTES);
+		
+		$apotek_cek_id = json_decode($this->input->post('apotek_cek_id'));
+		$apotek_cek_syarat_id = json_decode($this->input->post('apotek_cek_syarat_id'));
+		$apotek_cek_status = json_decode($this->input->post('apotek_cek_status'));
+		$apotek_cek_keterangan = json_decode($this->input->post('apotek_cek_keterangan'));
+		
 		$apotek_det_updated_by = $this->m_t_apotek_det->__checkSession();
 		$apotek_det_updated_date = date('Y-m-d H:i:s');
 		
-		if($apotek_det_updated_by != ''){
-			$result = 'sessionExpired';
+		$datapemohon = array(
+			'pemohon_nama'=>$pemohon_nama,
+			'pemohon_alamat'=>$pemohon_alamat,
+			'pemohon_telp'=>$pemohon_telp,
+			'pemohon_npwp'=>$pemohon_npwp,
+			'pemohon_rt'=>$pemohon_rt,
+			'pemohon_rw'=>$pemohon_rw,
+			'pemohon_kel'=>$pemohon_kel,
+			'pemohon_kec'=>$pemohon_kec,
+			'pemohon_nik'=>$pemohon_nik,
+			'pemohon_stra'=>$pemohon_stra,
+			'pemohon_surattugas'=>$pemohon_surattugas,
+			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
+			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
+			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
+			'pemohon_user_id'=>$pemohon_user_id,
+			'pemohon_pendidikan'=>$pemohon_pendidikan,
+			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+		);
+		if($pemohon_id != 0){
+			$resultpemohon = $this->m_t_apotek_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+			$resultpemohon = $pemohon_id;
 		}else{
+			$resultpemohon = $this->m_t_apotek_det->__insert($datapemohon, 'm_pemohon', 'insertId');
+		}
+		
+		if($apotek_det_updated_by != ''){
+			$dataInti = array(
+				'apotek_nama'=>$apotek_nama,
+				'apotek_alamat'=>$apotek_alamat,
+				'apotek_telp'=>$apotek_telp,
+				'apotek_kel'=>$apotek_kel,
+				'apotek_kec'=>$apotek_kec,
+				'apotek_kepemilikan'=>$apotek_kepemilikan,
+				'apotek_pemilik'=>$apotek_pemilik,
+				'apotek_pemilikalamat'=>$apotek_pemilikalamat,
+				'apotek_pemiliknpwp'=>$apotek_pemiliknpwp,
+				'apotek_siup'=>$apotek_siup
+			);
+			$resultInti = $this->m_t_apotek_det->__update($dataInti, $det_apotek_apotek_id, 't_apotek', 'updateId', 'apotek_id');
+			$result = 'success';
 			$data = array(
 				'det_apotek_apotek_id'=>$det_apotek_apotek_id,
 				'det_apotek_jenis'=>$det_apotek_jenis,
@@ -463,8 +567,21 @@ class C_t_apotek_det extends CI_Controller{
 				'det_apotek_spnomor'=>$det_apotek_spnomor,
 				'det_apotek_sptanggal'=>$det_apotek_sptanggal,
 				'det_apotek_notaris'=>$det_apotek_notaris,
+				'det_apotek_pemohon_id'=>$resultpemohon,
+			);
+			$resultdet = $this->m_t_apotek_det->__update($data, $det_apotek_id, '', 'updateId','');
+			for($i=0;$i<count($apotek_cek_syarat_id);$i++){
+				$datacek = array(
+					'apotek_cek_syarat_id'=>$apotek_cek_syarat_id[$i],
+					'apotek_cek_apotek_id'=>$det_apotek_apotek_id,
+					'apotek_cek_apotekdet_id'=>$det_apotek_id,
+					'apotek_cek_status'=>$apotek_cek_status[$i],
+					'apotek_cek_keterangan'=>$apotek_cek_keterangan[$i]
 				);
-			$result = $this->m_t_apotek_det->__update($data, $det_apotek_id, '', '');
+				$resultcek = $this->m_t_apotek_det->__update($datacek, $apotek_cek_id[$i], 't_apotek_ceklist', 'updateId','apotek_cek_id');
+			}
+		}else{
+			$result = 'sessionExpired';
 		}
 		echo $result;
 	}
@@ -846,13 +963,13 @@ class C_t_apotek_det extends CI_Controller{
 		$result = $this->m_t_apotek_det->getSyarat($params);
 		echo $result;
 	}
-	function changeSurveyStatus(){
+	function ubahProses(){
 		$apotekdet_id  = $this->input->post('apotekdet_id');
-		$lulus  = $this->input->post('lulus');
+		$proses  = $this->input->post('proses');
 		$data = array(
-			"det_apotek_surveylulus"=>$lulus
+			"det_apotek_proses"=>$proses
 		);
-		$result = $this->m_t_apotek_det->__update($data, $apotekdet_id, '', '');
+		$result = $this->m_t_apotek_det->__update($data, $apotekdet_id, '', '','');
 		echo $result;
 	}
 	function cetakLembarKontrol(){

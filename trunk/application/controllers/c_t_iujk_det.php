@@ -38,8 +38,8 @@ class C_t_iujk_det extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
-			case 'CHANGESURVEYSTATUS':
-				$this->changeSurveyStatus();
+			case 'UBAHPROSES':
+				$this->ubahProses();
 			break;
 			case 'CETAKLEMBARKONTROL':
 				$this->cetakLembarKontrol();
@@ -123,6 +123,55 @@ class C_t_iujk_det extends CI_Controller{
 		$iujk_det_author = $this->m_t_iujk_det->__checkSession();
 		$iujk_det_created_date = date('Y-m-d H:i:s');
 		
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
+		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
+		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
+		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
+		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
+		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
+		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
+		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
+		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
+		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
+		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
+		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
+		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
+		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
+		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
+		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
+		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		$datapemohon = array(
+			'pemohon_nama'=>$pemohon_nama,
+			'pemohon_alamat'=>$pemohon_alamat,
+			'pemohon_telp'=>$pemohon_telp,
+			'pemohon_npwp'=>$pemohon_npwp,
+			'pemohon_rt'=>$pemohon_rt,
+			'pemohon_rw'=>$pemohon_rw,
+			'pemohon_kel'=>$pemohon_kel,
+			'pemohon_kec'=>$pemohon_kec,
+			'pemohon_nik'=>$pemohon_nik,
+			'pemohon_stra'=>$pemohon_stra,
+			'pemohon_surattugas'=>$pemohon_surattugas,
+			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
+			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
+			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
+			'pemohon_user_id'=>$pemohon_user_id,
+			'pemohon_pendidikan'=>$pemohon_pendidikan,
+			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+		);
+		if($pemohon_id != 0){
+			$resultpemohon = $this->m_t_iujk_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+		}else{
+			$resultpemohon = $this->m_t_iujk_det->__insert($datapemohon, 'm_pemohon', 'insertId');
+		}
+		
+		
 		if($iujk_det_author != ''){
 			$dataInti = array(
 				'iujk_perusahaan'=>$iujk_perusahaan,
@@ -161,6 +210,7 @@ class C_t_iujk_det extends CI_Controller{
 					'det_iujk_pjteknis'=>$det_iujk_pjteknis,
 					'det_iujk_pjtbu'=>$det_iujk_pjtbu,
 					'det_iujk_surveylulus'=>$det_iujk_surveylulus,
+					'det_iujk_pemohon_id'=>$resultpemohon,
 					);
 				$resultdet = $this->m_t_iujk_det->__insert($data, '', '');
 				for($i=0;$i<count($iujk_cek_syarat_id);$i++){
@@ -203,13 +253,82 @@ class C_t_iujk_det extends CI_Controller{
 		$det_iujk_pjtbu = htmlentities($this->input->post('det_iujk_pjtbu'),ENT_QUOTES);
 		$det_iujk_surveylulus = htmlentities($this->input->post('det_iujk_surveylulus'),ENT_QUOTES);
 		$det_iujk_surveylulus = is_numeric($det_iujk_surveylulus) ? $det_iujk_surveylulus : 0;
-				
+		$iujk_perusahaan = htmlentities($this->input->post('iujk_perusahaan'),ENT_QUOTES);
+		$iujk_alamat = htmlentities($this->input->post('iujk_alamat'),ENT_QUOTES);
+		$iujk_direktur = htmlentities($this->input->post('iujk_direktur'),ENT_QUOTES);
+		$iujk_golongan = htmlentities($this->input->post('iujk_golongan'),ENT_QUOTES);
+		$iujk_kualifikasi = htmlentities($this->input->post('iujk_kualifikasi'),ENT_QUOTES);
+		$iujk_bidangusaha = htmlentities($this->input->post('iujk_bidangusaha'),ENT_QUOTES);
+		$iujk_rt = htmlentities($this->input->post('iujk_rt'),ENT_QUOTES);
+		$iujk_rt = is_numeric($iujk_rt) ? $iujk_rt : 0;
+		$iujk_rw = htmlentities($this->input->post('iujk_rw'),ENT_QUOTES);
+		$iujk_rw = is_numeric($iujk_rw) ? $iujk_rw : 0;
+		$iujk_kelurahan = htmlentities($this->input->post('iujk_kelurahan'),ENT_QUOTES);
+		$iujk_kelurahan = is_numeric($iujk_kelurahan) ? $iujk_kelurahan : 0;
+		$iujk_kota = htmlentities($this->input->post('iujk_kota'),ENT_QUOTES);
+		$iujk_kota = is_numeric($iujk_kota) ? $iujk_kota : 0;
+		$iujk_propinsi = htmlentities($this->input->post('iujk_propinsi'),ENT_QUOTES);
+		$iujk_propinsi = is_numeric($iujk_propinsi) ? $iujk_propinsi : 0;
+		$iujk_telepon = htmlentities($this->input->post('iujk_telepon'),ENT_QUOTES);
+		$iujk_kodepos = htmlentities($this->input->post('iujk_kodepos'),ENT_QUOTES);
+		$iujk_fax = htmlentities($this->input->post('iujk_fax'),ENT_QUOTES);
+		$iujk_npwp = htmlentities($this->input->post('iujk_npwp'),ENT_QUOTES);
+		
+		$iujk_cek_id = json_decode($this->input->post('iujk_cek_id'));
+		$iujk_cek_syarat_id = json_decode($this->input->post('iujk_cek_syarat_id'));
+		$iujk_cek_status = json_decode($this->input->post('iujk_cek_status'));
+		$iujk_cek_keterangan = json_decode($this->input->post('iujk_cek_keterangan'));
+		
 		$iujk_det_updated_by = $this->m_t_iujk_det->__checkSession();
 		$iujk_det_updated_date = date('Y-m-d H:i:s');
 		
-		if($iujk_det_updated_by != ''){
-			$result = 'sessionExpired';
+		$datapemohon = array(
+			'pemohon_nama'=>$pemohon_nama,
+			'pemohon_alamat'=>$pemohon_alamat,
+			'pemohon_telp'=>$pemohon_telp,
+			'pemohon_npwp'=>$pemohon_npwp,
+			'pemohon_rt'=>$pemohon_rt,
+			'pemohon_rw'=>$pemohon_rw,
+			'pemohon_kel'=>$pemohon_kel,
+			'pemohon_kec'=>$pemohon_kec,
+			'pemohon_nik'=>$pemohon_nik,
+			'pemohon_stra'=>$pemohon_stra,
+			'pemohon_surattugas'=>$pemohon_surattugas,
+			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
+			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
+			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
+			'pemohon_user_id'=>$pemohon_user_id,
+			'pemohon_pendidikan'=>$pemohon_pendidikan,
+			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+		);
+		if($pemohon_id != 0){
+			$resultpemohon = $this->m_t_iujk_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+			$resultpemohon = $pemohon_id;
 		}else{
+			$resultpemohon = $this->m_t_iujk_det->__insert($datapemohon, 'm_pemohon', 'insertId');
+		}
+		
+		
+		if($iujk_det_updated_by != ''){
+			$dataInti = array(
+				'iujk_perusahaan'=>$iujk_perusahaan,
+				'iujk_alamat'=>$iujk_alamat,
+				'iujk_direktur'=>$iujk_direktur,
+				'iujk_golongan'=>$iujk_golongan,
+				'iujk_kualifikasi'=>$iujk_kualifikasi,
+				'iujk_bidangusaha'=>$iujk_bidangusaha,
+				'iujk_rt'=>$iujk_rt,
+				'iujk_rw'=>$iujk_rw,
+				'iujk_kelurahan'=>$iujk_kelurahan,
+				'iujk_kota'=>$iujk_kota,
+				'iujk_propinsi'=>$iujk_propinsi,
+				'iujk_telepon'=>$iujk_telepon,
+				'iujk_kodepos'=>$iujk_kodepos,
+				'iujk_fax'=>$iujk_fax,
+				'iujk_npwp'=>$iujk_npwp,
+			);
+			$resultInti = $this->m_t_iujk_det->__update($dataInti, $det_iujk_iujk_id, 't_iujk', 'updateId', 'iujk_id');
+			$result = 'success';
 			$data = array(
 				'det_iujk_iujk_id'=>$det_iujk_iujk_id,
 				'det_iujk_jenis'=>$det_iujk_jenis,
@@ -226,8 +345,21 @@ class C_t_iujk_det extends CI_Controller{
 				'det_iujk_pjteknis'=>$det_iujk_pjteknis,
 				'det_iujk_pjtbu'=>$det_iujk_pjtbu,
 				'det_iujk_surveylulus'=>$det_iujk_surveylulus,
+				'det_iujk_pemohon_id'=>$resultpemohon,
+			);
+			$resultdet = $this->m_t_iujk_det->__update($data, $det_iujk_id, '', 'updateId','');
+			for($i=0;$i<count($iujk_cek_syarat_id);$i++){
+				$datacek = array(
+					'iujk_cek_syarat_id'=>$iujk_cek_syarat_id[$i],
+					'iujk_cek_iujk_id'=>$det_iujk_iujk_id,
+					'iujk_cek_iujkdet_id'=>$det_iujk_id,
+					'iujk_cek_status'=>$iujk_cek_status[$i],
+					'iujk_cek_keterangan'=>$iujk_cek_keterangan[$i]
 				);
-			$result = $this->m_t_iujk_det->__update($data, $det_iujk_id, '', '');
+				$resultcek = $this->m_t_iujk_det->__update($datacek, $iujk_cek_id[$i], 't_iujk_ceklist', 'updateId','iujk_cek_id');
+			}
+		}else{
+			$result = 'sessionExpired';
 		}
 		echo $result;
 	}
@@ -359,13 +491,13 @@ class C_t_iujk_det extends CI_Controller{
 		$result = $this->m_t_iujk_det->getSyarat($params);
 		echo $result;
 	}
-	function changeSurveyStatus(){
+	function ubahProses(){
 		$iujkdet_id  = $this->input->post('iujkdet_id');
-		$lulus  = $this->input->post('lulus');
+		$proses  = $this->input->post('proses');
 		$data = array(
-			"det_iujk_surveylulus"=>$lulus
+			"det_iujk_proses"=>$proses
 		);
-		$result = $this->m_t_iujk_det->__update($data, $iujkdet_id, '', '');
+		$result = $this->m_t_iujk_det->__update($data, $iujkdet_id, '', '','');
 		echo $result;
 	}
 	function cetakLembarKontrol(){

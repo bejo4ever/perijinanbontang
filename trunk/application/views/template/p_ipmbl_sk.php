@@ -167,15 +167,15 @@
 		</tr>
 		<tr>
 			<td colspan="3">&nbsp;</td>
-			<td align="center"><b><u>RACHMAN, SE</u></b></td>
+			<td align="center"><b><u><?php echo @$dataijin[0]->NAMA_PEJABAT; ?></u></b></td>
 		</tr>
 		<tr>
 			<td colspan="3">&nbsp;</td>
-			<td align="center"><b>Pembina Utama Muda</b></td>
+			<td align="center"><b><?php echo @$dataijin[0]->NAMA_PEJABAT; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="3">&nbsp;</td>
-			<td align="center"><b>NIP. 19570411 198503 1 010</b></td>
+			<td align="center"><b>NIP. <?php echo @$dataijin[0]->NAMA_PEJABAT; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="4"><b><u>Tembusan disampaikan kepada :</u></b></td>

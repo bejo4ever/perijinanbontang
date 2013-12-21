@@ -181,6 +181,11 @@
 			apotek_det_dbTask = 'CREATE';
 			apotek_det_dbTaskMessage = 'created';
 			apotek_det_resetForm();
+			apotek_det_syaratDataStore.proxy.extraParams = { 
+				currentAction : 'create',
+				action : 'GETSYARAT'
+			};
+			apotek_det_syaratDataStore.load();
 			apotek_det_switchToForm();
 		}
 		
@@ -388,7 +393,26 @@
 					apotek_pemilikalamatValue = apotek_pemilikalamatField.getValue();
 					apotek_pemiliknpwpValue = apotek_pemiliknpwpField.getValue();
 					apotek_siupValue = apotek_siupField.getValue();
-										
+					
+					var pemohon_idValue = apotek_det_pemohon_idField.getValue();
+					var pemohon_namaValue = apotek_det_pemohon_namaField.getValue();
+					var pemohon_alamatValue = apotek_det_pemohon_alamatField.getValue();
+					var pemohon_telpValue = apotek_det_pemohon_telpField.getValue();
+					var pemohon_npwpValue = apotek_det_pemohon_npwpField.getValue();
+					var pemohon_rtValue = apotek_det_pemohon_rtField.getValue();
+					var pemohon_rwValue = apotek_det_pemohon_rwField.getValue();
+					var pemohon_kelValue = apotek_det_pemohon_kelField.getValue();
+					var pemohon_kecValue = apotek_det_pemohon_kecField.getValue();
+					var pemohon_nikValue = apotek_det_pemohon_nikField.getValue();
+					var pemohon_straValue = apotek_det_pemohon_straField.getValue();
+					var pemohon_surattugasValue = apotek_det_pemohon_surattugasField.getValue();
+					var pemohon_pekerjaanValue = apotek_det_pemohon_pekerjaanField.getValue();
+					var pemohon_tempatlahirValue = apotek_det_pemohon_tempatlahirField.getValue();
+					var pemohon_tanggallahirValue = apotek_det_pemohon_tanggallahirField.getValue();
+					var pemohon_user_idValue = apotek_det_pemohon_user_idField.getValue();
+					var pemohon_pendidikanValue = apotek_det_pemohon_pendidikanField.getValue();
+					var pemohon_tahunlulusValue = apotek_det_pemohon_tahunlulusField.getValue();
+					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_apotek_det/switchAction',
@@ -470,7 +494,25 @@
 							apotek_pemilik : apotek_pemilikValue,
 							apotek_pemilikalamat : apotek_pemilikalamatValue,
 							apotek_pemiliknpwp : apotek_pemiliknpwpValue,
-							apotek_siup : apotek_siupValue,
+							apotek_siup : apotek_siupValue,pemohon_id : pemohon_idValue,
+							pemohon_nama : pemohon_namaValue,
+							pemohon_alamat : pemohon_alamatValue,
+							pemohon_telp : pemohon_telpValue,
+							pemohon_npwp : pemohon_npwpValue,
+							pemohon_rt : pemohon_rtValue,
+							pemohon_rw : pemohon_rwValue,
+							pemohon_kel : pemohon_kelValue,
+							pemohon_kec : pemohon_kecValue,
+							pemohon_nik : pemohon_nikValue,
+							pemohon_stra : pemohon_straValue,
+							pemohon_surattugas : pemohon_surattugasValue,
+							pemohon_pekerjaan : pemohon_pekerjaanValue,
+							pemohon_tempatlahir : pemohon_tempatlahirValue,
+							pemohon_tanggallahir : pemohon_tanggallahirValue,
+							pemohon_user_id : pemohon_user_idValue,
+							pemohon_pendidikan : pemohon_pendidikanValue,
+							pemohon_tahunlulus : pemohon_tahunlulusValue,
+							
 							
 							action : apotek_det_dbTask
 						},
@@ -702,6 +744,32 @@
 			apotek_pemilikalamatField.setValue(record.data.apotek_pemilikalamat);
 			apotek_pemiliknpwpField.setValue(record.data.apotek_pemiliknpwp);
 			apotek_siupField.setValue(record.data.apotek_siup);
+			apotek_det_pemohon_idField.setValue(record.data.pemohon_id);
+			apotek_det_pemohon_namaField.setValue(record.data.pemohon_nama);
+			apotek_det_pemohon_alamatField.setValue(record.data.pemohon_alamat);
+			apotek_det_pemohon_telpField.setValue(record.data.pemohon_telp);
+			apotek_det_pemohon_npwpField.setValue(record.data.pemohon_npwp);
+			apotek_det_pemohon_rtField.setValue(record.data.pemohon_rt);
+			apotek_det_pemohon_rwField.setValue(record.data.pemohon_rw);
+			apotek_det_pemohon_kelField.setValue(record.data.pemohon_kel);
+			apotek_det_pemohon_kecField.setValue(record.data.pemohon_kec);
+			apotek_det_pemohon_nikField.setValue(record.data.pemohon_nik);
+			apotek_det_pemohon_straField.setValue(record.data.pemohon_stra);
+			apotek_det_pemohon_surattugasField.setValue(record.data.pemohon_surattugas);
+			apotek_det_pemohon_pekerjaanField.setValue(record.data.pemohon_pekerjaan);
+			apotek_det_pemohon_tempatlahirField.setValue(record.data.pemohon_tempatlahir);
+			apotek_det_pemohon_tanggallahirField.setValue(record.data.pemohon_tanggallahir);
+			apotek_det_pemohon_user_idField.setValue(record.data.pemohon_user_id);
+			apotek_det_pemohon_pendidikanField.setValue(record.data.pemohon_pendidikan);
+			apotek_det_pemohon_tahunlulusField.setValue(record.data.pemohon_tahunlulus);
+			
+			apotek_det_syaratDataStore.proxy.extraParams = { 
+				apotek_id : record.data.det_apotek_apotek_id,
+				apotek_det_id : record.data.det_apotek_id,
+				currentAction : 'update',
+				action : 'GETSYARAT'
+			};
+			apotek_det_syaratDataStore.load();
 		}
 		
 		function apotek_det_showSearchWindow(){
@@ -1269,6 +1337,26 @@
 				{ name : 'apotek_pemilikalamat', type : 'string', mapping : 'apotek_pemilikalamat' },
 				{ name : 'apotek_pemiliknpwp', type : 'string', mapping : 'apotek_pemiliknpwp' },
 				{ name : 'apotek_siup', type : 'string', mapping : 'apotek_siup' },
+				{ name : 'det_idam_proses', type : 'string', mapping : 'det_idam_proses' },
+				{ name : 'lamaproses', type : 'string', mapping : 'lamaproses' },
+				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+				{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+				{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+				{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+				{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+				{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
+				{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+				{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+				{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+				{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+				{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+				{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
+				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+				{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
+				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
 				]
 		});
 /* End DataStore declaration */
@@ -1499,6 +1587,46 @@
 				apotek_det_bp_printCM,apotek_det_lk_printCM,apotek_det_bap_printCM,apotek_det_sk_printCM
 			]
 		});
+		function apotek_det_ubahProses(proses){
+			var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+			Ext.Ajax.request({
+				waitMsg: 'Please wait...',
+				url: 'c_t_apotek_det/switchAction',
+				params: {
+					apotekdet_id : record.get('det_apotek_id'),
+					proses : proses,
+					action : 'UBAHPROSES'
+				},success : function(){
+					apotek_det_dataStore.reload();
+				}
+			});
+		}
+		
+		var apotek_det_prosesContextMenu = Ext.create('Ext.menu.Menu',{
+			items: [
+				{
+					text : 'Selesai, belum diambil',
+					tooltip : 'Ubah Menjadi Selesai, belum diambil',
+					handler : function(){
+						apotek_det_ubahProses('Selesai, belum diambil');
+					}
+				},
+				{
+					text : 'Selesai, sudah diambil',
+					tooltip : 'Ubah Menjadi Selesai, sudah diambil',
+					handler : function(){
+						apotek_det_ubahProses('Selesai, sudah diambil');
+					}
+				},
+				{
+					text : 'Ditolak',
+					tooltip : 'Ubah Menjadi Ditolak',
+					handler : function(){
+						apotek_det_ubahProses('Ditolak');
+					}
+				}
+			]
+		});
 		
 		/* End ContextMenu For Action Column */
 		apotek_det_gridPanel = Ext.create('Ext.grid.Panel',{
@@ -1683,6 +1811,18 @@
 					hidden : true
 				},
 				{
+					text : 'Lama Proses',
+					dataIndex : 'lamaproses',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'Status',
+					dataIndex : 'det_idam_proses',
+					width : 125,
+					sortable : false
+				},
+				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
 					width:50,
@@ -1716,6 +1856,19 @@
 						}
 					}]
 				},
+				{
+					xtype:'actioncolumn',
+					width:30,
+					items: [{
+						iconCls : 'checked',
+						tooltip : 'Ubah Status',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							apotek_det_prosesContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				}
 			],
 			tbar : [
 				apotek_det_addButton,
@@ -2444,6 +2597,97 @@
 				apotek_det_switchToGrid();
 			}
 		});
+		/* START DATA PEMOHON */
+		var apotek_det_pemohon_idField = Ext.create('Ext.form.Hidden',{
+			name : 'pemohon_id'
+		});
+		var apotek_det_pemohon_namaField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_nama',
+			fieldLabel : 'Nama',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_alamatField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		var apotek_det_pemohon_telpField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_telp',
+			fieldLabel : 'Telp',
+			maxLength : 20,
+			maskRe : /([0-9]+)$/
+		});
+		var apotek_det_pemohon_npwpField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_npwp',
+			fieldLabel : 'NPWP',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_rtField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_rt',
+			fieldLabel : 'RT',
+			maskRe : /([0-9]+)$/
+		});
+		var apotek_det_pemohon_rwField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_rw',
+			fieldLabel : 'RW',
+			maskRe : /([0-9]+)$/
+		});
+		var apotek_det_pemohon_kelField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_kel',
+			fieldLabel : 'Kelurahan',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_kecField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_kec',
+			fieldLabel : 'Kecamatan',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_nikField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_nik',
+			fieldLabel : 'NIK',
+			maxLength : 20,
+			maskRe : /([0-9]+)$/
+		});
+		var apotek_det_pemohon_straField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_stra',
+			fieldLabel : 'STRA',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_surattugasField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_surattugas',
+			fieldLabel : 'Surat Tugas',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_pekerjaanField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_pekerjaan',
+			fieldLabel : 'Pekerjaan',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_tempatlahirField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_tempatlahir',
+			fieldLabel : 'Tempat Lahir',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_tanggallahirField = Ext.create('Ext.form.field.Date',{
+			name : 'pemohon_tanggallahir',
+			fieldLabel : 'Tanggal Lahir',
+			format : 'd-m-Y'
+		});
+		var apotek_det_pemohon_user_idField = Ext.create('Ext.form.Hidden',{
+			name : 'pemohon_user_id',
+		});
+		var apotek_det_pemohon_pendidikanField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_pendidikan',
+			fieldLabel : 'Pendidikan',
+			maxLength : 50
+		});
+		var apotek_det_pemohon_tahunlulusField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_tahunlulus',
+			fieldLabel : 'Tahun Lulus',
+			maxLength : 4,
+			maskRe : /([0-9]+)$/
+		});
+		/* END DATA PEMOHON */
 		apotek_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -2482,18 +2726,24 @@
 							collapsible : false,
 							layout :'form',
 							items : [
-								det_apotek_namaField,
-								det_apotek_alamatField,
-								det_apotek_telpField,
-								det_apotek_spField,
-								det_apotek_ktpField,
-								det_apotek_tempatlahirField,
-								det_apotek_tanggallahirField,
-								det_apotek_pekerjaanField,
-								det_apotek_npwpField,
-								det_apotek_straField,
-								det_apotek_pendidikanField,
-								det_apotek_tahunlulusField								
+								apotek_det_pemohon_idField,
+								apotek_det_pemohon_nikField,
+								apotek_det_pemohon_namaField,
+								apotek_det_pemohon_alamatField,
+								apotek_det_pemohon_telpField,
+								apotek_det_pemohon_npwpField,
+								apotek_det_pemohon_rtField,
+								apotek_det_pemohon_rwField,
+								apotek_det_pemohon_kelField,
+								apotek_det_pemohon_kecField,
+								apotek_det_pemohon_straField,
+								apotek_det_pemohon_surattugasField,
+								apotek_det_pemohon_pekerjaanField,
+								apotek_det_pemohon_tempatlahirField,
+								apotek_det_pemohon_tanggallahirField,
+								apotek_det_pemohon_user_idField,
+								apotek_det_pemohon_pendidikanField,
+								apotek_det_pemohon_tahunlulusField
 							]
 						},
 						{

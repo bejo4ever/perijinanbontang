@@ -7,25 +7,49 @@ class M_t_iujt_det extends App_model{
 				CASE WHEN det_iujt_jenis = 1 THEN 'BARU'
 					ELSE 'PERPANJANGAN'
 					END AS det_iujt_jenis_nama,
-				det_iujt_nama,
-				det_iujt_npwp,
-				det_iujt_alamat,
+				det_iujt_tanggal,
+				det_iujt_nomorreg,
+				det_iujt_norekom,
+				det_iujt_tglrekom,
 				det_iujt_sk,
 				det_iujt_berlaku,
 				det_iujt_kadaluarsa,
 				det_iujt_surveylulus,
-				det_iujt_tanggal,
 				det_iujt_nopermohonan,
 				det_iujt_cekpetugas,
 				det_iujt_cektanggal,
 				det_iujt_ceknip,
 				det_iujt_catatan,
+				det_iujt_proses,
 				iujt_usaha,
 				iujt_alamatusaha,
+				iujt_statusperusahaan,
 				iujt_penanggungjawab,
-				iujt_statusperusahaan
+				iujt_statusperusahaan,
+				CONCAT(5 * (DATEDIFF(NOW(), det_iujt_tanggal) DIV 7) + 
+					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_iujt_tanggal) + 
+						1, 1),' Hari') as lamaproses,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id,
+				pemohon_pendidikan,
+				pemohon_tahunlulus
 				FROM t_iujt_det 
 				JOIN t_iujt ON t_iujt_det.det_iujt_iujt_id = t_iujt.iujt_id
+				JOIN m_pemohon ON t_iujt_det.det_iujt_pemohon_id = m_pemohon.pemohon_id
 			WHERE det_iujt_id IS NOT NULL 
 	";
 	
@@ -45,9 +69,6 @@ class M_t_iujt_det extends App_model{
 				AND (
 					det_iujt_iujt_id LIKE '%".$searchText."%' OR 
 					det_iujt_jenis LIKE '%".$searchText."%' OR 
-					det_iujt_nama LIKE '%".$searchText."%' OR 
-					det_iujt_npwp LIKE '%".$searchText."%' OR 
-					det_iujt_alamat LIKE '%".$searchText."%' OR 
 					det_iujt_sk LIKE '%".$searchText."%' OR 
 					det_iujt_berlaku LIKE '%".$searchText."%' OR 
 					det_iujt_kadaluarsa LIKE '%".$searchText."%' OR 

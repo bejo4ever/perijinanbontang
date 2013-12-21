@@ -25,7 +25,7 @@
 			<td colspan="3" align="center"><b><u>SURAT REKOMENDASI</u></b></td>
 		</tr>
 		<tr>
-			<td colspan="3" align="center"><b>Nomor:<?php echo $det_iujt_sk; ?></b></td>
+			<td colspan="3" align="center"><b>Nomor:<?php echo $det_iujt_norekom; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="3">&nbsp;</td>
@@ -56,7 +56,7 @@
 		<tr>
 			<td valign="top">d. </td>
 			<td colspan="2" align="justify">
-				Surat Permohonan dari <?php echo $iujt_usaha; ?> Nomor <?php echo $det_iujt_norekom; ?>  Tanggal <?php echo date('d-m-Y',strtotime($det_iujt_tanggal)); ?> Perihal Permohonan Rekomendasi 
+				Surat Permohonan dari <?php echo $iujt_usaha; ?> Nomor <?php echo $det_iujt_nopermohonan; ?>  Tanggal <?php echo date('d-m-Y',strtotime($det_iujt_tanggal)); ?> Perihal Permohonan Rekomendasi 
 				Pembukaan Kantor Cabang Jasa Titipan
 			</td>
 		</tr>
