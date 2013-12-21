@@ -106,6 +106,9 @@ class M_t_iujk_det extends App_model{
 		
 		$sql = $this->mainSql;
 		
+		if(@$det_iujk_id != ''){
+			$sql .= " AND det_iujk_id LIKE '%".$det_iujk_id."%' ";
+		}
 		if(@$det_iujk_iujk_id != ''){
 			$sql .= " AND det_iujk_iujk_id LIKE '%".$det_iujk_iujk_id."%' ";
 		}
