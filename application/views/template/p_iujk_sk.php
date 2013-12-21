@@ -161,13 +161,13 @@
 						<td colspan="3" align="center"><b>KOTA BONTANG</b></td>
 					</tr>
 					<tr>
-						<td colspan="3" height="100" valign="bottom" align="center"><b><u>RACHMAN, SE</u></b></td>
+						<td colspan="3" height="100" valign="bottom" align="center"><b><u><?php echo @$dataijin[0]->NAMA_PEJABAT; ?></u></b></td>
 					</tr>
 					<tr>
-						<td colspan="3" align="center">Pembina Utama Muda</td>
+						<td colspan="3" align="center"><?php echo @$dataijin[0]->PANGKAT; ?></td>
 					</tr>
 					<tr>
-						<td colspan="3" align="center">NIP. 19570411 198503 1 010</td>
+						<td colspan="3" align="center">NIP. <?php echo @$dataijin[0]->NIP_PEJABAT; ?></td>
 					</tr>
 				</table>
 			</td>

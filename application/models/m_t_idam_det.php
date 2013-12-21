@@ -76,13 +76,6 @@ class M_t_idam_det extends App_model{
 					det_idam_idam_id LIKE '%".$searchText."%' OR 
 					det_idam_jenis LIKE '%".$searchText."%' OR 
 					det_idam_tanggal LIKE '%".$searchText."%' OR 
-					det_idam_nama LIKE '%".$searchText."%' OR 
-					det_idam_alamat LIKE '%".$searchText."%' OR 
-					det_idam_telp LIKE '%".$searchText."%' OR 
-					det_idam_tempatlahir LIKE '%".$searchText."%' OR 
-					det_idam_tanggallahir LIKE '%".$searchText."%' OR 
-					det_idam_pendidikan LIKE '%".$searchText."%' OR 
-					det_idam_tahunlulus LIKE '%".$searchText."%' OR 
 					det_idam_status LIKE '%".$searchText."%' OR 
 					det_idam_keterangan LIKE '%".$searchText."%' OR 
 					det_idam_bap LIKE '%".$searchText."%' OR 

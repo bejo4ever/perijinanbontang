@@ -84,6 +84,11 @@
 			iujk_det_dbTask = 'CREATE';
 			iujk_det_dbTaskMessage = 'created';
 			iujk_det_resetForm();
+			iujk_det_syaratDataStore.proxy.extraParams = { 
+				currentAction : 'create',
+				action : 'GETSYARAT'
+			};
+			iujk_det_syaratDataStore.load();
 			iujk_det_switchToForm();
 		}
 		
@@ -199,7 +204,26 @@
 					iujk_kodeposValue = iujk_kodeposField.getValue();
 					iujk_faxValue = iujk_faxField.getValue();
 					iujk_npwpValue = iujk_npwpField.getValue();
-										
+					
+					var pemohon_idValue = iujk_det_pemohon_idField.getValue();
+					var pemohon_namaValue = iujk_det_pemohon_namaField.getValue();
+					var pemohon_alamatValue = iujk_det_pemohon_alamatField.getValue();
+					var pemohon_telpValue = iujk_det_pemohon_telpField.getValue();
+					var pemohon_npwpValue = iujk_det_pemohon_npwpField.getValue();
+					var pemohon_rtValue = iujk_det_pemohon_rtField.getValue();
+					var pemohon_rwValue = iujk_det_pemohon_rwField.getValue();
+					var pemohon_kelValue = iujk_det_pemohon_kelField.getValue();
+					var pemohon_kecValue = iujk_det_pemohon_kecField.getValue();
+					var pemohon_nikValue = iujk_det_pemohon_nikField.getValue();
+					var pemohon_straValue = iujk_det_pemohon_straField.getValue();
+					var pemohon_surattugasValue = iujk_det_pemohon_surattugasField.getValue();
+					var pemohon_pekerjaanValue = iujk_det_pemohon_pekerjaanField.getValue();
+					var pemohon_tempatlahirValue = iujk_det_pemohon_tempatlahirField.getValue();
+					var pemohon_tanggallahirValue = iujk_det_pemohon_tanggallahirField.getValue();
+					var pemohon_user_idValue = iujk_det_pemohon_user_idField.getValue();
+					var pemohon_pendidikanValue = iujk_det_pemohon_pendidikanField.getValue();
+					var pemohon_tahunlulusValue = iujk_det_pemohon_tahunlulusField.getValue();
+					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_iujk_det/switchAction',
@@ -235,7 +259,24 @@
 							iujk_telepon : iujk_teleponValue,
 							iujk_kodepos : iujk_kodeposValue,
 							iujk_fax : iujk_faxValue,
-							iujk_npwp : iujk_npwpValue,
+							iujk_npwp : iujk_npwpValue,pemohon_id : pemohon_idValue,
+							pemohon_nama : pemohon_namaValue,
+							pemohon_alamat : pemohon_alamatValue,
+							pemohon_telp : pemohon_telpValue,
+							pemohon_npwp : pemohon_npwpValue,
+							pemohon_rt : pemohon_rtValue,
+							pemohon_rw : pemohon_rwValue,
+							pemohon_kel : pemohon_kelValue,
+							pemohon_kec : pemohon_kecValue,
+							pemohon_nik : pemohon_nikValue,
+							pemohon_stra : pemohon_straValue,
+							pemohon_surattugas : pemohon_surattugasValue,
+							pemohon_pekerjaan : pemohon_pekerjaanValue,
+							pemohon_tempatlahir : pemohon_tempatlahirValue,
+							pemohon_tanggallahir : pemohon_tanggallahirValue,
+							pemohon_user_id : pemohon_user_idValue,
+							pemohon_pendidikan : pemohon_pendidikanValue,
+							pemohon_tahunlulus : pemohon_tahunlulusValue,
 							
 							action : iujk_det_dbTask
 						},
@@ -421,6 +462,32 @@
 			iujk_kodeposField.setValue(record.data.iujk_kodepos);
 			iujk_faxField.setValue(record.data.iujk_fax);
 			iujk_npwpField.setValue(record.data.iujk_npwp);
+			iujk_det_pemohon_idField.setValue(record.data.pemohon_id);
+			iujk_det_pemohon_namaField.setValue(record.data.pemohon_nama);
+			iujk_det_pemohon_alamatField.setValue(record.data.pemohon_alamat);
+			iujk_det_pemohon_telpField.setValue(record.data.pemohon_telp);
+			iujk_det_pemohon_npwpField.setValue(record.data.pemohon_npwp);
+			iujk_det_pemohon_rtField.setValue(record.data.pemohon_rt);
+			iujk_det_pemohon_rwField.setValue(record.data.pemohon_rw);
+			iujk_det_pemohon_kelField.setValue(record.data.pemohon_kel);
+			iujk_det_pemohon_kecField.setValue(record.data.pemohon_kec);
+			iujk_det_pemohon_nikField.setValue(record.data.pemohon_nik);
+			iujk_det_pemohon_straField.setValue(record.data.pemohon_stra);
+			iujk_det_pemohon_surattugasField.setValue(record.data.pemohon_surattugas);
+			iujk_det_pemohon_pekerjaanField.setValue(record.data.pemohon_pekerjaan);
+			iujk_det_pemohon_tempatlahirField.setValue(record.data.pemohon_tempatlahir);
+			iujk_det_pemohon_tanggallahirField.setValue(record.data.pemohon_tanggallahir);
+			iujk_det_pemohon_user_idField.setValue(record.data.pemohon_user_id);
+			iujk_det_pemohon_pendidikanField.setValue(record.data.pemohon_pendidikan);
+			iujk_det_pemohon_tahunlulusField.setValue(record.data.pemohon_tahunlulus);
+			
+			iujk_det_syaratDataStore.proxy.extraParams = { 
+				iujk_id : record.data.det_iujk_iujk_id,
+				iujk_det_id : record.data.det_iujk_id,
+				currentAction : 'update',
+				action : 'GETSYARAT'
+			};
+			iujk_det_syaratDataStore.load();
 		}
 		
 		function iujk_det_showSearchWindow(){
@@ -636,6 +703,26 @@
 				{ name : 'iujk_kodepos', type : 'string', mapping : 'iujk_kodepos' },
 				{ name : 'iujk_fax', type : 'string', mapping : 'iujk_fax' },
 				{ name : 'iujk_npwp', type : 'string', mapping : 'iujk_npwp' },
+				{ name : 'det_idam_proses', type : 'string', mapping : 'det_idam_proses' },
+				{ name : 'lamaproses', type : 'string', mapping : 'lamaproses' },
+				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+				{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+				{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+				{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+				{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+				{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
+				{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+				{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+				{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+				{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+				{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+				{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
+				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+				{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
+				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
 				]
 		});
 /* End DataStore declaration */
@@ -865,6 +952,46 @@
 				iujk_det_bp_printCM,iujk_det_lk_printCM,iujk_det_rekom_printCM,iujk_det_sk_printCM
 			]
 		});
+		function iujk_det_ubahProses(proses){
+			var record = iujk_det_gridPanel.getSelectionModel().getSelection()[0];
+			Ext.Ajax.request({
+				waitMsg: 'Please wait...',
+				url: 'c_t_iujk_det/switchAction',
+				params: {
+					iujkdet_id : record.get('det_iujk_id'),
+					proses : proses,
+					action : 'UBAHPROSES'
+				},success : function(){
+					iujk_det_dataStore.reload();
+				}
+			});
+		}
+		
+		var iujk_det_prosesContextMenu = Ext.create('Ext.menu.Menu',{
+			items: [
+				{
+					text : 'Selesai, belum diambil',
+					tooltip : 'Ubah Menjadi Selesai, belum diambil',
+					handler : function(){
+						iujk_det_ubahProses('Selesai, belum diambil');
+					}
+				},
+				{
+					text : 'Selesai, sudah diambil',
+					tooltip : 'Ubah Menjadi Selesai, sudah diambil',
+					handler : function(){
+						iujk_det_ubahProses('Selesai, sudah diambil');
+					}
+				},
+				{
+					text : 'Ditolak',
+					tooltip : 'Ubah Menjadi Ditolak',
+					handler : function(){
+						iujk_det_ubahProses('Ditolak');
+					}
+				}
+			]
+		});
 		
 		/* End ContextMenu For Action Column */
 		iujk_det_gridPanel = Ext.create('Ext.grid.Panel',{
@@ -996,6 +1123,18 @@
 					hidden : true
 				},
 				{
+					text : 'Lama Proses',
+					dataIndex : 'lamaproses',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'Status',
+					dataIndex : 'det_idam_proses',
+					width : 125,
+					sortable : false
+				},
+				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
 					width:50,
@@ -1029,6 +1168,19 @@
 						}
 					}]
 				},
+				{
+					xtype:'actioncolumn',
+					width:30,
+					items: [{
+						iconCls : 'checked',
+						tooltip : 'Ubah Status',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							iujk_det_prosesContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				}
 			],
 			tbar : [
 				iujk_det_addButton,
@@ -1315,6 +1467,97 @@
 		var det_iujk_syaratGridEditor = new Ext.grid.plugin.CellEditing({
 			clicksToEdit: 1
 		});
+		/* START DATA PEMOHON */
+		var iujk_det_pemohon_idField = Ext.create('Ext.form.Hidden',{
+			name : 'pemohon_id'
+		});
+		var iujk_det_pemohon_namaField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_nama',
+			fieldLabel : 'Nama',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_alamatField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		var iujk_det_pemohon_telpField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_telp',
+			fieldLabel : 'Telp',
+			maxLength : 20,
+			maskRe : /([0-9]+)$/
+		});
+		var iujk_det_pemohon_npwpField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_npwp',
+			fieldLabel : 'NPWP',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_rtField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_rt',
+			fieldLabel : 'RT',
+			maskRe : /([0-9]+)$/
+		});
+		var iujk_det_pemohon_rwField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_rw',
+			fieldLabel : 'RW',
+			maskRe : /([0-9]+)$/
+		});
+		var iujk_det_pemohon_kelField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_kel',
+			fieldLabel : 'Kelurahan',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_kecField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_kec',
+			fieldLabel : 'Kecamatan',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_nikField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_nik',
+			fieldLabel : 'NIK',
+			maxLength : 20,
+			maskRe : /([0-9]+)$/
+		});
+		var iujk_det_pemohon_straField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_stra',
+			fieldLabel : 'STRA',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_surattugasField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_surattugas',
+			fieldLabel : 'Surat Tugas',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_pekerjaanField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_pekerjaan',
+			fieldLabel : 'Pekerjaan',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_tempatlahirField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_tempatlahir',
+			fieldLabel : 'Tempat Lahir',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_tanggallahirField = Ext.create('Ext.form.field.Date',{
+			name : 'pemohon_tanggallahir',
+			fieldLabel : 'Tanggal Lahir',
+			format : 'd-m-Y'
+		});
+		var iujk_det_pemohon_user_idField = Ext.create('Ext.form.Hidden',{
+			name : 'pemohon_user_id',
+		});
+		var iujk_det_pemohon_pendidikanField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_pendidikan',
+			fieldLabel : 'Pendidikan',
+			maxLength : 50
+		});
+		var iujk_det_pemohon_tahunlulusField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_tahunlulus',
+			fieldLabel : 'Tahun Lulus',
+			maxLength : 4,
+			maskRe : /([0-9]+)$/
+		});
+		/* END DATA PEMOHON */
 		det_iujk_syaratGrid = Ext.create('Ext.grid.Panel',{
 			id : 'det_iujk_syaratGrid',
 			store : iujk_det_syaratDataStore,
@@ -1403,12 +1646,38 @@
 						},
 						{
 							xtype : 'fieldset',
-							title : '2. Data Pemohon & Perusahaan',
+							title : '2. Data Pemohon ',
 							checkboxToggle : false,
 							collapsible : false,
 							layout :'form',
 							items : [
-								det_iujk_namaField,
+								iujk_det_pemohon_idField,
+								iujk_det_pemohon_nikField,
+								iujk_det_pemohon_namaField,
+								iujk_det_pemohon_alamatField,
+								iujk_det_pemohon_telpField,
+								iujk_det_pemohon_npwpField,
+								iujk_det_pemohon_rtField,
+								iujk_det_pemohon_rwField,
+								iujk_det_pemohon_kelField,
+								iujk_det_pemohon_kecField,
+								iujk_det_pemohon_straField,
+								iujk_det_pemohon_surattugasField,
+								iujk_det_pemohon_pekerjaanField,
+								iujk_det_pemohon_tempatlahirField,
+								iujk_det_pemohon_tanggallahirField,
+								iujk_det_pemohon_user_idField,
+								iujk_det_pemohon_pendidikanField,
+								iujk_det_pemohon_tahunlulusField
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '3. Data Perusahaan',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
 								iujk_perusahaanField,
 								iujk_alamatField,
 								iujk_direkturField,
@@ -1433,7 +1702,7 @@
 						},
 						{
 							xtype : 'fieldset',
-							title : '3. Data Ceklist',
+							title : '4. Data Ceklist',
 							checkboxToggle : false,
 							collapsible : false,
 							layout :'form',
@@ -1443,7 +1712,7 @@
 						},
 						{
 							xtype : 'fieldset',
-							title : '4. Data Pendukung',
+							title : '5. Data Pendukung',
 							checkboxToggle : false,
 							collapsible : false,
 							layout :'form',

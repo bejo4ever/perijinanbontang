@@ -96,7 +96,7 @@
 				<table>
 					<tr>
 						<td>Nama</td>
-						<td>: <?php echo $det_iujt_nama; ?></td>
+						<td>: <?php echo $pemohon_nama; ?></td>
 					</tr>
 					<tr>
 						<td>Perusahaan</td>
@@ -104,11 +104,11 @@
 					</tr>
 					<tr>
 						<td>NPWP</td>
-						<td>: <?php echo $det_iujt_npwp; ?></td>
+						<td>: <?php echo $pemohon_npwp; ?></td>
 					</tr>
 					<tr>
 						<td>Alamat</td>
-						<td>: <?php echo $det_iujt_alamat; ?></td>
+						<td>: <?php echo $pemohon_alamat; ?></td>
 					</tr>
 				</table>
 			</td>
