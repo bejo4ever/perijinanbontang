@@ -198,7 +198,6 @@ class C_t_iujk_det extends CI_Controller{
 					'det_iujk_iujk_id'=>$resultInti,
 					'det_iujk_jenis'=>$det_iujk_jenis,
 					'det_iujk_tanggal'=>$det_iujk_tanggal,
-					'det_iujk_nama'=>$det_iujk_nama,
 					'det_iujk_nomorreg'=>$det_iujk_nomorreg,
 					'det_iujk_rekomnomor'=>$det_iujk_rekomnomor,
 					'det_iujk_rekomtanggal'=>$det_iujk_rekomtanggal,
@@ -212,7 +211,7 @@ class C_t_iujk_det extends CI_Controller{
 					'det_iujk_surveylulus'=>$det_iujk_surveylulus,
 					'det_iujk_pemohon_id'=>$resultpemohon,
 					);
-				$resultdet = $this->m_t_iujk_det->__insert($data, '', '');
+				$resultdet = $this->m_t_iujk_det->__insert($data, '', 'insertId');
 				for($i=0;$i<count($iujk_cek_syarat_id);$i++){
 					$datacek = array(
 						'iujk_cek_syarat_id'=>$iujk_cek_syarat_id[$i],
@@ -282,6 +281,29 @@ class C_t_iujk_det extends CI_Controller{
 		$iujk_det_updated_by = $this->m_t_iujk_det->__checkSession();
 		$iujk_det_updated_date = date('Y-m-d H:i:s');
 		
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
+		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
+		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
+		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
+		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
+		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
+		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
+		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
+		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
+		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
+		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
+		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
+		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
+		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
+		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
+		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
+		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
 		$datapemohon = array(
 			'pemohon_nama'=>$pemohon_nama,
 			'pemohon_alamat'=>$pemohon_alamat,
@@ -333,7 +355,6 @@ class C_t_iujk_det extends CI_Controller{
 				'det_iujk_iujk_id'=>$det_iujk_iujk_id,
 				'det_iujk_jenis'=>$det_iujk_jenis,
 				'det_iujk_tanggal'=>$det_iujk_tanggal,
-				'det_iujk_nama'=>$det_iujk_nama,
 				'det_iujk_nomorreg'=>$det_iujk_nomorreg,
 				'det_iujk_rekomnomor'=>$det_iujk_rekomnomor,
 				'det_iujk_rekomtanggal'=>$det_iujk_rekomtanggal,
@@ -536,6 +557,7 @@ class C_t_iujk_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_iujk_det->search($params);
 		$data['printrecord'] = $printrecord[1];
+		$data['dataijin'] = $this->db->where('ID_IJIN',1)->get('master_ijin')->row();
 		$print_view=$this->load->view('template/p_iujk_buktiterima.php',$data,TRUE);
 		$print_file=fopen('print/iujk_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);

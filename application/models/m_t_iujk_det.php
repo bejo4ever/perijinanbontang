@@ -8,7 +8,6 @@ class M_t_iujk_det extends App_model{
 					ELSE 'PERPANJANGAN'
 					END AS det_iujk_jenis_nama,
 				det_iujk_tanggal,
-				det_iujk_nama,
 				det_iujk_nomorreg,
 				det_iujk_rekomnomor,
 				det_iujk_rekomtanggal,
@@ -34,9 +33,32 @@ class M_t_iujk_det extends App_model{
 				iujk_telepon,
 				iujk_kodepos,
 				iujk_fax,
-				iujk_npwp
+				iujk_npwp,
+				det_iujk_proses,
+				CONCAT(5 * (DATEDIFF(NOW(), det_iujk_tanggal) DIV 7) + 
+					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_iujk_tanggal) + 
+						1, 1),' Hari') as lamaproses,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id,
+				pemohon_pendidikan,
+				pemohon_tahunlulus
 				FROM t_iujk_det 
 				JOIN t_iujk ON t_iujk_det.det_iujk_iujk_id = t_iujk.iujk_id
+				JOIN m_pemohon ON t_iujk_det.det_iujk_pemohon_id = m_pemohon.pemohon_id
 			WHERE det_iujk_id IS NOT NULL 
 	";
 	
