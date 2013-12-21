@@ -117,6 +117,9 @@ class M_t_ipmbl_det extends App_model{
 		
 		$sql = $this->mainSql;
 		
+		if(@$det_ipmbl_id != ''){
+			$sql .= " AND det_ipmbl_id LIKE '%".$det_ipmbl_id."%' ";
+		}
 		if(@$det_ipmbl_ipmbl_id != ''){
 			$sql .= " AND det_ipmbl_ipmbl_id LIKE '%".$det_ipmbl_ipmbl_id."%' ";
 		}

@@ -4,22 +4,11 @@ class M_t_apotek_det extends App_model{
 				det_apotek_id,
 				det_apotek_apotek_id,
 				det_apotek_jenis,
+				det_apotek_tanggal,
 				CASE WHEN det_apotek_jenis = 1 THEN 'BARU'
 					ELSE 'PERPANJANGAN'
 					END AS det_apotek_jenis_nama,
 				det_apotek_surveylulus,
-				det_apotek_nama,
-				det_apotek_alamat,
-				det_apotek_telp,
-				det_apotek_sp,
-				det_apotek_ktp,
-				det_apotek_tempatlahir,
-				det_apotek_tanggallahir,
-				det_apotek_pekerjaan,
-				det_apotek_npwp,
-				det_apotek_stra,
-				det_apotek_pendidikan,
-				det_apotek_tahunlulus,
 				det_apotek_terima,
 				det_apotek_terimatanggal,
 				det_apotek_kelengkapan,
@@ -78,9 +67,10 @@ class M_t_apotek_det extends App_model{
 				det_apotek_spnomor,
 				det_apotek_sptanggal,
 				det_apotek_notaris,
-				det_apotek_nomorsk,
+				det_apotek_sk,
 				det_apotek_berlaku,
 				det_apotek_kadaluarsa,
+				det_apotek_proses,
 				apotek_nama,
 				apotek_alamat,
 				apotek_telp,
@@ -90,9 +80,31 @@ class M_t_apotek_det extends App_model{
 				apotek_pemilik,
 				apotek_pemilikalamat,
 				apotek_pemiliknpwp,
-				apotek_siup
+				apotek_siup,
+				CONCAT(5 * (DATEDIFF(NOW(), det_apotek_tanggal) DIV 7) + 
+					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_apotek_tanggal) + 
+						1, 1),' Hari') as lamaproses,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id,
+				pemohon_pendidikan,
+				pemohon_tahunlulus
 				FROM t_apotek_det 
 				JOIN t_apotek ON t_apotek.apotek_id = t_apotek_det.det_apotek_apotek_id
+				JOIN m_pemohon ON t_apotek_det.det_apotek_pemohon_id = m_pemohon.pemohon_id
 			WHERE det_apotek_id IS NOT NULL 
 	";
 	
@@ -191,6 +203,9 @@ class M_t_apotek_det extends App_model{
 		
 		$sql = $this->mainSql;
 		
+		if(@$det_apotek_id != ''){
+			$sql .= " AND det_apotek_id LIKE '%".$det_apotek_id."%' ";
+		}
 		if(@$det_apotek_apotek_id != ''){
 			$sql .= " AND det_apotek_apotek_id LIKE '%".$det_apotek_apotek_id."%' ";
 		}
@@ -392,6 +407,7 @@ class M_t_apotek_det extends App_model{
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
+		$this->firephp->log($sql);
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}

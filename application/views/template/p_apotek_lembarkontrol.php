@@ -17,7 +17,7 @@
 		</tr>
 		<tr>
 			<td>Nama Pemohon</td>
-			<td>: <?php echo $det_apotek_nama; ?></td>
+			<td>: <?php echo $pemohon_nama; ?></td>
 		</tr>
 		<tr>
 			<td>Nama Perusahaan</td>
@@ -42,14 +42,21 @@
 			<td colspan="3"><b>DAFTAR LAMPIRAN (RANGKAP 2)</b></td>
 			<td align="center"><b>KET</b></td>
 		</tr>
+		<?php $i=1; foreach($dataceklist as $subdataceklist){ ?>
 		<tr>
-			<td valign="top">1. </td>
-			<td>Permohonan ke Dinkes oleh Apoteker Penanggung</td>
-			<td valign="top">: ##statusada</td>
-			<td>##keterangan</td>
+			<td valign="top"><?php echo $i; ?></td>
+			<td><?php echo $subdataceklist->NAMA_SYARAT; ?></td>
+			<td valign="top">: <?php echo ($subdataceklist->apotek_cek_status == 1) ? 'ADA' : 'TIDAK ADA'; ?></td>
+			<td><?php echo $subdataceklist->apotek_cek_keterangan; ?></td>
+		</tr>
+		<?php $i++; } ?>
+		<tr>
+			<td width="20px">&nbsp;</td>
+			<td width="350px">&nbsp;</td>
+			<td width="100px">&nbsp;</td>
+			<td width="150px">&nbsp;</td>
 		</tr>
 	</table>
-	<br><br>
 	<table width="720px" align="center" cellpadding="0" cellspacing="0">
 		<tr>
 			<td colspan="4"><b>Kolom ini diisi oleh petugas :</b></td>

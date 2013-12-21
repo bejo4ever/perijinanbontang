@@ -34,7 +34,7 @@
 			<td colspan="4" align="center"><b><u>KEPUTUSAN KEPALA DINAS KESEHATAN KOTA BONTANG</u></b></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center"><h3 style="margin:0px;">Nomor : <?php echo $det_apotek_nomorsk; ?></h3></td>
+			<td colspan="4" align="center"><h3 style="margin:0px;">Nomor : <?php echo $det_apotek_sk; ?></h3></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">&nbsp;</td>
@@ -55,17 +55,17 @@
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nama</td>
-			<td colspan="2">: <?php echo $det_apotek_nama; ?></td>
+			<td colspan="2">: <?php echo $pemohon_nama; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Alamat</td>
-			<td colspan="2">: <?php echo $det_apotek_alamat; ?></td>
+			<td colspan="2">: <?php echo $pemohon_alamat; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
 			<td>Nomor Surat Penugasan</td>
-			<td colspan="2">: <?php echo $det_apotek_sp; ?></td>
+			<td colspan="2">: <?php echo $pemohon_surattugas; ?></td>
 		</tr>
 		<tr>
 			<td>&nbsp;</td>
