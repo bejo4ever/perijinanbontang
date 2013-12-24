@@ -38,6 +38,9 @@ class C_t_ipmbl_det extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
+			case 'GETRIWAYAT':
+				$this->getRiwayat();
+			break;
 			case 'UBAHPROSES':
 				$this->ubahProses();
 			break;
@@ -121,6 +124,12 @@ class C_t_ipmbl_det extends CI_Controller{
 		$ipmbl_cek_syarat_id = json_decode($this->input->post('ipmbl_cek_syarat_id'));
 		$ipmbl_cek_status = json_decode($this->input->post('ipmbl_cek_status'));
 		$ipmbl_cek_keterangan = json_decode($this->input->post('ipmbl_cek_keterangan'));
+		
+		$dok_ipmbl_id = json_decode($this->input->post('dok_ipmbl_id'));
+		$dok_ipmbl_penerima = json_decode($this->input->post('dok_ipmbl_penerima'));
+		$dok_ipmbl_jabatan = json_decode($this->input->post('dok_ipmbl_jabatan'));
+		$dok_ipmbl_tanggal = json_decode($this->input->post('dok_ipmbl_tanggal'));
+		$dok_ipmbl_keterangan = json_decode($this->input->post('dok_ipmbl_keterangan'));
 			
 		$ipmbl_det_author = $this->m_t_ipmbl_det->__checkSession();
 		$ipmbl_det_created_date = date('Y-m-d H:i:s');
@@ -222,7 +231,21 @@ class C_t_ipmbl_det extends CI_Controller{
 					);
 					$resultcek = $this->m_t_ipmbl_det->__insert($datacek, 't_ipmbl_ceklist', 'insertId');
 				}
-		
+				for($i=0;$i<count($dok_ipmbl_id);$i++){
+					$datadok = array(
+						'dok_ipmbl_penerima'=>$dok_ipmbl_penerima[$i],
+						'dok_ipmbl_jabatan'=>$dok_ipmbl_jabatan[$i],
+						'dok_ipmbl_tanggal'=>$dok_ipmbl_tanggal[$i],
+						'dok_ipmbl_keterangan'=>$dok_ipmbl_keterangan[$i],
+						'dok_ipmbl_ipmbl_id'=>$resultInti,
+						'dok_ipmbl_ipmbldet_id'=>$resultdet,
+					);
+					if($dok_ipmbl_id[$i] == 0){
+						$resultdok = $this->m_t_ipmbl_det->__insert($datadok, 't_ipmbl_dok', 'insertId');
+					}else{
+						$resultdok = $this->m_t_ipmbl_det->__update($datadok, $dok_ipmbl_id[$i], 't_ipmbl_dok', '', 'dok_ipmbl_id');
+					}
+				}
 			}else{
 				$result = 'fail';
 			}
@@ -275,6 +298,11 @@ class C_t_ipmbl_det extends CI_Controller{
 		$ipmbl_cek_syarat_id = json_decode($this->input->post('ipmbl_cek_syarat_id'));
 		$ipmbl_cek_status = json_decode($this->input->post('ipmbl_cek_status'));
 		$ipmbl_cek_keterangan = json_decode($this->input->post('ipmbl_cek_keterangan'));
+		$dok_ipmbl_id = json_decode($this->input->post('dok_ipmbl_id'));
+		$dok_ipmbl_penerima = json_decode($this->input->post('dok_ipmbl_penerima'));
+		$dok_ipmbl_jabatan = json_decode($this->input->post('dok_ipmbl_jabatan'));
+		$dok_ipmbl_tanggal = json_decode($this->input->post('dok_ipmbl_tanggal'));
+		$dok_ipmbl_keterangan = json_decode($this->input->post('dok_ipmbl_keterangan'));
 		
 		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
 		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
@@ -373,6 +401,21 @@ class C_t_ipmbl_det extends CI_Controller{
 					'ipmbl_cek_keterangan'=>$ipmbl_cek_keterangan[$i]
 				);
 				$resultcek = $this->m_t_ipmbl_det->__update($datacek, $ipmbl_cek_id[$i], 't_ipmbl_ceklist', 'updateId','ipmbl_cek_id');
+			}
+			for($i=0;$i<count($dok_ipmbl_id);$i++){
+				$datadok = array(
+					'dok_ipmbl_penerima'=>$dok_ipmbl_penerima[$i],
+					'dok_ipmbl_jabatan'=>$dok_ipmbl_jabatan[$i],
+					'dok_ipmbl_tanggal'=>$dok_ipmbl_tanggal[$i],
+					'dok_ipmbl_keterangan'=>$dok_ipmbl_keterangan[$i],
+					'dok_ipmbl_ipmbl_id'=>$det_ipmbl_ipmbl_id,
+					'dok_ipmbl_ipmbldet_id'=>$det_ipmbl_id,
+				);
+				if($dok_ipmbl_id[$i] == 0){
+					$resultdok = $this->m_t_ipmbl_det->__insert($datadok, 't_ipmbl_dok', 'insertId');
+				}else{
+					$resultdok = $this->m_t_ipmbl_det->__update($datadok, $dok_ipmbl_id[$i], 't_ipmbl_dok', '', 'dok_ipmbl_id');
+				}
 			}
 		}else{
 			$result = 'sessionExpired';
@@ -561,6 +604,18 @@ class C_t_ipmbl_det extends CI_Controller{
 		$result = $this->m_t_ipmbl_det->getSyarat($params);
 		echo $result;
 	}
+	function getRiwayat(){
+		$currentAction = $this->input->post('currentAction');
+		$ipmbl_id = $this->input->post('ipmbl_id');
+		$ipmbl_det_id = $this->input->post('ipmbl_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"ipmbl_id"=>$ipmbl_id,
+			"ipmbl_det_id"=>$ipmbl_det_id
+		);
+		$result = $this->m_t_ipmbl_det->getRiwayat($params);
+		echo $result;
+	}
 	function ubahProses(){
 		$ipmbldet_id  = $this->input->post('ipmbldet_id');
 		$proses  = $this->input->post('proses');
@@ -578,8 +633,10 @@ class C_t_ipmbl_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_ipmbl_det->search($params);
 		$dataceklist = $this->db->where('ipmbl_cek_ipmbldet_id', $ipmbldet_id)->join('master_syarat','ipmbl_cek_syarat_id = ID_SYARAT')->get('t_ipmbl_ceklist')->result();
+		$datadok = $this->db->where('dok_ipmbl_ipmbldet_id', $ipmbldet_id)->get('t_ipmbl_dok')->result();
 		$data['printrecord'] = $printrecord[1];
 		$data['dataceklist'] = $dataceklist;
+		$data['datadok'] = $datadok;
 		$print_view=$this->load->view('template/p_ipmbl_lembarkontrol.php',$data,TRUE);
 		$print_file=fopen('print/ipmbl_lembarkontrol.html','w+');
 		fwrite($print_file, $print_view);

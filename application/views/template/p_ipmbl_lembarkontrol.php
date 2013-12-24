@@ -117,6 +117,17 @@
 						<td align="center" width="138px">Tanda Tangan</td>
 						<td align="center" width="138px">Keterangan</td>
 					</tr>
+					<?php $i=1; 
+					if(is_array($datadok)){
+					foreach($datadok as $subdatadok){ ?>
+					<tr>
+						<td valign="top"><?php echo $i; ?></td>
+						<td><?php echo $subdatadok->dok_ipmbl_penerima; ?></td>
+						<td><?php echo $subdatadok->dok_ipmbl_jabatan; ?></td>
+						<td><?php echo date('d-m-Y', strtotime($subdatadok->dok_ipmbl_tanggal)); ?></td>
+						<td><?php echo $subdatadok->dok_ipmbl_keterangan; ?></td>
+					</tr>
+					<?php $i++; } }?>
 				</table>
 			</td>
 		</tr>

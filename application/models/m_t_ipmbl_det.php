@@ -249,5 +249,19 @@ class M_t_ipmbl_det extends App_model{
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
+	function getRiwayat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT 
+					*
+				FROM t_ipmbl_dok 
+				WHERE dok_ipmbl_ipmbldet_id = ".$ipmbl_det_id."
+				AND dok_ipmbl_ipmbl_id = ".$ipmbl_id."
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
 	
 }

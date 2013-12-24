@@ -195,6 +195,11 @@
 				action : 'GETSYARAT'
 			};
 			apotek_det_syaratDataStore.load();
+			apotek_det_perlengkapanDataStore.proxy.extraParams = { 
+				currentAction : 'create',
+				action : 'GETPERLENGKAPAN'
+			};
+			apotek_det_perlengkapanDataStore.load();
 			apotek_det_switchToForm();
 		}
 		
@@ -449,6 +454,45 @@
 					var encoded_apotek_cek_status = Ext.encode(array_apotek_cek_status);
 					var encoded_apotek_cek_keterangan = Ext.encode(array_apotek_cek_keterangan);
 					
+					var array_apotek_ket_id=new Array();
+					var array_apotek_ket_perlengkapanid=new Array();
+					var array_apotek_ket_status=new Array();
+					var array_apotek_ket_jumlah=new Array();
+					
+					if(apotek_det_syaratDataStore.getCount() > 0){
+						for(var i=0;i<apotek_det_syaratDataStore.getCount();i++){
+							array_apotek_ket_id.push(apotek_det_syaratDataStore.getAt(i).data.apotek_ket_id);
+							array_apotek_ket_perlengkapanid.push(apotek_det_syaratDataStore.getAt(i).data.apotek_ket_perlengkapanid);
+							array_apotek_ket_status.push(apotek_det_syaratDataStore.getAt(i).data.apotek_ket_status);
+							array_apotek_ket_jumlah.push(apotek_det_syaratDataStore.getAt(i).data.apotek_ket_jumlah);
+						}
+					}
+					
+					var encoded_apotek_ket_id = Ext.encode(array_apotek_ket_id);
+					var encoded_apotek_ket_perlengkapanid = Ext.encode(array_apotek_ket_perlengkapanid);
+					var encoded_apotek_ket_status = Ext.encode(array_apotek_ket_status);
+					var encoded_apotek_ket_jumlah = Ext.encode(array_apotek_ket_jumlah);
+					
+					var asisten_id = [];
+					var asisten_nama = [];
+					var asisten_sik = [];
+					var asisten_lulus = [];
+					var asisten_alamat = [];
+					
+					if(det_ipmbl_riwayat_dataStore.getCount() > 0){
+						for(var i=0;i<det_ipmbl_riwayat_dataStore.getCount();i++){
+							asisten_id.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_id);
+							asisten_nama.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_nama);
+							asisten_sik.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_sik);
+							asisten_lulus.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_lulus);
+							asisten_alamat.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_alamat);
+						}
+					}
+					var encoded_asisten_id = Ext.encode(asisten_id);
+					var encoded_asisten_nama = Ext.encode(asisten_nama);
+					var encoded_asisten_sik = Ext.encode(asisten_sik);
+					var encoded_asisten_lulus = Ext.encode(asisten_lulus);
+					var encoded_asisten_alamat = Ext.encode(asisten_alamat);
 					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -529,6 +573,15 @@
 							apotek_cek_syarat_id : encoded_apotek_cek_syarat_id,
 							apotek_cek_status : encoded_apotek_cek_status,
 							apotek_cek_keterangan : encoded_apotek_cek_keterangan,
+							apotek_ket_id : encoded_apotek_ket_id,
+							apotek_ket_perlengkapanid : encoded_apotek_ket_perlengkapanid,
+							apotek_ket_status : encoded_apotek_ket_status,
+							apotek_ket_jumlah : encoded_apotek_ket_jumlah,
+							asisten_id : encoded_asisten_id,
+							asisten_nama : encoded_asisten_nama,
+							asisten_sik : encoded_asisten_sik,
+							asisten_lulus : encoded_asisten_lulus,
+							asisten_alamat : encoded_asisten_alamat,
 							
 							apotek_nama : apotek_namaValue,
 							apotek_alamat : apotek_alamatValue,
@@ -2695,6 +2748,188 @@
 				}
 			]
 		});
+		apotek_det_perlengkapanDataStore = Ext.create('Ext.data.Store',{
+			id : 'apotek_det_perlengkapanDataStore',
+			pageSize : globalPageSize,
+			autoLoad : true,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_t_apotek_det/switchAction',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total'
+				},
+				actionMethods : {
+					read : 'POST'
+				},
+				extraParams : {
+					action : 'GETPERLENGKAPAN'
+				}
+			}),
+			fields : [
+				{ name : 'apotek_ket_id', type : 'int', mapping : 'apotek_ket_id' },
+				{ name : 'apotek_ket_perlengkapanid', type : 'int', mapping : 'apotek_ket_perlengkapanid' },
+				{ name : 'apotek_ket_perlengkapannama', type : 'string', mapping : 'apotek_ket_perlengkapannama' },
+				{ name : 'apotek_ket_status', type : 'int', mapping : 'apotek_ket_status' },
+				{ name : 'apotek_ket_jumlah', type : 'int', mapping : 'apotek_ket_jumlah' }
+				]
+		});
+		var det_apotek_perlengkapanGridEditor = new Ext.grid.plugin.CellEditing({
+			clicksToEdit: 1
+		});
+		det_apotek_perlengkapanGrid = Ext.create('Ext.grid.Panel',{
+			id : 'det_apotek_perlengkapanGrid',
+			store : apotek_det_perlengkapanDataStore,
+			loadMask : true,
+			width : '95%',
+			plugins : [
+				Ext.create('Ext.grid.plugin.CellEditing', {
+					clicksToEdit: 1
+				})
+			],
+			selType: 'cellmodel',
+			columns : [
+				{
+					text : 'Perlengkapan',
+					dataIndex : 'apotek_ket_perlengkapannama',
+					width : 450,
+					sortable : false
+				},
+				{
+					xtype: 'checkcolumn',
+					text: 'Ada?',
+					dataIndex: 'apotek_ket_status',
+					width: 55,
+					stopSelection: false
+				},
+				{
+					text : 'Jumlah',
+					dataIndex : 'apotek_ket_jumlah',
+					width : 100,
+					sortable : false,
+					editor: 'textfield',
+					flex : 1
+				}
+			]
+		});
+		
+		/* START asisten DOKUMEN */
+		var det_apotek_asisten_dataStore = Ext.create('Ext.data.Store',{
+			id : 'apotek_det_asistenDataStore',
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_t_apotek_det/switchAction',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total'
+				},
+				actionMethods : {
+					read : 'POST'
+				},
+				extraParams : {
+					action : 'GETasisten'
+				}
+			}),
+			fields : [
+				{ name : 'asisten_id', type : 'int', mapping : 'asisten_id' },
+				{ name : 'asisten_nama', type : 'string', mapping : 'asisten_nama' },
+				{ name : 'asisten_sik', type : 'string', mapping : 'asisten_sik' },
+				{ name : 'asisten_lulus', type : 'asisten_alamat', mapping : 'asisten_lulus' },
+				{ name : 'asisten_alamat', type : 'string', mapping : 'asisten_alamat' }
+			]
+		});
+		function det_apotek_asisten_addHandler(){
+			det_apotek_asisten_roleRowEditor.cancelEdit();
+			var data_det_apotekDetail = {
+				asisten_id : 0,
+				asisten_nama : '',
+				asisten_sik : '',
+				asisten_lulus : '',
+				asisten_alamat : ''
+			};
+			det_apotek_asisten_dataStore.insert(0, data_det_apotekDetail);
+			det_apotek_asisten_roleRowEditor.startEdit(0, 0);
+		}
+		function det_apotek_asisten_deleteHandler(){
+			var sm = det_apotek_asisten_gridPanel.getSelectionModel();
+			det_apotek_asisten_roleRowEditor.cancelEdit();
+			det_apotek_asisten_dataStore.remove(sm.getSelection());
+			if (det_apotek_asisten_dataStore.getCount() > 0) {
+				sm.select(0);
+			}
+		}
+		det_apotek_asisten_addEditor = Ext.create('Ext.Button',{
+			text: globalAddButtonTitle,
+			iconCls: 'icon16x16-add',
+			handler : det_apotek_asisten_addHandler
+		});
+		det_apotek_asisten_deleteEditor = Ext.create('Ext.Button',{
+			text : globalDeleteButtonTitle,
+			tooltip : globalDeleteTooltip,
+			iconCls : 'icon16x16-delete',
+			handler : det_apotek_asisten_deleteHandler
+		});
+		var det_apotek_asisten_roleRowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
+			clicksToMoveEditor : 1,
+			autoCancel : false
+		});
+		det_apotek_asisten_gridPanel = Ext.create('Ext.grid.Panel',{
+			id : 'det_apotek_asisten_gridPanel',
+			title : 'Data Asisten',
+			constrain : true,
+			store : det_apotek_asisten_dataStore,
+			loadMask : true,
+			height : 150,
+			plugins: [det_apotek_asisten_roleRowEditor],
+            enableColLock : false,
+			selModel : Ext.selection.Model(),
+			multiSelect : false,
+			tbar: [det_apotek_asisten_addEditor,det_apotek_asisten_deleteEditor],
+			columns : [
+				{
+					text : 'Nama',
+					dataIndex : 'asisten_nama',
+					width : 150,
+					sortable : false,
+					editor : Ext.create('Ext.form.TextField',{
+						maxLength : 50
+					})
+				},
+				{
+					text : 'Nomor SIK',
+					dataIndex: 'asisten_sik',
+					width: 150,
+					sortable : false,
+					editor : Ext.create('Ext.form.TextField',{
+						maxLength : 50
+					})
+				},
+				{
+					text : 'Tahun Lulus',
+					dataIndex: 'asisten_lulus',
+					width: 100,
+					sortable : false,
+					editor : Ext.create('Ext.form.TextField',{
+						maxLength : 50
+					})
+				},
+				{
+					text : 'Alamat',
+					dataIndex: 'asisten_alamat',
+					width: 200,
+					sortable : false,
+					flex : 1,
+					editor : Ext.create('Ext.form.TextField',{
+						maxLength : 50
+					})
+				}
+			]
+		});
+		
+		/* END asisten DOKUMEN */
 		var apotek_det_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : apotek_det_save
@@ -2895,7 +3130,17 @@
 						},
 						{
 							xtype : 'fieldset',
-							title : '4. Data Bangunan',
+							title : '4. Data Perlengkapan Apotek',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_apotek_perlengkapanGrid
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '5. Data Bangunan',
 							checkboxToggle : false,
 							collapsible : false,
 							layout :'form',
@@ -2930,7 +3175,7 @@
 						},
 						{
 							xtype : 'fieldset',
-							title : '5. Data Ceklist',
+							title : '6. Data Ceklist',
 							checkboxToggle : false,
 							collapsible : false,
 							layout :'form',
@@ -2940,7 +3185,17 @@
 						},
 						{
 							xtype : 'fieldset',
-							title : '6. Data Pendukung',
+							title : '7. Data Asisten',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_apotek_asisten_gridPanel
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '8. Data Pendukung',
 							checkboxToggle : false,
 							collapsible : false,
 							layout :'form',
