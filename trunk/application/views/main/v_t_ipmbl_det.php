@@ -257,6 +257,27 @@
 					var encoded_ipmbl_cek_status = Ext.encode(array_ipmbl_cek_status);
 					var encoded_ipmbl_cek_keterangan = Ext.encode(array_ipmbl_cek_keterangan);
 					
+					var dok_ipmbl_id = [];
+					var dok_ipmbl_penerima = [];
+					var dok_ipmbl_jabatan = [];
+					var dok_ipmbl_tanggal = [];
+					var dok_ipmbl_keterangan = [];
+					
+					if(det_ipmbl_riwayat_dataStore.getCount() > 0){
+						for(var i=0;i<det_ipmbl_riwayat_dataStore.getCount();i++){
+							dok_ipmbl_id.push(det_ipmbl_riwayat_dataStore.getAt(i).data.dok_ipmbl_id);
+							dok_ipmbl_penerima.push(det_ipmbl_riwayat_dataStore.getAt(i).data.dok_ipmbl_penerima);
+							dok_ipmbl_jabatan.push(det_ipmbl_riwayat_dataStore.getAt(i).data.dok_ipmbl_jabatan);
+							dok_ipmbl_tanggal.push(det_ipmbl_riwayat_dataStore.getAt(i).data.dok_ipmbl_tanggal);
+							dok_ipmbl_keterangan.push(det_ipmbl_riwayat_dataStore.getAt(i).data.dok_ipmbl_keterangan);
+						}
+					}
+					var encoded_dok_ipmbl_id = Ext.encode(dok_ipmbl_id);
+					var encoded_dok_ipmbl_penerima = Ext.encode(dok_ipmbl_penerima);
+					var encoded_dok_ipmbl_jabatan = Ext.encode(dok_ipmbl_jabatan);
+					var encoded_dok_ipmbl_tanggal = Ext.encode(dok_ipmbl_tanggal);
+					var encoded_dok_ipmbl_keterangan = Ext.encode(dok_ipmbl_keterangan);
+					
 					var pemohon_idValue = ipmbl_det_pemohon_idField.getValue();
 					var pemohon_namaValue = ipmbl_det_pemohon_namaField.getValue();
 					var pemohon_alamatValue = ipmbl_det_pemohon_alamatField.getValue();
@@ -338,6 +359,11 @@
 							pemohon_user_id : pemohon_user_idValue,
 							pemohon_pendidikan : pemohon_pendidikanValue,
 							pemohon_tahunlulus : pemohon_tahunlulusValue,
+							dok_ipmbl_id : encoded_dok_ipmbl_id,
+							dok_ipmbl_penerima : encoded_dok_ipmbl_penerima,
+							dok_ipmbl_jabatan : encoded_dok_ipmbl_jabatan,
+							dok_ipmbl_tanggal : encoded_dok_ipmbl_tanggal,
+							dok_ipmbl_keterangan : encoded_dok_ipmbl_keterangan,
 							action : ipmbl_det_dbTask
 						},
 						success: function(response){
@@ -553,6 +579,13 @@
 				action : 'GETSYARAT'
 			};
 			ipmbl_det_syaratDataStore.load();
+			det_ipmbl_riwayat_dataStore.proxy.extraParams = { 
+				ipmbl_id : record.data.det_ipmbl_ipmbl_id,
+				ipmbl_det_id : record.data.det_ipmbl_id,
+				currentAction : 'update',
+				action : 'GETRIWAYAT'
+			};
+			det_ipmbl_riwayat_dataStore.load();
 			
 		}
 		
@@ -823,7 +856,7 @@
 				{ name : 'det_ipmbl_nomoragenda', type : 'int', mapping : 'det_ipmbl_nomoragenda' },
 				{ name : 'det_ipmbl_berkasmasuk', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_ipmbl_berkasmasuk' },
 				{ name : 'det_ipmbl_surveytanggal', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_ipmbl_surveytanggal' },
-				{ name : 'det_ipmbl_surveylulus', type : 'string', mapping : 'det_ipmbl_surveylulus' },
+				{ name : 'det_ipmbl_surveylulus', type : 'int', mapping : 'det_ipmbl_surveylulus' },
 				{ name : 'det_ipmbl_status', type : 'int', mapping : 'det_ipmbl_status' },
 				{ name : 'det_ipmbl_status_nama', type : 'string', mapping : 'det_ipmbl_status_nama' },
 				{ name : 'det_ipmbl_surveypetugas', type : 'string', mapping : 'det_ipmbl_surveypetugas' },
@@ -1775,6 +1808,123 @@
 				}
 			]
 		});
+		/* START RIWAYAT DOKUMEN */
+		var det_ipmbl_riwayat_dataStore = Ext.create('Ext.data.Store',{
+			id : 'ipmbl_det_riwayatDataStore',
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_t_ipmbl_det/switchAction',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total'
+				},
+				actionMethods : {
+					read : 'POST'
+				},
+				extraParams : {
+					action : 'GETRIWAYAT'
+				}
+			}),
+			fields : [
+				{ name : 'dok_ipmbl_id', type : 'int', mapping : 'dok_ipmbl_id' },
+				{ name : 'dok_ipmbl_penerima', type : 'string', mapping : 'dok_ipmbl_penerima' },
+				{ name : 'dok_ipmbl_jabatan', type : 'string', mapping : 'dok_ipmbl_jabatan' },
+				{ name : 'dok_ipmbl_tanggal', type : 'date',dateFormat : 'Y-m-d', mapping : 'dok_ipmbl_tanggal' },
+				{ name : 'dok_ipmbl_keterangan', type : 'string', mapping : 'dok_ipmbl_keterangan' }
+			]
+		});
+		function det_ipmbl_riwayat_addHandler(){
+			det_ipmbl_riwayat_roleRowEditor.cancelEdit();
+			var data_det_ipmblDetail = {
+				riwayat_id : 0,
+				riwayat_nama : '',
+				riwayat_keterangan : '',
+				riwayat_jumlah : 1,
+				riwayat_aktif : 1
+			};
+			det_ipmbl_riwayat_dataStore.insert(0, data_det_ipmblDetail);
+			det_ipmbl_riwayat_roleRowEditor.startEdit(0, 0);
+		}
+		function det_ipmbl_riwayat_deleteHandler(){
+			var sm = det_ipmbl_riwayat_gridPanel.getSelectionModel();
+			det_ipmbl_riwayat_roleRowEditor.cancelEdit();
+			det_ipmbl_riwayat_dataStore.remove(sm.getSelection());
+			if (det_ipmbl_riwayat_dataStore.getCount() > 0) {
+				sm.select(0);
+			}
+		}
+		det_ipmbl_riwayat_addEditor = Ext.create('Ext.Button',{
+			text: globalAddButtonTitle,
+			iconCls: 'icon16x16-add',
+			handler : det_ipmbl_riwayat_addHandler
+		});
+		det_ipmbl_riwayat_deleteEditor = Ext.create('Ext.Button',{
+			text : globalDeleteButtonTitle,
+			tooltip : globalDeleteTooltip,
+			iconCls : 'icon16x16-delete',
+			handler : det_ipmbl_riwayat_deleteHandler
+		});
+		var det_ipmbl_riwayat_roleRowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
+			clicksToMoveEditor : 1,
+			autoCancel : false
+		});
+		det_ipmbl_riwayat_gridPanel = Ext.create('Ext.grid.Panel',{
+			id : 'det_ipmbl_riwayat_gridPanel',
+			title : 'Data riwayat',
+			constrain : true,
+			store : det_ipmbl_riwayat_dataStore,
+			loadMask : true,
+			height : 100,
+			plugins: [det_ipmbl_riwayat_roleRowEditor],
+            enableColLock : false,
+			selModel : Ext.selection.Model(),
+			multiSelect : false,
+			tbar: [det_ipmbl_riwayat_addEditor,det_ipmbl_riwayat_deleteEditor],
+			columns : [
+				{
+					text : 'Penerima',
+					dataIndex : 'dok_ipmbl_penerima',
+					width : 150,
+					sortable : false,
+					editor : Ext.create('Ext.form.TextField',{
+						maxLength : 50
+					})
+				},
+				{
+					text : 'Jabatan',
+					dataIndex: 'dok_ipmbl_jabatan',
+					width: 150,
+					sortable : false,
+					editor : Ext.create('Ext.form.TextField',{
+						maxLength : 50
+					})
+				},
+				{
+					text : 'Tanggal',
+					dataIndex: 'dok_ipmbl_tanggal',
+					width: 100,
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					editor : Ext.create('Ext.form.field.Date',{
+						maxLength : 50
+					})
+				},
+				{
+					text : 'Keterangan',
+					dataIndex: 'dok_ipmbl_keterangan',
+					width: 200,
+					sortable : false,
+					flex : 1,
+					editor : Ext.create('Ext.form.TextField',{
+						maxLength : 50
+					})
+				}
+			]
+		});
+		
+		/* END RIWAYAT DOKUMEN */
 		var ipmbl_det_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : ipmbl_det_save
@@ -1998,6 +2148,16 @@
 								det_ipmbl_skField,
 								det_ipmbl_berlakuField,
 								det_ipmbl_kadaluarsaField
+							]
+						},
+						{
+							xtype : 'fieldset',
+							title : '4. Data Riwayat',
+							checkboxToggle : false,
+							collapsible : false,
+							layout :'form',
+							items : [
+								det_ipmbl_riwayat_gridPanel
 							]
 						},
 						Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })

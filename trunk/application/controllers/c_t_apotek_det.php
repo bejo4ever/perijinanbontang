@@ -38,6 +38,9 @@ class C_t_apotek_det extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
+			case 'GETPERLENGKAPAN':
+				$this->getPerlengkapan();
+			break;
 			case 'UBAHPROSES':
 				$this->ubahProses();
 			break;
@@ -175,6 +178,17 @@ class C_t_apotek_det extends CI_Controller{
 		$apotek_cek_syarat_id = json_decode($this->input->post('apotek_cek_syarat_id'));
 		$apotek_cek_status = json_decode($this->input->post('apotek_cek_status'));
 		$apotek_cek_keterangan = json_decode($this->input->post('apotek_cek_keterangan'));
+		
+		$apotek_ket_id = json_decode($this->input->post('apotek_ket_id'));
+		$apotek_ket_perlengkapanid = json_decode($this->input->post('apotek_ket_perlengkapanid'));
+		$apotek_ket_status = json_decode($this->input->post('apotek_ket_status'));
+		$apotek_ket_jumlah = json_decode($this->input->post('apotek_ket_jumlah'));
+		
+		$asisten_id = json_decode($this->input->post('asisten_id'));
+		$asisten_nama = json_decode($this->input->post('asisten_nama'));
+		$asisten_sik = json_decode($this->input->post('asisten_sik'));
+		$asisten_lulus = json_decode($this->input->post('asisten_lulus'));
+		$asisten_alamat = json_decode($this->input->post('asisten_alamat'));
 		
 		$apotek_det_author = $this->m_t_apotek_det->__checkSession();
 		$apotek_det_created_date = date('Y-m-d H:i:s');
@@ -315,7 +329,32 @@ class C_t_apotek_det extends CI_Controller{
 						'apotek_cek_status'=>$apotek_cek_status[$i],
 						'apotek_cek_keterangan'=>$apotek_cek_keterangan[$i]
 					);
-					$resultcek = $this->m_t_apotek_det->__insert($datacek, 't_apotek_ceklist', 'insertId');
+					$resultcek = $this->m_t_apotek_det->__insert($datacek, 't_apotek_ceklist', '');
+				}
+				for($i=0;$i<count($apotek_ket_perlengkapanid);$i++){
+					$datacek = array(
+						'apotek_ket_perlengkapanid'=>$apotek_ket_perlengkapanid[$i],
+						'apotek_ket_apotek_id'=>$resultInti,
+						'apotek_ket_detapotek_id'=>$resultdet,
+						'apotek_ket_status'=>$apotek_ket_status[$i],
+						'apotek_ket_jumlah'=>$apotek_ket_jumlah[$i]
+					);
+					$resultcek = $this->m_t_apotek_det->__insert($datacek, 't_apotek_ket', '');
+				}
+				for($i=0;$i<count($asisten_id);$i++){
+					$datadok = array(
+						'asisten_nama'=>$asisten_nama[$i],
+						'asisten_sik'=>$asisten_sik[$i],
+						'asisten_lulus'=>$asisten_lulus[$i],
+						'asisten_alamat'=>$asisten_alamat[$i],
+						'asisten_apotek_id'=>$resultInti,
+						'asisten_apotekdet_id'=>$resultdet,
+					);
+					if($asisten_id[$i] == 0){
+						$resultasisten = $this->m_t_ipmbl_det->__insert($datadok, 't_apotek_asisten', '');
+					}else{
+						$resultasisten = $this->m_t_ipmbl_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
+					}
 				}
 			}else{
 				$result = 'fail';
@@ -429,6 +468,15 @@ class C_t_apotek_det extends CI_Controller{
 		$apotek_cek_syarat_id = json_decode($this->input->post('apotek_cek_syarat_id'));
 		$apotek_cek_status = json_decode($this->input->post('apotek_cek_status'));
 		$apotek_cek_keterangan = json_decode($this->input->post('apotek_cek_keterangan'));
+		$apotek_ket_id = json_decode($this->input->post('apotek_ket_id'));
+		$apotek_ket_perlengkapanid = json_decode($this->input->post('apotek_ket_perlengkapanid'));
+		$apotek_ket_status = json_decode($this->input->post('apotek_ket_status'));
+		$apotek_ket_jumlah = json_decode($this->input->post('apotek_ket_jumlah'));
+		$asisten_id = json_decode($this->input->post('asisten_id'));
+		$asisten_nama = json_decode($this->input->post('asisten_nama'));
+		$asisten_sik = json_decode($this->input->post('asisten_sik'));
+		$asisten_lulus = json_decode($this->input->post('asisten_lulus'));
+		$asisten_alamat = json_decode($this->input->post('asisten_alamat'));
 		
 		$apotek_det_updated_by = $this->m_t_apotek_det->__checkSession();
 		$apotek_det_updated_date = date('Y-m-d H:i:s');
@@ -569,6 +617,31 @@ class C_t_apotek_det extends CI_Controller{
 				);
 				$resultcek = $this->m_t_apotek_det->__update($datacek, $apotek_cek_id[$i], 't_apotek_ceklist', 'updateId','apotek_cek_id');
 			}
+			for($i=0;$i<count($apotek_ket_perlengkapanid);$i++){
+				$datacek = array(
+					'apotek_ket_perlengkapanid'=>$apotek_ket_perlengkapanid[$i],
+					'apotek_ket_apotek_id'=>$det_apotek_apotek_id,
+					'apotek_ket_detapotek_id'=>$det_apotek_id,
+					'apotek_ket_status'=>$apotek_ket_status[$i],
+					'apotek_ket_jumlah'=>$apotek_ket_jumlah[$i]
+				);
+				$resultket = $this->m_t_apotek_det->__update($datacek, $apotek_ket_id[$i], 't_apotek_ket', 'updateId','apotek_ket_id');
+			}
+				for($i=0;$i<count($asisten_id);$i++){
+					$datadok = array(
+						'asisten_nama'=>$asisten_nama[$i],
+						'asisten_sik'=>$asisten_sik[$i],
+						'asisten_lulus'=>$asisten_lulus[$i],
+						'asisten_alamat'=>$asisten_alamat[$i],
+						'asisten_apotek_id'=>$det_apotek_apotek_id,
+						'asisten_apotekdet_id'=>$det_apotek_id,
+					);
+					if($asisten_id[$i] == 0){
+						$resultasisten = $this->m_t_ipmbl_det->__insert($datadok, 't_apotek_asisten', '');
+					}else{
+						$resultasisten = $this->m_t_ipmbl_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
+					}
+				}
 		}else{
 			$result = 'sessionExpired';
 		}
@@ -950,6 +1023,18 @@ class C_t_apotek_det extends CI_Controller{
 			"apotek_det_id"=>$apotek_det_id
 		);
 		$result = $this->m_t_apotek_det->getSyarat($params);
+		echo $result;
+	}
+	function getPerlengkapan(){
+		$currentAction = $this->input->post('currentAction');
+		$apotek_id = $this->input->post('apotek_id');
+		$apotek_det_id = $this->input->post('apotek_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"apotek_id"=>$apotek_id,
+			"apotek_det_id"=>$apotek_det_id
+		);
+		$result = $this->m_t_apotek_det->getPerlengkapan($params);
 		echo $result;
 	}
 	function ubahProses(){

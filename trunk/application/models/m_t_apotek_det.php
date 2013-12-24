@@ -452,5 +452,33 @@ class M_t_apotek_det extends App_model{
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
+	function getPerlengkapan($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT 
+					apotek_ket_id,
+					apotek_ket_perlengkapanid,
+					apotek_ket_status,
+					apotek_ket_jumlah,
+					perlengkapan_nama
+				FROM t_apotek_ket 
+				LEFT JOIN m_perlengkapan_apotek ON m_perlengkapan_apotek.perlengkapan_id = t_apotek_ket.apotek_ket_perlengkapanid
+				WHERE apotek_ket_detapotek_id = ".$apotek_det_id."
+				AND apotek_ket_apotek_id = ".$apotek_id."
+			";
+		}else{
+			$sql = "
+				SELECT 
+					0 AS apotek_ket_id,
+					m_perlengkapan_apotek.perlengkapan_id AS apotek_ket_perlengkapanid,
+					perlengkapan_nama
+				FROM t_apotek_ket 
+				LEFT JOIN m_perlengkapan_apotek ON m_perlengkapan_apotek.perlengkapan_id = t_apotek_ket.apotek_ket_perlengkapanid
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
 	
 }
