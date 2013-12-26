@@ -479,13 +479,13 @@
 					var asisten_lulus = [];
 					var asisten_alamat = [];
 					
-					if(det_ipmbl_riwayat_dataStore.getCount() > 0){
-						for(var i=0;i<det_ipmbl_riwayat_dataStore.getCount();i++){
-							asisten_id.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_id);
-							asisten_nama.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_nama);
-							asisten_sik.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_sik);
-							asisten_lulus.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_lulus);
-							asisten_alamat.push(det_ipmbl_riwayat_dataStore.getAt(i).data.asisten_alamat);
+					if(det_apotek_asisten_dataStore.getCount() > 0){
+						for(var i=0;i<det_apotek_asisten_dataStore.getCount();i++){
+							asisten_id.push(det_apotek_asisten_dataStore.getAt(i).data.asisten_id);
+							asisten_nama.push(det_apotek_asisten_dataStore.getAt(i).data.asisten_nama);
+							asisten_sik.push(det_apotek_asisten_dataStore.getAt(i).data.asisten_sik);
+							asisten_lulus.push(det_apotek_asisten_dataStore.getAt(i).data.asisten_lulus);
+							asisten_alamat.push(det_apotek_asisten_dataStore.getAt(i).data.asisten_alamat);
 						}
 					}
 					var encoded_asisten_id = Ext.encode(asisten_id);
@@ -2771,7 +2771,7 @@
 				{ name : 'apotek_ket_id', type : 'int', mapping : 'apotek_ket_id' },
 				{ name : 'apotek_ket_perlengkapanid', type : 'int', mapping : 'apotek_ket_perlengkapanid' },
 				{ name : 'apotek_ket_perlengkapannama', type : 'string', mapping : 'apotek_ket_perlengkapannama' },
-				{ name : 'apotek_ket_status', type : 'int', mapping : 'apotek_ket_status' },
+				{ name : 'apotek_ket_status', type : 'boolean', mapping : 'apotek_ket_status' },
 				{ name : 'apotek_ket_jumlah', type : 'int', mapping : 'apotek_ket_jumlah' }
 				]
 		});
@@ -2793,7 +2793,7 @@
 				{
 					text : 'Perlengkapan',
 					dataIndex : 'apotek_ket_perlengkapannama',
-					width : 450,
+					width : 250,
 					sortable : false
 				},
 				{

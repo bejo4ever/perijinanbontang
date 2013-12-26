@@ -351,9 +351,9 @@ class C_t_apotek_det extends CI_Controller{
 						'asisten_apotekdet_id'=>$resultdet,
 					);
 					if($asisten_id[$i] == 0){
-						$resultasisten = $this->m_t_ipmbl_det->__insert($datadok, 't_apotek_asisten', '');
+						$resultasisten = $this->m_t_apotek_det->__insert($datadok, 't_apotek_asisten', '');
 					}else{
-						$resultasisten = $this->m_t_ipmbl_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
+						$resultasisten = $this->m_t_apotek_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
 					}
 				}
 			}else{
@@ -637,9 +637,9 @@ class C_t_apotek_det extends CI_Controller{
 						'asisten_apotekdet_id'=>$det_apotek_id,
 					);
 					if($asisten_id[$i] == 0){
-						$resultasisten = $this->m_t_ipmbl_det->__insert($datadok, 't_apotek_asisten', '');
+						$resultasisten = $this->m_t_apotek_det->__insert($datadok, 't_apotek_asisten', '');
 					}else{
-						$resultasisten = $this->m_t_ipmbl_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
+						$resultasisten = $this->m_t_apotek_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
 					}
 				}
 		}else{
