@@ -1050,6 +1050,7 @@
 					dataIndex : 'det_idam_idam_id',
 					width : 100,
 					hidden : true,
+					hideable: false,
 					sortable : false
 				},
 				{
@@ -1209,6 +1210,7 @@
 					xtype:'actioncolumn',
 					text : 'Cetak',
 					width:50,
+					hideable: false,
 					items: [{
 						iconCls: 'icon16x16-print',
 						tooltip: 'Cetak Dokumen',
@@ -1223,6 +1225,7 @@
 					xtype:'actioncolumn',
 					text : 'Action',
 					width:50,
+					hideable: false,
 					items: [{
 						iconCls: 'icon16x16-edit',
 						tooltip: 'Ubah Data',
@@ -1242,6 +1245,7 @@
 				{
 					xtype:'actioncolumn',
 					width:30,
+					hideable: false,
 					items: [{
 						iconCls : 'checked',
 						tooltip : 'Ubah Status',
@@ -1617,12 +1621,63 @@
 			fieldLabel : 'Kecamatan',
 			maxLength : 50
 		});
-		var idam_det_pemohon_nikField = Ext.create('Ext.form.TextField',{
-			name : 'pemohon_nik',
+		var idam_det_pemohon_nikField = Ext.create('Ext.form.ComboBox',{
+			name : 'idam_det_pemohon_nik',
 			fieldLabel : 'NIK',
-			maxLength : 20,
-			maskRe : /([0-9]+)$/
+			store : Ext.create('Ext.data.Store',{
+			id : 'pemohon_dataStore',
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+						url : 'c_m_pemohon/switchAction',
+						reader : {
+							type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'pemohon_id'
+						},
+						actionMethods : { read : 'POST' },
+						extraParams : { action : 'SEARCH' }
+					}),
+					fields : [
+						{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+						{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+						{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+						{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+						{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+						{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+						{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+						{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+						{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
+						{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+						{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+						{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+						{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+						{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+						{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'pemohon_tanggallahir' },
+						{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+						{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
+						{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
+					]
+				}),
+			displayField : 'pemohon_nik',
+			valueField : 'pemohon_id',
+			queryMode : 'remote',
+			triggerAction : 'all',
+			repeatTriggerClick : true,
+			minChars : 100,
+			forceSelection : false,
+			onTriggerClick: function(event){
+				var store = idam_det_pemohon_nikField.getStore();
+				var val = idam_det_pemohon_nikField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',pemohon_nik : val};
+				store.load();
+				idam_det_pemohon_nikField.expand();
+				idam_det_pemohon_nikField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">NIK : {pemohon_nik}<br>Nama : {pemohon_nama}<br>Alamat : {pemohon_alamat}<br>Telp : {pemohon_telp}<br></div>',
+				'</tpl>'
+			)
 		});
+		console.log(idam_det_pemohon_nikField);
 		var idam_det_pemohon_straField = Ext.create('Ext.form.TextField',{
 			name : 'pemohon_stra',
 			fieldLabel : 'STRA',
@@ -1988,6 +2043,13 @@
 			closeAction : 'hide',
 			items : [idam_det_searchPanel]
 		});
+		<?php if(@$_SESSION['IDHAK'] == 2){ ?>
+			idam_det_lk_printCM.hide();
+			idam_det_bap_printCM.hide();
+			idam_det_sk_printCM.hide();
+			idam_det_gridPanel.columns[24].setVisible(false);
+			idam_det_gridPanel.columns[25].setVisible(false);
+		<?php } ?>
 /* End SearchPanel declaration */
 });
 </script>
