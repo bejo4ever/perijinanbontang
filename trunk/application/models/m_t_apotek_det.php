@@ -461,7 +461,7 @@ class M_t_apotek_det extends App_model{
 					apotek_ket_perlengkapanid,
 					apotek_ket_status,
 					apotek_ket_jumlah,
-					perlengkapan_nama
+					perlengkapan_nama AS apotek_ket_perlengkapannama
 				FROM t_apotek_ket 
 				LEFT JOIN m_perlengkapan_apotek ON m_perlengkapan_apotek.perlengkapan_id = t_apotek_ket.apotek_ket_perlengkapanid
 				WHERE apotek_ket_detapotek_id = ".$apotek_det_id."
@@ -472,9 +472,8 @@ class M_t_apotek_det extends App_model{
 				SELECT 
 					0 AS apotek_ket_id,
 					m_perlengkapan_apotek.perlengkapan_id AS apotek_ket_perlengkapanid,
-					perlengkapan_nama
-				FROM t_apotek_ket 
-				LEFT JOIN m_perlengkapan_apotek ON m_perlengkapan_apotek.perlengkapan_id = t_apotek_ket.apotek_ket_perlengkapanid
+					perlengkapan_nama AS apotek_ket_perlengkapannama
+				FROM m_perlengkapan_apotek 
 			";
 		}
 		$result = $this->__listCore($sql, $params);
