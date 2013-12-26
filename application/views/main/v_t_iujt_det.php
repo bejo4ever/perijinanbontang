@@ -418,6 +418,7 @@
 			iujt_det_dbTaskMessage = 'create';
 			iujt_det_formPanel.getForm().reset();
 			det_iujt_idField.setValue(0);
+			window.scrollTo(0,0);
 		}
 		
 		function iujt_det_setForm(){
@@ -979,16 +980,7 @@
 			renderTo : 'iujt_detGrid',
 			width : '95%',
 			selModel : Ext.selection.Model(),
-			viewConfig : { 
-				forceFit:true,
-				listeners: {
-					itemcontextmenu: function(view, rec, node, index, e) {
-						e.stopEvent();
-						iujt_det_contextMenu.showAt(e.getXY());
-						return false;
-					}
-				}
-			},
+			viewConfig : {forceFit:true},
 			multiSelect : true,
 			keys : iujt_det_shorcut,
 			columns : [
@@ -1436,11 +1428,84 @@
 			fieldLabel : 'Kecamatan',
 			maxLength : 50
 		});
-		var iujt_det_pemohon_nikField = Ext.create('Ext.form.TextField',{
-			name : 'pemohon_nik',
+		var iujt_det_pemohon_nikField = Ext.create('Ext.form.ComboBox',{
+			name : 'iujt_det_pemohon_nik',
 			fieldLabel : 'NIK',
-			maxLength : 20,
-			maskRe : /([0-9]+)$/
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_m_pemohon/switchAction',
+					reader : {
+						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'pemohon_id'
+					},
+					actionMethods : { read : 'POST' },
+					extraParams : { action : 'SEARCH' }
+				}),
+				fields : [
+					{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+					{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+					{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+					{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+					{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+					{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+					{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+					{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+					{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
+					{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+					{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+					{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+					{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+					{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+					{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
+					{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+					{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
+					{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
+				]
+			}),
+			displayField : 'pemohon_nik',
+			valueField : 'pemohon_id',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
+			onTriggerClick: function(event){
+				var store = iujt_det_pemohon_nikField.getStore();
+				var val = iujt_det_pemohon_nikField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',pemohon_nik : val};
+				store.load();
+				iujt_det_pemohon_nikField.expand();
+				iujt_det_pemohon_nikField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">NIK : {pemohon_nik}<br>Nama : {pemohon_nama}<br>Alamat : {pemohon_alamat}<br>Telp : {pemohon_telp}<br></div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					iujt_det_pemohon_idField.setValue(rec.get('pemohon_id'));
+					iujt_det_pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					iujt_det_pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					iujt_det_pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					iujt_det_pemohon_telpField.setValue(rec.get('pemohon_telp'));
+					iujt_det_pemohon_npwpField.setValue(rec.get('pemohon_npwp'));
+					iujt_det_pemohon_rtField.setValue(rec.get('pemohon_rt'));
+					iujt_det_pemohon_rwField.setValue(rec.get('pemohon_rw'));
+					iujt_det_pemohon_kelField.setValue(rec.get('pemohon_kel'));
+					iujt_det_pemohon_kecField.setValue(rec.get('pemohon_kec'));
+					iujt_det_pemohon_straField.setValue(rec.get('pemohon_stra'));
+					iujt_det_pemohon_surattugasField.setValue(rec.get('pemohon_surattugas'));
+					iujt_det_pemohon_pekerjaanField.setValue(rec.get('pemohon_pekerjaan'));
+					iujt_det_pemohon_tempatlahirField.setValue(rec.get('pemohon_tempatlahir'));
+					iujt_det_pemohon_tanggallahirField.setValue(rec.get('pemohon_tanggallahir'));
+					iujt_det_pemohon_user_idField.setValue(rec.get('pemohon_user_id'));
+					iujt_det_pemohon_pendidikanField.setValue(rec.get('pemohon_pendidikan'));
+					iujt_det_pemohon_tahunlulusField.setValue(rec.get('pemohon_tahunlulus'));
+				}
+			}
 		});
 		var iujt_det_pemohon_straField = Ext.create('Ext.form.TextField',{
 			name : 'pemohon_stra',
@@ -1811,6 +1876,13 @@
 			closeAction : 'hide',
 			items : [iujt_det_searchPanel]
 		});
+		<?php if(@$_SESSION['IDHAK'] == 2){ ?>
+			iujt_det_lk_printCM.hide();
+			iujt_det_rekom_printCM.hide();
+			iujt_det_sk_printCM.hide();
+			iujt_det_gridPanel.columns[19].setVisible(false);
+			iujt_det_gridPanel.columns[20].setVisible(false);
+		<?php } ?>
 /* End SearchPanel declaration */
 });
 </script>
