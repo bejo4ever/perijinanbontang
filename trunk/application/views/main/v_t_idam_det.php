@@ -437,6 +437,7 @@
 			idam_det_dbTaskMessage = 'create';
 			idam_det_formPanel.getForm().reset();
 			det_idam_idField.setValue(0);
+			window.scrollTo(0,0);
 		}
 		
 		function idam_det_setForm(){
@@ -1625,43 +1626,43 @@
 			name : 'idam_det_pemohon_nik',
 			fieldLabel : 'NIK',
 			store : Ext.create('Ext.data.Store',{
-			id : 'pemohon_dataStore',
-			pageSize : globalPageSize,
-			proxy : Ext.create('Ext.data.HttpProxy',{
-						url : 'c_m_pemohon/switchAction',
-						reader : {
-							type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'pemohon_id'
-						},
-						actionMethods : { read : 'POST' },
-						extraParams : { action : 'SEARCH' }
-					}),
-					fields : [
-						{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
-						{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
-						{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
-						{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
-						{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
-						{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
-						{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
-						{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
-						{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
-						{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
-						{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
-						{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
-						{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
-						{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
-						{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'pemohon_tanggallahir' },
-						{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
-						{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
-						{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
-					]
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_m_pemohon/switchAction',
+					reader : {
+						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'pemohon_id'
+					},
+					actionMethods : { read : 'POST' },
+					extraParams : { action : 'SEARCH' }
 				}),
+				fields : [
+					{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+					{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+					{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+					{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+					{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+					{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+					{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+					{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+					{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
+					{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+					{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+					{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+					{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+					{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+					{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
+					{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+					{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
+					{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
+				]
+			}),
 			displayField : 'pemohon_nik',
 			valueField : 'pemohon_id',
 			queryMode : 'remote',
-			triggerAction : 'all',
+			triggerAction : 'query',
 			repeatTriggerClick : true,
 			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
 			forceSelection : false,
 			onTriggerClick: function(event){
 				var store = idam_det_pemohon_nikField.getStore();
@@ -1675,9 +1676,31 @@
 				'<tpl for=".">',
 					'<div class="x-boundlist-item">NIK : {pemohon_nik}<br>Nama : {pemohon_nama}<br>Alamat : {pemohon_alamat}<br>Telp : {pemohon_telp}<br></div>',
 				'</tpl>'
-			)
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					idam_det_pemohon_idField.setValue(rec.get('pemohon_id'));
+					idam_det_pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					idam_det_pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					idam_det_pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					idam_det_pemohon_telpField.setValue(rec.get('pemohon_telp'));
+					idam_det_pemohon_npwpField.setValue(rec.get('pemohon_npwp'));
+					idam_det_pemohon_rtField.setValue(rec.get('pemohon_rt'));
+					idam_det_pemohon_rwField.setValue(rec.get('pemohon_rw'));
+					idam_det_pemohon_kelField.setValue(rec.get('pemohon_kel'));
+					idam_det_pemohon_kecField.setValue(rec.get('pemohon_kec'));
+					idam_det_pemohon_straField.setValue(rec.get('pemohon_stra'));
+					idam_det_pemohon_surattugasField.setValue(rec.get('pemohon_surattugas'));
+					idam_det_pemohon_pekerjaanField.setValue(rec.get('pemohon_pekerjaan'));
+					idam_det_pemohon_tempatlahirField.setValue(rec.get('pemohon_tempatlahir'));
+					idam_det_pemohon_tanggallahirField.setValue(rec.get('pemohon_tanggallahir'));
+					idam_det_pemohon_user_idField.setValue(rec.get('pemohon_user_id'));
+					idam_det_pemohon_pendidikanField.setValue(rec.get('pemohon_pendidikan'));
+					idam_det_pemohon_tahunlulusField.setValue(rec.get('pemohon_tahunlulus'));
+				}
+			}
 		});
-		console.log(idam_det_pemohon_nikField);
 		var idam_det_pemohon_straField = Ext.create('Ext.form.TextField',{
 			name : 'pemohon_stra',
 			fieldLabel : 'STRA',
