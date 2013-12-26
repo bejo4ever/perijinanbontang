@@ -708,19 +708,22 @@
 					text : 'ID_USER',
 					dataIndex : 'ID_USER',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden:true
+					
 				},
 				{
 					text : 'NO_SK',
 					dataIndex : 'NO_SK',
 					width : 100,
 					sortable : false
+					hidden:true
 				},
 				{
-					text : 'NAMA_USAHA',
+					text : 'Nama Pemohon',
 					dataIndex : 'NAMA_USAHA',
 					width : 100,
-					sortable : false
+					sortable : false,
 				},
 				{
 					text : 'PENANGGUNG_JAWAB',

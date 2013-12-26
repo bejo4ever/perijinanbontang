@@ -7,6 +7,7 @@ class M_login extends App_model{
 		if($res->num_rows() === 1){
 			$result = $res->row();
 			$_SESSION['USERID']				= $result->ID_USER;
+			$_SESSION['IDHAK']				= $result->ID_HAK;
 			$_SESSION['PERIJINAN_USERNAME']	= $result->USER;
 			$_SESSION['PERIJINAN_NAMA']		= $result->NAMA;
 			$_SESSION['PERIJINAN_NIP']		= $result->NIP;

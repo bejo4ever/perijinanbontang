@@ -60,8 +60,8 @@
                                     <li><a href="#c_sktr">SKTR</a></li>
                                     <li><a href="#c_sppl">SPPL</a></li>
                                     <li><a href="#c_trayek">Trayek</a></li>
-                                    <li><a href="#c_ijin_lingkungan_inti">Lingkungan</a></li>
-                                    <li><a href="#c_ijin_lokasi_inti">Lokasi</a></li>
+                                    <li><a href="#c_ijin_lingkungan">Lingkungan</a></li>
+                                    <li><a href="#c_ijin_lokasi">Lokasi</a></li>
                                     <li><a href="#c_t_iujk_det">Usaha Jasa Konstruksi</a></li>
                                     <li><a href="#c_t_apotek_det">Izin Apotek</a></li>
                                     <li role="presentation" class="divider"></li>

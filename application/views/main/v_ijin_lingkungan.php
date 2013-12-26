@@ -834,158 +834,322 @@
 			multiSelect : true,
 			keys : in_lingkungan_shorcut,
 			columns : [
+				// {
+					// text : 'ID_SKTR_INTI',
+					// dataIndex : 'ID_SKTR_INTI',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ID_USER',
+					// dataIndex : 'ID_USER',
+					// width : 100,
+					// sortable : false
+				// },
 				{
-					text : 'ID_IJIN_LINGKUNGAN_INTI',
-					dataIndex : 'ID_IJIN_LINGKUNGAN_INTI',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NO_KTP',
-					dataIndex : 'NO_KTP',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NAMA_LENGKAP',
-					dataIndex : 'NAMA_LENGKAP',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TEMPAT_LAHIR',
-					dataIndex : 'TEMPAT_LAHIR',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TANGGAL_LAHIR',
-					dataIndex : 'TANGGAL_LAHIR',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'KEWARGANEGARAAN',
-					dataIndex : 'KEWARGANEGARAAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ALAMAT',
-					dataIndex : 'ALAMAT',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KELURAHAN',
-					dataIndex : 'ID_KELURAHAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KECAMATAN',
-					dataIndex : 'ID_KECAMATAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KOTA',
-					dataIndex : 'ID_KOTA',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TELP',
-					dataIndex : 'TELP',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NPWP',
-					dataIndex : 'NPWP',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NAMA_PERUSAHAAN',
-					dataIndex : 'NAMA_PERUSAHAAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NAMA_DIREKTUR',
-					dataIndex : 'NAMA_DIREKTUR',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NO_AKTE',
-					dataIndex : 'NO_AKTE',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'BENTUK_PERUSAHAAN',
-					dataIndex : 'BENTUK_PERUSAHAAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ALAMAT_PERUSAHAAN',
-					dataIndex : 'ALAMAT_PERUSAHAAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KELURAHAN2',
-					dataIndex : 'ID_KELURAHAN2',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KECAMATAN2',
-					dataIndex : 'ID_KECAMATAN2',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KOTA2',
-					dataIndex : 'ID_KOTA2',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TELP2',
-					dataIndex : 'TELP2',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'JENIS_PERMOHONAN',
+					text : 'Jenis Permohonan',
 					dataIndex : 'JENIS_PERMOHONAN',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : function(value){
+								if(value == 1){
+									return 'Baru';
+								}else{
+									return 'Perpanjangan';
+								}
+							}
 				},
 				{
-					text : 'TGL_PERMOHONAN',
-					dataIndex : 'TGL_PERMOHONAN',
+					text : 'No. SK',
+					dataIndex : 'NO_SK',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'TGL_AKHIR',
-					dataIndex : 'TGL_AKHIR',
+					text : 'Nama Pemohon',
+					dataIndex : 'pemohon_nama',
+					width : 120,
+					sortable : false
+				},
+				{
+					text : 'Alamat Pemohon',
+					dataIndex : 'pemohon_alamat',
 					width : 100,
 					sortable : false
 				},
+				{
+					text : 'No. Telp.',
+					dataIndex : 'pemohon_telp',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'Lama Proses',
+					dataIndex : 'lama_proses',
+					width : 100,
+					sortable : false
+				},
+				// {
+					// text : 'NAMA_PEMILIK',
+					// dataIndex : 'NAMA_PEMILIK',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NO_SURAT_TANAH',
+					// dataIndex : 'NO_SURAT_TANAH',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BATAS_KIRI',
+					// dataIndex : 'BATAS_KIRI',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BATAS_KANAN',
+					// dataIndex : 'BATAS_KANAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BATAS_DEPAN',
+					// dataIndex : 'BATAS_DEPAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BATAS_BELAKANG',
+					// dataIndex : 'BATAS_BELAKANG',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TGL_PERMOHONAN',
+					// dataIndex : 'TGL_PERMOHONAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'Lama Proses',
+					// dataIndex : 'lama_proses',
+					// width : 100,
+					// sortable : false
+				// },
+				{
+					text : 'Status Berkas',
+					dataIndex : 'STATUS',
+					width : 150,
+					sortable : false,
+					renderer : function(value){
+							if(value == 1){
+								return 'Disetujui, sudah diambil';
+							}else if (value == 2){
+								return 'Disetujui, belum diambil';
+							} else {
+								return 'Ditolak';
+							}
+						}
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							sktr_printContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},{
+					xtype:'actioncolumn',
+					text : 'Action',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-edit',
+						tooltip: 'Ubah Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							tr_confirmUpdate();
+						}
+					},{
+						iconCls: 'icon16x16-delete',
+						tooltip: 'Hapus Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							tr_confirmDelete();
+						}
+					}]
+				},{
+					xtype:'actioncolumn',
+					width:100,
+					text : 'Status Berkas',
+					items: [{
+						iconCls : 'checked',
+						tooltip : 'Ubah Status',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							sktr_prosesContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				}
+				// {
+					// text : 'ID_IJIN_LINGKUNGAN_INTI',
+					// dataIndex : 'ID_IJIN_LINGKUNGAN_INTI',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NO_KTP',
+					// dataIndex : 'NO_KTP',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NAMA_LENGKAP',
+					// dataIndex : 'NAMA_LENGKAP',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TEMPAT_LAHIR',
+					// dataIndex : 'TEMPAT_LAHIR',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TANGGAL_LAHIR',
+					// dataIndex : 'TANGGAL_LAHIR',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'KEWARGANEGARAAN',
+					// dataIndex : 'KEWARGANEGARAAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ALAMAT',
+					// dataIndex : 'ALAMAT',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ID_KELURAHAN',
+					// dataIndex : 'ID_KELURAHAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ID_KECAMATAN',
+					// dataIndex : 'ID_KECAMATAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ID_KOTA',
+					// dataIndex : 'ID_KOTA',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TELP',
+					// dataIndex : 'TELP',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NPWP',
+					// dataIndex : 'NPWP',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NAMA_PERUSAHAAN',
+					// dataIndex : 'NAMA_PERUSAHAAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NAMA_DIREKTUR',
+					// dataIndex : 'NAMA_DIREKTUR',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NO_AKTE',
+					// dataIndex : 'NO_AKTE',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BENTUK_PERUSAHAAN',
+					// dataIndex : 'BENTUK_PERUSAHAAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ALAMAT_PERUSAHAAN',
+					// dataIndex : 'ALAMAT_PERUSAHAAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ID_KELURAHAN2',
+					// dataIndex : 'ID_KELURAHAN2',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ID_KECAMATAN2',
+					// dataIndex : 'ID_KECAMATAN2',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ID_KOTA2',
+					// dataIndex : 'ID_KOTA2',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TELP2',
+					// dataIndex : 'TELP2',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'JENIS_PERMOHONAN',
+					// dataIndex : 'JENIS_PERMOHONAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TGL_PERMOHONAN',
+					// dataIndex : 'TGL_PERMOHONAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TGL_AKHIR',
+					// dataIndex : 'TGL_AKHIR',
+					// width : 100,
+					// sortable : false
+				// },
 							
 			],
 			tbar : [
 				in_lingkungan_addButton,
-				in_lingkungan_editButton,
-				in_lingkungan_deleteButton,
+				// in_lingkungan_editButton,
+				// in_lingkungan_deleteButton,
 				in_lingkungan_gridSearchField,
-				in_lingkungan_searchButton,
+				// in_lingkungan_searchButton,
 				in_lingkungan_refreshButton,
 				in_lingkungan_printButton,
 				in_lingkungan_excelButton

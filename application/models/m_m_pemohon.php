@@ -27,7 +27,7 @@ class M_m_pemohon extends App_model{
         parent::__construct();
         $this->table_name = 'm_pemohon';
         $this->column_primary = 'pemohon_id';
-        $this->column_order = '';
+        $this->column_order = 'pemohon_id ASC';
 		$this->column_unique = '';
     }
 	
