@@ -33,21 +33,21 @@
 		<thead>
 			<tr>
 				<th align="center" width="50">No</td>
+				<th align="center">ID_SKTR_INTI</td>
 				<th align="center">ID_USER</td>
+				<th align="center">JENIS_PERMOHONAN</td>
+				<th align="center">NO_SK</td>
 				<th align="center">NAMA_PEMOHON</td>
 				<th align="center">NO_TELP</td>
 				<th align="center">HAK_MILIK</td>
 				<th align="center">NAMA_PEMILIK</td>
 				<th align="center">NO_SURAT_TANAH</td>
-				<th align="center">ALAMAT_BANGUNAN</td>
-				<th align="center">RENCANA_PERUNTUKAN</td>
-				<th align="center">TINGGI_BANGUNAN</td>
-				<th align="center">LUAS_PERSIL</td>
-				<th align="center">LUAS_BANGUNAN</td>
 				<th align="center">BATAS_KIRI</td>
 				<th align="center">BATAS_KANAN</td>
 				<th align="center">BATAS_DEPAN</td>
 				<th align="center">BATAS_BELAKANG</td>
+				<th align="center">TGL_PERMOHONAN</td>
+				<th align="center">STATUS</td>
 				</tr>
 		</thead>
 		<tbody>
@@ -59,21 +59,21 @@
 			?>
 				<tr>
 					<td><?php echo $total_record; ?></td>
+					<td><?php echo $subrecord->ID_SKTR_INTI; ?></td>
 					<td><?php echo $subrecord->ID_USER; ?></td>
+					<td><?php echo $subrecord->JENIS_PERMOHONAN; ?></td>
+					<td><?php echo $subrecord->NO_SK; ?></td>
 					<td><?php echo $subrecord->NAMA_PEMOHON; ?></td>
 					<td><?php echo $subrecord->NO_TELP; ?></td>
 					<td><?php echo $subrecord->HAK_MILIK; ?></td>
 					<td><?php echo $subrecord->NAMA_PEMILIK; ?></td>
 					<td><?php echo $subrecord->NO_SURAT_TANAH; ?></td>
-					<td><?php echo $subrecord->ALAMAT_BANGUNAN; ?></td>
-					<td><?php echo $subrecord->RENCANA_PERUNTUKAN; ?></td>
-					<td><?php echo $subrecord->TINGGI_BANGUNAN; ?></td>
-					<td><?php echo $subrecord->LUAS_PERSIL; ?></td>
-					<td><?php echo $subrecord->LUAS_BANGUNAN; ?></td>
 					<td><?php echo $subrecord->BATAS_KIRI; ?></td>
 					<td><?php echo $subrecord->BATAS_KANAN; ?></td>
 					<td><?php echo $subrecord->BATAS_DEPAN; ?></td>
 					<td><?php echo $subrecord->BATAS_BELAKANG; ?></td>
+					<td><?php echo $subrecord->TGL_PERMOHONAN; ?></td>
+					<td><?php echo $subrecord->STATUS; ?></td>
 					</tr>
 			<?php }} ?>			<tr>
 				<td colspan="15" align="left">Total</td>

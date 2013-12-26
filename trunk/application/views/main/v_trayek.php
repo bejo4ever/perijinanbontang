@@ -613,56 +613,220 @@
 			multiSelect : true,
 			keys : ayek_shorcut,
 			columns : [
+				// {
+					// text : 'ID_SKTR_INTI',
+					// dataIndex : 'ID_SKTR_INTI',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'ID_USER',
+					// dataIndex : 'ID_USER',
+					// width : 100,
+					// sortable : false
+				// },
 				{
-					text : 'ID_TRAYEK_INTI',
-					dataIndex : 'ID_TRAYEK_INTI',
+					text : 'Jenis Permohonan',
+					dataIndex : 'JENIS_PERMOHONAN',
+					width : 100,
+					sortable : false,
+					renderer : function(value){
+								if(value == 1){
+									return 'Baru';
+								}else{
+									return 'Perpanjangan';
+								}
+							}
+				},
+				{
+					text : 'No. SK',
+					dataIndex : 'NO_SK',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'KODE_TRAYEK',
-					dataIndex : 'KODE_TRAYEK',
+					text : 'Nama Pemohon',
+					dataIndex : 'pemohon_nama',
+					width : 120,
+					sortable : false
+				},
+				{
+					text : 'Alamat Pemohon',
+					dataIndex : 'pemohon_alamat',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'NOMOR_UB',
-					dataIndex : 'NOMOR_UB',
+					text : 'No. Telp.',
+					dataIndex : 'pemohon_telp',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'TGL_PERMOHONAN',
-					dataIndex : 'TGL_PERMOHONAN',
+					text : 'Lama Proses',
+					dataIndex : 'lama_proses',
 					width : 100,
 					sortable : false
+				},
+				// {
+					// text : 'NAMA_PEMILIK',
+					// dataIndex : 'NAMA_PEMILIK',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NO_SURAT_TANAH',
+					// dataIndex : 'NO_SURAT_TANAH',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BATAS_KIRI',
+					// dataIndex : 'BATAS_KIRI',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BATAS_KANAN',
+					// dataIndex : 'BATAS_KANAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BATAS_DEPAN',
+					// dataIndex : 'BATAS_DEPAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'BATAS_BELAKANG',
+					// dataIndex : 'BATAS_BELAKANG',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TGL_PERMOHONAN',
+					// dataIndex : 'TGL_PERMOHONAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'Lama Proses',
+					// dataIndex : 'lama_proses',
+					// width : 100,
+					// sortable : false
+				// },
+				{
+					text : 'Status Berkas',
+					dataIndex : 'STATUS',
+					width : 150,
+					sortable : false,
+					renderer : function(value){
+							if(value == 1){
+								return 'Disetujui, sudah diambil';
+							}else if (value == 2){
+								return 'Disetujui, belum diambil';
+							} else {
+								return 'Ditolak';
+							}
+						}
 				},
 				{
-					text : 'NAMA_PERUSAHAAN',
-					dataIndex : 'NAMA_PERUSAHAAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NAMA_PEMOHON',
-					dataIndex : 'NAMA_PEMOHON',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TGL_AKHIR',
-					dataIndex : 'TGL_AKHIR',
-					width : 100,
-					sortable : false
-				},
+					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							sktr_printContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},{
+					xtype:'actioncolumn',
+					text : 'Action',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-edit',
+						tooltip: 'Ubah Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							tr_confirmUpdate();
+						}
+					},{
+						iconCls: 'icon16x16-delete',
+						tooltip: 'Hapus Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							tr_confirmDelete();
+						}
+					}]
+				},{
+					xtype:'actioncolumn',
+					width:100,
+					text : 'Status Berkas',
+					items: [{
+						iconCls : 'checked',
+						tooltip : 'Ubah Status',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							sktr_prosesContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				}
+				// {
+					// text : 'ID_TRAYEK_INTI',
+					// dataIndex : 'ID_TRAYEK_INTI',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'KODE_TRAYEK',
+					// dataIndex : 'KODE_TRAYEK',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NOMOR_UB',
+					// dataIndex : 'NOMOR_UB',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TGL_PERMOHONAN',
+					// dataIndex : 'TGL_PERMOHONAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NAMA_PERUSAHAAN',
+					// dataIndex : 'NAMA_PERUSAHAAN',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'NAMA_PEMOHON',
+					// dataIndex : 'NAMA_PEMOHON',
+					// width : 100,
+					// sortable : false
+				// },
+				// {
+					// text : 'TGL_AKHIR',
+					// dataIndex : 'TGL_AKHIR',
+					// width : 100,
+					// sortable : false
+				// },
 							
 			],
 			tbar : [
 				ayek_addButton,
-				ayek_editButton,
-				ayek_deleteButton,
+				// ayek_editButton,
+				// ayek_deleteButton,
 				ayek_gridSearchField,
-				ayek_searchButton,
+				// ayek_searchButton,
 				ayek_refreshButton,
 				ayek_printButton,
 				ayek_excelButton

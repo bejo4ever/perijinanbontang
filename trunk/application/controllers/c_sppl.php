@@ -35,6 +35,9 @@ class C_sppl extends CI_Controller{
 			case 'EXCEL':
 				$this->printExcel();
 			break;
+			case 'GETSYARAT':
+				$this->getSyarat();
+			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -81,7 +84,7 @@ class C_sppl extends CI_Controller{
 		$pl_author = $this->m_sppl->__checkSession();
 		$pl_created_date = date('Y-m-d H:i:s');
 		
-		if($pl_author != ''){
+		if($pl_author == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -133,7 +136,7 @@ class C_sppl extends CI_Controller{
 		$pl_updated_by = $this->m_sppl->__checkSession();
 		$pl_updated_date = date('Y-m-d H:i:s');
 		
-		if($pl_updated_by != ''){
+		if($pl_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -274,5 +277,16 @@ class C_sppl extends CI_Controller{
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
-	
+	function getSyarat(){
+		$currentAction = $this->input->post('currentAction');
+		$sppl_id = $this->input->post('sppl_id');
+		// $idam_det_id = $this->input->post('idam_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"sktr_id"=>$sppl_id
+			// "idam_det_id"=>$idam_det_id
+		);
+		$result = $this->m_sppl->getSyarat($params);
+		echo $result;
+	}
 }

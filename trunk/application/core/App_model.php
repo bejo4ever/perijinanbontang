@@ -125,5 +125,25 @@ class App_model extends CI_Model{
 			return 'fail';
 		}
 	}
-	
+	public function get_by ($key, $val = FALSE, $orwhere = FALSE, $single = FALSE) {
+        
+        // Limit results
+        if ($val == TRUE) {
+            $this->db->where(htmlentities($key), htmlentities($val));
+        }
+        else {
+			if(!is_array($key)){
+				$this->db->where($key);
+			} else {
+				$key = array_map('htmlentities', $key);
+				$where_method = $orwhere == TRUE ? 'or_where' : 'where';
+				$this->db->$where_method($key);
+			}           
+        }
+        count($this->db->ar_orderby) || $this->db->order_by($this->table_name . "." . $this->column_order);
+        // Return results
+        $single == FALSE || $this->db->limit(1);
+        $method = $single ? 'row_array' : 'result_array';
+        return $this->db->get($this->table_name)->$method();
+    }
 }

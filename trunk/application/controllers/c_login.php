@@ -19,6 +19,7 @@ class C_login extends CI_Controller{
 		$_SESSION['PERIJINAN_USERNAME']	='';
 		$_SESSION['PERIJINAN_NAMA']		='';
 		$_SESSION['PERIJINAN_NIP']		='';
+		$_SESSION['IDHAK']		='';
 		session_destroy();
 		redirect('/home');
 	}

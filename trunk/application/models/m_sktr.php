@@ -2,25 +2,27 @@
 class M_sktr extends App_model{
 	var $mainSql = "SELECT 
 				ID_SKTR,
-				sktr.ID_USER,
-				USER,
-				NAMA_PEMOHON,
-				NO_TELP,
-				if(HAK_MILIK = 1, 'Sertifikat','PPAT') as HAK_MILIK,
+				ID_SKTR_INTI,
+				ID_PEMOHON,
+				JENIS_PERMOHONAN,
+				NO_SK,
+				pemohon_nama,
+				pemohon_telp,
+				pemohon_alamat,
+				CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
+				MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
+				1, 1),' Hari') as lama_proses,
+				HAK_MILIK,
 				NAMA_PEMILIK,
 				NO_SURAT_TANAH,
-				ALAMAT_BANGUNAN,
-				RENCANA_PERUNTUKAN,
-				TINGGI_BANGUNAN,
-				LUAS_PERSIL,
-				LUAS_BANGUNAN,
 				BATAS_KIRI,
 				BATAS_KANAN,
 				BATAS_DEPAN,
 				BATAS_BELAKANG,
-				TGL_PERMOHONAN
-				FROM sktr LEFT JOIN master_user ON master_user.ID_USER = sktr.ID_USER
-				WHERE ID_SKTR IS NOT NULL 
+				TGL_PERMOHONAN,
+				STATUS
+				FROM sktr JOIN m_pemohon ON m_pemohon.pemohon_user_id = sktr.ID_PEMOHON
+			WHERE ID_SKTR IS NOT NULL 
 	";
 	
 	function __construct(){
@@ -33,26 +35,67 @@ class M_sktr extends App_model{
 	
 	function getList($params){
 		extract($params);
-		$sql = $this->mainSql;
+		if($_SESSION["IDHAK"] == 2){
+			$sql = "SELECT 
+						ID_SKTR,
+						ID_SKTR_INTI,
+						ID_PEMOHON,
+						JENIS_PERMOHONAN,
+						NO_SK
+						HAK_MILIK,
+						NAMA_PEMILIK,
+						NO_SURAT_TANAH,
+						BATAS_KIRI,
+						BATAS_KANAN,
+						BATAS_DEPAN,
+						BATAS_BELAKANG,
+						TGL_PERMOHONAN,
+						STATUS,
+						pemohon_id,
+						pemohon_nama,
+						pemohon_alamat,
+						pemohon_telp,
+						pemohon_npwp,
+						pemohon_rt,
+						pemohon_rw,
+						pemohon_kel,
+						pemohon_kec,
+						pemohon_nik,
+						pemohon_stra,
+						pemohon_surattugas,
+						pemohon_pekerjaan,
+						pemohon_tempatlahir,
+						pemohon_tanggallahir,
+						pemohon_user_id,
+						CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
+						MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
+						1, 1),' Hari') as lama_proses
+						FROM sktr
+						JOIN m_pemohon ON m_pemohon.pemohon_id = sktr.ID_PEMOHON
+					WHERE ID_SKTR IS NOT NULL 
+			";
+		} else {
+			$sql = $this->mainSql;
+		}
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					ID_USER LIKE '%".$searchText."%' OR 
-					NAMA_PEMOHON LIKE '%".$searchText."%' OR 
-					NO_TELP LIKE '%".$searchText."%' OR 
+					ID_SKTR_INTI LIKE '%".$searchText."%' OR 
+					ID_PEMOHON LIKE '%".$searchText."%' OR 
+					JENIS_PERMOHONAN LIKE '%".$searchText."%' OR 
+					NO_SK LIKE '%".$searchText."%' OR 
+					pemohon_nama LIKE '%".$searchText."%' OR 
+					pemohon_alamat LIKE '%".$searchText."%' OR 
+					pemohon_telp LIKE '%".$searchText."%' OR 
 					HAK_MILIK LIKE '%".$searchText."%' OR 
 					NAMA_PEMILIK LIKE '%".$searchText."%' OR 
 					NO_SURAT_TANAH LIKE '%".$searchText."%' OR 
-					ALAMAT_BANGUNAN LIKE '%".$searchText."%' OR 
-					RENCANA_PERUNTUKAN LIKE '%".$searchText."%' OR 
-					TINGGI_BANGUNAN LIKE '%".$searchText."%' OR 
-					LUAS_PERSIL LIKE '%".$searchText."%' OR 
-					LUAS_BANGUNAN LIKE '%".$searchText."%' OR 
 					BATAS_KIRI LIKE '%".$searchText."%' OR 
 					BATAS_KANAN LIKE '%".$searchText."%' OR 
 					BATAS_DEPAN LIKE '%".$searchText."%' OR 
 					BATAS_BELAKANG LIKE '%".$searchText."%' OR 
-					TGL_PERMOHONAN LIKE '%".$searchText."%'
+					TGL_PERMOHONAN LIKE '%".$searchText."%' OR 
+					STATUS LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -68,8 +111,17 @@ class M_sktr extends App_model{
 		
 		$sql = $this->mainSql;
 		
-		if(@$ID_USER != ''){
-			$sql .= " AND ID_USER LIKE '%".$ID_USER."%' ";
+		if(@$ID_SKTR_INTI != ''){
+			$sql .= " AND ID_SKTR_INTI LIKE '%".$ID_SKTR_INTI."%' ";
+		}
+		if(@$ID_PEMOHON != ''){
+			$sql .= " AND ID_PEMOHON LIKE '%".$ID_PEMOHON."%' ";
+		}
+		if(@$JENIS_PERMOHONAN != ''){
+			$sql .= " AND JENIS_PERMOHONAN LIKE '%".$JENIS_PERMOHONAN."%' ";
+		}
+		if(@$NO_SK != ''){
+			$sql .= " AND NO_SK LIKE '%".$NO_SK."%' ";
 		}
 		if(@$NAMA_PEMOHON != ''){
 			$sql .= " AND NAMA_PEMOHON LIKE '%".$NAMA_PEMOHON."%' ";
@@ -86,21 +138,6 @@ class M_sktr extends App_model{
 		if(@$NO_SURAT_TANAH != ''){
 			$sql .= " AND NO_SURAT_TANAH LIKE '%".$NO_SURAT_TANAH."%' ";
 		}
-		if(@$ALAMAT_BANGUNAN != ''){
-			$sql .= " AND ALAMAT_BANGUNAN LIKE '%".$ALAMAT_BANGUNAN."%' ";
-		}
-		if(@$RENCANA_PERUNTUKAN != ''){
-			$sql .= " AND RENCANA_PERUNTUKAN LIKE '%".$RENCANA_PERUNTUKAN."%' ";
-		}
-		if(@$TINGGI_BANGUNAN != ''){
-			$sql .= " AND TINGGI_BANGUNAN LIKE '%".$TINGGI_BANGUNAN."%' ";
-		}
-		if(@$LUAS_PERSIL != ''){
-			$sql .= " AND LUAS_PERSIL LIKE '%".$LUAS_PERSIL."%' ";
-		}
-		if(@$LUAS_BANGUNAN != ''){
-			$sql .= " AND LUAS_BANGUNAN LIKE '%".$LUAS_BANGUNAN."%' ";
-		}
 		if(@$BATAS_KIRI != ''){
 			$sql .= " AND BATAS_KIRI LIKE '%".$BATAS_KIRI."%' ";
 		}
@@ -115,6 +152,9 @@ class M_sktr extends App_model{
 		}
 		if(@$TGL_PERMOHONAN != ''){
 			$sql .= " AND TGL_PERMOHONAN LIKE '%".$TGL_PERMOHONAN."%' ";
+		}
+		if(@$STATUS != ''){
+			$sql .= " AND STATUS LIKE '%".$STATUS."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
@@ -136,30 +176,18 @@ class M_sktr extends App_model{
 		extract($params);
 		if($currentAction == 'update'){
 			$sql = "
-				SELECT 
-					ID_SYARAT,
-					ID_IJIN,
-					STATUS,
-					KETERANGAN,
-					NAMA_SYARAT AS sktr_cek_syarat_nama
-				FROM cek_list_sktr 
-				LEFT JOIN master_syarat ON cek_list_sktr.ID_SYARAT = master_syarat.ID_SYARAT
-				WHERE idam_cek_idamdet_id = ".$idam_det_id."
-				AND idam_cek_idam_id = ".$idam_id."
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 10;
 			";
 		}else{
 			$sql = "
-				SELECT 
-					0 AS sktr_cek_id,
-					master_syarat.ID_SYARAT AS sktr_cek_syarat_id,
-					NAMA_SYARAT AS sktr_cek_syarat_nama
-				FROM dt_syarat 
-				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT
-				WHERE ID_IJIN = 6
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 10;
 			";
 		}
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
-	
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 10;");
+		return $query->result_array();
+	}
 }

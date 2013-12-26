@@ -5,6 +5,7 @@ class C_sktr extends CI_Controller{
 		parent::__construct();
 		session_start();
 		$this->load->model('m_sktr');
+		$this->load->model('m_m_pemohon');
 	}
 	
 	function index(){
@@ -26,9 +27,6 @@ class C_sktr extends CI_Controller{
 			case 'DELETE':
 				$this->delete();
 			break;
-			case 'GETSYARAT':
-				$this->getSyarat();
-			break;
 			case 'SEARCH':
 				$this->search();
 			break;
@@ -37,6 +35,21 @@ class C_sktr extends CI_Controller{
 			break;
 			case 'EXCEL':
 				$this->printExcel();
+			break;
+			case 'CETAKBP':
+				$this->printBP();
+			break;
+			case 'GETSYARAT':
+				$this->getSyarat();
+			break;
+			case 'CETAKLK':
+				$this->printLK();
+			break;
+			case 'CETAKSK':
+				$this->printSK();
+			break;
+			case 'UBAHPROSES':
+				$this->ubahProses();
 			break;
 			default :
 				echo '{ failure : true }';
@@ -60,106 +73,131 @@ class C_sktr extends CI_Controller{
 	function create(){
 		$ID_SKTR = htmlentities($this->input->post('ID_SKTR'),ENT_QUOTES);
 		$ID_SKTR = is_numeric($ID_SKTR) ? $ID_SKTR : 0;
-		// $ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
-		// $ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
-		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
-		$NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
+		$ID_SKTR_INTI = htmlentities($this->input->post('ID_SKTR_INTI'),ENT_QUOTES);
+		$ID_SKTR_INTI = is_numeric($ID_SKTR_INTI) ? $ID_SKTR_INTI : 0;
+		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
+		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
+		// $NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
+		// $NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		
 		$HAK_MILIK = htmlentities($this->input->post('HAK_MILIK'),ENT_QUOTES);
 		$HAK_MILIK = is_numeric($HAK_MILIK) ? $HAK_MILIK : 0;
 		$NAMA_PEMILIK = htmlentities($this->input->post('NAMA_PEMILIK'),ENT_QUOTES);
 		$NO_SURAT_TANAH = htmlentities($this->input->post('NO_SURAT_TANAH'),ENT_QUOTES);
-		$ALAMAT_BANGUNAN = htmlentities($this->input->post('ALAMAT_BANGUNAN'),ENT_QUOTES);
-		$RENCANA_PERUNTUKAN = htmlentities($this->input->post('RENCANA_PERUNTUKAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = htmlentities($this->input->post('TINGGI_BANGUNAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = is_numeric($TINGGI_BANGUNAN) ? $TINGGI_BANGUNAN : 0;
-		$LUAS_PERSIL = htmlentities($this->input->post('LUAS_PERSIL'),ENT_QUOTES);
-		$LUAS_PERSIL = is_numeric($LUAS_PERSIL) ? $LUAS_PERSIL : 0;
-		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
-		$LUAS_BANGUNAN = is_numeric($LUAS_BANGUNAN) ? $LUAS_BANGUNAN : 0;
 		$BATAS_KIRI = htmlentities($this->input->post('BATAS_KIRI'),ENT_QUOTES);
 		$BATAS_KANAN = htmlentities($this->input->post('BATAS_KANAN'),ENT_QUOTES);
 		$BATAS_DEPAN = htmlentities($this->input->post('BATAS_DEPAN'),ENT_QUOTES);
 		$BATAS_BELAKANG = htmlentities($this->input->post('BATAS_BELAKANG'),ENT_QUOTES);
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
+		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
 				
 		$tr_author = $this->m_sktr->__checkSession();
 		$tr_created_date = date('Y-m-d H:i:s');
-		
+		$pemohon	= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
 		if($tr_author == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
 				'ID_SKTR'=>$ID_SKTR,
-				'ID_USER'=>$_SESSION['USERID'],
-				'NAMA_PEMOHON'=>$NAMA_PEMOHON,
-				'NO_TELP'=>$NO_TELP,
+				'ID_SKTR_INTI'=>$ID_SKTR_INTI,
+				'ID_PEMOHON'=>$pemohon['pemohon_id'],
+				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+				'NO_SK'=>$NO_SK,
+				// 'NAMA_PEMOHON'=>$NAMA_PEMOHON,
+				// 'NO_TELP'=>$NO_TELP,
 				'HAK_MILIK'=>$HAK_MILIK,
 				'NAMA_PEMILIK'=>$NAMA_PEMILIK,
 				'NO_SURAT_TANAH'=>$NO_SURAT_TANAH,
-				'ALAMAT_BANGUNAN'=>$ALAMAT_BANGUNAN,
-				'RENCANA_PERUNTUKAN'=>$RENCANA_PERUNTUKAN,
-				'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
-				'LUAS_PERSIL'=>$LUAS_PERSIL,
-				'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 				'BATAS_KIRI'=>$BATAS_KIRI,
 				'BATAS_KANAN'=>$BATAS_KANAN,
 				'BATAS_DEPAN'=>$BATAS_DEPAN,
 				'BATAS_BELAKANG'=>$BATAS_BELAKANG,
-				'TGL_PERMOHONAN'=>date("Y-m-d"),
+				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'STATUS'=>$STATUS,
+				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				);
-			$result = $this->m_sktr->__insert($data, '', '');
+			$result = $this->m_sktr->__insert($data, '', 'insertId');
+			$data2 = array(
+				'pemohon_nama'=>$pemohon_nama,
+				'pemohon_alamat'=>$pemohon_alamat,
+				'pemohon_telp'=>$pemohon_telp,
+				'pemohon_user_id'=>$_SESSION['USERID']
+			);
+			// $result2 = $this->m_m_pemohon->__insert($data2, '', '');
+			$sktr_keterangan = json_decode($this->input->post('KETERANGAN'));
+			$syarat	= $this->m_sktr->getSyarat2();
+			$i=0;
+			foreach($syarat as $row){
+				$datacek = array(
+				"ID_IJIN"=>$result,
+				"ID_SYARAT"=>$row["ID_SYARAT"],
+				"KETERANGAN"=>$sktr_keterangan[$i]);
+				$i++;
+				$resultcek = $this->m_sktr->__insert($datacek, 'cek_list_sktr', 'insertId');
+			}
 		}
-		echo $result;
+		echo "success";
 	}
 	
 	function update(){
 		$ID_SKTR = htmlentities($this->input->post('ID_SKTR'),ENT_QUOTES);
 		$ID_SKTR = is_numeric($ID_SKTR) ? $ID_SKTR : 0;
+		$ID_SKTR_INTI = htmlentities($this->input->post('ID_SKTR_INTI'),ENT_QUOTES);
+		$ID_SKTR_INTI = is_numeric($ID_SKTR_INTI) ? $ID_SKTR_INTI : 0;
 		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
 		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
-		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
-		$NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
+		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
+		// $NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
+		// $NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
 		$HAK_MILIK = htmlentities($this->input->post('HAK_MILIK'),ENT_QUOTES);
 		$HAK_MILIK = is_numeric($HAK_MILIK) ? $HAK_MILIK : 0;
 		$NAMA_PEMILIK = htmlentities($this->input->post('NAMA_PEMILIK'),ENT_QUOTES);
 		$NO_SURAT_TANAH = htmlentities($this->input->post('NO_SURAT_TANAH'),ENT_QUOTES);
-		$ALAMAT_BANGUNAN = htmlentities($this->input->post('ALAMAT_BANGUNAN'),ENT_QUOTES);
-		$RENCANA_PERUNTUKAN = htmlentities($this->input->post('RENCANA_PERUNTUKAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = htmlentities($this->input->post('TINGGI_BANGUNAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = is_numeric($TINGGI_BANGUNAN) ? $TINGGI_BANGUNAN : 0;
-		$LUAS_PERSIL = htmlentities($this->input->post('LUAS_PERSIL'),ENT_QUOTES);
-		$LUAS_PERSIL = is_numeric($LUAS_PERSIL) ? $LUAS_PERSIL : 0;
-		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
-		$LUAS_BANGUNAN = is_numeric($LUAS_BANGUNAN) ? $LUAS_BANGUNAN : 0;
 		$BATAS_KIRI = htmlentities($this->input->post('BATAS_KIRI'),ENT_QUOTES);
 		$BATAS_KANAN = htmlentities($this->input->post('BATAS_KANAN'),ENT_QUOTES);
 		$BATAS_DEPAN = htmlentities($this->input->post('BATAS_DEPAN'),ENT_QUOTES);
 		$BATAS_BELAKANG = htmlentities($this->input->post('BATAS_BELAKANG'),ENT_QUOTES);
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
-				
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
+		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
+		
 		$tr_updated_by = $this->m_sktr->__checkSession();
 		$tr_updated_date = date('Y-m-d H:i:s');
-		
+		$pemohon	= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
 		if($tr_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
-				'ID_USER'=>$_SESSION['USERID'],
-				'NAMA_PEMOHON'=>$NAMA_PEMOHON,
-				'NO_TELP'=>$NO_TELP,
+				'ID_SKTR'=>$ID_SKTR,
+				'ID_SKTR_INTI'=>$ID_SKTR_INTI,
+				'ID_PEMOHON'=>$pemohon['pemohon_id'],
+				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+				'NO_SK'=>$NO_SK,
+				// 'NAMA_PEMOHON'=>$NAMA_PEMOHON,
+				// 'NO_TELP'=>$NO_TELP,
 				'HAK_MILIK'=>$HAK_MILIK,
 				'NAMA_PEMILIK'=>$NAMA_PEMILIK,
 				'NO_SURAT_TANAH'=>$NO_SURAT_TANAH,
-				'ALAMAT_BANGUNAN'=>$ALAMAT_BANGUNAN,
-				'RENCANA_PERUNTUKAN'=>$RENCANA_PERUNTUKAN,
-				'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
-				'LUAS_PERSIL'=>$LUAS_PERSIL,
-				'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 				'BATAS_KIRI'=>$BATAS_KIRI,
 				'BATAS_KANAN'=>$BATAS_KANAN,
 				'BATAS_DEPAN'=>$BATAS_DEPAN,
 				'BATAS_BELAKANG'=>$BATAS_BELAKANG,
-				//'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'STATUS'=>$STATUS,
+				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				);
 			$result = $this->m_sktr->__update($data, $ID_SKTR, '', '');
 		}
@@ -176,45 +214,43 @@ class C_sktr extends CI_Controller{
 	function search(){
 		$limit_start = (integer)$this->input->post('start');
 		$limit_end = (integer)$this->input->post('limit');
+		$ID_SKTR_INTI = htmlentities($this->input->post('ID_SKTR_INTI'),ENT_QUOTES);
+		$ID_SKTR_INTI = is_numeric($ID_SKTR_INTI) ? $ID_SKTR_INTI : 0;
 		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
 		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
-		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
-		$NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
+		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
+		// $NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
+		// $NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
 		$HAK_MILIK = htmlentities($this->input->post('HAK_MILIK'),ENT_QUOTES);
 		$HAK_MILIK = is_numeric($HAK_MILIK) ? $HAK_MILIK : 0;
 		$NAMA_PEMILIK = htmlentities($this->input->post('NAMA_PEMILIK'),ENT_QUOTES);
 		$NO_SURAT_TANAH = htmlentities($this->input->post('NO_SURAT_TANAH'),ENT_QUOTES);
-		$ALAMAT_BANGUNAN = htmlentities($this->input->post('ALAMAT_BANGUNAN'),ENT_QUOTES);
-		$RENCANA_PERUNTUKAN = htmlentities($this->input->post('RENCANA_PERUNTUKAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = htmlentities($this->input->post('TINGGI_BANGUNAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = is_numeric($TINGGI_BANGUNAN) ? $TINGGI_BANGUNAN : 0;
-		$LUAS_PERSIL = htmlentities($this->input->post('LUAS_PERSIL'),ENT_QUOTES);
-		$LUAS_PERSIL = is_numeric($LUAS_PERSIL) ? $LUAS_PERSIL : 0;
-		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
-		$LUAS_BANGUNAN = is_numeric($LUAS_BANGUNAN) ? $LUAS_BANGUNAN : 0;
 		$BATAS_KIRI = htmlentities($this->input->post('BATAS_KIRI'),ENT_QUOTES);
 		$BATAS_KANAN = htmlentities($this->input->post('BATAS_KANAN'),ENT_QUOTES);
 		$BATAS_DEPAN = htmlentities($this->input->post('BATAS_DEPAN'),ENT_QUOTES);
 		$BATAS_BELAKANG = htmlentities($this->input->post('BATAS_BELAKANG'),ENT_QUOTES);
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 				
 		$params = array(
+			'ID_SKTR_INTI'=>$ID_SKTR_INTI,
 			'ID_USER'=>$ID_USER,
-			'NAMA_PEMOHON'=>$NAMA_PEMOHON,
-			'NO_TELP'=>$NO_TELP,
+			'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+			'NO_SK'=>$NO_SK,
+			// 'NAMA_PEMOHON'=>$NAMA_PEMOHON,
+			// 'NO_TELP'=>$NO_TELP,
 			'HAK_MILIK'=>$HAK_MILIK,
 			'NAMA_PEMILIK'=>$NAMA_PEMILIK,
 			'NO_SURAT_TANAH'=>$NO_SURAT_TANAH,
-			'ALAMAT_BANGUNAN'=>$ALAMAT_BANGUNAN,
-			'RENCANA_PERUNTUKAN'=>$RENCANA_PERUNTUKAN,
-			'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
-			'LUAS_PERSIL'=>$LUAS_PERSIL,
-			'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 			'BATAS_KIRI'=>$BATAS_KIRI,
 			'BATAS_KANAN'=>$BATAS_KANAN,
 			'BATAS_DEPAN'=>$BATAS_DEPAN,
 			'BATAS_BELAKANG'=>$BATAS_BELAKANG,
 			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+			'STATUS'=>$STATUS,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -228,46 +264,44 @@ class C_sktr extends CI_Controller{
 		
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
+		$ID_SKTR_INTI = htmlentities($this->input->post('ID_SKTR_INTI'),ENT_QUOTES);
+		$ID_SKTR_INTI = is_numeric($ID_SKTR_INTI) ? $ID_SKTR_INTI : 0;
 		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
 		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
-		$NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
-		$NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
+		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
+		// $NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
+		// $NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
 		$HAK_MILIK = htmlentities($this->input->post('HAK_MILIK'),ENT_QUOTES);
 		$HAK_MILIK = is_numeric($HAK_MILIK) ? $HAK_MILIK : 0;
 		$NAMA_PEMILIK = htmlentities($this->input->post('NAMA_PEMILIK'),ENT_QUOTES);
 		$NO_SURAT_TANAH = htmlentities($this->input->post('NO_SURAT_TANAH'),ENT_QUOTES);
-		$ALAMAT_BANGUNAN = htmlentities($this->input->post('ALAMAT_BANGUNAN'),ENT_QUOTES);
-		$RENCANA_PERUNTUKAN = htmlentities($this->input->post('RENCANA_PERUNTUKAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = htmlentities($this->input->post('TINGGI_BANGUNAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = is_numeric($TINGGI_BANGUNAN) ? $TINGGI_BANGUNAN : 0;
-		$LUAS_PERSIL = htmlentities($this->input->post('LUAS_PERSIL'),ENT_QUOTES);
-		$LUAS_PERSIL = is_numeric($LUAS_PERSIL) ? $LUAS_PERSIL : 0;
-		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
-		$LUAS_BANGUNAN = is_numeric($LUAS_BANGUNAN) ? $LUAS_BANGUNAN : 0;
 		$BATAS_KIRI = htmlentities($this->input->post('BATAS_KIRI'),ENT_QUOTES);
 		$BATAS_KANAN = htmlentities($this->input->post('BATAS_KANAN'),ENT_QUOTES);
 		$BATAS_DEPAN = htmlentities($this->input->post('BATAS_DEPAN'),ENT_QUOTES);
 		$BATAS_BELAKANG = htmlentities($this->input->post('BATAS_BELAKANG'),ENT_QUOTES);
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 				
 		$params = array(
 			'searchText' => $searchText,
+			'ID_SKTR_INTI'=>$ID_SKTR_INTI,
 			'ID_USER'=>$ID_USER,
-			'NAMA_PEMOHON'=>$NAMA_PEMOHON,
-			'NO_TELP'=>$NO_TELP,
+			'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+			'NO_SK'=>$NO_SK,
+			// 'NAMA_PEMOHON'=>$NAMA_PEMOHON,
+			// 'NO_TELP'=>$NO_TELP,
 			'HAK_MILIK'=>$HAK_MILIK,
 			'NAMA_PEMILIK'=>$NAMA_PEMILIK,
 			'NO_SURAT_TANAH'=>$NO_SURAT_TANAH,
-			'ALAMAT_BANGUNAN'=>$ALAMAT_BANGUNAN,
-			'RENCANA_PERUNTUKAN'=>$RENCANA_PERUNTUKAN,
-			'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
-			'LUAS_PERSIL'=>$LUAS_PERSIL,
-			'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 			'BATAS_KIRI'=>$BATAS_KIRI,
 			'BATAS_KANAN'=>$BATAS_KANAN,
 			'BATAS_DEPAN'=>$BATAS_DEPAN,
 			'BATAS_BELAKANG'=>$BATAS_BELAKANG,
 			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+			'STATUS'=>$STATUS,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
@@ -289,16 +323,26 @@ class C_sktr extends CI_Controller{
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
+	function ubahProses(){
+		$sktr_id  = $this->input->post('sktr_id');
+		$proses  = $this->input->post('proses');
+		($proses == "Selesai, belum diambil") ? ($proses = 2) : (($proses == "Selesai, sudah diambil") ? ($proses = 1) : ($proses = 0));
+		$data = array(
+			"STATUS"=>$proses
+		);
+		$result = $this->m_sktr->__update($data, $sktr_id, '', '','');
+		echo $result;
+	}
 	function getSyarat(){
 		$currentAction = $this->input->post('currentAction');
-		$idam_id = $this->input->post('ID_SKTR');
-		$idam_det_id = $this->input->post('idam_det_id');
+		$sktr_id = $this->input->post('sktr_id');
+		// $idam_det_id = $this->input->post('idam_det_id');
 		$params = array(
 			"currentAction"=>$currentAction,
-			"idam_id"=>$idam_id,
-			"idam_det_id"=>$idam_det_id
+			"sktr_id"=>$sktr_id
+			// "idam_det_id"=>$idam_det_id
 		);
-		$result = $this->m_t_idam_det->getSyarat($params);
+		$result = $this->m_sktr->getSyarat($params);
 		echo $result;
 	}
 }
