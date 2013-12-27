@@ -2,19 +2,26 @@
 class M_ijin_lokasi extends App_model{
 	var $mainSql = "SELECT 
 				ID_IJIN_LOKASI,
-				ID_IJIN_LOKASI_INTI,
-				NO_KTP,
-				NAMA_LENGKAP,
-				TEMPAT_LAHIR,
-				TGL_LAHIR,
-				PEKERJAAN,
+				ID_PEMOHON,
+				NO_SK,
+				NO_SK_LAMA,
+				NPWPD,
+				NO_AKTA,
+				BENTUK_PERUSAHAAN,
 				ALAMAT,
-				ID_DESA,
+				RT,
+				RW,
+				ID_KELURAHAN,
 				ID_KECAMATAN,
 				ID_KOTA,
-				TELEPON_PEMOHON,
-				TGL_PERMOHONAN,
-				TGL_AKHIR
+				TELP,
+				FUNGSI,
+				STATUS_TANAH,
+				KETERANGAN_TANAH,
+				LUAS_LOKASI,
+				ALAMAT_LOKASI,
+				ID_KELURAHAN_LOKASI,
+				ID_KECAMATAN_LOKASI
 				FROM ijin_lokasi 
 			WHERE ID_IJIN_LOKASI IS NOT NULL 
 	";
@@ -33,19 +40,26 @@ class M_ijin_lokasi extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					ID_IJIN_LOKASI_INTI LIKE '%".$searchText."%' OR 
-					NO_KTP LIKE '%".$searchText."%' OR 
-					NAMA_LENGKAP LIKE '%".$searchText."%' OR 
-					TEMPAT_LAHIR LIKE '%".$searchText."%' OR 
-					TGL_LAHIR LIKE '%".$searchText."%' OR 
-					PEKERJAAN LIKE '%".$searchText."%' OR 
+					ID_PEMOHON LIKE '%".$searchText."%' OR 
+					NO_SK LIKE '%".$searchText."%' OR 
+					NO_SK_LAMA LIKE '%".$searchText."%' OR 
+					NPWPD LIKE '%".$searchText."%' OR 
+					NO_AKTA LIKE '%".$searchText."%' OR 
+					BENTUK_PERUSAHAAN LIKE '%".$searchText."%' OR 
 					ALAMAT LIKE '%".$searchText."%' OR 
-					ID_DESA LIKE '%".$searchText."%' OR 
+					RT LIKE '%".$searchText."%' OR 
+					RW LIKE '%".$searchText."%' OR 
+					ID_KELURAHAN LIKE '%".$searchText."%' OR 
 					ID_KECAMATAN LIKE '%".$searchText."%' OR 
 					ID_KOTA LIKE '%".$searchText."%' OR 
-					TELEPON_PEMOHON LIKE '%".$searchText."%' OR 
-					TGL_PERMOHONAN LIKE '%".$searchText."%' OR 
-					TGL_AKHIR LIKE '%".$searchText."%'
+					TELP LIKE '%".$searchText."%' OR 
+					FUNGSI LIKE '%".$searchText."%' OR 
+					STATUS_TANAH LIKE '%".$searchText."%' OR 
+					KETERANGAN_TANAH LIKE '%".$searchText."%' OR 
+					LUAS_LOKASI LIKE '%".$searchText."%' OR 
+					ALAMAT_LOKASI LIKE '%".$searchText."%' OR 
+					ID_KELURAHAN_LOKASI LIKE '%".$searchText."%' OR 
+					ID_KECAMATAN_LOKASI LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -61,29 +75,35 @@ class M_ijin_lokasi extends App_model{
 		
 		$sql = $this->mainSql;
 		
-		if(@$ID_IJIN_LOKASI_INTI != ''){
-			$sql .= " AND ID_IJIN_LOKASI_INTI LIKE '%".$ID_IJIN_LOKASI_INTI."%' ";
+		if(@$ID_PEMOHON != ''){
+			$sql .= " AND ID_PEMOHON LIKE '%".$ID_PEMOHON."%' ";
 		}
-		if(@$NO_KTP != ''){
-			$sql .= " AND NO_KTP LIKE '%".$NO_KTP."%' ";
+		if(@$NO_SK != ''){
+			$sql .= " AND NO_SK LIKE '%".$NO_SK."%' ";
 		}
-		if(@$NAMA_LENGKAP != ''){
-			$sql .= " AND NAMA_LENGKAP LIKE '%".$NAMA_LENGKAP."%' ";
+		if(@$NO_SK_LAMA != ''){
+			$sql .= " AND NO_SK_LAMA LIKE '%".$NO_SK_LAMA."%' ";
 		}
-		if(@$TEMPAT_LAHIR != ''){
-			$sql .= " AND TEMPAT_LAHIR LIKE '%".$TEMPAT_LAHIR."%' ";
+		if(@$NPWPD != ''){
+			$sql .= " AND NPWPD LIKE '%".$NPWPD."%' ";
 		}
-		if(@$TGL_LAHIR != ''){
-			$sql .= " AND TGL_LAHIR LIKE '%".$TGL_LAHIR."%' ";
+		if(@$NO_AKTA != ''){
+			$sql .= " AND NO_AKTA LIKE '%".$NO_AKTA."%' ";
 		}
-		if(@$PEKERJAAN != ''){
-			$sql .= " AND PEKERJAAN LIKE '%".$PEKERJAAN."%' ";
+		if(@$BENTUK_PERUSAHAAN != ''){
+			$sql .= " AND BENTUK_PERUSAHAAN LIKE '%".$BENTUK_PERUSAHAAN."%' ";
 		}
 		if(@$ALAMAT != ''){
 			$sql .= " AND ALAMAT LIKE '%".$ALAMAT."%' ";
 		}
-		if(@$ID_DESA != ''){
-			$sql .= " AND ID_DESA LIKE '%".$ID_DESA."%' ";
+		if(@$RT != ''){
+			$sql .= " AND RT LIKE '%".$RT."%' ";
+		}
+		if(@$RW != ''){
+			$sql .= " AND RW LIKE '%".$RW."%' ";
+		}
+		if(@$ID_KELURAHAN != ''){
+			$sql .= " AND ID_KELURAHAN LIKE '%".$ID_KELURAHAN."%' ";
 		}
 		if(@$ID_KECAMATAN != ''){
 			$sql .= " AND ID_KECAMATAN LIKE '%".$ID_KECAMATAN."%' ";
@@ -91,14 +111,29 @@ class M_ijin_lokasi extends App_model{
 		if(@$ID_KOTA != ''){
 			$sql .= " AND ID_KOTA LIKE '%".$ID_KOTA."%' ";
 		}
-		if(@$TELEPON_PEMOHON != ''){
-			$sql .= " AND TELEPON_PEMOHON LIKE '%".$TELEPON_PEMOHON."%' ";
+		if(@$TELP != ''){
+			$sql .= " AND TELP LIKE '%".$TELP."%' ";
 		}
-		if(@$TGL_PERMOHONAN != ''){
-			$sql .= " AND TGL_PERMOHONAN LIKE '%".$TGL_PERMOHONAN."%' ";
+		if(@$FUNGSI != ''){
+			$sql .= " AND FUNGSI LIKE '%".$FUNGSI."%' ";
 		}
-		if(@$TGL_AKHIR != ''){
-			$sql .= " AND TGL_AKHIR LIKE '%".$TGL_AKHIR."%' ";
+		if(@$STATUS_TANAH != ''){
+			$sql .= " AND STATUS_TANAH LIKE '%".$STATUS_TANAH."%' ";
+		}
+		if(@$KETERANGAN_TANAH != ''){
+			$sql .= " AND KETERANGAN_TANAH LIKE '%".$KETERANGAN_TANAH."%' ";
+		}
+		if(@$LUAS_LOKASI != ''){
+			$sql .= " AND LUAS_LOKASI LIKE '%".$LUAS_LOKASI."%' ";
+		}
+		if(@$ALAMAT_LOKASI != ''){
+			$sql .= " AND ALAMAT_LOKASI LIKE '%".$ALAMAT_LOKASI."%' ";
+		}
+		if(@$ID_KELURAHAN_LOKASI != ''){
+			$sql .= " AND ID_KELURAHAN_LOKASI LIKE '%".$ID_KELURAHAN_LOKASI."%' ";
+		}
+		if(@$ID_KECAMATAN_LOKASI != ''){
+			$sql .= " AND ID_KECAMATAN_LOKASI LIKE '%".$ID_KECAMATAN_LOKASI."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

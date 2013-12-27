@@ -858,10 +858,10 @@
 					waitMsg: 'Please wait...',
 					url: 'c_sppl/switchAction',
 					params: {
-						ID_SPPL : record.get('ID_SPPL'),
+						ID_IJIN_LINGKUNGAN : record.get('ID_IJIN_LINGKUNGAN'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('<?php echo base_url("index.php/c_sppl/cetak_bp/")?>' + record.get('ID_SPPL'));
+						window.open('<?php echo base_url("index.php/c_sppl/cetak_bp/")?>' + record.get('ID_IJIN_LINGKUNGAN'));
 					}
 				});
 			}
