@@ -1,8 +1,9 @@
 <?php
 class M_ijin_lingkungan extends App_model{
-	var $mainSql = "SELECT 
-				ID_IJIN_LINGUKANGAN,
-				ID_IJIN_LINGKUNGAN_INTI,
+	var $mainSql = "
+				SELECT
+				ID_IJIN_LINGKUNGAN,
+				ijin_lingkungan.ID_IJIN_LINGKUNGAN_INTI,
 				NO_REG,
 				NO_SK,
 				NAMA_DIREKTUR,
@@ -11,15 +12,58 @@ class M_ijin_lingkungan extends App_model{
 				TGL_AWAL,
 				TGL_AKHIR,
 				STATUS,
-				STATUS_SURVEY
-				FROM ijin_lingkungan 
-			WHERE ID_IJIN_LINGUKANGAN IS NOT NULL 
+				STATUS_SURVEY,
+				NPWPD,
+				NAMA_PERUSAHAAN,
+				NO_AKTE,
+				BENTUK_PERUSAHAAN,
+				ALAMAT_PERUSAHAAN,
+				ID_KOTA,
+				ID_KECAMATAN,
+				ID_KELURAHAN,
+				NAMA_KEGIATAN,
+				JENIS_USAHA,
+				ALAMAT_LOKASI,
+				ID_KELURAHAN_LOKASI,
+				ID_KECAMATAN_LOKASI,
+				STATUS_LOKASI,
+				LUAS_USAHA,
+				LUAS_BAHAN,
+				LUAS_BANGUNAN,
+				LUAS_RUANG_USAHA,
+				KAPASITAS,
+				IZIN_SKTR,
+				IZIN_LOKASI,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_kota,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id,
+				pemohon_pendidikan,
+				pemohon_tahunlulus,
+				pemohon_wn,
+				pemohon_hp
+				FROM ijin_lingkungan
+				JOIN ijin_lingkungan_inti ON ijin_lingkungan_inti.ID_IJIN_LINGKUNGAN_INTI = ijin_lingkungan.ID_IJIN_LINGKUNGAN_INTI
+				JOIN m_pemohon ON m_pemohon.pemohon_id = ijin_lingkungan_inti.ID_PEMOHON
+			WHERE ID_IJIN_LINGKUNGAN IS NOT NULL 
 	";
 	
 	function __construct(){
         parent::__construct();
         $this->table_name = 'ijin_lingkungan';
-        $this->column_primary = 'ID_IJIN_LINGUKANGAN';
+        $this->column_primary = 'ID_IJIN_LINGKUNGAN';
         $this->column_order = '';
 		$this->column_unique = '';
     }
@@ -101,5 +145,22 @@ class M_ijin_lingkungan extends App_model{
 		}
 		return $result;
 	}
-	
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 8;
+			";
+		}else{
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 8;
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 8;");
+		return $query->result_array();
+	}
 }

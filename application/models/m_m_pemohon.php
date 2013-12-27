@@ -10,6 +10,7 @@ class M_m_pemohon extends App_model{
 				pemohon_rw,
 				pemohon_kel,
 				pemohon_kec,
+				pemohon_kota,
 				pemohon_nik,
 				pemohon_stra,
 				pemohon_surattugas,
@@ -18,7 +19,9 @@ class M_m_pemohon extends App_model{
 				pemohon_tanggallahir,
 				pemohon_user_id,
 				pemohon_pendidikan,
-				pemohon_tahunlulus
+				pemohon_tahunlulus,
+				pemohon_wn,
+				pemohon_hp
 				FROM m_pemohon 
 			WHERE pemohon_id IS NOT NULL 
 	";
@@ -27,7 +30,7 @@ class M_m_pemohon extends App_model{
         parent::__construct();
         $this->table_name = 'm_pemohon';
         $this->column_primary = 'pemohon_id';
-        $this->column_order = 'pemohon_id ASC';
+        $this->column_order = '';
 		$this->column_unique = '';
     }
 	
@@ -45,6 +48,7 @@ class M_m_pemohon extends App_model{
 					pemohon_rw LIKE '%".$searchText."%' OR 
 					pemohon_kel LIKE '%".$searchText."%' OR 
 					pemohon_kec LIKE '%".$searchText."%' OR 
+					pemohon_kota LIKE '%".$searchText."%' OR 
 					pemohon_nik LIKE '%".$searchText."%' OR 
 					pemohon_stra LIKE '%".$searchText."%' OR 
 					pemohon_surattugas LIKE '%".$searchText."%' OR 
@@ -53,7 +57,9 @@ class M_m_pemohon extends App_model{
 					pemohon_tanggallahir LIKE '%".$searchText."%' OR 
 					pemohon_user_id LIKE '%".$searchText."%' OR 
 					pemohon_pendidikan LIKE '%".$searchText."%' OR 
-					pemohon_tahunlulus LIKE '%".$searchText."%'
+					pemohon_tahunlulus LIKE '%".$searchText."%' OR 
+					pemohon_wn LIKE '%".$searchText."%' OR 
+					pemohon_hp LIKE '%".$searchText."%'
 					)
 			";
 		}
@@ -93,6 +99,9 @@ class M_m_pemohon extends App_model{
 		if(@$pemohon_kec != ''){
 			$sql .= " AND pemohon_kec LIKE '%".$pemohon_kec."%' ";
 		}
+		if(@$pemohon_kota != ''){
+			$sql .= " AND pemohon_kota LIKE '%".$pemohon_kota."%' ";
+		}
 		if(@$pemohon_nik != ''){
 			$sql .= " AND pemohon_nik LIKE '%".$pemohon_nik."%' ";
 		}
@@ -119,6 +128,12 @@ class M_m_pemohon extends App_model{
 		}
 		if(@$pemohon_tahunlulus != ''){
 			$sql .= " AND pemohon_tahunlulus LIKE '%".$pemohon_tahunlulus."%' ";
+		}
+		if(@$pemohon_wn != ''){
+			$sql .= " AND pemohon_wn LIKE '%".$pemohon_wn."%' ";
+		}
+		if(@$pemohon_hp != ''){
+			$sql .= " AND pemohon_hp LIKE '%".$pemohon_hp."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
