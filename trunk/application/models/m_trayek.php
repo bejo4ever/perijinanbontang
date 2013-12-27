@@ -2,14 +2,28 @@
 class M_trayek extends App_model{
 	var $mainSql = "SELECT 
 				ID_TRAYEK,
-				ID_TRAYEK_INTI,
+				trayek.ID_TRAYEK_INTI,
 				KODE_TRAYEK,
 				NOMOR_UB,
 				TGL_PERMOHONAN,
+				CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
+				MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
+				1, 1),' Hari') as lama_proses,
 				NAMA_PERUSAHAAN,
-				NAMA_PEMOHON,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				NOMOR_KENDARAAN,
+				NAMA_PEMILIK,
+				ALAMAT_PEMILIK,
+				NO_HP,
+				NOMOR_RANGKA,
+				NOMOR_MESIN,
+				JENIS_PERMOHONAN,
 				TGL_AKHIR
-				FROM trayek 
+				FROM trayek
+				JOIN trayek_inti ON trayek_inti.ID_TRAYEK_INTI = trayek.ID_TRAYEK_INTI
+				JOIN m_pemohon ON m_pemohon.pemohon_id = trayek_inti.ID_PEMOHON
 			WHERE ID_TRAYEK IS NOT NULL 
 	";
 	
@@ -86,5 +100,22 @@ class M_trayek extends App_model{
 		}
 		return $result;
 	}
-	
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 6;
+			";
+		}else{
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 6;
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 6;");
+		return $query->result_array();
+	}
 }

@@ -106,6 +106,7 @@
 					if(link != ''){
 						$("#mainpanel").empty();
 						$("#mainpanel").load('' + link);
+						$('html, body').animate({scrollTop: 0}, 500);
 					}
 				});
 			});

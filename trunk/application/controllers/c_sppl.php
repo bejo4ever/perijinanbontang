@@ -5,6 +5,7 @@ class C_sppl extends CI_Controller{
 		parent::__construct();
 		session_start();
 		$this->load->model('m_sppl');
+		$this->load->model('m_m_pemohon');
 	}
 	
 	function index(){
@@ -38,6 +39,9 @@ class C_sppl extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
+			case 'CETAKBP':
+				$this->cetak_bp();
+			break;
 			default :
 				echo '{ failure : true }';
 			break;
@@ -58,10 +62,13 @@ class C_sppl extends CI_Controller{
 	}
 	
 	function create(){
-		$ID_SPPL = htmlentities($this->input->post('ID_SPPL'),ENT_QUOTES);
-		$ID_SPPL = is_numeric($ID_SPPL) ? $ID_SPPL : 0;
-		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
-		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
+		// $ID_SPPL = htmlentities($this->input->post('ID_SPPL'),ENT_QUOTES);
+		// $ID_SPPL = is_numeric($ID_SPPL) ? $ID_SPPL : 0;
+		// $ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		// $ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
 		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
 		$NAMA_USAHA = htmlentities($this->input->post('NAMA_USAHA'),ENT_QUOTES);
 		$PENANGGUNG_JAWAB = htmlentities($this->input->post('PENANGGUNG_JAWAB'),ENT_QUOTES);
@@ -70,8 +77,11 @@ class C_sppl extends CI_Controller{
 		$ALAMAT_USAHA = htmlentities($this->input->post('ALAMAT_USAHA'),ENT_QUOTES);
 		$STATUS_LAHAN = htmlentities($this->input->post('STATUS_LAHAN'),ENT_QUOTES);
 		$STATUS_LAHAN = is_numeric($STATUS_LAHAN) ? $STATUS_LAHAN : 0;
+		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
 		$NO_AKTA = htmlentities($this->input->post('NO_AKTA'),ENT_QUOTES);
 		$TANGGAL = htmlentities($this->input->post('TANGGAL'),ENT_QUOTES);
+		$MULAI_KEGIATAN = htmlentities($this->input->post('MULAI_KEGIATAN'),ENT_QUOTES);
 		$LUAS_LAHAN = htmlentities($this->input->post('LUAS_LAHAN'),ENT_QUOTES);
 		$LUAS_LAHAN = is_numeric($LUAS_LAHAN) ? $LUAS_LAHAN : 0;
 		$LUAS_TAPAK_BANGUNAN = htmlentities($this->input->post('LUAS_TAPAK_BANGUNAN'),ENT_QUOTES);
@@ -83,30 +93,62 @@ class C_sppl extends CI_Controller{
 				
 		$pl_author = $this->m_sppl->__checkSession();
 		$pl_created_date = date('Y-m-d H:i:s');
-		
 		if($pl_author == ''){
 			$result = 'sessionExpired';
 		}else{
-			$data = array(
-				'ID_SPPL'=>$ID_SPPL,
-				'ID_USER'=>$ID_USER,
-				'NO_SK'=>$NO_SK,
-				'NAMA_USAHA'=>$NAMA_USAHA,
-				'PENANGGUNG_JAWAB'=>$PENANGGUNG_JAWAB,
-				'NO_TELP'=>$NO_TELP,
-				'JENIS_USAHA'=>$JENIS_USAHA,
-				'ALAMAT_USAHA'=>$ALAMAT_USAHA,
-				'STATUS_LAHAN'=>$STATUS_LAHAN,
-				'NO_AKTA'=>$NO_AKTA,
-				'TANGGAL'=>$TANGGAL,
-				'LUAS_LAHAN'=>$LUAS_LAHAN,
-				'LUAS_TAPAK_BANGUNAN'=>$LUAS_TAPAK_BANGUNAN,
-				'LUAS_KEGIATAN'=>$LUAS_KEGIATAN,
-				'LUAS_PARKIR'=>$LUAS_PARKIR,
+			if($JENIS_PERMOHONAN == 1){
+				$data = array(
+					'pemohon_nama'=>$pemohon_nama,
+					'pemohon_alamat'=>$pemohon_alamat,
+					'pemohon_telp'=>$pemohon_telp,
+					'pemohon_user_id'=>$_SESSION['USERID']
 				);
-			$result = $this->m_sppl->__insert($data, '', '');
+				$pemohon= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			} else {
+				$query_p= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
+				$pemohon=$query_p['pemohon_id'];
+			}
+			if($_SESSION['IDHAK'] == 2){
+				if($JENIS_PERMOHONAN == 1){
+					$data = array(
+					'ID_PEMOHON'=>$pemohon,
+					'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+					'NAMA_USAHA'=>$NAMA_USAHA,
+					'PENANGGUNG_JAWAB'=>$PENANGGUNG_JAWAB,
+					'NO_TELP'=>$NO_TELP,
+					'JENIS_USAHA'=>$JENIS_USAHA,
+					'ALAMAT_USAHA'=>$ALAMAT_USAHA,
+					'STATUS_LAHAN'=>$STATUS_LAHAN,
+					'NO_AKTA'=>$NO_AKTA,
+					'TANGGAL'=>$TANGGAL,
+					'MULAI_KEGIATAN'=>$MULAI_KEGIATAN,
+					'LUAS_LAHAN'=>$LUAS_LAHAN,
+					'LUAS_TAPAK_BANGUNAN'=>$LUAS_TAPAK_BANGUNAN,
+					'LUAS_KEGIATAN'=>$LUAS_KEGIATAN,
+					'LUAS_PARKIR'=>$LUAS_PARKIR,
+					'TGL_PERMOHONAN'=>date("Y-m-d")
+					);
+				} else {
+					
+				}
+				$result		= $this->m_sppl->__insert($data, '', 'insertId');
+				$sppl_ket	= json_decode($this->input->post('KETERANGAN'));
+				$syarat		= $this->m_sppl->getSyarat2();
+				$i=0;
+				foreach($syarat as $row){
+					$datacek = array(
+					"ID_IJIN"=>$result,
+					"ID_SYARAT"=>$row["ID_SYARAT"],
+					"KETERANGAN"=>$sppl_ket[$i]);
+					$i++;
+					$this->m_sppl->__insert($datacek, 'cek_list_sppl', 'insertId');
+				}
+				echo "success";
+			} else {
+				
+			}
+			
 		}
-		echo $result;
 	}
 	
 	function update(){
@@ -280,13 +322,18 @@ class C_sppl extends CI_Controller{
 	function getSyarat(){
 		$currentAction = $this->input->post('currentAction');
 		$sppl_id = $this->input->post('sppl_id');
-		// $idam_det_id = $this->input->post('idam_det_id');
 		$params = array(
 			"currentAction"=>$currentAction,
 			"sktr_id"=>$sppl_id
-			// "idam_det_id"=>$idam_det_id
 		);
 		$result = $this->m_sppl->getSyarat($params);
 		echo $result;
+	}
+	function cetak_bp($id_sppl=FALSE){
+		$this->load->model("m_master_ijin");
+		$data["sppl"]	= $this->m_sppl->get_by(array("ID_SPPL"=>$id_sppl),FALSE,FALSE,TRUE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>9),FALSE,FALSE,TRUE);
+		$this->load->view("template/sppl_bp",$data);
+		
 	}
 }

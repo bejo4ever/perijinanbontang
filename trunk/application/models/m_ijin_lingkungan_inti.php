@@ -2,13 +2,20 @@
 class M_ijin_lingkungan_inti extends App_model{
 	var $mainSql = "SELECT 
 				ID_IJIN_LINGKUNGAN_INTI,
-				ID_USER,
-				NO_REG,
-				JENIS_USAHA,
-				ALAMAT,
-				ID_KELURAHAN,
-				ID_KECAMATAN,
+				ID_PEMOHON,
+				NPWPD,
+				NAMA_PERUSAHAAN,
+				NO_AKTE,
+				BENTUK_PERUSAHAAN,
+				ALAMAT_PERUSAHAAN,
 				ID_KOTA,
+				ID_KECAMATAN,
+				ID_KELURAHAN,
+				NAMA_KEGIATAN,
+				JENIS_USAHA,
+				ALAMAT_LOKASI,
+				ID_KELURAHAN_LOKASI,
+				ID_KECAMATAN_LOKASI,
 				STATUS_LOKASI,
 				LUAS_USAHA,
 				LUAS_BAHAN,
@@ -35,13 +42,20 @@ class M_ijin_lingkungan_inti extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					ID_USER LIKE '%".$searchText."%' OR 
-					NO_REG LIKE '%".$searchText."%' OR 
-					JENIS_USAHA LIKE '%".$searchText."%' OR 
-					ALAMAT LIKE '%".$searchText."%' OR 
-					ID_KELURAHAN LIKE '%".$searchText."%' OR 
-					ID_KECAMATAN LIKE '%".$searchText."%' OR 
+					ID_PEMOHON LIKE '%".$searchText."%' OR 
+					NPWPD LIKE '%".$searchText."%' OR 
+					NAMA_PERUSAHAAN LIKE '%".$searchText."%' OR 
+					NO_AKTE LIKE '%".$searchText."%' OR 
+					BENTUK_PERUSAHAAN LIKE '%".$searchText."%' OR 
+					ALAMAT_PERUSAHAAN LIKE '%".$searchText."%' OR 
 					ID_KOTA LIKE '%".$searchText."%' OR 
+					ID_KECAMATAN LIKE '%".$searchText."%' OR 
+					ID_KELURAHAN LIKE '%".$searchText."%' OR 
+					NAMA_KEGIATAN LIKE '%".$searchText."%' OR 
+					JENIS_USAHA LIKE '%".$searchText."%' OR 
+					ALAMAT_LOKASI LIKE '%".$searchText."%' OR 
+					ID_KELURAHAN_LOKASI LIKE '%".$searchText."%' OR 
+					ID_KECAMATAN_LOKASI LIKE '%".$searchText."%' OR 
 					STATUS_LOKASI LIKE '%".$searchText."%' OR 
 					LUAS_USAHA LIKE '%".$searchText."%' OR 
 					LUAS_BAHAN LIKE '%".$searchText."%' OR 
@@ -65,26 +79,47 @@ class M_ijin_lingkungan_inti extends App_model{
 		
 		$sql = $this->mainSql;
 		
-		if(@$ID_USER != ''){
-			$sql .= " AND ID_USER LIKE '%".$ID_USER."%' ";
+		if(@$ID_PEMOHON != ''){
+			$sql .= " AND ID_PEMOHON LIKE '%".$ID_PEMOHON."%' ";
 		}
-		if(@$NO_REG != ''){
-			$sql .= " AND NO_REG LIKE '%".$NO_REG."%' ";
+		if(@$NPWPD != ''){
+			$sql .= " AND NPWPD LIKE '%".$NPWPD."%' ";
 		}
-		if(@$JENIS_USAHA != ''){
-			$sql .= " AND JENIS_USAHA LIKE '%".$JENIS_USAHA."%' ";
+		if(@$NAMA_PERUSAHAAN != ''){
+			$sql .= " AND NAMA_PERUSAHAAN LIKE '%".$NAMA_PERUSAHAAN."%' ";
 		}
-		if(@$ALAMAT != ''){
-			$sql .= " AND ALAMAT LIKE '%".$ALAMAT."%' ";
+		if(@$NO_AKTE != ''){
+			$sql .= " AND NO_AKTE LIKE '%".$NO_AKTE."%' ";
 		}
-		if(@$ID_KELURAHAN != ''){
-			$sql .= " AND ID_KELURAHAN LIKE '%".$ID_KELURAHAN."%' ";
+		if(@$BENTUK_PERUSAHAAN != ''){
+			$sql .= " AND BENTUK_PERUSAHAAN LIKE '%".$BENTUK_PERUSAHAAN."%' ";
+		}
+		if(@$ALAMAT_PERUSAHAAN != ''){
+			$sql .= " AND ALAMAT_PERUSAHAAN LIKE '%".$ALAMAT_PERUSAHAAN."%' ";
+		}
+		if(@$ID_KOTA != ''){
+			$sql .= " AND ID_KOTA LIKE '%".$ID_KOTA."%' ";
 		}
 		if(@$ID_KECAMATAN != ''){
 			$sql .= " AND ID_KECAMATAN LIKE '%".$ID_KECAMATAN."%' ";
 		}
-		if(@$ID_KOTA != ''){
-			$sql .= " AND ID_KOTA LIKE '%".$ID_KOTA."%' ";
+		if(@$ID_KELURAHAN != ''){
+			$sql .= " AND ID_KELURAHAN LIKE '%".$ID_KELURAHAN."%' ";
+		}
+		if(@$NAMA_KEGIATAN != ''){
+			$sql .= " AND NAMA_KEGIATAN LIKE '%".$NAMA_KEGIATAN."%' ";
+		}
+		if(@$JENIS_USAHA != ''){
+			$sql .= " AND JENIS_USAHA LIKE '%".$JENIS_USAHA."%' ";
+		}
+		if(@$ALAMAT_LOKASI != ''){
+			$sql .= " AND ALAMAT_LOKASI LIKE '%".$ALAMAT_LOKASI."%' ";
+		}
+		if(@$ID_KELURAHAN_LOKASI != ''){
+			$sql .= " AND ID_KELURAHAN_LOKASI LIKE '%".$ID_KELURAHAN_LOKASI."%' ";
+		}
+		if(@$ID_KECAMATAN_LOKASI != ''){
+			$sql .= " AND ID_KECAMATAN_LOKASI LIKE '%".$ID_KECAMATAN_LOKASI."%' ";
 		}
 		if(@$STATUS_LOKASI != ''){
 			$sql .= " AND STATUS_LOKASI LIKE '%".$STATUS_LOKASI."%' ";
