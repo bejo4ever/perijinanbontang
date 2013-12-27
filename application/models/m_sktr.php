@@ -2,7 +2,6 @@
 class M_sktr extends App_model{
 	var $mainSql = "SELECT 
 				ID_SKTR,
-				ID_SKTR_INTI,
 				ID_PEMOHON,
 				JENIS_PERMOHONAN,
 				NO_SK,
@@ -38,7 +37,6 @@ class M_sktr extends App_model{
 		if($_SESSION["IDHAK"] == 2){
 			$sql = "SELECT 
 						ID_SKTR,
-						ID_SKTR_INTI,
 						ID_PEMOHON,
 						JENIS_PERMOHONAN,
 						NO_SK
@@ -80,7 +78,6 @@ class M_sktr extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					ID_SKTR_INTI LIKE '%".$searchText."%' OR 
 					ID_PEMOHON LIKE '%".$searchText."%' OR 
 					JENIS_PERMOHONAN LIKE '%".$searchText."%' OR 
 					NO_SK LIKE '%".$searchText."%' OR 
@@ -111,9 +108,9 @@ class M_sktr extends App_model{
 		
 		$sql = $this->mainSql;
 		
-		if(@$ID_SKTR_INTI != ''){
-			$sql .= " AND ID_SKTR_INTI LIKE '%".$ID_SKTR_INTI."%' ";
-		}
+		// if(@$ID_SKTR_INTI != ''){
+			// $sql .= " AND ID_SKTR_INTI LIKE '%".$ID_SKTR_INTI."%' ";
+		// }
 		if(@$ID_PEMOHON != ''){
 			$sql .= " AND ID_PEMOHON LIKE '%".$ID_PEMOHON."%' ";
 		}

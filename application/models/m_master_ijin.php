@@ -16,7 +16,7 @@ class M_master_ijin extends App_model{
         parent::__construct();
         $this->table_name = 'master_ijin';
         $this->column_primary = 'ID_IJIN';
-        $this->column_order = '';
+        $this->column_order = 'ID_IJIN ASC';
 		$this->column_unique = '';
     }
 	

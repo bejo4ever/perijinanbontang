@@ -2,8 +2,15 @@
 class M_sppl extends App_model{
 	var $mainSql = "SELECT 
 				ID_SPPL,
-				ID_USER,
+				ID_PEMOHON,
 				NO_SK,
+				pemohon_nama,
+				pemohon_telp,
+				pemohon_alamat,
+				JENIS_PERMOHONAN,
+				CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
+				MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
+				1, 1),' Hari') as lama_proses,
 				NAMA_USAHA,
 				PENANGGUNG_JAWAB,
 				NO_TELP,
@@ -16,7 +23,7 @@ class M_sppl extends App_model{
 				LUAS_TAPAK_BANGUNAN,
 				LUAS_KEGIATAN,
 				LUAS_PARKIR
-				FROM sppl 
+				FROM sppl JOIN m_pemohon ON m_pemohon.pemohon_id = sppl.ID_PEMOHON
 			WHERE ID_SPPL IS NOT NULL 
 	";
 	
@@ -24,7 +31,7 @@ class M_sppl extends App_model{
         parent::__construct();
         $this->table_name = 'sppl';
         $this->column_primary = 'ID_SPPL';
-        $this->column_order = '';
+        $this->column_order = 'ID_SPPL ASC';
 		$this->column_unique = '';
     }
 	
@@ -134,5 +141,9 @@ class M_sppl extends App_model{
 		}
 		$result = $this->__listCore($sql, $params);
 		return $result;
+	}
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 9;");
+		return $query->result_array();
 	}
 }

@@ -71,15 +71,15 @@ class C_sktr extends CI_Controller{
 	}
 	
 	function create(){
-		$ID_SKTR = htmlentities($this->input->post('ID_SKTR'),ENT_QUOTES);
-		$ID_SKTR = is_numeric($ID_SKTR) ? $ID_SKTR : 0;
-		$ID_SKTR_INTI = htmlentities($this->input->post('ID_SKTR_INTI'),ENT_QUOTES);
-		$ID_SKTR_INTI = is_numeric($ID_SKTR_INTI) ? $ID_SKTR_INTI : 0;
-		$ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
-		$ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
+		// $ID_SKTR = htmlentities($this->input->post('ID_SKTR'),ENT_QUOTES);
+		// $ID_SKTR = is_numeric($ID_SKTR) ? $ID_SKTR : 0;
+		// $ID_SKTR_INTI = htmlentities($this->input->post('ID_SKTR_INTI'),ENT_QUOTES);
+		// $ID_SKTR_INTI = is_numeric($ID_SKTR_INTI) ? $ID_SKTR_INTI : 0;
+		// $ID_USER = htmlentities($this->input->post('ID_USER'),ENT_QUOTES);
+		// $ID_USER = is_numeric($ID_USER) ? $ID_USER : 0;
 		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
-		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
+		// $NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
 		// $NAMA_PEMOHON = htmlentities($this->input->post('NAMA_PEMOHON'),ENT_QUOTES);
 		// $NO_TELP = htmlentities($this->input->post('NO_TELP'),ENT_QUOTES);
 		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
@@ -95,10 +95,15 @@ class C_sktr extends CI_Controller{
 		$BATAS_DEPAN = htmlentities($this->input->post('BATAS_DEPAN'),ENT_QUOTES);
 		$BATAS_BELAKANG = htmlentities($this->input->post('BATAS_BELAKANG'),ENT_QUOTES);
 		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
-		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
-		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
-		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
-		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
+		$FUNGSI = htmlentities($this->input->post('FUNGSI'),ENT_QUOTES);
+		$ALAMAT_BANGUNAN = htmlentities($this->input->post('ALAMAT_BANGUNAN'),ENT_QUOTES);
+		$TINGGI_BANGUNAN = htmlentities($this->input->post('TINGGI_BANGUNAN'),ENT_QUOTES);
+		$LUAS_PERSIL = htmlentities($this->input->post('LUAS_PERSIL'),ENT_QUOTES);
+		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
+		// $STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		// $STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		// $STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
+		// $STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
 				
 		$tr_author = $this->m_sktr->__checkSession();
 		$tr_created_date = date('Y-m-d H:i:s');
@@ -106,43 +111,59 @@ class C_sktr extends CI_Controller{
 		if($tr_author == ''){
 			$result = 'sessionExpired';
 		}else{
-			$data = array(
-				'ID_SKTR'=>$ID_SKTR,
-				'ID_SKTR_INTI'=>$ID_SKTR_INTI,
-				'ID_PEMOHON'=>$pemohon['pemohon_id'],
-				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
-				'NO_SK'=>$NO_SK,
-				// 'NAMA_PEMOHON'=>$NAMA_PEMOHON,
-				// 'NO_TELP'=>$NO_TELP,
-				'HAK_MILIK'=>$HAK_MILIK,
-				'NAMA_PEMILIK'=>$NAMA_PEMILIK,
-				'NO_SURAT_TANAH'=>$NO_SURAT_TANAH,
-				'BATAS_KIRI'=>$BATAS_KIRI,
-				'BATAS_KANAN'=>$BATAS_KANAN,
-				'BATAS_DEPAN'=>$BATAS_DEPAN,
-				'BATAS_BELAKANG'=>$BATAS_BELAKANG,
-				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
-				'STATUS'=>$STATUS,
-				'STATUS_SURVEY'=>$STATUS_SURVEY,
+			if($JENIS_PERMOHONAN == 1){
+				$data = array(
+					'pemohon_nama'=>$pemohon_nama,
+					'pemohon_alamat'=>$pemohon_alamat,
+					'pemohon_telp'=>$pemohon_telp,
+					'pemohon_user_id'=>$_SESSION['USERID']
 				);
-			$result = $this->m_sktr->__insert($data, '', 'insertId');
-			$data2 = array(
-				'pemohon_nama'=>$pemohon_nama,
-				'pemohon_alamat'=>$pemohon_alamat,
-				'pemohon_telp'=>$pemohon_telp,
-				'pemohon_user_id'=>$_SESSION['USERID']
-			);
-			// $result2 = $this->m_m_pemohon->__insert($data2, '', '');
-			$sktr_keterangan = json_decode($this->input->post('KETERANGAN'));
-			$syarat	= $this->m_sktr->getSyarat2();
-			$i=0;
-			foreach($syarat as $row){
-				$datacek = array(
-				"ID_IJIN"=>$result,
-				"ID_SYARAT"=>$row["ID_SYARAT"],
-				"KETERANGAN"=>$sktr_keterangan[$i]);
-				$i++;
-				$resultcek = $this->m_sktr->__insert($datacek, 'cek_list_sktr', 'insertId');
+				$pemohon= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			} else {
+				$query_p= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
+				$pemohon=$query_p['pemohon_id'];
+			}
+			if($_SESSION['IDHAK'] == 2){
+				if($JENIS_PERMOHONAN == 1){
+					$data = array(
+						'ID_PEMOHON'=>$pemohon,
+						'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,				
+						'HAK_MILIK'=>$HAK_MILIK,
+						'NAMA_PEMILIK'=>$NAMA_PEMILIK,
+						'NO_SURAT_TANAH'=>$NO_SURAT_TANAH,
+						'BATAS_KIRI'=>$BATAS_KIRI,
+						'BATAS_KANAN'=>$BATAS_KANAN,
+						'BATAS_DEPAN'=>$BATAS_DEPAN,
+						'BATAS_BELAKANG'=>$BATAS_BELAKANG,
+						'TGL_PERMOHONAN'=>(($TGL_PERMOHONAN == null || $TGL_PERMOHONAN == "") ? (date("Y-m-d")) : ($TGL_PERMOHONAN)),
+						'FUNGSI'=>$FUNGSI,
+						'ALAMAT_BANGUNAN'=>$ALAMAT_BANGUNAN,
+						'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
+						'LUAS_PERSIL'=>$LUAS_PERSIL,
+						'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
+						);
+					} else {
+						
+					}
+					$result = $this->m_sktr->__insert($data, '', 'insertId');
+					$data2 = array(
+						'pemohon_nama'=>$pemohon_nama,
+						'pemohon_alamat'=>$pemohon_alamat,
+						'pemohon_telp'=>$pemohon_telp,
+						'pemohon_user_id'=>$_SESSION['USERID']
+					);
+					// $result2 = $this->m_m_pemohon->__insert($data2, '', '');
+					$sktr_keterangan = json_decode($this->input->post('KETERANGAN'));
+					$syarat	= $this->m_sktr->getSyarat2();
+					$i=0;
+					foreach($syarat as $row){
+						$datacek = array(
+						"ID_IJIN"=>$result,
+						"ID_SYARAT"=>$row["ID_SYARAT"],
+						"KETERANGAN"=>$sktr_keterangan[$i]);
+						$i++;
+						$resultcek = $this->m_sktr->__insert($datacek, 'cek_list_sktr', 'insertId');
+					}
 			}
 		}
 		echo "success";

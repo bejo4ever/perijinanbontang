@@ -1,8 +1,18 @@
+<style>
+	.checked{
+		background-image:url(../assets/images/icons/check.png) !important;
+		margin:auto;
+	}
+	.unchecked{
+		background-image:url(../assets/images/icons/forward.png) !important;
+	}
+</style>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
-		var pl_componentItemTitle="PL";
+		var pl_componentItemTitle="SPPL";
 		var pl_dataStore;
+		var sppl_syaratDataStore;
 		
 		var pl_shorcut;
 		var pl_contextMenu;
@@ -67,6 +77,11 @@
 			pl_dbTaskMessage = 'created';
 			pl_resetForm();
 			pl_switchToForm();
+			sppl_syaratDataStore.proxy.extraParams = {
+				currentAction : 'create',
+				action : 'GETSYARAT'
+			};
+			sppl_syaratDataStore.load();
 		}
 		
 		function pl_confirmUpdate(){
@@ -131,13 +146,22 @@
 					var LUAS_TAPAK_BANGUNANValue = '';
 					var LUAS_KEGIATANValue = '';
 					var LUAS_PARKIRValue = '';
-										
+					var array_sppl_keterangan=new Array();
+					if(sppl_syaratDataStore.getCount() > 0){
+						for(var i=0;i<sppl_syaratDataStore.getCount();i++){
+							array_sppl_keterangan.push(sppl_syaratDataStore.getAt(i).data.KETERANGAN);
+						}
+					}					
+					var encoded_array_sppl_keterangan = Ext.encode(array_sppl_keterangan);					
 					ID_SPPLValue = ID_SPPLField.getValue();
 					ID_USERValue = ID_USERField.getValue();
 					NO_SKValue = NO_SKField.getValue();
 					NAMA_USAHAValue = NAMA_USAHAField.getValue();
 					PENANGGUNG_JAWABValue = PENANGGUNG_JAWABField.getValue();
 					NO_TELPValue = NO_TELPField.getValue();
+					pemohon_namaValue = pemohon_namaField.getValue();
+					pemohon_telpValue = pemohon_telpField.getValue();
+					pemohon_alamatValue = pemohon_alamatField.getValue();
 					JENIS_USAHAValue = JENIS_USAHAField.getValue();
 					ALAMAT_USAHAValue = ALAMAT_USAHAField.getValue();
 					STATUS_LAHANValue = STATUS_LAHANField.getValue();
@@ -147,6 +171,8 @@
 					LUAS_TAPAK_BANGUNANValue = LUAS_TAPAK_BANGUNANField.getValue();
 					LUAS_KEGIATANValue = LUAS_KEGIATANField.getValue();
 					LUAS_PARKIRValue = LUAS_PARKIRField.getValue();
+					JENIS_PERMOHONANValue = JENIS_PERMOHONANField.getValue();
+					MULAI_KEGIATANValue = MULAI_KEGIATANField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -161,12 +187,18 @@
 							JENIS_USAHA : JENIS_USAHAValue,
 							ALAMAT_USAHA : ALAMAT_USAHAValue,
 							STATUS_LAHAN : STATUS_LAHANValue,
+							pemohon_nama : pemohon_namaValue,
+							pemohon_telp : pemohon_telpValue,
+							pemohon_alamat : pemohon_alamatValue,
 							NO_AKTA : NO_AKTAValue,
 							TANGGAL : TANGGALValue,
 							LUAS_LAHAN : LUAS_LAHANValue,
 							LUAS_TAPAK_BANGUNAN : LUAS_TAPAK_BANGUNANValue,
 							LUAS_KEGIATAN : LUAS_KEGIATANValue,
 							LUAS_PARKIR : LUAS_PARKIRValue,
+							JENIS_PERMOHONAN : JENIS_PERMOHONANValue,
+							MULAI_KEGIATAN : MULAI_KEGIATANValue,
+							KETERANGAN : encoded_array_sppl_keterangan,
 							action : pl_dbTask
 						},
 						success: function(response){
@@ -174,7 +206,16 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
+									Ext.MessageBox.show({
+										title : globalSuccessSaveTitle,
+										msg : globalSuccessSave,
+										buttons : Ext.MessageBox.OK,
+										animEl : 'save',
+										// icon : Ext.MessageBox.WARNING,
+										fn : function(btn){
+											$('html, body').animate({scrollTop: 0}, 500);
+										}
+									});
 									pl_dataStore.reload();
 									pl_resetForm();
 									pl_switchToGrid();
@@ -334,7 +375,13 @@
 			LUAS_TAPAK_BANGUNANField.setValue(record.data.LUAS_TAPAK_BANGUNAN);
 			LUAS_KEGIATANField.setValue(record.data.LUAS_KEGIATAN);
 			LUAS_PARKIRField.setValue(record.data.LUAS_PARKIR);
-					}
+			sppl_syaratDataStore.proxy.extraParams = { 
+				trayek_id : record.data.ID_TRAYEK,
+				currentAction : 'update',
+				action : 'GETSYARAT'
+			};
+			sppl_syaratDataStore.load();
+		}
 		
 		function pl_showSearchWindow(){
 			pl_searchWindow.show();
@@ -513,6 +560,11 @@
 			fields : [
 				{ name : 'ID_SPPL', type : 'int', mapping : 'ID_SPPL' },
 				{ name : 'ID_USER', type : 'int', mapping : 'ID_USER' },
+				{ name : 'JENIS_PERMOHONAN', type : 'int', mapping : 'JENIS_PERMOHONAN' },
+				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+				{ name : 'lama_proses', type : 'string', mapping : 'lama_proses' },
 				{ name : 'NO_SK', type : 'string', mapping : 'NO_SK' },
 				{ name : 'NAMA_USAHA', type : 'string', mapping : 'NAMA_USAHA' },
 				{ name : 'PENANGGUNG_JAWAB', type : 'string', mapping : 'PENANGGUNG_JAWAB' },
@@ -522,6 +574,7 @@
 				{ name : 'STATUS_LAHAN', type : 'int', mapping : 'STATUS_LAHAN' },
 				{ name : 'NO_AKTA', type : 'string', mapping : 'NO_AKTA' },
 				{ name : 'TANGGAL', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TANGGAL' },
+				{ name : 'MULAI_KEGIATAN', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'MULAI_KEGIATAN' },
 				{ name : 'LUAS_LAHAN', type : 'float', mapping : 'LUAS_LAHAN' },
 				{ name : 'LUAS_TAPAK_BANGUNAN', type : 'float', mapping : 'LUAS_TAPAK_BANGUNAN' },
 				{ name : 'LUAS_KEGIATAN', type : 'float', mapping : 'LUAS_KEGIATAN' },
@@ -672,15 +725,15 @@
 			text : 'Bukti Penerimaan',
 			tooltip : 'Cetak Bukti Penerimaan',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = pl_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
 					url: 'c_sppl/switchAction',
 					params: {
-						ID_SKTR : record.get('ID_SKTR'),
+						ID_SPPL : record.get('ID_SPPL'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('../print/idam_buktipenerimaan.html');
+						window.open('<?php echo base_url("index.php/c_sppl/cetak_bp/")?>' + record.get('ID_SPPL'));
 					}
 				});
 			}
@@ -721,7 +774,7 @@
 		});
 		var sppl_printContextMenu = Ext.create('Ext.menu.Menu',{
 			items: [
-				sppl_bp_printCM,sppl_lk_printCM,stkr_sppl_printCM
+				<?php echo ($_SESSION["IDHAK"] == 2) ? ("sppl_bp_printCM") : ("sppl_bp_printCM,sppl_lk_printCM,stkr_sppl_printCM")?>
 			]
 		});
 		function sppl_ubahProses(proses){
@@ -802,102 +855,6 @@
 			multiSelect : true,
 			keys : pl_shorcut,
 			columns : [
-				/* {
-					text : 'ID_USER',
-					dataIndex : 'ID_USER',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NO_SK',
-					dataIndex : 'NO_SK',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NAMA_USAHA',
-					dataIndex : 'NAMA_USAHA',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'PENANGGUNG_JAWAB',
-					dataIndex : 'PENANGGUNG_JAWAB',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NO_TELP',
-					dataIndex : 'NO_TELP',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'JENIS_USAHA',
-					dataIndex : 'JENIS_USAHA',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ALAMAT_USAHA',
-					dataIndex : 'ALAMAT_USAHA',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'STATUS_LAHAN',
-					dataIndex : 'STATUS_LAHAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NO_AKTA',
-					dataIndex : 'NO_AKTA',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TANGGAL',
-					dataIndex : 'TANGGAL',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'LUAS_LAHAN',
-					dataIndex : 'LUAS_LAHAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'LUAS_TAPAK_BANGUNAN',
-					dataIndex : 'LUAS_TAPAK_BANGUNAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'LUAS_KEGIATAN',
-					dataIndex : 'LUAS_KEGIATAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'LUAS_PARKIR',
-					dataIndex : 'LUAS_PARKIR',
-					width : 100,
-					sortable : false
-				}, */
-				// {
-					// text : 'ID_SKTR_INTI',
-					// dataIndex : 'ID_SKTR_INTI',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'ID_USER',
-					// dataIndex : 'ID_USER',
-					// width : 100,
-					// sortable : false
-				// },
 				{
 					text : 'Jenis Permohonan',
 					dataIndex : 'JENIS_PERMOHONAN',
@@ -924,8 +881,8 @@
 					sortable : false
 				},
 				{
-					text : 'pemohon_alamat',
-					dataIndex : 'Alamat Pemohon',
+					text : 'Alamat Pemohon',
+					dataIndex : 'pemohon_alamat',
 					width : 100,
 					sortable : false
 				},
@@ -941,54 +898,6 @@
 					width : 100,
 					sortable : false
 				},
-				// {
-					// text : 'NAMA_PEMILIK',
-					// dataIndex : 'NAMA_PEMILIK',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'NO_SURAT_TANAH',
-					// dataIndex : 'NO_SURAT_TANAH',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'BATAS_KIRI',
-					// dataIndex : 'BATAS_KIRI',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'BATAS_KANAN',
-					// dataIndex : 'BATAS_KANAN',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'BATAS_DEPAN',
-					// dataIndex : 'BATAS_DEPAN',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'BATAS_BELAKANG',
-					// dataIndex : 'BATAS_BELAKANG',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'TGL_PERMOHONAN',
-					// dataIndex : 'TGL_PERMOHONAN',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'Lama Proses',
-					// dataIndex : 'lama_proses',
-					// width : 100,
-					// sortable : false
-				// },
 				{
 					text : 'Status Berkas',
 					dataIndex : 'STATUS',
@@ -999,8 +908,10 @@
 								return 'Disetujui, sudah diambil';
 							}else if (value == 2){
 								return 'Disetujui, belum diambil';
-							} else {
+							} else if (value == 0){
 								return 'Ditolak';
+							} else {
+								return '-';
 							}
 						}
 				},
@@ -1026,16 +937,17 @@
 						tooltip: 'Ubah Data',
 						handler: function(grid, rowIndex){
 							grid.getSelectionModel().select(rowIndex);
-							tr_confirmUpdate();
+							pl_confirmUpdate();
 						}
 					},{
 						iconCls: 'icon16x16-delete',
 						tooltip: 'Hapus Data',
 						handler: function(grid, rowIndex){
 							grid.getSelectionModel().select(rowIndex);
-							tr_confirmDelete();
+							pl_confirmDelete();
 						}
-					}]
+					}],
+					<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : ("")?>
 				},{
 					xtype:'actioncolumn',
 					width:100,
@@ -1048,7 +960,8 @@
 							sppl_prosesContextMenu.showAt(e.getXY());
 							return false;
 						}
-					}]
+					}],
+					<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : ("")?>
 				}
 							
 			],
@@ -1099,6 +1012,13 @@
 			fieldLabel : 'No. SK',
 			maxLength : 50
 		});
+		NO_SK_LAMAField = Ext.create('Ext.form.TextField',{
+			id : 'NO_SK_LAMAField',
+			name : 'NO_SK_LAMA',
+			fieldLabel : 'No. SK Lama',
+			maxLength : 50,
+			hidden:true
+		});
 		NAMA_USAHAField = Ext.create('Ext.form.TextField',{
 			id : 'NAMA_USAHAField',
 			name : 'NAMA_USAHA',
@@ -1129,19 +1049,25 @@
 			fieldLabel : 'Alamat Usaha',
 			maxLength : 100
 		});
+		pemohon_namaField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_namaField',
+			name : 'pemohon_nama',
+			fieldLabel : 'Nama Pemohon',
+			maxLength : 50
+		});
+		pemohon_telpField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_telpField',
+			name : 'pemohon_telp',
+			fieldLabel : 'No. Telp',
+			maxLength : 20
+		});
+		pemohon_alamatField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_alamatField',
+			name : 'pemohon_alamat',
+			fieldLabel : 'Alamat Pemohon',
+			maxLength : 20
+		});
 		STATUS_LAHANField = Ext.create('Ext.form.ComboBox',{
-		/* 	id : 'STATUS_LAHANField',
-			name : 'STATUS_LAHAN',
-			fieldLabel : 'Status Lahan',
-			store : new Ext.data.ArrayStore({
-				fields : ['status_id', 'status'],
-				data : [[1,'Sertifikat'],[0,'PPAT']]
-			}),
-			displayField : 'status',
-			valueField : 'status_id',
-			queryMode : 'local',
-			triggerAction : 'all',
-			forceSelection : true */
 			id : 'STATUS_LAHANField',
 			name : 'STATUS_LAHAN',
 			fieldLabel : 'Status Lahan',
@@ -1155,6 +1081,36 @@
 			triggerAction : 'all',
 			forceSelection : true
 		});
+		JENIS_PERMOHONANField = Ext.create('Ext.form.ComboBox',{
+			id : 'JENIS_PERMOHONANField',
+			name : 'JENIS_PERMOHONAN',
+			fieldLabel : 'Jenis Permohonan',
+			allowBlank : false,
+			store : new Ext.data.ArrayStore({
+				fields : ['jenis_id', 'jenis'],
+				data : [[1,'Baru'],[0,'Perubahan']]
+			}),
+			displayField : 'jenis',
+			valueField : 'jenis_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true,
+			listeners : {
+				select : function(cmb, rec){
+					if(cmb.getValue() == '0'){
+						NO_SK_LAMAField.show();
+						pemohon_namaField.disable();
+						pemohon_alamatField.disable();
+						pemohon_telpField.disable();
+					}else{
+						NO_SK_LAMAField.hide();
+						pemohon_namaField.enable();
+						pemohon_alamatField.enable();
+						pemohon_telpField.enable();
+					}
+				}
+			}
+		});
 		NO_AKTAField = Ext.create('Ext.form.TextField',{
 			id : 'NO_AKTAField',
 			name : 'NO_AKTA',
@@ -1164,7 +1120,13 @@
 		TANGGALField = Ext.create('Ext.form.Date',{
 			id : 'TANGGALField',
 			name : 'TANGGAL',
-			fieldLabel : 'Tanggal',
+			fieldLabel : 'Tanggal Akta',
+			maxLength : 20
+		});
+		MULAI_KEGIATANField = Ext.create('Ext.form.Date',{
+			id : 'MULAI_KEGIATANField',
+			name : 'MULAI_KEGIATAN',
+			fieldLabel : 'Mulai Kegiatan',
 			maxLength : 20
 		});
 		LUAS_LAHANField = Ext.create('Ext.form.TextField',{
@@ -1208,11 +1170,12 @@
 			handler : function(){
 				pl_resetForm();
 				pl_switchToGrid();
+				$('html, body').animate({scrollTop: 0}, 500);
 			}
 		});
 		/*Get Syarat*/
-		sppl_det_syaratDataStore = Ext.create('Ext.data.Store',{
-			id : 'sppl_det_syaratDataStore',
+		sppl_syaratDataStore = Ext.create('Ext.data.Store',{
+			id : 'sppl_syaratDataStore',
 			pageSize : globalPageSize,
 			autoLoad : true,
 			proxy : Ext.create('Ext.data.HttpProxy',{
@@ -1234,19 +1197,15 @@
 				{ name : 'ID_IJIN', type : 'int', mapping : 'ID_IJIN' },
 				{ name : 'ID_SYARAT', type : 'int', mapping : 'ID_SYARAT' },
 				{ name : 'NAMA_SYARAT', type : 'string', mapping : 'NAMA_SYARAT' },
-				{ name : 'KETERANGAN', type : 'string', mapping : 'KETERANGAN' },
-				// { name : 'idam_cek_idam_id', type : 'int', mapping : 'idam_cek_idam_id' },
-				// { name : 'idam_cek_status', type : 'boolean', mapping : 'idam_cek_status' },
-				// { name : 'idam_cek_keterangan', type : 'string', mapping : 'idam_cek_keterangan' },
-				// { name : 'idam_cek_syarat_nama', type : 'string', mapping : 'idam_cek_syarat_nama' }
+				{ name : 'KETERANGAN', type : 'string', mapping : 'KETERANGAN' }
 				]
 		});
 		var sppl_syaratGridEditor = new Ext.grid.plugin.CellEditing({
 			clicksToEdit: 1
 		});
 		sppl_syaratGrid = Ext.create('Ext.grid.Panel',{
-			id : 'sppl_det_syaratDataStore',
-			store : sppl_det_syaratDataStore,
+			id : 'sppl_syaratDataStore',
+			store : sppl_syaratDataStore,
 			loadMask : true,
 			width : '95%',
 			plugins : [
@@ -1275,15 +1234,7 @@
 					dataIndex : 'NAMA_SYARAT',
 					width : 300,
 					sortable : false
-				},
-				// {
-					// xtype: 'checkcolumn',
-					// text: 'Ada?',
-					// dataIndex: 'idam_cek_status',
-					// width: 55,
-					// stopSelection: false
-				// },
-				{
+				},{
 					text : 'Keterangan',
 					dataIndex : 'KETERANGAN',
 					width : 200,
@@ -1295,28 +1246,27 @@
 		});
 		/*End Syarat*/
 		pl_formPanel = Ext.create('Ext.form.Panel', {
-			/* disabled : true,
-			fieldDefaults: {
-				msgTarget: 'side'
-			}, */
 			disabled : true,
 			frame : true,
 			layout : {
-				/* type : 'vbox',
-				align : 'stretch',
-				padding : 5 */
 				type : 'form',
 				padding : 5
 			},
 			items: [
 				{
-					/* xtype : 'container',
-					layout : 'hbox',
-					style : {borderWidth :'0px'},
-					defaultType : 'textfield',
-					defaults : {anchor : '95%'},
-					layout : 'anchor',
-					flex : 2, */
+					xtype : 'fieldset',
+					title : 'Data Permohon',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						JENIS_PERMOHONANField,
+						NO_SK_LAMAField,
+						pemohon_namaField,
+						pemohon_telpField,
+						pemohon_alamatField
+											]
+				},{
 					xtype : 'fieldset',
 					title : '1. Data Permohonan',
 					checkboxToggle : false,
@@ -1325,7 +1275,7 @@
 					items : [
 						ID_SPPLField,
 						ID_USERField,
-						NO_SKField,
+						// NO_SKField,
 						NAMA_USAHAField,
 						PENANGGUNG_JAWABField,
 						NO_TELPField,
@@ -1334,6 +1284,7 @@
 						STATUS_LAHANField,
 						NO_AKTAField,
 						TANGGALField,
+						MULAI_KEGIATANField,
 						LUAS_LAHANField,
 						LUAS_TAPAK_BANGUNANField,
 						LUAS_KEGIATANField,
@@ -1371,6 +1322,7 @@
 			closable : false,
 			items : [pl_formPanel]
 		});
+/* End FormP
 /* End FormPanel declaration */
 /* Start SearchPanel declaration */
 		ID_USERSearchField = Ext.create('Ext.form.NumberField',{
