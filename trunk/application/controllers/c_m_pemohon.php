@@ -67,6 +67,7 @@ class C_m_pemohon extends CI_Controller{
 		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
 		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
 		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_kota = htmlentities($this->input->post('pemohon_kota'),ENT_QUOTES);
 		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
 		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
 		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
@@ -78,6 +79,8 @@ class C_m_pemohon extends CI_Controller{
 		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
 		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
 		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		$pemohon_wn = htmlentities($this->input->post('pemohon_wn'),ENT_QUOTES);
+		$pemohon_hp = htmlentities($this->input->post('pemohon_hp'),ENT_QUOTES);
 				
 		$pemohon_author = $this->m_m_pemohon->__checkSession();
 		$pemohon_created_date = date('Y-m-d H:i:s');
@@ -95,6 +98,7 @@ class C_m_pemohon extends CI_Controller{
 				'pemohon_rw'=>$pemohon_rw,
 				'pemohon_kel'=>$pemohon_kel,
 				'pemohon_kec'=>$pemohon_kec,
+				'pemohon_kota'=>$pemohon_kota,
 				'pemohon_nik'=>$pemohon_nik,
 				'pemohon_stra'=>$pemohon_stra,
 				'pemohon_surattugas'=>$pemohon_surattugas,
@@ -104,6 +108,8 @@ class C_m_pemohon extends CI_Controller{
 				'pemohon_user_id'=>$pemohon_user_id,
 				'pemohon_pendidikan'=>$pemohon_pendidikan,
 				'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+				'pemohon_wn'=>$pemohon_wn,
+				'pemohon_hp'=>$pemohon_hp,
 				);
 			$result = $this->m_m_pemohon->__insert($data, '', '');
 		}
@@ -123,6 +129,7 @@ class C_m_pemohon extends CI_Controller{
 		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
 		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
 		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_kota = htmlentities($this->input->post('pemohon_kota'),ENT_QUOTES);
 		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
 		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
 		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
@@ -134,6 +141,8 @@ class C_m_pemohon extends CI_Controller{
 		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
 		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
 		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		$pemohon_wn = htmlentities($this->input->post('pemohon_wn'),ENT_QUOTES);
+		$pemohon_hp = htmlentities($this->input->post('pemohon_hp'),ENT_QUOTES);
 				
 		$pemohon_updated_by = $this->m_m_pemohon->__checkSession();
 		$pemohon_updated_date = date('Y-m-d H:i:s');
@@ -150,6 +159,7 @@ class C_m_pemohon extends CI_Controller{
 				'pemohon_rw'=>$pemohon_rw,
 				'pemohon_kel'=>$pemohon_kel,
 				'pemohon_kec'=>$pemohon_kec,
+				'pemohon_kota'=>$pemohon_kota,
 				'pemohon_nik'=>$pemohon_nik,
 				'pemohon_stra'=>$pemohon_stra,
 				'pemohon_surattugas'=>$pemohon_surattugas,
@@ -159,6 +169,8 @@ class C_m_pemohon extends CI_Controller{
 				'pemohon_user_id'=>$pemohon_user_id,
 				'pemohon_pendidikan'=>$pemohon_pendidikan,
 				'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+				'pemohon_wn'=>$pemohon_wn,
+				'pemohon_hp'=>$pemohon_hp,
 				);
 			$result = $this->m_m_pemohon->__update($data, $pemohon_id, '', '');
 		}
@@ -185,6 +197,7 @@ class C_m_pemohon extends CI_Controller{
 		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
 		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
 		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_kota = htmlentities($this->input->post('pemohon_kota'),ENT_QUOTES);
 		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
 		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
 		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
@@ -196,6 +209,8 @@ class C_m_pemohon extends CI_Controller{
 		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
 		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
 		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		$pemohon_wn = htmlentities($this->input->post('pemohon_wn'),ENT_QUOTES);
+		$pemohon_hp = htmlentities($this->input->post('pemohon_hp'),ENT_QUOTES);
 				
 		$params = array(
 			'pemohon_nama'=>$pemohon_nama,
@@ -206,6 +221,7 @@ class C_m_pemohon extends CI_Controller{
 			'pemohon_rw'=>$pemohon_rw,
 			'pemohon_kel'=>$pemohon_kel,
 			'pemohon_kec'=>$pemohon_kec,
+			'pemohon_kota'=>$pemohon_kota,
 			'pemohon_nik'=>$pemohon_nik,
 			'pemohon_stra'=>$pemohon_stra,
 			'pemohon_surattugas'=>$pemohon_surattugas,
@@ -215,6 +231,8 @@ class C_m_pemohon extends CI_Controller{
 			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+			'pemohon_wn'=>$pemohon_wn,
+			'pemohon_hp'=>$pemohon_hp,
 			'limit_start' => $limit_start,
 			'limit_end' => $limit_end
 		);
@@ -238,6 +256,7 @@ class C_m_pemohon extends CI_Controller{
 		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
 		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
 		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
+		$pemohon_kota = htmlentities($this->input->post('pemohon_kota'),ENT_QUOTES);
 		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
 		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
 		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
@@ -249,6 +268,8 @@ class C_m_pemohon extends CI_Controller{
 		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
 		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
 		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		$pemohon_wn = htmlentities($this->input->post('pemohon_wn'),ENT_QUOTES);
+		$pemohon_hp = htmlentities($this->input->post('pemohon_hp'),ENT_QUOTES);
 				
 		$params = array(
 			'searchText' => $searchText,
@@ -260,6 +281,7 @@ class C_m_pemohon extends CI_Controller{
 			'pemohon_rw'=>$pemohon_rw,
 			'pemohon_kel'=>$pemohon_kel,
 			'pemohon_kec'=>$pemohon_kec,
+			'pemohon_kota'=>$pemohon_kota,
 			'pemohon_nik'=>$pemohon_nik,
 			'pemohon_stra'=>$pemohon_stra,
 			'pemohon_surattugas'=>$pemohon_surattugas,
@@ -269,6 +291,8 @@ class C_m_pemohon extends CI_Controller{
 			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
+			'pemohon_wn'=>$pemohon_wn,
+			'pemohon_hp'=>$pemohon_hp,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
