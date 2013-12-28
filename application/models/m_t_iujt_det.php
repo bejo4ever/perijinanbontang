@@ -21,6 +21,7 @@ class M_t_iujt_det extends App_model{
 				det_iujt_ceknip,
 				det_iujt_catatan,
 				det_iujt_proses,
+				det_iujt_perihal,
 				iujt_usaha,
 				iujt_alamatusaha,
 				iujt_statusperusahaan,

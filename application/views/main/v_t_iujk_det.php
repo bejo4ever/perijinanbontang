@@ -3,6 +3,7 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
 </style>
+<h4>IZIN USAHA JASA KONSTRUKSI</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
