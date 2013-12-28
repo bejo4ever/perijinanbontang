@@ -6,6 +6,7 @@
 		background-image:url(../assets/images/icons/forward.png) !important;
 	}
 </style>
+<h4>IZIN USAHA JASA TITIPAN</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */

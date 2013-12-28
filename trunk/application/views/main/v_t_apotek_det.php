@@ -3,6 +3,7 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
 </style>
+<h4>IZIN APOTEK</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -1656,6 +1657,23 @@
 				});
 			}
 		});
+		var apotek_det_si_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Surat Ijin',
+			tooltip : 'Cetak Surat Ijin',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKSI'
+					},success : function(){
+						window.open('../print/apotek_si.html');
+					}
+				});
+			}
+		});
 		var apotek_det_bap_printCM = Ext.create('Ext.menu.Item',{
 			text : 'Berita Acara Penerimaan',
 			tooltip : 'Cetak Berita Acara Pemeriksaan',
@@ -1690,9 +1708,26 @@
 				});
 			}
 		});
+		var apotek_det_lampiran_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Lampiran',
+			tooltip : 'Cetak Lampiran',
+			handler : function(){
+				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_t_apotek_det/switchAction',
+					params: {
+						apotekdet_id : record.get('det_apotek_id'),
+						action : 'CETAKLAMPIRAN'
+					},success : function(){
+						window.open('../print/apotek_lampiran.html');
+					}
+				});
+			}
+		});
 		var apotek_det_printContextMenu = Ext.create('Ext.menu.Menu',{
 			items: [
-				apotek_det_bp_printCM,apotek_det_lk_printCM,apotek_det_bap_printCM,apotek_det_sk_printCM
+				apotek_det_bp_printCM,apotek_det_lampiran_printCM,apotek_det_lk_printCM,apotek_det_bap_printCM,apotek_det_si_printCM,apotek_det_sk_printCM
 			]
 		});
 		function apotek_det_ubahProses(proses){
@@ -3897,6 +3932,7 @@
 		<?php if(@$_SESSION['IDHAK'] == 2){ ?>
 			apotek_det_lk_printCM.hide();
 			apotek_det_bap_printCM.hide();
+			apotek_det_si_printCM.hide();
 			apotek_det_sk_printCM.hide();
 			apotek_det_gridPanel.columns[30].setVisible(false);
 			apotek_det_gridPanel.columns[31].setVisible(false);

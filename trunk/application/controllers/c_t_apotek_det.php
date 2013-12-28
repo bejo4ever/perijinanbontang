@@ -47,11 +47,17 @@ class C_t_apotek_det extends CI_Controller{
 			case 'CETAKLEMBARKONTROL':
 				$this->cetakLembarKontrol();
 			break;
+			case 'CETAKLAMPIRAN':
+				$this->cetakLampiran();
+			break;
 			case 'CETAKBAP':
 				$this->cetakBap();
 			break;
 			case 'CETAKSK':
 				$this->cetakSk();
+			break;
+			case 'CETAKSI':
+				$this->cetakSi();
 			break;
 			case 'CETAKBP':
 				$this->cetakBp();
@@ -1061,6 +1067,19 @@ class C_t_apotek_det extends CI_Controller{
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
+	function cetakLampiran(){
+		$apotekdet_id  = $this->input->post('apotekdet_id');
+		$params = array(
+			"det_apotek_id"=>$apotekdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_apotek_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_apotek_lampiran.php',$data,TRUE);
+		$print_file=fopen('print/apotek_lampiran.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
 	function cetakBap(){
 		$apotekdet_id  = $this->input->post('apotekdet_id');
 		$params = array(
@@ -1084,6 +1103,19 @@ class C_t_apotek_det extends CI_Controller{
 		$data['printrecord'] = $printrecord[1];
 		$print_view=$this->load->view('template/p_apotek_sk.php',$data,TRUE);
 		$print_file=fopen('print/apotek_sk.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakSi(){
+		$apotekdet_id  = $this->input->post('apotekdet_id');
+		$params = array(
+			"det_apotek_id"=>$apotekdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_apotek_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_apotek_ijin.php',$data,TRUE);
+		$print_file=fopen('print/apotek_si.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}

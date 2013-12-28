@@ -6,6 +6,7 @@
 		background-image:url(../assets/images/icons/forward.png) !important;
 	}
 </style>
+<h4>IZIN PENGAMBILAN MINERAL BUKAN LOGAM DAN BATUAN</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
