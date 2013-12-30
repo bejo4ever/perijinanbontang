@@ -77,9 +77,6 @@ class M_m_pemohon extends App_model{
 		extract($params);
 		
 		$sql = $this->mainSql;
-		if(@$_SESSION['IDHAK'] == 2){
-			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID'];
-		}
 		
 		if(@$pemohon_nama != ''){
 			$sql .= " AND pemohon_nama LIKE '%".$pemohon_nama."%' ";
