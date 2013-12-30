@@ -18,6 +18,7 @@ class M_sppl extends App_model{
 				ALAMAT_USAHA,
 				STATUS_LAHAN,
 				NO_AKTA,
+				MULAI_KEGIATAN,
 				TANGGAL,
 				LUAS_LAHAN,
 				LUAS_TAPAK_BANGUNAN,
@@ -111,6 +112,9 @@ class M_sppl extends App_model{
 		}
 		if(@$LUAS_PARKIR != ''){
 			$sql .= " AND LUAS_PARKIR LIKE '%".$LUAS_PARKIR."%' ";
+		}
+		if($_SESSION["IDHAK"] == 2){
+			$sql .= " AND m_pemohon.pemohon_user_id = " . $_SESSION["USERID"];
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

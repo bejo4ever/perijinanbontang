@@ -129,7 +129,24 @@ class C_sppl extends CI_Controller{
 					'TGL_PERMOHONAN'=>date("Y-m-d")
 					);
 				} else {
-					
+					$data = array(
+					'ID_PEMOHON'=>$pemohon,
+					'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+					'NAMA_USAHA'=>$NAMA_USAHA,
+					'PENANGGUNG_JAWAB'=>$PENANGGUNG_JAWAB,
+					'NO_TELP'=>$NO_TELP,
+					'JENIS_USAHA'=>$JENIS_USAHA,
+					'ALAMAT_USAHA'=>$ALAMAT_USAHA,
+					'STATUS_LAHAN'=>$STATUS_LAHAN,
+					'NO_AKTA'=>$NO_AKTA,
+					'TANGGAL'=>$TANGGAL,
+					'MULAI_KEGIATAN'=>$MULAI_KEGIATAN,
+					'LUAS_LAHAN'=>$LUAS_LAHAN,
+					'LUAS_TAPAK_BANGUNAN'=>$LUAS_TAPAK_BANGUNAN,
+					'LUAS_KEGIATAN'=>$LUAS_KEGIATAN,
+					'LUAS_PARKIR'=>$LUAS_PARKIR,
+					'TGL_PERMOHONAN'=>date("Y-m-d")
+					);
 				}
 				$result		= $this->m_sppl->__insert($data, '', 'insertId');
 				$sppl_ket	= json_decode($this->input->post('KETERANGAN'));

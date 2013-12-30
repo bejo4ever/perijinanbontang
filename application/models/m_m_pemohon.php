@@ -30,7 +30,7 @@ class M_m_pemohon extends App_model{
         parent::__construct();
         $this->table_name = 'm_pemohon';
         $this->column_primary = 'pemohon_id';
-        $this->column_order = '';
+        $this->column_order = 'pemohon_id';
 		$this->column_unique = '';
     }
 	
@@ -137,6 +137,9 @@ class M_m_pemohon extends App_model{
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
+		}
+		if($_SESSION["IDHAK"] == 2){
+			$sql .= " AND pemohon_user_id = " . $_SESSION["USERID"];
 		}
 		$result = $this->__listCore($sql, $params);
 		return $result;

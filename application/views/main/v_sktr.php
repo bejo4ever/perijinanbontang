@@ -178,6 +178,7 @@
 					pemohon_namaValue = pemohon_namaField.getValue();
 					pemohon_telpValue = pemohon_telpField.getValue();
 					pemohon_alamatValue = pemohon_alamatField.getValue();
+					pemohon_idFieldValue = pemohon_idField.getValue();
 					HAK_MILIKValue = HAK_MILIKField.getValue();
 					NAMA_PEMILIKValue = NAMA_PEMILIKField.getValue();
 					NO_SURAT_TANAHValue = NO_SURAT_TANAHField.getValue();
@@ -199,13 +200,12 @@
 						url: 'c_sktr/switchAction',
 						params: {							
 							ID_SKTR : ID_SKTRValue,
-							// ID_SKTR_INTI : ID_SKTR_INTIValue,
-							// ID_USER : ID_USERValue,
 							JENIS_PERMOHONAN : JENIS_PERMOHONANValue,
 							NO_SK : NO_SKValue,
 							pemohon_nama : pemohon_namaValue,
 							pemohon_telp : pemohon_telpValue,
 							pemohon_alamat : pemohon_alamatValue,
+							pemohon_id : pemohon_idFieldValue,
 							HAK_MILIK : HAK_MILIKValue,
 							NAMA_PEMILIK : NAMA_PEMILIKValue,
 							NO_SURAT_TANAH : NO_SURAT_TANAHValue,
@@ -915,18 +915,6 @@
 			multiSelect : true,
 			keys : tr_shorcut,
 			columns : [
-				// {
-					// text : 'ID_SKTR_INTI',
-					// dataIndex : 'ID_SKTR_INTI',
-					// width : 100,
-					// sortable : false
-				// },
-				// {
-					// text : 'ID_USER',
-					// dataIndex : 'ID_USER',
-					// width : 100,
-					// sortable : false
-				// },
 				{
 					text : 'Jenis Permohonan',
 					dataIndex : 'JENIS_PERMOHONAN',
@@ -980,10 +968,10 @@
 								return 'Disetujui, sudah diambil';
 							}else if (value == 2){
 								return 'Disetujui, belum diambil';
-							} else if (value == 0){
-								return 'Ditolak';
-							} else {
+							} else if (value == null || value == ""){
 								return '-';
+							} else {
+								return 'Ditolak';
 							}
 						}
 				},
@@ -1104,14 +1092,14 @@
 				select : function(cmb, rec){
 					if(cmb.getValue() == '2'){
 						NO_SK_LAMAField.show();
-						pemohon_namaField.disable();
-						pemohon_alamatField.disable();
-						pemohon_telpField.disable();
+						// pemohon_namaField.disable();
+						// pemohon_alamatField.disable();
+						// pemohon_telpField.disable();
 					}else{
 						NO_SK_LAMAField.hide();
-						pemohon_namaField.enable();
-						pemohon_alamatField.enable();
-						pemohon_telpField.enable();
+						// pemohon_namaField.enable();
+						// pemohon_alamatField.enable();
+						// pemohon_telpField.enable();
 					}
 				}
 			}
@@ -1122,12 +1110,154 @@
 			fieldLabel : 'Nomor SK',
 			maxLength : 50
 		});
-		NO_SK_LAMAField = Ext.create('Ext.form.TextField',{
-			id : 'NO_SK_LAMAField',
+		// NO_SK_LAMAField = Ext.create('Ext.form.TextField',{
+			// id : 'NO_SK_LAMAField',
+			// name : 'NO_SK_LAMA',
+			// fieldLabel : 'Nomor SK Lama',
+			// maxLength : 50,
+			// hidden:true
+		// });
+		NO_SK_LAMAField = Ext.create('Ext.form.ComboBox',{
 			name : 'NO_SK_LAMA',
-			fieldLabel : 'Nomor SK Lama',
-			maxLength : 50,
-			hidden:true
+			fieldLabel : 'SK Lama',
+			hidden:true,
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_sktr/switchAction',
+					reader : {
+						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'ID_SKTR'
+					},
+					actionMethods : { read : 'POST' },
+					extraParams : { action : 'SEARCH' }
+				}),
+				fields : [
+					{ name : 'NO_SK', type : 'string', mapping : 'NO_SK' },
+					{ name : 'NAMA_PEMILIK', type : 'string', mapping : 'NAMA_PEMILIK' },
+					{ name : 'NO_SURAT_TANAH', type : 'string', mapping : 'NO_SURAT_TANAH' },
+					{ name : 'FUNGSI', type : 'string', mapping : 'FUNGSI' },
+					{ name : 'ALAMAT_BANGUNAN', type : 'string', mapping : 'ALAMAT_BANGUNAN' },
+					{ name : 'HAK_MILIK', type : 'int', mapping : 'HAK_MILIK' },
+					{ name : 'NAMA_PEMILIK', type : 'string', mapping : 'NAMA_PEMILIK' },
+					{ name : 'NO_SURAT_TANAH', type : 'string', mapping : 'NO_SURAT_TANAH' },
+					{ name : 'BATAS_KIRI', type : 'string', mapping : 'BATAS_KIRI' },
+					{ name : 'BATAS_KANAN', type : 'string', mapping : 'BATAS_KANAN' },
+					{ name : 'BATAS_DEPAN', type : 'string', mapping : 'BATAS_DEPAN' },
+					{ name : 'BATAS_BELAKANG', type : 'string', mapping : 'BATAS_BELAKANG' },
+					{ name : 'TINGGI_BANGUNAN', type : 'string', mapping : 'TINGGI_BANGUNAN' },
+					{ name : 'LUAS_PERSIL', type : 'string', mapping : 'LUAS_PERSIL' },
+					{ name : 'LUAS_BANGUNAN', type : 'string', mapping : 'LUAS_BANGUNAN' }
+				]
+			}),
+			displayField : 'NO_SK',
+			valueField : 'ID_SKTR',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
+			onTriggerClick: function(event){
+				var store = NO_SK_LAMAField.getStore();
+				var val = NO_SK_LAMAField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',NO_SK : val};
+				store.load();
+				NO_SK_LAMAField.expand();
+				NO_SK_LAMAField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">No. SK : {NO_SK}<br>Nama Pemilik : {NAMA_PEMILIK}<br>No. Surat Tanah : {NO_SURAT_TANAH}<br>Fungsi : {FUNGSI}<br>Alamat Bangunan : {ALAMAT_BANGUNAN}<br></div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					HAK_MILIKField.setValue(rec.get('HAK_MILIK'));
+					NAMA_PEMILIKField.setValue(rec.get('NAMA_PEMILIK'));
+					NO_SURAT_TANAHField.setValue(rec.get('NO_SURAT_TANAH'));
+					ALAMAT_BANGUNANField.setValue(rec.get('ALAMAT_BANGUNAN'));
+					FUNGSIField.setValue(rec.get('FUNGSI'));
+					TINGGI_BANGUNANField.setValue(rec.get('TINGGI_BANGUNAN'));
+					LUAS_PERSILField.setValue(rec.get('LUAS_PERSIL'));
+					LUAS_BANGUNANField.setValue(rec.get('LUAS_BANGUNAN'));
+					BATAS_KIRIField.setValue(rec.get('BATAS_KIRI'));
+					BATAS_KANANField.setValue(rec.get('BATAS_KANAN'));
+					BATAS_DEPANField.setValue(rec.get('BATAS_DEPAN'));
+					BATAS_BELAKANGField.setValue(rec.get('BATAS_BELAKANG'));
+					// pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					// pemohon_idField.setValue(rec.get('pemohon_id'));
+					// pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					// pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					// pemohon_telpField.setValue(rec.get('pemohon_telp'));
+				}
+			}
+		});
+		var pemohon_nikField = Ext.create('Ext.form.ComboBox',{
+			name : 'pemohon_nikField',
+			fieldLabel : 'NIK',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_m_pemohon/switchAction',
+					reader : {
+						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'pemohon_id'
+					},
+					actionMethods : { read : 'POST' },
+					extraParams : { action : 'SEARCH' }
+				}),
+				fields : [
+					{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+					{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+					{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+					{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+					// { name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+					// { name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+					// { name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+					// { name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+					// { name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
+					{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+					// { name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+					// { name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+					// { name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+					// { name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+					// { name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
+					// { name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+					// { name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
+					// { name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
+				]
+			}),
+			displayField : 'pemohon_nik',
+			valueField : 'pemohon_id',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
+			onTriggerClick: function(event){
+				var store = pemohon_nikField.getStore();
+				var val = pemohon_nikField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',pemohon_nik : val};
+				store.load();
+				pemohon_nikField.expand();
+				pemohon_nikField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">NIK : {pemohon_nik}<br>Nama : {pemohon_nama}<br>Alamat : {pemohon_alamat}<br>Telp : {pemohon_telp}<br></div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					pemohon_idField.setValue(rec.get('pemohon_id'));
+					pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					pemohon_telpField.setValue(rec.get('pemohon_telp'));
+				}
+			}
 		});
 		pemohon_namaField = Ext.create('Ext.form.TextField',{
 			id : 'pemohon_namaField',
@@ -1146,6 +1276,13 @@
 			name : 'pemohon_alamat',
 			fieldLabel : 'Alamat Pemohon',
 			maxLength : 20
+		});
+		pemohon_idField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_idField',
+			name : 'pemohon_id',
+			fieldLabel : '',
+			maxLength : 20,
+			hidden:true
 		});
 		HAK_MILIKField = Ext.create('Ext.form.ComboBox',{
 			id : 'HAK_MILIKField',
@@ -1360,13 +1497,24 @@
 				{
 					
 					xtype : 'fieldset',
-					title : 'Data Pemohon',
+					title : 'SKTR',
 					checkboxToggle : false,
 					collapsible : false,
 					layout :'form',
 					items : [
 						JENIS_PERMOHONANField,
-						NO_SK_LAMAField,
+						NO_SK_LAMAField
+											]
+				},{
+					
+					xtype : 'fieldset',
+					title : '1. Data Pemohon',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						pemohon_idField,
+						pemohon_nikField,
 						pemohon_namaField,
 						pemohon_telpField,
 						pemohon_alamatField
