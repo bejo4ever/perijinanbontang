@@ -222,6 +222,7 @@ class C_t_iujk_det extends CI_Controller{
 					);
 					$resultcek = $this->m_t_iujk_det->__insert($datacek, 't_iujk_ceklist', 'insertId');
 				}
+				$this->m_t_iujk_det->__insertlog($iujk_det_author, $resultpemohon, $resultInti, 'Tambah');
 			}else{
 				$result = 'fail';
 			}
@@ -379,6 +380,7 @@ class C_t_iujk_det extends CI_Controller{
 				);
 				$resultcek = $this->m_t_iujk_det->__update($datacek, $iujk_cek_id[$i], 't_iujk_ceklist', 'updateId','iujk_cek_id');
 			}
+			$this->m_t_iujk_det->__insertlog($iujk_det_updated_by, $resultpemohon, $det_iujk_id, 'Ubah');
 		}else{
 			$result = 'sessionExpired';
 		}
@@ -514,7 +516,17 @@ class C_t_iujk_det extends CI_Controller{
 	}
 	function ubahProses(){
 		$iujkdet_id  = $this->input->post('iujkdet_id');
+		$iujkdet_nosk  = $this->input->post('iujkdet_nosk');
 		$proses  = $this->input->post('proses');
+		if($proses == 'Selesai, belum diambil' && $iujkdet_nosk == ''){
+			$nosk = $this->m_public_function->getNomorSk(1);
+			$data_sk = array(
+				"det_iujk_sk"=>$nosk,
+				"det_iujk_berlaku"=>date('Y-m-d')
+			);
+			$this->db->where('det_iujk_id', $iujkdet_id);
+			$this->db->update('t_iujk_det', $data_sk);
+		}
 		$data = array(
 			"det_iujk_proses"=>$proses
 		);

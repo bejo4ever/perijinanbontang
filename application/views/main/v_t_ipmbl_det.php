@@ -1142,6 +1142,7 @@
 				url: 'c_t_ipmbl_det/switchAction',
 				params: {
 					ipmbldet_id : record.get('det_ipmbl_id'),
+					ipmbldet_nosk : record.get('det_ipmbl_sk'),
 					proses : proses,
 					action : 'UBAHPROSES'
 				},success : function(){
@@ -1416,6 +1417,7 @@
 				},
 				{
 					xtype:'actioncolumn',
+					text : 'Proses',
 					width:50,
 					items: [{
 						iconCls : 'checked',

@@ -1737,6 +1737,7 @@
 				url: 'c_t_apotek_det/switchAction',
 				params: {
 					apotekdet_id : record.get('det_apotek_id'),
+					apotekdet_nosk : record.get('det_apotek_sk'),
 					proses : proses,
 					action : 'UBAHPROSES'
 				},success : function(){
@@ -2022,6 +2023,7 @@
 				},
 				{
 					xtype:'actioncolumn',
+					text : 'Proses',
 					width:30,
 					items: [{
 						iconCls : 'checked',

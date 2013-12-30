@@ -246,6 +246,7 @@ class C_t_ipmbl_det extends CI_Controller{
 						$resultdok = $this->m_t_ipmbl_det->__update($datadok, $dok_ipmbl_id[$i], 't_ipmbl_dok', '', 'dok_ipmbl_id');
 					}
 				}
+				$this->m_t_ipmbl_det->__insertlog($ipmbl_det_author, $resultpemohon, $resultInti, 'Tambah');
 			}else{
 				$result = 'fail';
 			}
@@ -417,6 +418,7 @@ class C_t_ipmbl_det extends CI_Controller{
 					$resultdok = $this->m_t_ipmbl_det->__update($datadok, $dok_ipmbl_id[$i], 't_ipmbl_dok', '', 'dok_ipmbl_id');
 				}
 			}
+			$this->m_t_ipmbl_det->__insertlog($ipmbl_det_updated_by, $resultpemohon, $det_ipmbl_id, 'Ubah');
 		}else{
 			$result = 'sessionExpired';
 		}
@@ -618,7 +620,17 @@ class C_t_ipmbl_det extends CI_Controller{
 	}
 	function ubahProses(){
 		$ipmbldet_id  = $this->input->post('ipmbldet_id');
+		$ipmbldet_nosk  = $this->input->post('ipmbldet_nosk');
 		$proses  = $this->input->post('proses');
+		if($proses == 'Selesai, belum diambil' && $ipmbldet_nosk == ''){
+			$nosk = $this->m_public_function->getNomorSk(1);
+			$data_sk = array(
+				"det_ipmbl_sk"=>$nosk,
+				"det_ipmbl_berlaku"=>date('Y-m-d')
+			);
+			$this->db->where('det_ipmbl_id', $ipmbldet_id);
+			$this->db->update('t_ipmbl_det', $data_sk);
+		}
 		$data = array(
 			"det_ipmbl_proses"=>$proses
 		);

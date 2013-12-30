@@ -17,7 +17,7 @@ class App_model extends CI_Model{
 		if($key != ''){
 			return @$_SESSION[$key];
 		}else{
-			return @$_SESSION['PERIJINAN_USERNAME'];
+			return @$_SESSION['USERID'];
 		}
 	}
 	
@@ -146,4 +146,15 @@ class App_model extends CI_Model{
         $method = $single ? 'row_array' : 'result_array';
         return $this->db->get($this->table_name)->$method();
     }
+	
+	public function __insertlog($user, $pemohon, $permohonan, $aktifitas){
+		$data = array(
+			"log_tanggal"=>date('Y-m-d H:i:s'),
+			"log_user"=>$user,
+			"log_pemohon"=>$pemohon,
+			"log_permohonan"=>$permohonan,
+			"log_aktifitas"=>$aktifitas
+		);
+		$this->db->insert('t_log', $data);
+	}
 }

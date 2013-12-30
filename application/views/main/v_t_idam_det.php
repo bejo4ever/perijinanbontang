@@ -1000,6 +1000,7 @@
 				url: 'c_t_idam_det/switchAction',
 				params: {
 					idamdet_id : record.get('det_idam_id'),
+					idamdet_nosk : record.get('det_idam_sk'),
 					proses : proses,
 					action : 'UBAHPROSES'
 				},success : function(){
@@ -1246,7 +1247,8 @@
 				},
 				{
 					xtype:'actioncolumn',
-					width:30,
+					width:50,
+					text : 'Proses',
 					hideable: false,
 					items: [{
 						iconCls : 'checked',
