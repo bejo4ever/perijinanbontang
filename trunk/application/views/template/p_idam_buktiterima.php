@@ -46,7 +46,7 @@
 		<tr>
 			<td colspan="5">&nbsp;</td>
 		</tr>
-		<tr>
+		<!-- <tr>
 			<td colspan="4">&nbsp;</td>
 			<td align="center">Petugas</td>
 		</tr>
@@ -60,7 +60,7 @@
 		<tr>
 			<td colspan="4">&nbsp;</td>
 			<td align="center"><?php echo @$_SESSION['PERIJINAN_NIP']; ?></td>
-		</tr>
+		</tr> -->
 	</table>
 </body>
 </html>

@@ -137,13 +137,13 @@
 						<td colspan="3"><b>Kota Bontang</b></td>
 					</tr>
 					<tr>
-						<td colspan="3" height="100" valign="bottom"><b><u><?php echo @$dataijin[0]->NAMA_PEJABAT; ?></u></b></td>
+						<td colspan="3" height="100" valign="bottom"><b><u><?php echo @$dataijin->NAMA_PEJABAT; ?></u></b></td>
 					</tr>
 					<tr>
-						<td colspan="3"><b><?php echo @$dataijin[0]->PANGKAT; ?></b></td>
+						<td colspan="3"><b><?php echo @$dataijin->PANGKAT; ?></b></td>
 					</tr>
 					<tr>
-						<td colspan="3"><b>NIP. <?php echo @$dataijin[0]->NIP_PEJABAT; ?></b></td>
+						<td colspan="3"><b>NIP. <?php echo @$dataijin->NIP_PEJABAT; ?></b></td>
 					</tr>
 				</table>
 			</td>

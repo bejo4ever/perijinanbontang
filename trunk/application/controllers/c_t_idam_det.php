@@ -81,6 +81,8 @@ class C_t_idam_det extends CI_Controller{
 		$det_idam_idam_id = is_numeric($det_idam_idam_id) ? $det_idam_idam_id : 0;
 		$det_idam_jenis = htmlentities($this->input->post('det_idam_jenis'),ENT_QUOTES);
 		$det_idam_jenis = is_numeric($det_idam_jenis) ? $det_idam_jenis : 0;
+		$det_idam_lama = htmlentities($this->input->post('det_idam_lama'),ENT_QUOTES);
+		$det_idam_lama = is_numeric($det_idam_lama) ? $det_idam_lama : 0;
 		$det_idam_tanggal = htmlentities($this->input->post('det_idam_tanggal'),ENT_QUOTES);
 		$det_idam_status = htmlentities($this->input->post('det_idam_status'),ENT_QUOTES);
 		$det_idam_keterangan = htmlentities($this->input->post('det_idam_keterangan'),ENT_QUOTES);
@@ -142,24 +144,29 @@ class C_t_idam_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
+			'pemohon_user_id'=>$idam_det_author,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
 		if($pemohon_id != 0){
 			$resultpemohon = $this->m_t_idam_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+			$resultpemohon = $pemohon_id;
 		}else{
 			$resultpemohon = $this->m_t_idam_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
 		if($idam_det_author != ''){
-			$dataInti = array(
-				'idam_usaha'=>$det_idam_namausaha,
-				'idam_jenisusaha'=>$det_idam_jenisusaha,
-				'idam_alamat'=>$det_idam_alamatusaha,
-				'idam_sertifikatpkp'=>$det_idam_nospkp
-			);
-			$resultInti = $this->m_t_idam_det->__insert($dataInti, 't_idam', 'insertId');
+			if($det_idam_lama != 0 && $det_idam_jenis == 2){
+				$resultInti = $det_idam_lama;
+			}else{
+				$dataInti = array(
+					'idam_usaha'=>$det_idam_namausaha,
+					'idam_jenisusaha'=>$det_idam_jenisusaha,
+					'idam_alamat'=>$det_idam_alamatusaha,
+					'idam_sertifikatpkp'=>$det_idam_nospkp
+				);
+				$resultInti = $this->m_t_idam_det->__insert($dataInti, 't_idam', 'insertId');
+			}
 			if($resultInti != 0){
 				$result = 'success';
 				$data = array(
@@ -274,7 +281,6 @@ class C_t_idam_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
@@ -282,6 +288,7 @@ class C_t_idam_det extends CI_Controller{
 			$resultpemohon = $this->m_t_idam_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
 			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$idam_det_updated_by;
 			$resultpemohon = $this->m_t_idam_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
@@ -539,10 +546,17 @@ class C_t_idam_det extends CI_Controller{
 		$printrecord = $this->m_t_idam_det->search($params);
 		$data['dataijin'] = $this->db->where('ID_IJIN',1)->get('master_ijin')->row();
 		$data['printrecord'] = $printrecord[1];
-		$print_view=$this->load->view('template/p_idam_sk.php',$data,TRUE);
-		$print_file=fopen('print/idam_sk.html','w+');
-		fwrite($print_file, $print_view);
-		echo 'success';
+		$sub = $data['printrecord'][0];
+		if($sub->det_idam_sk == ''){
+			echo 'nosk';
+		}else if($sub->det_idam_kadaluarsa == '' || $sub->det_idam_kadaluarsa == '0000-00-00'){
+			echo 'notglkadaluarsa';
+		}else{
+			$print_view=$this->load->view('template/p_idam_sk.php',$data,TRUE);
+			$print_file=fopen('print/idam_sk.html','w+');
+			fwrite($print_file, $print_view);
+			echo 'success';
+		}
 	}
 	
 }
