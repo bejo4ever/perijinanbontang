@@ -13,6 +13,7 @@ class M_trayek extends App_model{
 				pemohon_nama,
 				pemohon_alamat,
 				pemohon_telp,
+				pemohon_nik,
 				NOMOR_KENDARAAN,
 				NAMA_PEMILIK,
 				ALAMAT_PEMILIK,
@@ -83,6 +84,9 @@ class M_trayek extends App_model{
 		}
 		if(@$TGL_AKHIR != ''){
 			$sql .= " AND TGL_AKHIR LIKE '%".$TGL_AKHIR."%' ";
+		}
+		if($_SESSION["IDHAK"] == 2){
+			$sql .= " AND m_pemohon.pemohon_user_id = " . $_SESSION["USERID"];
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

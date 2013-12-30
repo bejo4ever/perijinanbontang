@@ -85,6 +85,7 @@ class C_sktr extends CI_Controller{
 		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
 		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
 		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
 		
 		$HAK_MILIK = htmlentities($this->input->post('HAK_MILIK'),ENT_QUOTES);
 		$HAK_MILIK = is_numeric($HAK_MILIK) ? $HAK_MILIK : 0;
@@ -107,23 +108,28 @@ class C_sktr extends CI_Controller{
 				
 		$tr_author = $this->m_sktr->__checkSession();
 		$tr_created_date = date('Y-m-d H:i:s');
-		$pemohon	= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
+		// $pemohon	= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
 		if($tr_author == ''){
 			$result = 'sessionExpired';
 		}else{
-			if($JENIS_PERMOHONAN == 1){
-				$data = array(
-					'pemohon_nama'=>$pemohon_nama,
-					'pemohon_alamat'=>$pemohon_alamat,
-					'pemohon_telp'=>$pemohon_telp,
-					'pemohon_user_id'=>$_SESSION['USERID']
-				);
-				$pemohon= $this->m_m_pemohon->__insert($data, '', 'insertId');
-			} else {
-				$query_p= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
-				$pemohon=$query_p['pemohon_id'];
-			}
+			// if($JENIS_PERMOHONAN == 1){
+				
+			// } else {
+				// $query_p= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
+				// $pemohon=$query_p['pemohon_id'];
+			// }
 			if($_SESSION['IDHAK'] == 2){
+				if($pemohon_id != null || $pemohon_id != ""){
+					$pemohon	= $pemohon_id;
+				} else {
+					$data = array(
+						'pemohon_nama'=>$pemohon_nama,
+						'pemohon_alamat'=>$pemohon_alamat,
+						'pemohon_telp'=>$pemohon_telp,
+						'pemohon_user_id'=>$_SESSION['USERID']
+					);
+					$pemohon= $this->m_m_pemohon->__insert($data, '', 'insertId');
+				}
 				if($JENIS_PERMOHONAN == 1){
 					$data = array(
 						'ID_PEMOHON'=>$pemohon,
@@ -143,7 +149,23 @@ class C_sktr extends CI_Controller{
 						'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
 						);
 					} else {
-						
+						$data = array(
+						'ID_PEMOHON'=>$pemohon,
+						'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,				
+						'HAK_MILIK'=>$HAK_MILIK,
+						'NAMA_PEMILIK'=>$NAMA_PEMILIK,
+						'NO_SURAT_TANAH'=>$NO_SURAT_TANAH,
+						'BATAS_KIRI'=>$BATAS_KIRI,
+						'BATAS_KANAN'=>$BATAS_KANAN,
+						'BATAS_DEPAN'=>$BATAS_DEPAN,
+						'BATAS_BELAKANG'=>$BATAS_BELAKANG,
+						'TGL_PERMOHONAN'=>(($TGL_PERMOHONAN == null || $TGL_PERMOHONAN == "") ? (date("Y-m-d")) : ($TGL_PERMOHONAN)),
+						'FUNGSI'=>$FUNGSI,
+						'ALAMAT_BANGUNAN'=>$ALAMAT_BANGUNAN,
+						'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
+						'LUAS_PERSIL'=>$LUAS_PERSIL,
+						'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
+						);
 					}
 					$result = $this->m_sktr->__insert($data, '', 'insertId');
 					$data2 = array(

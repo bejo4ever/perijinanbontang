@@ -19,8 +19,13 @@ class M_sktr extends App_model{
 				BATAS_DEPAN,
 				BATAS_BELAKANG,
 				TGL_PERMOHONAN,
-				STATUS
-				FROM sktr JOIN m_pemohon ON m_pemohon.pemohon_user_id = sktr.ID_PEMOHON
+				TINGGI_BANGUNAN,
+				LUAS_PERSIL,
+				LUAS_BANGUNAN,
+				STATUS,
+				FUNGSI,
+				ALAMAT_BANGUNAN
+				FROM sktr JOIN m_pemohon ON m_pemohon.pemohon_id = sktr.ID_PEMOHON
 			WHERE ID_SKTR IS NOT NULL 
 	";
 	
@@ -155,6 +160,9 @@ class M_sktr extends App_model{
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
+		}
+		if($_SESSION["IDHAK"] == 2){
+			$sql .= " AND m_pemohon.pemohon_user_id = " . $_SESSION["USERID"];
 		}
 		$result = $this->__listCore($sql, $params);
 		return $result;

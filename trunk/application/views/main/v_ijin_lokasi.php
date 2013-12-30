@@ -3,6 +3,7 @@
 /* Start variabel declaration */
 		var in_lokasi_componentItemTitle="IN_LOKASI";
 		var in_lokasi_dataStore;
+		var lokasi_syaratDataStore;
 		
 		var in_lokasi_shorcut;
 		var in_lokasi_contextMenu;
@@ -149,9 +150,19 @@
 					var ALAMAT_LOKASIValue = '';
 					var ID_KELURAHAN_LOKASIValue = '';
 					var ID_KECAMATAN_LOKASIValue = '';
-										
+					
+					var array_lokasi_keterangan=new Array();
+					if(lokasi_syaratDataStore.getCount() > 0){
+						for(var i=0;i<lokasi_syaratDataStore.getCount();i++){
+							array_lokasi_keterangan.push(lokasi_syaratDataStore.getAt(i).data.KETERANGAN);
+						}
+					}					
+					var encoded_array_lokasi_keterangan = Ext.encode(array_lokasi_keterangan);
+					
 					ID_IJIN_LOKASIValue = ID_IJIN_LOKASIField.getValue();
 					ID_PEMOHONValue = ID_PEMOHONField.getValue();
+					JENIS_PERMOHONANValue = JENIS_PERMOHONANField.getValue();
+					NAMA_PERUSAHAANValue = NAMA_PERUSAHAANField.getValue();
 					NO_SKValue = NO_SKField.getValue();
 					NO_SK_LAMAValue = NO_SK_LAMAField.getValue();
 					NPWPDValue = NPWPDField.getValue();
@@ -194,6 +205,8 @@
 						params: {							
 							ID_IJIN_LOKASI : ID_IJIN_LOKASIValue,
 							ID_PEMOHON : ID_PEMOHONValue,
+							JENIS_PERMOHONAN : JENIS_PERMOHONANValue,
+							NAMA_PERUSAHAAN : NAMA_PERUSAHAANValue,
 							NO_SK : NO_SKValue,
 							NO_SK_LAMA : NO_SK_LAMAValue,
 							NPWPD : NPWPDValue,
@@ -228,6 +241,7 @@
 							pemohon_tempatlahir : pemohon_tempatlahirValue,
 							pemohon_tanggallahir : pemohon_tanggallahirValue,
 							/*End Data Pemohon*/
+							KETERANGAN : encoded_array_lokasi_keterangan,
 							action : in_lokasi_dbTask
 						},
 						success: function(response){
@@ -391,6 +405,8 @@
 			var record = in_lokasi_gridPanel.getSelectionModel().getSelection()[0];
 			ID_IJIN_LOKASIField.setValue(record.data.ID_IJIN_LOKASI);
 			ID_PEMOHONField.setValue(record.data.ID_PEMOHON);
+			JENIS_PERMOHONANField.setValue(record.data.JENIS_PERMOHONAN);
+			NAMA_PERUSAHAANField.setValue(record.data.NAMA_PERUSAHAAN);
 			NO_SKField.setValue(record.data.NO_SK);
 			NO_SK_LAMAField.setValue(record.data.NO_SK_LAMA);
 			NPWPDField.setValue(record.data.NPWPD);
@@ -963,126 +979,6 @@
 			multiSelect : true,
 			keys : in_lokasi_shorcut,
 			columns : [
-				/* {
-					text : 'ID_PEMOHON',
-					dataIndex : 'ID_PEMOHON',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NO_SK',
-					dataIndex : 'NO_SK',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NO_SK_LAMA',
-					dataIndex : 'NO_SK_LAMA',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NPWPD',
-					dataIndex : 'NPWPD',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'NO_AKTA',
-					dataIndex : 'NO_AKTA',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'BENTUK_PERUSAHAAN',
-					dataIndex : 'BENTUK_PERUSAHAAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ALAMAT',
-					dataIndex : 'ALAMAT',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'RT',
-					dataIndex : 'RT',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'RW',
-					dataIndex : 'RW',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KELURAHAN',
-					dataIndex : 'ID_KELURAHAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KECAMATAN',
-					dataIndex : 'ID_KECAMATAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KOTA',
-					dataIndex : 'ID_KOTA',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TELP',
-					dataIndex : 'TELP',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'FUNGSI',
-					dataIndex : 'FUNGSI',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'STATUS_TANAH',
-					dataIndex : 'STATUS_TANAH',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'KETERANGAN_TANAH',
-					dataIndex : 'KETERANGAN_TANAH',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'LUAS_LOKASI',
-					dataIndex : 'LUAS_LOKASI',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ALAMAT_LOKASI',
-					dataIndex : 'ALAMAT_LOKASI',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KELURAHAN_LOKASI',
-					dataIndex : 'ID_KELURAHAN_LOKASI',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ID_KECAMATAN_LOKASI',
-					dataIndex : 'ID_KECAMATAN_LOKASI',
-					width : 100,
-					sortable : false
-				}, */
 				{
 					text : 'Jenis Permohonan',
 					dataIndex : 'JENIS_PERMOHONAN',
@@ -1136,6 +1032,8 @@
 								return 'Disetujui, sudah diambil';
 							}else if (value == 2){
 								return 'Disetujui, belum diambil';
+							} else if (value == null || value == ""){
+								return '-';
 							} else {
 								return 'Ditolak';
 							}
@@ -1212,6 +1110,80 @@
 			}
 		});
 /* End GridPanel declaration */
+
+/*Get Syarat*/
+		lokasi_syaratDataStore = Ext.create('Ext.data.Store',{
+			id : 'lokasi_syaratDataStore',
+			pageSize : globalPageSize,
+			autoLoad : true,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_ijin_lokasi/switchAction',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total'
+				},
+				actionMethods : {
+					read : 'POST'
+				},
+				extraParams : {
+					action : 'GETSYARAT'
+				}
+			}),
+			fields : [
+				{ name : 'ID_IJIN', type : 'int', mapping : 'ID_IJIN' },
+				{ name : 'ID_SYARAT', type : 'int', mapping : 'ID_SYARAT' },
+				{ name : 'NAMA_SYARAT', type : 'string', mapping : 'NAMA_SYARAT' },
+				{ name : 'KETERANGAN', type : 'string', mapping : 'KETERANGAN' }
+				]
+		});
+		var lokasi_syaratGridEditor = new Ext.grid.plugin.CellEditing({
+			clicksToEdit: 1
+		});
+		lokasi_syaratGrid = Ext.create('Ext.grid.Panel',{
+			id : 'lokasi_syaratDataStore',
+			store : lokasi_syaratDataStore,
+			loadMask : true,
+			width : '95%',
+			plugins : [
+				Ext.create('Ext.grid.plugin.CellEditing', {
+					clicksToEdit: 1
+				})
+			],
+			selType: 'cellmodel',
+			columns : [
+				{
+					text : 'ID_IJIN',
+					dataIndex : 'ID_IJIN',
+					width : 100,
+					hidden : true,
+					sortable : false
+				},
+				{
+					text : 'ID_SYARAT',
+					dataIndex : 'ID_SYARAT',
+					width : 100,
+					hidden : true,
+					sortable : false
+				},
+				{
+					text : 'Nama Syarat',
+					dataIndex : 'NAMA_SYARAT',
+					width : 300,
+					sortable : false
+				},{
+					text : 'Keterangan',
+					dataIndex : 'KETERANGAN',
+					width : 200,
+					sortable : false,
+					editor: 'textfield',
+					flex : 1
+				}
+			]
+		});
+		/*End Syarat*/
+
 /* Start FormPanel declaration */
 		ID_IJIN_LOKASIField = Ext.create('Ext.form.NumberField',{
 			id : 'ID_IJIN_LOKASIField',
@@ -1250,6 +1222,12 @@
 			id : 'NPWPDField',
 			name : 'NPWPD',
 			fieldLabel : 'NPWPD',
+			maxLength : 50
+		});
+		NAMA_PERUSAHAANField = Ext.create('Ext.form.TextField',{
+			id : 'NAMA_PERUSAHAANField',
+			name : 'NAMA_PERUSAHAAN',
+			fieldLabel : 'Nama Perusahaan',
 			maxLength : 50
 		});
 		NO_AKTAField = Ext.create('Ext.form.TextField',{
@@ -1322,14 +1300,56 @@
 			fieldLabel : 'Fungsi',
 			maxLength : 50
 		});
-		// STATUS_TANAHField = Ext.create('Ext.form.NumberField',{
-			// id : 'STATUS_TANAHField',
-			// name : 'STATUS_TANAH',
-			// fieldLabel : 'Status Tanah',
-			// allowNegatife : false,
-			// blankText : '0',
-			// allowDecimals : false,
-			// maskRe : /([0-9]+)$/});
+		JENIS_PERMOHONANField = Ext.create('Ext.form.ComboBox',{
+			id : 'JENIS_PERMOHONANField',
+			name : 'JENIS_PERMOHONAN',
+			fieldLabel : 'Jenis Permohonan',
+			allowBlank : false,
+			store : new Ext.data.ArrayStore({
+				fields : ['jenis_id', 'jenis'],
+				data : [[1,'Baru'],[2,'Perpanjang']]
+			}),
+			displayField : 'jenis',
+			valueField : 'jenis_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true,
+			listeners : {
+				select : function(cmb, rec){
+					if(cmb.getValue() == '2'){
+						NO_SK_LAMAField.show();
+						pemohon_nikField.disable();
+						pemohon_namaField.disable();
+						pemohon_tempatlahirField.disable();
+						pemohon_tanggallahirField.disable();
+						pemohon_pekerjaanField.disable();
+						pemohon_alamatField.disable();
+						pemohon_rtField.disable();
+						pemohon_rwField.disable();
+						pemohon_kelField.disable();
+						pemohon_kecField.disable();
+						pemohon_kotaField.disable();
+						pemohon_telpField.disable();						
+						pemohon_hpField.disable();	
+					}else{
+						NO_SK_LAMAField.hide();
+						pemohon_nikField.enable();
+						pemohon_namaField.enable();
+						pemohon_tempatlahirField.enable();
+						pemohon_tanggallahirField.enable();
+						pemohon_pekerjaanField.enable();
+						pemohon_alamatField.enable();
+						pemohon_rtField.enable();
+						pemohon_rwField.enable();
+						pemohon_kelField.enable();
+						pemohon_kecField.enable();
+						pemohon_kotaField.enable();
+						pemohon_telpField.enable();						
+						pemohon_hpField.enable();
+					}
+				}
+			}
+		});
 		STATUS_TANAHField = Ext.create('Ext.form.ComboBox',{
 			id : 'STATUS_TANAHField',
 			name : 'STATUS_TANAH',
@@ -1375,6 +1395,92 @@
 			fieldLabel : 'Alamat Lokasi',
 			maxLength : 100
 		});
+		
+		/*Data Pemohon*/
+		pemohon_pekerjaanField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_pekerjaanField',
+			name : 'pemohon_pekerjaan',
+			fieldLabel : 'Pekerjaan',
+			maxLength : 50
+		});
+		pemohon_nikField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_nikField',
+			name : 'pemohon_nik',
+			fieldLabel : 'NIK',
+			maxLength : 20
+		});
+		pemohon_namaField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_namaField',
+			name : 'pemohon_nama',
+			fieldLabel : 'Nama Lengkap',
+			maxLength : 50
+		});
+		pemohon_alamatField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_alamatField',
+			name : 'pemohon_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		pemohon_telpField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_telpField',
+			name : 'pemohon_telp',
+			fieldLabel : 'Telp',
+			maxLength : 20
+		});
+		pemohon_hpField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_hpField',
+			name : 'pemohon_hp',
+			fieldLabel : 'HP',
+			maxLength : 20
+		});
+		pemohon_rtField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_rtField',
+			name : 'pemohon_rt',
+			fieldLabel : 'RT',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		pemohon_rwField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_rwField',
+			name : 'pemohon_rw',
+			fieldLabel : 'RW',
+			allowNegatife : false,
+			//blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		pemohon_kelField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_kelField',
+			name : 'pemohon_kel',
+			fieldLabel : 'Kelurahan',
+			maxLength : 50
+		});
+		pemohon_kecField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_kecField',
+			name : 'pemohon_kec',
+			fieldLabel : 'Kecamatan',
+			maxLength : 50
+		});
+		pemohon_kotaField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_kotaField',
+			name : 'pemohon_kota',
+			fieldLabel : 'Kota',
+			maxLength : 50
+		});
+		pemohon_tempatlahirField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_tempatlahirField',
+			name : 'pemohon_tempatlahir',
+			fieldLabel : 'Tempat Lahir',
+			maxLength : 50
+		});
+		pemohon_tanggallahirField = Ext.create('Ext.form.Date',{
+			id : 'pemohon_tanggallahirField',
+			name : 'pemohon_tanggallahir',
+			fieldLabel : 'Tanggal Lahir',
+			maxLength : 10
+		});
+		/*End Data Pemohon*/
+		
 		ID_KELURAHAN_LOKASIField = Ext.create('Ext.form.NumberField',{
 			id : 'ID_KELURAHAN_LOKASIField',
 			name : 'ID_KELURAHAN_LOKASI',
@@ -1400,33 +1506,57 @@
 			handler : function(){
 				in_lokasi_resetForm();
 				in_lokasi_switchToGrid();
+				$('html, body').animate({scrollTop: 0}, 500);
 			}
 		});
 		in_lokasi_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
-			fieldDefaults: {
-				msgTarget: 'side'
-			},
+			frame : true,
 			layout : {
-				type : 'vbox',
-				align : 'stretch',
+				type : 'form',
 				padding : 5
 			},
 			items: [
 				{
-					xtype : 'container',
-					layout : 'hbox',
-					style : {borderWidth :'0px'},
-					defaultType : 'textfield',
-					defaults : {anchor : '95%'},
-					layout : 'anchor',
-					flex : 2,
+					xtype : 'fieldset',
+					title : 'Permohonan Ijin Lokasi',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
 					items : [
-						ID_IJIN_LOKASIField,
-						ID_PEMOHONField,
-						NO_SKField,
-						NO_SK_LAMAField,
+						JENIS_PERMOHONANField,
+						NO_SK_LAMAField
+											]
+				},{
+					xtype : 'fieldset',
+					title : '1. Data Permohon',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						pemohon_nikField,
+						pemohon_namaField,
+						pemohon_tempatlahirField,
+						pemohon_tanggallahirField,
+						pemohon_pekerjaanField,
+						pemohon_alamatField,
+						pemohon_rtField,
+						pemohon_rwField,
+						pemohon_kelField,
+						pemohon_kecField,
+						pemohon_kotaField,
+						pemohon_telpField,						
+						pemohon_hpField,						
+						]
+				},{
+					xtype : 'fieldset',
+					title : '2. Data Perusahaan',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
 						NPWPDField,
+						NAMA_PERUSAHAANField,
 						NO_AKTAField,
 						BENTUK_PERUSAHAANField,
 						ALAMATField,
@@ -1435,7 +1565,15 @@
 						ID_KELURAHANField,
 						ID_KECAMATANField,
 						ID_KOTAField,
-						TELPField,
+						TELPField
+											]
+				},{
+					xtype : 'fieldset',
+					title : '3. Data Ijin Lokasi',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
 						FUNGSIField,
 						STATUS_TANAHField,
 						KETERANGAN_TANAHField,
@@ -1444,6 +1582,16 @@
 						ID_KELURAHAN_LOKASIField,
 						ID_KECAMATAN_LOKASIField,
 											]
+				},{
+					xtype : 'fieldset',
+					title : '4. Data Kelengkapan',
+					columnWidth : 0.5,
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						lokasi_syaratGrid
+					]
 				}, {
 					xtype : 'splitter'
 				}, {

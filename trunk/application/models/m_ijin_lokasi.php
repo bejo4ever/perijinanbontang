@@ -21,8 +21,29 @@ class M_ijin_lokasi extends App_model{
 				LUAS_LOKASI,
 				ALAMAT_LOKASI,
 				ID_KELURAHAN_LOKASI,
-				ID_KECAMATAN_LOKASI
-				FROM ijin_lokasi 
+				ID_KECAMATAN_LOKASI,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_kota,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id,
+				pemohon_pendidikan,
+				pemohon_tahunlulus,
+				pemohon_wn,
+				pemohon_hp
+				FROM ijin_lokasi
+				JOIN m_pemohon ON m_pemohon.pemohon_id = ijin_lokasi.ID_PEMOHON
 			WHERE ID_IJIN_LOKASI IS NOT NULL 
 	";
 	
@@ -138,6 +159,9 @@ class M_ijin_lokasi extends App_model{
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
+		if($_SESSION["IDHAK"] == 2){
+			$sql .= " AND m_pemohon.pemohon_user_id = " . $_SESSION["USERID"];
+		}
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
@@ -151,5 +175,22 @@ class M_ijin_lokasi extends App_model{
 		}
 		return $result;
 	}
-	
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 7;
+			";
+		}else{
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 7;
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 7;");
+		return $query->result_array();
+	}
 }

@@ -129,6 +129,9 @@ class M_ijin_lingkungan extends App_model{
 		if(@$STATUS_SURVEY != ''){
 			$sql .= " AND STATUS_SURVEY LIKE '%".$STATUS_SURVEY."%' ";
 		}
+		if($_SESSION["IDHAK"] == 2){
+			$sql .= " AND m_pemohon.pemohon_user_id = " . $_SESSION["USERID"];
+		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
