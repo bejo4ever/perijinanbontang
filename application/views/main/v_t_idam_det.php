@@ -152,6 +152,7 @@
 					var det_idam_idValue = '';
 					var det_idam_idam_idValue = '';
 					var det_idam_jenisValue = '';
+					var det_idam_lamaValue = '';
 					var det_idam_tanggalValue = '';
 					var det_idam_namaValue = '';
 					var det_idam_alamatValue = '';
@@ -179,6 +180,7 @@
 					det_idam_idValue = det_idam_idField.getValue();
 					det_idam_idam_idValue = det_idam_idam_idField.getValue();
 					det_idam_jenisValue = det_idam_jenisField.getValue();
+					det_idam_lamaValue = det_idam_sklamaField.getValue();
 					det_idam_tanggalValue = det_idam_tanggalField.getValue();
 					det_idam_namaValue = det_idam_namaField.getValue();
 					det_idam_alamatValue = det_idam_alamatField.getValue();
@@ -248,6 +250,7 @@
 							det_idam_id : det_idam_idValue,
 							det_idam_idam_id : det_idam_idam_idValue,
 							det_idam_jenis : det_idam_jenisValue,
+							det_idam_lama : det_idam_lamaValue,
 							det_idam_tanggal : det_idam_tanggalValue,
 							det_idam_nama : det_idam_namaValue,
 							det_idam_alamat : det_idam_alamatValue,
@@ -439,6 +442,7 @@
 			idam_det_formPanel.getForm().reset();
 			det_idam_idField.setValue(0);
 			window.scrollTo(0,0);
+			det_idam_jenisField.enable();
 		}
 		
 		function idam_det_setForm(){
@@ -504,6 +508,7 @@
 				action : 'GETSYARAT'
 			};
 			idam_det_syaratDataStore.load();
+			det_idam_jenisField.disable();
 		}
 		
 		function idam_det_showSearchWindow(){
@@ -947,8 +952,28 @@
 					params: {
 						idamdet_id : record.get('det_idam_id'),
 						action : 'CETAKSK'
-					},success : function(){
-						window.open('../print/idam_sk.html');
+					},success : function(response){
+						var result = response.responseText;
+						switch(result){
+							case 'success':
+								window.open('../print/idam_sk.html');
+								break;
+							case 'nosk':
+								Ext.MessageBox.alert('Warning.','Nomor SK Belum ditetapkan.');
+								break;
+							case 'notglkadaluarsa':
+								Ext.MessageBox.alert('Warning.','Tanggal kadaluarsa belum ditetapkan.');
+								break;
+							default:
+								Ext.MessageBox.show({
+									title : 'Warning',
+									msg : 'Cetak gagal',
+									buttons : Ext.MessageBox.OK,
+									animEl : 'save',
+									icon : Ext.MessageBox.WARNING
+								});
+							break;
+						}
 					}
 				});
 			}
@@ -1211,21 +1236,6 @@
 				},
 				{
 					xtype:'actioncolumn',
-					text : 'Cetak',
-					width:50,
-					hideable: false,
-					items: [{
-						iconCls: 'icon16x16-print',
-						tooltip: 'Cetak Dokumen',
-						handler: function(grid, rowIndex, colIndex, node, e) {
-							e.stopEvent();
-							idam_det_printContextMenu.showAt(e.getXY());
-							return false;
-						}
-					}]
-				},
-				{
-					xtype:'actioncolumn',
 					text : 'Action',
 					width:50,
 					hideable: false,
@@ -1256,6 +1266,21 @@
 						handler: function(grid, rowIndex, colIndex, node, e) {
 							e.stopEvent();
 							idam_det_prosesContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					hideable: false,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							idam_det_printContextMenu.showAt(e.getXY());
 							return false;
 						}
 					}]
@@ -1331,18 +1356,66 @@
 				}
 			}
 		});
-		det_idam_sklamaField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_sklamaField',
-			name : 'det_idam_sklama',
+		det_idam_sklamaField = Ext.create('Ext.form.ComboBox',{
+			name : 'det_idam_sklamaField',
 			fieldLabel : 'Nomor SK Lama',
+			store : idam_det_dataStore,
+			displayField : 'det_idam_sk',
+			valueField : 'det_idam_idam_id',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
 			hidden : true,
-			maxLength : 50
+			onTriggerClick: function(event){
+				var store = det_idam_sklamaField.getStore();
+				var val = det_idam_sklamaField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',det_idam_sk : val};
+				store.load();
+				det_idam_sklamaField.expand();
+				det_idam_sklamaField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">SK : {det_idam_sk}<br>Nama Usaha : {idam_usaha}<br>Alamat : {idam_alamat}<br></div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					idam_det_pemohon_idField.setValue(rec.get('pemohon_id'));
+					idam_det_pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					idam_det_pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					idam_det_pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					idam_det_pemohon_telpField.setValue(rec.get('pemohon_telp'));
+					idam_det_pemohon_npwpField.setValue(rec.get('pemohon_npwp'));
+					idam_det_pemohon_rtField.setValue(rec.get('pemohon_rt'));
+					idam_det_pemohon_rwField.setValue(rec.get('pemohon_rw'));
+					idam_det_pemohon_kelField.setValue(rec.get('pemohon_kel'));
+					idam_det_pemohon_kecField.setValue(rec.get('pemohon_kec'));
+					idam_det_pemohon_straField.setValue(rec.get('pemohon_stra'));
+					idam_det_pemohon_surattugasField.setValue(rec.get('pemohon_surattugas'));
+					idam_det_pemohon_pekerjaanField.setValue(rec.get('pemohon_pekerjaan'));
+					idam_det_pemohon_tempatlahirField.setValue(rec.get('pemohon_tempatlahir'));
+					idam_det_pemohon_tanggallahirField.setValue(rec.get('pemohon_tanggallahir'));
+					idam_det_pemohon_user_idField.setValue(rec.get('pemohon_user_id'));
+					idam_det_pemohon_pendidikanField.setValue(rec.get('pemohon_pendidikan'));
+					idam_det_pemohon_tahunlulusField.setValue(rec.get('pemohon_tahunlulus'));
+					det_idam_namausahaField.setValue(rec.get('idam_usaha'));
+					det_idam_jenisusahaField.setValue(rec.get('idam_jenisusaha'));
+					det_idam_alamatusahaField.setValue(rec.get('idam_alamat'));
+					det_idam_nospkpField.setValue(rec.get('idam_sertifikatpkp'));
+				}
+			}
 		});
 		det_idam_tanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_idam_tanggalField',
 			name : 'det_idam_tanggal',
 			fieldLabel : 'Tanggal <font color=red>*</font>',
 			format : 'd-m-Y',
+			disabled : true,
 			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_idam_namaField = Ext.create('Ext.form.TextField',{
@@ -1474,13 +1547,15 @@
 			id : 'det_idam_skField',
 			name : 'det_idam_sk',
 			fieldLabel : 'Nomor SK',
-			maxLength : 255
+			maxLength : 255,
+			hidden : true
 		});
 		det_idam_berlakuField = Ext.create('Ext.form.field.Date',{
 			id : 'det_idam_berlakuField',
 			name : 'det_idam_berlaku',
 			fieldLabel : 'Tanggal Berlaku',
-			format : 'd-m-Y'
+			format : 'd-m-Y',
+			hidden : true
 		});
 		det_idam_kadaluarsaField = Ext.create('Ext.form.field.Date',{
 			id : 'det_idam_kadaluarsaField',
@@ -1531,7 +1606,7 @@
 			id : 'det_idam_syaratGrid',
 			store : idam_det_syaratDataStore,
 			loadMask : true,
-			width : '95%',
+			width : '100%',
 			plugins : [
 				Ext.create('Ext.grid.plugin.CellEditing', {
 					clicksToEdit: 1
@@ -1544,13 +1619,18 @@
 					dataIndex : 'idam_cek_id',
 					width : 100,
 					hidden : true,
+					hideable: false,
 					sortable : false
 				},
 				{
 					text : 'Syarat',
 					dataIndex : 'idam_cek_syarat_nama',
-					width : 400,
-					sortable : false
+					width : 300,
+					sortable : false,
+					editor : {
+						xtype : 'textfield',
+						readOnly : true
+					}
 				},
 				{
 					xtype: 'checkcolumn',
@@ -1707,11 +1787,13 @@
 		var idam_det_pemohon_straField = Ext.create('Ext.form.TextField',{
 			name : 'pemohon_stra',
 			fieldLabel : 'STRA',
+			hidden : true,
 			maxLength : 50
 		});
 		var idam_det_pemohon_surattugasField = Ext.create('Ext.form.TextField',{
 			name : 'pemohon_surattugas',
 			fieldLabel : 'Surat Tugas',
+			hidden : true,
 			maxLength : 50
 		});
 		var idam_det_pemohon_pekerjaanField = Ext.create('Ext.form.TextField',{
@@ -1742,6 +1824,26 @@
 			fieldLabel : 'Tahun Lulus',
 			maxLength : 4,
 			maskRe : /([0-9]+)$/
+		});
+		var idam_det_pendukungfieldset = Ext.create('Ext.form.FieldSet',{
+			title : '5. Data Pendukung',
+			columnWidth : 0.5,
+			checkboxToggle : false,
+			collapsible : false,
+			layout :'form',
+			items : [
+				det_idam_terimaField,
+				det_idam_terimatanggalField,
+				det_idam_kelengkapanField,
+				det_idam_bapField,
+				det_idam_baptanggalField,
+				det_idam_statusField,
+				det_idam_keteranganField,
+				det_idam_skField,
+				det_idam_berlakuField,
+				det_idam_kadaluarsaField,
+				det_idam_nomorregField
+			]
 		});
 		/* END DATA PEMOHON */
 		idam_det_formPanel = Ext.create('Ext.form.Panel', {
@@ -1816,27 +1918,7 @@
 					items : [
 						det_idam_syaratGrid
 					]
-				},{
-					xtype : 'fieldset',
-					title : '5. Data Pendukung',
-					columnWidth : 0.5,
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-						det_idam_terimaField,
-						det_idam_terimatanggalField,
-						det_idam_kelengkapanField,
-						det_idam_bapField,
-						det_idam_baptanggalField,
-						det_idam_statusField,
-						det_idam_keteranganField,
-						det_idam_skField,
-						det_idam_berlakuField,
-						det_idam_kadaluarsaField,
-						det_idam_nomorregField
-					]
-				},
+				},idam_det_pendukungfieldset,
 				Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
 			],
 			buttons : [idam_det_saveButton,idam_det_cancelButton]
@@ -1845,7 +1927,7 @@
 			id : 'idam_det_formWindow',
 			renderTo : 'idam_detSaveWindow',
 			title : globalFormAddEditTitle + ' ' + idam_det_componentItemTitle,
-			width : 700,
+			width : 500,
 			minHeight : 300,
 			autoHeight : true,
 			constrain : true,
@@ -2073,8 +2155,9 @@
 			idam_det_lk_printCM.hide();
 			idam_det_bap_printCM.hide();
 			idam_det_sk_printCM.hide();
+			idam_det_pendukungfieldset.hide();
+			idam_det_gridPanel.columns[23].setVisible(false);
 			idam_det_gridPanel.columns[24].setVisible(false);
-			idam_det_gridPanel.columns[25].setVisible(false);
 		<?php } ?>
 /* End SearchPanel declaration */
 });

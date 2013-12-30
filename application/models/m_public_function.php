@@ -18,7 +18,6 @@ class M_public_function extends App_model{
 		}
 		$data=array('counter'=>$counter);
 		$this->db->where('id',$rs->id)->update('nosk', $data);
-		$this->firephp->log($result);
 		return $result;
 	}
 }

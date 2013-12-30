@@ -4,7 +4,7 @@ class M_t_idam_det extends App_model{
 				det_idam_id,
 				det_idam_idam_id,
 				det_idam_jenis,
-				CASE WHEN det_idam_jenis = 1 THEN 'PERPANJANGAN'
+				CASE WHEN det_idam_jenis = 1 THEN 'BARU'
 					ELSE 'PERPANJANGAN'
 					END AS det_idam_jenis_nama,
 				det_idam_tanggal,
@@ -70,6 +70,9 @@ class M_t_idam_det extends App_model{
 	function getList($params){
 		extract($params);
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
@@ -90,7 +93,7 @@ class M_t_idam_det extends App_model{
 					)
 			";
 		}
-				if(@$limit_start != 0 && @$limit_start != 0){
+		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
 		$result = $this->__listCore($sql, $params);
@@ -101,6 +104,9 @@ class M_t_idam_det extends App_model{
 		extract($params);
 		
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID'];
+		}
 		
 		if(@$det_idam_id != ''){
 			$sql .= " AND det_idam_id = ".$det_idam_id." ";
@@ -171,7 +177,6 @@ class M_t_idam_det extends App_model{
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
-		$this->firephp->log($sql);
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
