@@ -388,4 +388,11 @@ class C_sktr extends CI_Controller{
 		$result = $this->m_sktr->getSyarat($params);
 		echo $result;
 	}
+	function printBP($id_sktr=FALSE){
+		$this->load->model("m_master_ijin");
+		$data["sppl"]	= $this->m_sktr->get_by(array("ID_SKTR"=>$id_sktr),FALSE,FALSE,TRUE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>10),FALSE,FALSE,TRUE);
+		$this->load->view("template/sktr_bp",$data);
+		
+	}
 }

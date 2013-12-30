@@ -289,6 +289,7 @@
 											$('html, body').animate({scrollTop: 0}, 500);
 										}
 									});
+									lingkungan_syaratDataStore.reload();
 									in_lingkungan_dataStore.reload();
 									in_lingkungan_resetForm();
 									in_lingkungan_switchToGrid();
@@ -853,15 +854,15 @@
 			text : 'Bukti Penerimaan',
 			tooltip : 'Cetak Bukti Penerimaan',
 			handler : function(){
-				var record = pl_gridPanel.getSelectionModel().getSelection()[0];
+				var record = in_lingkungan_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
-					url: 'c_sppl/switchAction',
+					url: 'c_ijin_lingkungan/switchAction',
 					params: {
 						ID_IJIN_LINGKUNGAN : record.get('ID_IJIN_LINGKUNGAN'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('<?php echo base_url("index.php/c_sppl/cetak_bp/")?>' + record.get('ID_IJIN_LINGKUNGAN'));
+						window.open('<?php echo base_url("index.php/c_ijin_lingkungan/printBP/")?>' + record.get('ID_IJIN_LINGKUNGAN'));
 					}
 				});
 			}

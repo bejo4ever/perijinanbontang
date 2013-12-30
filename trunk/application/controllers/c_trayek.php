@@ -37,6 +37,9 @@ class C_trayek extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
+			case 'CETAKBP':
+				$this->printBP();
+			break;
 			case 'EXCEL':
 				$this->printExcel();
 			break;
@@ -274,5 +277,15 @@ class C_trayek extends CI_Controller{
 		);
 		$result = $this->m_trayek->getSyarat($params);
 		echo $result;
+	}
+	function printBP($id_trayek=FALSE){
+		$this->load->model("m_master_ijin");
+		$join	= array(
+			array("table"=>"trayek","join_key"=>"ID_TRAYEK_INTI","join_table"=>"trayek_inti")
+		);
+		$data["sppl"]	= $this->m_trayek->get_join_by($join,array("ID_TRAYEK"=>$id_trayek),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>6),FALSE,FALSE,TRUE);
+		$this->load->view("template/trayek_bp",$data);
+		
 	}
 }

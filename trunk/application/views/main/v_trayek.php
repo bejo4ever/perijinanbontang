@@ -201,6 +201,7 @@
 											$('html, body').animate({scrollTop: 0}, 500);
 										}
 									});
+									trayek_syaratDataStore.reload();
 									ayek_dataStore.reload();
 									ayek_resetForm();
 									ayek_switchToGrid();
@@ -665,15 +666,15 @@
 			text : 'Bukti Penerimaan',
 			tooltip : 'Cetak Bukti Penerimaan',
 			handler : function(){
-				var record = pl_gridPanel.getSelectionModel().getSelection()[0];
+				var record = ayek_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
-					url: 'c_sppl/switchAction',
+					url: 'c_trayek/switchAction',
 					params: {
-						ID_SPPL : record.get('ID_SPPL'),
+						ID_TRAYEK : record.get('ID_TRAYEK'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('<?php echo base_url("index.php/c_sppl/cetak_bp/")?>' + record.get('ID_SPPL'));
+						window.open('<?php echo base_url("index.php/c_trayek/printBP/")?>' + record.get('ID_TRAYEK'));
 					}
 				});
 			}
@@ -1100,7 +1101,7 @@
 			listeners : {
 				select : function(cmb, record){
 					var rec=record[0];
-					NAMA_PERUSAHAANField.setValue(rec.get('NAMA_USAHA'));
+					NAMA_PERUSAHAANField.setValue(rec.get('NAMA_PERUSAHAAN'));
 					NOMOR_KENDARAANField.setValue(rec.get('NOMOR_KENDARAAN'));
 					NAMA_PEMILIKField.setValue(rec.get('NAMA_PEMILIK'));
 					ALAMAT_PEMILIKField.setValue(rec.get('ALAMAT_PEMILIK'));

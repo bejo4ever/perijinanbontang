@@ -32,7 +32,7 @@ class M_trayek extends App_model{
         parent::__construct();
         $this->table_name = 'trayek';
         $this->column_primary = 'ID_TRAYEK';
-        $this->column_order = '';
+        $this->column_order = 'ID_TRAYEK ASC';
 		$this->column_unique = '';
     }
 	

@@ -64,7 +64,7 @@ class M_ijin_lingkungan extends App_model{
         parent::__construct();
         $this->table_name = 'ijin_lingkungan';
         $this->column_primary = 'ID_IJIN_LINGKUNGAN';
-        $this->column_order = '';
+        $this->column_order = 'ID_IJIN_LINGKUNGAN ASC';
 		$this->column_unique = '';
     }
 	

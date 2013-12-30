@@ -239,6 +239,7 @@
 											$('html, body').animate({scrollTop: 0}, 500);
 										}
 									});
+									sktr_det_syaratDataStore.reload();
 									tr_dataStore.reload();
 									tr_resetForm();
 									tr_switchToGrid();
@@ -606,7 +607,7 @@
 				}
 			}),
 			fields : [
-				// { name : 'ID_SKTR', type : 'int', mapping : 'ID_SKTR' },
+				{ name : 'ID_SKTR', type : 'int', mapping : 'ID_SKTR' },
 				// { name : 'ID_SKTR_INTI', type : 'int', mapping : 'ID_SKTR_INTI' },
 				// { name : 'ID_USER', type : 'int', mapping : 'ID_USER' },
 				{ name : 'JENIS_PERMOHONAN', type : 'int', mapping : 'JENIS_PERMOHONAN' },
@@ -793,7 +794,7 @@
 						ID_SKTR : record.get('ID_SKTR'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('../print/idam_buktipenerimaan.html');
+						window.open('<?php echo base_url("index.php/c_sktr/printBP/"); ?>' + record.get('ID_SKTR'));
 					}
 				});
 			}
