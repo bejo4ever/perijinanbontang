@@ -37,6 +37,9 @@ class C_ijin_lingkungan extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
+			case 'CETAKBP':
+				$this->printBP();
+			break;
 			case 'EXCEL':
 				$this->printExcel();
 			break;
@@ -382,5 +385,15 @@ class C_ijin_lingkungan extends CI_Controller{
 		);
 		$result = $this->m_ijin_lingkungan->getSyarat($params);
 		echo $result;
+	}
+	function printBP($id_ijin_lingkungan=FALSE){
+		$this->load->model("m_master_ijin");
+		$join	= array(
+			array("table"=>"ijin_lingkungan","join_key"=>"ID_IJIN_LINGKUNGAN_INTI","join_table"=>"ijin_lingkungan_inti")
+		);
+		$data["sppl"]	= $this->m_ijin_lingkungan->get_join_by($join,array("ID_IJIN_LINGKUNGAN"=>$id_ijin_lingkungan),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>7),FALSE,FALSE,TRUE);
+		$this->load->view("template/lingkungan_bp",$data);
+		
 	}
 }

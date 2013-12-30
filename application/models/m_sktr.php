@@ -33,7 +33,7 @@ class M_sktr extends App_model{
         parent::__construct();
         $this->table_name = 'sktr';
         $this->column_primary = 'ID_SKTR';
-        $this->column_order = '';
+        $this->column_order = 'ID_SKTR ASC';
 		$this->column_unique = '';
     }
 	

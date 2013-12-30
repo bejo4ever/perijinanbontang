@@ -33,6 +33,9 @@ class C_ijin_lokasi extends CI_Controller{
 			case 'PRINT':
 				$this->printExcel();
 			break;
+			case 'CETAKBP':
+				$this->printBP();
+			break;
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
@@ -424,4 +427,11 @@ class C_ijin_lokasi extends CI_Controller{
 		$result = $this->m_ijin_lokasi->getSyarat($params);
 		echo $result;
 	}	
+	function printBP($id_trayek=FALSE){
+		$this->load->model("m_master_ijin");
+		$data["sppl"]	= $this->m_ijin_lokasi->get_by(array("ID_IJIN_LOKASI"=>$id_trayek),FALSE,FALSE,TRUE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>7),FALSE,FALSE,TRUE);
+		$this->load->view("template/lokasi_bp",$data);
+		
+	}
 }

@@ -216,6 +216,7 @@
 											$('html, body').animate({scrollTop: 0}, 500);
 										}
 									});
+									sppl_syaratDataStore.reload();
 									pl_dataStore.reload();
 									pl_resetForm();
 									pl_switchToGrid();
@@ -375,12 +376,12 @@
 			LUAS_TAPAK_BANGUNANField.setValue(record.data.LUAS_TAPAK_BANGUNAN);
 			LUAS_KEGIATANField.setValue(record.data.LUAS_KEGIATAN);
 			LUAS_PARKIRField.setValue(record.data.LUAS_PARKIR);
-			sppl_syaratDataStore.proxy.extraParams = { 
-				trayek_id : record.data.ID_TRAYEK,
-				currentAction : 'update',
-				action : 'GETSYARAT'
-			};
-			sppl_syaratDataStore.load();
+			// sppl_syaratDataStore.proxy.extraParams = { 
+				// trayek_id : record.data.ID_TRAYEK,
+				// currentAction : 'update',
+				// action : 'GETSYARAT'
+			// };
+			sppl_syaratDataStore.reload();
 		}
 		
 		function pl_showSearchWindow(){

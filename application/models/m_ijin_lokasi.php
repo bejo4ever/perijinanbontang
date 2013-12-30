@@ -5,6 +5,7 @@ class M_ijin_lokasi extends App_model{
 				ID_PEMOHON,
 				NO_SK,
 				NO_SK_LAMA,
+				JENIS_PERMOHONAN,
 				NPWPD,
 				NO_AKTA,
 				BENTUK_PERUSAHAAN,
@@ -51,7 +52,7 @@ class M_ijin_lokasi extends App_model{
         parent::__construct();
         $this->table_name = 'ijin_lokasi';
         $this->column_primary = 'ID_IJIN_LOKASI';
-        $this->column_order = '';
+        $this->column_order = 'ID_IJIN_LOKASI ASC';
 		$this->column_unique = '';
     }
 	

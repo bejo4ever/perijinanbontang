@@ -146,7 +146,22 @@ class App_model extends CI_Model{
         $method = $single ? 'row_array' : 'result_array';
         return $this->db->get($this->table_name)->$method();
     }
-	
+	function get_join_by($data,$key,$single=FALSE,$column=FALSE){ //Zulmi Adi Rizki 23 Juli 2013
+		foreach($data as $row){
+			$this->db->join($row["join_table"],$row["table"].".".$row["join_key"]."=".$row["join_table"].".".$row["join_key"]);
+		}
+		if(!is_array($key)){
+			$this->db->where($key);
+		} else {
+			$key = array_map('htmlentities', $key);
+			$this->db->where($key);
+		}
+		count($this->db->ar_orderby) || $this->db->order_by($this->column_order);
+		$this->db->select($column == FALSE ? "*" : $column)->from($this->table_name);
+		$single == FALSE || $this->db->limit(1);
+		$method = $single ? 'row_array' : 'result_array';
+		return $this->db->get()->$method();
+	}
 	public function __insertlog($user, $pemohon, $permohonan, $aktifitas){
 		$data = array(
 			"log_tanggal"=>date('Y-m-d H:i:s'),
