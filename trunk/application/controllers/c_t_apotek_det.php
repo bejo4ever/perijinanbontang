@@ -362,6 +362,7 @@ class C_t_apotek_det extends CI_Controller{
 						$resultasisten = $this->m_t_apotek_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
 					}
 				}
+				$this->m_t_apotek_det->__insertlog($apotek_det_author, $resultpemohon, $resultInti, 'Tambah');
 			}else{
 				$result = 'fail';
 			}
@@ -633,21 +634,22 @@ class C_t_apotek_det extends CI_Controller{
 				);
 				$resultket = $this->m_t_apotek_det->__update($datacek, $apotek_ket_id[$i], 't_apotek_ket', 'updateId','apotek_ket_id');
 			}
-				for($i=0;$i<count($asisten_id);$i++){
-					$datadok = array(
-						'asisten_nama'=>$asisten_nama[$i],
-						'asisten_sik'=>$asisten_sik[$i],
-						'asisten_lulus'=>$asisten_lulus[$i],
-						'asisten_alamat'=>$asisten_alamat[$i],
-						'asisten_apotek_id'=>$det_apotek_apotek_id,
-						'asisten_apotekdet_id'=>$det_apotek_id,
-					);
-					if($asisten_id[$i] == 0){
-						$resultasisten = $this->m_t_apotek_det->__insert($datadok, 't_apotek_asisten', '');
-					}else{
-						$resultasisten = $this->m_t_apotek_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
-					}
+			for($i=0;$i<count($asisten_id);$i++){
+				$datadok = array(
+					'asisten_nama'=>$asisten_nama[$i],
+					'asisten_sik'=>$asisten_sik[$i],
+					'asisten_lulus'=>$asisten_lulus[$i],
+					'asisten_alamat'=>$asisten_alamat[$i],
+					'asisten_apotek_id'=>$det_apotek_apotek_id,
+					'asisten_apotekdet_id'=>$det_apotek_id,
+				);
+				if($asisten_id[$i] == 0){
+					$resultasisten = $this->m_t_apotek_det->__insert($datadok, 't_apotek_asisten', '');
+				}else{
+					$resultasisten = $this->m_t_apotek_det->__update($datadok, $asisten_id[$i], 't_apotek_asisten', '', 'asisten_id');
 				}
+			}
+			$this->m_t_apotek_det->__insertlog($apotek_det_updated_by, $resultpemohon, $det_apotek_id, 'Ubah');
 		}else{
 			$result = 'sessionExpired';
 		}
@@ -1045,7 +1047,17 @@ class C_t_apotek_det extends CI_Controller{
 	}
 	function ubahProses(){
 		$apotekdet_id  = $this->input->post('apotekdet_id');
+		$apotekdet_nosk  = $this->input->post('apotekdet_nosk');
 		$proses  = $this->input->post('proses');
+		if($proses == 'Selesai, belum diambil' && $apotekdet_nosk == ''){
+			$nosk = $this->m_public_function->getNomorSk(1);
+			$data_sk = array(
+				"det_apotek_sk"=>$nosk,
+				"det_apotek_berlaku"=>date('Y-m-d')
+			);
+			$this->db->where('det_apotek_id', $apotekdet_id);
+			$this->db->update('t_apotek_det', $data_sk);
+		}
 		$data = array(
 			"det_apotek_proses"=>$proses
 		);

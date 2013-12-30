@@ -937,6 +937,7 @@
 				url: 'c_t_iujt_det/switchAction',
 				params: {
 					iujtdet_id : record.get('det_iujt_id'),
+					iujtdet_nosk : record.get('det_iujt_sk'),
 					proses : proses,
 					action : 'UBAHPROSES'
 				},success : function(){
@@ -1146,6 +1147,7 @@
 				},
 				{
 					xtype:'actioncolumn',
+					text : 'Proses',
 					width:50,
 					items: [{
 						iconCls : 'checked',
