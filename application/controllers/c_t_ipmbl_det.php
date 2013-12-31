@@ -82,6 +82,8 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_ipmbl_id = is_numeric($det_ipmbl_ipmbl_id) ? $det_ipmbl_ipmbl_id : 0;
 		$det_ipmbl_jenis = htmlentities($this->input->post('det_ipmbl_jenis'),ENT_QUOTES);
 		$det_ipmbl_jenis = is_numeric($det_ipmbl_jenis) ? $det_ipmbl_jenis : 0;
+		$det_ipmbl_lama = htmlentities($this->input->post('det_ipmbl_lama'),ENT_QUOTES);
+		$det_ipmbl_lama = is_numeric($det_ipmbl_lama) ? $det_ipmbl_lama : 0;
 		$det_ipmbl_tanggal = htmlentities($this->input->post('det_ipmbl_tanggal'),ENT_QUOTES);
 		$det_ipmbl_nama = htmlentities($this->input->post('det_ipmbl_nama'),ENT_QUOTES);
 		$det_ipmbl_alamat = htmlentities($this->input->post('det_ipmbl_alamat'),ENT_QUOTES);
@@ -172,28 +174,33 @@ class C_t_ipmbl_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
 		if($pemohon_id != 0){
 			$resultpemohon = $this->m_t_ipmbl_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$ipmbl_det_author;
 			$resultpemohon = $this->m_t_ipmbl_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
 		if($ipmbl_det_author != ''){
-			$dataInti = array(
-				'ipmbl_usaha'=>$det_ipmbl_usaha,
-				'ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
-				'ipmbl_kelurahan'=>$det_ipmbl_kelurahanusaha,
-				'ipmbl_kecamatan'=>$det_ipmbl_kecamatanusaha,
-				'ipmbl_luas'=>$det_ipmbl_luas,
-				'ipmbl_volume'=>$det_ipmbl_volume,
-				'ipmbl_keperluan'=>$det_ipmbl_keperluan,
-				'ipmbl_lokasi'=>$det_ipmbl_lokasi
-			);
-			$resultInti = $this->m_t_ipmbl_det->__insert($dataInti, 't_ipmbl', 'insertId');
+			if($det_ipmbl_lama != 0 && $det_ipmbl_jenis == 2){
+				$resultInti = $det_ipmbl_lama;
+			}else{
+				$dataInti = array(
+					'ipmbl_usaha'=>$det_ipmbl_usaha,
+					'ipmbl_alamatusaha'=>$det_ipmbl_alamatusaha,
+					'ipmbl_kelurahan'=>$det_ipmbl_kelurahanusaha,
+					'ipmbl_kecamatan'=>$det_ipmbl_kecamatanusaha,
+					'ipmbl_luas'=>$det_ipmbl_luas,
+					'ipmbl_volume'=>$det_ipmbl_volume,
+					'ipmbl_keperluan'=>$det_ipmbl_keperluan,
+					'ipmbl_lokasi'=>$det_ipmbl_lokasi
+				);
+				$resultInti = $this->m_t_ipmbl_det->__insert($dataInti, 't_ipmbl', 'insertId');
+			}
 			if($resultInti != 0){
 				$result = 'success';
 				$data = array(
@@ -344,7 +351,6 @@ class C_t_ipmbl_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
@@ -352,6 +358,7 @@ class C_t_ipmbl_det extends CI_Controller{
 			$resultpemohon = $this->m_t_ipmbl_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
 			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$ipmbl_det_updated_by;
 			$resultpemohon = $this->m_t_ipmbl_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
@@ -690,10 +697,17 @@ class C_t_ipmbl_det extends CI_Controller{
 		$printrecord = $this->m_t_ipmbl_det->search($params);
 		$data['printrecord'] = $printrecord[1];
 		$data['dataijin'] = $this->db->where('ID_IJIN',2)->get('master_ijin')->row();
-		$print_view=$this->load->view('template/p_ipmbl_sk.php',$data,TRUE);
-		$print_file=fopen('print/ipmbl_sk.html','w+');
-		fwrite($print_file, $print_view);
-		echo 'success';
+		$sub = $data['printrecord'][0];
+		if($sub->det_ipmbl_sk == ''){
+			echo 'nosk';
+		}else if($sub->det_ipmbl_kadaluarsa == '' || $sub->det_ipmbl_kadaluarsa == '0000-00-00'){
+			echo 'notglkadaluarsa';
+		}else{
+			$print_view=$this->load->view('template/p_ipmbl_sk.php',$data,TRUE);
+			$print_file=fopen('print/ipmbl_sk.html','w+');
+			fwrite($print_file, $print_view);
+			echo 'success';
+		}
 	}
 	
 }

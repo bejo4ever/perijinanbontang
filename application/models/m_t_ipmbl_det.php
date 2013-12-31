@@ -78,6 +78,9 @@ class M_t_ipmbl_det extends App_model{
 	function getList($params){
 		extract($params);
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
@@ -116,6 +119,9 @@ class M_t_ipmbl_det extends App_model{
 		extract($params);
 		
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
 		
 		if(@$det_ipmbl_id != ''){
 			$sql .= " AND det_ipmbl_id LIKE '%".$det_ipmbl_id."%' ";

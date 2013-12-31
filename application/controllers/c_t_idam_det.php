@@ -144,7 +144,6 @@ class C_t_idam_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$idam_det_author,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
@@ -152,6 +151,7 @@ class C_t_idam_det extends CI_Controller{
 			$resultpemohon = $this->m_t_idam_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
 			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$idam_det_author;
 			$resultpemohon = $this->m_t_idam_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		

@@ -79,6 +79,8 @@ class C_t_iujt_det extends CI_Controller{
 		$det_iujt_iujt_id = is_numeric($det_iujt_iujt_id) ? $det_iujt_iujt_id : 0;
 		$det_iujt_jenis = htmlentities($this->input->post('det_iujt_jenis'),ENT_QUOTES);
 		$det_iujt_jenis = is_numeric($det_iujt_jenis) ? $det_iujt_jenis : 0;
+		$det_iujt_lama = htmlentities($this->input->post('det_iujt_lama'),ENT_QUOTES);
+		$det_iujt_lama = is_numeric($det_iujt_lama) ? $det_iujt_lama : 0;
 		$det_iujt_sk = htmlentities($this->input->post('det_iujt_sk'),ENT_QUOTES);
 		$det_iujt_norekom = htmlentities($this->input->post('det_iujt_norekom'),ENT_QUOTES);
 		$det_iujt_berlaku = htmlentities($this->input->post('det_iujt_berlaku'),ENT_QUOTES);
@@ -144,24 +146,29 @@ class C_t_iujt_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
 		if($pemohon_id != 0){
 			$resultpemohon = $this->m_t_iujt_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$iujt_det_author;
 			$resultpemohon = $this->m_t_iujt_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
 		if($iujt_det_author != ''){
-			$dataInti = array(
-				'iujt_usaha'=>$iujt_usaha,
-				'iujt_alamatusaha'=>$iujt_alamatusaha,
-				'iujt_statusperusahaan'=>$iujt_statusperusahaan,
-				'iujt_penanggungjawab'=>$iujt_penanggungjawab
-			);
-			$resultInti = $this->m_t_iujt_det->__insert($dataInti, 't_iujt', 'insertId');
+			if($det_iujt_lama != 0 && $det_iujt_jenis == 2){
+				$resultInti = $det_iujt_lama;
+			}else{
+				$dataInti = array(
+					'iujt_usaha'=>$iujt_usaha,
+					'iujt_alamatusaha'=>$iujt_alamatusaha,
+					'iujt_statusperusahaan'=>$iujt_statusperusahaan,
+					'iujt_penanggungjawab'=>$iujt_penanggungjawab
+				);
+				$resultInti = $this->m_t_iujt_det->__insert($dataInti, 't_iujt', 'insertId');
+			}
 			if($resultInti != 0){
 				$result = 'success';
 				$data = array(
@@ -273,7 +280,6 @@ class C_t_iujt_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
@@ -281,6 +287,7 @@ class C_t_iujt_det extends CI_Controller{
 			$resultpemohon = $this->m_t_iujt_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
 			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$iujt_det_updated_by;
 			$resultpemohon = $this->m_t_iujt_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
@@ -515,10 +522,17 @@ class C_t_iujt_det extends CI_Controller{
 		$printrecord = $this->m_t_iujt_det->search($params);
 		$data['printrecord'] = $printrecord[1];
 		$data['dataijin'] = $this->db->where('ID_IJIN',3)->get('master_ijin')->row();
-		$print_view=$this->load->view('template/p_iujt_sk.php',$data,TRUE);
-		$print_file=fopen('print/iujt_sk.html','w+');
-		fwrite($print_file, $print_view);
-		echo 'success';
+		$sub = $data['printrecord'][0];
+		if($sub->det_iujt_sk == ''){
+			echo 'nosk';
+		}else if($sub->det_iujt_kadaluarsa == '' || $sub->det_iujt_kadaluarsa == '0000-00-00'){
+			echo 'notglkadaluarsa';
+		}else{
+			$print_view=$this->load->view('template/p_iujt_sk.php',$data,TRUE);
+			$print_file=fopen('print/iujt_sk.html','w+');
+			fwrite($print_file, $print_view);
+			echo 'success';
+		}
 	}
 	function cetakBp(){
 		$iujtdet_id  = $this->input->post('iujtdet_id');

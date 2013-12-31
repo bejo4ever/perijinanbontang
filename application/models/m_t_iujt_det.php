@@ -65,6 +65,9 @@ class M_t_iujt_det extends App_model{
 	function getList($params){
 		extract($params);
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
@@ -94,6 +97,9 @@ class M_t_iujt_det extends App_model{
 		extract($params);
 		
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
 		
 		if(@$det_iujt_id != ''){
 			$sql .= " AND det_iujt_id LIKE '%".$det_iujt_id."%' ";

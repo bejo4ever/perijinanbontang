@@ -35,6 +35,7 @@ class M_t_iujk_det extends App_model{
 				iujk_fax,
 				iujk_npwp,
 				det_iujk_proses,
+				det_iujk_sk,
 				CONCAT(5 * (DATEDIFF(NOW(), det_iujk_tanggal) DIV 7) + 
 					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_iujk_tanggal) + 
 						1, 1),' Hari') as lamaproses,
@@ -73,6 +74,9 @@ class M_t_iujk_det extends App_model{
 	function getList($params){
 		extract($params);
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
@@ -105,6 +109,9 @@ class M_t_iujk_det extends App_model{
 		extract($params);
 		
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
 		
 		if(@$det_iujk_id != ''){
 			$sql .= " AND det_iujk_id LIKE '%".$det_iujk_id."%' ";

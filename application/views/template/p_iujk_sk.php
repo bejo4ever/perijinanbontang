@@ -25,7 +25,7 @@
 			<td colspan="4" align="center"><h3 style="margin:0px;"><u>IJIN USAHA JASA KONSTRUKSI</u></h3></td>
 		</tr>
 		<tr>
-			<td colspan="4" align="center">No. Reg. : <?php echo $det_iujk_nomorreg; ?></td>
+			<td colspan="4" align="center">No. Reg. : <?php echo $det_iujk_sk; ?></td>
 		</tr>
 		<tr>
 			<td colspan="4" align="center">&nbsp;</td>
