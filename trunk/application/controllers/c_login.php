@@ -6,6 +6,9 @@ class C_login extends CI_Controller{
 		$this->load->model('m_login');
 	}
 	function index(){
+		$this->load->view('front');
+	}
+	function form(){
 		$this->load->view('v_login');
 	}
 	function verifikasiLogin(){
