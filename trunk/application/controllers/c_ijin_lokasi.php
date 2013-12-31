@@ -6,6 +6,7 @@ class C_ijin_lokasi extends CI_Controller{
 		session_start();
 		$this->load->model('m_ijin_lokasi');
 		$this->load->model('m_m_pemohon');
+		$this->load->model('m_cek_list_lokasi');
 	}
 	
 	function index(){
@@ -69,6 +70,7 @@ class C_ijin_lokasi extends CI_Controller{
 		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
 		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
 		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
 		$NPWPD = htmlentities($this->input->post('NPWPD'),ENT_QUOTES);
@@ -89,6 +91,10 @@ class C_ijin_lokasi extends CI_Controller{
 		$FUNGSI = htmlentities($this->input->post('FUNGSI'),ENT_QUOTES);
 		$STATUS_TANAH = htmlentities($this->input->post('STATUS_TANAH'),ENT_QUOTES);
 		$STATUS_TANAH = is_numeric($STATUS_TANAH) ? $STATUS_TANAH : 0;
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
+		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
 		$KETERANGAN_TANAH = htmlentities($this->input->post('KETERANGAN_TANAH'),ENT_QUOTES);
 		$LUAS_LOKASI = htmlentities($this->input->post('LUAS_LOKASI'),ENT_QUOTES);
 		$LUAS_LOKASI = is_numeric($LUAS_LOKASI) ? $LUAS_LOKASI : 0;
@@ -110,6 +116,7 @@ class C_ijin_lokasi extends CI_Controller{
 		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
 		$pemohon_kota = htmlentities($this->input->post('pemohon_kota'),ENT_QUOTES);
 		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
 		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
 		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
 		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
@@ -129,59 +136,87 @@ class C_ijin_lokasi extends CI_Controller{
 		if($in_lokasi_author == ''){
 			$result = 'sessionExpired';
 		}else{
+			if($pemohon_id != null || $pemohon_id != ""){
+				$pemohon	= $pemohon_id;
+			} else {
+				$data = array(
+				'pemohon_nama'=>$pemohon_nama,
+				'pemohon_alamat'=>$pemohon_alamat,
+				'pemohon_rt'=>$pemohon_rt,
+				'pemohon_rw'=>$pemohon_rw,
+				'pemohon_telp'=>$pemohon_telp,
+				'pemohon_kel'=>$pemohon_kel,
+				'pemohon_kec'=>$pemohon_kec,
+				'pemohon_kota'=>$pemohon_kota,
+				'pemohon_nik'=>$pemohon_nik,
+				'pemohon_pekerjaan'=>$pemohon_pekerjaan,
+				'pemohon_tempatlahir'=>$pemohon_tempatlahir,
+				'pemohon_tanggallahir'=>$pemohon_tanggallahir,
+				'pemohon_wn'=>$pemohon_wn,
+				'pemohon_hp'=>$pemohon_hp,
+				'pemohon_user_id'=>$_SESSION['USERID']
+				);
+				$pemohon= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			}
 			if($_SESSION['IDHAK'] == 2){
-				if($JENIS_PERMOHONAN == 1){
-					$data = array(
-						'pemohon_nama'=>$pemohon_nama,
-						'pemohon_alamat'=>$pemohon_alamat,
-						'pemohon_rt'=>$pemohon_rt,
-						'pemohon_rw'=>$pemohon_rw,
-						'pemohon_telp'=>$pemohon_telp,
-						'pemohon_kel'=>$pemohon_kel,
-						'pemohon_kec'=>$pemohon_kec,
-						'pemohon_kota'=>$pemohon_kota,
-						'pemohon_nik'=>$pemohon_nik,
-						'pemohon_pekerjaan'=>$pemohon_pekerjaan,
-						'pemohon_tempatlahir'=>$pemohon_tempatlahir,
-						'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-						'pemohon_wn'=>$pemohon_wn,
-						'pemohon_hp'=>$pemohon_hp,
-						'pemohon_user_id'=>$_SESSION['USERID']
+				$data = array(
+					'ID_IJIN_LOKASI'=>$ID_IJIN_LOKASI,
+					'ID_PEMOHON'=>$pemohon,
+					'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+					'NO_SK'=>$NO_SK,
+					'NO_SK_LAMA'=>$NO_SK_LAMA,
+					'NPWPD'=>$NPWPD,
+					'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
+					'NO_AKTA'=>$NO_AKTA,
+					'BENTUK_PERUSAHAAN'=>$BENTUK_PERUSAHAAN,
+					'ALAMAT'=>$ALAMAT,
+					'RT'=>$RT,
+					'RW'=>$RW,
+					'ID_KELURAHAN'=>$ID_KELURAHAN,
+					'ID_KECAMATAN'=>$ID_KECAMATAN,
+					'ID_KOTA'=>$ID_KOTA,
+					'TELP'=>$TELP,
+					'FUNGSI'=>$FUNGSI,
+					'STATUS_TANAH'=>$STATUS_TANAH,
+					'KETERANGAN_TANAH'=>$KETERANGAN_TANAH,
+					'LUAS_LOKASI'=>$LUAS_LOKASI,
+					'ALAMAT_LOKASI'=>$ALAMAT_LOKASI,
+					'ID_KELURAHAN_LOKASI'=>$ID_KELURAHAN_LOKASI,
+					'ID_KECAMATAN_LOKASI'=>$ID_KECAMATAN_LOKASI,
+					'TGL_PERMOHONAN'=>date("Y-m-d"),
 					);
-					$pemohon= $this->m_m_pemohon->__insert($data, '', 'insertId');
-					$data = array(
-						'ID_IJIN_LOKASI'=>$ID_IJIN_LOKASI,
-						'ID_PEMOHON'=>$pemohon,
-						'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
-						'NO_SK'=>$NO_SK,
-						'NO_SK_LAMA'=>$NO_SK_LAMA,
-						'NPWPD'=>$NPWPD,
-						'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
-						'NO_AKTA'=>$NO_AKTA,
-						'BENTUK_PERUSAHAAN'=>$BENTUK_PERUSAHAAN,
-						'ALAMAT'=>$ALAMAT,
-						'RT'=>$RT,
-						'RW'=>$RW,
-						'ID_KELURAHAN'=>$ID_KELURAHAN,
-						'ID_KECAMATAN'=>$ID_KECAMATAN,
-						'ID_KOTA'=>$ID_KOTA,
-						'TELP'=>$TELP,
-						'FUNGSI'=>$FUNGSI,
-						'STATUS_TANAH'=>$STATUS_TANAH,
-						'KETERANGAN_TANAH'=>$KETERANGAN_TANAH,
-						'LUAS_LOKASI'=>$LUAS_LOKASI,
-						'ALAMAT_LOKASI'=>$ALAMAT_LOKASI,
-						'ID_KELURAHAN_LOKASI'=>$ID_KELURAHAN_LOKASI,
-						'ID_KECAMATAN_LOKASI'=>$ID_KECAMATAN_LOKASI,
-						'TGL_PERMOHONAN'=>date("Y-m-d"),
-						);
-				} else {
-					$query_p= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
-					$pemohon=$query_p['pemohon_id'];
-				}
 				$result = $this->m_ijin_lokasi->__insert($data, '', 'insertId');
 			} else {
-			
+				$data = array(
+					'ID_IJIN_LOKASI'=>$ID_IJIN_LOKASI,
+					'ID_PEMOHON'=>$pemohon,
+					'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+					'NO_SK'=>$NO_SK,
+					'NO_SK_LAMA'=>$NO_SK_LAMA,
+					'NPWPD'=>$NPWPD,
+					'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
+					'NO_AKTA'=>$NO_AKTA,
+					'BENTUK_PERUSAHAAN'=>$BENTUK_PERUSAHAAN,
+					'ALAMAT'=>$ALAMAT,
+					'RT'=>$RT,
+					'RW'=>$RW,
+					'ID_KELURAHAN'=>$ID_KELURAHAN,
+					'ID_KECAMATAN'=>$ID_KECAMATAN,
+					'ID_KOTA'=>$ID_KOTA,
+					'TELP'=>$TELP,
+					'FUNGSI'=>$FUNGSI,
+					'STATUS_TANAH'=>$STATUS_TANAH,
+					'KETERANGAN_TANAH'=>$KETERANGAN_TANAH,
+					'LUAS_LOKASI'=>$LUAS_LOKASI,
+					'ALAMAT_LOKASI'=>$ALAMAT_LOKASI,
+					'ID_KELURAHAN_LOKASI'=>$ID_KELURAHAN_LOKASI,
+					'ID_KECAMATAN_LOKASI'=>$ID_KECAMATAN_LOKASI,
+					'TGL_PERMOHONAN'=>date("Y-m-d"),
+					'TGL_AKHIR'=>$TGL_AKHIR,
+					'STATUS'=>$STATUS,
+					'STATUS_SURVEY'=>$STATUS_SURVEY,
+					);
+				$result = $this->m_ijin_lokasi->__insert($data, '', 'insertId');
 			}
 			$lokasi_ket	= json_decode($this->input->post('KETERANGAN'));
 			$syarat		= $this->m_ijin_lokasi->getSyarat2();
@@ -204,6 +239,7 @@ class C_ijin_lokasi extends CI_Controller{
 		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
 		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
 		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
+		$TGL_AKHIR = htmlentities($this->input->post('TGL_AKHIR'),ENT_QUOTES);
 		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
 		$NPWPD = htmlentities($this->input->post('NPWPD'),ENT_QUOTES);
 		$NO_AKTA = htmlentities($this->input->post('NO_AKTA'),ENT_QUOTES);
@@ -231,11 +267,15 @@ class C_ijin_lokasi extends CI_Controller{
 		$ID_KELURAHAN_LOKASI = is_numeric($ID_KELURAHAN_LOKASI) ? $ID_KELURAHAN_LOKASI : 0;
 		$ID_KECAMATAN_LOKASI = htmlentities($this->input->post('ID_KECAMATAN_LOKASI'),ENT_QUOTES);
 		$ID_KECAMATAN_LOKASI = is_numeric($ID_KECAMATAN_LOKASI) ? $ID_KECAMATAN_LOKASI : 0;
-				
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
+		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
+		
 		$in_lokasi_updated_by = $this->m_ijin_lokasi->__checkSession();
 		$in_lokasi_updated_date = date('Y-m-d H:i:s');
 		
-		if($in_lokasi_updated_by != ''){
+		if($in_lokasi_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -259,10 +299,27 @@ class C_ijin_lokasi extends CI_Controller{
 				'ALAMAT_LOKASI'=>$ALAMAT_LOKASI,
 				'ID_KELURAHAN_LOKASI'=>$ID_KELURAHAN_LOKASI,
 				'ID_KECAMATAN_LOKASI'=>$ID_KECAMATAN_LOKASI,
+				'TGL_AKHIR'=>$TGL_AKHIR,
+				'STATUS'=>$STATUS,
+				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				);
-			$result = $this->m_ijin_lokasi->__update($data, $ID_IJIN_LOKASI, '', '');
+			// $result = $this->m_ijin_lokasi->__update($data, $ID_IJIN_LOKASI, '', '');
+			$result = $this->m_ijin_lokasi->save($data, $ID_IJIN_LOKASI);
+			$this->m_cek_list_lokasi->delete($ID_IJIN_LOKASI);
+			$lokasi_ket	= json_decode($this->input->post('KETERANGAN'));
+			$syarat		= $this->m_ijin_lokasi->getSyarat2();
+			$i=0;
+			foreach($syarat as $row){
+				$datacek = array(
+				"ID_IJIN"=>$result,
+				"ID_SYARAT"=>$row["ID_SYARAT"],
+				"KETERANGAN"=>$lokasi_ket[$i]);
+				$i++;
+				$this->m_ijin_lokasi->__insert($datacek, 'cek_list_lokasi', '');
+			}
+			echo "success";
 		}
-		echo $result;
+		
 	}
 	
 	function delete(){
@@ -422,7 +479,7 @@ class C_ijin_lokasi extends CI_Controller{
 		$lokasi_id = $this->input->post('lokasi_id');
 		$params = array(
 			"currentAction"=>$currentAction,
-			"lingkungan_id"=>$lokasi_id
+			"lokasi_id"=>$lokasi_id
 		);
 		$result = $this->m_ijin_lokasi->getSyarat($params);
 		echo $result;

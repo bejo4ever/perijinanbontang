@@ -172,4 +172,37 @@ class App_model extends CI_Model{
 		);
 		$this->db->insert('t_log', $data);
 	}
+	 public function save($data, $id = FALSE) {
+        
+        if ($id == FALSE) {
+            
+            // This is an insert
+            $this->db->set($data)->insert($this->table_name);
+        }
+        else {
+            if(!is_array($id)){
+				$filter = $this->primary_filter;
+				$this->db->set($data)->where($this->column_primary, $filter($id))->update($this->table_name);
+			} else {
+				$filter = $this->primary_filter;
+				$this->db->set($data)->where($id)->update($this->table_name);
+				/*
+				update tidak berdasarkan primary key tetapi, menggunakan kolom lain contoh : save($data,array("NAMA_KOLOM"=>"coba"));
+				*/
+				//Zulmi Adi Rizki 19 Juli 2013
+			}
+            // This is an update
+        }
+        
+        // Return the ID
+        return $id == FALSE ? $this->db->insert_id() : $id;
+    }
+	public function delete($id){
+        
+        $filter = $this->primary_filter; 
+		$id = $filter($id);
+		if ($id) {
+			$this->db->where($this->column_primary, $id)->delete($this->table_name);
+		}
+    }
 }

@@ -156,6 +156,7 @@
 					var BATAS_DEPANValue = '';
 					var BATAS_BELAKANGValue = '';
 					var TGL_PERMOHONANValue = '';
+					var TGL_BERAKHIRValue = '';
 					var FUNGSIValue = '';
 					var ALAMAT_BANGUNANValue = '';
 					var TINGGI_BANGUNANValue = '';
@@ -178,7 +179,8 @@
 					pemohon_namaValue = pemohon_namaField.getValue();
 					pemohon_telpValue = pemohon_telpField.getValue();
 					pemohon_alamatValue = pemohon_alamatField.getValue();
-					pemohon_idFieldValue = pemohon_idField.getValue();
+					pemohon_idValue = pemohon_idField.getValue();
+					pemohon_nikValue = pemohon_nikField.getValue();
 					HAK_MILIKValue = HAK_MILIKField.getValue();
 					NAMA_PEMILIKValue = NAMA_PEMILIKField.getValue();
 					NO_SURAT_TANAHValue = NO_SURAT_TANAHField.getValue();
@@ -187,6 +189,7 @@
 					BATAS_DEPANValue = BATAS_DEPANField.getValue();
 					BATAS_BELAKANGValue = BATAS_BELAKANGField.getValue();
 					TGL_PERMOHONANValue = TGL_PERMOHONANField.getValue();
+					TGL_BERAKHIRValue = TGL_BERAKHIRField.getValue();
 					FUNGSIValue = FUNGSIField.getValue();
 					ALAMAT_BANGUNANValue = ALAMAT_BANGUNANField.getValue();
 					TINGGI_BANGUNANValue = TINGGI_BANGUNANField.getValue();
@@ -205,7 +208,8 @@
 							pemohon_nama : pemohon_namaValue,
 							pemohon_telp : pemohon_telpValue,
 							pemohon_alamat : pemohon_alamatValue,
-							pemohon_id : pemohon_idFieldValue,
+							pemohon_id : pemohon_idValue,
+							pemohon_nik : pemohon_nikValue,
 							HAK_MILIK : HAK_MILIKValue,
 							NAMA_PEMILIK : NAMA_PEMILIKValue,
 							NO_SURAT_TANAH : NO_SURAT_TANAHValue,
@@ -214,6 +218,7 @@
 							BATAS_DEPAN : BATAS_DEPANValue,
 							BATAS_BELAKANG : BATAS_BELAKANGValue,
 							TGL_PERMOHONAN : TGL_PERMOHONANValue,
+							TGL_BERAKHIR : TGL_BERAKHIRValue,
 							STATUS : STATUSValue,
 							FUNGSI : FUNGSIValue,
 							ALAMAT_BANGUNAN : ALAMAT_BANGUNANValue,
@@ -384,11 +389,10 @@
             tr_dbTaskMessage = 'update';
 			
 			var record = tr_gridPanel.getSelectionModel().getSelection()[0];
-			// ID_SKTRField.setValue(record.data.ID_SKTR);
-			// ID_SKTR_INTIField.setValue(record.data.ID_SKTR_INTI);
-			// ID_USERField.setValue(record.data.ID_USER);
+			ID_SKTRField.setValue(record.data.ID_SKTR);
 			JENIS_PERMOHONANField.setValue(record.data.JENIS_PERMOHONAN);
-			// NO_SKField.setValue(record.data.NO_SK);
+			pemohon_idField.setValue(record.data.pemohon_id);
+			pemohon_nikField.setValue(record.data.pemohon_nik);
 			pemohon_namaField.setValue(record.data.pemohon_nama);
 			pemohon_telpField.setValue(record.data.pemohon_telp);
 			pemohon_alamatField.setValue(record.data.pemohon_alamat);
@@ -405,11 +409,11 @@
 			BATAS_DEPANField.setValue(record.data.BATAS_DEPAN);
 			BATAS_BELAKANGField.setValue(record.data.BATAS_BELAKANG);
 			TGL_PERMOHONANField.setValue(record.data.TGL_PERMOHONAN);
-			// STATUSField.setValue(record.data.STATUS);
-			// STATUS_SURVEYField.setValue(record.data.STATUS_SURVEY);
+			TGL_BERAKHIRField.setValue(record.data.TGL_BERAKHIR);
+			STATUSField.setValue(record.data.STATUS);
+			STATUS_SURVEYField.setValue(record.data.STATUS_SURVEY);
 			sktr_det_syaratDataStore.proxy.extraParams = { 
-				idam_id : record.data.det_idam_idam_id,
-				idam_det_id : record.data.det_idam_id,
+				sktr_id : record.data.ID_SKTR,
 				currentAction : 'update',
 				action : 'GETSYARAT'
 			};
@@ -608,8 +612,11 @@
 			}),
 			fields : [
 				{ name : 'ID_SKTR', type : 'int', mapping : 'ID_SKTR' },
-				// { name : 'ID_SKTR_INTI', type : 'int', mapping : 'ID_SKTR_INTI' },
-				// { name : 'ID_USER', type : 'int', mapping : 'ID_USER' },
+				{ name : 'TINGGI_BANGUNAN', type : 'float', mapping : 'TINGGI_BANGUNAN' },
+				{ name : 'LUAS_PERSIL', type : 'float', mapping : 'LUAS_PERSIL' },
+				{ name : 'LUAS_BANGUNAN', type : 'float', mapping : 'LUAS_BANGUNAN' },
+				{ name : 'FUNGSI', type : 'string', mapping : 'FUNGSI' },
+				{ name : 'ALAMAT_BANGUNAN', type : 'string', mapping : 'ALAMAT_BANGUNAN' },
 				{ name : 'JENIS_PERMOHONAN', type : 'int', mapping : 'JENIS_PERMOHONAN' },
 				{ name : 'NO_SK', type : 'string', mapping : 'NO_SK' },
 				{ name : 'HAK_MILIK', type : 'int', mapping : 'HAK_MILIK' },
@@ -620,6 +627,7 @@
 				{ name : 'BATAS_DEPAN', type : 'string', mapping : 'BATAS_DEPAN' },
 				{ name : 'BATAS_BELAKANG', type : 'string', mapping : 'BATAS_BELAKANG' },
 				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_PERMOHONAN' },
+				{ name : 'TGL_BERAKHIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERAKHIR' },
 				{ name : 'STATUS', type : 'int', mapping : 'STATUS' },
 				{ name : 'STATUS_SURVEY', type : 'int', mapping : 'STATUS_SURVEY' },
 				{ name : 'lama_proses', type : 'string', mapping : 'lama_proses' },
@@ -1058,24 +1066,6 @@
 			allowDecimals : false,
 			hidden : true,
 			maskRe : /([0-9]+)$/});
-		// ID_SKTR_INTIField = Ext.create('Ext.form.NumberField',{
-			// id : 'ID_SKTR_INTIField',
-			// name : 'ID_SKTR_INTI',
-			// fieldLabel : 'ID_SKTR_INTI',
-			// allowNegatife : false,
-			// blankText : '0',
-			// allowDecimals : false,
-			// hidden:true,
-			// maskRe : /([0-9]+)$/});
-		// ID_USERField = Ext.create('Ext.form.NumberField',{
-			// id : 'ID_USERField',
-			// name : 'ID_USER',
-			// fieldLabel : 'ID_USER',
-			// allowNegatife : false,
-			// blankText : '0',
-			// allowDecimals : false,
-			// hidden:true,
-			// maskRe : /([0-9]+)$/});
 		JENIS_PERMOHONANField = Ext.create('Ext.form.ComboBox',{
 			id : 'JENIS_PERMOHONANField',
 			name : 'JENIS_PERMOHONAN',
@@ -1093,14 +1083,8 @@
 				select : function(cmb, rec){
 					if(cmb.getValue() == '2'){
 						NO_SK_LAMAField.show();
-						// pemohon_namaField.disable();
-						// pemohon_alamatField.disable();
-						// pemohon_telpField.disable();
 					}else{
 						NO_SK_LAMAField.hide();
-						// pemohon_namaField.enable();
-						// pemohon_alamatField.enable();
-						// pemohon_telpField.enable();
 					}
 				}
 			}
@@ -1111,13 +1095,6 @@
 			fieldLabel : 'Nomor SK',
 			maxLength : 50
 		});
-		// NO_SK_LAMAField = Ext.create('Ext.form.TextField',{
-			// id : 'NO_SK_LAMAField',
-			// name : 'NO_SK_LAMA',
-			// fieldLabel : 'Nomor SK Lama',
-			// maxLength : 50,
-			// hidden:true
-		// });
 		NO_SK_LAMAField = Ext.create('Ext.form.ComboBox',{
 			name : 'NO_SK_LAMA',
 			fieldLabel : 'SK Lama',
@@ -1186,11 +1163,6 @@
 					BATAS_KANANField.setValue(rec.get('BATAS_KANAN'));
 					BATAS_DEPANField.setValue(rec.get('BATAS_DEPAN'));
 					BATAS_BELAKANGField.setValue(rec.get('BATAS_BELAKANG'));
-					// pemohon_nikField.setValue(rec.get('pemohon_nik'));
-					// pemohon_idField.setValue(rec.get('pemohon_id'));
-					// pemohon_namaField.setValue(rec.get('pemohon_nama'));
-					// pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
-					// pemohon_telpField.setValue(rec.get('pemohon_telp'));
 				}
 			}
 		});
@@ -1212,20 +1184,7 @@
 					{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
 					{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
 					{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
-					// { name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
-					// { name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
-					// { name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
-					// { name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
-					// { name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
 					{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
-					// { name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
-					// { name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
-					// { name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
-					// { name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
-					// { name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
-					// { name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
-					// { name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
-					// { name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
 				]
 			}),
 			displayField : 'pemohon_nik',
@@ -1370,6 +1329,13 @@
 			name : 'TGL_PERMOHONAN',
 			format : 'd-m-Y',
 			fieldLabel : 'Tanggal Permohonan',
+			maxLength : 20
+		});
+		TGL_BERAKHIRField = Ext.create('Ext.form.Date',{
+			id : 'TGL_BERAKHIRField',
+			name : 'TGL_BERAKHIR',
+			format : 'd-m-Y',
+			fieldLabel : 'Masa Berlaku',
 			maxLength : 20
 		});
 		STATUSField = Ext.create('Ext.form.ComboBox',{
@@ -1540,9 +1506,9 @@
 						BATAS_KANANField,
 						BATAS_DEPANField,
 						BATAS_BELAKANGField,
-						// TGL_PERMOHONANField,
-						// STATUS_SURVEYField,
-						// STATUSField
+						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("TGL_BERAKHIRField,"); ?>
+						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("STATUS_SURVEYField,"); ?>
+						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("STATUSField,"); ?>
 							]
 				},{
 					xtype : 'fieldset',

@@ -152,7 +152,11 @@
 					pemohon_namaValue = pemohon_namaField.getValue();
 					pemohon_telpValue = pemohon_telpField.getValue();
 					pemohon_alamatValue = pemohon_alamatField.getValue();
+					pemohon_nikValue = pemohon_nikField.getValue();
+					pemohon_idValue = pemohon_idField.getValue();
 					NOMOR_KENDARAANValue = NOMOR_KENDARAANField.getValue();
+					STATUSValue = STATUSField.getValue();
+					STATUS_SURVEYValue = STATUS_SURVEYField.getValue();
 					NAMA_PEMILIKValue = NAMA_PEMILIKField.getValue();
 					ALAMAT_PEMILIKValue = ALAMAT_PEMILIKField.getValue();
 					NO_HPValue = NO_HPField.getValue();
@@ -174,10 +178,13 @@
 							pemohon_nama : pemohon_namaValue,
 							pemohon_telp : pemohon_telpValue,
 							pemohon_alamat : pemohon_alamatValue,
+							pemohon_id : pemohon_idValue,
 							TGL_AKHIR : TGL_AKHIRValue,
 							NOMOR_KENDARAAN : NOMOR_KENDARAANValue,
 							NAMA_PEMILIK : NAMA_PEMILIKValue,
 							ALAMAT_PEMILIK : ALAMAT_PEMILIKValue,
+							STATUS : STATUSValue,
+							STATUS_SURVEY : STATUS_SURVEYValue,
 							NO_HP : NO_HPValue,
 							NOMOR_RANGKA : NOMOR_RANGKAValue,
 							NOMOR_MESIN : NOMOR_MESINValue,
@@ -347,6 +354,11 @@
 			
 			var record = ayek_gridPanel.getSelectionModel().getSelection()[0];
 			ID_TRAYEKField.setValue(record.data.ID_TRAYEK);
+			pemohon_idField.setValue(record.data.pemohon_id);
+			pemohon_nikField.setValue(record.data.pemohon_nik);
+			pemohon_namaField.setValue(record.data.pemohon_nama);
+			pemohon_telpField.setValue(record.data.pemohon_telp);
+			pemohon_alamatField.setValue(record.data.pemohon_alamat);
 			ID_TRAYEK_INTIField.setValue(record.data.ID_TRAYEK_INTI);
 			KODE_TRAYEKField.setValue(record.data.KODE_TRAYEK);
 			NOMOR_UBField.setValue(record.data.NOMOR_UB);
@@ -362,7 +374,7 @@
 			NOMOR_MESINField.setValue(record.data.NOMOR_MESIN);
 			JENIS_PERMOHONANField.setValue(record.data.JENIS_PERMOHONAN);
 			trayek_syaratDataStore.proxy.extraParams = { 
-				sktr_id : record.data.ID_TRAYEK,
+				trayek_id : record.data.ID_TRAYEK,
 				currentAction : 'update',
 				action : 'GETSYARAT'
 			};
@@ -507,13 +519,15 @@
 				{ name : 'KODE_TRAYEK', type : 'string', mapping : 'KODE_TRAYEK' },
 				{ name : 'NOMOR_UB', type : 'string', mapping : 'NOMOR_UB' },
 				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
 				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
 				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+				{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
 				{ name : 'lama_proses', type : 'string', mapping : 'lama_proses' },
-				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_PERMOHONAN' },
+				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_PERMOHONAN' },
 				{ name : 'NAMA_PERUSAHAAN', type : 'string', mapping : 'NAMA_PERUSAHAAN' },
 				{ name : 'NAMA_PEMOHON', type : 'string', mapping : 'NAMA_PEMOHON' },
-				{ name : 'TGL_AKHIR', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_AKHIR' },
+				{ name : 'TGL_AKHIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_AKHIR' },
 				{ name : 'NOMOR_KENDARAAN', type : 'string', mapping : 'NOMOR_KENDARAAN' },
 				{ name : 'NAMA_PEMILIK', type : 'string', mapping : 'NAMA_PEMILIK' },
 				{ name : 'ALAMAT_PEMILIK', type : 'string', mapping : 'ALAMAT_PEMILIK' },
@@ -686,7 +700,7 @@
 				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
-					url: 'c_sppl/switchAction',
+					url: 'c_trayek/switchAction',
 					params: {
 						ID_SKTR : record.get('ID_SKTR'),
 						action : 'CETAKLK'
@@ -696,14 +710,31 @@
 				});
 			}
 		});
-		var trayek_printCM = Ext.create('Ext.menu.Item',{
+		var trayek_rekom_printCM = Ext.create('Ext.menu.Item',{
 			text : 'TRAYEK',
-			tooltip : 'Cetak SKTR',
+			tooltip : 'Cetak Lembar Rekomendasi',
 			handler : function(){
 				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
-					url: 'c_sppl/switchAction',
+					url: 'c_trayek/switchAction',
+					params: {
+						ID_SKTR : record.get('ID_SKTR'),
+						action : 'CETAKSKTR'
+					},success : function(){
+						window.open('../print/idam_lembarkontrol.html');
+					}
+				});
+			}
+		});
+		var trayek_sk_printCM = Ext.create('Ext.menu.Item',{
+			text : 'TRAYEK',
+			tooltip : 'Cetak Lembar SK',
+			handler : function(){
+				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_trayek/switchAction',
 					params: {
 						ID_SKTR : record.get('ID_SKTR'),
 						action : 'CETAKSKTR'
@@ -715,7 +746,7 @@
 		});
 		var trayek_printContextMenu = Ext.create('Ext.menu.Menu',{
 			items: [
-				<?php echo ($_SESSION["IDHAK"] == 2) ? ("trayek_bp_printCM") : ("trayek_bp_printCM,trayek_lk_printCM,trayek_sppl_printCM")?>
+				<?php echo ($_SESSION["IDHAK"] == 2) ? ("trayek_bp_printCM") : ("trayek_bp_printCM,trayek_lk_printCM,trayek_sk_printCM,trayek_rekom_printCM,")?>
 			]
 		});
 		function trayek_ubahProses(proses){
@@ -950,14 +981,12 @@
 			name : 'KODE_TRAYEK',
 			fieldLabel : 'Kode Trayek',
 			maxLength : 50,
-			hidden : true,
 		});
 		NOMOR_UBField = Ext.create('Ext.form.TextField',{
 			id : 'NOMOR_UBField',
 			name : 'NOMOR_UB',
 			fieldLabel : 'Nomor Uji Berkala',
 			maxLength : 50,
-			hidden : true,
 		});
 		TGL_PERMOHONANField = Ext.create('Ext.form.TextField',{
 			id : 'TGL_PERMOHONANField',
@@ -979,12 +1008,41 @@
 			maxLength : 50,
 			hidden : true,
 		});
-		TGL_AKHIRField = Ext.create('Ext.form.TextField',{
+		TGL_AKHIRField = Ext.create('Ext.form.Date',{
 			id : 'TGL_AKHIRField',
 			name : 'TGL_AKHIR',
+			format:'d-m-Y',
 			fieldLabel : 'Tanggal Akhir',
-			maxLength : 0,
-			hidden : true,
+		});
+		STATUSField = Ext.create('Ext.form.ComboBox',{
+			id : 'STATUSField',
+			name : 'STATUS',
+			fieldLabel : 'Status Permohonan',
+			allowBlank : false,
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status'],
+				data : [[1,'Diterima'],[0,'Ditolak']]
+			}),
+			displayField : 'status',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
+		STATUS_SURVEYField = Ext.create('Ext.form.ComboBox',{
+			id : 'STATUS_SURVEYField',
+			name : 'STATUS_SURVEY',
+			fieldLabel : 'Status Survey',
+			allowBlank : false,
+			store : new Ext.data.ArrayStore({
+				fields : ['status_survey_id', 'status_survey'],
+				data : [[1,'Diterima'],[0,'Ditolak']]
+			}),
+			displayField : 'status_survey',
+			valueField : 'status_survey_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
 		});
 		NOMOR_KENDARAANField = Ext.create('Ext.form.TextField',{
 			id : 'NOMOR_KENDARAANField',
@@ -1028,6 +1086,12 @@
 			fieldLabel : 'Nama Pemohon',
 			maxLength : 50
 		});
+		pemohon_idField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_idField',
+			name : 'pemohon_id',
+			fieldLabel : '',
+			maxLength : 50
+		});
 		pemohon_telpField = Ext.create('Ext.form.TextField',{
 			id : 'pemohon_telpField',
 			name : 'pemohon_telp',
@@ -1061,6 +1125,7 @@
 					{ name : 'NOMOR_UB', type : 'string', mapping : 'NOMOR_UB' },
 					{ name : 'NO_SK', type : 'string', mapping : 'NO_SK' },
 					{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+					{ name : 'pemohon_id', type : 'string', mapping : 'pemohon_id' },
 					{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
 					{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
 					{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
@@ -1336,8 +1401,13 @@
 						ALAMAT_PEMILIKField,
 						NO_HPField,
 						NOMOR_RANGKAField,
-						NOMOR_MESINField
-											]
+						NOMOR_MESINField,
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("TGL_AKHIRField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("KODE_TRAYEKField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("NOMOR_UBField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUSField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUS_SURVEYField,"); ?>
+						]
 				},{
 					xtype : 'fieldset',
 					title : '2. Data Kelengkapan',

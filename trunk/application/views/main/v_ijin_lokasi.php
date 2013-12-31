@@ -177,6 +177,9 @@
 					TELPValue = TELPField.getValue();
 					FUNGSIValue = FUNGSIField.getValue();
 					STATUS_TANAHValue = STATUS_TANAHField.getValue();
+					TGL_AKHIRValue = TGL_AKHIRField.getValue();
+					STATUSValue = STATUSField.getValue();
+					STATUS_SURVEYValue = STATUS_SURVEYField.getValue();
 					KETERANGAN_TANAHValue = KETERANGAN_TANAHField.getValue();
 					LUAS_LOKASIValue = LUAS_LOKASIField.getValue();
 					ALAMAT_LOKASIValue = ALAMAT_LOKASIField.getValue();
@@ -185,6 +188,7 @@
 					
 					/*Data Pemohon*/
 					pemohon_namaValue = pemohon_namaField.getValue();
+					pemohon_idValue = pemohon_idField.getValue();
 					pemohon_alamatValue = pemohon_alamatField.getValue();
 					pemohon_telpValue = pemohon_telpField.getValue();
 					pemohon_hpValue = pemohon_hpField.getValue();
@@ -226,6 +230,9 @@
 							ALAMAT_LOKASI : ALAMAT_LOKASIValue,
 							ID_KELURAHAN_LOKASI : ID_KELURAHAN_LOKASIValue,
 							ID_KECAMATAN_LOKASI : ID_KECAMATAN_LOKASIValue,
+							TGL_AKHIR : TGL_AKHIRValue,
+							STATUS : STATUSValue,
+							STATUS_SURVEY : STATUS_SURVEYValue,
 							/*Data Pemohon*/
 							pemohon_nama : pemohon_namaValue,
 							pemohon_alamat : pemohon_alamatValue,
@@ -237,6 +244,7 @@
 							pemohon_kec : pemohon_kecValue,
 							pemohon_kota : pemohon_kotaValue,
 							pemohon_nik : pemohon_nikValue,
+							pemohon_id : pemohon_idValue,
 							pemohon_pekerjaan : pemohon_pekerjaanValue,
 							pemohon_tempatlahir : pemohon_tempatlahirValue,
 							pemohon_tanggallahir : pemohon_tanggallahirValue,
@@ -422,12 +430,16 @@
 			TELPField.setValue(record.data.TELP);
 			FUNGSIField.setValue(record.data.FUNGSI);
 			STATUS_TANAHField.setValue(record.data.STATUS_TANAH);
+			STATUSField.setValue(record.data.STATUS);
+			STATUS_SURVEYField.setValue(record.data.STATUS_SURVEY);
+			TGL_AKHIRField.setValue(record.data.TGL_AKHIR);
 			KETERANGAN_TANAHField.setValue(record.data.KETERANGAN_TANAH);
 			LUAS_LOKASIField.setValue(record.data.LUAS_LOKASI);
 			ALAMAT_LOKASIField.setValue(record.data.ALAMAT_LOKASI);
 			ID_KELURAHAN_LOKASIField.setValue(record.data.ID_KELURAHAN_LOKASI);
 			ID_KECAMATAN_LOKASIField.setValue(record.data.ID_KECAMATAN_LOKASI);
 			/*Data Pemohon*/
+			pemohon_idField.setValue(record.data.pemohon_id);
 			pemohon_namaField.setValue(record.data.pemohon_nama);
 			pemohon_alamatField.setValue(record.data.pemohon_alamat);
 			pemohon_telpField.setValue(record.data.pemohon_telp);
@@ -437,17 +449,17 @@
 			pemohon_kecField.setValue(record.data.pemohon_kec);
 			pemohon_kotaField.setValue(record.data.pemohon_kota);
 			pemohon_hpField.setValue(record.data.pemohon_hp);
-			pemohon_wnField.setValue(record.data.pemohon_wn);
+			// pemohon_wnField.setValue(record.data.pemohon_wn);
 			pemohon_nikField.setValue(record.data.pemohon_nik);
 			pemohon_pekerjaanField.setValue(record.data.pemohon_pekerjaan);
 			pemohon_tempatlahirField.setValue(record.data.pemohon_tempatlahir);
 			pemohon_tanggallahirField.setValue(record.data.pemohon_tanggallahir);
-			// lokasi_syaratDataStore.proxy.extraParams = { 
-				// lokasi_id : record.data.ID_IJIN_LOKASI,
-				// currentAction : 'update',
-				// action : 'GETSYARAT'
-			// };
-			lokasi_syaratDataStore.reload();
+			lokasi_syaratDataStore.proxy.extraParams = { 
+				lokasi_id : record.data.ID_IJIN_LOKASI,
+				currentAction : 'update',
+				action : 'GETSYARAT'
+			};
+			lokasi_syaratDataStore.load();
 			/*End Data Pemohon*/
 		}
 		
@@ -670,6 +682,7 @@
 				{ name : 'NPWPD', type : 'string', mapping : 'NPWPD' },
 				{ name : 'NO_AKTA', type : 'string', mapping : 'NO_AKTA' },
 				{ name : 'BENTUK_PERUSAHAAN', type : 'string', mapping : 'BENTUK_PERUSAHAAN' },
+				{ name : 'NAMA_PERUSAHAAN', type : 'string', mapping : 'BENTUK_PERUSAHAAN' },
 				{ name : 'ALAMAT', type : 'string', mapping : 'ALAMAT' },
 				{ name : 'RT', type : 'int', mapping : 'RT' },
 				{ name : 'RW', type : 'int', mapping : 'RW' },
@@ -677,14 +690,16 @@
 				{ name : 'ID_KECAMATAN', type : 'int', mapping : 'ID_KECAMATAN' },
 				{ name : 'ID_KOTA', type : 'int', mapping : 'ID_KOTA' },
 				{ name : 'TELP', type : 'string', mapping : 'TELP' },
+				{ name : 'TGL_AKHIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_AKHIR' },
 				{ name : 'FUNGSI', type : 'string', mapping : 'FUNGSI' },
 				{ name : 'STATUS_TANAH', type : 'int', mapping : 'STATUS_TANAH' },
+				{ name : 'STATUS', type : 'string', mapping : 'STATUS' },
+				{ name : 'STATUS_SURVEY', type : 'string', mapping : 'STATUS_SURVEY' },
 				{ name : 'KETERANGAN_TANAH', type : 'string', mapping : 'KETERANGAN_TANAH' },
 				{ name : 'LUAS_LOKASI', type : 'float', mapping : 'LUAS_LOKASI' },
 				{ name : 'ALAMAT_LOKASI', type : 'string', mapping : 'ALAMAT_LOKASI' },
 				{ name : 'ID_KELURAHAN_LOKASI', type : 'int', mapping : 'ID_KELURAHAN_LOKASI' },
 				{ name : 'ID_KECAMATAN_LOKASI', type : 'int', mapping : 'ID_KECAMATAN_LOKASI' },
-				/*Data Pemohon*/
 				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
 				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
 				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
@@ -699,7 +714,7 @@
 				{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
 				{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
 				{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
-				{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'pemohon_tanggallahir' },
+				{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
 				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
 				{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
 				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
@@ -897,9 +912,9 @@
 				});
 			}
 		});
-		var lokasi_printCM = Ext.create('Ext.menu.Item',{
+		var lokasi_sk_printCM = Ext.create('Ext.menu.Item',{
 			text : 'TRAYEK',
-			tooltip : 'Cetak SKTR',
+			tooltip : 'Cetak Cetak Lembar SK',
 			handler : function(){
 				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
@@ -916,7 +931,7 @@
 		});
 		var lokasi_printContextMenu = Ext.create('Ext.menu.Menu',{
 			items: [
-				<?php echo ($_SESSION["IDHAK"] == 2) ? ("lokasi_bp_printCM") : ("lokasi_bp_printCM,lokasi_lk_printCM,lokasi_sppl_printCM")?>
+				<?php echo ($_SESSION["IDHAK"] == 2) ? ("lokasi_bp_printCM") : ("lokasi_bp_printCM,lokasi_lk_printCM,lokasi_sk_printCM")?>
 			]
 		});
 		function lokasi_ubahProses(proses){
@@ -1309,7 +1324,7 @@
 			allowBlank : false,
 			store : new Ext.data.ArrayStore({
 				fields : ['jenis_id', 'jenis'],
-				data : [[1,'Baru'],[2,'Perpanjang']]
+				data : [['1','Baru'],['2','Perpanjang']]
 			}),
 			displayField : 'jenis',
 			valueField : 'jenis_id',
@@ -1376,6 +1391,35 @@
 				}
 			}
 		});
+		STATUS_SURVEYField = Ext.create('Ext.form.ComboBox',{
+			id : 'STATUS_SURVEYField',
+			name : 'STATUS_SURVEY',
+			fieldLabel : 'Hasil Survey',
+			allowBlank : false,
+			store : new Ext.data.ArrayStore({
+				fields : ['survey_id', 'survey'],
+				data : [['1','Lolos'],['0','Tidak Lolos']]
+			}),
+			displayField : 'survey',
+			valueField : 'survey_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true,
+		});
+		STATUSField = Ext.create('Ext.form.ComboBox',{
+			id : 'STATUSField',
+			name : 'STATUS',
+			fieldLabel : 'Status Permohonan',
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status'],
+				data : [['1','Diterima'],['0','Ditolak']]
+			}),
+			displayField : 'status',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true
+		});
 		KETERANGAN_TANAHField = Ext.create('Ext.form.TextField',{
 			id : 'KETERANGAN_TANAHField',
 			name : 'KETERANGAN_TANAH',
@@ -1418,12 +1462,6 @@
 			// fieldLabel : 'NIK',
 			// maxLength : 20
 		// });
-		pemohon_namaField = Ext.create('Ext.form.TextField',{
-			id : 'pemohon_namaField',
-			name : 'pemohon_nama',
-			fieldLabel : 'Nama Lengkap',
-			maxLength : 50
-		});
 		pemohon_alamatField = Ext.create('Ext.form.TextField',{
 			id : 'pemohon_alamatField',
 			name : 'pemohon_alamat',
@@ -1476,6 +1514,12 @@
 			fieldLabel : 'Kota',
 			maxLength : 50
 		});
+		pemohon_namaField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_namaField',
+			name : 'pemohon_nama',
+			fieldLabel : 'Nama Lengkap',
+			maxLength : 50
+		});
 		pemohon_tempatlahirField = Ext.create('Ext.form.TextField',{
 			id : 'pemohon_tempatlahirField',
 			name : 'pemohon_tempatlahir',
@@ -1489,7 +1533,12 @@
 			maxLength : 10
 		});
 		/*End Data Pemohon*/
-		
+		TGL_AKHIRField = Ext.create('Ext.form.Date',{
+			id : 'TGL_AKHIRField',
+			name : 'TGL_AKHIR',
+			fieldLabel : 'Masa Berlaku',
+			maxLength : 10
+		});
 		/*Combobox Search*/
 		NO_SK_LAMAField = Ext.create('Ext.form.ComboBox',{
 			name : 'NO_SK_LAMA',
@@ -1506,7 +1555,7 @@
 					extraParams : { action : 'SEARCH' }
 				}),
 				fields : [
-					{ name : 'ID_IJIN_LOKASI', type : 'int', mapping : 'ID_IJIN_LOKASI' },
+					/* { name : 'ID_IJIN_LOKASI', type : 'int', mapping : 'ID_IJIN_LOKASI' },
 					{ name : 'ID_PEMOHON', type : 'int', mapping : 'ID_PEMOHON' },
 					{ name : 'NO_SK', type : 'string', mapping : 'NO_SK' },
 					{ name : 'NO_SK_LAMA', type : 'string', mapping : 'NO_SK_LAMA' },
@@ -1522,6 +1571,32 @@
 					{ name : 'TELP', type : 'string', mapping : 'TELP' },
 					{ name : 'FUNGSI', type : 'string', mapping : 'FUNGSI' },
 					{ name : 'STATUS_TANAH', type : 'int', mapping : 'STATUS_TANAH' },
+					{ name : 'KETERANGAN_TANAH', type : 'string', mapping : 'KETERANGAN_TANAH' },
+					{ name : 'LUAS_LOKASI', type : 'float', mapping : 'LUAS_LOKASI' },
+					{ name : 'ALAMAT_LOKASI', type : 'string', mapping : 'ALAMAT_LOKASI' },
+					{ name : 'ID_KELURAHAN_LOKASI', type : 'int', mapping : 'ID_KELURAHAN_LOKASI' },
+					{ name : 'ID_KECAMATAN_LOKASI', type : 'int', mapping : 'ID_KECAMATAN_LOKASI' }, */
+					{ name : 'ID_IJIN_LOKASI', type : 'int', mapping : 'ID_IJIN_LOKASI' },
+					{ name : 'ID_PEMOHON', type : 'int', mapping : 'ID_PEMOHON' },
+					{ name : 'NO_SK', type : 'string', mapping : 'NO_SK' },
+					{ name : 'JENIS_PERMOHONAN', type : 'string', mapping : 'JENIS_PERMOHONAN' },
+					{ name : 'NO_SK_LAMA', type : 'string', mapping : 'NO_SK_LAMA' },
+					{ name : 'NPWPD', type : 'string', mapping : 'NPWPD' },
+					{ name : 'NO_AKTA', type : 'string', mapping : 'NO_AKTA' },
+					{ name : 'BENTUK_PERUSAHAAN', type : 'string', mapping : 'BENTUK_PERUSAHAAN' },
+					{ name : 'NAMA_PERUSAHAAN', type : 'string', mapping : 'NAMA_PERUSAHAAN' },
+					{ name : 'ALAMAT', type : 'string', mapping : 'ALAMAT' },
+					{ name : 'RT', type : 'int', mapping : 'RT' },
+					{ name : 'RW', type : 'int', mapping : 'RW' },
+					{ name : 'ID_KELURAHAN', type : 'int', mapping : 'ID_KELURAHAN' },
+					{ name : 'ID_KECAMATAN', type : 'int', mapping : 'ID_KECAMATAN' },
+					{ name : 'ID_KOTA', type : 'int', mapping : 'ID_KOTA' },
+					{ name : 'TELP', type : 'string', mapping : 'TELP' },
+					{ name : 'TGL_AKHIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_AKHIR' },
+					{ name : 'FUNGSI', type : 'string', mapping : 'FUNGSI' },
+					{ name : 'STATUS_TANAH', type : 'int', mapping : 'STATUS_TANAH' },
+					{ name : 'STATUS', type : 'string', mapping : 'STATUS' },
+					{ name : 'STATUS_SURVEY', type : 'string', mapping : 'STATUS_SURVEY' },
 					{ name : 'KETERANGAN_TANAH', type : 'string', mapping : 'KETERANGAN_TANAH' },
 					{ name : 'LUAS_LOKASI', type : 'float', mapping : 'LUAS_LOKASI' },
 					{ name : 'ALAMAT_LOKASI', type : 'string', mapping : 'ALAMAT_LOKASI' },
@@ -1542,7 +1617,7 @@
 					{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
 					{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
 					{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
-					{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'pemohon_tanggallahir' },
+					{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
 					{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
 					{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
 					{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
@@ -1592,6 +1667,9 @@
 					ALAMAT_LOKASIField.setValue(rec.get('ALAMAT_LOKASI'));
 					ID_KELURAHAN_LOKASIField.setValue(rec.get('ID_KELURAHAN_LOKASI'));
 					ID_KECAMATAN_LOKASIField.setValue(rec.get('ID_KECAMATAN_LOKASI'));
+					TGL_AKHIRField.setValue(rec.get('TGL_AKHIR'));
+					STATUSField.setValue(rec.get('STATUS'));
+					STATUS_SURVEYField.setValue(rec.get('STATUS_SURVEY'));
 				}
 			}
 		});
@@ -1773,6 +1851,9 @@
 						ALAMAT_LOKASIField,
 						ID_KELURAHAN_LOKASIField,
 						ID_KECAMATAN_LOKASIField,
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("TGL_AKHIRField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUS_SURVEYField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUSField,"); ?>
 											]
 				},{
 					xtype : 'fieldset',

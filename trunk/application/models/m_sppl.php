@@ -5,6 +5,8 @@ class M_sppl extends App_model{
 				ID_PEMOHON,
 				NO_SK,
 				pemohon_nama,
+				pemohon_id,
+				pemohon_nik,
 				pemohon_telp,
 				pemohon_alamat,
 				JENIS_PERMOHONAN,
@@ -20,6 +22,10 @@ class M_sppl extends App_model{
 				NO_AKTA,
 				MULAI_KEGIATAN,
 				TANGGAL,
+				STATUS_SURVEY,
+				STATUS,
+				TGL_BERAKHIR,
+				TGL_BERLAKU,
 				LUAS_LAHAN,
 				LUAS_TAPAK_BANGUNAN,
 				LUAS_KEGIATAN,
@@ -136,7 +142,7 @@ class M_sppl extends App_model{
 		extract($params);
 		if($currentAction == 'update'){
 			$sql = "
-				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 9;
+				SELECT cek_list_sppl.ID_SYARAT,cek_list_sppl.ID_IJIN,cek_list_sppl.`STATUS`,cek_list_sppl.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_sppl RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_sppl.ID_SYARAT AND cek_list_sppl.ID_IJIN = '" . $sppl_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 9;
 			";
 		}else{
 			$sql = "
