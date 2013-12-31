@@ -18,11 +18,14 @@ class M_ijin_lokasi extends App_model{
 				TELP,
 				FUNGSI,
 				STATUS_TANAH,
+				TGL_AKHIR,
 				KETERANGAN_TANAH,
 				LUAS_LOKASI,
 				ALAMAT_LOKASI,
 				ID_KELURAHAN_LOKASI,
 				ID_KECAMATAN_LOKASI,
+				STATUS,
+				STATUS_SURVEY,
 				pemohon_nama,
 				pemohon_alamat,
 				pemohon_telp,
@@ -180,7 +183,7 @@ class M_ijin_lokasi extends App_model{
 		extract($params);
 		if($currentAction == 'update'){
 			$sql = "
-				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 7;
+				SELECT cek_list_lokasi.ID_SYARAT,cek_list_lokasi.ID_IJIN,cek_list_lokasi.`STATUS`,cek_list_lokasi.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_lokasi RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_lokasi.ID_SYARAT AND cek_list_lokasi.ID_IJIN = '" . $lokasi_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 7;
 			";
 		}else{
 			$sql = "

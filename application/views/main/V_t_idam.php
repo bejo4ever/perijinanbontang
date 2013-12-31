@@ -274,7 +274,7 @@
 			idam_jenisusahaField.setValue(record.data.idam_jenisusaha);
 			idam_alamatField.setValue(record.data.idam_alamat);
 			idam_sertifikatpkpField.setValue(record.data.idam_sertifikatpkp);
-					}
+		}
 		
 		function idam_showSearchWindow(){
 			idam_searchWindow.show();

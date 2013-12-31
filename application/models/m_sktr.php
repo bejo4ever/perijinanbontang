@@ -1,32 +1,48 @@
 <?php
 class M_sktr extends App_model{
 	var $mainSql = "SELECT 
-				ID_SKTR,
-				ID_PEMOHON,
-				JENIS_PERMOHONAN,
-				NO_SK,
-				pemohon_nama,
-				pemohon_telp,
-				pemohon_alamat,
-				CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
-				MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
-				1, 1),' Hari') as lama_proses,
-				HAK_MILIK,
-				NAMA_PEMILIK,
-				NO_SURAT_TANAH,
-				BATAS_KIRI,
-				BATAS_KANAN,
-				BATAS_DEPAN,
-				BATAS_BELAKANG,
-				TGL_PERMOHONAN,
-				TINGGI_BANGUNAN,
-				LUAS_PERSIL,
-				LUAS_BANGUNAN,
-				STATUS,
-				FUNGSI,
-				ALAMAT_BANGUNAN
-				FROM sktr JOIN m_pemohon ON m_pemohon.pemohon_id = sktr.ID_PEMOHON
-			WHERE ID_SKTR IS NOT NULL 
+						ID_SKTR,
+						ID_PEMOHON,
+						JENIS_PERMOHONAN,
+						NO_SK
+						HAK_MILIK,
+						NAMA_PEMILIK,
+						NO_SURAT_TANAH,
+						BATAS_KIRI,
+						BATAS_KANAN,
+						BATAS_DEPAN,
+						BATAS_BELAKANG,
+						TGL_PERMOHONAN,
+						STATUS,
+						TINGGI_BANGUNAN,
+						LUAS_PERSIL,
+						LUAS_BANGUNAN,
+						FUNGSI,
+						ALAMAT_BANGUNAN,
+						pemohon_id,
+						pemohon_nama,
+						pemohon_alamat,
+						pemohon_telp,
+						pemohon_npwp,
+						pemohon_rt,
+						pemohon_rw,
+						pemohon_kel,
+						pemohon_kec,
+						pemohon_nik,
+						pemohon_stra,
+						pemohon_surattugas,
+						pemohon_pekerjaan,
+						pemohon_tempatlahir,
+						pemohon_tanggallahir,
+						pemohon_user_id,
+						TGL_BERAKHIR,
+						STATUS_SURVEY,
+						CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
+						MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
+						1, 1),' Hari') as lama_proses
+						FROM sktr
+						JOIN m_pemohon ON m_pemohon.pemohon_id = sktr.ID_PEMOHON
+					WHERE ID_SKTR IS NOT NULL 
 	";
 	
 	function __construct(){
@@ -181,7 +197,7 @@ class M_sktr extends App_model{
 		extract($params);
 		if($currentAction == 'update'){
 			$sql = "
-				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 10;
+				SELECT cek_list_sktr.ID_SYARAT,cek_list_sktr.ID_IJIN,cek_list_sktr.`STATUS`,cek_list_sktr.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_sktr RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_sktr.ID_SYARAT AND cek_list_sktr.ID_IJIN = '" . $sktr_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 10;
 			";
 		}else{
 			$sql = "

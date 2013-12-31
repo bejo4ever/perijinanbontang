@@ -14,6 +14,7 @@ class M_trayek extends App_model{
 				pemohon_alamat,
 				pemohon_telp,
 				pemohon_nik,
+				pemohon_id,
 				NOMOR_KENDARAAN,
 				NAMA_PEMILIK,
 				ALAMAT_PEMILIK,
@@ -108,7 +109,7 @@ class M_trayek extends App_model{
 		extract($params);
 		if($currentAction == 'update'){
 			$sql = "
-				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 6;
+				SELECT cek_list_trayek.ID_SYARAT,cek_list_trayek.ID_IJIN,cek_list_trayek.`STATUS`,cek_list_trayek.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_trayek RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_trayek.ID_SYARAT AND cek_list_trayek.ID_IJIN = '" . $trayek_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 6;
 			";
 		}else{
 			$sql = "
