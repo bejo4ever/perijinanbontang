@@ -142,7 +142,7 @@
 					var det_iujt_idValue = '';
 					var det_iujt_iujt_idValue = '';
 					var det_iujt_jenisValue = '';
-					var det_iujt_sklamaValue = '';
+					var det_iujt_lamaValue = '';
 					var det_iujt_namaValue = '';
 					var det_iujt_npwpValue = '';
 					var det_iujt_alamatValue = '';
@@ -166,7 +166,7 @@
 					det_iujt_idValue = det_iujt_idField.getValue();
 					det_iujt_iujt_idValue = det_iujt_iujt_idField.getValue();
 					det_iujt_jenisValue = det_iujt_jenisField.getValue();
-					det_iujt_sklamaValue = det_iujt_sklamaField.getValue();
+					det_iujt_lamaValue = det_iujt_sklamaField.getValue();
 					det_iujt_namaValue = det_iujt_namaField.getValue();
 					det_iujt_npwpValue = det_iujt_npwpField.getValue();
 					det_iujt_alamatValue = det_iujt_alamatField.getValue();
@@ -232,7 +232,7 @@
 							det_iujt_id : det_iujt_idValue,
 							det_iujt_iujt_id : det_iujt_iujt_idValue,
 							det_iujt_jenis : det_iujt_jenisValue,
-							det_iujt_sklama : det_iujt_sklamaValue,
+							det_iujt_lama : det_iujt_lamaValue,
 							det_iujt_nama : det_iujt_namaValue,
 							det_iujt_npwp : det_iujt_npwpValue,
 							det_iujt_alamat : det_iujt_alamatValue,
@@ -885,8 +885,28 @@
 					params: {
 						iujtdet_id : record.get('det_iujt_id'),
 						action : 'CETAKSK'
-					},success : function(){
-						window.open('../print/iujt_sk.html');
+					},success : function(response){
+						var result = response.responseText;
+						switch(result){
+							case 'success':
+								window.open('../print/iujt_sk.html');
+								break;
+							case 'nosk':
+								Ext.MessageBox.alert('Warning.','Nomor SK Belum ditetapkan.');
+								break;
+							case 'notglkadaluarsa':
+								Ext.MessageBox.alert('Warning.','Tanggal kadaluarsa belum ditetapkan.');
+								break;
+							default:
+								Ext.MessageBox.show({
+									title : 'Warning',
+									msg : 'Cetak gagal',
+									buttons : Ext.MessageBox.OK,
+									animEl : 'save',
+									icon : Ext.MessageBox.WARNING
+								});
+							break;
+						}
 					}
 				});
 			}
@@ -1113,20 +1133,6 @@
 				},
 				{
 					xtype:'actioncolumn',
-					text : 'Cetak',
-					width:50,
-					items: [{
-						iconCls: 'icon16x16-print',
-						tooltip: 'Cetak Dokumen',
-						handler: function(grid, rowIndex, colIndex, node, e) {
-							e.stopEvent();
-							iujt_det_printContextMenu.showAt(e.getXY());
-							return false;
-						}
-					}]
-				},
-				{
-					xtype:'actioncolumn',
 					text : 'Action',
 					width:50,
 					items: [{
@@ -1155,6 +1161,20 @@
 						handler: function(grid, rowIndex, colIndex, node, e) {
 							e.stopEvent();
 							iujt_det_prosesContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							iujt_det_printContextMenu.showAt(e.getXY());
 							return false;
 						}
 					}]
@@ -1221,12 +1241,59 @@
 				}
 			}
 		});
-		det_iujt_sklamaField = Ext.create('Ext.form.TextField',{
-			id : 'det_iujt_sklamaField',
-			name : 'det_iujt_sklama',
+		det_iujt_sklamaField = Ext.create('Ext.form.ComboBox',{
+			name : 'det_iujt_sklamaField',
 			fieldLabel : 'Nomor SK Lama',
+			store : iujt_det_dataStore,
+			displayField : 'det_iujt_sk',
+			valueField : 'det_iujt_iujt_id',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
 			hidden : true,
-			maxLength : 50
+			onTriggerClick: function(event){
+				var store = det_iujt_sklamaField.getStore();
+				var val = det_iujt_sklamaField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',det_iujt_sk : val};
+				store.load();
+				det_iujt_sklamaField.expand();
+				det_iujt_sklamaField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">SK : {det_iujt_sk}<br>Nama Usaha : {iujt_usaha}<br>Alamat : {iujt_alamatusaha}<br></div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					iujt_det_pemohon_idField.setValue(rec.get('pemohon_id'));
+					iujt_det_pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					iujt_det_pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					iujt_det_pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					iujt_det_pemohon_telpField.setValue(rec.get('pemohon_telp'));
+					iujt_det_pemohon_npwpField.setValue(rec.get('pemohon_npwp'));
+					iujt_det_pemohon_rtField.setValue(rec.get('pemohon_rt'));
+					iujt_det_pemohon_rwField.setValue(rec.get('pemohon_rw'));
+					iujt_det_pemohon_kelField.setValue(rec.get('pemohon_kel'));
+					iujt_det_pemohon_kecField.setValue(rec.get('pemohon_kec'));
+					iujt_det_pemohon_straField.setValue(rec.get('pemohon_stra'));
+					iujt_det_pemohon_surattugasField.setValue(rec.get('pemohon_surattugas'));
+					iujt_det_pemohon_pekerjaanField.setValue(rec.get('pemohon_pekerjaan'));
+					iujt_det_pemohon_tempatlahirField.setValue(rec.get('pemohon_tempatlahir'));
+					iujt_det_pemohon_tanggallahirField.setValue(rec.get('pemohon_tanggallahir'));
+					iujt_det_pemohon_user_idField.setValue(rec.get('pemohon_user_id'));
+					iujt_det_pemohon_pendidikanField.setValue(rec.get('pemohon_pendidikan'));
+					iujt_det_pemohon_tahunlulusField.setValue(rec.get('pemohon_tahunlulus'));
+					iujt_usahaField.setValue(rec.get('iujt_usaha'));
+					iujt_alamatusahaField.setValue(rec.get('iujt_alamatusaha'));
+					iujt_statusperusahaanField.setValue(rec.get('iujt_statusperusahaan'));
+					iujt_penanggungjawabField.setValue(rec.get('iujt_penanggungjawab'));
+				}
+			}
 		});
 		det_iujt_namaField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujt_namaField',
@@ -1250,7 +1317,8 @@
 			id : 'det_iujt_skField',
 			name : 'det_iujt_sk',
 			fieldLabel : 'Nomor SK',
-			maxLength : 50
+			maxLength : 50,
+			hidden : true
 		});
 		det_iujt_norekomField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujt_norekomField',
@@ -1262,7 +1330,8 @@
 			id : 'det_iujt_berlakuField',
 			name : 'det_iujt_berlaku',
 			fieldLabel : 'Tanggal Berlaku',
-			format : 'd-m-Y'
+			format : 'd-m-Y',
+			hidden : true
 		});
 		det_iujt_tglrekomField = Ext.create('Ext.form.field.Date',{
 			id : 'det_iujt_tglrekomField',
@@ -1274,8 +1343,7 @@
 			id : 'det_iujt_kadaluarsaField',
 			name : 'det_iujt_kadaluarsa',
 			fieldLabel : 'Kadaluarsa',
-			format : 'd-m-Y',
-			minValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+			format : 'd-m-Y'
 		});
 		det_iujt_surveylulusField = Ext.create('Ext.form.ComboBox',{
 			id : 'det_iujt_surveylulusField',
@@ -1296,7 +1364,7 @@
 			name : 'det_iujt_tanggal',
 			fieldLabel : 'Tanggal <font color=red>*</font>',
 			format : 'd-m-Y',
-			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>'),
+			disabled : true,
 			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_iujt_nopermohonanField = Ext.create('Ext.form.TextField',{
@@ -1315,8 +1383,7 @@
 			id : 'det_iujt_cektanggalField',
 			name : 'det_iujt_cektanggal',
 			fieldLabel : 'Tanggal Cek',
-			format : 'd-m-Y',
-			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+			format : 'd-m-Y'
 		});
 		det_iujt_ceknipField = Ext.create('Ext.form.TextField',{
 			id : 'det_iujt_ceknipField',
@@ -1554,7 +1621,7 @@
 			id : 'det_iujt_syaratGrid',
 			store : iujt_det_syaratDataStore,
 			loadMask : true,
-			width : '95%',
+			width : '100%',
 			plugins : [
 				Ext.create('Ext.grid.plugin.CellEditing', {
 					clicksToEdit: 1
@@ -1567,13 +1634,18 @@
 					dataIndex : 'iujt_cek_id',
 					width : 100,
 					hidden : true,
+					hideable : false,
 					sortable : false
 				},
 				{
 					text : 'Syarat',
 					dataIndex : 'iujt_cek_syarat_nama',
-					width : 150,
-					sortable : false
+					width : 200,
+					sortable : false,
+					editor : {
+						xtype : 'textfield',
+						readOnly : true
+					}
 				},
 				{
 					xtype: 'checkcolumn',
@@ -1603,6 +1675,25 @@
 				iujt_det_switchToGrid();
 			}
 		});
+		var iujt_det_pendukungfieldset = Ext.create('Ext.form.FieldSet',{
+			title : '5. Data Pendukung',
+			checkboxToggle : false,
+			collapsible : false,
+			layout :'form',
+			items : [
+				det_iujt_norekomField,
+				det_iujt_tglrekomField,
+				det_iujt_skField,
+				det_iujt_berlakuField,
+				det_iujt_surveylulusField,
+				det_iujt_nopermohonanField,
+				det_iujt_cekpetugasField,
+				det_iujt_cektanggalField,
+				det_iujt_ceknipField,
+				det_iujt_catatanField,
+				det_iujt_kadaluarsaField
+			]
+		});
 		iujt_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -1623,8 +1714,8 @@
 						det_iujt_idField,
 						det_iujt_iujt_idField,
 						det_iujt_jenisField,
-						det_iujt_tanggalField,
-						det_iujt_sklamaField
+						det_iujt_sklamaField,
+						det_iujt_tanggalField
 					]
 				},
 				{
@@ -1677,26 +1768,9 @@
 						det_iujt_syaratGrid
 					]
 				},
-				{
-					xtype : 'fieldset',
-					title : '5. Data Pendukung',
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-						det_iujt_norekomField,
-						det_iujt_tglrekomField,
-						det_iujt_skField,
-						det_iujt_berlakuField,
-						det_iujt_kadaluarsaField,
-						det_iujt_surveylulusField,
-						det_iujt_nopermohonanField,
-						det_iujt_cekpetugasField,
-						det_iujt_cektanggalField,
-						det_iujt_ceknipField,
-						det_iujt_catatanField
-					]
-				}],
+				iujt_det_pendukungfieldset,
+				Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
+			],
 			buttons : [iujt_det_saveButton,iujt_det_cancelButton]
 		});
 		iujt_det_formWindow = Ext.create('Ext.window.Window',{
@@ -1883,8 +1957,9 @@
 			iujt_det_lk_printCM.hide();
 			iujt_det_rekom_printCM.hide();
 			iujt_det_sk_printCM.hide();
+			iujt_det_pendukungfieldset.hide();
+			iujt_det_gridPanel.columns[18].setVisible(false);
 			iujt_det_gridPanel.columns[19].setVisible(false);
-			iujt_det_gridPanel.columns[20].setVisible(false);
 		<?php } ?>
 /* End SearchPanel declaration */
 });

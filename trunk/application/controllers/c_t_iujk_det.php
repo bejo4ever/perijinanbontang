@@ -79,6 +79,8 @@ class C_t_iujk_det extends CI_Controller{
 		$det_iujk_iujk_id = is_numeric($det_iujk_iujk_id) ? $det_iujk_iujk_id : 0;
 		$det_iujk_jenis = htmlentities($this->input->post('det_iujk_jenis'),ENT_QUOTES);
 		$det_iujk_jenis = is_numeric($det_iujk_jenis) ? $det_iujk_jenis : 0;
+		$det_iujk_lama = htmlentities($this->input->post('det_iujk_lama'),ENT_QUOTES);
+		$det_iujk_lama = is_numeric($det_iujk_lama) ? $det_iujk_lama : 0;
 		$det_iujk_tanggal = htmlentities($this->input->post('det_iujk_tanggal'),ENT_QUOTES);
 		$det_iujk_nama = htmlentities($this->input->post('det_iujk_nama'),ENT_QUOTES);
 		$det_iujk_nomorreg = htmlentities($this->input->post('det_iujk_nomorreg'),ENT_QUOTES);
@@ -105,11 +107,8 @@ class C_t_iujk_det extends CI_Controller{
 		$iujk_rw = htmlentities($this->input->post('iujk_rw'),ENT_QUOTES);
 		$iujk_rw = is_numeric($iujk_rw) ? $iujk_rw : 0;
 		$iujk_kelurahan = htmlentities($this->input->post('iujk_kelurahan'),ENT_QUOTES);
-		$iujk_kelurahan = is_numeric($iujk_kelurahan) ? $iujk_kelurahan : 0;
 		$iujk_kota = htmlentities($this->input->post('iujk_kota'),ENT_QUOTES);
-		$iujk_kota = is_numeric($iujk_kota) ? $iujk_kota : 0;
 		$iujk_propinsi = htmlentities($this->input->post('iujk_propinsi'),ENT_QUOTES);
-		$iujk_propinsi = is_numeric($iujk_propinsi) ? $iujk_propinsi : 0;
 		$iujk_telepon = htmlentities($this->input->post('iujk_telepon'),ENT_QUOTES);
 		$iujk_kodepos = htmlentities($this->input->post('iujk_kodepos'),ENT_QUOTES);
 		$iujk_fax = htmlentities($this->input->post('iujk_fax'),ENT_QUOTES);
@@ -167,30 +166,36 @@ class C_t_iujk_det extends CI_Controller{
 		);
 		if($pemohon_id != 0){
 			$resultpemohon = $this->m_t_iujk_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$iujk_det_author;
 			$resultpemohon = $this->m_t_iujk_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
 		
 		if($iujk_det_author != ''){
-			$dataInti = array(
-				'iujk_perusahaan'=>$iujk_perusahaan,
-				'iujk_alamat'=>$iujk_alamat,
-				'iujk_direktur'=>$iujk_direktur,
-				'iujk_golongan'=>$iujk_golongan,
-				'iujk_kualifikasi'=>$iujk_kualifikasi,
-				'iujk_bidangusaha'=>$iujk_bidangusaha,
-				'iujk_rt'=>$iujk_rt,
-				'iujk_rw'=>$iujk_rw,
-				'iujk_kelurahan'=>$iujk_kelurahan,
-				'iujk_kota'=>$iujk_kota,
-				'iujk_propinsi'=>$iujk_propinsi,
-				'iujk_telepon'=>$iujk_telepon,
-				'iujk_kodepos'=>$iujk_kodepos,
-				'iujk_fax'=>$iujk_fax,
-				'iujk_npwp'=>$iujk_npwp,
-			);
-			$resultInti = $this->m_t_iujk_det->__insert($dataInti, 't_iujk', 'insertId');
+			if($det_iujk_lama != 0 && $det_iujk_jenis == 2){
+				$resultInti = $det_iujk_lama;
+			}else{
+				$dataInti = array(
+					'iujk_perusahaan'=>$iujk_perusahaan,
+					'iujk_alamat'=>$iujk_alamat,
+					'iujk_direktur'=>$iujk_direktur,
+					'iujk_golongan'=>$iujk_golongan,
+					'iujk_kualifikasi'=>$iujk_kualifikasi,
+					'iujk_bidangusaha'=>$iujk_bidangusaha,
+					'iujk_rt'=>$iujk_rt,
+					'iujk_rw'=>$iujk_rw,
+					'iujk_kelurahan'=>$iujk_kelurahan,
+					'iujk_kota'=>$iujk_kota,
+					'iujk_propinsi'=>$iujk_propinsi,
+					'iujk_telepon'=>$iujk_telepon,
+					'iujk_kodepos'=>$iujk_kodepos,
+					'iujk_fax'=>$iujk_fax,
+					'iujk_npwp'=>$iujk_npwp,
+				);
+				$resultInti = $this->m_t_iujk_det->__insert($dataInti, 't_iujk', 'insertId');
+			}
 			if($resultInti != 0){
 				$result = 'success';
 				$data = array(
@@ -264,11 +269,8 @@ class C_t_iujk_det extends CI_Controller{
 		$iujk_rw = htmlentities($this->input->post('iujk_rw'),ENT_QUOTES);
 		$iujk_rw = is_numeric($iujk_rw) ? $iujk_rw : 0;
 		$iujk_kelurahan = htmlentities($this->input->post('iujk_kelurahan'),ENT_QUOTES);
-		$iujk_kelurahan = is_numeric($iujk_kelurahan) ? $iujk_kelurahan : 0;
 		$iujk_kota = htmlentities($this->input->post('iujk_kota'),ENT_QUOTES);
-		$iujk_kota = is_numeric($iujk_kota) ? $iujk_kota : 0;
 		$iujk_propinsi = htmlentities($this->input->post('iujk_propinsi'),ENT_QUOTES);
-		$iujk_propinsi = is_numeric($iujk_propinsi) ? $iujk_propinsi : 0;
 		$iujk_telepon = htmlentities($this->input->post('iujk_telepon'),ENT_QUOTES);
 		$iujk_kodepos = htmlentities($this->input->post('iujk_kodepos'),ENT_QUOTES);
 		$iujk_fax = htmlentities($this->input->post('iujk_fax'),ENT_QUOTES);
@@ -320,7 +322,6 @@ class C_t_iujk_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
@@ -328,6 +329,7 @@ class C_t_iujk_det extends CI_Controller{
 			$resultpemohon = $this->m_t_iujk_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
 			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$iujk_det_updated_by;
 			$resultpemohon = $this->m_t_iujk_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
@@ -583,10 +585,17 @@ class C_t_iujk_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_iujk_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$print_view=$this->load->view('template/p_iujk_sk.php',$data,TRUE);
-		$print_file=fopen('print/iujk_sk.html','w+');
-		fwrite($print_file, $print_view);
-		echo 'success';
+		$sub = $data['printrecord'][0];
+		if($sub->det_iujk_sk == ''){
+			echo 'nosk';
+		}else if($sub->det_iujk_kadaluarsa == '' || $sub->det_iujk_kadaluarsa == '0000-00-00'){
+			echo 'notglkadaluarsa';
+		}else{
+			$print_view=$this->load->view('template/p_iujk_sk.php',$data,TRUE);
+			$print_file=fopen('print/iujk_sk.html','w+');
+			fwrite($print_file, $print_view);
+			echo 'success';
+		}
 	}
 	
 }

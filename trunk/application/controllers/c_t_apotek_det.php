@@ -41,6 +41,9 @@ class C_t_apotek_det extends CI_Controller{
 			case 'GETPERLENGKAPAN':
 				$this->getPerlengkapan();
 			break;
+			case 'GETASISTEN':
+				$this->getAsisten();
+			break;
 			case 'UBAHPROSES':
 				$this->ubahProses();
 			break;
@@ -88,6 +91,8 @@ class C_t_apotek_det extends CI_Controller{
 		$det_apotek_apotek_id = is_numeric($det_apotek_apotek_id) ? $det_apotek_apotek_id : 0;
 		$det_apotek_jenis = htmlentities($this->input->post('det_apotek_jenis'),ENT_QUOTES);
 		$det_apotek_jenis = is_numeric($det_apotek_jenis) ? $det_apotek_jenis : 0;
+		$det_apotek_lama = htmlentities($this->input->post('det_apotek_lama'),ENT_QUOTES);
+		$det_apotek_lama = is_numeric($det_apotek_lama) ? $det_apotek_lama : 0;
 		$det_apotek_surveylulus = htmlentities($this->input->post('det_apotek_surveylulus'),ENT_QUOTES);
 		$det_apotek_surveylulus = is_numeric($det_apotek_surveylulus) ? $det_apotek_surveylulus : 0;
 		$det_apotek_terima = htmlentities($this->input->post('det_apotek_terima'),ENT_QUOTES);
@@ -237,31 +242,36 @@ class C_t_apotek_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
 		if($pemohon_id != 0){
 			$resultpemohon = $this->m_t_apotek_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
+			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$apotek_det_author;
 			$resultpemohon = $this->m_t_apotek_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
 		
 		if($apotek_det_author != ''){
-			$dataInti = array(
-				'apotek_nama'=>$apotek_nama,
-				'apotek_alamat'=>$apotek_alamat,
-				'apotek_telp'=>$apotek_telp,
-				'apotek_kel'=>$apotek_kel,
-				'apotek_kec'=>$apotek_kec,
-				'apotek_kepemilikan'=>$apotek_kepemilikan,
-				'apotek_pemilik'=>$apotek_pemilik,
-				'apotek_pemilikalamat'=>$apotek_pemilikalamat,
-				'apotek_pemiliknpwp'=>$apotek_pemiliknpwp,
-				'apotek_siup'=>$apotek_siup
-			);
-			$resultInti = $this->m_t_apotek_det->__insert($dataInti, 't_apotek', 'insertId');
+			if($det_apotek_lama != 0 && $det_apotek_jenis == 2){
+				$resultInti = $det_apotek_lama;
+			}else{
+				$dataInti = array(
+					'apotek_nama'=>$apotek_nama,
+					'apotek_alamat'=>$apotek_alamat,
+					'apotek_telp'=>$apotek_telp,
+					'apotek_kel'=>$apotek_kel,
+					'apotek_kec'=>$apotek_kec,
+					'apotek_kepemilikan'=>$apotek_kepemilikan,
+					'apotek_pemilik'=>$apotek_pemilik,
+					'apotek_pemilikalamat'=>$apotek_pemilikalamat,
+					'apotek_pemiliknpwp'=>$apotek_pemiliknpwp,
+					'apotek_siup'=>$apotek_siup
+				);
+				$resultInti = $this->m_t_apotek_det->__insert($dataInti, 't_apotek', 'insertId');
+			}
 			if($resultInti != 0){
 				$result = 'success';
 				$data = array(
@@ -526,7 +536,6 @@ class C_t_apotek_det extends CI_Controller{
 			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
 			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
 			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_user_id'=>$pemohon_user_id,
 			'pemohon_pendidikan'=>$pemohon_pendidikan,
 			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
 		);
@@ -534,6 +543,7 @@ class C_t_apotek_det extends CI_Controller{
 			$resultpemohon = $this->m_t_apotek_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
 			$resultpemohon = $pemohon_id;
 		}else{
+			$datapemohon["pemohon_user_id"]=$apotek_det_updated_by;
 			$resultpemohon = $this->m_t_apotek_det->__insert($datapemohon, 'm_pemohon', 'insertId');
 		}
 		
@@ -1045,6 +1055,18 @@ class C_t_apotek_det extends CI_Controller{
 		$result = $this->m_t_apotek_det->getPerlengkapan($params);
 		echo $result;
 	}
+	function getAsisten(){
+		$currentAction = $this->input->post('currentAction');
+		$apotek_id = $this->input->post('apotek_id');
+		$apotek_det_id = $this->input->post('apotek_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"apotek_id"=>$apotek_id,
+			"apotek_det_id"=>$apotek_det_id
+		);
+		$result = $this->m_t_apotek_det->getAsisten($params);
+		echo $result;
+	}
 	function ubahProses(){
 		$apotekdet_id  = $this->input->post('apotekdet_id');
 		$apotekdet_nosk  = $this->input->post('apotekdet_nosk');
@@ -1113,10 +1135,17 @@ class C_t_apotek_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_apotek_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$print_view=$this->load->view('template/p_apotek_sk.php',$data,TRUE);
-		$print_file=fopen('print/apotek_sk.html','w+');
-		fwrite($print_file, $print_view);
-		echo 'success';
+		$sub = $data['printrecord'][0];
+		if($sub->det_apotek_sk == ''){
+			echo 'nosk';
+		}else if($sub->det_apotek_kadaluarsa == '' || $sub->det_apotek_kadaluarsa == '0000-00-00'){
+			echo 'notglkadaluarsa';
+		}else{
+			$print_view=$this->load->view('template/p_apotek_sk.php',$data,TRUE);
+			$print_file=fopen('print/apotek_sk.html','w+');
+			fwrite($print_file, $print_view);
+			echo 'success';
+		}
 	}
 	function cetakSi(){
 		$apotekdet_id  = $this->input->post('apotekdet_id');
@@ -1126,10 +1155,17 @@ class C_t_apotek_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_apotek_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$print_view=$this->load->view('template/p_apotek_ijin.php',$data,TRUE);
-		$print_file=fopen('print/apotek_si.html','w+');
-		fwrite($print_file, $print_view);
-		echo 'success';
+		$sub = $data['printrecord'][0];
+		if($sub->det_apotek_sk == ''){
+			echo 'nosk';
+		}else if($sub->det_apotek_kadaluarsa == '' || $sub->det_apotek_kadaluarsa == '0000-00-00'){
+			echo 'notglkadaluarsa';
+		}else{
+			$print_view=$this->load->view('template/p_apotek_ijin.php',$data,TRUE);
+			$print_file=fopen('print/apotek_si.html','w+');
+			fwrite($print_file, $print_view);
+			echo 'success';
+		}
 	}
 	function cetakBp(){
 		$apotekdet_id  = $this->input->post('apotekdet_id');

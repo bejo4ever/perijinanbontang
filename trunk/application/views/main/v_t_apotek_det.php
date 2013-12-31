@@ -22,6 +22,7 @@
 		var det_apotek_idField;
 		var det_apotek_apotek_idField;
 		var det_apotek_jenisField;
+		var det_apotek_sklamaField;
 		var det_apotek_surveylulusField;
 		var det_apotek_namaField;
 		var det_apotek_alamatField;
@@ -254,6 +255,7 @@
 					var det_apotek_idValue = '';
 					var det_apotek_apotek_idValue = '';
 					var det_apotek_jenisValue = '';
+					var det_apotek_lamaValue = '';
 					var det_apotek_surveylulusValue = '';
 					var det_apotek_namaValue = '';
 					var det_apotek_alamatValue = '';
@@ -337,6 +339,7 @@
 					det_apotek_idValue = det_apotek_idField.getValue();
 					det_apotek_apotek_idValue = det_apotek_apotek_idField.getValue();
 					det_apotek_jenisValue = det_apotek_jenisField.getValue();
+					det_apotek_lamaValue = det_apotek_sklamaField.getValue();
 					det_apotek_surveylulusValue = det_apotek_surveylulusField.getValue();
 					det_apotek_namaValue = det_apotek_namaField.getValue();
 					det_apotek_alamatValue = det_apotek_alamatField.getValue();
@@ -460,12 +463,12 @@
 					var array_apotek_ket_status=new Array();
 					var array_apotek_ket_jumlah=new Array();
 					
-					if(apotek_det_syaratDataStore.getCount() > 0){
-						for(var i=0;i<apotek_det_syaratDataStore.getCount();i++){
-							array_apotek_ket_id.push(apotek_det_syaratDataStore.getAt(i).data.apotek_ket_id);
-							array_apotek_ket_perlengkapanid.push(apotek_det_syaratDataStore.getAt(i).data.apotek_ket_perlengkapanid);
-							array_apotek_ket_status.push(apotek_det_syaratDataStore.getAt(i).data.apotek_ket_status);
-							array_apotek_ket_jumlah.push(apotek_det_syaratDataStore.getAt(i).data.apotek_ket_jumlah);
+					if(apotek_det_perlengkapanDataStore.getCount() > 0){
+						for(var i=0;i<apotek_det_perlengkapanDataStore.getCount();i++){
+							array_apotek_ket_id.push(apotek_det_perlengkapanDataStore.getAt(i).data.apotek_ket_id);
+							array_apotek_ket_perlengkapanid.push(apotek_det_perlengkapanDataStore.getAt(i).data.apotek_ket_perlengkapanid);
+							array_apotek_ket_status.push(apotek_det_perlengkapanDataStore.getAt(i).data.apotek_ket_status);
+							array_apotek_ket_jumlah.push(apotek_det_perlengkapanDataStore.getAt(i).data.apotek_ket_jumlah);
 						}
 					}
 					
@@ -502,6 +505,7 @@
 							det_apotek_id : det_apotek_idValue,
 							det_apotek_apotek_id : det_apotek_apotek_idValue,
 							det_apotek_jenis : det_apotek_jenisValue,
+							det_apotek_lama : det_apotek_lamaValue,
 							det_apotek_surveylulus : det_apotek_surveylulusValue,
 							det_apotek_nama : det_apotek_namaValue,
 							det_apotek_alamat : det_apotek_alamatValue,
@@ -874,6 +878,20 @@
 				action : 'GETSYARAT'
 			};
 			apotek_det_syaratDataStore.load();
+			apotek_det_perlengkapanDataStore.proxy.extraParams = { 
+				apotek_id : record.data.det_apotek_apotek_id,
+				apotek_det_id : record.data.det_apotek_id,
+				currentAction : 'update',
+				action : 'GETPERLENGKAPAN'
+			};
+			apotek_det_perlengkapanDataStore.load();
+			det_apotek_asisten_dataStore.proxy.extraParams = { 
+				apotek_id : record.data.det_apotek_apotek_id,
+				apotek_det_id : record.data.det_apotek_id,
+				currentAction : 'update',
+				action : 'GETASISTEN'
+			};
+			det_apotek_asisten_dataStore.load();
 		}
 		
 		function apotek_det_showSearchWindow(){
@@ -1651,8 +1669,28 @@
 					params: {
 						apotekdet_id : record.get('det_apotek_id'),
 						action : 'CETAKSK'
-					},success : function(){
-						window.open('../print/apotek_sk.html');
+					},success : function(response){
+						var result = response.responseText;
+						switch(result){
+							case 'success':
+								window.open('../print/apotek_sk.html');
+								break;
+							case 'nosk':
+								Ext.MessageBox.alert('Warning.','Nomor SK Belum ditetapkan.');
+								break;
+							case 'notglkadaluarsa':
+								Ext.MessageBox.alert('Warning.','Tanggal kadaluarsa belum ditetapkan.');
+								break;
+							default:
+								Ext.MessageBox.show({
+									title : 'Warning',
+									msg : 'Cetak gagal',
+									buttons : Ext.MessageBox.OK,
+									animEl : 'save',
+									icon : Ext.MessageBox.WARNING
+								});
+							break;
+						}
 					}
 				});
 			}
@@ -1668,8 +1706,28 @@
 					params: {
 						apotekdet_id : record.get('det_apotek_id'),
 						action : 'CETAKSI'
-					},success : function(){
-						window.open('../print/apotek_si.html');
+					},success : function(response){
+						var result = response.responseText;
+						switch(result){
+							case 'success':
+								window.open('../print/apotek_si.html');
+								break;
+							case 'nosk':
+								Ext.MessageBox.alert('Warning.','Nomor SK Belum ditetapkan.');
+								break;
+							case 'notglkadaluarsa':
+								Ext.MessageBox.alert('Warning.','Tanggal kadaluarsa belum ditetapkan.');
+								break;
+							default:
+								Ext.MessageBox.show({
+									title : 'Warning',
+									msg : 'Cetak gagal',
+									buttons : Ext.MessageBox.OK,
+									animEl : 'save',
+									icon : Ext.MessageBox.WARNING
+								});
+							break;
+						}
 					}
 				});
 			}
@@ -1797,7 +1855,14 @@
 					text : 'Jenis',
 					dataIndex : 'det_apotek_jenis',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : function(value){
+						if(value == 1){
+							return 'BARU';
+						}else{
+							return 'PERPANJANGAN';
+						}
+					}
 				},
 				{
 					text : 'Tanggal',
@@ -1989,20 +2054,6 @@
 				},
 				{
 					xtype:'actioncolumn',
-					text : 'Cetak',
-					width:50,
-					items: [{
-						iconCls: 'icon16x16-print',
-						tooltip: 'Cetak Dokumen',
-						handler: function(grid, rowIndex, colIndex, node, e) {
-							e.stopEvent();
-							apotek_det_printContextMenu.showAt(e.getXY());
-							return false;
-						}
-					}]
-				},
-				{
-					xtype:'actioncolumn',
 					text : 'Action',
 					width:50,
 					items: [{
@@ -2031,6 +2082,20 @@
 						handler: function(grid, rowIndex, colIndex, node, e) {
 							e.stopEvent();
 							apotek_det_prosesContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},
+				{
+					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							apotek_det_printContextMenu.showAt(e.getXY());
 							return false;
 						}
 					}]
@@ -2091,10 +2156,115 @@
 			listeners : {
 				select : function(cmb, rec){
 					if(cmb.getValue() == '2'){
-						// det_apotek_sklamaField.show();
+						det_apotek_sklamaField.show();
 					}else{
-						// det_apotek_sklamaField.hide();
+						det_apotek_sklamaField.hide();
 					}
+				}
+			}
+		});
+		det_apotek_sklamaField = Ext.create('Ext.form.ComboBox',{
+			name : 'det_apotek_sklamaField',
+			fieldLabel : 'Nomor SK Lama',
+			store : apotek_det_dataStore,
+			displayField : 'det_apotek_sk',
+			valueField : 'det_apotek_apotek_id',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
+			hidden : true,
+			onTriggerClick: function(event){
+				var store = det_apotek_sklamaField.getStore();
+				var val = det_apotek_sklamaField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',det_apotek_sk : val};
+				store.load();
+				det_apotek_sklamaField.expand();
+				det_apotek_sklamaField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">SK : {det_apotek_sk}<br>Nama Apotek : {apotek_nama}<br>Alamat : {apotek_alamat}<br></div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					apotek_det_pemohon_idField.setValue(rec.get('pemohon_id'));
+					apotek_det_pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					apotek_det_pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					apotek_det_pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					apotek_det_pemohon_telpField.setValue(rec.get('pemohon_telp'));
+					apotek_det_pemohon_npwpField.setValue(rec.get('pemohon_npwp'));
+					apotek_det_pemohon_rtField.setValue(rec.get('pemohon_rt'));
+					apotek_det_pemohon_rwField.setValue(rec.get('pemohon_rw'));
+					apotek_det_pemohon_kelField.setValue(rec.get('pemohon_kel'));
+					apotek_det_pemohon_kecField.setValue(rec.get('pemohon_kec'));
+					apotek_det_pemohon_straField.setValue(rec.get('pemohon_stra'));
+					apotek_det_pemohon_surattugasField.setValue(rec.get('pemohon_surattugas'));
+					apotek_det_pemohon_pekerjaanField.setValue(rec.get('pemohon_pekerjaan'));
+					apotek_det_pemohon_tempatlahirField.setValue(rec.get('pemohon_tempatlahir'));
+					apotek_det_pemohon_tanggallahirField.setValue(rec.get('pemohon_tanggallahir'));
+					apotek_det_pemohon_user_idField.setValue(rec.get('pemohon_user_id'));
+					apotek_det_pemohon_pendidikanField.setValue(rec.get('pemohon_pendidikan'));
+					apotek_det_pemohon_tahunlulusField.setValue(rec.get('pemohon_tahunlulus'));
+					
+					apotek_namaField.setValue(rec.get('apotek_nama'));
+					apotek_alamatField.setValue(rec.get('apotek_alamat'));
+					apotek_telpField.setValue(rec.get('apotek_telp'));
+					apotek_kelField.setValue(rec.get('apotek_kel'));
+					apotek_kecField.setValue(rec.get('apotek_kec'));
+					apotek_kepemilikanField.setValue(rec.get('apotek_kepemilikan'));
+					apotek_pemilikField.setValue(rec.get('apotek_pemilik'));
+					apotek_pemilikalamatField.setValue(rec.get('apotek_pemilikalamat'));
+					apotek_pemiliknpwpField.setValue(rec.get('apotek_pemiliknpwp'));
+					apotek_siupField.setValue(rec.get('apotek_siup'));
+					det_apotek_jarakField.setValue(rec.get('det_apotek_jarak'));
+					det_apotek_rracikField.setValue(rec.get('det_apotek_rracik'));
+					det_apotek_radminField.setValue(rec.get('det_apotek_radmin'));
+					det_apotek_rkerjaField.setValue(rec.get('det_apotek_rkerja'));
+					det_apotek_rtungguField.setValue(rec.get('det_apotek_rtunggu'));
+					det_apotek_rwcField.setValue(rec.get('det_apotek_rwc'));
+					det_apotek_airField.setValue(rec.get('det_apotek_air'));
+					det_apotek_listrikField.setValue(rec.get('det_apotek_listrik'));
+					det_apotek_apkField.setValue(rec.get('det_apotek_apk'));
+					det_apotek_apkukuranField.setValue(rec.get('det_apotek_apkukuran'));
+					det_apotek_jendelaField.setValue(rec.get('det_apotek_jendela'));
+					det_apotek_limbahField.setValue(rec.get('det_apotek_limbah'));
+					det_apotek_baksampahField.setValue(rec.get('det_apotek_baksampah'));
+					det_apotek_parkirField.setValue(rec.get('det_apotek_parkir'));
+					det_apotek_papannamaField.setValue(rec.get('det_apotek_papannama'));
+					det_apotek_pengelolaField.setValue(rec.get('det_apotek_pengelola'));
+					det_apotek_pendampingField.setValue(rec.get('det_apotek_pendamping'));
+					det_apotek_asistenField.setValue(rec.get('det_apotek_asisten'));
+					det_apotek_luasField.setValue(rec.get('det_apotek_luas'));
+					det_apotek_statustanahField.setValue(rec.get('det_apotek_statustanah'));
+					det_apotek_sewalamaField.setValue(rec.get('det_apotek_sewalama'));
+					det_apotek_sewaawalField.setValue(rec.get('det_apotek_sewaawal'));
+					det_apotek_sewaakhirField.setValue(rec.get('det_apotek_sewaakhir'));
+					det_apotek_shnomorField.setValue(rec.get('det_apotek_shnomor'));
+					det_apotek_shtahunField.setValue(rec.get('det_apotek_shtahun'));
+					det_apotek_shgssuField.setValue(rec.get('det_apotek_shgssu'));
+					det_apotek_shtanggalField.setValue(rec.get('det_apotek_shtanggal'));
+					det_apotek_shanField.setValue(rec.get('det_apotek_shan'));
+					det_apotek_aktanoField.setValue(rec.get('det_apotek_aktano'));
+					det_apotek_aktatahunField.setValue(rec.get('det_apotek_aktatahun'));
+					det_apotek_aktanotarisField.setValue(rec.get('det_apotek_aktanotaris'));
+					det_apotek_aktaanField.setValue(rec.get('det_apotek_aktaan'));
+					det_apotek_ckutipanField.setValue(rec.get('det_apotek_ckutipan'));
+					det_apotek_ckecField.setValue(rec.get('det_apotek_ckec'));
+					det_apotek_ctanggalField.setValue(rec.get('det_apotek_ctanggal'));
+					det_apotek_cpetokField.setValue(rec.get('det_apotek_cpetok'));
+					det_apotek_cpersilField.setValue(rec.get('det_apotek_cpersil'));
+					det_apotek_ckelasField.setValue(rec.get('det_apotek_ckelas'));
+					det_apotek_canField.setValue(rec.get('det_apotek_can'));
+					det_apotek_sppihak1Field.setValue(rec.get('det_apotek_sppihak1'));
+					det_apotek_sppihak2Field.setValue(rec.get('det_apotek_sppihak2'));
+					det_apotek_spnomorField.setValue(rec.get('det_apotek_spnomor'));
+					det_apotek_sptanggalField.setValue(rec.get('det_apotek_sptanggal'));
+					det_apotek_notarisField.setValue(rec.get('det_apotek_notaris'));
 				}
 			}
 		});
@@ -2152,8 +2322,7 @@
 			id : 'det_apotek_tanggallahirField',
 			name : 'det_apotek_tanggallahir',
 			fieldLabel : 'Tanggal Lahir',
-			format : 'd-m-Y',
-			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+			format : 'd-m-Y'
 		});
 		det_apotek_pekerjaanField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_pekerjaanField',
@@ -2195,14 +2364,14 @@
 			id : 'det_apotek_terimatanggalField',
 			name : 'det_apotek_terimatanggal',
 			fieldLabel : 'Tanggal Terima',
-			format : 'd-m-Y',
-			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+			format : 'd-m-Y'
 		});
 		det_apotek_tanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_apotek_tanggalField',
 			name : 'det_apotek_tanggal',
 			fieldLabel : 'Tanggal',
 			format : 'd-m-Y',
+			disabled : true,
 			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_apotek_kelengkapanField = Ext.create('Ext.form.ComboBox',{
@@ -2229,20 +2398,21 @@
 			id : 'det_apotek_skField',
 			name : 'det_apotek_sk',
 			fieldLabel : 'Nomor SK',
-			maxLength : 50
+			maxLength : 50,
+			hidden : true
 		});
 		det_apotek_baptanggalField = Ext.create('Ext.form.field.Date',{
 			id : 'det_apotek_baptanggalField',
 			name : 'det_apotek_baptanggal',
 			fieldLabel : 'Tanggal BAP',
-			format : 'd-m-Y',
-			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+			format : 'd-m-Y'
 		});
 		det_apotek_berlakuField = Ext.create('Ext.form.field.Date',{
 			id : 'det_apotek_berlakuField',
 			name : 'det_apotek_berlaku',
 			fieldLabel : 'Tanggal Berlaku',
-			format : 'd-m-Y'
+			format : 'd-m-Y',
+			hidden : true
 		});
 		det_apotek_kadaluarsaField = Ext.create('Ext.form.field.Date',{
 			id : 'det_apotek_kadaluarsaField',
@@ -2522,8 +2692,7 @@
 			id : 'det_apotek_shtanggalField',
 			name : 'det_apotek_shtanggal',
 			fieldLabel : 'Tanggal',
-			format : 'd-m-Y',
-			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+			format : 'd-m-Y'
 		});
 		det_apotek_shanField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_shanField',
@@ -2571,8 +2740,7 @@
 			id : 'det_apotek_ctanggalField',
 			name : 'det_apotek_ctanggal',
 			fieldLabel : 'Tanggal',
-			format : 'd-m-Y',
-			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+			format : 'd-m-Y'
 		});
 		det_apotek_cpetokField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_cpetokField',
@@ -2620,8 +2788,7 @@
 			id : 'det_apotek_sptanggalField',
 			name : 'det_apotek_sptanggal',
 			fieldLabel : 'Tanggal',
-			format : 'd-m-Y',
-			maxValue : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+			format : 'd-m-Y'
 		});
 		det_apotek_notarisField = Ext.create('Ext.form.TextField',{
 			id : 'det_apotek_notarisField',
@@ -2739,7 +2906,7 @@
 			id : 'det_apotek_syaratGrid',
 			store : apotek_det_syaratDataStore,
 			loadMask : true,
-			width : '95%',
+			width : '100%',
 			plugins : [
 				Ext.create('Ext.grid.plugin.CellEditing', {
 					clicksToEdit: 1
@@ -2752,13 +2919,18 @@
 					dataIndex : 'apotek_cek_id',
 					width : 100,
 					hidden : true,
+					hideable : false,
 					sortable : false
 				},
 				{
 					text : 'Syarat',
 					dataIndex : 'apotek_cek_syarat_nama',
-					width : 150,
-					sortable : false
+					width : 200,
+					sortable : false,
+					editor : {
+						xtype : 'textfield',
+						readOnly : true
+					}
 				},
 				{
 					xtype: 'checkcolumn',
@@ -2823,7 +2995,11 @@
 					text : 'Perlengkapan',
 					dataIndex : 'apotek_ket_perlengkapannama',
 					width : 250,
-					sortable : false
+					sortable : false,
+					editor : {
+						xtype : 'textfield',
+						readOnly : true
+					}
 				},
 				{
 					xtype: 'checkcolumn',
@@ -2859,14 +3035,14 @@
 					read : 'POST'
 				},
 				extraParams : {
-					action : 'GETasisten'
+					action : 'GETASISTEN'
 				}
 			}),
 			fields : [
 				{ name : 'asisten_id', type : 'int', mapping : 'asisten_id' },
 				{ name : 'asisten_nama', type : 'string', mapping : 'asisten_nama' },
 				{ name : 'asisten_sik', type : 'string', mapping : 'asisten_sik' },
-				{ name : 'asisten_lulus', type : 'asisten_alamat', mapping : 'asisten_lulus' },
+				{ name : 'asisten_lulus', type : 'string', mapping : 'asisten_lulus' },
 				{ name : 'asisten_alamat', type : 'string', mapping : 'asisten_alamat' }
 			]
 		});
@@ -2921,7 +3097,7 @@
 				{
 					text : 'Nama',
 					dataIndex : 'asisten_nama',
-					width : 150,
+					width : 100,
 					sortable : false,
 					editor : Ext.create('Ext.form.TextField',{
 						maxLength : 50
@@ -2930,7 +3106,7 @@
 				{
 					text : 'Nomor SIK',
 					dataIndex: 'asisten_sik',
-					width: 150,
+					width: 100,
 					sortable : false,
 					editor : Ext.create('Ext.form.TextField',{
 						maxLength : 50
@@ -2939,7 +3115,7 @@
 				{
 					text : 'Tahun Lulus',
 					dataIndex: 'asisten_lulus',
-					width: 100,
+					width: 70,
 					sortable : false,
 					editor : Ext.create('Ext.form.TextField',{
 						maxLength : 50
@@ -3133,6 +3309,25 @@
 			maxLength : 4,
 			maskRe : /([0-9]+)$/
 		});
+		var ipmbl_det_pendukungfieldset = Ext.create('Ext.form.FieldSet',{
+			title : '8. Data Pendukung',
+			checkboxToggle : false,
+			collapsible : false,
+			layout :'form',
+			items : [
+				det_apotek_surveylulusField,
+				det_apotek_terimaField,
+				det_apotek_terimatanggalField,
+				det_apotek_kelengkapanField,
+				det_apotek_bapField,
+				det_apotek_baptanggalField,
+				det_apotek_keputusanField,
+				det_apotek_keteranganField,
+				det_apotek_skField,
+				det_apotek_berlakuField,
+				det_apotek_kadaluarsaField
+			]
+		});
 		/* END DATA PEMOHON */
 		apotek_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
@@ -3163,6 +3358,7 @@
 								det_apotek_idField,
 								det_apotek_apotek_idField,
 								det_apotek_jenisField,
+								det_apotek_sklamaField,
 								det_apotek_tanggalField
 							]
 						},
@@ -3295,26 +3491,7 @@
 								det_apotek_asisten_gridPanel
 							]
 						},
-						{
-							xtype : 'fieldset',
-							title : '8. Data Pendukung',
-							checkboxToggle : false,
-							collapsible : false,
-							layout :'form',
-							items : [
-								det_apotek_surveylulusField,
-								det_apotek_terimaField,
-								det_apotek_terimatanggalField,
-								det_apotek_kelengkapanField,
-								det_apotek_bapField,
-								det_apotek_baptanggalField,
-								det_apotek_keputusanField,
-								det_apotek_keteranganField,
-								det_apotek_skField,
-								det_apotek_berlakuField,
-								det_apotek_kadaluarsaField
-							]
-						},
+						ipmbl_det_pendukungfieldset,
 						Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
 					],
 				}
@@ -3936,8 +4113,9 @@
 			apotek_det_bap_printCM.hide();
 			apotek_det_si_printCM.hide();
 			apotek_det_sk_printCM.hide();
+			ipmbl_det_pendukungfieldset.hide();
+			apotek_det_gridPanel.columns[29].setVisible(false);
 			apotek_det_gridPanel.columns[30].setVisible(false);
-			apotek_det_gridPanel.columns[31].setVisible(false);
 		<?php } ?>
 /* End SearchPanel declaration */
 });

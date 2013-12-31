@@ -167,15 +167,15 @@
 		</tr>
 		<tr>
 			<td colspan="3">&nbsp;</td>
-			<td align="center"><b><u><?php echo @$dataijin[0]->NAMA_PEJABAT; ?></u></b></td>
+			<td align="center"><b><u><?php echo @$dataijin->NAMA_PEJABAT; ?></u></b></td>
 		</tr>
 		<tr>
 			<td colspan="3">&nbsp;</td>
-			<td align="center"><b><?php echo @$dataijin[0]->NAMA_PEJABAT; ?></b></td>
+			<td align="center"><b><?php echo @$dataijin->NAMA_PEJABAT; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="3">&nbsp;</td>
-			<td align="center"><b>NIP. <?php echo @$dataijin[0]->NAMA_PEJABAT; ?></b></td>
+			<td align="center"><b>NIP. <?php echo @$dataijin->NAMA_PEJABAT; ?></b></td>
 		</tr>
 		<tr>
 			<td colspan="4"><b><u>Tembusan disampaikan kepada :</u></b></td>

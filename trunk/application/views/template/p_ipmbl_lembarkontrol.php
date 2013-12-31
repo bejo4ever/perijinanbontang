@@ -125,6 +125,7 @@
 						<td><?php echo $subdatadok->dok_ipmbl_penerima; ?></td>
 						<td><?php echo $subdatadok->dok_ipmbl_jabatan; ?></td>
 						<td><?php echo date('d-m-Y', strtotime($subdatadok->dok_ipmbl_tanggal)); ?></td>
+						<td>&nbsp;</td>
 						<td><?php echo $subdatadok->dok_ipmbl_keterangan; ?></td>
 					</tr>
 					<?php $i++; } }?>
