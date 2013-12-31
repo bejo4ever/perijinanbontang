@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html class="bootstrap-admin-vertical-centered">
-	<head>
+	<!--<head>
 		<title>PERIJINAN - LOGIN</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,12 +12,12 @@
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/html5shiv.js"></script>
 			<script type="text/javascript" src="<?php echo base_url(); ?>assets/js/respond.min.js"></script>
 		<![endif]-->
-	</head>
+	<!--</head>
 	<body class="bootstrap-admin-without-padding">
 		<div class="container">
-			<div class="row">
+			<div class="row">-->
 				<form method="post" class="bootstrap-admin-login-form">
-                    <h1>Please Login</h1>
+                    <h3>User Login</h3>
                     <div class="form-group">
                         <input class="form-control" type="text" name="email" placeholder="E-mail" id="username">
                     </div>
@@ -26,10 +26,10 @@
                     </div>
                     <button class="btn btn-lg btn-primary" type="button" id="submitbutton">Login</button>
                 </form>
-			</div>
+			<!--</div>
 		</div>
 		<script src="<?php echo base_url(); ?>assets/js/jquery-1.9.1.min.js"></script>
-		<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>
+		<script src="<?php echo base_url(); ?>assets/js/bootstrap.min.js"></script>-->
 		<script>
 			$(document).ready(function(){
 				$('input[name="email"]').focus();
@@ -58,5 +58,5 @@
 				});
 			});
 		</script>
-	</body>
-</html>
+	<!--</body>
+</html>-->
