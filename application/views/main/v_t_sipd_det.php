@@ -721,6 +721,7 @@
 				{ name : 'det_sipd_pemohon_id', type : 'int', mapping : 'det_sipd_pemohon_id' },
 				{ name : 'det_sipd_nomorreg', type : 'string', mapping : 'det_sipd_nomorreg' },
 				{ name : 'det_sipd_proses', type : 'string', mapping : 'det_sipd_proses' },
+				{ name : 'lamaproses', type : 'string', mapping : 'lamaproses' },
 				{ name : 'det_sipd_sk', type : 'string', mapping : 'det_sipd_sk' },
 				{ name : 'det_sipd_skurut', type : 'int', mapping : 'det_sipd_skurut' },
 				{ name : 'det_sipd_berlaku', type : 'date', dateFormat : 'Y-m-d', mapping : 'det_sipd_berlaku' },
@@ -1071,14 +1072,6 @@
 			keys : sipd_det_shorcut,
 			columns : [
 				{
-					text : 'Id SIPD',
-					dataIndex : 'det_sipd_sipd_id',
-					width : 100,
-					sortable : false,
-					hidden : true,
-					hideable : false
-				},
-				{
 					text : 'Jenis',
 					dataIndex : 'det_sipd_jenis',
 					width : 100,
@@ -1101,7 +1094,7 @@
 				{
 					text : 'Pemohon',
 					dataIndex : 'pemohon_nama',
-					width : 200,
+					width : 150,
 					sortable : false
 				},
 				{
@@ -1114,18 +1107,54 @@
 				{
 					text : 'Telp',
 					dataIndex : 'pemohon_telp',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'Nama Praktek',
+					dataIndex : 'sipd_nama',
 					width : 150,
+					sortable : false
+				},
+				{
+					text : 'Nomor SK',
+					dataIndex : 'det_sipd_sk',
+					width : 200,
+					sortable : false,
+					hidden : true
+				},
+				{
+					text : 'Tanggal Berlaku',
+					dataIndex : 'det_sipd_berlaku',
+					width : 100,
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
+				},
+				{
+					text : 'Tanggal Kadaluarsa',
+					dataIndex : 'det_sipd_kadaluarsa',
+					width : 100,
+					sortable : false,
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					hidden : true
+				},
+				{
+					text : 'Lama Proses',
+					dataIndex : 'lamaproses',
+					width : 100,
 					sortable : false
 				},
 				{
 					text : 'Status',
 					dataIndex : 'det_sipd_proses',
-					width : 200,
+					width : 125,
 					sortable : false
 				},
 				{
 					xtype:'actioncolumn',
 					text : 'Action',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls: 'icon16x16-edit',
@@ -1146,6 +1175,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Proses',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls : 'checked',
@@ -1160,6 +1190,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls: 'icon16x16-print',
@@ -1175,7 +1206,6 @@
 			tbar : [
 				sipd_det_addButton,
 				sipd_det_gridSearchField,
-				sipd_det_searchButton,
 				sipd_det_refreshButton,
 				sipd_det_printButton,
 				sipd_det_excelButton
@@ -2064,8 +2094,8 @@
 		sipd_det_bap_printCM.hide();
 		sipd_det_sk_printCM.hide();
 		sipd_det_pendukungfieldset.hide();
-		sipd_det_gridPanel.columns[8].setVisible(false);
-		sipd_det_gridPanel.columns[9].setVisible(false);
+		sipd_det_gridPanel.columns[10].setVisible(false);
+		sipd_det_gridPanel.columns[11].setVisible(false);
 	<?php } ?>
 });
 </script>

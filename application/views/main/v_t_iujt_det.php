@@ -2,9 +2,6 @@
 	.checked{
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
-	.unchecked{
-		background-image:url(../assets/images/icons/forward.png) !important;
-	}
 </style>
 <h4>IZIN USAHA JASA TITIPAN</h4>
 <script>
@@ -1007,13 +1004,6 @@
 			keys : iujt_det_shorcut,
 			columns : [
 				{
-					text : 'ID IUJT',
-					dataIndex : 'det_iujt_iujt_id',
-					width : 100,
-					hidden : true,
-					sortable : false
-				},
-				{
 					text : 'Jenis',
 					dataIndex : 'det_iujt_jenis_nama',
 					width : 100,
@@ -1024,13 +1014,12 @@
 					dataIndex : 'det_iujt_tanggal',
 					width : 100,
 					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
+					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
 				{
 					text : 'Nama',
 					dataIndex : 'pemohon_nama',
-					width : 200,
+					width : 150,
 					sortable : false
 				},
 				{
@@ -1043,22 +1032,20 @@
 					text : 'Alamat',
 					dataIndex : 'pemohon_alamat',
 					width : 200,
+					sortable : false,
+					flex : 1
+				},
+				{
+					text : 'Telp',
+					dataIndex : 'pemohon_telp',
+					width : 100,
 					sortable : false
 				},
 				{
-					text : 'Nomor Rekom',
-					dataIndex : 'det_iujt_norekom',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tgl Rekom',
-					dataIndex : 'det_iujt_tglrekom',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
+					text : 'Usaha',
+					dataIndex : 'iujt_usaha',
+					width : 150,
+					sortable : false
 				},
 				{
 					text : 'Nomor SK',
@@ -1084,42 +1071,6 @@
 					hidden : true
 				},
 				{
-					text : 'Nomor Permohonan',
-					dataIndex : 'det_iujt_nopermohonan',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Petugas Cek',
-					dataIndex : 'det_iujt_cekpetugas',
-					width : 150,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tanggal Cek',
-					dataIndex : 'det_iujt_cektanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
-				},
-				{
-					text : 'NIP Petugas',
-					dataIndex : 'det_iujt_ceknip',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Catatan',
-					dataIndex : 'det_iujt_catatan',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
 					text : 'Lama Proses',
 					dataIndex : 'lamaproses',
 					width : 100,
@@ -1135,6 +1086,7 @@
 					xtype:'actioncolumn',
 					text : 'Action',
 					width:50,
+					hideable : false,
 					items: [{
 						iconCls: 'icon16x16-edit',
 						tooltip: 'Ubah Data',
@@ -1154,6 +1106,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Proses',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls : 'checked',
@@ -1168,6 +1121,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls: 'icon16x16-print',
@@ -1958,8 +1912,8 @@
 			iujt_det_rekom_printCM.hide();
 			iujt_det_sk_printCM.hide();
 			iujt_det_pendukungfieldset.hide();
-			iujt_det_gridPanel.columns[18].setVisible(false);
-			iujt_det_gridPanel.columns[19].setVisible(false);
+			iujt_det_gridPanel.columns[12].setVisible(false);
+			iujt_det_gridPanel.columns[13].setVisible(false);
 		<?php } ?>
 /* End SearchPanel declaration */
 });

@@ -2,9 +2,6 @@
 	.checked{
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
-	.unchecked{
-		background-image:url(../assets/images/icons/forward.png) !important;
-	}
 </style>
 <h4>IZIN DEPO AIR MINUM</h4>
 <script>
@@ -1074,14 +1071,6 @@
 			keys : idam_det_shorcut,
 			columns : [
 				{
-					text : 'Id Idam',
-					dataIndex : 'det_idam_idam_id',
-					width : 100,
-					hidden : true,
-					hideable: false,
-					sortable : false
-				},
-				{
 					text : 'Jenis',
 					dataIndex : 'det_idam_jenis_nama',
 					width : 100,
@@ -1104,7 +1093,8 @@
 					text : 'Alamat',
 					dataIndex : 'pemohon_alamat',
 					width : 200,
-					sortable : false
+					sortable : false,
+					flex : 1
 				},
 				{
 					text : 'No. Telp',
@@ -1142,55 +1132,10 @@
 					hidden : true
 				},
 				{
-					text : 'Status',
-					dataIndex : 'det_idam_status',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Keterangan',
-					dataIndex : 'det_idam_keterangan',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'BAP',
-					dataIndex : 'det_idam_bap',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tanggal BAP',
-					dataIndex : 'det_idam_baptanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
-				},
-				{
-					text : 'Kelengkapan Berkas',
-					dataIndex : 'det_idam_kelengkapan',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Penerima Berkas',
-					dataIndex : 'det_idam_terima',
-					width : 180,
-					hidden : true,
+					text : 'Usaha',
+					dataIndex : 'idam_usaha',
+					width : 150,
 					sortable : false
-				},
-				{
-					text : 'Tanggal Terima',
-					dataIndex : 'det_idam_terimatanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
 				},
 				{
 					text : 'Nomor SK',
@@ -2156,8 +2101,8 @@
 			idam_det_bap_printCM.hide();
 			idam_det_sk_printCM.hide();
 			idam_det_pendukungfieldset.hide();
-			idam_det_gridPanel.columns[23].setVisible(false);
-			idam_det_gridPanel.columns[24].setVisible(false);
+			idam_det_gridPanel.columns[16].setVisible(false);
+			idam_det_gridPanel.columns[17].setVisible(false);
 		<?php } ?>
 /* End SearchPanel declaration */
 });
