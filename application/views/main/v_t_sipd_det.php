@@ -291,6 +291,10 @@
 							pemohon_user_id : pemohon_user_idValue,
 							pemohon_pendidikan : pemohon_pendidikanValue,
 							pemohon_tahunlulus : pemohon_tahunlulusValue,
+							sipd_cek_id : encoded_sipd_cek_id,
+							sipd_cek_syarat_id : encoded_sipd_cek_syarat_id,
+							sipd_cek_status : encoded_sipd_cek_status,
+							sipd_cek_keterangan : encoded_sipd_cek_keterangan,
 							action : sipd_det_dbTask
 						},
 						success: function(response){
@@ -464,6 +468,25 @@
 			det_sipd_nropField.setValue(record.data.det_sipd_nrop);
 			det_sipd_strField.setValue(record.data.det_sipd_str);
 			det_sipd_kompetensiField.setValue(record.data.det_sipd_kompetensi);
+			
+			sipd_det_pemohon_idField.setValue(record.data.pemohon_id);
+			sipd_det_pemohon_namaField.setValue(record.data.pemohon_nama);
+			sipd_det_pemohon_alamatField.setValue(record.data.pemohon_alamat);
+			sipd_det_pemohon_telpField.setValue(record.data.pemohon_telp);
+			sipd_det_pemohon_npwpField.setValue(record.data.pemohon_npwp);
+			sipd_det_pemohon_rtField.setValue(record.data.pemohon_rt);
+			sipd_det_pemohon_rwField.setValue(record.data.pemohon_rw);
+			sipd_det_pemohon_kelField.setValue(record.data.pemohon_kel);
+			sipd_det_pemohon_kecField.setValue(record.data.pemohon_kec);
+			sipd_det_pemohon_nikField.setValue(record.data.pemohon_nik);
+			sipd_det_pemohon_straField.setValue(record.data.pemohon_stra);
+			sipd_det_pemohon_surattugasField.setValue(record.data.pemohon_surattugas);
+			sipd_det_pemohon_pekerjaanField.setValue(record.data.pemohon_pekerjaan);
+			sipd_det_pemohon_tempatlahirField.setValue(record.data.pemohon_tempatlahir);
+			sipd_det_pemohon_tanggallahirField.setValue(record.data.pemohon_tanggallahir);
+			sipd_det_pemohon_user_idField.setValue(record.data.pemohon_user_id);
+			sipd_det_pemohon_pendidikanField.setValue(record.data.pemohon_pendidikan);
+			sipd_det_pemohon_tahunlulusField.setValue(record.data.pemohon_tahunlulus);
 			
 			sipd_namaField.setValue(record.data.sipd_nama);
 			sipd_alamatField.setValue(record.data.sipd_alamat);
@@ -1078,25 +1101,26 @@
 				{
 					text : 'Pemohon',
 					dataIndex : 'pemohon_nama',
-					width : 100,
+					width : 200,
 					sortable : false
 				},
 				{
 					text : 'Alamat',
 					dataIndex : 'pemohon_alamat',
 					width : 100,
+					flex : 1,
 					sortable : false
 				},
 				{
 					text : 'Telp',
 					dataIndex : 'pemohon_telp',
-					width : 100,
+					width : 150,
 					sortable : false
 				},
 				{
 					text : 'Status',
 					dataIndex : 'det_sipd_proses',
-					width : 100,
+					width : 200,
 					sortable : false
 				},
 				
@@ -1173,7 +1197,6 @@
 			id : 'det_sipd_idField',
 			name : 'det_sipd_id',
 			fieldLabel : 'det_sipd_id<font color=red>*</font>',
-			allowBlank : false,
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
@@ -1235,14 +1258,39 @@
 			},  
 			tpl: Ext.create('Ext.XTemplate',
 				'<tpl for=".">',
-					'<div class="x-boundlist-item">SK : {det_sipd_sk}<br>Nama Usaha : {sipd_usaha}<br>Alamat : {sipd_alamat}<br></div>',
+					'<div class="x-boundlist-item">SK : {det_sipd_sk}<br>Nama Praktek : {sipd_nama}<br>Alamat : {sipd_alamat}<br></div>',
 				'</tpl>'
 			),
 			listeners : {
 				select : function(cmb, record){
 					var rec=record[0];
-					console.log(rec);
-					// sipd_det_pemohon_idField.setValue(rec.get('pemohon_id'));
+					sipd_det_pemohon_idField.setValue(rec.get('pemohon_id'));
+					sipd_det_pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					sipd_det_pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					sipd_det_pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					sipd_det_pemohon_telpField.setValue(rec.get('pemohon_telp'));
+					sipd_det_pemohon_npwpField.setValue(rec.get('pemohon_npwp'));
+					sipd_det_pemohon_rtField.setValue(rec.get('pemohon_rt'));
+					sipd_det_pemohon_rwField.setValue(rec.get('pemohon_rw'));
+					sipd_det_pemohon_kelField.setValue(rec.get('pemohon_kel'));
+					sipd_det_pemohon_kecField.setValue(rec.get('pemohon_kec'));
+					sipd_det_pemohon_straField.setValue(rec.get('pemohon_stra'));
+					sipd_det_pemohon_surattugasField.setValue(rec.get('pemohon_surattugas'));
+					sipd_det_pemohon_pekerjaanField.setValue(rec.get('pemohon_pekerjaan'));
+					sipd_det_pemohon_tempatlahirField.setValue(rec.get('pemohon_tempatlahir'));
+					sipd_det_pemohon_tanggallahirField.setValue(rec.get('pemohon_tanggallahir'));
+					sipd_det_pemohon_user_idField.setValue(rec.get('pemohon_user_id'));
+					sipd_det_pemohon_pendidikanField.setValue(rec.get('pemohon_pendidikan'));
+					sipd_det_pemohon_tahunlulusField.setValue(rec.get('pemohon_tahunlulus'));
+					sipd_namaField.setValue(rec.get('sipd_nama'));
+					sipd_alamatField.setValue(rec.get('sipd_alamat'));
+					sipd_telpField.setValue(rec.get('sipd_telp'));
+					sipd_urutanField.setValue(rec.get('sipd_urutan'));
+					sipd_jenisdokterField.setValue(rec.get('sipd_jenisdokter'));
+					det_sipd_kompetensiField.setValue(rec.get('det_sipd_kompetensi'));
+					det_sipd_strField.setValue(rec.get('det_sipd_str'));
+					det_sipd_nropField.setValue(rec.get('det_sipd_nrop'));
+					det_sipd_sipField.setValue(rec.get('det_sipd_sip'));
 				}
 			}
 		});
@@ -1294,12 +1342,11 @@
 			maskRe : /([0-9]+)$/,
 			hidden : true
 		});
-		det_sipd_berlakuField = Ext.create('Ext.form.TextField',{
+		det_sipd_berlakuField = Ext.create('Ext.form.field.Date',{
 			id : 'det_sipd_berlakuField',
 			name : 'det_sipd_berlaku',
-			fieldLabel : 'det_sipd_berlaku',
-			maxLength : 0,
-			hidden : true
+			fieldLabel : 'Tanggal Berlaku',
+			format : 'd-m-Y'
 		});
 		det_sipd_kadaluarsaField = Ext.create('Ext.form.field.Date',{
 			id : 'det_sipd_kadaluarsaField',
@@ -1672,6 +1719,27 @@
 				sipd_det_switchToGrid();
 			}
 		});
+		var sipd_det_pendukungfieldset = Ext.create('Ext.form.FieldSet',{
+			title : '4. Data Pendukung',
+			columnWidth : 0.5,
+			checkboxToggle : false,
+			collapsible : false,
+			layout :'form',
+			items : [
+				det_sipd_nomorregField,
+				det_sipd_prosesField,
+				det_sipd_skField,
+				det_sipd_skurutField,
+				det_sipd_berlakuField,
+				det_sipd_terimaField,
+				det_sipd_terimatanggalField,
+				det_sipd_kelengkapanField,
+				det_sipd_bapField,
+				det_sipd_keputusanField,
+				det_sipd_baptanggalField,
+				det_sipd_kadaluarsaField
+			]
+		});
 		sipd_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			fieldDefaults: {
@@ -1759,28 +1827,7 @@
 							items : [
 								det_sipd_syaratGrid
 							]
-						},{
-							xtype : 'fieldset',
-							title : '4. Data Pendukung',
-							columnWidth : 0.5,
-							checkboxToggle : false,
-							collapsible : false,
-							layout :'form',
-							items : [
-								det_sipd_nomorregField,
-								det_sipd_prosesField,
-								det_sipd_skField,
-								det_sipd_skurutField,
-								det_sipd_berlakuField,
-								det_sipd_terimaField,
-								det_sipd_terimatanggalField,
-								det_sipd_kelengkapanField,
-								det_sipd_bapField,
-								det_sipd_keputusanField,
-								det_sipd_baptanggalField,
-								det_sipd_kadaluarsaField
-							]
-						}
+						},sipd_det_pendukungfieldset
 					]
 				}, {
 					xtype : 'splitter'
@@ -2014,6 +2061,14 @@
 			items : [sipd_det_searchPanel]
 		});
 /* End SearchPanel declaration */
+	<?php if(@$_SESSION['IDHAK'] == 2){ ?>
+		sipd_det_lk_printCM.hide();
+		sipd_det_bap_printCM.hide();
+		sipd_det_sk_printCM.hide();
+		sipd_det_pendukungfieldset.hide();
+		sipd_det_gridPanel.columns[8].setVisible(false);
+		sipd_det_gridPanel.columns[9].setVisible(false);
+	<?php } ?>
 });
 </script>
 <div id="sipd_detSaveWindow"></div>

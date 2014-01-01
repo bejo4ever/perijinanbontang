@@ -15,8 +15,15 @@ class M_t_sipd_det extends App_model{
 				det_sipd_terima,
 				det_sipd_terimatanggal,
 				det_sipd_kelengkapan,
+				CASE WHEN det_sipd_kelengkapan = 1 THEN 'LENGKAP'
+					ELSE 'TIDAK LENGKAP'
+					END AS det_sipd_kelengkapan_nama,
 				det_sipd_bap,
 				det_sipd_keputusan,
+				CASE WHEN det_sipd_keputusan = 1 THEN 'DISETUJUI'
+					WHEN det_sipd_keputusan = 2 THEN 'DITOLAK'
+					ELSE 'DITANGGUHKAN'
+					END AS det_sipd_keputusan_nama,
 				det_sipd_baptanggal,
 				det_sipd_sip,
 				det_sipd_nrop,
