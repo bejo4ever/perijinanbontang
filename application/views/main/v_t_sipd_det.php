@@ -1123,7 +1123,6 @@
 					width : 200,
 					sortable : false
 				},
-				
 				{
 					xtype:'actioncolumn',
 					text : 'Action',
@@ -1632,7 +1631,6 @@
 		sipd_det_syaratDataStore = Ext.create('Ext.data.Store',{
 			id : 'sipd_det_syaratDataStore',
 			pageSize : globalPageSize,
-			autoLoad : true,
 			proxy : Ext.create('Ext.data.HttpProxy',{
 				url : 'c_t_sipd_det/switchAction',
 				reader : {
