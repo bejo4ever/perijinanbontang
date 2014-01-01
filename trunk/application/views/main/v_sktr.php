@@ -1462,7 +1462,6 @@
 			defaults : {anchor : '95%'},
 			items: [
 				{
-					
 					xtype : 'fieldset',
 					title : 'SKTR',
 					checkboxToggle : false,

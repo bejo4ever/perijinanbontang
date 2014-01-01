@@ -3,7 +3,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
-		<title>Medical Management System</title>
+		<title>Perijinan Kota Bontang</title>
 		<link rel="icon" href="<?php echo base_url(); ?>ico.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
@@ -80,9 +80,9 @@
 				<a class="brand" href="#"></a>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li><a class="<?//php echo ($active == "home") ? ("active") : (""); ?>" href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-						<li><a class="<?//php echo ($active == "master") ? ("active") : (""); ?>" href=""><i class="icon-zoom-in"></i> Cari Izin</a></li>
-						<li class="<?//php echo ($active == "transaksi") ? ("active") : (""); ?> dropdown">
+						<li><a class="" href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
+						<li><a class="" href=""><i class="icon-zoom-in"></i> Cari Izin</a></li>
+						<li class="dropdown">
 							<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-book"></i> Informasi<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?php echo site_url();?>/PenerimaanObat"><!--<i class="icon-plus"></i>--> Perijinan</a></li>
@@ -90,7 +90,7 @@
 								<li><a href="<?php echo site_url();?>/PengeluaranObat"><!--<i class="icon-minus"></i>--> Pengaduan</a></li>
 							</ul>
 						</li>
-						<li class="<?//php echo ($active == "report") ? ("active") : (""); ?> dropdown">
+						<li class="dropdown">
 							<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i> Permohonan Izin<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#c_t_idam_det">Depo Air Minum</a></li>
@@ -105,7 +105,7 @@
 								<li><a href="#c_t_apotek_det">Izin Apotek</a></li>
 							</ul>
 						</li>
-						<li class="<?//php echo ($active == "user_menu") ? ("active") : (""); ?> dropdown">
+						<li class="dropdown">
 							<a href="<?php echo base_url("index.php/c_login/form"); ?>" class="dropdown-toggle fancybox fancybox.ajax" data-toggle="dropdown"><i class="icon-user"></i> Login</a>
 						</li>
 					</ul>
