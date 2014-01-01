@@ -65,6 +65,9 @@
                                     <li><a href="#c_t_iujk_det">Usaha Jasa Konstruksi</a></li>
                                     <li><a href="#c_t_apotek_det">Izin Apotek</a></li>
                                     <li><a href="#c_t_sipd_det">Izin Praktek Dokter</a></li>
+                                    <li><a href="#c_iuiphhk">Izin Usaha Industri Primer Hasil Hutan Kayu</a></li>
+                                    <li><a href="#c_ijin_prinsip">Izin Prinsip</a></li>
+                                    <li><a href="#c_trotoar">Izin Bongkar Trotoar</a></li>
                                     <li><a href="#c_t_simb_det">Izin Minuman Beralkohol</a></li>
                                 </ul>
                             </li>
