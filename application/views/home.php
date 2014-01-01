@@ -64,7 +64,7 @@
                                     <li><a href="#c_ijin_lokasi">Lokasi</a></li>
                                     <li><a href="#c_t_iujk_det">Usaha Jasa Konstruksi</a></li>
                                     <li><a href="#c_t_apotek_det">Izin Apotek</a></li>
-                                    <li role="presentation" class="divider"></li>
+                                    <li><a href="#c_t_sipd_det">Izin Praktek Dokter</a></li>
                                 </ul>
                             </li>
                         </ul>

@@ -21,8 +21,36 @@ class M_t_sipd_det extends App_model{
 				det_sipd_sip,
 				det_sipd_nrop,
 				det_sipd_str,
-				det_sipd_kompetensi
+				det_sipd_kompetensi,
+				CONCAT(5 * (DATEDIFF(NOW(), det_sipd_tanggal) DIV 7) + 
+					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_sipd_tanggal) + 
+						1, 1),' Hari') as lamaproses,
+				sipd_nama,
+				sipd_alamat,
+				sipd_telp,
+				sipd_urutan,
+				sipd_jenisdokter,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id,
+				pemohon_pendidikan,
+				pemohon_tahunlulus
 				FROM t_sipd_det 
+				JOIN t_sipd ON t_sipd.sipd_id = t_sipd_det.det_sipd_sipd_id
+				JOIN m_pemohon ON t_sipd_det.det_sipd_pemohon_id = m_pemohon.pemohon_id
 			WHERE det_sipd_id IS NOT NULL 
 	";
 	
@@ -37,6 +65,9 @@ class M_t_sipd_det extends App_model{
 	function getList($params){
 		extract($params);
 		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
@@ -74,7 +105,12 @@ class M_t_sipd_det extends App_model{
 		extract($params);
 		
 		$sql = $this->mainSql;
-		
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID']." ";
+		}
+		if(@$det_sipd_id != ''){
+			$sql .= " AND det_sipd_id = ".$det_sipd_id." ";
+		}
 		if(@$det_sipd_sipd_id != ''){
 			$sql .= " AND det_sipd_sipd_id LIKE '%".$det_sipd_sipd_id."%' ";
 		}
@@ -149,6 +185,37 @@ class M_t_sipd_det extends App_model{
 		}else if(@$currentAction == "SEARCH"){
 			$result = $this->search($params);
 		}
+		return $result;
+	}
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT 
+					sipd_cek_id,
+					sipd_cek_syarat_id,
+					sipd_cek_sipddet_id,
+					sipd_cek_sipd_id,
+					sipd_cek_status,
+					sipd_cek_keterangan,
+					NAMA_SYARAT AS sipd_cek_syarat_nama
+				FROM t_sipd_ceklist 
+				LEFT JOIN master_syarat ON t_sipd_ceklist.sipd_cek_syarat_id = master_syarat.ID_SYARAT
+				WHERE sipd_cek_sipddet_id = ".$sipd_det_id."
+				AND sipd_cek_sipd_id = ".$sipd_id."
+			";
+		}else{
+			$sql = "
+				SELECT 
+					0 AS sipd_cek_id,
+					master_syarat.ID_SYARAT AS sipd_cek_syarat_id,
+					NAMA_SYARAT AS sipd_cek_syarat_nama
+				FROM dt_syarat 
+				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT
+				WHERE ID_IJIN = 1
+			";
+		}
+		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
 	
