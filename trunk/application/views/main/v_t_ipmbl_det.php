@@ -2,9 +2,6 @@
 	.checked{
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
-	.unchecked{
-		background-image:url(../assets/images/icons/forward.png) !important;
-	}
 </style>
 <h4>IZIN PENGAMBILAN MINERAL BUKAN LOGAM DAN BATUAN</h4>
 <script>
@@ -1215,13 +1212,6 @@
 			keys : ipmbl_det_shorcut,
 			columns : [
 				{
-					text : 'Id Ipmbl',
-					dataIndex : 'det_ipmbl_ipmbl_id',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
 					text : 'Jenis',
 					dataIndex : 'det_ipmbl_jenis_nama',
 					width : 100,
@@ -1244,21 +1234,8 @@
 					text : 'Alamat',
 					dataIndex : 'pemohon_alamat',
 					width : 200,
-					sortable : false
-				},
-				{
-					text : 'Kelurahan',
-					dataIndex : 'pemohon_kel',
-					width : 100,
 					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Kecamatan',
-					dataIndex : 'pemohon_kec',
-					width : 100,
-					sortable : false,
-					hidden : true
+					flex : 1
 				},
 				{
 					text : 'Telp',
@@ -1267,107 +1244,10 @@
 					sortable : false
 				},
 				{
-					text : 'Nomor Agenda',
-					dataIndex : 'det_ipmbl_nomoragenda',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tgl Masuk Berkas',
-					dataIndex : 'det_ipmbl_berkasmasuk',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
-				},
-				{
-					text : 'Tgl Survey',
-					dataIndex : 'det_ipmbl_surveytanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
-				},
-				{
-					text : 'Status',
-					dataIndex : 'det_ipmbl_status_nama',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Petugas Survey',
-					dataIndex : 'det_ipmbl_surveypetugas',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Dinas',
-					dataIndex : 'det_ipmbl_surveydinas',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'NIP',
-					dataIndex : 'det_ipmbl_surveynip',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Pendapat',
-					dataIndex : 'det_ipmbl_surveypendapat',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Rekomendasi BLH',
-					dataIndex : 'det_ipmbl_rekombl',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tanggal',
-					dataIndex : 'det_ipmbl_rekomblhtanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
-				},
-				{
-					text : 'Rekomendasi Kelurahan',
-					dataIndex : 'det_ipmbl_rekomkel',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tanggal',
-					dataIndex : 'det_ipmbl_rekomkeltanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
-				},
-				{
-					text : 'Rekomendasi Kecamatan',
-					dataIndex : 'det_ipmbl_rekomkec',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tanggal',
-					dataIndex : 'det_ipmbl_rekomkectanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
+					text : 'Usaha',
+					dataIndex : 'ipmbl_usaha',
+					width : 150,
+					sortable : false
 				},
 				{
 					text : 'Nomor SK',
@@ -1407,6 +1287,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Action',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls: 'icon16x16-edit',
@@ -1427,6 +1308,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Proses',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls : 'checked',
@@ -1441,6 +1323,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls: 'icon16x16-print',
@@ -2602,8 +2485,8 @@
 			ipmbl_det_sk_printCM.hide();
 			ipmbl_det_pendukungfieldset.hide();
 			ipmbl_det_riwayatfieldset.hide();
-			ipmbl_det_gridPanel.columns[27].setVisible(false);
-			ipmbl_det_gridPanel.columns[28].setVisible(false);
+			ipmbl_det_gridPanel.columns[11].setVisible(false);
+			ipmbl_det_gridPanel.columns[12].setVisible(false);
 		<?php } ?>
 /* End SearchPanel declaration */
 });

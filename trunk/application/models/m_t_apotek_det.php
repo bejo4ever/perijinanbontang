@@ -125,73 +125,12 @@ class M_t_apotek_det extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					det_apotek_apotek_id LIKE '%".$searchText."%' OR 
-					det_apotek_jenis LIKE '%".$searchText."%' OR 
-					det_apotek_surveylulus LIKE '%".$searchText."%' OR 
-					det_apotek_nama LIKE '%".$searchText."%' OR 
-					det_apotek_alamat LIKE '%".$searchText."%' OR 
-					det_apotek_telp LIKE '%".$searchText."%' OR 
-					det_apotek_sp LIKE '%".$searchText."%' OR 
-					det_apotek_ktp LIKE '%".$searchText."%' OR 
-					det_apotek_tempatlahir LIKE '%".$searchText."%' OR 
-					det_apotek_tanggallahir LIKE '%".$searchText."%' OR 
-					det_apotek_pekerjaan LIKE '%".$searchText."%' OR 
-					det_apotek_npwp LIKE '%".$searchText."%' OR 
-					det_apotek_stra LIKE '%".$searchText."%' OR 
-					det_apotek_pendidikan LIKE '%".$searchText."%' OR 
-					det_apotek_tahunlulus LIKE '%".$searchText."%' OR 
-					det_apotek_terima LIKE '%".$searchText."%' OR 
-					det_apotek_terimatanggal LIKE '%".$searchText."%' OR 
-					det_apotek_kelengkapan LIKE '%".$searchText."%' OR 
-					det_apotek_bap LIKE '%".$searchText."%' OR 
-					det_apotek_baptanggal LIKE '%".$searchText."%' OR 
-					det_apotek_keputusan LIKE '%".$searchText."%' OR 
-					det_apotek_keterangan LIKE '%".$searchText."%' OR 
-					det_apotek_jarak LIKE '%".$searchText."%' OR 
-					det_apotek_rracik LIKE '%".$searchText."%' OR 
-					det_apotek_radmin LIKE '%".$searchText."%' OR 
-					det_apotek_rkerja LIKE '%".$searchText."%' OR 
-					det_apotek_rtunggu LIKE '%".$searchText."%' OR 
-					det_apotek_rwc LIKE '%".$searchText."%' OR 
-					det_apotek_air LIKE '%".$searchText."%' OR 
-					det_apotek_listrik LIKE '%".$searchText."%' OR 
-					det_apotek_apk LIKE '%".$searchText."%' OR 
-					det_apotek_apkukuran LIKE '%".$searchText."%' OR 
-					det_apotek_jendela LIKE '%".$searchText."%' OR 
-					det_apotek_limbah LIKE '%".$searchText."%' OR 
-					det_apotek_baksampah LIKE '%".$searchText."%' OR 
-					det_apotek_parkir LIKE '%".$searchText."%' OR 
-					det_apotek_papannama LIKE '%".$searchText."%' OR 
-					det_apotek_pengelola LIKE '%".$searchText."%' OR 
-					det_apotek_pendamping LIKE '%".$searchText."%' OR 
-					det_apotek_asisten LIKE '%".$searchText."%' OR 
-					det_apotek_luas LIKE '%".$searchText."%' OR 
-					det_apotek_statustanah LIKE '%".$searchText."%' OR 
-					det_apotek_sewalama LIKE '%".$searchText."%' OR 
-					det_apotek_sewaawal LIKE '%".$searchText."%' OR 
-					det_apotek_sewaakhir LIKE '%".$searchText."%' OR 
-					det_apotek_shnomor LIKE '%".$searchText."%' OR 
-					det_apotek_shtahun LIKE '%".$searchText."%' OR 
-					det_apotek_shgssu LIKE '%".$searchText."%' OR 
-					det_apotek_shtanggal LIKE '%".$searchText."%' OR 
-					det_apotek_shan LIKE '%".$searchText."%' OR 
-					det_apotek_aktano LIKE '%".$searchText."%' OR 
-					det_apotek_aktatahun LIKE '%".$searchText."%' OR 
-					det_apotek_aktanotaris LIKE '%".$searchText."%' OR 
-					det_apotek_aktaan LIKE '%".$searchText."%' OR 
-					det_apotek_ckutipan LIKE '%".$searchText."%' OR 
-					det_apotek_ckec LIKE '%".$searchText."%' OR 
-					det_apotek_ctanggal LIKE '%".$searchText."%' OR 
-					det_apotek_cpetok LIKE '%".$searchText."%' OR 
-					det_apotek_cpersil LIKE '%".$searchText."%' OR 
-					det_apotek_ckelas LIKE '%".$searchText."%' OR 
-					det_apotek_can LIKE '%".$searchText."%' OR 
-					det_apotek_sppihak1 LIKE '%".$searchText."%' OR 
-					det_apotek_sppihak2 LIKE '%".$searchText."%' OR 
-					det_apotek_spnomor LIKE '%".$searchText."%' OR 
-					det_apotek_sptanggal LIKE '%".$searchText."%' OR 
-					det_apotek_notaris LIKE '%".$searchText."%'
-					)
+					pemohon_nama LIKE '%".$searchText."%' OR 
+					pemohon_alamat LIKE '%".$searchText."%' OR 
+					pemohon_telp LIKE '%".$searchText."%' OR 
+					apotek_nama LIKE '%".$searchText."%' OR 
+					det_apotek_sk LIKE '%".$searchText."%' 
+				)
 			";
 		}
 				if(@$limit_start != 0 && @$limit_start != 0){
@@ -413,7 +352,6 @@ class M_t_apotek_det extends App_model{
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
-		$this->firephp->log($sql);
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}
@@ -482,7 +420,6 @@ class M_t_apotek_det extends App_model{
 				FROM m_perlengkapan_apotek 
 			";
 		}
-		$this->firephp->log($sql);
 		$result = $this->__listCore($sql, $params);
 		return $result;
 	}

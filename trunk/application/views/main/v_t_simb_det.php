@@ -710,6 +710,7 @@
 				{ name : 'det_simb_pemohon_id', type : 'int', mapping : 'det_simb_pemohon_id' },
 				{ name : 'det_simb_nomorreg', type : 'string', mapping : 'det_simb_nomorreg' },
 				{ name : 'det_simb_proses', type : 'string', mapping : 'det_simb_proses' },
+				{ name : 'lamaproses', type : 'string', mapping : 'lamaproses' },
 				{ name : 'det_simb_sk', type : 'string', mapping : 'det_simb_sk' },
 				{ name : 'det_simb_berlaku', type : 'string', mapping : 'det_simb_berlaku' },
 				{ name : 'det_simb_kadaluarsa', type : 'string', mapping : 'det_simb_kadaluarsa' },
@@ -1071,14 +1072,6 @@
 			keys : simb_det_shorcut,
 			columns : [
 				{
-					text : 'Id SIMB',
-					dataIndex : 'det_simb_simb_id',
-					width : 100,
-					sortable : false,
-					hideable : false,
-					hidden : true
-				},
-				{
 					text : 'Jenis Permohonan',
 					dataIndex : 'det_simb_jenis',
 					width : 100,
@@ -1118,16 +1111,9 @@
 					sortable : false
 				},
 				{
-					text : 'Nomor Reg',
-					dataIndex : 'det_simb_nomorreg',
+					text : 'Perusahaan',
+					dataIndex : 'simb_per_nama',
 					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Proses',
-					dataIndex : 'det_simb_proses',
-					width : 150,
 					sortable : false
 				},
 				{
@@ -1152,30 +1138,21 @@
 					hidden : true
 				},
 				{
-					text : 'Penerima',
-					dataIndex : 'det_simb_penerima',
+					text : 'Lama Proses',
+					dataIndex : 'lamaproses',
 					width : 100,
-					sortable : false,
-					hidden : true
+					sortable : false
 				},
 				{
-					text : 'Tanggal Terima',
-					dataIndex : 'det_simb_tanggalterima',
-					width : 100,
-					sortable : false,
-					hidden : true,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y')
-				},
-				{
-					text : 'Keterangan',
-					dataIndex : 'det_simb_keterangan',
-					width : 100,
-					sortable : false,
-					hidden : true
+					text : 'Status',
+					dataIndex : 'det_simb_proses',
+					width : 125,
+					sortable : false
 				},
 				{
 					xtype:'actioncolumn',
 					text : 'Action',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls: 'icon16x16-edit',
@@ -1196,6 +1173,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Proses',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls : 'checked',
@@ -1210,6 +1188,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
+					hideable : false,
 					width:50,
 					items: [{
 						iconCls: 'icon16x16-print',
@@ -1225,7 +1204,6 @@
 			tbar : [
 				simb_det_addButton,
 				simb_det_gridSearchField,
-				simb_det_searchButton,
 				simb_det_refreshButton,
 				simb_det_printButton,
 				simb_det_excelButton
@@ -2109,6 +2087,14 @@
 			items : [simb_det_searchPanel]
 		});
 /* End SearchPanel declaration */
+	<?php if(@$_SESSION['IDHAK'] == 2){ ?>
+		simb_det_lk_printCM.hide();
+		simb_det_bap_printCM.hide();
+		simb_det_sk_printCM.hide();
+		simb_det_pendukungfieldset.hide();
+		simb_det_gridPanel.columns[11].setVisible(false);
+		simb_det_gridPanel.columns[12].setVisible(false);
+	<?php } ?>
 });
 </script>
 <div id="simb_detSaveWindow"></div>

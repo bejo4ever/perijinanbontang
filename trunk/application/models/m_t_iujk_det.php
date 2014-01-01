@@ -80,21 +80,11 @@ class M_t_iujk_det extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					det_iujk_iujk_id LIKE '%".$searchText."%' OR 
-					det_iujk_jenis LIKE '%".$searchText."%' OR 
-					det_iujk_tanggal LIKE '%".$searchText."%' OR 
-					det_iujk_nama LIKE '%".$searchText."%' OR 
-					det_iujk_nomorreg LIKE '%".$searchText."%' OR 
-					det_iujk_rekomnomor LIKE '%".$searchText."%' OR 
-					det_iujk_rekomtanggal LIKE '%".$searchText."%' OR 
-					det_iujk_berlaku LIKE '%".$searchText."%' OR 
-					det_iujk_kadaluarsa LIKE '%".$searchText."%' OR 
-					det_iujk_pj1 LIKE '%".$searchText."%' OR 
-					det_iujk_pj2 LIKE '%".$searchText."%' OR 
-					det_iujk_pj3 LIKE '%".$searchText."%' OR 
-					det_iujk_pjteknis LIKE '%".$searchText."%' OR 
-					det_iujk_pjtbu LIKE '%".$searchText."%' OR 
-					det_iujk_surveylulus LIKE '%".$searchText."%'
+					pemohon_nama LIKE '%".$searchText."%' OR 
+					pemohon_alamat LIKE '%".$searchText."%' OR 
+					pemohon_telp LIKE '%".$searchText."%' OR 
+					iujk_perusahaan LIKE '%".$searchText."%' OR 
+					det_iujk_sk LIKE '%".$searchText."%' 
 					)
 			";
 		}

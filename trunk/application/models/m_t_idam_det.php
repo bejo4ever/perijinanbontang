@@ -76,21 +76,12 @@ class M_t_idam_det extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					det_idam_idam_id LIKE '%".$searchText."%' OR 
-					det_idam_jenis LIKE '%".$searchText."%' OR 
-					det_idam_tanggal LIKE '%".$searchText."%' OR 
-					det_idam_status LIKE '%".$searchText."%' OR 
-					det_idam_keterangan LIKE '%".$searchText."%' OR 
-					det_idam_bap LIKE '%".$searchText."%' OR 
-					det_idam_baptanggal LIKE '%".$searchText."%' OR 
-					det_idam_kelengkapan LIKE '%".$searchText."%' OR 
-					det_idam_terima LIKE '%".$searchText."%' OR 
-					det_idam_terimatanggal LIKE '%".$searchText."%' OR 
+					pemohon_nama LIKE '%".$searchText."%' OR 
+					pemohon_telp LIKE '%".$searchText."%' OR 
 					det_idam_sk LIKE '%".$searchText."%' OR 
-					det_idam_berlaku LIKE '%".$searchText."%' OR 
-					det_idam_kadaluarsa LIKE '%".$searchText."%' OR 
-					det_idam_nomorreg LIKE '%".$searchText."%'
-					)
+					idam_usaha LIKE '%".$searchText."%' OR 
+					pemohon_alamat LIKE '%".$searchText."%'
+				)
 			";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){

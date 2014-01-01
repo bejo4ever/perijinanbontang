@@ -78,26 +78,11 @@ class M_t_sipd_det extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					det_sipd_sipd_id LIKE '%".$searchText."%' OR 
-					det_sipd_jenis LIKE '%".$searchText."%' OR 
-					det_sipd_tanggal LIKE '%".$searchText."%' OR 
-					det_sipd_pemohon_id LIKE '%".$searchText."%' OR 
-					det_sipd_nomorreg LIKE '%".$searchText."%' OR 
-					det_sipd_proses LIKE '%".$searchText."%' OR 
+					pemohon_nama LIKE '%".$searchText."%' OR 
+					pemohon_alamat LIKE '%".$searchText."%' OR 
+					pemohon_telp LIKE '%".$searchText."%' OR 
 					det_sipd_sk LIKE '%".$searchText."%' OR 
-					det_sipd_skurut LIKE '%".$searchText."%' OR 
-					det_sipd_berlaku LIKE '%".$searchText."%' OR 
-					det_sipd_kadaluarsa LIKE '%".$searchText."%' OR 
-					det_sipd_terima LIKE '%".$searchText."%' OR 
-					det_sipd_terimatanggal LIKE '%".$searchText."%' OR 
-					det_sipd_kelengkapan LIKE '%".$searchText."%' OR 
-					det_sipd_bap LIKE '%".$searchText."%' OR 
-					det_sipd_keputusan LIKE '%".$searchText."%' OR 
-					det_sipd_baptanggal LIKE '%".$searchText."%' OR 
-					det_sipd_sip LIKE '%".$searchText."%' OR 
-					det_sipd_nrop LIKE '%".$searchText."%' OR 
-					det_sipd_str LIKE '%".$searchText."%' OR 
-					det_sipd_kompetensi LIKE '%".$searchText."%'
+					sipd_nama LIKE '%".$searchText."%' 
 					)
 			";
 		}

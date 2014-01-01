@@ -106,18 +106,11 @@ class M_t_simb_det extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					det_simb_simb_id LIKE '%".$searchText."%' OR 
-					det_simb_jenis LIKE '%".$searchText."%' OR 
-					det_simb_tanggal LIKE '%".$searchText."%' OR 
-					det_simb_pemohon_id LIKE '%".$searchText."%' OR 
-					det_simb_nomorreg LIKE '%".$searchText."%' OR 
-					det_simb_proses LIKE '%".$searchText."%' OR 
+					pemohon_nama LIKE '%".$searchText."%' OR 
+					pemohon_alamat LIKE '%".$searchText."%' OR 
+					pemohon_telp LIKE '%".$searchText."%' OR 
 					det_simb_sk LIKE '%".$searchText."%' OR 
-					det_simb_berlaku LIKE '%".$searchText."%' OR 
-					det_simb_kadaluarsa LIKE '%".$searchText."%' OR 
-					det_simb_penerima LIKE '%".$searchText."%' OR 
-					det_simb_tanggalterima LIKE '%".$searchText."%' OR 
-					det_simb_keterangan LIKE '%".$searchText."%'
+					simb_per_nama LIKE '%".$searchText."%' 
 					)
 			";
 		}

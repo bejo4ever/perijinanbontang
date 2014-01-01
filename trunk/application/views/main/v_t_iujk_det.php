@@ -1065,13 +1065,6 @@
 			keys : iujk_det_shorcut,
 			columns : [
 				{
-					text : 'Id',
-					dataIndex : 'det_iujk_iujk_id',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
 					text : 'Jenis',
 					dataIndex : 'det_iujk_jenis',
 					width : 100,
@@ -1098,25 +1091,23 @@
 					sortable : false
 				},
 				{
-					text : 'Perusahaan',
-					dataIndex : 'iujk_perusahaan',
+					text : 'Alamat',
+					dataIndex : 'pemohon_alamat',
+					width : 150,
+					sortable : false,
+					flex : 1
+				},
+				{
+					text : 'Telp',
+					dataIndex : 'pemohon_telp',
 					width : 150,
 					sortable : false
 				},
 				{
-					text : 'Nomor Rekomendasi',
-					dataIndex : 'det_iujk_rekomnomor',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tanggal Rekomendasi',
-					dataIndex : 'det_iujk_rekomtanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
+					text : 'Perusahaan',
+					dataIndex : 'iujk_perusahaan',
+					width : 150,
+					sortable : false
 				},
 				{
 					text : 'Tgl Berlaku',
@@ -1135,43 +1126,8 @@
 					hidden : true
 				},
 				{
-					text : 'Penanggung Jawab 1',
-					dataIndex : 'det_iujk_pj1',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Penanggung Jawab 2',
-					dataIndex : 'det_iujk_pj2',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Penanggung Jawab 3',
-					dataIndex : 'det_iujk_pj3',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Penanggung Jawab Teknis',
-					dataIndex : 'det_iujk_pjteknis',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'NO. PJT -BU',
-					dataIndex : 'det_iujk_pjtbu',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Lulus Survey',
-					dataIndex : 'det_iujk_surveylulus',
+					text : 'Nomor SK',
+					dataIndex : 'det_iujk_sk',
 					width : 100,
 					sortable : false,
 					hidden : true
@@ -2110,8 +2066,8 @@
 			iujk_det_rekom_printCM.hide();
 			iujk_det_sk_printCM.hide();
 			iujk_det_pendukungfieldset.hide();
-			iujk_det_gridPanel.columns[17].setVisible(false);
-			iujk_det_gridPanel.columns[18].setVisible(false);
+			iujk_det_gridPanel.columns[11].setVisible(false);
+			iujk_det_gridPanel.columns[12].setVisible(false);
 		<?php } ?>
 /* End SearchPanel declaration */
 });

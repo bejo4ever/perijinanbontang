@@ -84,28 +84,13 @@ class M_t_ipmbl_det extends App_model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					det_ipmbl_ipmbl_id LIKE '%".$searchText."%' OR 
-					det_ipmbl_jenis LIKE '%".$searchText."%' OR 
-					det_ipmbl_tanggal LIKE '%".$searchText."%' OR 
-					det_ipmbl_nomoragenda LIKE '%".$searchText."%' OR 
-					det_ipmbl_berkasmasuk LIKE '%".$searchText."%' OR 
-					det_ipmbl_surveytanggal LIKE '%".$searchText."%' OR 
-					det_ipmbl_surveylulus LIKE '%".$searchText."%' OR 
-					det_ipmbl_status LIKE '%".$searchText."%' OR 
-					det_ipmbl_surveypetugas LIKE '%".$searchText."%' OR 
-					det_ipmbl_surveydinas LIKE '%".$searchText."%' OR 
-					det_ipmbl_surveynip LIKE '%".$searchText."%' OR 
-					det_ipmbl_surveypendapat LIKE '%".$searchText."%' OR 
-					det_ipmbl_rekombl LIKE '%".$searchText."%' OR 
-					det_ipmbl_rekomblhtanggal LIKE '%".$searchText."%' OR 
-					det_ipmbl_rekomkel LIKE '%".$searchText."%' OR 
-					det_ipmbl_rekomkeltanggal LIKE '%".$searchText."%' OR 
-					det_ipmbl_rekomkec LIKE '%".$searchText."%' OR 
-					det_ipmbl_rekomkectanggal LIKE '%".$searchText."%' OR 
-					det_ipmbl_sk LIKE '%".$searchText."%' OR 
-					det_ipmbl_kadaluarsa LIKE '%".$searchText."%' OR 
-					det_ipmbl_berlaku LIKE '%".$searchText."%'
-					)
+					pemohon_nama LIKE '%".$searchText."%' OR 
+					pemohon_alamat LIKE '%".$searchText."%' OR 
+					pemohon_npwp LIKE '%".$searchText."%' OR 
+					ipmbl_usaha LIKE '%".$searchText."%' OR 
+					pemohon_telp LIKE '%".$searchText."%' OR 
+					det_ipmbl_sk LIKE '%".$searchText."%' 
+				)
 			";
 		}
 				if(@$limit_start != 0 && @$limit_start != 0){

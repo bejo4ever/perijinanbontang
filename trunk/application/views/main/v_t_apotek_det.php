@@ -1769,6 +1769,7 @@
 		var apotek_det_lampiran_printCM = Ext.create('Ext.menu.Item',{
 			text : 'Lampiran',
 			tooltip : 'Cetak Lampiran',
+			hidden : true,
 			handler : function(){
 				var record = apotek_det_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
@@ -1845,13 +1846,6 @@
 			keys : apotek_det_shorcut,
 			columns : [
 				{
-					text : 'Id',
-					dataIndex : 'det_apotek_apotek_id',
-					width : 100,
-					hidden : true,
-					sortable : false
-				},
-				{
 					text : 'Jenis',
 					dataIndex : 'det_apotek_jenis',
 					width : 100,
@@ -1872,23 +1866,17 @@
 					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
 				{
-					text : 'Lulus Survey ?',
-					dataIndex : 'det_apotek_surveylulus',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
 					text : 'Nama',
 					dataIndex : 'pemohon_nama',
-					width : 100,
+					width : 150,
 					sortable : false
 				},
 				{
 					text : 'Alamat',
 					dataIndex : 'pemohon_alamat',
 					width : 100,
-					sortable : false
+					sortable : false,
+					flex : 1
 				},
 				{
 					text : 'Telp',
@@ -1907,7 +1895,8 @@
 					text : 'NIK',
 					dataIndex : 'pemohon_nik',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Tempat Lahir',
@@ -1923,13 +1912,6 @@
 					hidden : true,
 					sortable : false,
 					renderer : Ext.util.Format.dateRenderer('d-m-Y')
-				},
-				{
-					text : 'Pekerjaan',
-					dataIndex : 'det_apotek_pekerjaan',
-					width : 100,
-					sortable : false,
-					hidden : true
 				},
 				{
 					text : 'NPWP',
@@ -1960,47 +1942,16 @@
 					hidden : true
 				},
 				{
-					text : 'Penerima Berkas',
-					dataIndex : 'det_apotek_terima',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tgl Terima',
-					dataIndex : 'det_apotek_terimatanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					hidden : true
-				},
-				{
-					text : 'Kelengkapan',
-					dataIndex : 'det_apotek_kelengkapan',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'BAP',
-					dataIndex : 'det_apotek_bap',
-					width : 100,
-					sortable : false,
-					hidden : true
+					text : 'Nama Apotek',
+					dataIndex : 'apotek_nama',
+					width : 150,
+					sortable : false
 				},
 				{
 					text : 'Nomor SK',
 					dataIndex : 'det_apotek_sk',
 					width : 100,
 					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Tanggal BAP',
-					dataIndex : 'det_apotek_baptanggal',
-					width : 100,
-					sortable : false,
-					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
 					hidden : true
 				},
 				{
@@ -2020,27 +1971,6 @@
 					hidden : true
 				},
 				{
-					text : 'Keputusan',
-					dataIndex : 'det_apotek_keputusan',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Keterangan',
-					dataIndex : 'det_apotek_keterangan',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
-					text : 'Jarak',
-					dataIndex : 'det_apotek_jarak',
-					width : 100,
-					sortable : false,
-					hidden : true
-				},
-				{
 					text : 'Lama Proses',
 					dataIndex : 'lamaproses',
 					width : 100,
@@ -2056,6 +1986,7 @@
 					xtype:'actioncolumn',
 					text : 'Action',
 					width:50,
+					hideable : false,
 					items: [{
 						iconCls: 'icon16x16-edit',
 						tooltip: 'Ubah Data',
@@ -2076,6 +2007,7 @@
 					xtype:'actioncolumn',
 					text : 'Proses',
 					width:30,
+					hideable : false,
 					items: [{
 						iconCls : 'checked',
 						tooltip : 'Ubah Status',
@@ -2090,6 +2022,7 @@
 					xtype:'actioncolumn',
 					text : 'Cetak',
 					width:50,
+					hideable : false,
 					items: [{
 						iconCls: 'icon16x16-print',
 						tooltip: 'Cetak Dokumen',
@@ -2104,7 +2037,6 @@
 			tbar : [
 				apotek_det_addButton,
 				apotek_det_gridSearchField,
-				apotek_det_searchButton,
 				apotek_det_refreshButton,
 				apotek_det_printButton,
 				apotek_det_excelButton
@@ -4114,8 +4046,8 @@
 			apotek_det_si_printCM.hide();
 			apotek_det_sk_printCM.hide();
 			ipmbl_det_pendukungfieldset.hide();
-			apotek_det_gridPanel.columns[29].setVisible(false);
-			apotek_det_gridPanel.columns[30].setVisible(false);
+			apotek_det_gridPanel.columns[19].setVisible(false);
+			apotek_det_gridPanel.columns[20].setVisible(false);
 		<?php } ?>
 /* End SearchPanel declaration */
 });
