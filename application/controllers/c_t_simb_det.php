@@ -44,6 +44,9 @@ class C_t_simb_det extends CI_Controller{
 			case 'CETAKLEMBARKONTROL':
 				$this->cetakLembarKontrol();
 			break;
+			case 'CETAKREKOMENDASI':
+				$this->cetakRekomendasi();
+			break;
 			case 'CETAKSK':
 				$this->cetakSk();
 			break;
@@ -571,6 +574,19 @@ class C_t_simb_det extends CI_Controller{
 		$data['dataceklist'] = $dataceklist;
 		$print_view=$this->load->view('template/p_simb_lembarkontrol.php',$data,TRUE);
 		$print_file=fopen('print/simb_lembarkontrol.html','w+');
+		fwrite($print_file, $print_view);
+		echo 'success';
+	}
+	function cetakRekomendasi(){
+		$simbdet_id  = $this->input->post('simbdet_id');
+		$params = array(
+			"det_simb_id"=>$simbdet_id,
+			"return_type"=>'array',
+		);
+		$printrecord = $this->m_t_simb_det->search($params);
+		$data['printrecord'] = $printrecord[1];
+		$print_view=$this->load->view('template/p_simb_rekomendasi.php',$data,TRUE);
+		$print_file=fopen('print/simb_rekomendasi.html','w+');
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
