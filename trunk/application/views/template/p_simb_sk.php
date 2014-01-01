@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Surat Izin Praktik Dokter</title>
+	<title>Surat Izin HO</title>
 </head>
 <body onLoad="window.print();">
 	<?php extract((array)$printrecord[0]); ?>
@@ -153,5 +153,6 @@
 			<td colspan="2"></td>
 			<td align="center">ADI DARMA</td>
 		</tr>
+	</table>
 </body>
 </html>

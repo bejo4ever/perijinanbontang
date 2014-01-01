@@ -954,8 +954,8 @@
 			}
 		});
 		var simb_det_bap_printCM = Ext.create('Ext.menu.Item',{
-			text : 'Berita Acara Pemeriksaan',
-			tooltip : 'Cetak Berita Acara Pemeriksaan',
+			text : 'Rekomendasi',
+			tooltip : 'Cetak Rekomendasi',
 			handler : function(){
 				var record = simb_det_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
@@ -963,9 +963,9 @@
 					url: 'c_t_simb_det/switchAction',
 					params: {
 						simbdet_id : record.get('det_simb_id'),
-						action : 'CETAKLEMBARKONTROL'
+						action : 'CETAKREKOMENDASI'
 					},success : function(){
-						window.open('../print/simb_lembarkontrol.html');
+						window.open('../print/simb_rekomendasi.html');
 					}
 				});
 			}
