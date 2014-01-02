@@ -14,8 +14,14 @@ class M_trotoar extends App_model{
 				TGL_BERLAKU,
 				TGL_BERAKHIR,
 				STATUS,
-				STATUS_SURVEY
-				FROM trotoar 
+				STATUS_SURVEY,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_nik
+				FROM trotoar
+				JOIN m_pemohon ON m_pemohon.pemohon_id = trotoar.ID_PEMOHON
 			WHERE ID_TROTOAR IS NOT NULL 
 	";
 	
@@ -100,6 +106,9 @@ class M_trotoar extends App_model{
 		if(@$STATUS_SURVEY != ''){
 			$sql .= " AND STATUS_SURVEY LIKE '%".$STATUS_SURVEY."%' ";
 		}
+		if($_SESSION["IDHAK"] == 2){
+			$sql .= " AND m_pemohon.pemohon_user_id = " . $_SESSION["USERID"];
+		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
@@ -116,5 +125,22 @@ class M_trotoar extends App_model{
 		}
 		return $result;
 	}
-	
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT cek_list_trotoar.ID_SYARAT,cek_list_trotoar.ID_IJIN,cek_list_trotoar.`STATUS`,cek_list_trotoar.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_trotoar RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_trotoar.ID_SYARAT AND cek_list_trotoar.ID_IJIN = '" . $trotoar_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 13;
+			";
+		}else{
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 13;
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 13;");
+		return $query->result_array();
+	}
 }

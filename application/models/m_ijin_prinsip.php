@@ -1,6 +1,11 @@
 <?php
 class M_ijin_prinsip extends App_model{
 	var $mainSql = "SELECT 
+				m_pemohon.pemohon_id,
+				m_pemohon.pemohon_nik,
+				m_pemohon.pemohon_nama,
+				m_pemohon.pemohon_alamat,
+				m_pemohon.pemohon_telp,
 				ID_IJIN_PRINSIP,
 				ID_PEMOHON,
 				NAMA_PERUSAHAAN,
@@ -17,8 +22,12 @@ class M_ijin_prinsip extends App_model{
 				UKURAN_BANGUNAN,
 				TINGGI_BANGUNAN,
 				TIANG_BANGUNAN,
-				PONDASI_BANGUNAN
-				FROM ijin_prinsip 
+				PONDASI_BANGUNAN,
+				STATUS,
+				STATUS_SURVEY,
+				TGL_BERAKHIR
+				FROM ijin_prinsip
+				JOIN m_pemohon ON m_pemohon.pemohon_id = ijin_prinsip.ID_PEMOHON
 			WHERE ID_IJIN_PRINSIP IS NOT NULL 
 	";
 	
@@ -131,5 +140,22 @@ class M_ijin_prinsip extends App_model{
 		}
 		return $result;
 	}
-	
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT cek_list_prinsip.ID_SYARAT,cek_list_prinsip.ID_IJIN,cek_list_prinsip.`STATUS`,cek_list_prinsip.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_prinsip RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_prinsip.ID_SYARAT AND cek_list_prinsip.ID_IJIN = '" . $ijin_prinsip_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 12;
+			";
+		}else{
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 12;
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 12;");
+		return $query->result_array();
+	}
 }

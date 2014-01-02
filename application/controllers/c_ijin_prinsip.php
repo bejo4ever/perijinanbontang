@@ -5,6 +5,8 @@ class C_ijin_prinsip extends CI_Controller{
 		parent::__construct();
 		session_start();
 		$this->load->model('m_ijin_prinsip');
+		$this->load->model('m_m_pemohon');
+		$this->load->model('m_cek_list_prinsip');
 	}
 	
 	function index(){
@@ -34,6 +36,9 @@ class C_ijin_prinsip extends CI_Controller{
 			break;
 			case 'EXCEL':
 				$this->printExcel();
+			break;
+			case 'GETSYARAT':
+				$this->getSyarat();
 			break;
 			default :
 				echo '{ failure : true }';
@@ -76,18 +81,40 @@ class C_ijin_prinsip extends CI_Controller{
 		$TINGGI_BANGUNAN = is_numeric($TINGGI_BANGUNAN) ? $TINGGI_BANGUNAN : 0;
 		$TIANG_BANGUNAN = htmlentities($this->input->post('TIANG_BANGUNAN'),ENT_QUOTES);
 		$PONDASI_BANGUNAN = htmlentities($this->input->post('PONDASI_BANGUNAN'),ENT_QUOTES);
-				
+		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
+		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
+		
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		
 		$in_prinsip_author = $this->m_ijin_prinsip->__checkSession();
 		$in_prinsip_created_date = date('Y-m-d H:i:s');
 		
 		if($in_prinsip_author == ''){
 			$result = 'sessionExpired';
 		}else{
+			$get_pemohon= $this->m_m_pemohon->get_by(array("pemohon_nik"=>$pemohon_nik));
+			$pemohon_id	= (count($get_pemohon) <= 0) ? ($pemohon_id = null) : ($pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES));
+			if($pemohon_id == null){
+				$data = array(
+					'pemohon_nama'=>$pemohon_nama,
+					'pemohon_alamat'=>$pemohon_alamat,
+					'pemohon_telp'=>$pemohon_telp,
+					'pemohon_nik'=>$pemohon_nik,
+					'pemohon_user_id'=>$_SESSION['USERID']
+				);
+				$pemohon_id	= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			}
 			$data = array(
-				'ID_IJIN_PRINSIP'=>$ID_IJIN_PRINSIP,
-				'ID_PEMOHON'=>$ID_PEMOHON,
+				// 'ID_IJIN_PRINSIP'=>$ID_IJIN_PRINSIP,
+				'ID_PEMOHON'=>$pemohon_id,
 				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
-				'NO_SK'=>$NO_SK,
+				// 'NO_SK'=>$NO_SK,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
 				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
 				'NAMA_LOKASI'=>$NAMA_LOKASI,
@@ -101,10 +128,25 @@ class C_ijin_prinsip extends CI_Controller{
 				'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
 				'TIANG_BANGUNAN'=>$TIANG_BANGUNAN,
 				'PONDASI_BANGUNAN'=>$PONDASI_BANGUNAN,
+				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+				'STATUS_SURVEY'=>$STATUS_SURVEY,
+				'STATUS'=>$STATUS,
 				);
-			$result = $this->m_ijin_prinsip->__insert($data, '', '');
+			$result = $this->m_ijin_prinsip->__insert($data, '', 'insertId');
+			
+			$ijin_prinsip_ket = json_decode($this->input->post('KETERANGAN'));
+			$syarat = $this->m_ijin_prinsip->getSyarat2();
+			$i=0;
+			foreach($syarat as $row){
+				$datacek = array(
+				"ID_IJIN"=>$result,
+				"ID_SYARAT"=>$row["ID_SYARAT"],
+				"KETERANGAN"=>$ijin_prinsip_ket[$i]);
+				$i++;
+				$this->m_ijin_prinsip->__insert($datacek, 'cek_list_prinsip', '');
+			}
 		}
-		echo $result;
+		echo "success";
 	}
 	
 	function update(){
@@ -129,15 +171,37 @@ class C_ijin_prinsip extends CI_Controller{
 		$TINGGI_BANGUNAN = is_numeric($TINGGI_BANGUNAN) ? $TINGGI_BANGUNAN : 0;
 		$TIANG_BANGUNAN = htmlentities($this->input->post('TIANG_BANGUNAN'),ENT_QUOTES);
 		$PONDASI_BANGUNAN = htmlentities($this->input->post('PONDASI_BANGUNAN'),ENT_QUOTES);
-				
+		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
+		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
+		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
+		
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		
 		$in_prinsip_updated_by = $this->m_ijin_prinsip->__checkSession();
 		$in_prinsip_updated_date = date('Y-m-d H:i:s');
 		
 		if($in_prinsip_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
+			$get_pemohon= $this->m_m_pemohon->get_by(array("pemohon_nik"=>$pemohon_nik));
+			$pemohon_id	= (count($get_pemohon) <= 0) ? ($pemohon_id = null) : ($pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES));
+			if($pemohon_id == null){
+				$data = array(
+					'pemohon_nama'=>$pemohon_nama,
+					'pemohon_alamat'=>$pemohon_alamat,
+					'pemohon_telp'=>$pemohon_telp,
+					'pemohon_nik'=>$pemohon_nik,
+					'pemohon_user_id'=>$_SESSION['USERID']
+				);
+				$pemohon_id	= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			}
 			$data = array(
-				'ID_PEMOHON'=>$ID_PEMOHON,
+				'ID_PEMOHON'=>$pemohon_id,
 				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
 				'NO_SK'=>$NO_SK,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
@@ -153,10 +217,25 @@ class C_ijin_prinsip extends CI_Controller{
 				'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
 				'TIANG_BANGUNAN'=>$TIANG_BANGUNAN,
 				'PONDASI_BANGUNAN'=>$PONDASI_BANGUNAN,
+				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+				'STATUS_SURVEY'=>$STATUS_SURVEY,
+				'STATUS'=>$STATUS,
 				);
-			$result = $this->m_ijin_prinsip->__update($data, $ID_IJIN_PRINSIP, '', '');
+			$result = $this->m_ijin_prinsip->save($data, $ID_IJIN_PRINSIP);
+			$this->m_cek_list_prinsip->delete($result);
+			$ijin_prinsip_ket = json_decode($this->input->post('KETERANGAN'));
+			$syarat = $this->m_ijin_prinsip->getSyarat2();
+			$i=0;
+			foreach($syarat as $row){
+				$datacek = array(
+				"ID_IJIN"=>$result,
+				"ID_SYARAT"=>$row["ID_SYARAT"],
+				"KETERANGAN"=>$ijin_prinsip_ket[$i]);
+				$i++;
+				$this->m_ijin_prinsip->__insert($datacek, 'cek_list_prinsip', '');
+			}
 		}
-		echo $result;
+		echo "success";
 	}
 	
 	function delete(){
@@ -278,5 +357,14 @@ class C_ijin_prinsip extends CI_Controller{
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
-	
+	function getSyarat(){
+		$currentAction = $this->input->post('currentAction');
+		$ijin_prinsip_id = $this->input->post('ijin_prinsip_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"ijin_prinsip_id"=>$ijin_prinsip_id
+		);
+		$result = $this->m_ijin_prinsip->getSyarat($params);
+		echo $result;
+	}	
 }

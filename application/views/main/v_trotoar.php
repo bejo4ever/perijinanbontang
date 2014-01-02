@@ -12,8 +12,9 @@
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
-		var otoar_componentItemTitle="TROTOAR";
+		var otoar_componentItemTitle="Izin Bongkar Trotoar";
 		var otoar_dataStore;
+		var otoar_syaratDataStore;
 		
 		var otoar_shorcut;
 		var otoar_contextMenu;
@@ -139,7 +140,14 @@
 					var TGL_BERAKHIRValue = '';
 					var STATUSValue = '';
 					var STATUS_SURVEYValue = '';
-										
+					var array_otoar_keterangan=new Array();
+					if(otoar_syaratDataStore.getCount() > 0){
+						for(var i=0;i<otoar_syaratDataStore.getCount();i++){
+							array_otoar_keterangan.push(otoar_syaratDataStore.getAt(i).data.KETERANGAN);
+						}
+					}					
+					var encoded_array_otoar_keterangan = Ext.encode(array_otoar_keterangan);
+					
 					ID_TROTOARValue = ID_TROTOARField.getValue();
 					ID_PEMOHONValue = ID_PEMOHONField.getValue();
 					JENIS_PERMOHONANValue = JENIS_PERMOHONANField.getValue();
@@ -154,6 +162,11 @@
 					TGL_BERAKHIRValue = TGL_BERAKHIRField.getValue();
 					STATUSValue = STATUSField.getValue();
 					STATUS_SURVEYValue = STATUS_SURVEYField.getValue();
+					pemohon_namaValue = pemohon_namaField.getValue();
+					pemohon_telpValue = pemohon_telpField.getValue();
+					pemohon_alamatValue = pemohon_alamatField.getValue();
+					pemohon_idValue = pemohon_idField.getValue();
+					pemohon_nikValue = pemohon_nikField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -173,6 +186,12 @@
 							TGL_BERAKHIR : TGL_BERAKHIRValue,
 							STATUS : STATUSValue,
 							STATUS_SURVEY : STATUS_SURVEYValue,
+							pemohon_nama : pemohon_namaValue,
+							pemohon_telp : pemohon_telpValue,
+							pemohon_alamat : pemohon_alamatValue,
+							pemohon_id : pemohon_idValue,
+							pemohon_nik : pemohon_nikValue,
+							KETERANGAN : encoded_array_otoar_keterangan,
 							action : otoar_dbTask
 						},
 						success: function(response){
@@ -347,7 +366,18 @@
 			TGL_BERAKHIRField.setValue(record.data.TGL_BERAKHIR);
 			STATUSField.setValue(record.data.STATUS);
 			STATUS_SURVEYField.setValue(record.data.STATUS_SURVEY);
-					}
+			pemohon_idField.setValue(record.data.pemohon_id);
+			pemohon_nikField.setValue(record.data.pemohon_nik);
+			pemohon_namaField.setValue(record.data.pemohon_nama);
+			pemohon_telpField.setValue(record.data.pemohon_telp);
+			pemohon_alamatField.setValue(record.data.pemohon_alamat);
+			otoar_syaratDataStore.proxy.extraParams = { 
+				trotoar_id : record.data.ID_TROTOAR,
+				currentAction : 'update',
+				action : 'GETSYARAT'
+			};
+			otoar_syaratDataStore.load();
+		}
 		
 		function otoar_showSearchWindow(){
 			otoar_searchWindow.show();
@@ -527,11 +557,16 @@
 				{ name : 'ALAMAT', type : 'string', mapping : 'ALAMAT' },
 				{ name : 'PERUNTUKAN', type : 'string', mapping : 'PERUNTUKAN' },
 				{ name : 'ALAMAT_LOKASI', type : 'string', mapping : 'ALAMAT_LOKASI' },
-				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_PERMOHONAN' },
-				{ name : 'TGL_BERLAKU', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_BERLAKU' },
-				{ name : 'TGL_BERAKHIR', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_BERAKHIR' },
+				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_PERMOHONAN' },
+				{ name : 'TGL_BERLAKU', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERLAKU' },
+				{ name : 'TGL_BERAKHIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERAKHIR' },
 				{ name : 'STATUS', type : 'int', mapping : 'STATUS' },
 				{ name : 'STATUS_SURVEY', type : 'int', mapping : 'STATUS_SURVEY' },
+				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+				{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
 				]
 		});
 /* End DataStore declaration */
@@ -987,12 +1022,77 @@
 			fieldLabel : 'No SK',
 			maxLength : 50
 		});
-		NO_SK_LAMAField = Ext.create('Ext.form.TextField',{
-			id : 'NO_SK_LAMAField',
+		NO_SK_LAMAField = Ext.create('Ext.form.ComboBox',{
 			name : 'NO_SK_LAMA',
 			fieldLabel : 'No SK Lama',
-			maxLength : 50,
-			hidden : true
+			hidden:true,
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_trotoar/switchAction',
+					reader : {
+						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'ID_TROTOAR'
+					},
+					actionMethods : { read : 'POST' },
+					extraParams : { action : 'SEARCH' }
+				}),
+				fields : [
+					{ name : 'ID_TROTOAR', type : 'int', mapping : 'ID_TROTOAR' },
+					{ name : 'ID_PEMOHON', type : 'int', mapping : 'ID_PEMOHON' },
+					{ name : 'JENIS_PERMOHONAN', type : 'int', mapping : 'JENIS_PERMOHONAN' },
+					{ name : 'NO_SK', type : 'string', mapping : 'NO_SK' },
+					{ name : 'NO_SK_LAMA', type : 'string', mapping : 'NO_SK_LAMA' },
+					{ name : 'NAMA_PERUSAHAAN', type : 'string', mapping : 'NAMA_PERUSAHAAN' },
+					{ name : 'ALAMAT', type : 'string', mapping : 'ALAMAT' },
+					{ name : 'PERUNTUKAN', type : 'string', mapping : 'PERUNTUKAN' },
+					{ name : 'ALAMAT_LOKASI', type : 'string', mapping : 'ALAMAT_LOKASI' },
+					{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_PERMOHONAN' },
+					{ name : 'TGL_BERLAKU', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_BERLAKU' },
+					{ name : 'TGL_BERAKHIR', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_BERAKHIR' },
+					{ name : 'STATUS', type : 'int', mapping : 'STATUS' },
+					{ name : 'STATUS_SURVEY', type : 'int', mapping : 'STATUS_SURVEY' },
+					{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+					{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+					{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+					{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+					{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+				]
+			}),
+			displayField : 'NO_SK',
+			valueField : 'ID_TROTOAR',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
+			onTriggerClick: function(event){
+				var store = NO_SK_LAMAField.getStore();
+				var val = NO_SK_LAMAField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',NO_SK : val};
+				store.load();
+				NO_SK_LAMAField.expand();
+				NO_SK_LAMAField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">No. SK : {NO_SK}<br>Nama Perusahaan : {NAMA_PERUSAHAAN}<br>Alamat : {ALAMAT}<br>Alamat Lokasi : {ALAMAT_LOKASI}<br>Fungsi : {PERUNTUKAN}</div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					NAMA_PERUSAHAANField.setValue(rec.get('NAMA_PERUSAHAAN'));
+					ALAMATField.setValue(rec.get('ALAMAT'));
+					PERUNTUKANField.setValue(rec.get('PERUNTUKAN'));
+					ALAMAT_LOKASIField.setValue(rec.get('ALAMAT_LOKASI'));
+					pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					pemohon_idField.setValue(rec.get('pemohon_id'));
+					pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					pemohon_telpField.setValue(rec.get('pemohon_telp'));
+				}
+			}
 		});
 		NAMA_PERUSAHAANField = Ext.create('Ext.form.TextField',{
 			id : 'NAMA_PERUSAHAANField',
@@ -1162,6 +1262,79 @@
 				$('html, body').animate({scrollTop: 0}, 500);
 			}
 		});
+		/*Get Syarat*/
+		otoar_syaratDataStore = Ext.create('Ext.data.Store',{
+			id : 'otoar_syaratDataStore',
+			pageSize : globalPageSize,
+			autoLoad : true,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_trotoar/switchAction',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total'
+				},
+				actionMethods : {
+					read : 'POST'
+				},
+				extraParams : {
+					action : 'GETSYARAT'
+				}
+			}),
+			fields : [
+				{ name : 'ID_IJIN', type : 'int', mapping : 'ID_IJIN' },
+				{ name : 'ID_SYARAT', type : 'int', mapping : 'ID_SYARAT' },
+				{ name : 'NAMA_SYARAT', type : 'string', mapping : 'NAMA_SYARAT' },
+				{ name : 'KETERANGAN', type : 'string', mapping : 'KETERANGAN' }
+				]
+		});
+		var otoar_syaratGridEditor = new Ext.grid.plugin.CellEditing({
+			clicksToEdit: 1
+		});
+		otoar_syaratGrid = Ext.create('Ext.grid.Panel',{
+			id : 'otoar_syaratDataStore',
+			store : otoar_syaratDataStore,
+			loadMask : true,
+			width : '95%',
+			plugins : [
+				Ext.create('Ext.grid.plugin.CellEditing', {
+					clicksToEdit: 1
+				})
+			],
+			selType: 'cellmodel',
+			columns : [
+				{
+					text : 'ID_IJIN',
+					dataIndex : 'ID_IJIN',
+					width : 100,
+					hidden : true,
+					sortable : false
+				},
+				{
+					text : 'ID_SYARAT',
+					dataIndex : 'ID_SYARAT',
+					width : 100,
+					hidden : true,
+					sortable : false
+				},
+				{
+					text : 'Nama Syarat',
+					dataIndex : 'NAMA_SYARAT',
+					width : 300,
+					sortable : false
+				},
+				{
+					text : 'Keterangan',
+					dataIndex : 'KETERANGAN',
+					width : 200,
+					sortable : false,
+					editor: 'textfield',
+					flex : 1
+				}
+			]
+		});
+		/*End Syarat*/
 		otoar_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -1213,6 +1386,16 @@
 						STATUS_SURVEYField,
 						STATUSField,
 						TGL_BERAKHIRField,
+					]
+				}, {
+					xtype : 'fieldset',
+					title : '3. Data Kelengkapan',
+					columnWidth : 0.5,
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						otoar_syaratGrid
 					]
 				}, {
 					xtype : 'splitter'

@@ -2726,14 +2726,14 @@
 						tooltip: 'Ubah Data',
 						handler: function(grid, rowIndex){
 							grid.getSelectionModel().select(rowIndex);
-							tr_confirmUpdate();
+							iphhk_confirmUpdate();
 						}
 					},{
 						iconCls: 'icon16x16-delete',
 						tooltip: 'Hapus Data',
 						handler: function(grid, rowIndex){
 							grid.getSelectionModel().select(rowIndex);
-							tr_confirmDelete();
+							iphhk_confirmDelete();
 						}
 					}],
 					<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
@@ -3865,6 +3865,7 @@
 			handler : function(){
 				iphhk_resetForm();
 				iphhk_switchToGrid();
+				$('html, body').animate({scrollTop: 0}, 500);
 			}
 		});
 		iphhk_formPanel = Ext.create('Ext.form.Panel', {
