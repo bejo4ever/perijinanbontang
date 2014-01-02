@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html class="no-js">
     <head>
-        <title>PERIJINAN KOTA BONTANG</title>
+        <title>Perijinan Kota Bontang</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		
@@ -11,7 +11,7 @@
 		<link href="<?php echo base_url(); ?>assets/css/icons.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>assets/css/styles.css" rel="stylesheet" media="screen">
 		<link href="<?php echo base_url(); ?>assets/css/ext-all.css" rel="stylesheet">
-		
+		<link rel="icon" href="<?php echo base_url(); ?>/assets/images/logo-bontang.png">
 		<!--[if lt IE 9]>
            <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/html5shiv.js"></script>
            <script type="text/javascript" src="<?php echo base_url(); ?>assets/js/respond.min.js"></script>

@@ -80,7 +80,7 @@ class C_ijin_prinsip extends CI_Controller{
 		$in_prinsip_author = $this->m_ijin_prinsip->__checkSession();
 		$in_prinsip_created_date = date('Y-m-d H:i:s');
 		
-		if($in_prinsip_author != ''){
+		if($in_prinsip_author == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -133,7 +133,7 @@ class C_ijin_prinsip extends CI_Controller{
 		$in_prinsip_updated_by = $this->m_ijin_prinsip->__checkSession();
 		$in_prinsip_updated_date = date('Y-m-d H:i:s');
 		
-		if($in_prinsip_updated_by != ''){
+		if($in_prinsip_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
