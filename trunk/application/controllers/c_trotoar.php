@@ -5,6 +5,8 @@ class C_trotoar extends CI_Controller{
 		parent::__construct();
 		session_start();
 		$this->load->model('m_trotoar');
+		$this->load->model('m_m_pemohon');
+		$this->load->model('m_cek_list_trotoar');
 	}
 	
 	function index(){
@@ -34,6 +36,9 @@ class C_trotoar extends CI_Controller{
 			break;
 			case 'EXCEL':
 				$this->printExcel();
+			break;
+			case 'GETSYARAT':
+				$this->getSyarat();
 			break;
 			default :
 				echo '{ failure : true }';
@@ -74,16 +79,33 @@ class C_trotoar extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-				
+		
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		
 		$otoar_author = $this->m_trotoar->__checkSession();
 		$otoar_created_date = date('Y-m-d H:i:s');
 		
 		if($otoar_author == ''){
 			$result = 'sessionExpired';
 		}else{
+			$get_pemohon= $this->m_m_pemohon->get_by(array("pemohon_nik"=>$pemohon_nik));
+			$pemohon_id	= (count($get_pemohon) <= 0) ? ($pemohon_id = null) : ($pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES));
+			if($pemohon_id == null){
+				$data = array(
+					'pemohon_nama'=>$pemohon_nama,
+					'pemohon_alamat'=>$pemohon_alamat,
+					'pemohon_telp'=>$pemohon_telp,
+					'pemohon_nik'=>$pemohon_nik,
+					'pemohon_user_id'=>$_SESSION['USERID']
+				);
+				$pemohon_id	= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			}
 			$data = array(
 				'ID_TROTOAR'=>$ID_TROTOAR,
-				'ID_PEMOHON'=>$ID_PEMOHON,
+				'ID_PEMOHON'=>$pemohon_id,
 				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
 				'NO_SK'=>$NO_SK,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
@@ -97,9 +119,21 @@ class C_trotoar extends CI_Controller{
 				'STATUS'=>$STATUS,
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				);
-			$result = $this->m_trotoar->__insert($data, '', '');
+			$result = $this->m_trotoar->__insert($data, '', 'insertId');
+			
+			$trotoar_ket = json_decode($this->input->post('KETERANGAN'));
+			$syarat = $this->m_trotoar->getSyarat2();
+			$i=0;
+			foreach($syarat as $row){
+				$datacek = array(
+				"ID_IJIN"=>$result,
+				"ID_SYARAT"=>$row["ID_SYARAT"],
+				"KETERANGAN"=>$trotoar_ket[$i]);
+				$i++;
+				$this->m_trotoar->__insert($datacek, 'cek_list_trotoar', '');
+			}
 		}
-		echo $result;
+		echo "success";
 	}
 	
 	function update(){
@@ -122,15 +156,32 @@ class C_trotoar extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-				
+		
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		
 		$otoar_updated_by = $this->m_trotoar->__checkSession();
 		$otoar_updated_date = date('Y-m-d H:i:s');
 		
 		if($otoar_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
+			$get_pemohon= $this->m_m_pemohon->get_by(array("pemohon_nik"=>$pemohon_nik));
+			$pemohon_id	= (count($get_pemohon) <= 0) ? ($pemohon_id = null) : ($pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES));
+			if($pemohon_id == null){
+				$data = array(
+					'pemohon_nama'=>$pemohon_nama,
+					'pemohon_alamat'=>$pemohon_alamat,
+					'pemohon_telp'=>$pemohon_telp,
+					'pemohon_nik'=>$pemohon_nik,
+					'pemohon_user_id'=>$_SESSION['USERID']
+				);
+				$pemohon_id	= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			}
 			$data = array(
-				'ID_PEMOHON'=>$ID_PEMOHON,
+				'ID_PEMOHON'=>$pemohon_id,
 				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
 				'NO_SK'=>$NO_SK,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
@@ -144,9 +195,21 @@ class C_trotoar extends CI_Controller{
 				'STATUS'=>$STATUS,
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				);
-			$result = $this->m_trotoar->__update($data, $ID_TROTOAR, '', '');
+			$result = $this->m_trotoar->save($data, $ID_TROTOAR);
+			$this->m_cek_list_trotoar->delete($result);
+			$trotoar_ket = json_decode($this->input->post('KETERANGAN'));
+			$syarat = $this->m_trotoar->getSyarat2();
+			$i=0;
+			foreach($syarat as $row){
+				$datacek = array(
+				"ID_IJIN"=>$result,
+				"ID_SYARAT"=>$row["ID_SYARAT"],
+				"KETERANGAN"=>$trotoar_ket[$i]);
+				$i++;
+				$this->m_trotoar->__insert($datacek, 'cek_list_trotoar', '');
+			}
 		}
-		echo $result;
+		echo 'success';
 	}
 	
 	function delete(){
@@ -258,5 +321,14 @@ class C_trotoar extends CI_Controller{
 		fwrite($print_file, $print_view);
 		echo 'success';
 	}
-	
+	function getSyarat(){
+		$currentAction = $this->input->post('currentAction');
+		$trotoar_id = $this->input->post('trotoar_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"trotoar_id"=>$trotoar_id
+		);
+		$result = $this->m_trotoar->getSyarat($params);
+		echo $result;
+	}	
 }
