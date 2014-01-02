@@ -78,7 +78,7 @@ class C_trotoar extends CI_Controller{
 		$otoar_author = $this->m_trotoar->__checkSession();
 		$otoar_created_date = date('Y-m-d H:i:s');
 		
-		if($otoar_author != ''){
+		if($otoar_author == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -126,7 +126,7 @@ class C_trotoar extends CI_Controller{
 		$otoar_updated_by = $this->m_trotoar->__checkSession();
 		$otoar_updated_date = date('Y-m-d H:i:s');
 		
-		if($otoar_updated_by != ''){
+		if($otoar_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(

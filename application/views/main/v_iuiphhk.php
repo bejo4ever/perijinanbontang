@@ -7,6 +7,8 @@
 		background-image:url(../assets/images/icons/forward.png) !important;
 	}
 </style>
+<h4>IZIN USAHA INDUSTRI PRIMER HASIL HUTAN KAYU</h4>
+<hr>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */

@@ -4,7 +4,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 		<meta charset="utf-8">
 		<title>Perijinan Kota Bontang</title>
-		<link rel="icon" href="<?php echo base_url(); ?>ico.png">
+		<link rel="icon" href="<?php echo base_url(); ?>/assets/images/logo-bontang.png">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="author" content="">

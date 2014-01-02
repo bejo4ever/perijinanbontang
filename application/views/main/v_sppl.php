@@ -7,6 +7,8 @@
 		background-image:url(../assets/images/icons/forward.png) !important;
 	}
 </style>
+<h4>SURAT PERNYATAAN KESANGGUPAN PENGELOLAAN DAN PEMANTAUAN LINGKUNGAN HIDUP</h4>
+<hr>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */

@@ -1,7 +1,18 @@
+<style>
+	.checked{
+		background-image:url(../assets/images/icons/check.png) !important;
+		margin:auto;
+	}
+	.unchecked{
+		background-image:url(../assets/images/icons/forward.png) !important;
+	}
+</style>
+<h4>REKOMENDASI PEMBONGKARAN TROTOAR</h4>
+<hr>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
-		var otoar_componentItemTitle="OTOAR";
+		var otoar_componentItemTitle="TROTOAR";
 		var otoar_dataStore;
 		
 		var otoar_shorcut;
@@ -169,7 +180,15 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
+									Ext.MessageBox.show({
+										title : globalSuccessSaveTitle,
+										msg : globalSuccessSave,
+										buttons : Ext.MessageBox.OK,
+										animEl : 'save',
+										fn : function(btn){
+											$('html, body').animate({scrollTop: 0}, 500);
+										}
+									});
 									otoar_dataStore.reload();
 									otoar_resetForm();
 									otoar_switchToGrid();
@@ -669,6 +688,103 @@
 			},
 			width: 150
 		});
+		/*Pilihan Cetak*/
+			var otoar_bp_printCM = Ext.create('Ext.menu.Item',{
+			text : 'Bukti Penerimaan',
+			tooltip : 'Cetak Bukti Penerimaan',
+			handler : function(){
+				var record = otoar_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_trotoar/switchAction',
+					params: {
+						ID_TROTOAR : record.get('ID_TROTOAR'),
+						action : 'CETAKBP'
+					},success : function(){
+						window.open('<?php echo base_url("index.php/c_trotoar/printBP/"); ?>' + record.get('ID_TROTOAR'));
+					}
+				});
+			}
+			});
+			var otoar_lk_printCM = Ext.create('Ext.menu.Item',{
+				text : 'Lembar Kontrol',
+				tooltip : 'Cetak Lembar Kontrol',
+				handler : function(){
+					var record = otoar_gridPanel.getSelectionModel().getSelection()[0];
+					Ext.Ajax.request({
+						waitMsg: 'Please wait...',
+						url: 'c_trotoar/switchAction',
+						params: {
+							ID_TROTOAR : record.get('ID_TROTOAR'),
+							action : 'CETAKLK'
+						},success : function(){
+							window.open('../print/idam_sk.html');
+						}
+					});
+				}
+			});
+			var otoar_sk_printCM = Ext.create('Ext.menu.Item',{
+				text : 'SK',
+				tooltip : 'Cetak Lembar SK',
+				handler : function(){
+					var record = otoar_gridPanel.getSelectionModel().getSelection()[0];
+					Ext.Ajax.request({
+						waitMsg: 'Please wait...',
+						url: 'c_trotoar/switchAction',
+						params: {
+							ID_TROTOAR : record.get('ID_TROTOAR'),
+							action : 'CETAKSK'
+						},success : function(){
+							window.open('../print/idam_lembarkontrol.html');
+						}
+					});
+				}
+			});
+			var otoar_printContextMenu = Ext.create('Ext.menu.Menu',{
+				items: [
+					<?php echo ($_SESSION["IDHAK"] == 2) ? ("otoar_bp_printCM") : ("otoar_bp_printCM,otoar_lk_printCM,otoar_sk_printCM"); ?>
+				]
+			});
+			function otoar_ubahProses(proses){
+				var record = otoar_gridPanel.getSelectionModel().getSelection()[0];
+				Ext.Ajax.request({
+					waitMsg: 'Please wait...',
+					url: 'c_trotoar/switchAction',
+					params: {
+						trotoar_id : record.get('ID_TROTOAR'),
+						proses : proses,
+						action : 'UBAHPROSES'
+					},success : function(){
+						otoar_dataStore.reload();
+					}
+				});
+			}
+			var otoar_prosesContextMenu = Ext.create('Ext.menu.Menu',{
+				items: [
+					{
+						text : 'Selesai, belum diambil',
+						tooltip : 'Ubah Menjadi Selesai, belum diambil',
+						handler : function(){
+							otoar_ubahProses('Selesai, belum diambil');
+						}
+					},
+					{
+						text : 'Selesai, sudah diambil',
+						tooltip : 'Ubah Menjadi Selesai, sudah diambil',
+						handler : function(){
+							otoar_ubahProses('Selesai, sudah diambil');
+						}
+					},
+					{
+						text : 'Ditolak',
+						tooltip : 'Ubah Menjadi Ditolak',
+						handler : function(){
+							otoar_ubahProses('Ditolak');
+						}
+					}
+				]
+			});
+			/*End Pilihan Cetak*/
 		otoar_gridPanel = Ext.create('Ext.grid.Panel',{
 			id : 'otoar_gridPanel',
 			constrain : true,
@@ -692,91 +808,121 @@
 			keys : otoar_shorcut,
 			columns : [
 				{
-					text : 'ID_PEMOHON',
-					dataIndex : 'ID_PEMOHON',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'JENIS_PERMOHONAN',
+					text : 'Jenis Permohonan',
 					dataIndex : 'JENIS_PERMOHONAN',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : function(value){
+								if(value == 1){
+									return 'Baru';
+								}else{
+									return 'Perpanjangan';
+								}
+							}
 				},
 				{
-					text : 'NO_SK',
+					text : 'No. SK',
 					dataIndex : 'NO_SK',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'NO_SK_LAMA',
-					dataIndex : 'NO_SK_LAMA',
+					text : 'Nama Pemohon',
+					dataIndex : 'pemohon_nama',
+					width : 120,
+					sortable : false
+				},
+				{
+					text : 'Alamat Pemohon',
+					dataIndex : 'pemohon_alamat',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'NAMA_PERUSAHAAN',
-					dataIndex : 'NAMA_PERUSAHAAN',
+					text : 'No. Telp.',
+					dataIndex : 'pemohon_telp',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'ALAMAT',
-					dataIndex : 'ALAMAT',
+					text : 'Lama Proses',
+					dataIndex : 'lama_proses',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'PERUNTUKAN',
-					dataIndex : 'PERUNTUKAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'ALAMAT_LOKASI',
-					dataIndex : 'ALAMAT_LOKASI',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TGL_PERMOHONAN',
-					dataIndex : 'TGL_PERMOHONAN',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TGL_BERLAKU',
-					dataIndex : 'TGL_BERLAKU',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'TGL_BERAKHIR',
-					dataIndex : 'TGL_BERAKHIR',
-					width : 100,
-					sortable : false
-				},
-				{
-					text : 'STATUS',
+					text : 'Status Berkas',
 					dataIndex : 'STATUS',
-					width : 100,
-					sortable : false
+					width : 150,
+					sortable : false,
+					renderer : function(value){
+							if(value == 1){
+								return 'Disetujui, sudah diambil';
+							}else if (value == 2){
+								return 'Disetujui, belum diambil';
+							} else if (value == null || value == ""){
+								return '-';
+							} else {
+								return 'Ditolak';
+							}
+						}
 				},
 				{
-					text : 'STATUS_SURVEY',
-					dataIndex : 'STATUS_SURVEY',
-					width : 100,
-					sortable : false
-				},
+					xtype:'actioncolumn',
+					text : 'Cetak',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-print',
+						tooltip: 'Cetak Dokumen',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							otoar_printContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}]
+				},{
+					xtype:'actioncolumn',
+					text : 'Action',
+					width:50,
+					items: [{
+						iconCls: 'icon16x16-edit',
+						tooltip: 'Ubah Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							otoar_confirmUpdate();
+						}
+					},{
+						iconCls: 'icon16x16-delete',
+						tooltip: 'Hapus Data',
+						handler: function(grid, rowIndex){
+							grid.getSelectionModel().select(rowIndex);
+							otoar_confirmDelete();
+						}
+					}],
+					<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
+				},{
+					xtype:'actioncolumn',
+					width:100,
+					text : 'Status Berkas',
+					items: [{
+						iconCls : 'checked',
+						tooltip : 'Ubah Status',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							e.stopEvent();
+							otoar_prosesContextMenu.showAt(e.getXY());
+							return false;
+						}
+					}],
+					<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
+				}
 							
 			],
 			tbar : [
 				otoar_addButton,
-				otoar_editButton,
-				otoar_deleteButton,
+				// otoar_editButton,
+				// otoar_deleteButton,
 				otoar_gridSearchField,
-				otoar_searchButton,
+				// otoar_searchButton,
 				otoar_refreshButton,
 				otoar_printButton,
 				otoar_excelButton
@@ -810,85 +956,200 @@
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
+			hidden : true,
 			maskRe : /([0-9]+)$/});
-		JENIS_PERMOHONANField = Ext.create('Ext.form.NumberField',{
+		JENIS_PERMOHONANField = Ext.create('Ext.form.ComboBox',{
 			id : 'JENIS_PERMOHONANField',
 			name : 'JENIS_PERMOHONAN',
-			fieldLabel : 'JENIS_PERMOHONAN',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
+			fieldLabel : 'Jenis Permohonan',
+			store : new Ext.data.ArrayStore({
+				fields : ['jenis_id', 'jenis'],
+				data : [[1,'Baru'],[2,'Perpanjangan']]
+			}),
+			displayField : 'jenis',
+			valueField : 'jenis_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true,
+			listeners : {
+				select : function(cmb, rec){
+					if(cmb.getValue() == '2'){
+						NO_SK_LAMAField.show();
+					}else{
+						NO_SK_LAMAField.hide();
+					}
+				}
+			}
+		});
 		NO_SKField = Ext.create('Ext.form.TextField',{
 			id : 'NO_SKField',
 			name : 'NO_SK',
-			fieldLabel : 'NO_SK',
+			fieldLabel : 'No SK',
 			maxLength : 50
 		});
 		NO_SK_LAMAField = Ext.create('Ext.form.TextField',{
 			id : 'NO_SK_LAMAField',
 			name : 'NO_SK_LAMA',
-			fieldLabel : 'NO_SK_LAMA',
-			maxLength : 50
+			fieldLabel : 'No SK Lama',
+			maxLength : 50,
+			hidden : true
 		});
 		NAMA_PERUSAHAANField = Ext.create('Ext.form.TextField',{
 			id : 'NAMA_PERUSAHAANField',
 			name : 'NAMA_PERUSAHAAN',
-			fieldLabel : 'NAMA_PERUSAHAAN',
+			fieldLabel : 'Nama Perusahaan',
 			maxLength : 50
 		});
 		ALAMATField = Ext.create('Ext.form.TextField',{
 			id : 'ALAMATField',
 			name : 'ALAMAT',
-			fieldLabel : 'ALAMAT',
+			fieldLabel : 'Alamat',
 			maxLength : 100
 		});
 		PERUNTUKANField = Ext.create('Ext.form.TextField',{
 			id : 'PERUNTUKANField',
 			name : 'PERUNTUKAN',
-			fieldLabel : 'PERUNTUKAN',
+			fieldLabel : 'Fungsi',
 			maxLength : 50
 		});
 		ALAMAT_LOKASIField = Ext.create('Ext.form.TextField',{
 			id : 'ALAMAT_LOKASIField',
 			name : 'ALAMAT_LOKASI',
-			fieldLabel : 'ALAMAT_LOKASI',
+			fieldLabel : 'Alamat Lokasi',
 			maxLength : 100
 		});
 		TGL_PERMOHONANField = Ext.create('Ext.form.TextField',{
 			id : 'TGL_PERMOHONANField',
 			name : 'TGL_PERMOHONAN',
-			fieldLabel : 'TGL_PERMOHONAN',
-			maxLength : 0
+			fieldLabel : 'Tanggal Permohonan',
+			maxLength : 0,
+			hidden : true
 		});
 		TGL_BERLAKUField = Ext.create('Ext.form.TextField',{
 			id : 'TGL_BERLAKUField',
 			name : 'TGL_BERLAKU',
 			fieldLabel : 'TGL_BERLAKU',
-			maxLength : 0
+			maxLength : 0,
+			hidden : true
 		});
-		TGL_BERAKHIRField = Ext.create('Ext.form.TextField',{
+		TGL_BERAKHIRField = Ext.create('Ext.form.Date',{
 			id : 'TGL_BERAKHIRField',
 			name : 'TGL_BERAKHIR',
-			fieldLabel : 'TGL_BERAKHIR',
-			maxLength : 0
+			fieldLabel : 'Masa Berlaku',
+			format:'d-m-Y',
+			maxLength : 10,
+			<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
 		});
-		STATUSField = Ext.create('Ext.form.NumberField',{
+		STATUSField = Ext.create('Ext.form.ComboBox',{
 			id : 'STATUSField',
 			name : 'STATUS',
-			fieldLabel : 'STATUS',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		STATUS_SURVEYField = Ext.create('Ext.form.NumberField',{
+			fieldLabel : 'Status Permohonan',
+			store : new Ext.data.ArrayStore({
+				fields : ['status_id', 'status'],
+				data : [[1,'Diterima'],[0,'Ditolak']]
+			}),
+			displayField : 'status',
+			valueField : 'status_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true,
+			<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
+		});
+		STATUS_SURVEYField = Ext.create('Ext.form.ComboBox',{
 			id : 'STATUS_SURVEYField',
 			name : 'STATUS_SURVEY',
-			fieldLabel : 'STATUS_SURVEY',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
+			fieldLabel : 'Hasil Survey',
+			store : new Ext.data.ArrayStore({
+				fields : ['survey_id', 'survey'],
+				data : [[1,'Lolos Survey'],[0,'Tidak Lolos Survey']]
+			}),
+			displayField : 'survey',
+			valueField : 'survey_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true,
+			<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
+		});
+		/*Start Deklarasi Form Pemohon*/
+		var pemohon_nikField = Ext.create('Ext.form.ComboBox',{
+			name : 'pemohon_nikField',
+			fieldLabel : 'NIK',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_m_pemohon/switchAction',
+					reader : {
+						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'pemohon_id'
+					},
+					actionMethods : { read : 'POST' },
+					extraParams : { action : 'SEARCH' }
+				}),
+				fields : [
+					{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
+					{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
+					{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
+					{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+					{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+				]
+			}),
+			displayField : 'pemohon_nik',
+			valueField : 'pemohon_id',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
+			onTriggerClick: function(event){
+				var store = pemohon_nikField.getStore();
+				var val = pemohon_nikField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',pemohon_nik : val};
+				store.load();
+				pemohon_nikField.expand();
+				pemohon_nikField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">NIK : {pemohon_nik}<br>Nama : {pemohon_nama}<br>Alamat : {pemohon_alamat}<br>Telp : {pemohon_telp}<br></div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					pemohon_idField.setValue(rec.get('pemohon_id'));
+					pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					pemohon_telpField.setValue(rec.get('pemohon_telp'));
+				}
+			}
+		});
+		pemohon_namaField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_namaField',
+			name : 'pemohon_nama',
+			fieldLabel : 'Nama Pemohon',
+			maxLength : 50
+		});
+		pemohon_telpField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_telpField',
+			name : 'pemohon_telp',
+			fieldLabel : 'No. Telp',
+			maxLength : 20
+		});
+		pemohon_alamatField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_alamatField',
+			name : 'pemohon_alamat',
+			fieldLabel : 'Alamat Pemohon',
+			maxLength : 20
+		});
+		pemohon_idField = Ext.create('Ext.form.TextField',{
+			id : 'pemohon_idField',
+			name : 'pemohon_id',
+			fieldLabel : '',
+			maxLength : 20,
+			hidden:true
+		});
+		/*End Deklarasi Form Pemohon*/
 		var otoar_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : otoar_save
@@ -898,43 +1159,61 @@
 			handler : function(){
 				otoar_resetForm();
 				otoar_switchToGrid();
+				$('html, body').animate({scrollTop: 0}, 500);
 			}
 		});
 		otoar_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
-			fieldDefaults: {
-				msgTarget: 'side'
-			},
+			frame : true,
 			layout : {
-				type : 'vbox',
-				align : 'stretch',
+				type : 'form',
 				padding : 5
 			},
+			defaults : {anchor : '95%'},
 			items: [
 				{
-					xtype : 'container',
-					layout : 'hbox',
-					style : {borderWidth :'0px'},
-					defaultType : 'textfield',
-					defaults : {anchor : '95%'},
-					layout : 'anchor',
-					flex : 2,
+					xtype : 'fieldset',
+					title : 'Trotoar',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
 					items : [
 						ID_TROTOARField,
 						ID_PEMOHONField,
 						JENIS_PERMOHONANField,
-						NO_SKField,
 						NO_SK_LAMAField,
+						]
+				}, {
+					xtype : 'fieldset',
+					title : '1. Data Pemohon',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						pemohon_idField,
+						pemohon_nikField,
+						pemohon_namaField,
+						pemohon_telpField,
+						pemohon_alamatField
+						]
+				}, {
+					xtype : 'fieldset',
+					title : '2. Data Perijinan',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						// NO_SKField,
 						NAMA_PERUSAHAANField,
 						ALAMATField,
 						PERUNTUKANField,
 						ALAMAT_LOKASIField,
 						TGL_PERMOHONANField,
 						TGL_BERLAKUField,
-						TGL_BERAKHIRField,
-						STATUSField,
 						STATUS_SURVEYField,
-											]
+						STATUSField,
+						TGL_BERAKHIRField,
+					]
 				}, {
 					xtype : 'splitter'
 				}, {
