@@ -68,6 +68,21 @@ class M_iuiphhk extends App_model{
 				BP_DN_ASAL,
 				BP_DN_HARGA,
 				BP_DN_KETERANGAN,
+				BBKB_I_JUMLAH,
+				BBKB_I_SATUAN,
+				BBKB_I_ASAL,
+				BBKB_I_HARGA,
+				BBKB_I_KETERANGAN,
+				BBKO_I_JUMLAH,
+				BBKO_I_SATUAN,
+				BBKO_I_ASAL,
+				BBKO_I_HARGA,
+				BBKO_I_KETERANGAN,
+				BP_I_JUMLAH,
+				BP_I_SATUAN,
+				BP_I_ASAL,
+				BP_I_HARGA,
+				BP_I_KETERANGAN,
 				RBB_LUAS_GUDANG,
 				RBB_KAYU_OLAHAN,
 				RBB_PENOLONG,
@@ -106,8 +121,17 @@ class M_iuiphhk extends App_model{
 				STATUS_SURVEY,
 				STATUS,
 				TGL_BERLAKU,
-				TGL_BERAKHIR
-				FROM iuiphhk 
+				TGL_BERAKHIR,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_nik,
+				CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
+				MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
+				1, 1),' Hari') as lama_proses
+				FROM iuiphhk
+				JOIN m_pemohon ON m_pemohon.pemohon_id = iuiphhk.ID_PEMOHON
 			WHERE ID_IUIPHHK IS NOT NULL 
 	";
 	
@@ -576,5 +600,22 @@ class M_iuiphhk extends App_model{
 		}
 		return $result;
 	}
-	
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT cek_list_iuiphhk.ID_SYARAT,cek_list_iuiphhk.ID_IJIN,cek_list_iuiphhk.`STATUS`,cek_list_iuiphhk.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_iuiphhk RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_iuiphhk.ID_SYARAT AND cek_list_iuiphhk.ID_IJIN = '" . $iuiphhk_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 11;
+			";
+		}else{
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 11;
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 11;");
+		return $query->result_array();
+	}
 }
