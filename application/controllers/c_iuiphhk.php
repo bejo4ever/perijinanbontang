@@ -5,6 +5,8 @@ class C_iuiphhk extends CI_Controller{
 		parent::__construct();
 		session_start();
 		$this->load->model('m_iuiphhk');
+		$this->load->model('m_iuiphhk_rencana_alat');
+		$this->load->model('m_iuiphhk_rencana_produksi');
 	}
 	
 	function index(){
@@ -31,6 +33,9 @@ class C_iuiphhk extends CI_Controller{
 			break;
 			case 'PRINT':
 				$this->printExcel();
+			break;
+			case 'GETSYARAT':
+				$this->getSyarat();
 			break;
 			case 'EXCEL':
 				$this->printExcel();
@@ -166,6 +171,27 @@ class C_iuiphhk extends CI_Controller{
 		$BP_DN_HARGA = htmlentities($this->input->post('BP_DN_HARGA'),ENT_QUOTES);
 		$BP_DN_HARGA = is_numeric($BP_DN_HARGA) ? $BP_DN_HARGA : 0;
 		$BP_DN_KETERANGAN = htmlentities($this->input->post('BP_DN_KETERANGAN'),ENT_QUOTES);
+		$BBKB_I_JUMLAH = htmlentities($this->input->post('BBKB_I_JUMLAH'),ENT_QUOTES);
+		$BBKB_I_JUMLAH = is_numeric($BBKB_I_JUMLAH) ? $BBKB_I_JUMLAH : 0;
+		$BBKB_I_SATUAN = htmlentities($this->input->post('BBKB_I_SATUAN'),ENT_QUOTES);
+		$BBKB_I_ASAL = htmlentities($this->input->post('BBKB_I_ASAL'),ENT_QUOTES);
+		$BBKB_I_HARGA = htmlentities($this->input->post('BBKB_I_HARGA'),ENT_QUOTES);
+		$BBKB_I_HARGA = is_numeric($BBKB_I_HARGA) ? $BBKB_I_HARGA : 0;
+		$BBKB_I_KETERANGAN = htmlentities($this->input->post('BBKB_I_KETERANGAN'),ENT_QUOTES);
+		$BBKO_I_JUMLAH = htmlentities($this->input->post('BBKO_I_JUMLAH'),ENT_QUOTES);
+		$BBKO_I_JUMLAH = is_numeric($BBKO_I_JUMLAH) ? $BBKO_I_JUMLAH : 0;
+		$BBKO_I_SATUAN = htmlentities($this->input->post('BBKO_I_SATUAN'),ENT_QUOTES);
+		$BBKO_I_ASAL = htmlentities($this->input->post('BBKO_I_ASAL'),ENT_QUOTES);
+		$BBKO_I_HARGA = htmlentities($this->input->post('BBKO_I_HARGA'),ENT_QUOTES);
+		$BBKO_I_HARGA = is_numeric($BBKO_I_HARGA) ? $BBKO_I_HARGA : 0;
+		$BBKO_I_KETERANGAN = htmlentities($this->input->post('BBKO_I_KETERANGAN'),ENT_QUOTES);
+		$BP_I_JUMLAH = htmlentities($this->input->post('BP_I_JUMLAH'),ENT_QUOTES);
+		$BP_I_JUMLAH = is_numeric($BP_I_JUMLAH) ? $BP_I_JUMLAH : 0;
+		$BP_I_SATUAN = htmlentities($this->input->post('BP_I_SATUAN'),ENT_QUOTES);
+		$BP_I_ASAL = htmlentities($this->input->post('BP_I_ASAL'),ENT_QUOTES);
+		$BP_I_HARGA = htmlentities($this->input->post('BP_I_HARGA'),ENT_QUOTES);
+		$BP_I_HARGA = is_numeric($BP_I_HARGA) ? $BP_I_HARGA : 0;
+		$BP_I_KETERANGAN = htmlentities($this->input->post('BP_I_KETERANGAN'),ENT_QUOTES);
 		$RBB_LUAS_GUDANG = htmlentities($this->input->post('RBB_LUAS_GUDANG'),ENT_QUOTES);
 		$RBB_LUAS_GUDANG = is_numeric($RBB_LUAS_GUDANG) ? $RBB_LUAS_GUDANG : 0;
 		$RBB_KAYU_OLAHAN = htmlentities($this->input->post('RBB_KAYU_OLAHAN'),ENT_QUOTES);
@@ -305,6 +331,21 @@ class C_iuiphhk extends CI_Controller{
 				'BP_DN_ASAL'=>$BP_DN_ASAL,
 				'BP_DN_HARGA'=>$BP_DN_HARGA,
 				'BP_DN_KETERANGAN'=>$BP_DN_KETERANGAN,
+				'BBKB_I_JUMLAH'=>$BBKB_I_JUMLAH,
+				'BBKB_I_SATUAN'=>$BBKB_I_SATUAN,
+				'BBKB_I_ASAL'=>$BBKB_I_ASAL,
+				'BBKB_I_HARGA'=>$BBKB_I_HARGA,
+				'BBKB_I_KETERANGAN'=>$BBKB_I_KETERANGAN,
+				'BBKO_I_JUMLAH'=>$BBKO_I_JUMLAH,
+				'BBKO_I_SATUAN'=>$BBKO_I_SATUAN,
+				'BBKO_I_ASAL'=>$BBKO_I_ASAL,
+				'BBKO_I_HARGA'=>$BBKO_I_HARGA,
+				'BBKO_I_KETERANGAN'=>$BBKO_I_KETERANGAN,
+				'BP_I_JUMLAH'=>$BP_I_JUMLAH,
+				'BP_I_SATUAN'=>$BP_I_SATUAN,
+				'BP_I_ASAL'=>$BP_I_ASAL,
+				'BP_I_HARGA'=>$BP_I_HARGA,
+				'BP_I_KETERANGAN'=>$BP_I_KETERANGAN,
 				'RBB_LUAS_GUDANG'=>$RBB_LUAS_GUDANG,
 				'RBB_KAYU_OLAHAN'=>$RBB_KAYU_OLAHAN,
 				'RBB_PENOLONG'=>$RBB_PENOLONG,
@@ -339,7 +380,7 @@ class C_iuiphhk extends CI_Controller{
 				'PENYETUJU'=>$PENYETUJU,
 				'NOMOR_SURAT'=>$NOMOR_SURAT,
 				'TGL_TERLAMPIR'=>$TGL_TERLAMPIR,
-				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				'TGL_PERMOHONAN'=>date("Y-m-d"),
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				'STATUS'=>$STATUS,
 				'TGL_BERLAKU'=>$TGL_BERLAKU,
@@ -351,6 +392,27 @@ class C_iuiphhk extends CI_Controller{
 	}
 	
 	function update(){
+		$BBKB_I_JUMLAH = htmlentities($this->input->post('BBKB_I_JUMLAH'),ENT_QUOTES);
+		$BBKB_I_JUMLAH = is_numeric($BBKB_I_JUMLAH) ? $BBKB_I_JUMLAH : 0;
+		$BBKB_I_SATUAN = htmlentities($this->input->post('BBKB_I_SATUAN'),ENT_QUOTES);
+		$BBKB_I_ASAL = htmlentities($this->input->post('BBKB_I_ASAL'),ENT_QUOTES);
+		$BBKB_I_HARGA = htmlentities($this->input->post('BBKB_I_HARGA'),ENT_QUOTES);
+		$BBKB_I_HARGA = is_numeric($BBKB_I_HARGA) ? $BBKB_I_HARGA : 0;
+		$BBKB_I_KETERANGAN = htmlentities($this->input->post('BBKB_I_KETERANGAN'),ENT_QUOTES);
+		$BBKO_I_JUMLAH = htmlentities($this->input->post('BBKO_I_JUMLAH'),ENT_QUOTES);
+		$BBKO_I_JUMLAH = is_numeric($BBKO_I_JUMLAH) ? $BBKO_I_JUMLAH : 0;
+		$BBKO_I_SATUAN = htmlentities($this->input->post('BBKO_I_SATUAN'),ENT_QUOTES);
+		$BBKO_I_ASAL = htmlentities($this->input->post('BBKO_I_ASAL'),ENT_QUOTES);
+		$BBKO_I_HARGA = htmlentities($this->input->post('BBKO_I_HARGA'),ENT_QUOTES);
+		$BBKO_I_HARGA = is_numeric($BBKO_I_HARGA) ? $BBKO_I_HARGA : 0;
+		$BBKO_I_KETERANGAN = htmlentities($this->input->post('BBKO_I_KETERANGAN'),ENT_QUOTES);
+		$BP_I_JUMLAH = htmlentities($this->input->post('BP_I_JUMLAH'),ENT_QUOTES);
+		$BP_I_JUMLAH = is_numeric($BP_I_JUMLAH) ? $BP_I_JUMLAH : 0;
+		$BP_I_SATUAN = htmlentities($this->input->post('BP_I_SATUAN'),ENT_QUOTES);
+		$BP_I_ASAL = htmlentities($this->input->post('BP_I_ASAL'),ENT_QUOTES);
+		$BP_I_HARGA = htmlentities($this->input->post('BP_I_HARGA'),ENT_QUOTES);
+		$BP_I_HARGA = is_numeric($BP_I_HARGA) ? $BP_I_HARGA : 0;
+		$BP_I_KETERANGAN = htmlentities($this->input->post('BP_I_KETERANGAN'),ENT_QUOTES);
 		$ID_IUIPHHK = htmlentities($this->input->post('ID_IUIPHHK'),ENT_QUOTES);
 		$ID_IUIPHHK = is_numeric($ID_IUIPHHK) ? $ID_IUIPHHK : 0;
 		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
@@ -530,7 +592,7 @@ class C_iuiphhk extends CI_Controller{
 		$iphhk_updated_by = $this->m_iuiphhk->__checkSession();
 		$iphhk_updated_date = date('Y-m-d H:i:s');
 		
-		if($iphhk_updated_by != ''){
+		if($iphhk_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
@@ -595,6 +657,21 @@ class C_iuiphhk extends CI_Controller{
 				'BBKO_DN_ASAL'=>$BBKO_DN_ASAL,
 				'BBKO_DN_HARGA'=>$BBKO_DN_HARGA,
 				'BBKO_DN_KETERANGAN'=>$BBKO_DN_KETERANGAN,
+				'BBKB_I_JUMLAH'=>$BBKB_I_JUMLAH,
+				'BBKB_I_SATUAN'=>$BBKB_I_SATUAN,
+				'BBKB_I_ASAL'=>$BBKB_I_ASAL,
+				'BBKB_I_HARGA'=>$BBKB_I_HARGA,
+				'BBKB_I_KETERANGAN'=>$BBKB_I_KETERANGAN,
+				'BBKO_I_JUMLAH'=>$BBKO_I_JUMLAH,
+				'BBKO_I_SATUAN'=>$BBKO_I_SATUAN,
+				'BBKO_I_ASAL'=>$BBKO_I_ASAL,
+				'BBKO_I_HARGA'=>$BBKO_I_HARGA,
+				'BBKO_I_KETERANGAN'=>$BBKO_I_KETERANGAN,
+				'BP_I_JUMLAH'=>$BP_I_JUMLAH,
+				'BP_I_SATUAN'=>$BP_I_SATUAN,
+				'BP_I_ASAL'=>$BP_I_ASAL,
+				'BP_I_HARGA'=>$BP_I_HARGA,
+				'BP_I_KETERANGAN'=>$BP_I_KETERANGAN,
 				'BP_DN_JUMLAH'=>$BP_DN_JUMLAH,
 				'BP_DN_SATUAN'=>$BP_DN_SATUAN,
 				'BP_DN_ASAL'=>$BP_DN_ASAL,
@@ -634,7 +711,7 @@ class C_iuiphhk extends CI_Controller{
 				'PENYETUJU'=>$PENYETUJU,
 				'NOMOR_SURAT'=>$NOMOR_SURAT,
 				'TGL_TERLAMPIR'=>$TGL_TERLAMPIR,
-				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+				// 'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				'STATUS'=>$STATUS,
 				'TGL_BERLAKU'=>$TGL_BERLAKU,
@@ -1254,6 +1331,17 @@ class C_iuiphhk extends CI_Controller{
 		$currentAction = $this->input->post('currentAction');
 		$id_iuiphhk = $this->input->post('ID_IUIPHHK');
 		$result = $this->m_iuiphhk_rencana_alat->get_by(array("ID_IUIPHHK"=>$id_iuiphhk));
+		echo $result;
+	}
+	function getSyarat(){
+		$currentAction = $this->input->post('currentAction');
+		$iuiphhk_id = $this->input->post('iuiphhk_id');
+		// $idam_det_id = $this->input->post('idam_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"iuiphhk_id"=>$iuiphhk_id
+		);
+		$result = $this->m_iuiphhk->getSyarat($params);
 		echo $result;
 	}
 }
