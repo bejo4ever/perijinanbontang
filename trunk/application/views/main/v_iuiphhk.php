@@ -361,7 +361,6 @@
 					var E_JENIS_PRODUK2Value = '';
 					var E_JENIS_PRODUK3Value = '';
 					var MERK_JENIS_PRODUKValue = '';
-					
 					var BBKB_DN_JUMLAHValue = '';
 					var BBKB_DN_SATUANValue = '';
 					var BBKB_DN_ASALValue = '';
@@ -377,23 +376,6 @@
 					var BP_DN_ASALValue = '';
 					var BP_DN_HARGAValue = '';
 					var BP_DN_KETERANGANValue = '';
-					
-					var BBKB_I_JUMLAHValue = '';
-					var BBKB_I_SATUANValue = '';
-					var BBKB_I_ASALValue = '';
-					var BBKB_I_HARGAValue = '';
-					var BBKB_I_KETERANGANValue = '';
-					var BBKO_I_JUMLAHValue = '';
-					var BBKO_I_SATUANValue = '';
-					var BBKO_I_ASALValue = '';
-					var BBKO_I_HARGAValue = '';
-					var BBKO_I_KETERANGANValue = '';
-					var BP_I_JUMLAHValue = '';
-					var BP_I_SATUANValue = '';
-					var BP_I_ASALValue = '';
-					var BP_I_HARGAValue = '';
-					var BP_I_KETERANGANValue = '';
-					
 					var RBB_LUAS_GUDANGValue = '';
 					var RBB_KAYU_OLAHANValue = '';
 					var RBB_PENOLONGValue = '';
@@ -486,11 +468,6 @@
 					E_JENIS_PRODUK2Value = E_JENIS_PRODUK2Field.getValue();
 					E_JENIS_PRODUK3Value = E_JENIS_PRODUK3Field.getValue();
 					MERK_JENIS_PRODUKValue = MERK_JENIS_PRODUKField.getValue();
-					pemohon_namaValue = pemohon_namaField.getValue();
-					pemohon_telpValue = pemohon_telpField.getValue();
-					pemohon_alamatValue = pemohon_alamatField.getValue();
-					pemohon_idValue = pemohon_idField.getValue();
-					pemohon_nikValue = pemohon_nikField.getValue();
 					BBKB_DN_JUMLAHValue = BBKB_DN_JUMLAHField.getValue();
 					BBKB_DN_SATUANValue = BBKB_DN_SATUANField.getValue();
 					BBKB_DN_ASALValue = BBKB_DN_ASALField.getValue();
@@ -506,23 +483,6 @@
 					BP_DN_ASALValue = BP_DN_ASALField.getValue();
 					BP_DN_HARGAValue = BP_DN_HARGAField.getValue();
 					BP_DN_KETERANGANValue = BP_DN_KETERANGANField.getValue();
-					
-					BBKB_I_JUMLAHValue = BBKB_I_JUMLAHField.getValue();
-					BBKB_I_SATUANValue = BBKB_I_SATUANField.getValue();
-					BBKB_I_ASALValue = BBKB_I_ASALField.getValue();
-					BBKB_I_HARGAValue = BBKB_I_HARGAField.getValue();
-					BBKB_I_KETERANGANValue = BBKB_I_KETERANGANField.getValue();
-					BBKO_I_JUMLAHValue = BBKO_I_JUMLAHField.getValue();
-					BBKO_I_SATUANValue = BBKO_I_SATUANField.getValue();
-					BBKO_I_ASALValue = BBKO_I_ASALField.getValue();
-					BBKO_I_HARGAValue = BBKO_I_HARGAField.getValue();
-					BBKO_I_KETERANGANValue = BBKO_I_KETERANGANField.getValue();
-					BP_I_JUMLAHValue = BP_I_JUMLAHField.getValue();
-					BP_I_SATUANValue = BP_I_SATUANField.getValue();
-					BP_I_ASALValue = BP_I_ASALField.getValue();
-					BP_I_HARGAValue = BP_I_HARGAField.getValue();
-					BP_I_KETERANGANValue = BP_I_KETERANGANField.getValue();
-					
 					RBB_LUAS_GUDANGValue = RBB_LUAS_GUDANGField.getValue();
 					RBB_KAYU_OLAHANValue = RBB_KAYU_OLAHANField.getValue();
 					RBB_PENOLONGValue = RBB_PENOLONGField.getValue();
@@ -566,12 +526,7 @@
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_iuiphhk/switchAction',
-						params: {
-							pemohon_nama : pemohon_namaValue,
-							pemohon_telp : pemohon_telpValue,
-							pemohon_alamat : pemohon_alamatValue,
-							pemohon_id : pemohon_idValue,
-							pemohon_nik : pemohon_nikValue,
+						params: {							
 							ID_IUIPHHK : ID_IUIPHHKValue,
 							ID_PEMOHON : ID_PEMOHONValue,
 							NO_SK : NO_SKValue,
@@ -624,7 +579,6 @@
 							E_JENIS_PRODUK2 : E_JENIS_PRODUK2Value,
 							E_JENIS_PRODUK3 : E_JENIS_PRODUK3Value,
 							MERK_JENIS_PRODUK : MERK_JENIS_PRODUKValue,
-							
 							BBKB_DN_JUMLAH : BBKB_DN_JUMLAHValue,
 							BBKB_DN_SATUAN : BBKB_DN_SATUANValue,
 							BBKB_DN_ASAL : BBKB_DN_ASALValue,
@@ -640,23 +594,6 @@
 							BP_DN_ASAL : BP_DN_ASALValue,
 							BP_DN_HARGA : BP_DN_HARGAValue,
 							BP_DN_KETERANGAN : BP_DN_KETERANGANValue,
-							
-							BBKB_I_JUMLAH : BBKB_I_JUMLAHValue,
-							BBKB_I_SATUAN : BBKB_I_SATUANValue,
-							BBKB_I_ASAL : BBKB_I_ASALValue,
-							BBKB_I_HARGA : BBKB_I_HARGAValue,
-							BBKB_I_KETERANGAN : BBKB_I_KETERANGANValue,
-							BBKO_I_JUMLAH : BBKO_I_JUMLAHValue,
-							BBKO_I_SATUAN : BBKO_I_SATUANValue,
-							BBKO_I_ASAL : BBKO_I_ASALValue,
-							BBKO_I_HARGA : BBKO_I_HARGAValue,
-							BBKO_I_KETERANGAN : BBKO_I_KETERANGANValue,
-							BP_I_JUMLAH : BP_I_JUMLAHValue,
-							BP_I_SATUAN : BP_I_SATUANValue,
-							BP_I_ASAL : BP_I_ASALValue,
-							BP_I_HARGA : BP_I_HARGAValue,
-							BP_I_KETERANGAN : BP_I_KETERANGANValue,
-							
 							RBB_LUAS_GUDANG : RBB_LUAS_GUDANGValue,
 							RBB_KAYU_OLAHAN : RBB_KAYU_OLAHANValue,
 							RBB_PENOLONG : RBB_PENOLONGValue,
@@ -848,11 +785,6 @@
             iphhk_dbTaskMessage = 'update';
 			
 			var record = iphhk_gridPanel.getSelectionModel().getSelection()[0];
-			pemohon_idField.setValue(record.data.pemohon_id);
-			pemohon_nikField.setValue(record.data.pemohon_nik);
-			pemohon_namaField.setValue(record.data.pemohon_nama);
-			pemohon_telpField.setValue(record.data.pemohon_telp);
-			pemohon_alamatField.setValue(record.data.pemohon_alamat);
 			ID_IUIPHHKField.setValue(record.data.ID_IUIPHHK);
 			ID_PEMOHONField.setValue(record.data.ID_PEMOHON);
 			NO_SKField.setValue(record.data.NO_SK);
@@ -905,7 +837,6 @@
 			E_JENIS_PRODUK2Field.setValue(record.data.E_JENIS_PRODUK2);
 			E_JENIS_PRODUK3Field.setValue(record.data.E_JENIS_PRODUK3);
 			MERK_JENIS_PRODUKField.setValue(record.data.MERK_JENIS_PRODUK);
-			
 			BBKB_DN_JUMLAHField.setValue(record.data.BBKB_DN_JUMLAH);
 			BBKB_DN_SATUANField.setValue(record.data.BBKB_DN_SATUAN);
 			BBKB_DN_ASALField.setValue(record.data.BBKB_DN_ASAL);
@@ -921,23 +852,6 @@
 			BP_DN_ASALField.setValue(record.data.BP_DN_ASAL);
 			BP_DN_HARGAField.setValue(record.data.BP_DN_HARGA);
 			BP_DN_KETERANGANField.setValue(record.data.BP_DN_KETERANGAN);
-			
-			BBKB_I_JUMLAHField.setValue(record.data.BBKB_I_JUMLAH);
-			BBKB_I_SATUANField.setValue(record.data.BBKB_I_SATUAN);
-			BBKB_I_ASALField.setValue(record.data.BBKB_I_ASAL);
-			BBKB_I_HARGAField.setValue(record.data.BBKB_I_HARGA);
-			BBKB_I_KETERANGANField.setValue(record.data.BBKB_I_KETERANGAN);
-			BBKO_I_JUMLAHField.setValue(record.data.BBKO_I_JUMLAH);
-			BBKO_I_SATUANField.setValue(record.data.BBKO_I_SATUAN);
-			BBKO_I_ASALField.setValue(record.data.BBKO_I_ASAL);
-			BBKO_I_HARGAField.setValue(record.data.BBKO_I_HARGA);
-			BBKO_I_KETERANGANField.setValue(record.data.BBKO_I_KETERANGAN);
-			BP_I_JUMLAHField.setValue(record.data.BP_I_JUMLAH);
-			BP_I_SATUANField.setValue(record.data.BP_I_SATUAN);
-			BP_I_ASALField.setValue(record.data.BP_I_ASAL);
-			BP_I_HARGAField.setValue(record.data.BP_I_HARGA);
-			BP_I_KETERANGANField.setValue(record.data.BP_I_KETERANGAN);
-			
 			RBB_LUAS_GUDANGField.setValue(record.data.RBB_LUAS_GUDANG);
 			RBB_KAYU_OLAHANField.setValue(record.data.RBB_KAYU_OLAHAN);
 			RBB_PENOLONGField.setValue(record.data.RBB_PENOLONG);
@@ -1767,21 +1681,6 @@
 				{ name : 'BP_DN_ASAL', type : 'string', mapping : 'BP_DN_ASAL' },
 				{ name : 'BP_DN_HARGA', type : 'float', mapping : 'BP_DN_HARGA' },
 				{ name : 'BP_DN_KETERANGAN', type : 'string', mapping : 'BP_DN_KETERANGAN' },
-				{ name : 'BBKB_I_JUMLAH', type : 'int', mapping : 'BBKB_I_JUMLAH' },
-				{ name : 'BBKB_I_SATUAN', type : 'string', mapping : 'BBKB_I_SATUAN' },
-				{ name : 'BBKB_I_ASAL', type : 'string', mapping : 'BBKB_I_ASAL' },
-				{ name : 'BBKB_I_HARGA', type : 'float', mapping : 'BBKB_I_HARGA' },
-				{ name : 'BBKB_I_KETERANGAN', type : 'string', mapping : 'BBKB_I_KETERANGAN' },
-				{ name : 'BBKO_I_JUMLAH', type : 'int', mapping : 'BBKO_I_JUMLAH' },
-				{ name : 'BBKO_I_SATUAN', type : 'string', mapping : 'BBKO_I_SATUAN' },
-				{ name : 'BBKO_I_ASAL', type : 'string', mapping : 'BBKO_I_ASAL' },
-				{ name : 'BBKO_I_HARGA', type : 'float', mapping : 'BBKO_I_HARGA' },
-				{ name : 'BBKO_I_KETERANGAN', type : 'string', mapping : 'BBKO_I_KETERANGAN' },
-				{ name : 'BP_I_JUMLAH', type : 'int', mapping : 'BP_I_JUMLAH' },
-				{ name : 'BP_I_SATUAN', type : 'string', mapping : 'BP_I_SATUAN' },
-				{ name : 'BP_I_ASAL', type : 'string', mapping : 'BP_I_ASAL' },
-				{ name : 'BP_I_HARGA', type : 'float', mapping : 'BP_I_HARGA' },
-				{ name : 'BP_I_KETERANGAN', type : 'string', mapping : 'BP_I_KETERANGAN' },
 				{ name : 'RBB_LUAS_GUDANG', type : 'float', mapping : 'RBB_LUAS_GUDANG' },
 				{ name : 'RBB_KAYU_OLAHAN', type : 'float', mapping : 'RBB_KAYU_OLAHAN' },
 				{ name : 'RBB_PENOLONG', type : 'float', mapping : 'RBB_PENOLONG' },
@@ -1815,18 +1714,12 @@
 				{ name : 'RPL4_PENANGANAN', type : 'string', mapping : 'RPL4_PENANGANAN' },
 				{ name : 'PENYETUJU', type : 'string', mapping : 'PENYETUJU' },
 				{ name : 'NOMOR_SURAT', type : 'string', mapping : 'NOMOR_SURAT' },
-				{ name : 'TGL_TERLAMPIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_TERLAMPIR' },
-				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_PERMOHONAN' },
-				{ name : 'STATUS_SURVEY', type : 'string', mapping : 'STATUS_SURVEY' },
-				{ name : 'STATUS', type : 'string', mapping : 'STATUS' },
-				{ name : 'TGL_BERLAKU', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERLAKU' },
-				{ name : 'TGL_BERAKHIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERAKHIR' },
-				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
-				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
-				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
-				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
-				{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
-				{ name : 'lama_proses', type : 'string', mapping : 'lama_proses' },
+				{ name : 'TGL_TERLAMPIR', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_TERLAMPIR' },
+				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_PERMOHONAN' },
+				{ name : 'STATUS_SURVEY', type : 'int', mapping : 'STATUS_SURVEY' },
+				{ name : 'STATUS', type : 'int', mapping : 'STATUS' },
+				{ name : 'TGL_BERLAKU', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_BERLAKU' },
+				{ name : 'TGL_BERAKHIR', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'TGL_BERAKHIR' },
 				]
 		});
 /* End DataStore declaration */
@@ -2064,7 +1957,7 @@
 				waitMsg: 'Please wait...',
 				url: 'c_iuiphhk/switchAction',
 				params: {
-					iuiphhk_id : record.get('ID_IUIPHHK'),
+					iuiphhk_id : record.get('ID_SKTR'),
 					proses : proses,
 					action : 'UBAHPROSES'
 				},success : function(){
@@ -2121,6 +2014,636 @@
 			multiSelect : true,
 			keys : iphhk_shorcut,
 			columns : [
+				/* {
+					text : 'ID_PEMOHON',
+					dataIndex : 'ID_PEMOHON',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'NO_SK',
+					dataIndex : 'NO_SK',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'NO_SK_LAMA',
+					dataIndex : 'NO_SK_LAMA',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'JENIS_PERMOHONAN',
+					dataIndex : 'JENIS_PERMOHONAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'NAMA_PERUSAHAAN',
+					dataIndex : 'NAMA_PERUSAHAAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'NPWP',
+					dataIndex : 'NPWP',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'ALAMAT',
+					dataIndex : 'ALAMAT',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'STATUS_MODAL',
+					dataIndex : 'STATUS_MODAL',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'NAMA_NOTARIS',
+					dataIndex : 'NAMA_NOTARIS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'NO_AKTA',
+					dataIndex : 'NO_AKTA',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'PENANGGUNG_JAWAB',
+					dataIndex : 'PENANGGUNG_JAWAB',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'NAMA_DIREKSI',
+					dataIndex : 'NAMA_DIREKSI',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'DEWAN_KOMISARIS',
+					dataIndex : 'DEWAN_KOMISARIS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TUJUAN_PRODUKSI',
+					dataIndex : 'TUJUAN_PRODUKSI',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'LOKASI_PABRIK',
+					dataIndex : 'LOKASI_PABRIK',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'LUAS_TANAH',
+					dataIndex : 'LUAS_TANAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'ALAMAT_PABRIK',
+					dataIndex : 'ALAMAT_PABRIK',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH1_P_TAHUN',
+					dataIndex : 'OLAH1_P_TAHUN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH1_P_BULAN',
+					dataIndex : 'OLAH1_P_BULAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH2_P_TAHUN',
+					dataIndex : 'OLAH2_P_TAHUN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH2_P_BULAN',
+					dataIndex : 'OLAH2_P_BULAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH3_P_TAHUN',
+					dataIndex : 'OLAH3_P_TAHUN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH3_P_BULAN',
+					dataIndex : 'OLAH3_P_BULAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH1_S_TAHUN',
+					dataIndex : 'OLAH1_S_TAHUN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH1_S_BULAN',
+					dataIndex : 'OLAH1_S_BULAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH2_S_TAHUN',
+					dataIndex : 'OLAH2_S_TAHUN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH2_S_BULAN',
+					dataIndex : 'OLAH2_S_BULAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH3_S_TAHUN',
+					dataIndex : 'OLAH3_S_TAHUN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'OLAH3_S_BULAN',
+					dataIndex : 'OLAH3_S_BULAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'MT_TANAH',
+					dataIndex : 'MT_TANAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'MT_BANGUNAN',
+					dataIndex : 'MT_BANGUNAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'MT_MESIN',
+					dataIndex : 'MT_MESIN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'MT_DLL',
+					dataIndex : 'MT_DLL',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'MK_BAHAN_BAKU',
+					dataIndex : 'MK_BAHAN_BAKU',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'MK_UPAH',
+					dataIndex : 'MK_UPAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'MK_DLL',
+					dataIndex : 'MK_DLL',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'SP_MODAL_SENDIRI',
+					dataIndex : 'SP_MODAL_SENDIRI',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'SP_PINJAMAN',
+					dataIndex : 'SP_PINJAMAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TKI_L_JUMLAH',
+					dataIndex : 'TKI_L_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TKI_P_JUMLAH',
+					dataIndex : 'TKI_P_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TKA_JUMLAH',
+					dataIndex : 'TKA_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TKA_ASAL',
+					dataIndex : 'TKA_ASAL',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TKA_JABATAN',
+					dataIndex : 'TKA_JABATAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TKA_JANGKA_WAKTU',
+					dataIndex : 'TKA_JANGKA_WAKTU',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'DN_JENIS_PRODUK1',
+					dataIndex : 'DN_JENIS_PRODUK1',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'DN_JENIS_PRODUK2',
+					dataIndex : 'DN_JENIS_PRODUK2',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'DN_JENIS_PRODUK3',
+					dataIndex : 'DN_JENIS_PRODUK3',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'E_JENIS_PRODUK1',
+					dataIndex : 'E_JENIS_PRODUK1',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'E_JENIS_PRODUK2',
+					dataIndex : 'E_JENIS_PRODUK2',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'E_JENIS_PRODUK3',
+					dataIndex : 'E_JENIS_PRODUK3',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'MERK_JENIS_PRODUK',
+					dataIndex : 'MERK_JENIS_PRODUK',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKB_DN_JUMLAH',
+					dataIndex : 'BBKB_DN_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKB_DN_SATUAN',
+					dataIndex : 'BBKB_DN_SATUAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKB_DN_ASAL',
+					dataIndex : 'BBKB_DN_ASAL',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKB_DN_HARGA',
+					dataIndex : 'BBKB_DN_HARGA',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKB_DN_KETERANGAN',
+					dataIndex : 'BBKB_DN_KETERANGAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKO_DN_JUMLAH',
+					dataIndex : 'BBKO_DN_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKO_DN_SATUAN',
+					dataIndex : 'BBKO_DN_SATUAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKO_DN_ASAL',
+					dataIndex : 'BBKO_DN_ASAL',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKO_DN_HARGA',
+					dataIndex : 'BBKO_DN_HARGA',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BBKO_DN_KETERANGAN',
+					dataIndex : 'BBKO_DN_KETERANGAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BP_DN_JUMLAH',
+					dataIndex : 'BP_DN_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BP_DN_SATUAN',
+					dataIndex : 'BP_DN_SATUAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BP_DN_ASAL',
+					dataIndex : 'BP_DN_ASAL',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BP_DN_HARGA',
+					dataIndex : 'BP_DN_HARGA',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'BP_DN_KETERANGAN',
+					dataIndex : 'BP_DN_KETERANGAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RBB_LUAS_GUDANG',
+					dataIndex : 'RBB_LUAS_GUDANG',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RBB_KAYU_OLAHAN',
+					dataIndex : 'RBB_KAYU_OLAHAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RBB_PENOLONG',
+					dataIndex : 'RBB_PENOLONG',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RBB_HASIL_PRODUKSI',
+					dataIndex : 'RBB_HASIL_PRODUKSI',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RLPLY_LOKASI',
+					dataIndex : 'RLPLY_LOKASI',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RLPLY_LUAS',
+					dataIndex : 'RLPLY_LUAS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RLPLY_PERIZINAN',
+					dataIndex : 'RLPLY_PERIZINAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD1_KAPASITAS',
+					dataIndex : 'RSD1_KAPASITAS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD1_JUMLAH',
+					dataIndex : 'RSD1_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD211_KAPASITAS',
+					dataIndex : 'RSD211_KAPASITAS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD211_JUMLAH',
+					dataIndex : 'RSD211_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD212_KAPASITAS',
+					dataIndex : 'RSD212_KAPASITAS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD212_JUMLAH',
+					dataIndex : 'RSD212_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD213_KAPASITAS',
+					dataIndex : 'RSD213_KAPASITAS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD213_JUMLAH',
+					dataIndex : 'RSD213_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD22_KAPASITAS',
+					dataIndex : 'RSD22_KAPASITAS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD22_JUMLAH',
+					dataIndex : 'RSD22_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD23_KAPASITAS',
+					dataIndex : 'RSD23_KAPASITAS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RSD23_JUMLAH',
+					dataIndex : 'RSD23_JUMLAH',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL1_VOLUME',
+					dataIndex : 'RPL1_VOLUME',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL1_SATUAN',
+					dataIndex : 'RPL1_SATUAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL1_PENANGANAN',
+					dataIndex : 'RPL1_PENANGANAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL2_VOLUME',
+					dataIndex : 'RPL2_VOLUME',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL2_SATUAN',
+					dataIndex : 'RPL2_SATUAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL2_PENANGANAN',
+					dataIndex : 'RPL2_PENANGANAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL3_VOLUME',
+					dataIndex : 'RPL3_VOLUME',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL3_SATUAN',
+					dataIndex : 'RPL3_SATUAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL3_PENANGANAN',
+					dataIndex : 'RPL3_PENANGANAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL4_VOLUME',
+					dataIndex : 'RPL4_VOLUME',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL4_SATUAN',
+					dataIndex : 'RPL4_SATUAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'RPL4_PENANGANAN',
+					dataIndex : 'RPL4_PENANGANAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'PENYETUJU',
+					dataIndex : 'PENYETUJU',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'NOMOR_SURAT',
+					dataIndex : 'NOMOR_SURAT',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TGL_TERLAMPIR',
+					dataIndex : 'TGL_TERLAMPIR',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TGL_PERMOHONAN',
+					dataIndex : 'TGL_PERMOHONAN',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'STATUS_SURVEY',
+					dataIndex : 'STATUS_SURVEY',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'STATUS',
+					dataIndex : 'STATUS',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TGL_BERLAKU',
+					dataIndex : 'TGL_BERLAKU',
+					width : 100,
+					sortable : false
+				},
+				{
+					text : 'TGL_BERAKHIR',
+					dataIndex : 'TGL_BERAKHIR',
+					width : 100,
+					sortable : false
+				}, */
 				{
 					text : 'Jenis Permohonan',
 					dataIndex : 'JENIS_PERMOHONAN',
@@ -2325,7 +2848,7 @@
 		});
 		det_iuiphhk_rencana_alat_gridPanel = Ext.create('Ext.grid.Panel',{
 			id : 'det_iuiphhk_rencana_alat_gridPanel',
-			title : 'Mesin / Peralatan Produksi Impor',
+			title : 'Mesin / Peralatan Prouksi Impor',
 			constrain : true,
 			store : det_iuiphhk_rencana_alat_dataStore,
 			loadMask : true,
@@ -2358,18 +2881,19 @@
 				{
 					text : 'Kapasitas',
 					dataIndex: 'KAPASITAS',
-					width: 100,
+					width: 80,
 					sortable : false,
-					// renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					editor : Ext.create('Ext.form.TextField',{
+					renderer : Ext.util.Format.dateRenderer('d-m-Y'),
+					editor : Ext.create('Ext.form.field.Date',{
 						maxLength : 50
 					})
 				},
 				{
 					text : 'Merk',
 					dataIndex: 'MERK',
-					width: 100,
+					width: 200,
 					sortable : false,
+					flex : 1,
 					editor : Ext.create('Ext.form.TextField',{
 						maxLength : 50
 					})
@@ -2377,8 +2901,9 @@
 				{
 					text : 'Tahun',
 					dataIndex: 'TAHUN',
-					width: 100,
+					width: 200,
 					sortable : false,
+					flex : 1,
 					editor : Ext.create('Ext.form.TextField',{
 						maxLength : 50
 					})
@@ -2386,8 +2911,9 @@
 				{
 					text : 'Negara',
 					dataIndex: 'NEGARA',
-					width: 100,
+					width: 200,
 					sortable : false,
+					flex : 1,
 					editor : Ext.create('Ext.form.TextField',{
 						maxLength : 50
 					})
@@ -2395,8 +2921,9 @@
 				{
 					text : 'Harga',
 					dataIndex: 'HARGA',
-					width: 100,
+					width: 200,
 					sortable : false,
+					flex : 1,
 					editor : Ext.create('Ext.form.TextField',{
 						maxLength : 50
 					})
@@ -2404,8 +2931,9 @@
 				{
 					text : 'Jenis',
 					dataIndex: 'JENIS',
-					width: 100,
+					width: 200,
 					sortable : false,
+					flex : 1,
 					editor : Ext.create('Ext.form.TextField',{
 						maxLength : 50
 					})
@@ -2415,348 +2943,6 @@
 		
 		/* END RIWAYAT DOKUMEN */
 
-		/* START RIWAYAT DOKUMEN */
-		var det_iuiphhk_rencana_alat_e_dataStore = Ext.create('Ext.data.Store',{
-			id : 'ipmbl_det_riwayatDataStore',
-			pageSize : globalPageSize,
-			proxy : Ext.create('Ext.data.HttpProxy',{
-				url : 'c_iuiphhk/switchAction',
-				reader : {
-					type : 'json',
-					root : 'results',
-					rootProperty : 'results',
-					totalProperty : 'total'
-				},
-				actionMethods : {
-					read : 'POST'
-				},
-				extraParams : {
-					action : 'GETR_ALAT'
-				}
-			}),
-			fields : [
-				{ name : 'ID_RENCANA_ALAT', type : 'int', mapping : 'ID_RENCANA_ALAT' },
-				{ name : 'NAMA_ALAT', type : 'string', mapping : 'NAMA_ALAMAT' },
-				{ name : 'JUMLAH', type : 'string', mapping : 'JUMLAH' },
-				{ name : 'KAPASITAS', type : 'string', mapping : 'KAPASITAS' },
-				{ name : 'MERK', type : 'string', mapping : 'MERK' },
-				{ name : 'TAHUN', type : 'string', mapping : 'TAHUN' },
-				{ name : 'NEGARA', type : 'string', mapping : 'NEGARA' },
-				{ name : 'HARGA', type : 'string', mapping : 'HARGA' },
-				{ name : 'JENIS', type : 'string', mapping : 'JENIS' }
-			]
-		});
-		function det_iuiphhk_rencana_alat_e_addHandler(){
-			det_iuiphhk_rencana_alat_e_roleRowEditor.cancelEdit();
-			var data_rencana_alat_eDetail = {
-				ID_RENCANA_ALAT : 0,
-				NAMA_ALAT : '',
-				JUMLAH : '',
-				KAPASITAS : '',
-				MERK : '',
-				TAHUN : '',
-				NEGARA : '',
-				HARGA : '',
-				JENIS : ''
-				
-			};
-			det_iuiphhk_rencana_alat_e_dataStore.insert(0, data_rencana_alat_eDetail);
-			det_iuiphhk_rencana_alat_e_roleRowEditor.startEdit(0, 0);
-		}
-		function det_iuiphhk_rencana_alat_e_deleteHandler(){
-			var sm = det_iuiphhk_rencana_alat_e_gridPanel.getSelectionModel();
-			det_iuiphhk_rencana_alat_e_roleRowEditor.cancelEdit();
-			det_iuiphhk_rencana_alat_e_dataStore.remove(sm.getSelection());
-			if (det_iuiphhk_rencana_alat_e_dataStore.getCount() > 0) {
-				sm.select(0);
-			}
-		}
-		det_iuiphhk_rencana_alat_e_addEditor = Ext.create('Ext.Button',{
-			text: globalAddButtonTitle,
-			iconCls: 'icon16x16-add',
-			handler : det_iuiphhk_rencana_alat_e_addHandler
-		});
-		det_iuiphhk_rencana_alat_e_deleteEditor = Ext.create('Ext.Button',{
-			text : globalDeleteButtonTitle,
-			tooltip : globalDeleteTooltip,
-			iconCls : 'icon16x16-delete',
-			handler : det_iuiphhk_rencana_alat_e_deleteHandler
-		});
-		var det_iuiphhk_rencana_alat_e_roleRowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
-			clicksToMoveEditor : 1,
-			autoCancel : false
-		});
-		det_iuiphhk_rencana_alat_e_gridPanel = Ext.create('Ext.grid.Panel',{
-			id : 'det_iuiphhk_rencana_alat_e_gridPanel',
-			title : 'Mesin / Peralatan Produksi Ekspor',
-			constrain : true,
-			store : det_iuiphhk_rencana_alat_e_dataStore,
-			loadMask : true,
-			height : 200,
-			width : '100%',
-			plugins: [det_iuiphhk_rencana_alat_e_roleRowEditor],
-            enableColLock : false,
-			selModel : Ext.selection.Model(),
-			multiSelect : false,
-			tbar: [det_iuiphhk_rencana_alat_e_addEditor,det_iuiphhk_rencana_alat_e_deleteEditor],
-			columns : [
-				{
-					text : 'Nama Alat',
-					dataIndex : 'NAMA_ALAT',
-					width : 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Jumlah',
-					dataIndex: 'JUMLAH',
-					width: 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Kapasitas',
-					dataIndex: 'KAPASITAS',
-					width: 100,
-					sortable : false,
-					// renderer : Ext.util.Format.dateRenderer('d-m-Y'),
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Merk',
-					dataIndex: 'MERK',
-					width: 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Tahun',
-					dataIndex: 'TAHUN',
-					width: 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Negara',
-					dataIndex: 'NEGARA',
-					width: 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Harga',
-					dataIndex: 'HARGA',
-					width: 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Jenis',
-					dataIndex: 'JENIS',
-					width: 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				}
-			]
-		});
-		
-		/* END RIWAYAT DOKUMEN */
-		
-		/* START RIWAYAT DOKUMEN */
-		var det_iuiphhk_rencana_produksi_dataStore = Ext.create('Ext.data.Store',{
-			id : 'ipmbl_det_riwayatDataStore',
-			pageSize : globalPageSize,
-			proxy : Ext.create('Ext.data.HttpProxy',{
-				url : 'c_iuiphhk/switchAction',
-				reader : {
-					type : 'json',
-					root : 'results',
-					rootProperty : 'results',
-					totalProperty : 'total'
-				},
-				actionMethods : {
-					read : 'POST'
-				},
-				extraParams : {
-					action : 'GETR_PRODUKSI'
-				}
-			}),
-			fields : [
-				{ name : 'ID_RENCANA_PRODUKSI', type : 'int', mapping : 'ID_RENCANA_PRODUKSI' },
-				{ name : 'JENIS_PRODUK', type : 'string', mapping : 'JENIS_PRODUK' },
-				{ name : 'KAPASITAS', type : 'string', mapping : 'KAPASITAS' },
-				{ name : 'KETERANGAN', type : 'string', mapping : 'KETERANGAN' }
-			]
-		});
-		function det_iuiphhk_rencana_produksi_addHandler(){
-			det_iuiphhk_rencana_produksi_roleRowEditor.cancelEdit();
-			var data_rencana_produksiDetail = {
-				ID_RENCANA_PRODUKSI : 0,
-				JENIS_PRODUK : '',
-				KAPASITAS : '',
-				KETERANGAN : ''
-				
-			};
-			det_iuiphhk_rencana_produksi_dataStore.insert(0, data_rencana_produksiDetail);
-			det_iuiphhk_rencana_produksi_roleRowEditor.startEdit(0, 0);
-		}
-		function det_iuiphhk_rencana_produksi_deleteHandler(){
-			var sm = det_iuiphhk_rencana_produksi_gridPanel.getSelectionModel();
-			det_iuiphhk_rencana_produksi_roleRowEditor.cancelEdit();
-			det_iuiphhk_rencana_produksi_dataStore.remove(sm.getSelection());
-			if (det_iuiphhk_rencana_produksi_dataStore.getCount() > 0) {
-				sm.select(0);
-			}
-		}
-		det_iuiphhk_rencana_produksi_addEditor = Ext.create('Ext.Button',{
-			text: globalAddButtonTitle,
-			iconCls: 'icon16x16-add',
-			handler : det_iuiphhk_rencana_produksi_addHandler
-		});
-		det_iuiphhk_rencana_produksi_deleteEditor = Ext.create('Ext.Button',{
-			text : globalDeleteButtonTitle,
-			tooltip : globalDeleteTooltip,
-			iconCls : 'icon16x16-delete',
-			handler : det_iuiphhk_rencana_produksi_deleteHandler
-		});
-		var det_iuiphhk_rencana_produksi_roleRowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
-			clicksToMoveEditor : 1,
-			autoCancel : false
-		});
-		det_iuiphhk_rencana_produksi_gridPanel = Ext.create('Ext.grid.Panel',{
-			id : 'det_iuiphhk_rencana_produksi_gridPanel',
-			title : 'Jenis Produksi',
-			constrain : true,
-			store : det_iuiphhk_rencana_produksi_dataStore,
-			loadMask : true,
-			height : 200,
-			width : '100%',
-			plugins: [det_iuiphhk_rencana_produksi_roleRowEditor],
-            enableColLock : false,
-			selModel : Ext.selection.Model(),
-			multiSelect : false,
-			tbar: [det_iuiphhk_rencana_produksi_addEditor,det_iuiphhk_rencana_produksi_deleteEditor],
-			columns : [
-				{
-					text : 'Jenis Produk',
-					dataIndex : 'JENIS_PRODUK',
-					width : 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Kapasitas',
-					dataIndex: 'KAPASITAS',
-					width: 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				},
-				{
-					text : 'Keterangan',
-					dataIndex: 'KETERANGAN',
-					width: 100,
-					sortable : false,
-					editor : Ext.create('Ext.form.TextField',{
-						maxLength : 50
-					})
-				}
-			]
-		});
-		
-		/* END RIWAYAT DOKUMEN */
-		/*Get Syarat*/
-		iuiphhk_syaratDataStore = Ext.create('Ext.data.Store',{
-			id : 'iuiphhk_syaratDataStore',
-			pageSize : globalPageSize,
-			autoLoad : true,
-			proxy : Ext.create('Ext.data.HttpProxy',{
-				url : 'c_iuiphhk/switchAction',
-				reader : {
-					type : 'json',
-					root : 'results',
-					rootProperty : 'results',
-					totalProperty : 'total'
-				},
-				actionMethods : {
-					read : 'POST'
-				},
-				extraParams : {
-					action : 'GETSYARAT'
-				}
-			}),
-			fields : [
-				{ name : 'ID_IJIN', type : 'int', mapping : 'ID_IJIN' },
-				{ name : 'ID_SYARAT', type : 'int', mapping : 'ID_SYARAT' },
-				{ name : 'NAMA_SYARAT', type : 'string', mapping : 'NAMA_SYARAT' },
-				{ name : 'KETERANGAN', type : 'string', mapping : 'KETERANGAN' }
-				]
-		});
-		var iuiphhk_syaratGridEditor = new Ext.grid.plugin.CellEditing({
-			clicksToEdit: 1
-		});
-		iuiphhk_syaratGrid = Ext.create('Ext.grid.Panel',{
-			id : 'iuiphhk_syaratDataStore',
-			store : iuiphhk_syaratDataStore,
-			loadMask : true,
-			width : '95%',
-			plugins : [
-				Ext.create('Ext.grid.plugin.CellEditing', {
-					clicksToEdit: 1
-				})
-			],
-			selType: 'cellmodel',
-			columns : [
-				{
-					text : 'ID_IJIN',
-					dataIndex : 'ID_IJIN',
-					width : 100,
-					hidden : true,
-					sortable : false
-				},
-				{
-					text : 'ID_SYARAT',
-					dataIndex : 'ID_SYARAT',
-					width : 100,
-					hidden : true,
-					sortable : false
-				},
-				{
-					text : 'Nama Syarat',
-					dataIndex : 'NAMA_SYARAT',
-					width : 300,
-					sortable : false
-				},
-				{
-					text : 'Keterangan',
-					dataIndex : 'KETERANGAN',
-					width : 200,
-					sortable : false,
-					editor: 'textfield',
-					flex : 1
-				}
-			]
-		});
-		/*End Syarat*/
 /* Start FormPanel declaration */
 		ID_IUIPHHKField = Ext.create('Ext.form.NumberField',{
 			id : 'ID_IUIPHHKField',
@@ -3300,109 +3486,6 @@
 			fieldLabel : 'Keterangan',
 			maxLength : 100
 		});
-		
-		BBKB_I_JUMLAHField = Ext.create('Ext.form.TextField',{
-			id : 'BBKB_I_JUMLAHField',
-			name : 'BBKB_I_JUMLAH',
-			fieldLabel : 'Jumlah',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		BBKB_I_SATUANField = Ext.create('Ext.form.TextField',{
-			id : 'BBKB_I_SATUANField',
-			name : 'BBKB_I_SATUAN',
-			fieldLabel : 'Satuan',
-			maxLength : 50
-		});
-		BBKB_I_ASALField = Ext.create('Ext.form.TextField',{
-			id : 'BBKB_I_ASALField',
-			name : 'BBKB_I_ASAL',
-			fieldLabel : 'Asal',
-			maxLength : 50
-		});
-		BBKB_I_HARGAField = Ext.create('Ext.form.TextField',{
-			id : 'BBKB_I_HARGAField',
-			name : 'BBKB_I_HARGA',
-			fieldLabel : 'Harga',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		BBKB_I_KETERANGANField = Ext.create('Ext.form.TextField',{
-			id : 'BBKB_I_KETERANGANField',
-			name : 'BBKB_I_KETERANGAN',
-			fieldLabel : 'Keterangan',
-			maxLength : 100
-		});
-		BBKO_I_JUMLAHField = Ext.create('Ext.form.TextField',{
-			id : 'BBKO_I_JUMLAH',
-			name : 'BBKO_I_JUMLAH',
-			fieldLabel : 'Jumlah',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		BBKO_I_SATUANField = Ext.create('Ext.form.TextField',{
-			id : 'BBKO_I_SATUANField',
-			name : 'BBKO_I_SATUAN',
-			fieldLabel : 'Satuan',
-			maxLength : 50
-		});
-		BBKO_I_ASALField = Ext.create('Ext.form.TextField',{
-			id : 'BBKO_I_ASALField',
-			name : 'BBKO_I_ASAL',
-			fieldLabel : 'Asal',
-			maxLength : 50
-		});
-		BBKO_I_HARGAField = Ext.create('Ext.form.TextField',{
-			id : 'BBKO_I_HARGAField',
-			name : 'BBKO_I_HARGA',
-			fieldLabel : 'Harga',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		BBKO_I_KETERANGANField = Ext.create('Ext.form.TextField',{
-			id : 'BBKO_I_KETERANGAN',
-			name : 'BBKO_I_KETERANGAN',
-			fieldLabel : 'Keterangan',
-			maxLength : 100
-		});
-		BP_I_JUMLAHField = Ext.create('Ext.form.TextField',{
-			id : 'BP_I_JUMLAHField',
-			name : 'BP_I_JUMLAH',
-			fieldLabel : 'Jumlah',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		BP_I_SATUANField = Ext.create('Ext.form.TextField',{
-			id : 'BP_I_SATUANField',
-			name : 'BP_I_SATUAN',
-			fieldLabel : 'Satuan',
-			maxLength : 50
-		});
-		BP_I_ASALField = Ext.create('Ext.form.TextField',{
-			id : 'BP_I_ASAL',
-			name : 'BP_I_ASAL',
-			fieldLabel : 'Asal',
-			maxLength : 50
-		});
-		BP_I_HARGAField = Ext.create('Ext.form.TextField',{
-			id : 'BP_I_HARGAField',
-			name : 'BP_I_HARGA',
-			fieldLabel : 'Harga',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		BP_I_KETERANGANField = Ext.create('Ext.form.TextField',{
-			id : 'BP_I_KETERANGANField',
-			name : 'BP_I_KETERANGAN',
-			fieldLabel : 'Keterangan',
-			maxLength : 100
-		});
 		RBB_LUAS_GUDANGField = Ext.create('Ext.form.TextField',{
 			id : 'RBB_LUAS_GUDANGField',
 			name : 'RBB_LUAS_GUDANG',
@@ -3661,36 +3744,24 @@
 			maxLength : 0,
 			hidden : true
 		});
-		STATUS_SURVEYField = Ext.create('Ext.form.ComboBox',{
+		STATUS_SURVEYField = Ext.create('Ext.form.TextField',{
 			id : 'STATUS_SURVEYField',
 			name : 'STATUS_SURVEY',
-			fieldLabel : 'Hasil Survey',
-			store : new Ext.data.ArrayStore({
-				fields : ['survey_id', 'survey'],
-				data : [['1','Lolos Survey'],['0','Tidak Lolos Survey']]
-			}),
-			displayField : 'survey',
-			valueField : 'survey_id',
-			queryMode : 'local',
-			<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden : true,") : (""); ?>
-			triggerAction : 'all',
-			forceSelection : true
-		});
-		STATUSField = Ext.create('Ext.form.ComboBox',{
+			fieldLabel : 'STATUS_SURVEY',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			hidden : true,
+			maskRe : /([0-9]+)$/});
+		STATUSField = Ext.create('Ext.form.TextField',{
 			id : 'STATUSField',
 			name : 'STATUS',
-			fieldLabel : 'Status Permohonan',
-			store : new Ext.data.ArrayStore({
-				fields : ['status_id', 'status'],
-				data : [['1','Diterima'],['0','Ditolak']]
-			}),
-			displayField : 'status',
-			valueField : 'status_id',
-			queryMode : 'local',
-			triggerAction : 'all',
-			<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden : true,") : (""); ?>
-			forceSelection : true
-		});
+			fieldLabel : 'STATUS',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			hidden : true,
+			maskRe : /([0-9]+)$/});
 		TGL_BERLAKUField = Ext.create('Ext.form.TextField',{
 			id : 'TGL_BERLAKUField',
 			name : 'TGL_BERLAKU',
@@ -3698,13 +3769,12 @@
 			maxLength : 0,
 			hidden : true
 		});
-		TGL_BERAKHIRField = Ext.create('Ext.form.Date',{
+		TGL_BERAKHIRField = Ext.create('Ext.form.TextField',{
 			id : 'TGL_BERAKHIRField',
 			name : 'TGL_BERAKHIR',
-			fieldLabel : 'Masa Berlaku',
-			format : 'd-m-Y',
-			maxLength : 10,
-			<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden : true,") : (""); ?>
+			fieldLabel : 'TGL_BERAKHIR',
+			maxLength : 0,
+			hidden : true
 		});
 		/*Data Pemohon*/
 		var pemohon_nikField = Ext.create('Ext.form.ComboBox',{
@@ -4065,6 +4135,60 @@
 							},
 							MERK_JENIS_PRODUKField,
 						]
+							/* BBKB_DN_JUMLAHField,
+							BBKB_DN_SATUANField,
+							BBKB_DN_ASALField,
+							BBKB_DN_HARGAField,
+							BBKB_DN_KETERANGANField,
+							BBKO_DN_JUMLAHField,
+							BBKO_DN_SATUANField,
+							BBKO_DN_ASALField,
+							BBKO_DN_HARGAField,
+							BBKO_DN_KETERANGANField,
+							BP_DN_JUMLAHField,
+							BP_DN_SATUANField,
+							BP_DN_ASALField,
+							BP_DN_HARGAField,
+							BP_DN_KETERANGANField,
+							RBB_LUAS_GUDANGField,
+							RBB_KAYU_OLAHANField,
+							RBB_PENOLONGField,
+							RBB_HASIL_PRODUKSIField,
+							RLPLY_LOKASIField,
+							RLPLY_LUASField,
+							RLPLY_PERIZINANField,
+							RSD1_KAPASITASField,
+							RSD1_JUMLAHField,
+							RSD211_KAPASITASField,
+							RSD211_JUMLAHField,
+							RSD212_KAPASITASField,
+							RSD212_JUMLAHField,
+							RSD213_KAPASITASField,
+							RSD213_JUMLAHField,
+							RSD22_KAPASITASField,
+							RSD22_JUMLAHField,
+							RSD23_KAPASITASField,
+							RSD23_JUMLAHField,
+							RPL1_VOLUMEField,
+							RPL1_SATUANField,
+							RPL1_PENANGANANField,
+							RPL2_VOLUMEField,
+							RPL2_SATUANField,
+							RPL2_PENANGANANField,
+							RPL3_VOLUMEField,
+							RPL3_SATUANField,
+							RPL3_PENANGANANField,
+							RPL4_VOLUMEField,
+							RPL4_SATUANField,
+							RPL4_PENANGANANField,
+							PENYETUJUField,
+							NOMOR_SURATField,
+							TGL_TERLAMPIRField,
+							TGL_PERMOHONANField,
+							STATUS_SURVEYField,
+							STATUSField,
+							TGL_BERLAKUField,
+							TGL_BERAKHIRField, */
 				}, {
 					xtype : 'fieldset',
 					title : 'Daftar Rencana Mesin Dan Peralatan Yang Digunakan',
@@ -4072,341 +4196,8 @@
 					collapsible : false,
 					layout :'form',
 					items : [
-							det_iuiphhk_rencana_alat_gridPanel,
-							det_iuiphhk_rencana_alat_e_gridPanel
+							det_iuiphhk_rencana_alat_gridPanel
 							]
-				}, {
-					xtype : 'fieldset',
-					title : 'Daftar Rencana Jenis Produksi dan Kapasitas Produksi',
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-							det_iuiphhk_rencana_produksi_gridPanel,
-							]
-				}, {
-					xtype : 'fieldset',
-					title : '8. Daftar Pemenuhan Bahan Baku Kayu',
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-								{
-									xtype : 'fieldset',
-									title : '1. Bahan Baku Kayu Bulat',
-									checkboxToggle : false,
-									collapsible : false,
-									border : false,
-									layout :'form',
-									items : [
-												{
-													xtype : 'fieldset',
-													title : 'a. Dalam Negeri',
-													checkboxToggle : false,
-													collapsible : false,
-													border : false,
-													layout :'form',
-													items : [
-															BBKB_DN_JUMLAHField,
-															BBKB_DN_SATUANField,
-															BBKB_DN_ASALField,
-															BBKB_DN_HARGAField,
-															BBKB_DN_KETERANGANField,
-															]
-												},{
-													xtype : 'fieldset',
-													title : 'b. Impor',
-													border : false,
-													checkboxToggle : false,
-													collapsible : false,
-													layout :'form',
-													items : [
-															BBKB_I_JUMLAHField,
-															BBKB_I_SATUANField,
-															BBKB_I_ASALField,
-															BBKB_I_HARGAField,
-															BBKB_I_KETERANGANField,
-															]
-												}
-											]
-								}, {
-									xtype : 'fieldset',
-									title : '2. Bahan Baku Kayu Olahan',
-									checkboxToggle : false,
-									border : false,
-									collapsible : false,
-									layout :'form',
-									items : [
-												{
-													xtype : 'fieldset',
-													title : 'a. Dalam Negeri',
-													border : false,
-													checkboxToggle : false,
-													collapsible : false,
-													layout :'form',
-													items : [
-															BBKO_DN_JUMLAHField,
-															BBKO_DN_SATUANField,
-															BBKO_DN_ASALField,
-															BBKO_DN_HARGAField,
-															BBKO_DN_KETERANGANField,
-															]
-												},{
-													xtype : 'fieldset',
-													title : 'b. Impor',
-													border : false,
-													checkboxToggle : false,
-													collapsible : false,
-													layout :'form',
-													items : [
-															BBKO_I_JUMLAHField,
-															BBKO_I_SATUANField,
-															BBKO_I_ASALField,
-															BBKO_I_HARGAField,
-															BBKO_I_KETERANGANField,
-															]
-												}
-											]
-								}, {
-									xtype : 'fieldset',
-									title : '3. Bahan Penoling',
-									checkboxToggle : false,
-									collapsible : false,
-									border : false,
-									layout :'form',
-									items : [
-												{
-													xtype : 'fieldset',
-													title : 'a. Dalam Negeri',
-													checkboxToggle : false,
-													border : false,
-													collapsible : false,
-													layout :'form',
-													items : [
-															BP_DN_JUMLAHField,
-															BP_DN_SATUANField,
-															BP_DN_ASALField,
-															BP_DN_HARGAField,
-															BP_DN_KETERANGANField,
-															]
-												},{
-													xtype : 'fieldset',
-													title : 'b. Impor',
-													checkboxToggle : false,
-													border : false,
-													collapsible : false,
-													layout :'form',
-													items : [
-															BP_I_JUMLAHField,
-															BP_I_SATUANField,
-															BP_I_ASALField,
-															BP_I_HARGAField,
-															BP_I_KETERANGANField,
-															]
-												}
-											]
-								}
-							]
-				}, {
-					xtype : 'fieldset',
-					title : '9. Rencana Gudang Bahan Baku dan Hasil Produksi',
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-							RBB_LUAS_GUDANGField,
-							RBB_KAYU_OLAHANField,
-							RBB_PENOLONGField,
-							RBB_HASIL_PRODUKSIField,
-							]
-				}, {
-					xtype : 'fieldset',
-					title : '10. Rencana Log Pond Log Yard',
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-							RLPLY_LOKASIField,
-							RLPLY_LUASField,
-							RLPLY_PERIZINANField,
-							]
-				}, {
-					xtype : 'fieldset',
-					title : '11. Rencana Sumber Daya Energi',
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-							{
-								xtype : 'fieldset',
-								title : 'a. Air',
-								border : false,
-								checkboxToggle : false,
-								collapsible : false,
-								layout :'form',
-								items : [
-										RSD1_KAPASITASField,
-										RSD1_JUMLAHField,
-										]
-							}, {
-								xtype : 'fieldset',
-								title : 'b. Energi Penggerak',
-								border : false,
-								checkboxToggle : false,
-								collapsible : false,
-								layout :'form',
-								items : [
-										{
-											xtype : 'fieldset',
-											title : '- PLN',
-											checkboxToggle : false,
-											border : false,
-											collapsible : false,
-											layout :'form',
-											items : [
-													RSD211_KAPASITASField,
-													RSD211_JUMLAHField,
-													]
-										}, {
-											xtype : 'fieldset',
-											title : '- Ganset',
-											checkboxToggle : false,
-											border : false,
-											collapsible : false,
-											layout :'form',
-											items : [
-													RSD212_KAPASITASField,
-													RSD212_JUMLAHField,
-													]
-										}, {
-											xtype : 'fieldset',
-											title : '- Pembangkit Listrik (Power Plant)',
-											checkboxToggle : false,
-											border : false,
-											collapsible : false,
-											layout :'form',
-											items : [
-													RSD213_KAPASITASField,
-													RSD213_JUMLAHField,
-													]
-										}
-										]
-							}, {
-								xtype : 'fieldset',
-								title : 'b. Gas',
-								checkboxToggle : false,
-								border : false,
-								collapsible : false,
-								layout :'form',
-								items : [
-										RSD22_KAPASITASField,
-										RSD22_JUMLAHField,
-										]
-							}, {
-								xtype : 'fieldset',
-								title : 'c. Lain - Lain',
-								border : false,
-								checkboxToggle : false,
-								collapsible : false,
-								layout :'form',
-								items : [
-										RSD23_KAPASITASField,
-										RSD23_JUMLAHField,
-										]
-							}
-							]
-				}, {
-					xtype : 'fieldset',
-					title : '12. Rencana Pengelolaan Lingkungan',
-					checkboxToggle : false,
-					collapsible : false,
-					layout :'form',
-					items : [
-							{
-								xtype : 'fieldset',
-								title : 'a. Padat',
-								border : false,
-								checkboxToggle : false,
-								collapsible : false,
-								layout :'form',
-								items : [
-										RPL1_VOLUMEField,
-										RPL1_SATUANField,
-										RPL1_PENANGANANField
-										]
-							}, {
-								xtype : 'fieldset',
-								title : 'b. Gas',
-								checkboxToggle : false,
-								border : false,
-								collapsible : false,
-								layout :'form',
-								items : [
-										RPL2_VOLUMEField,
-										RPL2_SATUANField,
-										RPL2_PENANGANANField
-										]
-							}, {
-								xtype : 'fieldset',
-								title : 'c. Cair',
-								checkboxToggle : false,
-								collapsible : false,
-								border : false,
-								layout :'form',
-								items : [
-										RPL3_VOLUMEField,
-										RPL3_SATUANField,
-										RPL3_PENANGANANField
-										]
-							}, {
-								xtype : 'fieldset',
-								title : 'd. Lain - Lain',
-								checkboxToggle : false,
-								border : false,
-								collapsible : false,
-								layout :'form',
-								items : [
-										RPL4_VOLUMEField,
-										RPL4_SATUANField,
-										RPL4_PENANGANANField
-										]
-							}
-							]
-				}, {
-						xtype : 'fieldset',
-						title : '13. Dokumen UKL-UPL',
-						checkboxToggle : false,
-						collapsible : false,
-						layout :'form',
-						items : [
-							PENYETUJUField,
-							NOMOR_SURATField,
-							TGL_TERLAMPIRField,
-						]
-				}, {
-						xtype : 'fieldset',
-						title : '14. Data Kelengkapan',
-						checkboxToggle : false,
-						collapsible : false,
-						<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden : true,") : (""); ?>
-						layout :'form',
-						items : [
-							iuiphhk_syaratGrid
-						]
-				}, {
-						xtype : 'fieldset',
-						title : '15. Data Pendukung',
-						checkboxToggle : false,
-						collapsible : false,
-						<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden : true,") : (""); ?>
-						layout :'form',
-						items : [
-							// TGL_PERMOHONANField,
-							STATUS_SURVEYField,
-							STATUSField,
-							// TGL_BERLAKUField,
-							TGL_BERAKHIRField
-						]
 				}, {
 					xtype : 'splitter'
 				}, {

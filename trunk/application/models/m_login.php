@@ -1,5 +1,5 @@
 <?php
-class M_login extends App_model{
+class M_login extends App_Model{
 	function verifikasiLogin($username, $password){
 		$this->db->where('USER', $username);
 		$this->db->where('PASS', $password);

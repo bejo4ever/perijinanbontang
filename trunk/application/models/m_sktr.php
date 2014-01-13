@@ -1,5 +1,5 @@
 <?php
-class M_sktr extends App_model{
+class M_sktr extends App_Model{
 	var $mainSql = "SELECT 
 						ID_SKTR,
 						ID_PEMOHON,

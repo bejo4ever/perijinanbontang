@@ -1,5 +1,5 @@
 <?php
-class M_t_apotek_det extends App_model{
+class M_t_apotek_det extends App_Model{
 	var $mainSql = "SELECT 
 				det_apotek_id,
 				det_apotek_apotek_id,

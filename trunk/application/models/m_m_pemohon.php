@@ -1,5 +1,5 @@
 <?php
-class M_m_pemohon extends App_model{
+class M_m_pemohon extends App_Model{
 	var $mainSql = "SELECT 
 				pemohon_id,
 				pemohon_nama,

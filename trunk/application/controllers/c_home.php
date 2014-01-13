@@ -4,7 +4,7 @@ class C_home extends CI_Controller{
 		parent::__construct();
 		session_start();
 	}
-	function index(){
+	function index(){		 
 		$this->load->view('home');
 	}
 }

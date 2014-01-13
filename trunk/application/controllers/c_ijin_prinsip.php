@@ -10,6 +10,7 @@ class C_ijin_prinsip extends CI_Controller{
 	}
 	
 	function index(){
+		$this->load->view('home.php');
 		$this->load->view('main/v_ijin_prinsip');
 	}
 	

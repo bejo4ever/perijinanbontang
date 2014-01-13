@@ -1,5 +1,5 @@
 <?php
-class M_master_user extends App_model{
+class M_master_user extends App_Model{
 	var $mainSql = "SELECT 
 				ID_USER,
 				USER,

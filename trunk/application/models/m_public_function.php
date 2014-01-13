@@ -1,5 +1,5 @@
 <?php
-class M_public_function extends App_model{
+class M_public_function extends App_Model{
 	function getNomorSk($id_ijin){
 		$romawi=array('I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII');
 		$counter= 0;

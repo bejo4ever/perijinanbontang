@@ -1,5 +1,5 @@
 <?php
-class M_t_ipmbl extends App_model{
+class M_t_ipmbl extends App_Model{
 	var $mainSql = "SELECT 
 				ipmbl_id,
 				ipmbl_luas,

@@ -1,5 +1,5 @@
 <?php
-class M_cek_list_sktr extends App_model{
+class M_cek_list_sktr extends App_Model{
 	var $mainSql = "SELECT 
 				ID_SYARAT,
 				ID_IJIN,

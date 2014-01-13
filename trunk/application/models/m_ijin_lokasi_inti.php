@@ -1,5 +1,5 @@
 <?php
-class M_ijin_lokasi_inti extends App_model{
+class M_ijin_lokasi_inti extends App_Model{
 	var $mainSql = "SELECT 
 				ID_IJIN_LOKASI_INTI,
 				ID_USER,
