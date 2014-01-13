@@ -1,5 +1,5 @@
 <?php
-class M_master_syarat extends App_model{
+class M_master_syarat extends App_Model{
 	var $mainSql = "SELECT 
 				ID_SYARAT,
 				NAMA_SYARAT

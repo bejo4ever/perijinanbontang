@@ -93,7 +93,7 @@ class App_model extends CI_Model{
 	public function __update($dataValue, $id, $table=FALSE, $return_type = FALSE, $prim=FALSE){
 		$table = ($table!=FALSE) ? $table : $this->table_name ;
 		$prim = ($prim!=FALSE) ? $prim : $this->column_primary ;
-		$result = 'fail';
+		$result = 'fail';		
 		if($this->__checkCodeExisting($dataValue, $id)){
 			$filter = $this->primary_filter;
 			$this->db->set($dataValue)->where($prim, $filter($id))->update($table);

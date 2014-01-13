@@ -1,5 +1,5 @@
 <?php
-class M_t_ipmbl_dok extends App_model{
+class M_t_ipmbl_dok extends App_Model{
 	var $mainSql = "SELECT 
 				dok_ipmbl_id,
 				dok_ipmbl_penerima,

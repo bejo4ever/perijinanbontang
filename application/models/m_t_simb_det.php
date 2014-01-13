@@ -1,5 +1,5 @@
 <?php
-class M_t_simb_det extends App_model{
+class M_t_simb_det extends App_Model{
 	var $mainSql = "SELECT 
 				det_simb_id,
 				det_simb_simb_id,

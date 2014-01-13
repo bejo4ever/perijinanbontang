@@ -1,5 +1,5 @@
 <?php
-class M_master_ijin extends App_model{
+class M_master_ijin extends App_Model{
 	var $mainSql = "SELECT 
 				ID_IJIN,
 				NAMA_IJIN,

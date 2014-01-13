@@ -18,7 +18,7 @@
         <![endif]-->
     </head>
     
-    <body class="bootstrap-admin-with-small-navbar">
+    <body class="bootstrap-admin-with-small-navbar">	
 		<nav class="navbar navbar-default navbar-fixed-top bootstrap-admin-navbar-sm" role="navigation">
             <div class="container">
                 <div class="row">
@@ -47,28 +47,59 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>
                         </button>
-                        <a class="navbar-brand" href="about.html">PERIJINAN</a>
-                    </div>
+                        <a class="navbar-brand" href="about.html">BERANDA</a>
+                    </div>			
+                        
+                   
                     <div class="collapse navbar-collapse main-navbar-collapse">
-                        <ul class="nav navbar-nav" id="mainmenu">
+						<ul class="nav navbar-nav" >
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-hover="dropdown">Perijinan <b class="caret"></b></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#c_t_idam_det">Depo Air Minum</a></li>
-                                    <li><a href="#c_t_ipmbl_det">Pengambilan Mineral Bukan Logam</a></li>
-                                    <li><a href="#c_t_iujt_det">Usaha Jasa Titipan</a></li>
-                                    <li><a href="#c_sktr">SKTR</a></li>
-                                    <li><a href="#c_sppl">SPPL</a></li>
-                                    <li><a href="#c_trayek">Trayek</a></li>
-                                    <li><a href="#c_ijin_lingkungan">Lingkungan</a></li>
-                                    <li><a href="#c_ijin_lokasi">Lokasi</a></li>
-                                    <li><a href="#c_t_iujk_det">Usaha Jasa Konstruksi</a></li>
-                                    <li><a href="#c_t_apotek_det">Izin Apotek</a></li>
-                                    <li><a href="#c_t_sipd_det">Izin Praktek Dokter</a></li>
-                                    <li><a href="#c_iuiphhk">Izin Usaha Industri Primer Hasil Hutan Kayu</a></li>
-                                    <li><a href="#c_ijin_prinsip">Izin Prinsip</a></li>
-                                    <li><a href="#c_trotoar">Izin Bongkar Trotoar</a></li>
-                                    <li><a href="#c_t_simb_det">Izin Minuman Beralkohol</a></li>
+                                <a href="#" class="dropdown-toggle" data-hover="dropdown">Informasi <b class="caret"></b></a>								
+                                <ul class="dropdown-menu" id="mainmenu">
+									<li><a href="<?php echo base_url(); ?>index.php/info_perijinan">Perijinan</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/info_cekpermohonan">Cek Permohonan</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/info_tambahpengaduan">Pengaduan</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/info_daftarpengaduan">Daftar Pengaduan</a></li>
+									
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav" >
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-hover="dropdown">Perijinan <b class="caret"></b></a>								
+                                <ul class="dropdown-menu" id="mainmenu">
+									<li><a href="<?php echo base_url(); ?>index.php/tdp">TDP</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/imb">IMB</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/siup">SIUP</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/ho">SITU/HO</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/reklame">Reklame</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/limbah">Limbah</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/trayek">Trayek</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/lokasi">Lokasi</a></li>
+
+									<li><a href="<?php echo base_url(); ?>index.php/c_t_iujk_det">IUJK</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_t_idam_det">Depo Air Minum</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_t_ipmbl_det">Pengambilan Mineral Bukan Logam</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_t_iujt_det">IUJT</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_sktr">SKTR</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_sppl">SPPL</a></li>                                    
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_ijin_lingkungan">Lingkungan</a></li>                                
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_t_apotek_det">Apotek</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_t_sipd_det">Praktek Dokter</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_iuiphhk">Usaha Industri</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_ijin_prinsip">Prinsip</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_trotoar">Trotoar</a></li>
+                                    <li><a href="<?php echo base_url(); ?>index.php/c_t_simb_det">SITU MB</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+						<ul class="nav navbar-nav" >
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-hover="dropdown">Administrasi <b class="caret"></b></a>								
+                                <ul class="dropdown-menu" id="mainmenu">
+									<li><a href="<?php echo base_url(); ?>index.php/tabel_master">Tabel Master</a></li>
+									
+									
                                 </ul>
                             </li>
                         </ul>
@@ -82,16 +113,11 @@
             <div class="row">
                 <!-- content -->
                 <div class="col-md-12">
-                    <div class="row" id="mainpanel">
+                    <div class="row" id="mainpanel"
+					
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <hr>
-                <footer role="contentinfo">
-                    <p>&copy; 2013</p>
-                </footer>
-            </div>
+            </div>           
         </div>
 		
         <!--/.fluid-container-->
@@ -102,19 +128,6 @@
 		<script src="<?php echo base_url(); ?>assets/js/globalVariabel.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/ext-all.js"></script>
 		<script src="<?php echo base_url(); ?>assets/js/src/ux/InputTextMask.js"></script>
-		<script>
-			$(document).ready(function(){
-				$("#mainmenu li a").click(function(){
-					var item = $(this);
-					var link = item.attr('href').replace('#','');
-					if(link != ''){
-						$("#mainpanel").empty();
-						$("#mainpanel").load('' + link);
-						$('html, body').animate({scrollTop: 0}, 500);
-					}
-					return false;
-				});
-			});
-		</script>
+
     </body>
 </html>

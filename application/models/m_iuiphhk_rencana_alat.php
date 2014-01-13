@@ -1,5 +1,5 @@
 <?php
-class M_iuiphhk_rencana_alat extends App_model{
+class M_iuiphhk_rencana_alat extends App_Model{
 	var $mainSql = "SELECT 
 				ID_RENCANA_ALAT,
 				ID_IUIPHHK,

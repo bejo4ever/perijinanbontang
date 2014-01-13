@@ -1,5 +1,5 @@
 <?php
-class M_t_sipd_ceklist extends App_model{
+class M_t_sipd_ceklist extends App_Model{
 	var $mainSql = "SELECT 
 				sipd_cek_id,
 				sipd_cek_syarat_id,

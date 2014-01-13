@@ -8,6 +8,7 @@ class C_t_idam_det extends CI_Controller{
 	}
 	
 	function index(){
+		$this->load->view('home.php');
 		$this->load->view('main/v_t_idam_det');
 	}
 	

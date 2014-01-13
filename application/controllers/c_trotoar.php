@@ -10,6 +10,7 @@ class C_trotoar extends CI_Controller{
 	}
 	
 	function index(){
+		$this->load->view('home.php');
 		$this->load->view('main/v_trotoar');
 	}
 	

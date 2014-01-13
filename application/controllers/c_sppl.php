@@ -10,6 +10,7 @@ class C_sppl extends CI_Controller{
 	}
 	
 	function index(){
+		$this->load->view('home.php');
 		$this->load->view('main/v_sppl');
 	}
 	

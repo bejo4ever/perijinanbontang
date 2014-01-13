@@ -1,5 +1,5 @@
 <?php
-class M_cek_list_iuiphhk extends App_model{
+class M_cek_list_iuiphhk extends App_Model{
 	var $mainSql = "SELECT 
 				ID_SYARAT,
 				ID_IJIN,

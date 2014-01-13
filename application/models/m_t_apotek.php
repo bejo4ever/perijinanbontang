@@ -1,5 +1,5 @@
 <?php
-class M_t_apotek extends App_model{
+class M_t_apotek extends App_Model{
 	var $mainSql = "SELECT 
 				apotek_id,
 				apotek_nama,
@@ -13,8 +13,7 @@ class M_t_apotek extends App_model{
 				apotek_pemiliknpwp,
 				apotek_siup
 				FROM t_apotek 
-			WHERE apotek_id IS NOT NULL 
-	";
+			WHERE apotek_id IS NOT NULL";
 	
 	function __construct(){
         parent::__construct();
