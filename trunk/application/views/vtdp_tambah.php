@@ -29,7 +29,7 @@ foreach($css_files as $file): ?>
 
 	function Tpilih(jenis,id)
 		{		
-		var base_url = '<?echo site_url()?>';
+		var base_url = '<?phpecho site_url()?>';
 		
 		if (jenis=='siup')
 		{
@@ -147,7 +147,7 @@ foreach($css_files as $file): ?>
 		}
 
 	$(function() {		
-		$( "#tglmohon" ).val('<?=date('d-m-Y')?>');	
+		$( "#tglmohon" ).val('<?php echo date('d-m-Y')?>');	
 	});
 
 	$(function() {
@@ -192,7 +192,7 @@ foreach($css_files as $file): ?>
 -->
     </style>
 </head>
-<?
+<?php
 
 $datasiup= array(
 			'name' 	=>'datasiup', 
@@ -413,7 +413,7 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
 		<h2>Pencarian data SIUP</h2>
 	</div>	
     <div class="modal-body">		 
-        <p><?=$output['output']->output?></p>  
+        <p><?php echo $output['output']->output?></p>  
     </div>  
 </div>
 
@@ -423,7 +423,7 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
 		<h2>Pencarian data Pemohon</h2>
 	</div>	
     <div class="modal-body">		 
-        <p><?=$output['output1']->output?></p>  
+        <p><?php echo $output['output1']->output?></p>  
     </div>  
 </div>
 
@@ -433,7 +433,7 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
 		<h2>Pencarian data Perusahaan</h2>
 	</div>	
     <div class="modal-body">		 
-        <p><?=$output['output2']->output?></p>  
+        <p><?php echo $output['output2']->output?></p>  
     </div>  
 </div>
 
@@ -443,11 +443,11 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
 		<h2>Cari KLUI</h2>
 	</div>	
     <div class="modal-body">		 
-        <p><?=$output['output3']->output?></p>  
+        <p><?php echo $output['output3']->output?></p>  
     </div>  
 </div>
 
-<form name="kirim" class="form-vertical" action="<?=site_url()."/tdp"?>" method="post">
+<form name="kirim" class="form-vertical" action="<?php echo site_url()."/tdp"?>" method="post">
 <fieldset>
   <table width="100%"  border="0" cellspacing="1" cellpadding="1">
     <tr>
@@ -462,25 +462,25 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
     <tr class="font3" >
       <td width="29%" align="right"  style="padding-left:10px ">Jenis Permohonan </td>
       <td width="2%" align="center"  class="text">:</td>
-      <td width="71%" align="left"><? echo form_dropdown('jnspermohonan', $data_jenis_permohonan);?></td>
+      <td width="71%" align="left"><?php echo form_dropdown('jnspermohonan', $data_jenis_permohonan);?></td>
     </tr>
     <!--SIUP baru-->
     <tr class="font3" id="trskbaru">
       <td width="29%" align="right" style="padding-left:10px ">Pencarian Data SIUP </td>
       <td width="2%" align="center" class="text">:</td>
-      <td width="71%" align="left"><? echo form_input($datasiup);?>&nbsp;<a href="#Msiup" data-toggle="modal"><img src="../../assets/images/search.gif" width="16" height="16" align="Cari" title="Cari SIUP"></a></td>
+      <td width="71%" align="left"><?php echo form_input($datasiup);?>&nbsp;<a href="#Msiup" data-toggle="modal"><img src="../../assets/images/search.gif" width="16" height="16" align="Cari" title="Cari SIUP"></a></td>
     </tr>
     <!--SIUP lama-->
     <tr class="font3" >
       <td width="29%" align="right" style="padding-left:10px ">Pembaharuan Ke- </td>
       <td width="2%" align="center" class="text">:</td>
-      <td><? echo form_input($counter_daftar);?>
+      <td><?php echo form_input($counter_daftar);?>
       </td>
     </tr>
     <tr class="font3">
       <td align="right" style="padding-left:10px ">No. Agenda </td>
       <td align="center"  class="text">:</td>
-      <td align="left" ><label><? echo form_input($no_agenda);?> </label></td>
+      <td align="left" ><label><?php echo form_input($no_agenda);?> </label></td>
     </tr>
     <tr>
       <td height="25" colspan="3" style="padding:10px 0px 10px 0px; border-bottom:1px dashed #000000;" align="left" valign="bottom" class="font2">2. Data Pemohon</td>
@@ -488,36 +488,36 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
     <tr class="font3" >
       <td width="29%" align="right" style="padding-left:10px ">Nomor KTP </td>
       <td width="2%" align="center"  class="text">:</td>
-      <td width="71%" align="left" ><? echo form_input($ktp1);?>&nbsp;<a href="#Mktp" data-toggle="modal"><img src="../../assets/images/search.gif" width="16" height="16" align="Cari" title="Cari data pemohon"></a>
+      <td width="71%" align="left" ><?php echo form_input($ktp1);?>&nbsp;<a href="#Mktp" data-toggle="modal"><img src="../../assets/images/search.gif" width="16" height="16" align="Cari" title="Cari data pemohon"></a>
         <input type="hidden" name="pemohon_id" id="pemohon_id">
 </td>
     </tr>
     <tr class="font3">
       <td width="29%" align="right"  style="padding-left:10px ">Nama Lengkap </td>
       <td width="2%" align="center"  class="text">:</td>
-      <td width="71%" align="left"><? echo form_input($nama1);?> </td>
+      <td width="71%" align="left"><?php echo form_input($nama1);?> </td>
     </tr>
     <tr class="font3">
       <td width="29%" align="right" style="padding-left:10px ">TTL</td>
       <td width="2%" align="center"  class="text">:</td>
-      <td width="71%" align="left"><? echo form_input($tlahir1);?> <input name="tgllahir1" type="text" id="tgllahir" class="input-small" size="10"/></td>
+      <td width="71%" align="left"><?php echo form_input($tlahir1);?> <input name="tgllahir1" type="text" id="tgllahir" class="input-small" size="10"/></td>
     </tr>
     <tr class="font3">
       <td width="29%" align="right"  style="padding-left:10px ">Pekerjaan / Jabatan</td>
       <td width="2%" align="center"  class="text">:</td>
-      <td width="71%" align="left"><? echo form_input($pekerjaan1);?> </td>
+      <td width="71%" align="left"><?php echo form_input($pekerjaan1);?> </td>
     </tr>
     <tr class="font3" >
       <td width="29%" align="right"  style="padding-left:10px ">Warga Negara </td>
       <td width="2%" align="center"  class="text">:</td>
-      <td width="71%" align="left" ><? echo form_dropdown('warga_id1', $warga_id1,'','id="warga_id1"');?>
+      <td width="71%" align="left" ><?php echo form_dropdown('warga_id1', $warga_id1,'','id="warga_id1"');?>
       </td>
     </tr>
     <tr class="font3">
       <td align="right" style="padding-left:20px ">Alamat</td>
       <td align="center"  class="text">:</td>
-      <td align="left" ><? echo form_input($jalan1);?> RT :
-      <? echo form_input($rt1);?> </td>
+      <td align="left" ><?php echo form_input($jalan1);?> RT :
+      <?php echo form_input($rt1);?> </td>
     </tr>
     <tr class="font3">
       <td align="right" style="padding-left:20px ">Kecamatan</td>
@@ -536,8 +536,8 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
       <td align="right"  class="text" >Telepon</td>
       <td align="center"  class="text">:</td>
       <td align="left"  class="text">
-<? echo form_input($telp1);?>&nbsp; HP :
-<? echo form_input($hp1);?> </td>
+<?php echo form_input($telp1);?>&nbsp; HP :
+<?php echo form_input($hp1);?> </td>
     </tr>
     <tr>
       <td height="25" style="padding:5px 0px 5px 0px; border-bottom:1px dashed #000000;  " colspan="3" align="left" valign="bottom"  class="font2">3. Data Perusahaan</td>
@@ -545,18 +545,18 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
     <tr class="font3">
       <td align="right"  style="padding-left:10px ">NPWP/NPWPD </td>
       <td align="center"  class="text">:</td>
-      <td align="left" class="font3"><span class="text"><? echo form_input($npwp2);?></span>&nbsp;<a href="#Mperus" data-toggle="modal"><img src="../../assets/images/search.gif" width="16" height="16" align="Cari" title="Cari data perusahaan"></a>
+      <td align="left" class="font3"><span class="text"><?php echo form_input($npwp2);?></span>&nbsp;<a href="#Mperus" data-toggle="modal"><img src="../../assets/images/search.gif" width="16" height="16" align="Cari" title="Cari data perusahaan"></a>
       <input type="hidden" name="perusahaan_id" id="perusahaan_id"></td>
     </tr>
     <tr class="font3">
       <td align="right"  style="padding-left:10px ">Nama</td>
       <td align="center"  class="text">:</td>
-      <td align="left"><span class="text"><? echo form_input($nama2);?></span></td>
+      <td align="left"><span class="text"><?php echo form_input($nama2);?></span></td>
     </tr>
     <tr>
       <td><div align="right">No. Akte</div></td>
       <td><div align="center">:</div></td>
-      <td><span class="text"><? echo form_input($noakta2);?></span></td>
+      <td><span class="text"><?php echo form_input($noakta2);?></span></td>
     </tr>
     <tr>
       <td align="right">Tanggal Akte</td>
@@ -567,24 +567,24 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
     <tr>
       <td align="right">Notaris</td>
       <td><div align="center">:</div></td>
-      <td><span class="text"><? echo form_input($notaris2);?></span></td>
+      <td><span class="text"><?php echo form_input($notaris2);?></span></td>
     </tr>
     <tr class="font3">
       <td align="right" style="padding-left:10px ">Bentuk Perusahaan </td>
       <td align="center"  class="text">:</td>
-      <td align="left"><? echo form_dropdown('bentuk_id2', $bentuk_id2,'','id="bentuk_id2"');?> </td>
+      <td align="left"><?php echo form_dropdown('bentuk_id2', $bentuk_id2,'','id="bentuk_id2"');?> </td>
     </tr>
     <tr class="font3">
       <td align="right" style="padding-left:10px ">Status Perusahaan </td>
       <td align="center"  class="text">:</td>
-      <td align="left"><? echo form_dropdown('sperusahaan_id2', $sperusahaan_id2,'','id="sperusahaan_id2"');?>
+      <td align="left"><?php echo form_dropdown('sperusahaan_id2', $sperusahaan_id2,'','id="sperusahaan_id2"');?>
       </td>
     </tr>
     <tr class="font3">
       <td align="right" style="padding-left:20px ">Alamat Perusahaan</td>
       <td align="center"  class="text">:</td>
       <td align="left" class="font3">
-<span class="text"><? echo form_input($alamat2);?></span>&nbsp;RT : <span class="text">&nbsp;<? echo form_input($rt2);?></span> </td>
+<span class="text"><?php echo form_input($alamat2);?></span>&nbsp;RT : <span class="text">&nbsp;<?php echo form_input($rt2);?></span> </td>
     </tr>
     <tr class="font3">
       <td align="right" style="padding-left:20px ">Kecamatan</td>
@@ -604,8 +604,8 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
       <td align="right" style="padding-left:10px " >Telepon</td>
       <td align="center"  class="text">:</td>
       <td align="left"  class="text">
-<? echo form_input($telp2);?> Fax :
-<? echo form_input($fax2);?> </td>
+<?php echo form_input($telp2);?> Fax :
+<?php echo form_input($fax2);?> </td>
     </tr>
    
     <tr>
@@ -614,7 +614,7 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
     <tr>
       <td align="right">KLUI</td>
       <td><div align="center">:</div></td>
-      <td><span class="text"><? echo form_input($klui3);?></span>&nbsp;<a href="#MKLUI" data-toggle="modal"><img src="../../assets/images/search.gif" width="16" height="16" align="Cari" title="Cari data..."></a></td>
+      <td><span class="text"><?php echo form_input($klui3);?></span>&nbsp;<a href="#MKLUI" data-toggle="modal"><img src="../../assets/images/search.gif" width="16" height="16" align="Cari" title="Cari data..."></a></td>
    
       <td id="wrapper">
         <div id="overlay" class="overlay"></div>
@@ -624,26 +624,26 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
     <tr>
       <td align="right">KLUI Pokok</td>
       <td><div align="center">:</div></td>
-      <td><span class="text"><? echo form_input($klui_pokok3);?></span></td>
+      <td><span class="text"><?php echo form_input($klui_pokok3);?></span></td>
     </tr>
     <tr>
       <td align="right">No Peng. Menkeh/Menkop</td>
       <td><div align="center">:</div></td>
-      <td>      <span class="text"><? echo form_input($no_menkeh3);?></span>&nbsp;Tanggal
+      <td>      <span class="text"><?php echo form_input($no_menkeh3);?></span>&nbsp;Tanggal
         <input name="tgl_menkeh3" type="text" id="tgl_menkeh3" size="10" class="input-small"/>
 </td>
     </tr>
     <tr>
       <td align="right">No. Persetujuan Menkeh A.A.P.AD</td>
       <td><div align="center">:</div></td>
-      <td>      <span class="text"><? echo form_input($no_aapad3);?></span>&nbsp;Tanggal
+      <td>      <span class="text"><?php echo form_input($no_aapad3);?></span>&nbsp;Tanggal
         <input name="tgl_aapad3" type="text" id="tgl_aapad3" size="10" class="input-small"/>
 </td>
     </tr>
     <tr>
       <td align="right">No. Penerimaan Laporan P.AD</td>
       <td><div align="center">:</div></td>
-      <td>      <span class="text"><? echo form_input($no_lpad3);?></span>&nbsp;Tanggal
+      <td>      <span class="text"><?php echo form_input($no_lpad3);?></span>&nbsp;Tanggal
       <input name="tgl_lpad3" type="text" id="tgl_lpad3" size="10" class="input-small"/></td>
     </tr>
     <tr>
@@ -652,7 +652,7 @@ $data_listPersyaratan = $this->Permohonan_model->get_listPersyaratan(6);
     <tr>
       <td align="right">Retribusi</td>
       <td><div align="center">:</div></td>
-      <td>Rp . <span class="text"><? echo form_input($retribusi);?></span> </td>
+      <td>Rp . <span class="text"><?php echo form_input($retribusi);?></span> </td>
     </tr>
     <tr valign="top" class="font3" >
       <td align="right"  style="padding-left:10px ">Pembayaran</td>
@@ -672,12 +672,12 @@ Gratis  </div>          </td>
     <tr class="font3">
       <td align="right"  style="padding-left:10px ">Nama Bibit </td>
       <td align="center"  class="text">:</td>
-      <td align="left" ><label><span class="text"><? echo form_input($nama_bibit);?></span> </label></td>
+      <td align="left" ><label><span class="text"><?php echo form_input($nama_bibit);?></span> </label></td>
     </tr>
     <tr class="font3">
       <td align="right" style="padding-left:10px ">Jumlah </td>
       <td align="center"  class="text">:</td>
-      <td align="left"><span class="text"><? echo form_input($jumlah_bibit);?></span></td>
+      <td align="left"><span class="text"><?php echo form_input($jumlah_bibit);?></span></td>
     </tr>
     <tr>
       <td height="25" colspan="3" style="padding:10px 0px 10px 0px; border-bottom:1px dashed #000000;" align="left" valign="bottom" class="font2" >7. Lampiran Persyaratan</td>
@@ -689,25 +689,25 @@ Gratis  </div>          </td>
             <th width="62%"><span class="style1">Jenis Lampiran </span></th>
             <th width="33%"><span class="style1">Keterangan</span></th>
           </tr>
-		  <?
+		  <?php
 		  $jml=$data_listPersyaratan[0];
 		  $data=$data_listPersyaratan[1];
 		  $id=$data_listPersyaratan[2];
 		  for($i=0;$i<$jml;$i++)
 				{
 		  ?>
-          <tr <? if ($i%2<>0) {?> bgcolor="#E7F0FE" <? }?>>
-            <td valign="top" align="center"><?=($i+1)?>
-            <input type="hidden" name="Hsyarat<?=$i?>" id="Hsyarat<?=$i?>" value="<?=$id[$i]?>"></td>
-            <td valign="top"><?=$data[$i]?></td>
+          <tr <?php if ($i%2<>0) {?> bgcolor="#E7F0FE" <?php }?>>
+            <td valign="top" align="center"><?php echo ($i+1)?>
+            <input type="hidden" name="Hsyarat<?php echo $i?>" id="Hsyarat<?php echo $i?>" value="<?php echo $id[$i]?>"></td>
+            <td valign="top"><?php echo $data[$i]?></td>
             <td><div align="center">
-              <input type="text" name="syarat<?=$i?>" id="syarat<?=$i?>">
+              <input type="text" name="syarat<?php echo $i?>" id="syarat<?php echo $i?>">
             </div></td>
           </tr>
-         <?
+         <?php
 				}
 		 ?>
-          <input type="hidden" name="jumlah" value="<?=$jml?>"/>
+          <input type="hidden" name="jumlah" value="<?php echo $jml?>"/>
           
       </table></td>
     </tr>
@@ -726,17 +726,17 @@ Gratis  </div>          </td>
 	
 	function OnLoad()
 	{	
-		CreateKecamatan(document.getElementById('kec1'),'<?=isset($dataPermohonan->kecamatan_id) ? $dataPermohonan->kecamatan_id : ''?>'); 
-		PilihDesa(document.getElementById('kec1'),document.getElementById('desa1'),'<?=isset($dataPermohonan->desa_id) ? $dataPermohonan->desa_id : ''?>');
-		CreateKecamatan(document.getElementById('kec2'),'<?=isset($dataPerusahaan->kecamatan_id) ? $dataPerusahaan->kecamatan_id : ''?>'); 
-		PilihDesa(document.getElementById('kec2'),document.getElementById('desa2'),'<?=isset($dataPerusahaan->desa_id) ? $dataPerusahaan->desa_id : ''?>');	
+		CreateKecamatan(document.getElementById('kec1'),'<?php echo isset($dataPermohonan->kecamatan_id) ? $dataPermohonan->kecamatan_id : ''?>'); 
+		PilihDesa(document.getElementById('kec1'),document.getElementById('desa1'),'<?php echo isset($dataPermohonan->desa_id) ? $dataPermohonan->desa_id : ''?>');
+		CreateKecamatan(document.getElementById('kec2'),'<?php echo isset($dataPerusahaan->kecamatan_id) ? $dataPerusahaan->kecamatan_id : ''?>'); 
+		PilihDesa(document.getElementById('kec2'),document.getElementById('desa2'),'<?php echo isset($dataPerusahaan->desa_id) ? $dataPerusahaan->desa_id : ''?>');	
 	}
 	
 	function simpen()
 	{
 	if (confirmSubmit())
 		{
-		document.kirim.action="<?=site_url()."/tdp/simpen_baru"?>";
+		document.kirim.action="<?php echo site_url()."/tdp/simpen_baru"?>";
 		document.kirim.submit();
 		}
 	}
