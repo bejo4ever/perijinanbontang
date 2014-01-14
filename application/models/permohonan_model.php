@@ -1,4 +1,4 @@
-<?
+<?php
 class Permohonan_model extends CI_Model {   
 
     function __construct()
