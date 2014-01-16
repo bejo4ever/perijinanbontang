@@ -497,7 +497,7 @@
 					var encoded_asisten_sik = Ext.encode(asisten_sik);
 					var encoded_asisten_lulus = Ext.encode(asisten_lulus);
 					var encoded_asisten_alamat = Ext.encode(asisten_alamat);
-					
+					var det_apotek_retribusiValue = apotek_det_retibusiNilaiField.getValue();
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_apotek_det/switchAction',
@@ -615,8 +615,7 @@
 							pemohon_user_id : pemohon_user_idValue,
 							pemohon_pendidikan : pemohon_pendidikanValue,
 							pemohon_tahunlulus : pemohon_tahunlulusValue,
-							
-							
+							det_apotek_retribusi : det_apotek_retribusiValue,
 							action : apotek_det_dbTask
 						},
 						success: function(response){
@@ -841,6 +840,13 @@
 			det_apotek_spnomorField.setValue(record.data.det_apotek_spnomor);
 			det_apotek_sptanggalField.setValue(record.data.det_apotek_sptanggal);
 			det_apotek_notarisField.setValue(record.data.det_apotek_notaris);
+			
+			if(record.data.det_apotek_retribusi != 0){
+				apotek_det_retribusiField.setValue({ apotek_retribusi : ['1'] });
+			}else{
+				apotek_det_retribusiField.setValue({ apotek_retribusi : ['0'] });
+			}
+			apotek_det_retibusiNilaiField.setValue(record.data.det_apotek_retribusi);
 			
 			apotek_namaField.setValue(record.data.apotek_nama);
 			apotek_alamatField.setValue(record.data.apotek_alamat);
@@ -1484,6 +1490,7 @@
 				{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
 				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
 				{ name : 'det_apotek_proses', type : 'string', mapping : 'det_apotek_proses' },
+				{ name : 'det_apotek_retribusi', type : 'int', mapping : 'det_apotek_retribusi' }
 				]
 		});
 /* End DataStore declaration */
@@ -3261,6 +3268,43 @@
 			]
 		});
 		/* END DATA PEMOHON */
+		/* START DATA RETRIBUSI */
+		var apotek_det_retribusiField = Ext.create('Ext.form.RadioGroup',{
+			fieldLabel : 'Retribusi ',
+			vertical : false,
+			items : [
+				{ boxLabel : 'Gratis', name : 'apotek_retribusi', inputValue : '0', checked : true},
+				{ boxLabel : 'Bayar', name : 'apotek_retribusi', inputValue : '1'}
+			],
+			listeners : {
+				change : function(com, newval, oldval, e){
+					if(newval.apotek_retribusi == 1){
+						apotek_det_retibusiNilaiField.show();
+					}else{
+						apotek_det_retibusiNilaiField.hide();
+					}
+				}
+			}
+		});
+		var apotek_det_retibusiNilaiField = Ext.create('Ext.form.TextField',{
+			name : 'apotek_det_retibusiNilai',
+			fieldLabel : 'Nominal Retribusi ',
+			maxLength : 100,
+			hidden : true,
+			value : 0
+		});
+		var apotek_det_retribusifieldset = Ext.create('Ext.form.FieldSet',{
+			title : '6. Data Retribusi',
+			columnWidth : 0.5,
+			checkboxToggle : false,
+			collapsible : false,
+			layout :'form',
+			items : [
+				apotek_det_retribusiField,
+				apotek_det_retibusiNilaiField
+			]
+		});
+		/* END DATA RETRIBUSI */
 		apotek_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -3423,7 +3467,7 @@
 								det_apotek_asisten_gridPanel
 							]
 						},
-						ipmbl_det_pendukungfieldset,
+						ipmbl_det_pendukungfieldset,apotek_det_retribusifieldset,
 						Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
 					],
 				}

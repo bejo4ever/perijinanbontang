@@ -85,7 +85,8 @@ class M_t_simb_det extends App_Model{
 				pemohon_user_id,
 				pemohon_pendidikan,
 				pemohon_tahunlulus,
-				pemohon_wn
+				pemohon_wn,
+				det_simb_retribusi
 				FROM t_simb_det 
 				JOIN t_simb ON t_simb.simb_id = t_simb_det.det_simb_simb_id
 				JOIN m_pemohon ON t_simb_det.det_simb_pemohon_id = m_pemohon.pemohon_id

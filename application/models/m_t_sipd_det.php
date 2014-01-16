@@ -54,7 +54,8 @@ class M_t_sipd_det extends App_Model{
 				pemohon_tanggallahir,
 				pemohon_user_id,
 				pemohon_pendidikan,
-				pemohon_tahunlulus
+				pemohon_tahunlulus,
+				det_sipd_retribusi
 				FROM t_sipd_det 
 				JOIN t_sipd ON t_sipd.sipd_id = t_sipd_det.det_sipd_sipd_id
 				JOIN m_pemohon ON t_sipd_det.det_sipd_pemohon_id = m_pemohon.pemohon_id

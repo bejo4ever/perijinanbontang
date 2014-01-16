@@ -56,7 +56,8 @@ class M_t_iujk_det extends App_Model{
 				pemohon_tanggallahir,
 				pemohon_user_id,
 				pemohon_pendidikan,
-				pemohon_tahunlulus
+				pemohon_tahunlulus,
+				det_iujk_retribusi
 				FROM t_iujk_det 
 				JOIN t_iujk ON t_iujk_det.det_iujk_iujk_id = t_iujk.iujk_id
 				JOIN m_pemohon ON t_iujk_det.det_iujk_pemohon_id = m_pemohon.pemohon_id

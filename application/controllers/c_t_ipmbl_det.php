@@ -134,6 +134,9 @@ class C_t_ipmbl_det extends CI_Controller{
 		$dok_ipmbl_tanggal = json_decode($this->input->post('dok_ipmbl_tanggal'));
 		$dok_ipmbl_keterangan = json_decode($this->input->post('dok_ipmbl_keterangan'));
 			
+		$det_ipmbl_retribusi = htmlentities($this->input->post('det_ipmbl_retribusi'),ENT_QUOTES);
+		$det_ipmbl_retribusi = is_numeric($det_ipmbl_retribusi) ? $det_ipmbl_retribusi : 0;
+			
 		$ipmbl_det_author = $this->m_t_ipmbl_det->__checkSession();
 		$ipmbl_det_created_date = date('Y-m-d H:i:s');
 		
@@ -227,6 +230,7 @@ class C_t_ipmbl_det extends CI_Controller{
 					'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
 					'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
 					'det_ipmbl_pemohon_id'=>$resultpemohon,
+					'det_ipmbl_retribusi'=>$det_ipmbl_retribusi
 					);
 				$resultdet = $this->m_t_ipmbl_det->__insert($data, false, 'insertId');
 				for($i=0;$i<count($ipmbl_cek_syarat_id);$i++){
@@ -299,6 +303,9 @@ class C_t_ipmbl_det extends CI_Controller{
 		$det_ipmbl_volume = $this->input->post('det_ipmbl_volume');
 		$det_ipmbl_keperluan = htmlentities($this->input->post('det_ipmbl_keperluan'),ENT_QUOTES);
 		$det_ipmbl_lokasi = htmlentities($this->input->post('det_ipmbl_lokasi'),ENT_QUOTES);
+		
+		$det_ipmbl_retribusi = htmlentities($this->input->post('det_ipmbl_retribusi'),ENT_QUOTES);
+		$det_ipmbl_retribusi = is_numeric($det_ipmbl_retribusi) ? $det_ipmbl_retribusi : 0;
 		
 		$ipmbl_det_updated_by = $this->m_t_ipmbl_det->__checkSession();
 		$ipmbl_det_updated_date = date('Y-m-d H:i:s');
@@ -398,7 +405,8 @@ class C_t_ipmbl_det extends CI_Controller{
 				'det_ipmbl_sk'=>$det_ipmbl_sk,
 				'det_ipmbl_kadaluarsa'=>$det_ipmbl_kadaluarsa,
 				'det_ipmbl_berlaku'=>$det_ipmbl_berlaku,
-				'det_ipmbl_pemohon_id'=>$resultpemohon
+				'det_ipmbl_pemohon_id'=>$resultpemohon,
+				'det_ipmbl_retribusi'=>$det_ipmbl_retribusi
 				);
 			$resultdet = $this->m_t_ipmbl_det->__update($data, $det_ipmbl_id, '', 'updateId','');
 			for($i=0;$i<count($ipmbl_cek_syarat_id);$i++){

@@ -120,6 +120,9 @@ class C_t_iujk_det extends CI_Controller{
 		$iujk_cek_status = json_decode($this->input->post('iujk_cek_status'));
 		$iujk_cek_keterangan = json_decode($this->input->post('iujk_cek_keterangan'));
 		
+		$det_iujk_retribusi = htmlentities($this->input->post('det_iujk_retribusi'),ENT_QUOTES);
+		$det_iujk_retribusi = is_numeric($det_iujk_retribusi) ? $det_iujk_retribusi : 0;
+		
 		$iujk_det_author = $this->m_t_iujk_det->__checkSession();
 		$iujk_det_created_date = date('Y-m-d H:i:s');
 		
@@ -216,6 +219,7 @@ class C_t_iujk_det extends CI_Controller{
 					'det_iujk_pjtbu'=>$det_iujk_pjtbu,
 					'det_iujk_surveylulus'=>$det_iujk_surveylulus,
 					'det_iujk_pemohon_id'=>$resultpemohon,
+					'det_iujk_retribusi'=>$det_iujk_retribusi
 					);
 				$resultdet = $this->m_t_iujk_det->__insert($data, '', 'insertId');
 				for($i=0;$i<count($iujk_cek_syarat_id);$i++){
@@ -281,6 +285,9 @@ class C_t_iujk_det extends CI_Controller{
 		$iujk_cek_syarat_id = json_decode($this->input->post('iujk_cek_syarat_id'));
 		$iujk_cek_status = json_decode($this->input->post('iujk_cek_status'));
 		$iujk_cek_keterangan = json_decode($this->input->post('iujk_cek_keterangan'));
+		
+		$det_iujk_retribusi = htmlentities($this->input->post('det_iujk_retribusi'),ENT_QUOTES);
+		$det_iujk_retribusi = is_numeric($det_iujk_retribusi) ? $det_iujk_retribusi : 0;
 		
 		$iujk_det_updated_by = $this->m_t_iujk_det->__checkSession();
 		$iujk_det_updated_date = date('Y-m-d H:i:s');
@@ -371,6 +378,7 @@ class C_t_iujk_det extends CI_Controller{
 				'det_iujk_pjtbu'=>$det_iujk_pjtbu,
 				'det_iujk_surveylulus'=>$det_iujk_surveylulus,
 				'det_iujk_pemohon_id'=>$resultpemohon,
+				'det_iujk_retribusi'=>$det_iujk_retribusi
 			);
 			$resultdet = $this->m_t_iujk_det->__update($data, $det_iujk_id, '', 'updateId','');
 			for($i=0;$i<count($iujk_cek_syarat_id);$i++){

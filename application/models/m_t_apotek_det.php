@@ -101,7 +101,8 @@ class M_t_apotek_det extends App_Model{
 				pemohon_tanggallahir,
 				pemohon_user_id,
 				pemohon_pendidikan,
-				pemohon_tahunlulus
+				pemohon_tahunlulus,
+				det_apotek_retribusi
 				FROM t_apotek_det 
 				JOIN t_apotek ON t_apotek.apotek_id = t_apotek_det.det_apotek_apotek_id
 				JOIN m_pemohon ON t_apotek_det.det_apotek_pemohon_id = m_pemohon.pemohon_id

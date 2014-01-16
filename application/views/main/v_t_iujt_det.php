@@ -221,7 +221,7 @@
 					var pemohon_user_idValue = iujt_det_pemohon_user_idField.getValue();
 					var pemohon_pendidikanValue = iujt_det_pemohon_pendidikanField.getValue();
 					var pemohon_tahunlulusValue = iujt_det_pemohon_tahunlulusField.getValue();
-					
+					var det_iujt_retribusiValue = iujt_det_retibusiNilaiField.getValue();
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_iujt_det/switchAction',
@@ -270,7 +270,7 @@
 							pemohon_user_id : pemohon_user_idValue,
 							pemohon_pendidikan : pemohon_pendidikanValue,
 							pemohon_tahunlulus : pemohon_tahunlulusValue,
-							
+							det_iujt_retribusi : det_iujt_retribusiValue,
 							action : iujt_det_dbTask
 						},
 						success: function(response){
@@ -447,6 +447,14 @@
 			iujt_alamatusahaField.setValue(record.data.iujt_alamatusaha);
 			iujt_statusperusahaanField.setValue(record.data.iujt_statusperusahaan);
 			iujt_penanggungjawabField.setValue(record.data.iujt_penanggungjawab);
+			
+			if(record.data.det_iujt_retribusi != 0){
+				iujt_det_retribusiField.setValue({ iujt_retribusi : ['1'] });
+			}else{
+				iujt_det_retribusiField.setValue({ iujt_retribusi : ['0'] });
+			}
+			iujt_det_retibusiNilaiField.setValue(record.data.det_iujt_retribusi);
+			
 			iujt_det_pemohon_idField.setValue(record.data.pemohon_id);
 			iujt_det_pemohon_namaField.setValue(record.data.pemohon_nama);
 			iujt_det_pemohon_alamatField.setValue(record.data.pemohon_alamat);
@@ -698,6 +706,7 @@
 				{ name : 'iujt_alamatusaha', type : 'string', mapping : 'iujt_alamatusaha' },
 				{ name : 'iujt_statusperusahaan', type : 'string', mapping : 'iujt_statusperusahaan' },
 				{ name : 'iujt_penanggungjawab', type : 'string', mapping : 'iujt_penanggungjawab' },
+				{ name : 'det_iujt_retribusi', type : 'int', mapping : 'det_iujt_retribusi' }
 				]
 		});
 /* End DataStore declaration */
@@ -1648,6 +1657,43 @@
 				det_iujt_kadaluarsaField
 			]
 		});
+		/* START DATA RETRIBUSI */
+		var iujt_det_retribusiField = Ext.create('Ext.form.RadioGroup',{
+			fieldLabel : 'Retribusi ',
+			vertical : false,
+			items : [
+				{ boxLabel : 'Gratis', name : 'iujt_retribusi', inputValue : '0', checked : true},
+				{ boxLabel : 'Bayar', name : 'iujt_retribusi', inputValue : '1'}
+			],
+			listeners : {
+				change : function(com, newval, oldval, e){
+					if(newval.iujt_retribusi == 1){
+						iujt_det_retibusiNilaiField.show();
+					}else{
+						iujt_det_retibusiNilaiField.hide();
+					}
+				}
+			}
+		});
+		var iujt_det_retibusiNilaiField = Ext.create('Ext.form.TextField',{
+			name : 'iujt_det_retibusiNilai',
+			fieldLabel : 'Nominal Retribusi ',
+			maxLength : 100,
+			hidden : true,
+			value : 0
+		});
+		var iujt_det_retribusifieldset = Ext.create('Ext.form.FieldSet',{
+			title : '6. Data Retribusi',
+			columnWidth : 0.5,
+			checkboxToggle : false,
+			collapsible : false,
+			layout :'form',
+			items : [
+				iujt_det_retribusiField,
+				iujt_det_retibusiNilaiField
+			]
+		});
+		/* END DATA RETRIBUSI */
 		iujt_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -1722,7 +1768,7 @@
 						det_iujt_syaratGrid
 					]
 				},
-				iujt_det_pendukungfieldset,
+				iujt_det_pendukungfieldset,iujt_det_retribusifieldset,
 				Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
 			],
 			buttons : [iujt_det_saveButton,iujt_det_cancelButton]
