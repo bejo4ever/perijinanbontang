@@ -422,7 +422,7 @@
 				{ name : 'JABATAN', type : 'string', mapping : 'JABATAN' },
 				{ name : 'PANGKAT', type : 'string', mapping : 'PANGKAT' },
 				{ name : 'ATASNAMA', type : 'string', mapping : 'ATASNAMA' },
-				]
+			]
 		});
 /* End DataStore declaration */
 /* Start Shorcut Declaration */

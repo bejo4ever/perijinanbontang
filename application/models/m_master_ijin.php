@@ -6,8 +6,7 @@ class M_master_ijin extends App_Model{
 				NAMA_PEJABAT,
 				NIP_PEJABAT,
 				JABATAN,
-				PANGKAT,
-				ATASNAMA
+				PANGKAT
 				FROM master_ijin 
 			WHERE ID_IJIN IS NOT NULL 
 	";
