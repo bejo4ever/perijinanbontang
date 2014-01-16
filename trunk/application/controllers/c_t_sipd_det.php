@@ -136,6 +136,9 @@ class C_t_sipd_det extends CI_Controller{
 		$sipd_cek_status = json_decode($this->input->post('sipd_cek_status'));
 		$sipd_cek_keterangan = json_decode($this->input->post('sipd_cek_keterangan'));
 		
+		$det_sipd_retribusi = htmlentities($this->input->post('det_sipd_retribusi'),ENT_QUOTES);
+		$det_sipd_retribusi = is_numeric($det_sipd_retribusi) ? $det_sipd_retribusi : 0;
+		
 		$sipd_det_author = $this->m_t_sipd_det->__checkSession();
 		$sipd_det_created_date = date('Y-m-d H:i:s');
 		
@@ -198,6 +201,7 @@ class C_t_sipd_det extends CI_Controller{
 					'det_sipd_nrop'=>$det_sipd_nrop,
 					'det_sipd_str'=>$det_sipd_str,
 					'det_sipd_kompetensi'=>$det_sipd_kompetensi,
+					'det_sipd_retribusi'=>$det_sipd_retribusi
 					);
 				$resultdet = $this->m_t_sipd_det->__insert($data, false, 'insertId');
 				for($i=0;$i<count($sipd_cek_syarat_id);$i++){
@@ -286,6 +290,9 @@ class C_t_sipd_det extends CI_Controller{
 		$sipd_cek_status = json_decode($this->input->post('sipd_cek_status'));
 		$sipd_cek_keterangan = json_decode($this->input->post('sipd_cek_keterangan'));
 		
+		$det_sipd_retribusi = htmlentities($this->input->post('det_sipd_retribusi'),ENT_QUOTES);
+		$det_sipd_retribusi = is_numeric($det_sipd_retribusi) ? $det_sipd_retribusi : 0;
+		
 		$sipd_det_updated_by = $this->m_t_sipd_det->__checkSession();
 		$sipd_det_updated_date = date('Y-m-d H:i:s');
 		
@@ -346,6 +353,7 @@ class C_t_sipd_det extends CI_Controller{
 				'det_sipd_nrop'=>$det_sipd_nrop,
 				'det_sipd_str'=>$det_sipd_str,
 				'det_sipd_kompetensi'=>$det_sipd_kompetensi,
+				'det_sipd_retribusi'=>$det_sipd_retribusi
 				);
 			$resultdet = $this->m_t_sipd_det->__update($data, $det_sipd_id, '', 'updateId','');
 			for($i=0;$i<count($sipd_cek_syarat_id);$i++){

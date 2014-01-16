@@ -127,6 +127,9 @@ class C_t_idam_det extends CI_Controller{
 		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
 		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
 		
+		$det_idam_retribusi = htmlentities($this->input->post('det_idam_retribusi'),ENT_QUOTES);
+		$det_idam_retribusi = is_numeric($det_idam_retribusi) ? $det_idam_retribusi : 0;
+		
 		$idam_det_author = $this->m_t_idam_det->__checkSession();
 		$idam_det_created_date = date('Y-m-d H:i:s');
 		
@@ -186,6 +189,7 @@ class C_t_idam_det extends CI_Controller{
 					'det_idam_kadaluarsa'=>$det_idam_kadaluarsa,
 					'det_idam_nomorreg'=>$det_idam_nomorreg,
 					'det_idam_pemohon_id'=>$resultpemohon,
+					'det_idam_retribusi'=>$det_idam_retribusi
 					);
 				$resultdet = $this->m_t_idam_det->__insert($data, false, 'insertId');
 				for($i=0;$i<count($idam_cek_syarat_id);$i++){
@@ -264,6 +268,9 @@ class C_t_idam_det extends CI_Controller{
 		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
 		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
 		
+		$det_idam_retribusi = htmlentities($this->input->post('det_idam_retribusi'),ENT_QUOTES);
+		$det_idam_retribusi = is_numeric($det_idam_retribusi) ? $det_idam_retribusi : 0;
+		
 		$idam_det_updated_by = $this->m_t_idam_det->__checkSession();
 		$idam_det_updated_date = date('Y-m-d H:i:s');
 		
@@ -317,7 +324,8 @@ class C_t_idam_det extends CI_Controller{
 				'det_idam_berlaku'=>$det_idam_berlaku,
 				'det_idam_kadaluarsa'=>$det_idam_kadaluarsa,
 				'det_idam_nomorreg'=>$det_idam_nomorreg,
-				'det_idam_pemohon_id'=>$resultpemohon
+				'det_idam_pemohon_id'=>$resultpemohon,
+				'det_idam_retribusi'=>$det_idam_retribusi
 			);
 			$resultdet = $this->m_t_idam_det->__update($data, $det_idam_id, '', 'updateId','');
 			for($i=0;$i<count($idam_cek_syarat_id);$i++){

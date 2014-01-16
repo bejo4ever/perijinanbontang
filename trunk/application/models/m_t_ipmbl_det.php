@@ -60,7 +60,8 @@ class M_t_ipmbl_det extends App_Model{
 				pemohon_tahunlulus,
 				CONCAT(5 * (DATEDIFF(NOW(), det_ipmbl_tanggal) DIV 7) + 
 					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_ipmbl_tanggal) + 
-						1, 1),' Hari') as lamaproses
+						1, 1),' Hari') as lamaproses,
+				det_ipmbl_retribusi
 				FROM t_ipmbl_det 
 				JOIN t_ipmbl ON t_ipmbl.ipmbl_id = t_ipmbl_det.det_ipmbl_ipmbl_id
 				JOIN m_pemohon ON t_ipmbl_det.det_ipmbl_pemohon_id = m_pemohon.pemohon_id

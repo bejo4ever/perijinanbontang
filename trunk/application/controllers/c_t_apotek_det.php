@@ -202,6 +202,9 @@ class C_t_apotek_det extends CI_Controller{
 		$asisten_lulus = json_decode($this->input->post('asisten_lulus'));
 		$asisten_alamat = json_decode($this->input->post('asisten_alamat'));
 		
+		$det_apotek_retribusi = htmlentities($this->input->post('det_apotek_retribusi'),ENT_QUOTES);
+		$det_apotek_retribusi = is_numeric($det_apotek_retribusi) ? $det_apotek_retribusi : 0;
+		
 		$apotek_det_author = $this->m_t_apotek_det->__checkSession();
 		$apotek_det_created_date = date('Y-m-d H:i:s');
 		
@@ -336,6 +339,7 @@ class C_t_apotek_det extends CI_Controller{
 					'det_apotek_sptanggal'=>$det_apotek_sptanggal,
 					'det_apotek_notaris'=>$det_apotek_notaris,
 					'det_apotek_pemohon_id'=>$resultpemohon,
+					'det_apotek_retribusi'=>$det_apotek_retribusi
 					);
 				$resultdet = $this->m_t_apotek_det->__insert($data, '', 'insertId');
 				for($i=0;$i<count($apotek_cek_syarat_id);$i++){
@@ -496,6 +500,9 @@ class C_t_apotek_det extends CI_Controller{
 		$asisten_lulus = json_decode($this->input->post('asisten_lulus'));
 		$asisten_alamat = json_decode($this->input->post('asisten_alamat'));
 		
+		$det_apotek_retribusi = htmlentities($this->input->post('det_apotek_retribusi'),ENT_QUOTES);
+		$det_apotek_retribusi = is_numeric($det_apotek_retribusi) ? $det_apotek_retribusi : 0;
+		
 		$apotek_det_updated_by = $this->m_t_apotek_det->__checkSession();
 		$apotek_det_updated_date = date('Y-m-d H:i:s');
 		
@@ -623,6 +630,7 @@ class C_t_apotek_det extends CI_Controller{
 				'det_apotek_sptanggal'=>$det_apotek_sptanggal,
 				'det_apotek_notaris'=>$det_apotek_notaris,
 				'det_apotek_pemohon_id'=>$resultpemohon,
+				'det_apotek_retribusi'=>$det_apotek_retribusi
 			);
 			$resultdet = $this->m_t_apotek_det->__update($data, $det_apotek_id, '', 'updateId','');
 			for($i=0;$i<count($apotek_cek_syarat_id);$i++){

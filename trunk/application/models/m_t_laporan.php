@@ -1,5 +1,5 @@
 <?php
-class M_t_idam_det extends App_Model{
+class M_t_laporan extends App_Model{
 	var $mainSql = "SELECT 
 				det_idam_id,
 				det_idam_idam_id,
@@ -54,15 +54,15 @@ class M_t_idam_det extends App_Model{
 				pemohon_pendidikan,
 				pemohon_tahunlulus,
 				det_idam_retribusi
-				FROM t_idam_det 
-				JOIN t_idam ON t_idam_det.det_idam_idam_id = t_idam.idam_id
-				JOIN m_pemohon ON t_idam_det.det_idam_pemohon_id = m_pemohon.pemohon_id
+				FROM t_laporan 
+				JOIN t_idam ON t_laporan.det_idam_idam_id = t_idam.idam_id
+				JOIN m_pemohon ON t_laporan.det_idam_pemohon_id = m_pemohon.pemohon_id
 			WHERE det_idam_id IS NOT NULL 
 	";
 	
 	function __construct(){
         parent::__construct();
-        $this->table_name = 't_idam_det';
+        $this->table_name = 't_laporan';
         $this->column_primary = 'det_idam_id';
         $this->column_order = '';
 		$this->column_unique = '';
@@ -197,7 +197,7 @@ class M_t_idam_det extends App_Model{
 					NAMA_SYARAT AS idam_cek_syarat_nama
 				FROM t_idam_ceklist 
 				LEFT JOIN master_syarat ON t_idam_ceklist.idam_cek_syarat_id = master_syarat.ID_SYARAT
-				WHERE idam_cek_idamdet_id = ".$idam_det_id."
+				WHERE idam_cek_idamdet_id = ".$laporan_id."
 				AND idam_cek_idam_id = ".$idam_id."
 			";
 		}else{

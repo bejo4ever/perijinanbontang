@@ -98,8 +98,14 @@
                                 <a href="#" class="dropdown-toggle" data-hover="dropdown">Administrasi <b class="caret"></b></a>								
                                 <ul class="dropdown-menu" id="mainmenu">
 									<li><a href="<?php echo base_url(); ?>index.php/tabel_master">Tabel Master</a></li>
-									
-									
+                                </ul>
+                            </li>
+                        </ul>
+						<ul class="nav navbar-nav" >
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-hover="dropdown">Laporan <b class="caret"></b></a>								
+                                <ul class="dropdown-menu" id="mainmenu">
+									<li><a href="<?php echo base_url(); ?>index.php/c_t_laporan">Laporan</a></li>
                                 </ul>
                             </li>
                         </ul>

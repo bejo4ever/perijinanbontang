@@ -151,6 +151,9 @@ class C_t_simb_det extends CI_Controller{
 		$simb_cek_status = json_decode($this->input->post('simb_cek_status'));
 		$simb_cek_keterangan = json_decode($this->input->post('simb_cek_keterangan'));
 		
+		$det_simb_retribusi = htmlentities($this->input->post('det_simb_retribusi'),ENT_QUOTES);
+		$det_simb_retribusi = is_numeric($det_simb_retribusi) ? $det_simb_retribusi : 0;
+		
 		$simb_det_author = $this->m_t_simb_det->__checkSession();
 		$simb_det_created_date = date('Y-m-d H:i:s');
 		
@@ -224,6 +227,7 @@ class C_t_simb_det extends CI_Controller{
 					'det_simb_penerima'=>$det_simb_penerima,
 					'det_simb_tanggalterima'=>$det_simb_tanggalterima,
 					'det_simb_keterangan'=>$det_simb_keterangan,
+					'det_simb_retribusi'=>$det_simb_retribusi
 				);
 				$resultdet = $this->m_t_simb_det->__insert($data, false, 'insertId');
 				for($i=0;$i<count($simb_cek_syarat_id);$i++){
@@ -325,6 +329,9 @@ class C_t_simb_det extends CI_Controller{
 		$simb_cek_status = json_decode($this->input->post('simb_cek_status'));
 		$simb_cek_keterangan = json_decode($this->input->post('simb_cek_keterangan'));
 		
+		$det_simb_retribusi = htmlentities($this->input->post('det_simb_retribusi'),ENT_QUOTES);
+		$det_simb_retribusi = is_numeric($det_simb_retribusi) ? $det_simb_retribusi : 0;
+		
 		$simb_det_updated_by = $this->m_t_simb_det->__checkSession();
 		$simb_det_updated_date = date('Y-m-d H:i:s');
 		
@@ -387,7 +394,7 @@ class C_t_simb_det extends CI_Controller{
 				'det_simb_simb_id'=>$det_simb_simb_id,
 				'det_simb_jenis'=>$det_simb_jenis,
 				'det_simb_tanggal'=>$det_simb_tanggal,
-				'det_simb_pemohon_id'=>$det_simb_pemohon_id,
+				'det_simb_pemohon_id'=>$resultpemohon,
 				'det_simb_nomorreg'=>$det_simb_nomorreg,
 				'det_simb_proses'=>$det_simb_proses,
 				'det_simb_sk'=>$det_simb_sk,
@@ -396,6 +403,7 @@ class C_t_simb_det extends CI_Controller{
 				'det_simb_penerima'=>$det_simb_penerima,
 				'det_simb_tanggalterima'=>$det_simb_tanggalterima,
 				'det_simb_keterangan'=>$det_simb_keterangan,
+				'det_simb_retribusi'=>$det_simb_retribusi
 			);
 			$resultdet = $this->m_t_simb_det->__update($data, $det_simb_id, '', 'updateId','');
 			for($i=0;$i<count($simb_cek_syarat_id);$i++){

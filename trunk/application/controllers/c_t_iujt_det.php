@@ -106,6 +106,9 @@ class C_t_iujt_det extends CI_Controller{
 		$iujt_cek_status = json_decode($this->input->post('iujt_cek_status'));
 		$iujt_cek_keterangan = json_decode($this->input->post('iujt_cek_keterangan'));
 		
+		$det_iujt_retribusi = htmlentities($this->input->post('det_iujt_retribusi'),ENT_QUOTES);
+		$det_iujt_retribusi = is_numeric($det_iujt_retribusi) ? $det_iujt_retribusi : 0;
+		
 		$iujt_det_author = $this->m_t_iujt_det->__checkSession();
 		$iujt_det_created_date = date('Y-m-d H:i:s');
 		
@@ -187,7 +190,8 @@ class C_t_iujt_det extends CI_Controller{
 					'det_iujt_cektanggal'=>$det_iujt_cektanggal,
 					'det_iujt_ceknip'=>$det_iujt_ceknip,
 					'det_iujt_catatan'=>$det_iujt_catatan,
-					'det_iujt_pemohon_id'=>$resultpemohon
+					'det_iujt_pemohon_id'=>$resultpemohon,
+					'det_iujt_retribusi'=>$det_iujt_retribusi
 					);
 				$resultdet = $this->m_t_iujt_det->__insert($data, '', 'insertId');
 				for($i=0;$i<count($iujt_cek_syarat_id);$i++){
@@ -240,6 +244,9 @@ class C_t_iujt_det extends CI_Controller{
 		$iujt_cek_syarat_id = json_decode($this->input->post('iujt_cek_syarat_id'));
 		$iujt_cek_status = json_decode($this->input->post('iujt_cek_status'));
 		$iujt_cek_keterangan = json_decode($this->input->post('iujt_cek_keterangan'));
+		
+		$det_iujt_retribusi = htmlentities($this->input->post('det_iujt_retribusi'),ENT_QUOTES);
+		$det_iujt_retribusi = is_numeric($det_iujt_retribusi) ? $det_iujt_retribusi : 0;
 		
 		$iujt_det_updated_by = $this->m_t_iujt_det->__checkSession();
 		$iujt_det_updated_date = date('Y-m-d H:i:s');
@@ -316,7 +323,8 @@ class C_t_iujt_det extends CI_Controller{
 				'det_iujt_cektanggal'=>$det_iujt_cektanggal,
 				'det_iujt_ceknip'=>$det_iujt_ceknip,
 				'det_iujt_catatan'=>$det_iujt_catatan,
-				'det_iujt_pemohon_id'=>$resultpemohon
+				'det_iujt_pemohon_id'=>$resultpemohon,
+				'det_iujt_retribusi'=>$det_iujt_retribusi
 			);
 			$resultdet = $this->m_t_iujt_det->__update($data, $det_iujt_id, '', 'updateId','');
 			for($i=0;$i<count($iujt_cek_syarat_id);$i++){

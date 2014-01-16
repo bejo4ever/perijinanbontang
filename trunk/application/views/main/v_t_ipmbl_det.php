@@ -296,7 +296,7 @@
 					var pemohon_user_idValue = ipmbl_det_pemohon_user_idField.getValue();
 					var pemohon_pendidikanValue = ipmbl_det_pemohon_pendidikanField.getValue();
 					var pemohon_tahunlulusValue = ipmbl_det_pemohon_tahunlulusField.getValue();
-					
+					var det_ipmbl_retribusiValue = ipmbl_det_retibusiNilaiField.getValue();
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_ipmbl_det/switchAction',
@@ -365,6 +365,7 @@
 							dok_ipmbl_jabatan : encoded_dok_ipmbl_jabatan,
 							dok_ipmbl_tanggal : encoded_dok_ipmbl_tanggal,
 							dok_ipmbl_keterangan : encoded_dok_ipmbl_keterangan,
+							det_ipmbl_retribusi : det_ipmbl_retribusiValue,
 							action : ipmbl_det_dbTask
 						},
 						success: function(response){
@@ -554,6 +555,13 @@
 			det_ipmbl_skField.setValue(record.data.det_ipmbl_sk);
 			det_ipmbl_kadaluarsaField.setValue(record.data.det_ipmbl_kadaluarsa);
 			det_ipmbl_berlakuField.setValue(record.data.det_ipmbl_berlaku);
+			
+			if(record.data.det_ipmbl_retribusi != 0){
+				ipmbl_det_retribusiField.setValue({ ipmbl_retribusi : ['1'] });
+			}else{
+				ipmbl_det_retribusiField.setValue({ ipmbl_retribusi : ['0'] });
+			}
+			ipmbl_det_retibusiNilaiField.setValue(record.data.det_ipmbl_retribusi);
 			
 			ipmbl_det_pemohon_idField.setValue(record.data.pemohon_id);
 			ipmbl_det_pemohon_namaField.setValue(record.data.pemohon_nama);
@@ -904,7 +912,8 @@
 				{ name : 'ipmbl_status', type : 'int', mapping : 'ipmbl_status' },
 				{ name : 'ipmbl_tanggalsurvey', type : 'date', dateFormat : 'Y-m-d H:i:s', mapping : 'ipmbl_tanggalsurvey' },
 				{ name : 'ipmbl_usaha', type : 'string', mapping : 'ipmbl_usaha' },
-				{ name : 'ipmbl_alamatusaha', type : 'string', mapping : 'ipmbl_alamatusaha' }
+				{ name : 'ipmbl_alamatusaha', type : 'string', mapping : 'ipmbl_alamatusaha' },
+				{ name : 'det_ipmbl_retribusi', type : 'int', mapping : 'det_ipmbl_retribusi' }
 			]
 		});
 /* End DataStore declaration */
@@ -2092,6 +2101,43 @@
 			]
 		});
 		/* END DATA PEMOHON */
+		/* START DATA RETRIBUSI */
+		var ipmbl_det_retribusiField = Ext.create('Ext.form.RadioGroup',{
+			fieldLabel : 'Retribusi ',
+			vertical : false,
+			items : [
+				{ boxLabel : 'Gratis', name : 'ipmbl_retribusi', inputValue : '0', checked : true},
+				{ boxLabel : 'Bayar', name : 'ipmbl_retribusi', inputValue : '1'}
+			],
+			listeners : {
+				change : function(com, newval, oldval, e){
+					if(newval.ipmbl_retribusi == 1){
+						ipmbl_det_retibusiNilaiField.show();
+					}else{
+						ipmbl_det_retibusiNilaiField.hide();
+					}
+				}
+			}
+		});
+		var ipmbl_det_retibusiNilaiField = Ext.create('Ext.form.TextField',{
+			name : 'ipmbl_det_retibusiNilai',
+			fieldLabel : 'Nominal Retribusi ',
+			maxLength : 100,
+			hidden : true,
+			value : 0
+		});
+		var ipmbl_det_retribusifieldset = Ext.create('Ext.form.FieldSet',{
+			title : '6. Data Retribusi',
+			columnWidth : 0.5,
+			checkboxToggle : false,
+			collapsible : false,
+			layout :'form',
+			items : [
+				ipmbl_det_retribusiField,
+				ipmbl_det_retibusiNilaiField
+			]
+		});
+		/* END DATA RETRIBUSI */
 		ipmbl_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -2194,7 +2240,7 @@
 								det_ipmbl_rekomkectanggalField
 							]
 						},
-						ipmbl_det_riwayatfieldset,ipmbl_det_pendukungfieldset,
+						ipmbl_det_riwayatfieldset,ipmbl_det_pendukungfieldset,ipmbl_det_retribusifieldset,
 						Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
 					]
 				}],
