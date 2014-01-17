@@ -52,11 +52,11 @@ class C_t_laporan extends CI_Controller{
 			$view_name = "p_laporan_permohonan.php";
 			$file_name = ($outputType == 'PRINT') ? "laporan_permohonan.html" : 'laporan_permohonan.xls';
 		}else if($laporan_jenis == 2){
-			$printrecord = $this->m_t_laporan->getrecords($params);
+			$printrecord = $this->m_t_laporan->getrecordsrekap($params);
 			$view_name = "p_laporan_rekap.php";
 			$file_name = ($outputType == 'PRINT') ? "laporan_rekap.html" : 'laporan_rekap.xls';
 		}else{
-			$printrecord = $this->m_t_laporan->getrecords($params);
+			$printrecord = $this->m_t_laporan->getrecordssk($params);
 			$view_name = "p_laporan_sk.php";
 			$file_name = ($outputType == 'PRINT') ? "laporan_sk.html" : 'laporan_sk.xls';
 		}

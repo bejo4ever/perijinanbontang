@@ -15,6 +15,13 @@
 			<td colspan="8" align="center">LAPORAN PERMOHONAN <?php echo strtoupper($params['laporan_ijin_nama']); ?></td>
 		</tr>
 		<tr>
+			<td colspan="6">Tanggal Permohonan : <?php if($params['laporan_opsi'] == 'tanggal'){echo $params['laporan_tanggalAwal'] . ' s/d ' .$params['laporan_tanggalAkhir'];}else{echo $params['laporan_bulan'] . '-' . $params['laporan_tahun']; } ?> </td>
+			<td colspan="2" align="right">Tanggal Cetak : <?php echo date('d-m-Y'); ?></td>
+		</tr>
+		<tr>
+			<td colspan="8" align="center">&nbsp;</td>
+		</tr>
+		<tr>
 			<td align="center">No.</td>
 			<td align="center">Jenis</td>
 			<td align="center">Nama Pemohon</td>
