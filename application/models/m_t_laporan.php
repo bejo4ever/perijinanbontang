@@ -70,4 +70,36 @@ class M_t_laporan extends App_Model{
 		return $result;
 	}
 	
+	function getrecordsrekap($params){
+		extract($params);
+		$sql = "";
+		switch($laporan_ijin){
+			case 1:
+				$sql = "
+					SELECT
+						induk.det_idam_tanggal,
+						(SELECT count(sub1.det_idam_id) FROM t_idam_det sub1 WHERE sub1.det_idam_tanggal = induk.det_idam_tanggal) AS jumlah_daftar,
+						(SELECT count(sub1.det_idam_id) FROM t_idam_det sub1 WHERE sub1.det_idam_tanggal = induk.det_idam_tanggal AND sub1.det_idam_proses = '') AS jumlah_proses,
+						(SELECT count(sub1.det_idam_id) FROM t_idam_det sub1 WHERE sub1.det_idam_tanggal = induk.det_idam_tanggal AND sub1.det_idam_proses = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.det_idam_id) FROM t_idam_det sub1 WHERE sub1.det_idam_tanggal = induk.det_idam_tanggal AND sub1.det_idam_proses = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.det_idam_id) FROM t_idam_det sub1 WHERE sub1.det_idam_tanggal = induk.det_idam_tanggal AND sub1.det_idam_proses = 'Ditolak') AS jumlah_ditolak
+					FROM t_idam_det induk 
+					WHERE det_idam_id IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND det_idam_tanggal <= '".$laporan_tanggalAkhir."' 
+						AND det_idam_tanggal >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(det_idam_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.det_idam_tanggal ";
+			break;
+		}
+		$result[] = 0;
+		$result[] = $this->db->query($sql)->result();
+		
+		return $result;
+	}
+	
 }

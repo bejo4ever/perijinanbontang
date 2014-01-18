@@ -63,8 +63,6 @@ class C_t_laporan extends CI_Controller{
 		
 		$data['params'] = $params;
 		$data['printrecord'] = $printrecord[1];
-		$this->firephp->log($printrecord);
-		$this->firephp->log($printrecord[1]);
 		$print_view=$this->load->view('template/'.$view_name, $data, TRUE);
 		$print_file=fopen('print/'.$file_name,'w+');
 		fwrite($print_file, $print_view);
