@@ -37,7 +37,7 @@
 		foreach($printrecord AS $subrecord){ $n++; ?>
 			<tr>
 				<td><?php echo $n; ?></td>
-				<td><?php echo $subrecord->det_idam_tanggal; ?></td>
+				<td><?php echo $subrecord->permohonan_tanggal; ?></td>
 				<td><?php echo $subrecord->jumlah_daftar; ?></td>
 				<td><?php echo $subrecord->jumlah_proses; ?></td>
 				<td><?php echo $subrecord->jumlah_belum; ?></td>
