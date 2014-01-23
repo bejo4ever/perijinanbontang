@@ -8,8 +8,11 @@ class C_t_iujk_det extends CI_Controller{
 	}
 	
 	function index(){
+		$data['bidang']=$this->m_t_iujk_det->getBidang();
+		$data['bidangsub']=$this->m_t_iujk_det->getSubBidang();
+		$this->firephp->log($data);
 		$this->load->view('home.php');
-		$this->load->view('main/v_t_iujk_det');
+		$this->load->view('main/v_t_iujk_det', $data);
 	}
 	
 	function switchAction(){

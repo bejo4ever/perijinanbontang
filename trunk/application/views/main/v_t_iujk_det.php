@@ -135,7 +135,7 @@
 		function iujk_det_save(){
 			var pattU=new RegExp("U");
 			var pattC=new RegExp("C");
-			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
+			// var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
 			if(pattU.test(iujk_det_dbPermission)==false && pattC.test(iujk_det_dbPermission)==false){
 				Ext.MessageBox.show({
 					title : 'Warning',
@@ -251,6 +251,34 @@
 					var encoded_iujk_cek_status = Ext.encode(array_iujk_cek_status);
 					var encoded_iujk_cek_keterangan = Ext.encode(array_iujk_cek_keterangan);
 					var det_iujk_retribusiValue = iujk_det_retibusiNilaiField.getValue();
+					
+					/* START BIDANG */
+					<?php
+					foreach($bidang AS $sub_bidang){ 
+						$nm_bid = strtolower($sub_bidang->bidang);
+						$nm_bid_nospc = str_replace(' ','', $nm_bid);
+						
+						echo "if(iujk_".$nm_bid_nospc."_checkbox.getValue() == true){iujk_bidang".$nm_bid_nospc." = 1;}else{iujk_bidang".$nm_bid_nospc." = 0;}";
+						echo "var iujk_bidang".$nm_bid_nospc."_proyek = iujk_bidang".$nm_bid_nospc."_proyekField.getValue();";
+						echo "var iujk_bidang".$nm_bid_nospc."_tahun = iujk_bidang".$nm_bid_nospc."_tahunField.getValue();";
+						echo "var iujk_bidang".$nm_bid_nospc."_nilai = iujk_bidang".$nm_bid_nospc."_nilaiField.getValue();";
+						
+						echo "console.log(iujk_bidang".$nm_bid_nospc.");";
+						echo "console.log(iujk_bidang".$nm_bid_nospc."_proyek);";
+						echo "console.log(iujk_bidang".$nm_bid_nospc."_tahun);";
+						echo "console.log(iujk_bidang".$nm_bid_nospc."_nilai);";
+						$counter=1;
+						foreach($bidangsub as $sub_bidangsub){
+						if($sub_bidangsub->bidang_jasa_id == $sub_bidang->id){
+						echo "if(iujk_bidang".$nm_bid_nospc."_sub".$counter."Field.getValue() == true){iujk_bidang".$nm_bid_nospc."_sub".$counter." = 1;}else{iujk_bidang".$nm_bid_nospc."_sub".$counter." = 0;}";
+						echo "console.log(iujk_bidang".$nm_bid_nospc."_sub".$counter.");";
+						$counter++;
+						}
+						}
+					}
+					?>
+					/* END BIDANG */
+					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_iujk_det/switchAction',
@@ -312,6 +340,24 @@
 							pemohon_pendidikan : pemohon_pendidikanValue,
 							pemohon_tahunlulus : pemohon_tahunlulusValue,
 							det_iujk_retribusi : det_iujk_retribusiValue,
+							
+							<?php
+							foreach($bidang AS $sub_bidang){ 
+								$nm_bid = strtolower($sub_bidang->bidang);
+								$nm_bid_nospc = str_replace(' ','', $nm_bid);
+								echo "iujk_bidang".$nm_bid_nospc." : iujk_bidang".$nm_bid_nospc.",";
+								echo "iujk_bidang".$nm_bid_nospc."_proyek : iujk_bidang".$nm_bid_nospc."_proyek,";
+								echo "iujk_bidang".$nm_bid_nospc."_tahun : iujk_bidang".$nm_bid_nospc."_tahun,";
+								echo "iujk_bidang".$nm_bid_nospc."_nilai : iujk_bidang".$nm_bid_nospc."_nilai,";
+								$counter=1;
+								foreach($bidangsub as $sub_bidangsub){
+								if($sub_bidangsub->bidang_jasa_id == $sub_bidang->id){
+								echo "iujk_bidang".$nm_bid_nospc."_sub".$counter." : iujk_bidang".$nm_bid_nospc."_sub".$counter.",";
+								$counter++;
+								}
+								}
+							}
+							?>
 							action : iujk_det_dbTask
 						},
 						success: function(response){
@@ -1821,6 +1867,64 @@
 			]
 		});
 		/* END DATA RETRIBUSI */
+		/* START BIDANG */
+		<?php 
+		$bidangcheckbox = array();
+		$bidangpanel = array();
+		foreach($bidang AS $sub_bidang){ 
+			$nm_bid = strtolower($sub_bidang->bidang);
+			$nm_bid_nospc = str_replace(' ','', $nm_bid);
+			$nm_bid_chk = 'iujk_' . $nm_bid_nospc . '_checkbox';
+			$nm_bid_pnl = 'iujk_' . $nm_bid_nospc . '_panel';
+			$bidangcheckbox[] = $nm_bid_chk;
+			$bidangpanel[] = $nm_bid_pnl;
+			$counter_subbidang=1;
+			
+			echo "var iujk_bidang".$nm_bid_nospc."_proyekField = Ext.create('Ext.form.TextField',{
+				fieldLabel : 'Proyek Bidang', maxLength : 50 });";
+			echo "var iujk_bidang".$nm_bid_nospc."_tahunField = Ext.create('Ext.form.TextField',{
+				fieldLabel : 'Tahun Proyek', maxLength : 50 });";
+			echo "var iujk_bidang".$nm_bid_nospc."_nilaiField = Ext.create('Ext.form.TextField',{
+				fieldLabel : 'Nilai Proyek', maxLength : 50 });";
+			foreach($bidangsub as $sub_bidangsub){
+			if($sub_bidangsub->bidang_jasa_id == $sub_bidang->id){
+				echo "var iujk_bidang".$nm_bid_nospc."_sub".$counter_subbidang."Field = Ext.create('Ext.form.Checkbox',{
+					boxLabel  : '".$sub_bidangsub->nama."', inputValue: '1' });
+					";
+				$counter_subbidang++;
+			}
+			}
+			$counter_subbidang=1;
+			
+			echo "var ". $nm_bid_pnl. " = Ext.create('Ext.form.Panel', {";
+			echo "bodyPadding: 10, height : 200, hidden : true,autoScroll:true, items: [ ";
+				echo "iujk_bidang".$nm_bid_nospc."_proyekField,";
+				echo "iujk_bidang".$nm_bid_nospc."_tahunField,";
+				echo "iujk_bidang".$nm_bid_nospc."_nilaiField,";				
+				foreach($bidangsub as $sub_bidangsub){
+					if($sub_bidangsub->bidang_jasa_id == $sub_bidang->id){
+						echo "iujk_bidang".$nm_bid_nospc."_sub".$counter_subbidang."Field,";
+						$counter_subbidang++;
+					}
+				}
+			echo "] });
+			";
+			
+			
+			echo "var " . $nm_bid_chk . " = Ext.create('Ext.form.Checkbox',{";
+			echo "boxLabel  : '" . ucwords($nm_bid) . "', inputValue: '1' ,
+			listeners : {
+				change : function(cmp, newVal, oldVal, e ){
+					if(newVal == true){
+						iujk_".$nm_bid_nospc."_panel.show();
+					}else{
+						iujk_".$nm_bid_nospc."_panel.hide();
+					}
+				}
+			}
+			}); ";
+		} ?>
+		/* END BIDANG */
 		iujk_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			fieldDefaults: {
@@ -1908,7 +2012,14 @@
 								det_iujk_pj2Field,
 								det_iujk_pj3Field,
 								det_iujk_pjteknisField,
-								det_iujk_pjtbuField
+								det_iujk_pjtbuField,
+								Ext.create('Ext.form.Label',{ html : '<b>Bidang Pekerjaan</b>'}),
+								<?php
+								for($i=0;$i<count($bidangcheckbox);$i++){
+									echo $bidangcheckbox[$i].',';
+									echo $bidangpanel[$i].',';
+								}
+								?>
 							]
 						},
 						{

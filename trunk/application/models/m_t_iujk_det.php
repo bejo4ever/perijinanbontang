@@ -200,4 +200,11 @@ class M_t_iujk_det extends App_Model{
 		return $result;
 	}
 	
+	function getBidang(){
+		return $this->db->get('bidangjasa')->result();
+	}
+	function getSubBidang(){
+		return $this->db->get('bidangjasa_sub')->result();
+	}
+	
 }
