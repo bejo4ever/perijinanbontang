@@ -108,6 +108,63 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_apotek_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
+			case 6:
+				$sql = "
+					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
+						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
+						TGL_PERMOHONAN AS permohonan_tanggal, NO_SK AS permohonan_sk,
+						TGL_AWAL AS permohonan_terbit
+						FROM trayek 
+						JOIN trayek_inti ON trayek_inti.ID_TRAYEK_INTI = trayek.ID_TRAYEK_INTI
+						JOIN m_pemohon ON trayek_inti.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_TRAYEK IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 14:
+				$sql = "
+					SELECT CASE WHEN det_simb_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
+						pemohon_nama, pemohon_alamat, det_simb_proses AS permohonan_proses,
+						det_simb_tanggal AS permohonan_tanggal, det_simb_sk AS permohonan_sk,
+						det_simb_berlaku AS permohonan_terbit
+						FROM t_simb_det 
+						JOIN t_simb ON t_simb_det.det_simb_simb_id = t_simb.simb_id
+						JOIN m_pemohon ON t_simb_det.det_simb_pemohon_id = m_pemohon.pemohon_id
+					WHERE det_simb_id IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND det_simb_tanggal <= '".$laporan_tanggalAkhir."' 
+						AND det_simb_tanggal >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(det_simb_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 15:
+				$sql = "
+					SELECT CASE WHEN det_sipd_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
+						pemohon_nama, pemohon_alamat, det_sipd_proses AS permohonan_proses,
+						det_sipd_tanggal AS permohonan_tanggal, det_sipd_sk AS permohonan_sk,
+						det_sipd_berlaku AS permohonan_terbit
+						FROM t_sipd_det 
+						JOIN t_sipd ON t_sipd_det.det_sipd_sipd_id = t_sipd.sipd_id
+						JOIN m_pemohon ON t_sipd_det.det_sipd_pemohon_id = m_pemohon.pemohon_id
+					WHERE det_sipd_id IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND det_sipd_tanggal <= '".$laporan_tanggalAkhir."' 
+						AND det_sipd_tanggal >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(det_sipd_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
 		}
 		$result = $this->__listCore($sql, $params);
 		return $result;
@@ -237,6 +294,78 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_apotek_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
+			case 6:
+				$sql = "
+					SELECT 
+						pemohon_nama, pemohon_alamat,
+						TGL_PERMOHONAN AS permohonan_tanggal, 
+						NO_SK AS permohonan_sk,
+						TGL_AWAL AS permohonan_terbit,
+						CONCAT(5 * (DATEDIFF(TGL_PERMOHONAN, TGL_AWAL) DIV 7) + 
+							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(TGL_PERMOHONAN) + WEEKDAY(TGL_AWAL) + 
+								1, 1),' Hari') as lamaproses
+						FROM trayek 
+						JOIN trayek_inti ON trayek_inti.ID_TRAYEK_INTI = trayek.ID_TRAYEK_INTI
+						JOIN m_pemohon ON trayek_inti.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_TRAYEK IS NOT NULL 
+					AND NO_SK IS NOT NULL
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 14:
+				$sql = "
+					SELECT 
+						pemohon_nama, pemohon_alamat,
+						det_simb_tanggal AS permohonan_tanggal, 
+						det_simb_sk AS permohonan_sk,
+						det_simb_berlaku AS permohonan_terbit,
+						CONCAT(5 * (DATEDIFF(det_simb_tanggal, det_simb_berlaku) DIV 7) + 
+							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(det_simb_tanggal) + WEEKDAY(det_simb_berlaku) + 
+								1, 1),' Hari') as lamaproses
+						FROM t_simb_det 
+						JOIN t_simb ON t_simb_det.det_simb_simb_id = t_simb.simb_id
+						JOIN m_pemohon ON t_simb_det.det_simb_pemohon_id = m_pemohon.pemohon_id
+					WHERE det_simb_id IS NOT NULL 
+					AND det_simb_sk IS NOT NULL
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND det_simb_tanggal <= '".$laporan_tanggalAkhir."' 
+						AND det_simb_tanggal >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(det_simb_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 15:
+				$sql = "
+					SELECT 
+						pemohon_nama, pemohon_alamat,
+						det_sipd_tanggal AS permohonan_tanggal, 
+						det_sipd_sk AS permohonan_sk,
+						det_sipd_berlaku AS permohonan_terbit,
+						CONCAT(5 * (DATEDIFF(det_sipd_tanggal, det_sipd_berlaku) DIV 7) + 
+							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(det_sipd_tanggal) + WEEKDAY(det_sipd_berlaku) + 
+								1, 1),' Hari') as lamaproses
+						FROM t_sipd_det 
+						JOIN t_sipd ON t_sipd_det.det_sipd_sipd_id = t_sipd.sipd_id
+						JOIN m_pemohon ON t_sipd_det.det_sipd_pemohon_id = m_pemohon.pemohon_id
+					WHERE det_sipd_id IS NOT NULL 
+					AND det_sipd_sk IS NOT NULL
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND det_sipd_tanggal <= '".$laporan_tanggalAkhir."' 
+						AND det_sipd_tanggal >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(det_sipd_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
 		}
 		$result = $this->__listCore($sql, $params);
 		return $result;
@@ -350,6 +479,69 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_apotek_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 				$sql .= " GROUP BY induk.det_apotek_tanggal ";
+			break;
+			case 6:
+				$sql = "
+					SELECT
+						induk.TGL_PERMOHONAN AS permohonan_tanggal,
+						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN) AS jumlah_daftar,
+						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.det_apotek_proses = '') AS jumlah_proses,
+						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.det_apotek_proses = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.det_apotek_proses = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.det_apotek_proses = 'Ditolak') AS jumlah_ditolak
+					FROM trayek induk 
+					WHERE ID_TRAYEK IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
+			break;
+			case 14:
+				$sql = "
+					SELECT
+						induk.det_simb_tanggal AS permohonan_tanggal,
+						(SELECT count(sub1.det_simb_id) FROM t_simb_det sub1 WHERE sub1.det_simb_tanggal = induk.det_simb_tanggal) AS jumlah_daftar,
+						(SELECT count(sub1.det_simb_id) FROM t_simb_det sub1 WHERE sub1.det_simb_tanggal = induk.det_simb_tanggal AND sub1.det_simb_proses = '') AS jumlah_proses,
+						(SELECT count(sub1.det_simb_id) FROM t_simb_det sub1 WHERE sub1.det_simb_tanggal = induk.det_simb_tanggal AND sub1.det_simb_proses = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.det_simb_id) FROM t_simb_det sub1 WHERE sub1.det_simb_tanggal = induk.det_simb_tanggal AND sub1.det_simb_proses = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.det_simb_id) FROM t_simb_det sub1 WHERE sub1.det_simb_tanggal = induk.det_simb_tanggal AND sub1.det_simb_proses = 'Ditolak') AS jumlah_ditolak
+					FROM t_simb_det induk 
+					WHERE det_simb_id IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND det_simb_tanggal <= '".$laporan_tanggalAkhir."' 
+						AND det_simb_tanggal >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(det_simb_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.det_simb_tanggal ";
+			break;
+			case 15:
+				$sql = "
+					SELECT
+						induk.det_sipd_tanggal AS permohonan_tanggal,
+						(SELECT count(sub1.det_sipd_id) FROM t_sipd_det sub1 WHERE sub1.det_sipd_tanggal = induk.det_sipd_tanggal) AS jumlah_daftar,
+						(SELECT count(sub1.det_sipd_id) FROM t_sipd_det sub1 WHERE sub1.det_sipd_tanggal = induk.det_sipd_tanggal AND sub1.det_sipd_proses = '') AS jumlah_proses,
+						(SELECT count(sub1.det_sipd_id) FROM t_sipd_det sub1 WHERE sub1.det_sipd_tanggal = induk.det_sipd_tanggal AND sub1.det_sipd_proses = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.det_sipd_id) FROM t_sipd_det sub1 WHERE sub1.det_sipd_tanggal = induk.det_sipd_tanggal AND sub1.det_sipd_proses = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.det_sipd_id) FROM t_sipd_det sub1 WHERE sub1.det_sipd_tanggal = induk.det_sipd_tanggal AND sub1.det_sipd_proses = 'Ditolak') AS jumlah_ditolak
+					FROM t_sipd_det induk 
+					WHERE det_sipd_id IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND det_sipd_tanggal <= '".$laporan_tanggalAkhir."' 
+						AND det_sipd_tanggal >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(det_sipd_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.det_sipd_tanggal ";
 			break;
 		}
 		$result[] = 0;
