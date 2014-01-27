@@ -108,16 +108,106 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_apotek_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 6:
+			case 8:
 				$sql = "
 					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
 						TGL_PERMOHONAN AS permohonan_tanggal, NO_SK AS permohonan_sk,
 						TGL_AWAL AS permohonan_terbit
-						FROM trayek 
-						JOIN trayek_inti ON trayek_inti.ID_TRAYEK_INTI = trayek.ID_TRAYEK_INTI
-						JOIN m_pemohon ON trayek_inti.ID_PEMOHON = m_pemohon.pemohon_id
-					WHERE ID_TRAYEK IS NOT NULL 
+						FROM ijin_lingkungan 
+						JOIN ijin_lingkungan_inti ON ijin_lingkungan_inti.ID_IJIN_LINGKUNGAN_INTI = ijin_lingkungan.ID_IJIN_LINGKUNGAN_INTI
+						JOIN m_pemohon ON ijin_lingkungan_inti.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_IJIN_LINGKUNGAN IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 9:
+				$sql = "
+					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
+						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
+						TGL_PERMOHONAN AS permohonan_tanggal, NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit
+						FROM sppl 
+						JOIN m_pemohon ON sppl.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_SPPL IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 10:
+				$sql = "
+					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
+						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
+						TGL_PERMOHONAN AS permohonan_tanggal, NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit
+						FROM sktr 
+						JOIN m_pemohon ON sktr.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_SKTR IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 11:
+				$sql = "
+					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
+						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
+						TGL_PERMOHONAN AS permohonan_tanggal, NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit
+						FROM iuiphhk 
+						JOIN m_pemohon ON iuiphhk.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_IUIPHHK IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 12:
+				$sql = "
+					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
+						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
+						TGL_PERMOHONAN AS permohonan_tanggal, NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit
+						FROM ijin_prinsip 
+						JOIN m_pemohon ON ijin_prinsip.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_IJIN_PRINSIP IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 13:
+				$sql = "
+					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
+						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
+						TGL_PERMOHONAN AS permohonan_tanggal, NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit
+						FROM trotoar 
+						JOIN m_pemohon ON trotoar.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_TROTOAR IS NOT NULL 
 				";
 				if($laporan_opsi == 'tanggal'){
 					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
@@ -294,7 +384,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_apotek_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 6:
+			case 8:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -304,10 +394,125 @@ class M_t_laporan extends App_Model{
 						CONCAT(5 * (DATEDIFF(TGL_PERMOHONAN, TGL_AWAL) DIV 7) + 
 							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(TGL_PERMOHONAN) + WEEKDAY(TGL_AWAL) + 
 								1, 1),' Hari') as lamaproses
-						FROM trayek 
-						JOIN trayek_inti ON trayek_inti.ID_TRAYEK_INTI = trayek.ID_TRAYEK_INTI
-						JOIN m_pemohon ON trayek_inti.ID_PEMOHON = m_pemohon.pemohon_id
-					WHERE ID_TRAYEK IS NOT NULL 
+						FROM ijin_lingkungan 
+						JOIN ijin_lingkungan_inti ON ijin_lingkungan_inti.ID_IJIN_LINGKUNGAN_INTI = ijin_lingkungan.ID_IJIN_LINGKUNGAN_INTI
+						JOIN m_pemohon ON ijin_lingkungan_inti.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_IJIN_LINGKUNGAN IS NOT NULL 
+					AND NO_SK IS NOT NULL
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 9:
+				$sql = "
+					SELECT 
+						pemohon_nama, pemohon_alamat,
+						TGL_PERMOHONAN AS permohonan_tanggal, 
+						NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit,
+						CONCAT(5 * (DATEDIFF(TGL_PERMOHONAN, TGL_BERLAKU) DIV 7) + 
+							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(TGL_PERMOHONAN) + WEEKDAY(TGL_BERLAKU) + 
+								1, 1),' Hari') as lamaproses
+						FROM sppl 
+						JOIN m_pemohon ON sppl.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_SPPL IS NOT NULL 
+					AND NO_SK IS NOT NULL
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 10:
+				$sql = "
+					SELECT 
+						pemohon_nama, pemohon_alamat,
+						TGL_PERMOHONAN AS permohonan_tanggal, 
+						NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit,
+						CONCAT(5 * (DATEDIFF(TGL_PERMOHONAN, TGL_BERLAKU) DIV 7) + 
+							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(TGL_PERMOHONAN) + WEEKDAY(TGL_BERLAKU) + 
+								1, 1),' Hari') as lamaproses
+						FROM sktr 
+						JOIN m_pemohon ON sktr.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_SKTR IS NOT NULL 
+					AND NO_SK IS NOT NULL
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 11:
+				$sql = "
+					SELECT 
+						pemohon_nama, pemohon_alamat,
+						TGL_PERMOHONAN AS permohonan_tanggal, 
+						NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit,
+						CONCAT(5 * (DATEDIFF(TGL_PERMOHONAN, TGL_BERLAKU) DIV 7) + 
+							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(TGL_PERMOHONAN) + WEEKDAY(TGL_BERLAKU) + 
+								1, 1),' Hari') as lamaproses
+						FROM iuiphhk 
+						JOIN m_pemohon ON iuiphhk.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_IUIPHHK IS NOT NULL 
+					AND NO_SK IS NOT NULL
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 12:
+				$sql = "
+					SELECT 
+						pemohon_nama, pemohon_alamat,
+						TGL_PERMOHONAN AS permohonan_tanggal, 
+						NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit,
+						CONCAT(5 * (DATEDIFF(TGL_PERMOHONAN, TGL_BERLAKU) DIV 7) + 
+							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(TGL_PERMOHONAN) + WEEKDAY(TGL_BERLAKU) + 
+								1, 1),' Hari') as lamaproses
+						FROM ijin_prinsip 
+						JOIN m_pemohon ON ijin_prinsip.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_IJIN_PRINSIP IS NOT NULL 
+					AND NO_SK IS NOT NULL
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+			break;
+			case 13:
+				$sql = "
+					SELECT 
+						pemohon_nama, pemohon_alamat,
+						TGL_PERMOHONAN AS permohonan_tanggal, 
+						NO_SK AS permohonan_sk,
+						TGL_BERLAKU AS permohonan_terbit,
+						CONCAT(5 * (DATEDIFF(TGL_PERMOHONAN, TGL_BERLAKU) DIV 7) + 
+							MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(TGL_PERMOHONAN) + WEEKDAY(TGL_BERLAKU) + 
+								1, 1),' Hari') as lamaproses
+						FROM trotoar 
+						JOIN m_pemohon ON trotoar.ID_PEMOHON = m_pemohon.pemohon_id
+					WHERE ID_TROTOAR IS NOT NULL 
 					AND NO_SK IS NOT NULL
 				";
 				if($laporan_opsi == 'tanggal'){
@@ -480,17 +685,122 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.det_apotek_tanggal ";
 			break;
-			case 6:
+			case 8:
 				$sql = "
 					SELECT
 						induk.TGL_PERMOHONAN AS permohonan_tanggal,
-						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN) AS jumlah_daftar,
-						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.det_apotek_proses = '') AS jumlah_proses,
-						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.det_apotek_proses = 'Selesai, belum diambil') AS jumlah_belum,
-						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.det_apotek_proses = 'Selesai, sudah diambil') AS jumlah_diambil,
-						(SELECT count(sub1.ID_TRAYEK) FROM trayek sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.det_apotek_proses = 'Ditolak') AS jumlah_ditolak
-					FROM trayek induk 
-					WHERE ID_TRAYEK IS NOT NULL 
+						(SELECT count(sub1.ID_IJIN_LINGKUNGAN) FROM ijin_lingkungan sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN) AS jumlah_daftar,
+						(SELECT count(sub1.ID_IJIN_LINGKUNGAN) FROM ijin_lingkungan sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = '') AS jumlah_proses,
+						(SELECT count(sub1.ID_IJIN_LINGKUNGAN) FROM ijin_lingkungan sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.ID_IJIN_LINGKUNGAN) FROM ijin_lingkungan sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.ID_IJIN_LINGKUNGAN) FROM ijin_lingkungan sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Ditolak') AS jumlah_ditolak
+					FROM ijin_lingkungan induk 
+					WHERE ID_IJIN_LINGKUNGAN IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
+			break;
+			case 9:
+				$sql = "
+					SELECT
+						induk.TGL_PERMOHONAN AS permohonan_tanggal,
+						(SELECT count(sub1.ID_SPPL) FROM sppl sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN) AS jumlah_daftar,
+						(SELECT count(sub1.ID_SPPL) FROM sppl sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = '') AS jumlah_proses,
+						(SELECT count(sub1.ID_SPPL) FROM sppl sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.ID_SPPL) FROM sppl sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.ID_SPPL) FROM sppl sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Ditolak') AS jumlah_ditolak
+					FROM sppl induk 
+					WHERE ID_SPPL IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
+			break;
+			case 10:
+				$sql = "
+					SELECT
+						induk.TGL_PERMOHONAN AS permohonan_tanggal,
+						(SELECT count(sub1.ID_SKTR) FROM sktr sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN) AS jumlah_daftar,
+						(SELECT count(sub1.ID_SKTR) FROM sktr sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = '') AS jumlah_proses,
+						(SELECT count(sub1.ID_SKTR) FROM sktr sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.ID_SKTR) FROM sktr sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.ID_SKTR) FROM sktr sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Ditolak') AS jumlah_ditolak
+					FROM sktr induk 
+					WHERE ID_SKTR IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
+			break;
+			case 11:
+				$sql = "
+					SELECT
+						induk.TGL_PERMOHONAN AS permohonan_tanggal,
+						(SELECT count(sub1.ID_IUIPHHK) FROM iuiphhk sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN) AS jumlah_daftar,
+						(SELECT count(sub1.ID_IUIPHHK) FROM iuiphhk sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = '') AS jumlah_proses,
+						(SELECT count(sub1.ID_IUIPHHK) FROM iuiphhk sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.ID_IUIPHHK) FROM iuiphhk sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.ID_IUIPHHK) FROM iuiphhk sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Ditolak') AS jumlah_ditolak
+					FROM iuiphhk induk 
+					WHERE ID_IUIPHHK IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
+			break;
+			case 12:
+				$sql = "
+					SELECT
+						induk.TGL_PERMOHONAN AS permohonan_tanggal,
+						(SELECT count(sub1.ID_IJIN_PRINSIP) FROM ijin_prinsip sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN) AS jumlah_daftar,
+						(SELECT count(sub1.ID_IJIN_PRINSIP) FROM ijin_prinsip sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = '') AS jumlah_proses,
+						(SELECT count(sub1.ID_IJIN_PRINSIP) FROM ijin_prinsip sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.ID_IJIN_PRINSIP) FROM ijin_prinsip sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.ID_IJIN_PRINSIP) FROM ijin_prinsip sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Ditolak') AS jumlah_ditolak
+					FROM ijin_prinsip induk 
+					WHERE ID_IJIN_PRINSIP IS NOT NULL 
+				";
+				if($laporan_opsi == 'tanggal'){
+					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
+						AND TGL_PERMOHONAN >= '".$laporan_tanggalAwal."' 
+					";
+				}else{
+					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
+				}
+				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
+			break;
+			case 13:
+				$sql = "
+					SELECT
+						induk.TGL_PERMOHONAN AS permohonan_tanggal,
+						(SELECT count(sub1.ID_TROTOAR) FROM trotoar sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN) AS jumlah_daftar,
+						(SELECT count(sub1.ID_TROTOAR) FROM trotoar sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = '') AS jumlah_proses,
+						(SELECT count(sub1.ID_TROTOAR) FROM trotoar sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, belum diambil') AS jumlah_belum,
+						(SELECT count(sub1.ID_TROTOAR) FROM trotoar sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Selesai, sudah diambil') AS jumlah_diambil,
+						(SELECT count(sub1.ID_TROTOAR) FROM trotoar sub1 WHERE sub1.TGL_PERMOHONAN = induk.TGL_PERMOHONAN AND sub1.STATUS = 'Ditolak') AS jumlah_ditolak
+					FROM trotoar induk 
+					WHERE ID_TROTOAR IS NOT NULL 
 				";
 				if($laporan_opsi == 'tanggal'){
 					$sql .= " AND TGL_PERMOHONAN <= '".$laporan_tanggalAkhir."' 
