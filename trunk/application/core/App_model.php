@@ -205,4 +205,30 @@ class App_model extends CI_Model{
 			$this->db->where($this->column_primary, $id)->delete($this->table_name);
 		}
     }
+	 public function get_all ($ids = FALSE){
+        
+        // Set flag - if we passed a single ID we should return a single record
+        $single = $ids == FALSE || is_array($ids) ? FALSE : TRUE;
+        
+        // Limit results to one or more ids
+        if ($ids !== FALSE) {
+            
+            // $ids should always be an array
+            is_array($ids) || $ids = array($ids); 
+            
+            // Sanitize ids
+            $filter = $this->primaryFilter;
+            $ids = array_map($filter, $ids); 
+            
+            $this->db->where_in($this->primary_key, $ids);
+        }
+        
+        // Set order by if it was not already set
+        count($this->db->ar_orderby) || $this->db->order_by($this->table_name . "." . $this->column_order);
+        
+        // Return results
+        $single == FALSE || $this->db->limit(1);
+        $method = $single ? 'row_array' : 'result_array';
+        return $this->db->get($this->table_name)->$method();
+    }
 }

@@ -90,7 +90,7 @@ a:hover
   </tr>
   <tr>
     <td width="301">&nbsp;* <a href="<?php echo base_url(); ?>index.php/master_jusaha">Jenis Usaha</a></td>
-    <td width="189">&nbsp;</td>
+    <td width="301">&nbsp;* <a href="<?php echo base_url(); ?>index.php/master_user">Setting Menu User</a></td>
   </tr>
 </table>
 
