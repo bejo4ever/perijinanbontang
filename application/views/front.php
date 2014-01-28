@@ -81,16 +81,16 @@
 				<div class="nav-collapse collapse">
 					<ul class="nav">
 						<li><a class="" href="<?php echo base_url(); ?>"><i class="icon-home"></i> Home</a></li>
-						<li><a class="" href=""><i class="icon-zoom-in"></i> Cari Izin</a></li>
+						<li><a class="" href="<?php echo site_url();?>/informasi_p/cari_izin"><i class="icon-zoom-in"></i> Cari Izin</a></li>
 						<li class="dropdown">
 							<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-book"></i> Informasi<b class="caret"></b></a>
 							<ul class="dropdown-menu">
-								<li><a href="<?php echo site_url();?>/PenerimaanObat"><!--<i class="icon-plus"></i>--> Perijinan</a></li>
-								<li><a href="<?php echo site_url();?>/PengeluaranObat"><!--<i class="icon-minus"></i>--> Cek Permohonan</a></li>
-								<li><a href="<?php echo site_url();?>/PengeluaranObat"><!--<i class="icon-minus"></i>--> Pengaduan</a></li>
+								<li><a href="<?php echo site_url();?>/informasi_p/perijinan"><!--<i class="icon-plus"></i>--> Perijinan</a></li>
+								<!--<li><a href="<?//php echo site_url();?>/informasi_p/cek_permohonan"><!--<i class="icon-minus"></i>--><!-- Cek Permohonan</a></li>-->
+								<li><a href="<?//php echo site_url();?>#"><!--<i class="icon-minus"></i>--> Pengaduan</a></li>
 							</ul>
 						</li>
-						<li class="dropdown">
+						<!--<li class="dropdown">
 							<a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icon-list-alt"></i> Permohonan Izin<b class="caret"></b></a>
 							<ul class="dropdown-menu">
 								<li><a href="#c_t_idam_det">Depo Air Minum</a></li>
@@ -104,7 +104,7 @@
 								<li><a href="#c_t_iujk_det">Usaha Jasa Konstruksi</a></li>
 								<li><a href="#c_t_apotek_det">Izin Apotek</a></li>
 							</ul>
-						</li>
+						</li>-->
 						<li class="dropdown">
 							<a href="<?php echo base_url("index.php/c_login/form"); ?>" class="dropdown-toggle fancybox fancybox.ajax" data-toggle="dropdown"><i class="icon-user"></i> Login</a>
 						</li>
@@ -114,9 +114,7 @@
 		</div>
 	</div>
 	<div class="container" style="margin-top:80px;">
-		<div class="hero-unit">
-		<?//php echo $content; ?>
-		</div>
+	<?php echo $content; ?>
 	<hr>
 		<footer>
 			<p>&#169; Pemerintah Kota Bontang 2013</p>
