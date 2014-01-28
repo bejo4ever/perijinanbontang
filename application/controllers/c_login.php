@@ -1,5 +1,5 @@
 <?php
-class C_login extends CI_Controller{
+class c_login extends CI_Controller{
 	function __construct(){
 		parent::__construct();
 		session_start();
