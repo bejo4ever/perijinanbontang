@@ -18,7 +18,7 @@
 			var username = $("#username").val();
 			var password = $("#password").val();
 			$.ajax({
-				url : 'index.php/c_login/verifikasiLogin',
+				url : '<?php echo base_url(); ?>index.php/c_login/verifikasiLogin',
 				method : 'post',
 				data : {
 					username : username,
@@ -26,7 +26,7 @@
 				},
 				success : function(response){
 					if(response=='success'){
-						window.location="index.php/c_home";
+						window.location="<?php echo base_url(); ?>index.php/c_home";
 					}else{
 						alert('Login gagal');
 						$("#username").val('');

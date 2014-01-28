@@ -21,7 +21,7 @@ background-color: #ffffff;
 		</select>
 	</p>
 	<p>
-		<label>Cari Berdasarkan</label>
+		<!--<label>Cari Berdasarkan</label>
 		<hr>
 		<select name="jenis_ijin" id="jenis_ijin">
 				<option value=""> -- Pilih Jenis Pencarian -- </option>
@@ -30,19 +30,19 @@ background-color: #ffffff;
 		</select>
 		<p style="display:none" id="text-cari">
 			<input type="text" name="value">
-		</p>
+		</p>-->
 	</p>
-	<p>
+	<!--<p>
 		<button type="submit" class="btn btn-primary">
 			<span class="icon-zoom-in icon-white"></span> Cari
 		</button>
-	</p>
+	</p>-->
 	<?php
 	echo form_close();
 	?>
 </div>
 <script language="javascript">
-	$("#jenis_ijin").change(function(){
+/* 	$("#jenis_ijin").change(function(){
 		if($("#jenis_ijin").val() != ""){
 			$("#text-cari").show();
 			// alert("ye");
@@ -50,5 +50,5 @@ background-color: #ffffff;
 			// alert("no");
 			$("#text-cari").hide();
 		}
-	});
+	}); */
 </script>
