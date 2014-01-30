@@ -1,3 +1,9 @@
+<style>
+	.magnifier{
+		background-image:url(../assets/images/icons/magnifier.png) !important;
+		margin:auto;
+	}
+</style>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -655,6 +661,22 @@
 					width : 100,
 					sortable : false
 				},
+				{
+					xtype:'actioncolumn',
+					width:100,
+					text : 'Lihat Hak Akses',
+					items: [{
+						iconCls : 'magnifier',
+						tooltip : 'Ubah Status',
+						handler: function(grid, rowIndex, colIndex, node, e) {
+							grid.getSelectionModel().select(rowIndex);
+							var record = grid.getSelectionModel().getSelection()[0];
+							user_id = record.get('ID_USER');
+							window.location = "<?php echo site_url(); ?>/";
+						}
+					}],
+					<?//php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
+				}	
 							
 			],
 			tbar : [
