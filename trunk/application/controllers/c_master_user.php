@@ -8,6 +8,7 @@ class C_master_user extends CI_Controller{
 	}
 	
 	function index(){
+		$this->load->view('home.php');
 		$this->load->view('main/v_master_user');
 	}
 	
@@ -182,8 +183,8 @@ class C_master_user extends CI_Controller{
 			'limit_start' => 0,
 			'limit_end' => 0
 		);
-		
-		$data['records'] = $this->m_master_user->printExcel($params)[1];
+		$value	 = $this->m_master_user->printExcel($params);
+		$data['records'] = $value[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_master_user.php',$data,TRUE);
