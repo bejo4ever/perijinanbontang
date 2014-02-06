@@ -373,9 +373,11 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
 									ipmbl_det_dataStore.reload();
 									ipmbl_det_resetForm();
+									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave, function(){
+										window.scrollTo(0,0);
+									});
 									ipmbl_det_switchToGrid();
 									ipmbl_det_gridPanel.getSelectionModel().deselectAll();
 									break;
@@ -396,7 +398,7 @@
 										animEl : 'save',
 										icon : Ext.MessageBox.WARNING,
 										fn : function(btn){
-											window.location="index.php";
+											window.location="../index.php";
 										}
 									});
 									break;
@@ -801,9 +803,9 @@
 					switch(result){
 						case 'success':
 							if(outputType == 'EXCEL'){
-								window.open('./print/t_ipmbl_det_list.xls');
+								window.open('../print/t_ipmbl_det_list.xls');
 							}else{
-								window.open('./print/t_ipmbl_det_list.html','ipmbl_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
+								window.open('../print/t_ipmbl_det_list.html','ipmbl_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
 							}
 						break;
 						default:

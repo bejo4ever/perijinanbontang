@@ -303,9 +303,11 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
 									sipd_det_dataStore.reload();
 									sipd_det_resetForm();
+									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave, function(){
+										window.scrollTo(0,0);
+									});
 									sipd_det_switchToGrid();
 									sipd_det_gridPanel.getSelectionModel().deselectAll();
 									break;
@@ -326,7 +328,7 @@
 										animEl : 'save',
 										icon : Ext.MessageBox.WARNING,
 										fn : function(btn){
-											window.location="index.php";
+											window.location="../index.php";
 										}
 									});
 									break;
@@ -671,9 +673,9 @@
 					switch(result){
 						case 'success':
 							if(outputType == 'EXCEL'){
-								window.open('./print/t_sipd_det_list.xls');
+								window.open('../print/t_sipd_det_list.xls');
 							}else{
-								window.open('./print/t_sipd_det_list.html','sipd_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
+								window.open('../print/t_sipd_det_list.html','sipd_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
 							}
 						break;
 						default:
@@ -1492,9 +1494,11 @@
 			name : 'sipd_urutan',
 			fieldLabel : 'Praktek ke-',
 			allowNegatife : false,
-			blankText : '0',
+			value : 1,
 			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
+			minValue : 1,
+			maskRe : /([0-9]+)$/
+			});
 		sipd_jenisdokterField = Ext.create('Ext.form.TextField',{
 			id : 'sipd_jenisdokterField',
 			name : 'sipd_jenisdokter',

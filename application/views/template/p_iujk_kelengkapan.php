@@ -90,7 +90,7 @@
 					<tr>
 						<td valign="top"><?php echo $i; ?></td>
 						<td><?php echo $subdataceklist->NAMA_SYARAT; ?></td>
-						<td><?php echo $subdataceklist->iujk_cek_keterangan; ?></td>
+						<td align="center"><?php echo $subdataceklist->iujk_cek_keterangan; ?></td>
 					</tr>
 					<?php $i++; } ?>
 				</table>

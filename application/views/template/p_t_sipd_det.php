@@ -2,7 +2,7 @@
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Sipd_det</title>
+	<title>Daftar Data SIPD</title>
 	<xml>
 	 <x:ExcelWorkbook>
 	  <x:ExcelWorksheets>
@@ -24,36 +24,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Sipd_det</title>
+	<title>Daftar Data SIPD</title>
 	<link rel='stylesheet' type='text/css' href='../assets/css/printstyle.css'/>
 </head>
 <body onload="window.print();">
 <?php } ?>	<table>
-		<caption>Sipd_det</caption>
+		<caption>Data Izin Praktek Dokter</caption>
 		<thead>
 			<tr>
 				<th align="center" width="50">No</td>
-				<th align="center">det_sipd_sipd_id</td>
-				<th align="center">det_sipd_jenis</td>
-				<th align="center">det_sipd_tanggal</td>
-				<th align="center">det_sipd_pemohon_id</td>
-				<th align="center">det_sipd_nomorreg</td>
-				<th align="center">det_sipd_proses</td>
-				<th align="center">det_sipd_sk</td>
-				<th align="center">det_sipd_skurut</td>
-				<th align="center">det_sipd_berlaku</td>
-				<th align="center">det_sipd_kadaluarsa</td>
-				<th align="center">det_sipd_terima</td>
-				<th align="center">det_sipd_terimatanggal</td>
-				<th align="center">det_sipd_kelengkapan</td>
-				<th align="center">det_sipd_bap</td>
-				<th align="center">det_sipd_keputusan</td>
-				<th align="center">det_sipd_baptanggal</td>
-				<th align="center">det_sipd_sip</td>
-				<th align="center">det_sipd_nrop</td>
-				<th align="center">det_sipd_str</td>
-				<th align="center">det_sipd_kompetensi</td>
-				</tr>
+				<th align="center">Jenis</td>
+				<th align="center">Tanggal</td>
+				<th align="center">Pemohon</td>
+				<th align="center">Alamat</td>
+				<th align="center">Telp</td>
+				<th align="center">Nama Praktek</td>
+				<th align="center">Lama Proses</td>
+			</tr>
 		</thead>
 		<tbody>
 			<?php
@@ -64,30 +51,17 @@
 			?>
 				<tr>
 					<td><?php echo $total_record; ?></td>
-					<td><?php echo $subrecord->det_sipd_sipd_id; ?></td>
-					<td><?php echo $subrecord->det_sipd_jenis; ?></td>
-					<td><?php echo $subrecord->det_sipd_tanggal; ?></td>
-					<td><?php echo $subrecord->det_sipd_pemohon_id; ?></td>
-					<td><?php echo $subrecord->det_sipd_nomorreg; ?></td>
-					<td><?php echo $subrecord->det_sipd_proses; ?></td>
-					<td><?php echo $subrecord->det_sipd_sk; ?></td>
-					<td><?php echo $subrecord->det_sipd_skurut; ?></td>
-					<td><?php echo $subrecord->det_sipd_berlaku; ?></td>
-					<td><?php echo $subrecord->det_sipd_kadaluarsa; ?></td>
-					<td><?php echo $subrecord->det_sipd_terima; ?></td>
-					<td><?php echo $subrecord->det_sipd_terimatanggal; ?></td>
-					<td><?php echo $subrecord->det_sipd_kelengkapan; ?></td>
-					<td><?php echo $subrecord->det_sipd_bap; ?></td>
-					<td><?php echo $subrecord->det_sipd_keputusan; ?></td>
-					<td><?php echo $subrecord->det_sipd_baptanggal; ?></td>
-					<td><?php echo $subrecord->det_sipd_sip; ?></td>
-					<td><?php echo $subrecord->det_sipd_nrop; ?></td>
-					<td><?php echo $subrecord->det_sipd_str; ?></td>
-					<td><?php echo $subrecord->det_sipd_kompetensi; ?></td>
-					</tr>
+					<td><?php echo $subrecord->det_sipd_jenis_nama; ?></td>
+					<td><?php echo date('d-m-Y', strtotime($subrecord->det_sipd_tanggal)); ?></td>
+					<td><?php echo $subrecord->pemohon_nama; ?></td>
+					<td><?php echo $subrecord->pemohon_alamat; ?></td>
+					<td><?php echo $subrecord->pemohon_telp; ?></td>
+					<td><?php echo $subrecord->sipd_nama; ?></td>
+					<td><?php echo $subrecord->lamaproses; ?></td>
+				</tr>
 			<?php }} ?>			<tr>
-				<td colspan="20" align="left">Total</td>
-				<td><?php echo $total_record; ?></td>
+				<td>Total</td>
+				<td colspan="7"><?php echo $total_record; ?></td>
 			</tr>
 		<tbody>
 	</table>

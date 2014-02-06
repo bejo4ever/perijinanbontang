@@ -2,7 +2,7 @@
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Idam_det</title>
+	<title>Daftar Data IDAM</title>
 	<xml>
 	 <x:ExcelWorkbook>
 	  <x:ExcelWorksheets>
@@ -24,38 +24,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Idam_det</title>
+	<title>Daftar Data IDAM</title>
 	<link rel='stylesheet' type='text/css' href='../assets/css/printstyle.css'/>
 </head>
 <body onload="window.print();">
 <?php } ?>	<table>
-		<caption>Idam_det</caption>
+		<caption>Data Izin Depo Air Minum</caption>
 		<thead>
 			<tr>
 				<th align="center" width="50">No</td>
-				<th align="center">det_idam_idam_id</td>
-				<th align="center">det_idam_jenis</td>
-				<th align="center">det_idam_tanggal</td>
-				<th align="center">det_idam_nama</td>
-				<th align="center">det_idam_alamat</td>
-				<th align="center">det_idam_telp</td>
-				<th align="center">det_idam_tempatlahir</td>
-				<th align="center">det_idam_tanggallahir</td>
-				<th align="center">det_idam_pendidikan</td>
-				<th align="center">det_idam_tahunlulus</td>
-				<th align="center">det_idam_status</td>
-				<th align="center">det_idam_keterangan</td>
-				<th align="center">det_idam_bap</td>
-				<th align="center">det_idam_baptanggal</td>
-				<th align="center">det_idam_kelengkapan</td>
-				<th align="center">det_idam_terima</td>
-				<th align="center">det_idam_terimatanggal</td>
-				<th align="center">det_idam_sk</td>
-				<th align="center">det_idam_skurut</td>
-				<th align="center">det_idam_berlaku</td>
-				<th align="center">det_idam_kadaluarsa</td>
-				<th align="center">det_idam_nomorreg</td>
-				</tr>
+				<th align="center">Jenis</td>
+				<th align="center">Tanggal</td>
+				<th align="center">Nama Pemohon</td>
+				<th align="center">Alamat</td>
+				<th align="center">No. Telp</td>
+				<th align="center">Usaha</td>
+				<th align="center">Lama Proses</td>
+			</tr>
 		</thead>
 		<tbody>
 			<?php
@@ -66,32 +51,17 @@
 			?>
 				<tr>
 					<td><?php echo $total_record; ?></td>
-					<td><?php echo $subrecord->det_idam_idam_id; ?></td>
-					<td><?php echo $subrecord->det_idam_jenis; ?></td>
-					<td><?php echo $subrecord->det_idam_tanggal; ?></td>
-					<td><?php echo $subrecord->det_idam_nama; ?></td>
-					<td><?php echo $subrecord->det_idam_alamat; ?></td>
-					<td><?php echo $subrecord->det_idam_telp; ?></td>
-					<td><?php echo $subrecord->det_idam_tempatlahir; ?></td>
-					<td><?php echo $subrecord->det_idam_tanggallahir; ?></td>
-					<td><?php echo $subrecord->det_idam_pendidikan; ?></td>
-					<td><?php echo $subrecord->det_idam_tahunlulus; ?></td>
-					<td><?php echo $subrecord->det_idam_status; ?></td>
-					<td><?php echo $subrecord->det_idam_keterangan; ?></td>
-					<td><?php echo $subrecord->det_idam_bap; ?></td>
-					<td><?php echo $subrecord->det_idam_baptanggal; ?></td>
-					<td><?php echo $subrecord->det_idam_kelengkapan; ?></td>
-					<td><?php echo $subrecord->det_idam_terima; ?></td>
-					<td><?php echo $subrecord->det_idam_terimatanggal; ?></td>
-					<td><?php echo $subrecord->det_idam_sk; ?></td>
-					<td><?php echo $subrecord->det_idam_skurut; ?></td>
-					<td><?php echo $subrecord->det_idam_berlaku; ?></td>
-					<td><?php echo $subrecord->det_idam_kadaluarsa; ?></td>
-					<td><?php echo $subrecord->det_idam_nomorreg; ?></td>
+					<td><?php echo $subrecord->det_idam_jenis_nama; ?></td>
+					<td><?php echo date('d-m-Y', strtotime($subrecord->det_idam_tanggal)); ?></td>
+					<td><?php echo $subrecord->pemohon_nama; ?></td>
+					<td><?php echo $subrecord->pemohon_alamat; ?></td>
+					<td><?php echo $subrecord->pemohon_telp; ?></td>
+					<td><?php echo $subrecord->idam_usaha; ?></td>
+					<td><?php echo $subrecord->lamaproses; ?></td>
 					</tr>
 			<?php }} ?>			<tr>
-				<td colspan="22" align="left">Total</td>
-				<td><?php echo $total_record; ?></td>
+				<td>Total</td>
+				<td colspan="7"><?php echo $total_record; ?></td>
 			</tr>
 		<tbody>
 	</table>

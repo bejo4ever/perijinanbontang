@@ -331,9 +331,11 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
 									simb_det_dataStore.reload();
 									simb_det_resetForm();
+									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave, function(){
+										window.scrollTo(0,0);
+									});
 									simb_det_switchToGrid();
 									simb_det_gridPanel.getSelectionModel().deselectAll();
 									break;
@@ -354,7 +356,7 @@
 										animEl : 'save',
 										icon : Ext.MessageBox.WARNING,
 										fn : function(btn){
-											window.location="index.php";
+											window.location="../index.php";
 										}
 									});
 									break;
@@ -661,9 +663,9 @@
 					switch(result){
 						case 'success':
 							if(outputType == 'EXCEL'){
-								window.open('./print/t_simb_det_list.xls');
+								window.open('../print/t_simb_det_list.xls');
 							}else{
-								window.open('./print/t_simb_det_list.html','simb_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
+								window.open('../print/t_simb_det_list.html','simb_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
 							}
 						break;
 						default:
@@ -1880,104 +1882,88 @@
 		/* END DATA RETRIBUSI */
 		simb_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
-			fieldDefaults: {
-				msgTarget: 'side'
-			},
+			frame : true,
 			layout : {
-				type : 'vbox',
-				align : 'stretch',
+				type : 'form',
 				padding : 5
 			},
+			defaultType : 'textfield',
+			defaults : {anchor : '95%'},
 			items: [
 				{
-					xtype : 'container',
-					layout : 'hbox',
-					style : {borderWidth :'0px'},
-					defaultType : 'textfield',
-					defaults : {anchor : '95%'},
-					layout : 'anchor',
-					flex : 2,
-					items : [
-						{
-							xtype : 'fieldset',
-							title : '1. Data Permohonan',
-							checkboxToggle : false,
-							collapsible : false,
-							layout :'form',
-							items : [								
-								det_simb_idField,
-								det_simb_simb_idField,
-								det_simb_jenisField,
-								det_simb_tanggalField,
-								det_simb_pemohon_idField,
-								det_simb_nomorregField,
-								det_simb_prosesField,
-							]
-						},
-						{
-							xtype : 'fieldset',
-							title : '2. Data Pemohon',
-							checkboxToggle : false,
-							collapsible : false,
-							layout :'form',
-							items : [
-								simb_det_pemohon_idField,
-								simb_det_pemohon_nikField,
-								simb_det_pemohon_namaField,
-								simb_det_pemohon_alamatField,
-								simb_det_pemohon_telpField,
-								simb_det_pemohon_npwpField,
-								simb_det_pemohon_rtField,
-								simb_det_pemohon_rwField,
-								simb_det_pemohon_kelField,
-								simb_det_pemohon_kecField,
-								simb_det_pemohon_straField,
-								simb_det_pemohon_surattugasField,
-								simb_det_pemohon_pekerjaanField,
-								simb_det_pemohon_tempatlahirField,
-								simb_det_pemohon_tanggallahirField,
-								simb_det_pemohon_user_idField,
-								simb_det_pemohon_pendidikanField,
-								simb_det_pemohon_tahunlulusField
-							]
-						},
-						{
-							xtype : 'fieldset',
-							title : '3. Data Perusahaan',
-							checkboxToggle : false,
-							collapsible : false,
-							layout :'form',
-							items : [
-								simb_per_npwpField,
-								simb_per_namaField,
-								simb_per_aktaField,
-								simb_per_bentukField,
-								simb_per_alamatField,
-								simb_per_kelField,
-								simb_per_kecField,
-								simb_per_kotaField,
-								simb_per_telpField,
-							]
-						},
-						{
-							xtype : 'fieldset',
-							title : '4. Data Ceklist',
-							checkboxToggle : false,
-							collapsible : false,
-							layout :'form',
-							items : [
-								det_simb_syaratGrid
-							]
-						},
-						{
-							xtype : 'fieldset',
-						}
+					xtype : 'fieldset',
+					title : '1. Data Permohonan',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [								
+						det_simb_idField,
+						det_simb_simb_idField,
+						det_simb_jenisField,
+						det_simb_tanggalField,
+						det_simb_pemohon_idField,
+						det_simb_nomorregField,
+						det_simb_prosesField,
 					]
-				}, simb_det_pendukungfieldset, simb_det_retribusifieldset,{
-					bodyPadding : 5,
-					items : [Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })],
-					flex : 2
-				}],
+				},
+				{
+					xtype : 'fieldset',
+					title : '2. Data Pemohon',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						simb_det_pemohon_idField,
+						simb_det_pemohon_nikField,
+						simb_det_pemohon_namaField,
+						simb_det_pemohon_alamatField,
+						simb_det_pemohon_telpField,
+						simb_det_pemohon_npwpField,
+						simb_det_pemohon_rtField,
+						simb_det_pemohon_rwField,
+						simb_det_pemohon_kelField,
+						simb_det_pemohon_kecField,
+						simb_det_pemohon_straField,
+						simb_det_pemohon_surattugasField,
+						simb_det_pemohon_pekerjaanField,
+						simb_det_pemohon_tempatlahirField,
+						simb_det_pemohon_tanggallahirField,
+						simb_det_pemohon_user_idField,
+						simb_det_pemohon_pendidikanField,
+						simb_det_pemohon_tahunlulusField
+					]
+				},
+				{
+					xtype : 'fieldset',
+					title : '3. Data Perusahaan',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						simb_per_npwpField,
+						simb_per_namaField,
+						simb_per_aktaField,
+						simb_per_bentukField,
+						simb_per_alamatField,
+						simb_per_kelField,
+						simb_per_kecField,
+						simb_per_kotaField,
+						simb_per_telpField,
+					]
+				},
+				{
+					xtype : 'fieldset',
+					title : '4. Data Ceklist',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
+						det_simb_syaratGrid
+					]
+				},
+				simb_det_pendukungfieldset, simb_det_retribusifieldset,
+				Ext.create('Ext.form.Label',{ html : 'Keterangan : ' + globalRequiredInfo })
+			],
 			buttons : [simb_det_saveButton,simb_det_cancelButton]
 		});
 		simb_det_formWindow = Ext.create('Ext.window.Window',{

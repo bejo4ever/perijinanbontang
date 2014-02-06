@@ -623,9 +623,11 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
 									apotek_det_dataStore.reload();
 									apotek_det_resetForm();
+									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave, function(){
+										window.scrollTo(0,0);
+									});
 									apotek_det_switchToGrid();
 									apotek_det_gridPanel.getSelectionModel().deselectAll();
 									break;
@@ -646,7 +648,7 @@
 										animEl : 'save',
 										icon : Ext.MessageBox.WARNING,
 										fn : function(btn){
-											window.location="index.php";
+											window.location="../index.php";
 										}
 									});
 									break;
@@ -1336,9 +1338,9 @@
 					switch(result){
 						case 'success':
 							if(outputType == 'EXCEL'){
-								window.open('./print/t_apotek_det_list.xls');
+								window.open('../print/t_apotek_det_list.xls');
 							}else{
-								window.open('./print/t_apotek_det_list.html','apotek_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
+								window.open('../print/t_apotek_det_list.html','apotek_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
 							}
 						break;
 						default:
@@ -1868,7 +1870,7 @@
 				{
 					text : 'Tanggal',
 					dataIndex : 'det_apotek_tanggal',
-					width : 100,
+					width : 80,
 					sortable : false,
 					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
@@ -1980,7 +1982,7 @@
 				{
 					text : 'Lama Proses',
 					dataIndex : 'lamaproses',
-					width : 100,
+					width : 80,
 					sortable : false
 				},
 				{
@@ -2013,7 +2015,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Proses',
-					width:30,
+					width:40,
 					hideable : false,
 					items: [{
 						iconCls : 'checked',
@@ -2028,7 +2030,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Cetak',
-					width:50,
+					width:40,
 					hideable : false,
 					items: [{
 						iconCls: 'icon16x16-print',

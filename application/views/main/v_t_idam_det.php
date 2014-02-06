@@ -303,9 +303,11 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
 									idam_det_dataStore.reload();
 									idam_det_resetForm();
+									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave, function(){
+										window.scrollTo(0,0);
+									});
 									idam_det_switchToGrid();
 									idam_det_gridPanel.getSelectionModel().deselectAll();
 									break;
@@ -326,7 +328,7 @@
 										animEl : 'save',
 										icon : Ext.MessageBox.WARNING,
 										fn : function(btn){
-											window.location="index.php";
+											window.location="../index.php";
 										}
 									});
 									break;
@@ -683,9 +685,9 @@
 					switch(result){
 						case 'success':
 							if(outputType == 'EXCEL'){
-								window.open('./print/t_idam_det_list.xls');
+								window.open('../print/t_idam_det_list.xls');
 							}else{
-								window.open('./print/t_idam_det_list.html','idam_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
+								window.open('../print/t_idam_det_list.html','idam_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
 							}
 						break;
 						default:
