@@ -10,7 +10,8 @@ class C_t_iujk_det extends CI_Controller{
 	function index(){
 		$data['bidang']=$this->m_t_iujk_det->getBidang();
 		$data['bidangsub']=$this->m_t_iujk_det->getSubBidang();
-		$this->firephp->log($data);
+		$this->firephp->log($data['bidang']);
+		$this->firephp->log($data['bidangsub']);
 		$this->load->view('home.php');
 		$this->load->view('main/v_t_iujk_det', $data);
 	}
@@ -152,6 +153,10 @@ class C_t_iujk_det extends CI_Controller{
 		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
 		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
 		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
+		
+		$bidang=$this->m_t_iujk_det->getBidang();
+		$bidangsub=$this->m_t_iujk_det->getSubBidang();
+		
 		$datapemohon = array(
 			'pemohon_nama'=>$pemohon_nama,
 			'pemohon_alamat'=>$pemohon_alamat,
@@ -225,6 +230,38 @@ class C_t_iujk_det extends CI_Controller{
 					'det_iujk_retribusi'=>$det_iujk_retribusi
 					);
 				$resultdet = $this->m_t_iujk_det->__insert($data, '', 'insertId');
+				foreach($bidang AS $sub_bidang){ 
+					$nm_bid = strtolower($sub_bidang->bidang);
+					$nm_bid_nospc = str_replace(' ','', $nm_bid);
+					// $this->firephp->log("bidang " . $nm_bid_nospc . $this->input->post("iujk_bidang".$nm_bid_nospc));
+					// $this->firephp->log("proyek " . $nm_bid_nospc . $this->input->post("iujk_bidang".$nm_bid_nospc."_proyek"));
+					// $this->firephp->log("tahun " . $nm_bid_nospc . $this->input->post("iujk_bidang".$nm_bid_nospc."_tahun"));
+					// $this->firephp->log("nilai " . $nm_bid_nospc . $this->input->post("iujk_bidang".$nm_bid_nospc."_nilai"));
+					
+					if($this->input->post("iujk_bidang".$nm_bid_nospc) == 1){
+						$databidang = array(
+							'iujk_id'=>$resultdet,
+							'bidangjasa_id'=>$sub_bidang->id,
+							'nama_proyek'=>$this->input->post("iujk_bidang".$nm_bid_nospc."_proyek"),
+							'tahun_proyek'=>$this->input->post("iujk_bidang".$nm_bid_nospc."_tahun"),
+							'nilai_proyek'=>$this->input->post("iujk_bidang".$nm_bid_nospc."_nilai"),
+						);
+						$resbidang = $this->db->insert('iujkbidang',$databidang);
+						foreach($bidangsub as $sub_bidangsub){
+							if($sub_bidangsub->bidang_jasa_id == $sub_bidang->id){
+								$subid = $sub_bidangsub->id;
+								if($this->input->post("iujk_bidang".$nm_bid_nospc."_sub".$subid) == 1){
+									$datasubbidang = array(
+										'iujk_id'=>$resultdet,
+										'bidangjasa_sub_id'=>$subid
+									);
+									$this->db->insert('iujksubbidang',$datasubbidang);
+								}
+								// $this->firephp->log("bidang " . $nm_bid_nospc ."_sub" . $subid . $this->input->post("iujk_bidang".$nm_bid_nospc."_sub".$subid));
+							}
+						}
+					}
+				}
 				for($i=0;$i<count($iujk_cek_syarat_id);$i++){
 					$datacek = array(
 						'iujk_cek_syarat_id'=>$iujk_cek_syarat_id[$i],
@@ -608,6 +645,16 @@ class C_t_iujk_det extends CI_Controller{
 			fwrite($print_file, $print_view);
 			echo 'success';
 		}
+	}
+	function getBidang(){
+		$iujkdet_id = $this->input->post("iujkdet_id");
+		$result = $this->m_t_iujk_det->getBidang($iujkdet_id);
+		echo json_encode($result);
+	}
+	function getSubBidang(){
+		$iujkdet_id = $this->input->post("iujkdet_id");
+		$result = $this->m_t_iujk_det->getSubBidang($iujkdet_id);
+		echo json_encode($result);
 	}
 	
 }
