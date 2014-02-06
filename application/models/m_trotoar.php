@@ -143,4 +143,8 @@ class M_trotoar extends App_Model{
 		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 13;");
 		return $query->result_array();
 	}
+	function get_lk($trotoar_id){
+		$query	= $this->db->query("SELECT cek_list_trotoar.ID_SYARAT,cek_list_trotoar.ID_IJIN,cek_list_trotoar.`STATUS`,cek_list_trotoar.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_trotoar RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_trotoar.ID_SYARAT AND cek_list_trotoar.ID_IJIN = '" . $trotoar_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 13");
+		return $query;
+	}
 }

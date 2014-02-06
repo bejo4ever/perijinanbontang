@@ -166,4 +166,8 @@ class M_ijin_lingkungan extends App_Model{
 		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 8;");
 		return $query->result_array();
 	}
+	function get_lk($lingkungan_id){
+		$query	= $this->db->query("SELECT cek_list_lingkungan.ID_SYARAT,cek_list_lingkungan.ID_IJIN,cek_list_lingkungan.`STATUS`,cek_list_lingkungan.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_lingkungan RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_lingkungan.ID_SYARAT AND cek_list_lingkungan.ID_IJIN = '" . $lingkungan_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 8");
+		return $query;
+	}
 }

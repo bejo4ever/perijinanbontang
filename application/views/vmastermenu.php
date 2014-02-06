@@ -14,7 +14,7 @@
 <?php endforeach; */?>
  
 <style type='text/css'>
-body
+/* body
 {
     font-family: Arial;
     font-size: 24px;
@@ -27,7 +27,7 @@ a {
 a:hover
 {
     text-decoration: underline;
-}
+} */
 </style>
 </head>
 
@@ -90,7 +90,7 @@ a:hover
   </tr>
   <tr>
     <td width="301">&nbsp;* <a href="<?php echo base_url(); ?>index.php/master_jusaha">Jenis Usaha</a></td>
-    <td width="301">&nbsp;* <a href="<?php echo base_url(); ?>index.php/master_user">Setting Menu User</a></td>
+    <td width="301">&nbsp;* <a href="<?php echo base_url(); ?>index.php/c_master_user">Setting Menu User</a></td>
   </tr>
 </table>
 

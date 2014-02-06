@@ -4,7 +4,7 @@ class M_sktr extends App_Model{
 						ID_SKTR,
 						ID_PEMOHON,
 						JENIS_PERMOHONAN,
-						NO_SK
+						NO_SK,
 						HAK_MILIK,
 						NAMA_PEMILIK,
 						NO_SURAT_TANAH,
@@ -37,6 +37,7 @@ class M_sktr extends App_Model{
 						pemohon_user_id,
 						TGL_BERAKHIR,
 						STATUS_SURVEY,
+						RETRIBUSI,
 						CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
 						MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
 						1, 1),' Hari') as lama_proses
@@ -60,7 +61,7 @@ class M_sktr extends App_Model{
 						ID_SKTR,
 						ID_PEMOHON,
 						JENIS_PERMOHONAN,
-						NO_SK
+						NO_SK,
 						HAK_MILIK,
 						NAMA_PEMILIK,
 						NO_SURAT_TANAH,
@@ -210,5 +211,9 @@ class M_sktr extends App_Model{
 	function getSyarat2(){
 		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 10;");
 		return $query->result_array();
+	}
+	function get_lk($sktr_id){
+		$query	= $this->db->query("SELECT cek_list_sktr.ID_SYARAT,cek_list_sktr.ID_IJIN,cek_list_sktr.`STATUS`,cek_list_sktr.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_sktr RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_sktr.ID_SYARAT AND cek_list_sktr.ID_IJIN = '" . $sktr_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 10;");
+		return $query;
 	}
 }

@@ -231,6 +231,7 @@
 					pemohon_pekerjaanValue = pemohon_pekerjaanField.getValue();
 					pemohon_tempatlahirValue = pemohon_tempatlahirField.getValue();
 					pemohon_tanggallahirValue = pemohon_tanggallahirField.getValue();
+					RETRIBUSIValue = RETRIBUSIField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -285,6 +286,7 @@
 							pemohon_pekerjaan : pemohon_pekerjaanValue,
 							pemohon_tempatlahir : pemohon_tempatlahirValue,
 							pemohon_tanggallahir : pemohon_tanggallahirValue,
+							RETRIBUSI : RETRIBUSIValue,
 							action : in_lingkungan_dbTask
 						},
 						success: function(response){
@@ -494,6 +496,12 @@
 			pemohon_pekerjaanField.setValue(record.data.pemohon_pekerjaan);
 			pemohon_tempatlahirField.setValue(record.data.pemohon_tempatlahir);
 			pemohon_tanggallahirField.setValue(record.data.pemohon_tanggallahir);
+			RETRIBUSIField.setValue(record.data.RETRIBUSI);
+			if(record.data.RETRIBUSI != 0){
+				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['1'] });
+			}else{
+				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['0'] });
+			}
 			lingkungan_syaratDataStore.proxy.extraParams = { 
 				lingkungan_id : record.data.ID_IJIN_LINGKUNGAN,
 				currentAction : 'update',
@@ -683,6 +691,7 @@
 				{ name : 'LUAS_BAHAN', type : 'float', mapping : 'LUAS_BAHAN' },
 				{ name : 'LUAS_BANGUNAN', type : 'float', mapping : 'LUAS_BANGUNAN' },
 				{ name : 'LUAS_RUANG_USAHA', type : 'float', mapping : 'LUAS_RUANG_USAHA' },
+				{ name : 'RETRIBUSI', type : 'float', mapping : 'RETRIBUSI' },
 				{ name : 'KAPASITAS', type : 'float', mapping : 'KAPASITAS' },
 				{ name : 'IZIN_SKTR', type : 'int', mapping : 'IZIN_SKTR' },
 				{ name : 'IZIN_LOKASI', type : 'int', mapping : 'IZIN_LOKASI' },
@@ -877,7 +886,7 @@
 						ID_IJIN_LINGKUNGAN : record.get('ID_IJIN_LINGKUNGAN'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('<?php echo base_url("index.php/c_ijin_lingkungan/printBP/")?>' + record.get('ID_IJIN_LINGKUNGAN'));
+						window.open('<?php echo base_url("print/lingkungan_bp.html")?>');
 					}
 				});
 			}
@@ -886,49 +895,49 @@
 			text : 'Lembar Kontrol',
 			tooltip : 'Cetak Lembar Kontrol',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = in_lingkungan_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
-					url: 'c_sppl/switchAction',
+					url: 'c_ijin_lingkungan/switchAction',
 					params: {
-						ID_SKTR : record.get('ID_SKTR'),
+						ID_IJIN_LINGKUNGAN : record.get('ID_IJIN_LINGKUNGAN'),
 						action : 'CETAKLK'
 					},success : function(){
-						window.open('../print/idam_sk.html');
+						window.open('<?php echo base_url("print/lingkungan_lk.html")?>');
 					}
 				});
 			}
 		});
 		var lingkungan_sk_printCM = Ext.create('Ext.menu.Item',{
-			text : 'TRAYEK',
+			text : 'Lembar SK',
 			tooltip : 'Cetak Lembar SK',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = in_lingkungan_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
-					url: 'c_sppl/switchAction',
+					url: 'c_ijin_lingkungan/switchAction',
 					params: {
-						ID_SKTR : record.get('ID_SKTR'),
-						action : 'CETAKSKTR'
+						ID_IJIN_LINGKUNGAN : record.get('ID_IJIN_LINGKUNGAN'),
+						action : 'CETAKSK'
 					},success : function(){
-						window.open('../print/idam_lembarkontrol.html');
+						window.open('<?php echo base_url("print/lingkungan_sk.html")?>');
 					}
 				});
 			}
 		});
 		var lingkungan_ba_printCM = Ext.create('Ext.menu.Item',{
-			text : 'TRAYEK',
+			text : 'Lembar Berita Acara',
 			tooltip : 'Cetak Lembar Berita Acara',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = in_lingkungan_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
-					url: 'c_sppl/switchAction',
+					url: 'c_ijin_lingkungan/switchAction',
 					params: {
-						ID_SKTR : record.get('ID_SKTR'),
-						action : 'CETAKSKTR'
+						ID_IJIN_LINGKUNGAN : record.get('ID_IJIN_LINGKUNGAN'),
+						action : 'CETAKBA'
 					},success : function(){
-						window.open('../print/idam_lembarkontrol.html');
+						window.open('<?php echo base_url("print/lingkungan_ba.html")?>');
 					}
 				});
 			}
@@ -942,9 +951,10 @@
 			var record = in_lingkungan_gridPanel.getSelectionModel().getSelection()[0];
 			Ext.Ajax.request({
 				waitMsg: 'Please wait...',
-				url: 'c_sppl/switchAction',
+				url: 'c_ijin_lingkungan/switchAction',
 				params: {
-					sppl_id : record.get('ID_LINGKUNGAN'),
+					lingkungan_id : record.get('ID_IJIN_LINGKUNGAN'),
+					no_sk : record.get('NO_SK'),
 					proses : proses,
 					action : 'UBAHPROSES'
 				},success : function(){
@@ -1161,6 +1171,29 @@
 			id : 'NO_SKField',
 			name : 'NO_SK',
 			fieldLabel : 'NO_SK',
+			maxLength : 50
+		});
+		var RETRIBUSI_STATUSField = Ext.create('Ext.form.RadioGroup',{
+			fieldLabel : 'Retribusi ',
+			vertical : false,
+			items : [
+				{ boxLabel : 'Gratis', name : 's_retribusi', inputValue : '0', checked : true},
+				{ boxLabel : 'Bayar', name : 's_retribusi', inputValue : '1'}
+			],
+			listeners : {
+				change : function(com, newval, oldval, e){
+					if(newval.s_retribusi == 1){
+						RETRIBUSIField.show();
+					}else{
+						RETRIBUSIField.hide();
+					}
+				}
+			}
+		});
+		RETRIBUSIField = Ext.create('Ext.form.TextField',{
+			id : 'RETRIBUSIField',
+			name : 'RETRIBUSI',
+			fieldLabel : 'Retribusi',
 			maxLength : 50
 		});
 		NAMA_DIREKTURField = Ext.create('Ext.form.TextField',{
@@ -1978,6 +2011,8 @@
 						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUSField,"); ?>
 						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUS_SURVEYField,"); ?>
 						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("TGL_AKHIRField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSI_STATUSField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSIField,"); ?>
 						]
 				},{
 					xtype : 'fieldset',

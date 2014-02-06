@@ -199,6 +199,7 @@
 					LUAS_BANGUNANValue = LUAS_BANGUNANField.getValue();
 					STATUSValue = STATUSField.getValue();
 					STATUS_SURVEYValue = STATUS_SURVEYField.getValue();
+					RETRIBUSIValue = RETRIBUSIField.getValue();
 										
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -229,6 +230,7 @@
 							LUAS_BANGUNAN : LUAS_BANGUNANValue,
 							KETERANGAN : encoded_array_sktr_keterangan,
 							STATUS_SURVEY : STATUS_SURVEYValue,
+							RETRIBUSI : RETRIBUSIValue,
 							action : tr_dbTask
 						},
 						success: function(response){
@@ -414,6 +416,12 @@
 			TGL_BERAKHIRField.setValue(record.data.TGL_BERAKHIR);
 			STATUSField.setValue(record.data.STATUS);
 			STATUS_SURVEYField.setValue(record.data.STATUS_SURVEY);
+			RETRIBUSIField.setValue(record.data.RETRIBUSI);
+			if(record.data.RETRIBUSI != 0){
+				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['1'] });
+			}else{
+				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['0'] });
+			}
 			sktr_det_syaratDataStore.proxy.extraParams = { 
 				sktr_id : record.data.ID_SKTR,
 				currentAction : 'update',
@@ -649,7 +657,8 @@
 				{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
 				{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
 				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
-				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' }
+				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
+				{ name : 'RETRIBUSI', type : 'int', mapping : 'RETRIBUSI' }
 				]
 		});
 /* End DataStore declaration */
@@ -804,7 +813,7 @@
 						ID_SKTR : record.get('ID_SKTR'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('<?php echo base_url("index.php/c_sktr/printBP/"); ?>' + record.get('ID_SKTR'));
+						window.open('<?php echo base_url("print/sktr_bp.html"); ?>');
 					}
 				});
 			}
@@ -821,7 +830,7 @@
 						ID_SKTR : record.get('ID_SKTR'),
 						action : 'CETAKLK'
 					},success : function(){
-						window.open('../print/idam_sk.html');
+						window.open('<? echo base_url("print/sktr_lk.html"); ?>');
 					}
 				});
 			}
@@ -838,7 +847,7 @@
 						ID_SKTR : record.get('ID_SKTR'),
 						action : 'CETAKSKTR'
 					},success : function(){
-						window.open('../print/idam_lembarkontrol.html');
+						window.open('<? echo base_url("print/sktr_sk.html"); ?>');
 					}
 				});
 			}
@@ -855,6 +864,7 @@
 				url: 'c_sktr/switchAction',
 				params: {
 					sktr_id : record.get('ID_SKTR'),
+					no_sk : record.get('NO_SK'),
 					proses : proses,
 					action : 'UBAHPROSES'
 				},success : function(){
@@ -979,10 +989,10 @@
 								return 'Disetujui, sudah diambil';
 							}else if (value == 2){
 								return 'Disetujui, belum diambil';
-							} else if (value == null || value == ""){
-								return '-';
-							} else {
+							} else if (value == 0){
 								return 'Ditolak';
+							} else {
+								return '-';
 							}
 						}
 				},
@@ -1354,6 +1364,30 @@
 			triggerAction : 'all',
 			forceSelection : true
 		});
+		var RETRIBUSI_STATUSField = Ext.create('Ext.form.RadioGroup',{
+			fieldLabel : 'Retribusi ',
+			vertical : false,
+			items : [
+				{ boxLabel : 'Gratis', name : 's_retribusi', inputValue : '0', checked : true},
+				{ boxLabel : 'Bayar', name : 's_retribusi', inputValue : '1'}
+			],
+			listeners : {
+				change : function(com, newval, oldval, e){
+					if(newval.s_retribusi == 1){
+						RETRIBUSIField.show();
+					}else{
+						RETRIBUSIField.hide();
+					}
+				}
+			}
+		});
+		RETRIBUSIField = Ext.create('Ext.form.TextField',{
+			id : 'RETRIBUSIField',
+			name : 'RETRIBUSI',
+			fieldLabel : 'Nilai Retribusi',
+			maxLength : 50,
+			hidden : true,
+		});
 		STATUS_SURVEYField = Ext.create('Ext.form.ComboBox',{
 			id : 'STATUS_SURVEYField',
 			name : 'STATUS_SURVEY',
@@ -1510,6 +1544,8 @@
 						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("TGL_BERAKHIRField,"); ?>
 						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("STATUS_SURVEYField,"); ?>
 						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("STATUSField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSI_STATUSField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSIField,"); ?>
 							]
 				},{
 					xtype : 'fieldset',
