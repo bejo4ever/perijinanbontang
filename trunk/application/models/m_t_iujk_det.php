@@ -200,11 +200,22 @@ class M_t_iujk_det extends App_Model{
 		return $result;
 	}
 	
-	function getBidang(){
-		return $this->db->get('bidangjasa')->result();
+	function getBidang($iujkdet_id = 0){
+		$iujkdet_id = is_numeric($iujkdet_id) ? $iujkdet_id : 0;
+		$sql = "SELECT bidangjasa.id, bidangjasa.bidang, iujkbidang.id AS iujkbidang_id, iujk_id, nama_proyek, tahun_proyek, nilai_proyek
+			FROM bidangjasa
+			LEFT JOIN iujkbidang ON iujkbidang.bidangjasa_id = bidangjasa.id AND iujkbidang.iujk_id = ".$iujkdet_id." ";
+		$query = $this->db->query($sql);
+		return $query->result();
 	}
-	function getSubBidang(){
-		return $this->db->get('bidangjasa_sub')->result();
+	function getSubBidang($iujkdet_id = 0){
+		$iujkdet_id = is_numeric($iujkdet_id) ? $iujkdet_id : 0;
+		$sql = "SELECT bidangjasa_sub.id, bidangjasa_sub.bidang_jasa_id, bidangjasa_sub.nama, iujksubbidang.id As iujksubbidang_id 
+				,iujk_id FROM bidangjasa_sub
+				LEFT JOIN iujksubbidang ON iujksubbidang.bidangjasa_sub_id = bidangjasa_sub.id AND iujksubbidang.iujk_id = ".$iujkdet_id."
+				ORDER BY bidang_jasa_id ";
+		$query = $this->db->query($sql);
+		return $query->result();
 	}
 	
 }
