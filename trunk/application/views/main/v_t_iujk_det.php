@@ -359,9 +359,11 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
 									iujk_det_dataStore.reload();
 									iujk_det_resetForm();
+									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave, function(){
+										window.scrollTo(0,0);
+									});
 									iujk_det_switchToGrid();
 									iujk_det_gridPanel.getSelectionModel().deselectAll();
 									break;
@@ -382,7 +384,7 @@
 										animEl : 'save',
 										icon : Ext.MessageBox.WARNING,
 										fn : function(btn){
-											window.location="index.php";
+											window.location="../index.php";
 										}
 									});
 									break;
@@ -757,9 +759,9 @@
 					switch(result){
 						case 'success':
 							if(outputType == 'EXCEL'){
-								window.open('./print/t_iujk_det_list.xls');
+								window.open('../print/t_iujk_det_list.xls');
 							}else{
-								window.open('./print/t_iujk_det_list.html','iujk_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
+								window.open('../print/t_iujk_det_list.html','iujk_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
 							}
 						break;
 						default:
@@ -833,9 +835,9 @@
 				{ name : 'iujk_bidangusaha', type : 'string', mapping : 'iujk_bidangusaha' },
 				{ name : 'iujk_rt', type : 'int', mapping : 'iujk_rt' },
 				{ name : 'iujk_rw', type : 'int', mapping : 'iujk_rw' },
-				{ name : 'iujk_kelurahan', type : 'int', mapping : 'iujk_kelurahan' },
-				{ name : 'iujk_kota', type : 'int', mapping : 'iujk_kota' },
-				{ name : 'iujk_propinsi', type : 'int', mapping : 'iujk_propinsi' },
+				{ name : 'iujk_kelurahan', type : 'string', mapping : 'iujk_kelurahan' },
+				{ name : 'iujk_kota', type : 'string', mapping : 'iujk_kota' },
+				{ name : 'iujk_propinsi', type : 'string', mapping : 'iujk_propinsi' },
 				{ name : 'iujk_telepon', type : 'string', mapping : 'iujk_telepon' },
 				{ name : 'iujk_kodepos', type : 'string', mapping : 'iujk_kodepos' },
 				{ name : 'iujk_fax', type : 'string', mapping : 'iujk_fax' },

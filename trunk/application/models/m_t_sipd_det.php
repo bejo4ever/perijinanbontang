@@ -4,6 +4,9 @@ class M_t_sipd_det extends App_Model{
 				det_sipd_id,
 				det_sipd_sipd_id,
 				det_sipd_jenis,
+				CASE WHEN det_sipd_jenis = 1 THEN 'BARU'
+					ELSE 'PERPANJANGAN'
+					END AS det_sipd_jenis_nama,
 				det_sipd_tanggal,
 				det_sipd_pemohon_id,
 				det_sipd_nomorreg,

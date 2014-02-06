@@ -2,7 +2,7 @@
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Simb_det</title>
+	<title>Daftar Data SIMB</title>
 	<xml>
 	 <x:ExcelWorkbook>
 	  <x:ExcelWorksheets>
@@ -24,27 +24,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Simb_det</title>
+	<title>Daftar Data SIMB</title>
 	<link rel='stylesheet' type='text/css' href='../assets/css/printstyle.css'/>
 </head>
 <body onload="window.print();">
 <?php } ?>	<table>
-		<caption>Simb_det</caption>
+		<caption>Data Izin Minuman Beralkohol</caption>
 		<thead>
 			<tr>
 				<th align="center" width="50">No</td>
-				<th align="center">det_simb_simb_id</td>
-				<th align="center">det_simb_jenis</td>
-				<th align="center">det_simb_tanggal</td>
-				<th align="center">det_simb_pemohon_id</td>
-				<th align="center">det_simb_nomorreg</td>
-				<th align="center">det_simb_proses</td>
-				<th align="center">det_simb_sk</td>
-				<th align="center">det_simb_berlaku</td>
-				<th align="center">det_simb_kadaluarsa</td>
-				<th align="center">det_simb_penerima</td>
-				<th align="center">det_simb_tanggalterima</td>
-				<th align="center">det_simb_keterangan</td>
+				<th align="center">Jenis</td>
+				<th align="center">Tanggal</td>
+				<th align="center">Nama Pemohon</td>
+				<th align="center">Alamat</td>
+				<th align="center">Telp</td>
+				<th align="center">Perusahaan</td>
+				<th align="center">Lama Proses</td>
 				</tr>
 		</thead>
 		<tbody>
@@ -56,22 +51,17 @@
 			?>
 				<tr>
 					<td><?php echo $total_record; ?></td>
-					<td><?php echo $subrecord->det_simb_simb_id; ?></td>
-					<td><?php echo $subrecord->det_simb_jenis; ?></td>
-					<td><?php echo $subrecord->det_simb_tanggal; ?></td>
-					<td><?php echo $subrecord->det_simb_pemohon_id; ?></td>
-					<td><?php echo $subrecord->det_simb_nomorreg; ?></td>
-					<td><?php echo $subrecord->det_simb_proses; ?></td>
-					<td><?php echo $subrecord->det_simb_sk; ?></td>
-					<td><?php echo $subrecord->det_simb_berlaku; ?></td>
-					<td><?php echo $subrecord->det_simb_kadaluarsa; ?></td>
-					<td><?php echo $subrecord->det_simb_penerima; ?></td>
-					<td><?php echo $subrecord->det_simb_tanggalterima; ?></td>
-					<td><?php echo $subrecord->det_simb_keterangan; ?></td>
+					<td><?php echo $subrecord->det_simb_jenis_nama; ?></td>
+					<td><?php echo date('d-m-Y', strtotime($subrecord->det_simb_tanggal)); ?></td>
+					<td><?php echo $subrecord->pemohon_nama; ?></td>
+					<td><?php echo $subrecord->pemohon_alamat; ?></td>
+					<td><?php echo $subrecord->pemohon_telp; ?></td>
+					<td><?php echo $subrecord->simb_per_nama; ?></td>
+					<td><?php echo $subrecord->lamaproses; ?></td>
 					</tr>
 			<?php }} ?>			<tr>
-				<td colspan="12" align="left">Total</td>
-				<td><?php echo $total_record; ?></td>
+				<td>Total</td>
+				<td colspan="7"><?php echo $total_record; ?></td>
 			</tr>
 		<tbody>
 	</table>

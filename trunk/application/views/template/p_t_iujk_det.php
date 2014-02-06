@@ -2,7 +2,7 @@
 <html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Iujk_det</title>
+	<title>Daftar Data IUJK</title>
 	<xml>
 	 <x:ExcelWorkbook>
 	  <x:ExcelWorksheets>
@@ -24,30 +24,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<title>Daftar Data Iujk_det</title>
+	<title>Daftar Data IUJK</title>
 	<link rel='stylesheet' type='text/css' href='../assets/css/printstyle.css'/>
 </head>
 <body onload="window.print();">
 <?php } ?>	<table>
-		<caption>Iujk_det</caption>
+		<caption>DATA IUJK</caption>
 		<thead>
 			<tr>
 				<th align="center" width="50">No</td>
-				<th align="center">det_iujk_iujk_id</td>
-				<th align="center">det_iujk_jenis</td>
-				<th align="center">det_iujk_tanggal</td>
-				<th align="center">det_iujk_nama</td>
-				<th align="center">det_iujk_nomorreg</td>
-				<th align="center">det_iujk_rekomnomor</td>
-				<th align="center">det_iujk_rekomtanggal</td>
-				<th align="center">det_iujk_berlaku</td>
-				<th align="center">det_iujk_kadaluarsa</td>
-				<th align="center">det_iujk_pj1</td>
-				<th align="center">det_iujk_pj2</td>
-				<th align="center">det_iujk_pj3</td>
-				<th align="center">det_iujk_pjteknis</td>
-				<th align="center">det_iujk_pjtbu</td>
-				<th align="center">det_iujk_surveylulus</td>
+				<th align="center">Jenis</td>
+				<th align="center">Tanggal</td>
+				<th align="center">Nama Pemohon</td>
+				<th align="center">Alamat</td>
+				<th align="center">Telp</td>
+				<th align="center">Perusahaan</td>
+				<th align="center">Lama Proses</td>
 				</tr>
 		</thead>
 		<tbody>
@@ -59,25 +51,17 @@
 			?>
 				<tr>
 					<td><?php echo $total_record; ?></td>
-					<td><?php echo $subrecord->det_iujk_iujk_id; ?></td>
-					<td><?php echo $subrecord->det_iujk_jenis; ?></td>
-					<td><?php echo $subrecord->det_iujk_tanggal; ?></td>
-					<td><?php echo $subrecord->det_iujk_nama; ?></td>
-					<td><?php echo $subrecord->det_iujk_nomorreg; ?></td>
-					<td><?php echo $subrecord->det_iujk_rekomnomor; ?></td>
-					<td><?php echo $subrecord->det_iujk_rekomtanggal; ?></td>
-					<td><?php echo $subrecord->det_iujk_berlaku; ?></td>
-					<td><?php echo $subrecord->det_iujk_kadaluarsa; ?></td>
-					<td><?php echo $subrecord->det_iujk_pj1; ?></td>
-					<td><?php echo $subrecord->det_iujk_pj2; ?></td>
-					<td><?php echo $subrecord->det_iujk_pj3; ?></td>
-					<td><?php echo $subrecord->det_iujk_pjteknis; ?></td>
-					<td><?php echo $subrecord->det_iujk_pjtbu; ?></td>
-					<td><?php echo $subrecord->det_iujk_surveylulus; ?></td>
+					<td><?php echo $subrecord->det_iujk_jenis_nama; ?></td>
+					<td><?php echo date('d-m-Y', strtotime($subrecord->det_iujk_tanggal)); ?></td>
+					<td><?php echo $subrecord->pemohon_nama; ?></td>
+					<td><?php echo $subrecord->pemohon_alamat; ?></td>
+					<td><?php echo $subrecord->pemohon_telp; ?></td>
+					<td><?php echo $subrecord->iujk_perusahaan; ?></td>
+					<td><?php echo $subrecord->lamaproses; ?></td>
 					</tr>
 			<?php }} ?>			<tr>
-				<td colspan="15" align="left">Total</td>
-				<td><?php echo $total_record; ?></td>
+				<td>Total</td>
+				<td colspan="7"><?php echo $total_record; ?></td>
 			</tr>
 		<tbody>
 	</table>

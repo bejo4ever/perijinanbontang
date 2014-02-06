@@ -278,9 +278,11 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave);
 									iujt_det_dataStore.reload();
 									iujt_det_resetForm();
+									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave, function(){
+										window.scrollTo(0,0);
+									});
 									iujt_det_switchToGrid();
 									iujt_det_gridPanel.getSelectionModel().deselectAll();
 									break;
@@ -301,7 +303,7 @@
 										animEl : 'save',
 										icon : Ext.MessageBox.WARNING,
 										fn : function(btn){
-											window.location="index.php";
+											window.location="../index.php";
 										}
 									});
 									break;
@@ -612,9 +614,9 @@
 					switch(result){
 						case 'success':
 							if(outputType == 'EXCEL'){
-								window.open('./print/t_iujt_det_list.xls');
+								window.open('../print/t_iujt_det_list.xls');
 							}else{
-								window.open('./print/t_iujt_det_list.html','iujt_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
+								window.open('../print/t_iujt_det_list.html','iujt_detlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
 							}
 						break;
 						default:
@@ -1021,7 +1023,7 @@
 				{
 					text : 'Tanggal',
 					dataIndex : 'det_iujt_tanggal',
-					width : 100,
+					width : 80,
 					sortable : false,
 					renderer : Ext.util.Format.dateRenderer('d-m-Y')
 				},
@@ -1035,7 +1037,8 @@
 					text : 'NPWP',
 					dataIndex : 'pemohon_npwp',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
 					text : 'Alamat',
@@ -1082,7 +1085,7 @@
 				{
 					text : 'Lama Proses',
 					dataIndex : 'lamaproses',
-					width : 100,
+					width : 90,
 					sortable : false
 				},
 				{

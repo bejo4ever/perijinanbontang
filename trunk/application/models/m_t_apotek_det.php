@@ -6,7 +6,7 @@ class M_t_apotek_det extends App_Model{
 				det_apotek_jenis,
 				det_apotek_tanggal,
 				CASE WHEN det_apotek_jenis = 1 THEN 'BARU'
-					ELSE 'PERPANJANGAN'
+					ELSE 'PERUBAHAN'
 					END AS det_apotek_jenis_nama,
 				det_apotek_surveylulus,
 				det_apotek_terima,
