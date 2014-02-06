@@ -171,7 +171,8 @@ class C_master_ijin extends CI_Controller{
 			'limit_end' => 0
 		);
 		
-		$data['records'] = $this->m_master_ijin->printExcel($params)[1];
+		$records = $this->m_master_ijin->printExcel($params);
+		$data['records'] = $records[1];
 		$data['type']=$outputType;
 		
 		$print_view=$this->load->view('template/p_master_ijin.php',$data,TRUE);

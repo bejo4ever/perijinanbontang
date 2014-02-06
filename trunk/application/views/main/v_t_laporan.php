@@ -84,6 +84,7 @@
 /* Start DataStore declaration */
 		laporan_ijindataStore = Ext.create('Ext.data.Store',{
 			pageSize : globalPageSize,
+			autoLoad : true,
 			proxy : Ext.create('Ext.data.HttpProxy',{
 				url : 'c_master_ijin/switchAction',
 				reader : {
@@ -110,7 +111,7 @@
 		laporan_ijinField=Ext.create('Ext.form.ComboBox',{
 			fieldLabel:'<b>Perijinan </b>',
 			store : laporan_ijindataStore,
-			mode: 'remote',
+			mode: 'local',
 			displayField: 'NAMA_IJIN',
 			valueField: 'ID_IJIN',
 			width: 100,
