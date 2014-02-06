@@ -9,7 +9,7 @@
 	<table width="680px" align="center" cellpadding="0" cellspacing="0" style="padding:20px;border:2px solid black;">
 		<tr>
 			<td rowspan="4" align="center"><img src="<?php echo base_url(); ?>assets/images/logo-bontang.jpg" width="50px" height="60px"></td>
-			<td align="center" colspan="4"><h4 style="margin:0px;">BUKTI PENERIMAAN DOKUMEN IZIN DEPO AIR MINUM</h4></td>
+			<td align="center" colspan="4"><h4 style="margin:0px;">BUKTI PENERIMAAN DOKUMEN SURAT PERNYATAAN KESANGGUPAN PENGELOLAAN DAN PEMANTAUAN LINGKUNGAN HIDUP</h4></td>
 		</tr>
 		<tr>
 			<td align="center" colspan="4"><h4 style="margin:0px;">BADAN PELAYANAN PERIJINAN TERPADU DAN PENANAMAN MODAL</h4></td>

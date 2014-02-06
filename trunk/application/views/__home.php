@@ -127,11 +127,11 @@
                 <!-- content -->
                 <div class="col-md-12">
                     <div class="row" id="mainpanel">
-					<?php echo (isset($content)) ? ($content) : (""); ?>
+						<?//php echo $content; ?>
                     </div>
                 </div>
             </div>           
         </div>
-        <!--/.fluid-container-->
+		<!--/.fluid-container-->
     </body>
 </html>

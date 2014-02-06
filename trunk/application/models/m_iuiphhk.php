@@ -106,7 +106,8 @@ class M_iuiphhk extends App_Model{
 				STATUS_SURVEY,
 				STATUS,
 				TGL_BERLAKU,
-				TGL_BERAKHIR
+				TGL_BERAKHIR,
+				RETRIBUSI
 				FROM iuiphhk 
 			WHERE ID_IUIPHHK IS NOT NULL 
 	";
@@ -576,5 +577,26 @@ class M_iuiphhk extends App_Model{
 		}
 		return $result;
 	}
-	
+	function getSyarat($params){
+		extract($params);
+		if($currentAction == 'update'){
+			$sql = "
+				SELECT cek_list_iuiphhk.ID_SYARAT,cek_list_iuiphhk.ID_IJIN,cek_list_iuiphhk.`STATUS`,cek_list_iuiphhk.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_iuiphhk RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_iuiphhk.ID_SYARAT AND cek_list_iuiphhk.ID_IJIN = '" . $iuiphhk_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 11;
+			";
+		}else{
+			$sql = "
+				SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 11;
+			";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
+	function getSyarat2(){
+		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 11;");
+		return $query->result_array();
+	}
+	function get_lk($iuiphhk_id){
+		$query	= $this->db->query("SELECT cek_list_iuiphhk.ID_SYARAT,cek_list_iuiphhk.ID_IJIN,cek_list_iuiphhk.`STATUS`,cek_list_iuiphhk.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_iuiphhk RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_iuiphhk.ID_SYARAT AND cek_list_iuiphhk.ID_IJIN = '" . $iuiphhk_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 11;");
+		return $query;
+	}
 }

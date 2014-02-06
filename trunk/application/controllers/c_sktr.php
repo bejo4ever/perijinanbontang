@@ -7,11 +7,12 @@ class C_sktr extends CI_Controller{
 		$this->load->model('m_sktr');
 		$this->load->model('m_m_pemohon');
 		$this->load->model('m_cek_list_sktr');
+		$this->load->model('m_public_function');
 	}
 	
 	function index(){
-		$this->load->view('home.php');
-		$this->load->view('main/v_sktr');
+		$data["content"]	= $this->load->view('main/v_sktr',"",true);
+		$this->load->view('home',$data);
 	}
 	
 	function switchAction(){
@@ -47,7 +48,7 @@ class C_sktr extends CI_Controller{
 			case 'CETAKLK':
 				$this->printLK();
 			break;
-			case 'CETAKSK':
+			case 'CETAKSKTR':
 				$this->printSK();
 			break;
 			case 'UBAHPROSES':
@@ -107,6 +108,7 @@ class C_sktr extends CI_Controller{
 		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
 		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
 		
@@ -163,6 +165,7 @@ class C_sktr extends CI_Controller{
 						'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
 						'LUAS_PERSIL'=>$LUAS_PERSIL,
 						'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
+						'RETRIBUSI'=>$RETRIBUSI,
 						);
 					}
 					$result = $this->m_sktr->__insert($data, '', 'insertId');
@@ -293,7 +296,8 @@ class C_sktr extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		
+		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
+		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
 		$tr_updated_by = $this->m_sktr->__checkSession();
 		$tr_updated_date = date('Y-m-d H:i:s');
 		$pemohon	= $this->m_m_pemohon->get_by(array("pemohon_user_id"=>$_SESSION["USERID"]),FALSE,FALSE,TRUE);
@@ -330,6 +334,7 @@ class C_sktr extends CI_Controller{
 				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				'STATUS'=>$STATUS,
+				'RETRIBUSI'=>$RETRIBUSI,
 				);
 			$result = $this->m_sktr->save($data, $ID_SKTR);
 			$sktr_keterangan = json_decode($this->input->post('KETERANGAN'));
@@ -469,11 +474,21 @@ class C_sktr extends CI_Controller{
 	}
 	function ubahProses(){
 		$sktr_id  = $this->input->post('sktr_id');
+		$no_sk  = $this->input->post('no_sk');
 		$proses  = $this->input->post('proses');
 		($proses == "Selesai, belum diambil") ? ($proses = 2) : (($proses == "Selesai, sudah diambil") ? ($proses = 1) : ($proses = 0));
-		$data = array(
-			"STATUS"=>$proses
-		);
+		if (($no_sk == "" || $no_sk == NULL) && $proses != 0){
+			($proses == 2 || $proses == 1) ? ($nosk = $this->m_public_function->getNomorSk("sktr")) : ($nosk = NULL);
+			$data = array(
+				"NO_SK"=>$nosk,
+				"STATUS"=>$proses,
+				"TGL_BERLAKU"=>date("Y-m-d")
+			);
+		} else {
+			$data = array(
+				"STATUS"=>$proses
+			);
+		}
 		$result = $this->m_sktr->__update($data, $sktr_id, '', '','');
 		echo $result;
 	}
@@ -489,11 +504,40 @@ class C_sktr extends CI_Controller{
 		$result = $this->m_sktr->getSyarat($params);
 		echo $result;
 	}
-	function printBP($id_sktr=FALSE){
+	function printBP(){
+		$id_sktr  = $this->input->post('ID_SKTR');
 		$this->load->model("m_master_ijin");
-		$data["sppl"]	= $this->m_sktr->get_by(array("ID_SKTR"=>$id_sktr),FALSE,FALSE,TRUE);
+		$data["sktr"]	= $this->m_sktr->get_by(array("ID_SKTR"=>$id_sktr),FALSE,FALSE,TRUE);
 		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>10),FALSE,FALSE,TRUE);
-		$this->load->view("template/sktr_bp",$data);
-		
+		$print_view		= $this->load->view("template/sktr_bp",$data,true);
+		$print_file=fopen('print/sktr_bp.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printSK(){
+		$id_sktr  = $this->input->post('ID_SKTR');
+		$this->load->model("m_master_ijin");
+		$join	= array(array("table"=>"sktr","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id"));
+		$data["sktr"]	= $this->m_sktr->get_join_by($join,array("ID_SKTR"=>$id_sktr),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>10),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/sktr_sk",$data,true);
+		$print_file=fopen('print/sktr_sk.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printLK($id_sktr=FALSE){
+		$ID_SKTR  = $this->input->post('ID_SKTR');
+		// $params = array(
+			// "sktr_id"=>$ID_SKTR,
+			// "currentAction"=>'update',
+		// );
+		$join	= array(array("table"=>"sktr","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id"));
+		$printrecord = $this->m_sktr->get_join_by($join,array("ID_SKTR"=>$ID_SKTR),TRUE,FALSE);
+		$dataceklist = $this->m_sktr->get_lk($ID_SKTR);
+		$data['printrecord'] = $printrecord;
+		$data['dataceklist'] = $dataceklist;
+		$print_view=$this->load->view('template/sktr_lk',$data,TRUE);
+		// $this->load->view('template/sktr_lk',$data);
+		$print_file=fopen('print/sktr_lk.html','w+');
+		fwrite($print_file, $print_view);
+		// echo $ID_SKTR;
 	}
 }

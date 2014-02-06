@@ -10,8 +10,8 @@ class C_ijin_lingkungan extends CI_Controller{
 	}
 	
 	function index(){
-		$this->load->view('home.php');
-		$this->load->view('main/v_ijin_lingkungan');
+		$data["content"]	= $this->load->view('main/v_ijin_lingkungan',"",true);
+		$this->load->view('home.php',$data);
 	}
 	
 	function switchAction(){
@@ -40,6 +40,18 @@ class C_ijin_lingkungan extends CI_Controller{
 			break;
 			case 'CETAKBP':
 				$this->printBP();
+			break;
+			case 'CETAKLK':
+				$this->printLK();
+			break;
+			case 'CETAKSK':
+				$this->printSK();
+			break;
+			case 'CETAKBA':
+				$this->printBA();
+			break;
+			case 'UBAHPROSES':
+				$this->ubahProses();
 			break;
 			case 'EXCEL':
 				$this->printExcel();
@@ -122,6 +134,7 @@ class C_ijin_lingkungan extends CI_Controller{
 		/*End Inti*/
 		
 		/*Data Pemohon*/
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
 		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
 		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
 		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
@@ -426,9 +439,22 @@ class C_ijin_lingkungan extends CI_Controller{
 					'STATUS'=>$STATUS,
 					'STATUS_SURVEY'=>$STATUS_SURVEY,
 					);
-			$result = $this->m_ijin_lingkungan->__update($data, $ID_IJIN_LINGKUNGAN, '', '');
+			$result = $this->m_ijin_lingkungan->__update($data, $ID_IJIN_LINGKUNGAN, FALSE, 'updateId');
+			$lingkungan_ket	= json_decode($this->input->post('KETERANGAN'));
+			$syarat		= $this->m_ijin_lingkungan->getSyarat2();
+			$this->load->model("m_cek_list_lingkungan");
+			$this->m_cek_list_lingkungan->delete($ID_IJIN_LINGKUNGAN);
+			$i=0;
+			foreach($syarat as $row){
+				$datacek = array(
+				"ID_IJIN"=>$ID_IJIN_LINGKUNGAN,
+				"ID_SYARAT"=>$row["ID_SYARAT"],
+				"KETERANGAN"=>$lingkungan_ket[$i]);
+				$i++;
+				$this->m_ijin_lingkungan->__insert($datacek, 'cek_list_lingkungan', 'insertId');
+			}
+			echo "success";
 		}
-		echo $result;
 	}
 	
 	function delete(){
@@ -538,14 +564,78 @@ class C_ijin_lingkungan extends CI_Controller{
 		$result = $this->m_ijin_lingkungan->getSyarat($params);
 		echo $result;
 	}
-	function printBP($id_ijin_lingkungan=FALSE){
+	function printBP(){
+		$id_ijin_lingkungan  = $this->input->post('ID_IJIN_LINGKUNGAN');
 		$this->load->model("m_master_ijin");
 		$join	= array(
 			array("table"=>"ijin_lingkungan","join_key"=>"ID_IJIN_LINGKUNGAN_INTI","join_table"=>"ijin_lingkungan_inti")
 		);
-		$data["sppl"]	= $this->m_ijin_lingkungan->get_join_by($join,array("ID_IJIN_LINGKUNGAN"=>$id_ijin_lingkungan),TRUE,FALSE);
-		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>7),FALSE,FALSE,TRUE);
-		$this->load->view("template/lingkungan_bp",$data);
+		$data["lingkungan"]	= $this->m_ijin_lingkungan->get_join_by($join,array("ID_IJIN_LINGKUNGAN"=>$id_ijin_lingkungan),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>8),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/lingkungan_bp",$data,true);
+		$print_file=fopen('print/lingkungan_bp.html','w+');
+		fwrite($print_file, $print_view);
 		
+	}
+	function printSK(){
+		$id_ijin_lingkungan  = $this->input->post('ID_IJIN_LINGKUNGAN');
+		$this->load->model("m_master_ijin");
+		$join	= array(
+					array("table"=>"ijin_lingkungan","join_key"=>"ID_IJIN_LINGKUNGAN_INTI","join_table"=>"ijin_lingkungan_inti"),
+					array("table"=>"ijin_lingkungan_inti","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id")
+					);
+		$data["ijin_lingkungan"]	= $this->m_ijin_lingkungan->get_join_by($join,array("ID_IJIN_LINGKUNGAN"=>$id_ijin_lingkungan),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>8),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/lingkungan_sk",$data,true);
+		$print_file=fopen('print/lingkungan_sk.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printBA(){
+		$id_ijin_lingkungan  = $this->input->post('ID_IJIN_LINGKUNGAN');
+		$this->load->model("m_master_ijin");
+		$join	= array(
+					array("table"=>"ijin_lingkungan","join_key"=>"ID_IJIN_LINGKUNGAN_INTI","join_table"=>"ijin_lingkungan_inti"),
+					array("table"=>"ijin_lingkungan_inti","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id")
+					);
+		$data["ijin_lingkungan"]	= $this->m_ijin_lingkungan->get_join_by($join,array("ID_IJIN_LINGKUNGAN"=>$id_ijin_lingkungan),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>8),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/lingkungan_ba",$data,true);
+		$print_file=fopen('print/lingkungan_ba.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printLK(){
+		$ID_IJIN_LINGKUNGAN  = $this->input->post('ID_IJIN_LINGKUNGAN');
+		$join	= array(
+					array("table"=>"ijin_lingkungan","join_key"=>"ID_IJIN_LINGKUNGAN_INTI","join_table"=>"ijin_lingkungan_inti"),
+					array("table"=>"ijin_lingkungan_inti","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id")
+					);
+		$printrecord = $this->m_ijin_lingkungan->get_join_by($join,array("ID_IJIN_LINGKUNGAN"=>$ID_IJIN_LINGKUNGAN),TRUE,FALSE);
+		$dataceklist = $this->m_ijin_lingkungan->get_lk($ID_IJIN_LINGKUNGAN);
+		$data['printrecord'] = $printrecord;
+		$data['dataceklist'] = $dataceklist;
+		$print_view=$this->load->view('template/lingkungan_lk',$data,TRUE);
+		$print_file=fopen('print/lingkungan_lk.html','w+');
+		fwrite($print_file, $print_view);
+		// echo $ID_SKTR;
+	}
+	function ubahProses(){
+		$lingkungan_id  = $this->input->post('lingkungan_id');
+		$no_sk  = $this->input->post('no_sk');
+		$proses  = $this->input->post('proses');
+		($proses == "Selesai, belum diambil") ? ($proses = 2) : (($proses == "Selesai, sudah diambil") ? ($proses = 1) : ($proses = 0));
+		if (($no_sk == "" || $no_sk == NULL) && $proses != 0){
+			($proses == 2 || $proses == 1) ? ($nosk = $this->m_public_function->getNomorSk("lingkungan")) : ($nosk = NULL);
+			$data = array(
+				"NO_SK"=>$nosk,
+				"STATUS"=>$proses,
+				"TGL_AWAL"=>date("Y-m-d")
+			);
+		} else {
+			$data = array(
+				"STATUS"=>$proses,
+			);
+		}
+		$result = $this->m_ijin_lingkungan->__update($data, $lingkungan_id, '', '','');
+		echo $result;
 	}
 }

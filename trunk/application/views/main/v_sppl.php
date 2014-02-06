@@ -180,6 +180,7 @@
 					STATUSValue = STATUSField.getValue();
 					STATUS_SURVEYValue = STATUS_SURVEYField.getValue();
 					TGL_BERAKHIRValue = TGL_BERAKHIRField.getValue();
+					RETRIBUSIValue = RETRIBUSIField.getValue();
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_sppl/switchAction',
@@ -397,6 +398,12 @@
 			STATUSField.setValue(record.data.STATUS);
 			STATUS_SURVEYField.setValue(record.data.STATUS_SURVEY);
 			TGL_BERAKHIRField.setValue(record.data.TGL_BERAKHIR);
+			RETRIBUSIField.setValue(record.data.RETRIBUSI);
+			if(record.data.RETRIBUSI != 0){
+				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['1'] });
+			}else{
+				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['0'] });
+			}
 			sppl_syaratDataStore.proxy.extraParams = { 
 				sppl_id : record.data.ID_SPPL,
 				currentAction : 'update',
@@ -607,6 +614,7 @@
 				{ name : 'LUAS_TAPAK_BANGUNAN', type : 'float', mapping : 'LUAS_TAPAK_BANGUNAN' },
 				{ name : 'LUAS_KEGIATAN', type : 'float', mapping : 'LUAS_KEGIATAN' },
 				{ name : 'LUAS_PARKIR', type : 'float', mapping : 'LUAS_PARKIR' },
+				{ name : 'RETRIBUSI', type : 'float', mapping : 'RETRIBUSI' },
 				]
 		});
 /* End DataStore declaration */
@@ -761,7 +769,7 @@
 						ID_SPPL : record.get('ID_SPPL'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('<?php echo base_url("index.php/c_sppl/cetak_bp/")?>' + record.get('ID_SPPL'));
+						window.open('<?php echo base_url("print/sppl_bp.html/")?>');
 					}
 				});
 			}
@@ -770,32 +778,32 @@
 			text : 'Lembar Kontrol',
 			tooltip : 'Cetak Lembar Kontrol',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = pl_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
 					url: 'c_sppl/switchAction',
 					params: {
-						ID_SKTR : record.get('ID_SKTR'),
+						ID_SPPL : record.get('ID_SPPL'),
 						action : 'CETAKLK'
 					},success : function(){
-						window.open('../print/idam_sk.html');
+						window.open('<?php echo base_url("print/sppl_lk.html/")?>');
 					}
 				});
 			}
 		});
 		var stkr_sppl_printCM = Ext.create('Ext.menu.Item',{
-			text : 'SKTR',
-			tooltip : 'Cetak SKTR',
+			text : 'SPPL',
+			tooltip : 'Cetak SPPL',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = pl_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
 					url: 'c_sppl/switchAction',
 					params: {
-						ID_SKTR : record.get('ID_SKTR'),
-						action : 'CETAKSKTR'
+						ID_SPPL : record.get('ID_SPPL'),
+						action : 'CETAKSPPL'
 					},success : function(){
-						window.open('../print/idam_lembarkontrol.html');
+						window.open('<?php echo base_url("print/sppl_sk.html/")?>');
 					}
 				});
 			}
@@ -806,16 +814,17 @@
 			]
 		});
 		function sppl_ubahProses(proses){
-			var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+			var record = pl_gridPanel.getSelectionModel().getSelection()[0];
 			Ext.Ajax.request({
 				waitMsg: 'Please wait...',
 				url: 'c_sppl/switchAction',
 				params: {
-					sppl_id : record.get('ID_SKTR'),
+					sppl_id : record.get('ID_SPPL'),
 					proses : proses,
+					no_sk : record.get('NO_SK'),
 					action : 'UBAHPROSES'
 				},success : function(){
-					tr_dataStore.reload();
+					pl_dataStore.reload();
 				}
 			});
 		}
@@ -1039,6 +1048,30 @@
 			name : 'NO_SK',
 			fieldLabel : 'No. SK',
 			maxLength : 50
+		});
+		var RETRIBUSI_STATUSField = Ext.create('Ext.form.RadioGroup',{
+			fieldLabel : 'Retribusi ',
+			vertical : false,
+			items : [
+				{ boxLabel : 'Gratis', name : 's_retribusi', inputValue : '0', checked : true},
+				{ boxLabel : 'Bayar', name : 's_retribusi', inputValue : '1'}
+			],
+			listeners : {
+				change : function(com, newval, oldval, e){
+					if(newval.s_retribusi == 1){
+						RETRIBUSIField.show();
+					}else{
+						RETRIBUSIField.hide();
+					}
+				}
+			}
+		});
+		RETRIBUSIField = Ext.create('Ext.form.TextField',{
+			id : 'RETRIBUSIField',
+			name : 'RETRIBUSI',
+			fieldLabel : 'Nilai Retribusi',
+			maxLength : 50,
+			hidden : true,
 		});
 		NO_SK_LAMAField = Ext.create('Ext.form.ComboBox',{
 			name : 'NO_SK_LAMA',
@@ -1481,8 +1514,6 @@
 					layout :'form',
 					items : [
 						ID_SPPLField,
-						// ID_USERField,
-						// NO_SKField,
 						NAMA_USAHAField,
 						PENANGGUNG_JAWABField,
 						NO_TELPField,
@@ -1499,6 +1530,8 @@
 						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("TGL_BERAKHIRField,"); ?>
 						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("STATUS_SURVEYField,"); ?>
 						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("STATUSField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSI_STATUSField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSIField,"); ?>
 											]
 				},{
 					xtype : 'fieldset',

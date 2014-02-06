@@ -10,8 +10,8 @@ class C_sppl extends CI_Controller{
 	}
 	
 	function index(){
-		$this->load->view('home.php');
-		$this->load->view('main/v_sppl');
+		$data["content"]	= $this->load->view('main/v_sppl',"",true);
+		$this->load->view('home.php',$data);
 	}
 	
 	function switchAction(){
@@ -41,8 +41,17 @@ class C_sppl extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
+			case 'CETAKLK':
+				$this->printLK();
+			break;
 			case 'CETAKBP':
-				$this->cetak_bp();
+				$this->printBP();
+			break;
+			case 'CETAKSPPL':
+				$this->printSK();
+			break;
+			case 'UBAHPROSES':
+				$this->ubahProses();
 			break;
 			default :
 				echo '{ failure : true }';
@@ -200,7 +209,7 @@ class C_sppl extends CI_Controller{
 					'LUAS_KEGIATAN'=>$LUAS_KEGIATAN,
 					'LUAS_PARKIR'=>$LUAS_PARKIR,
 					'TGL_PERMOHONAN'=>date("Y-m-d"),
-					'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+					'TGL_BERAKHIR'=>$TANGGAL_BERAKHIR,
 					'STATUS'=>$STATUS,
 					'STATUS'=>$STATUS_SURVEY,
 					);
@@ -316,7 +325,26 @@ class C_sppl extends CI_Controller{
 		$result = $this->m_sppl->__delete($arrayId,'');
 		echo $result;
 	}
-	
+	function ubahProses(){
+		$sppl_id  = $this->input->post('sppl_id');
+		$no_sk  = $this->input->post('no_sk');
+		$proses  = $this->input->post('proses');
+		($proses == "Selesai, belum diambil") ? ($proses = 2) : (($proses == "Selesai, sudah diambil") ? ($proses = 1) : ($proses = 0));
+		if (($no_sk == "" || $no_sk == NULL) && $proses != 0){
+			($proses == 2 || $proses == 1) ? ($nosk = $this->m_public_function->getNomorSk("sppl")) : ($nosk = NULL);
+			$data = array(
+				"NO_SK"=>$nosk,
+				"STATUS"=>$proses,
+				"TGL_BERLAKU"=>date("Y-m-d")
+			);
+		} else {
+			$data = array(
+				"STATUS"=>$proses
+			);
+		}
+		$result = $this->m_sppl->__update($data, $sppl_id, '', '','');
+		echo $result;
+	}
 	function search(){
 		$limit_start = (integer)$this->input->post('start');
 		$limit_end = (integer)$this->input->post('limit');
@@ -437,11 +465,34 @@ class C_sppl extends CI_Controller{
 		$result = $this->m_sppl->getSyarat($params);
 		echo $result;
 	}
-	function cetak_bp($id_sppl=FALSE){
+	function printBP(){
 		$this->load->model("m_master_ijin");
+		$id_sppl  = $this->input->post('ID_SPPL');
 		$data["sppl"]	= $this->m_sppl->get_by(array("ID_SPPL"=>$id_sppl),FALSE,FALSE,TRUE);
 		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>9),FALSE,FALSE,TRUE);
-		$this->load->view("template/sppl_bp",$data);
-		
+		$print_view		= $this->load->view("template/sppl_bp",$data,true);
+		$print_file=fopen('print/sppl_bp.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printLK($id_sppl=FALSE){
+		$ID_SPPL  = $this->input->post('ID_SPPL');
+		$join	= array(array("table"=>"sppl","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id"));
+		$printrecord = $this->m_sppl->get_join_by($join,array("ID_SPPL"=>$ID_SPPL),TRUE,FALSE);
+		$dataceklist = $this->m_sppl->get_lk($ID_SPPL);
+		$data['printrecord'] = $printrecord;
+		$data['dataceklist'] = $dataceklist;
+		$print_view=$this->load->view('template/sppl_lk',$data,TRUE);
+		$print_file=fopen('print/sppl_lk.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printSK(){
+		$id_sppl  = $this->input->post('ID_SPPL');
+		$this->load->model("m_master_ijin");
+		$join	= array(array("table"=>"sppl","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id"));
+		$data["sppl"]	= $this->m_sppl->get_join_by($join,array("ID_SPPL"=>$id_sppl),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>10),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/sppl_sk",$data,true);
+		$print_file=fopen('print/sppl_sk.html','w+');
+		fwrite($print_file, $print_view);
 	}
 }

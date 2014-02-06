@@ -146,15 +146,22 @@ class App_model extends CI_Model{
         $method = $single ? 'row_array' : 'result_array';
         return $this->db->get($this->table_name)->$method();
     }
-	function get_join_by($data,$key,$single=FALSE,$column=FALSE){ //Zulmi Adi Rizki 23 Juli 2013
+	function get_join_by($data,$key=FALSE,$single=FALSE,$column=FALSE){ //Zulmi Adi Rizki 23 Juli 2013
 		foreach($data as $row){
-			$this->db->join($row["join_table"],$row["table"].".".$row["join_key"]."=".$row["join_table"].".".$row["join_key"]);
+			$join_key	= (isset($row["join_key2"])) ? ($row["join_key2"]) : ($row["join_key"]);
+			if(isset($row["join_type"])){
+				$this->db->join($row["join_table"],$row["table"].".".$row["join_key"]."=".$row["join_table"].".".$join_key, $row["join_type"]);
+			} else {
+				$this->db->join($row["join_table"],$row["table"].".".$row["join_key"]."=".$row["join_table"].".".$join_key);
+			}
 		}
-		if(!is_array($key)){
-			$this->db->where($key);
-		} else {
-			$key = array_map('htmlentities', $key);
-			$this->db->where($key);
+		if($key == TRUE){
+			if(!is_array($key)){
+				$this->db->where($key);
+			} else {
+				$key = array_map('htmlentities', $key);
+				$this->db->where($key);
+			}
 		}
 		count($this->db->ar_orderby) || $this->db->order_by($this->column_order);
 		$this->db->select($column == FALSE ? "*" : $column)->from($this->table_name);

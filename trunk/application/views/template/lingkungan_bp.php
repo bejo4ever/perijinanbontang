@@ -9,7 +9,7 @@
 	<table width="680px" align="center" cellpadding="0" cellspacing="0" style="padding:20px;border:2px solid black;">
 		<tr>
 			<td rowspan="4" align="center"><img src="<?php echo base_url(); ?>assets/images/logo-bontang.jpg" width="50px" height="60px"></td>
-			<td align="center" colspan="4"><h4 style="margin:0px;">BUKTI PENERIMAAN DOKUMEN IZIN DEPO AIR MINUM</h4></td>
+			<td align="center" colspan="4"><h4 style="margin:0px;">BUKTI PENERIMAAN DOKUMEN IZIN LINGKUNGAN</h4></td>
 		</tr>
 		<tr>
 			<td align="center" colspan="4"><h4 style="margin:0px;">BADAN PELAYANAN PERIJINAN TERPADU DAN PENANAMAN MODAL</h4></td>
@@ -22,15 +22,15 @@
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Nama Perusahaan</span></td>
-			<td colspan="3">: <?php echo $sppl["NAMA_PERUSAHAAN"]; ?></td>
+			<td colspan="3">: <?php echo $lingkungan["NAMA_PERUSAHAAN"]; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Alamat Perusahaan</span></td>
-			<td colspan="3">: <?php echo $sppl["ALAMAT_PERUSAHAAN"]; ?></td>
+			<td colspan="3">: <?php echo $lingkungan["ALAMAT_PERUSAHAAN"]; ?></td>
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Tanggal Masuk</span></td>
-			<td colspan="3">: <?php echo date('d-m-Y', strtotime($sppl["TGL_PERMOHONAN"])); ?></td>
+			<td colspan="3">: <?php echo date('d-m-Y', strtotime($lingkungan["TGL_PERMOHONAN"])); ?></td>
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Perkiraan Selesai</span></td>

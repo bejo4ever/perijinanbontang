@@ -158,4 +158,8 @@ class M_ijin_prinsip extends App_Model{
 		$query = $this->db->query("SELECT master_syarat.ID_SYARAT,master_syarat.NAMA_SYARAT FROM `dt_syarat` JOIN master_syarat ON master_syarat.ID_SYARAT=dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 12;");
 		return $query->result_array();
 	}
+	function get_lk($ijin_prinsip_id){
+		$query	= $this->db->query("SELECT cek_list_prinsip.ID_SYARAT,cek_list_prinsip.ID_IJIN,cek_list_prinsip.`STATUS`,cek_list_prinsip.KETERANGAN,master_syarat.NAMA_SYARAT FROM cek_list_prinsip RIGHT JOIN dt_syarat ON dt_syarat.ID_SYARAT = cek_list_prinsip.ID_SYARAT AND cek_list_prinsip.ID_IJIN = '" . $ijin_prinsip_id . "' JOIN master_syarat ON master_syarat.ID_SYARAT = dt_syarat.ID_SYARAT WHERE dt_syarat.ID_IJIN = 12;");
+		return $query;
+	}
 }
