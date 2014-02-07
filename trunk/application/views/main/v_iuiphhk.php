@@ -4458,7 +4458,7 @@
 						items : [
 							// TGL_PERMOHONANField,
 							STATUS_SURVEYField,
-							STATUSField,
+							// STATUSField,
 							// TGL_BERLAKUField,
 							TGL_BERAKHIRField,
 							<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSI_STATUSField,"); ?>

@@ -2008,7 +2008,7 @@
 						KAPASITASField,
 						IZIN_SKTRField,
 						IZIN_LOKASIField,
-						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUSField,"); ?>
+						<?//php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUSField,"); ?>
 						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("STATUS_SURVEYField,"); ?>
 						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("TGL_AKHIRField,"); ?>
 						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSI_STATUSField,"); ?>
