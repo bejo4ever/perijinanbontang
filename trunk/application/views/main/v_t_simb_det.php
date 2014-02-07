@@ -471,6 +471,7 @@
 			simb_det_dbTaskMessage = 'create';
 			simb_det_formPanel.getForm().reset();
 			det_simb_idField.setValue(0);
+			window.scrollTo(0,0);
 		}
 		
 		function simb_det_setForm(){

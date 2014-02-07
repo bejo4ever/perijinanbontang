@@ -676,7 +676,7 @@
 								window.location = "<?php echo site_url(); ?>/";
 							}
 						}],
-						<?//php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
+						<?php //php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
 					}	
 								
 				],

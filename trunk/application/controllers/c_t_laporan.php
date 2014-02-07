@@ -61,6 +61,7 @@ class C_t_laporan extends CI_Controller{
 			$file_name = ($outputType == 'PRINT') ? "laporan_sk.html" : 'laporan_sk.xls';
 		}
 		
+		$file_name = str_replace(' ','',$laporan_ijin_nama).'_'.$file_name;
 		$data['params'] = $params;
 		$data['printrecord'] = $printrecord[1];
 		$print_view=$this->load->view('template/'.$view_name, $data, TRUE);
