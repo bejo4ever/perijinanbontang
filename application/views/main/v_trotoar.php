@@ -167,7 +167,8 @@
 					pemohon_alamatValue = pemohon_alamatField.getValue();
 					pemohon_idValue = pemohon_idField.getValue();
 					pemohon_nikValue = pemohon_nikField.getValue();
-										
+					RETRIBUSIValue = RETRIBUSIField.getValue();
+					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_trotoar/switchAction',
@@ -192,6 +193,7 @@
 							pemohon_id : pemohon_idValue,
 							pemohon_nik : pemohon_nikValue,
 							KETERANGAN : encoded_array_otoar_keterangan,
+							RETRIBUSI : RETRIBUSIValue,
 							action : otoar_dbTask
 						},
 						success: function(response){
@@ -371,6 +373,12 @@
 			pemohon_namaField.setValue(record.data.pemohon_nama);
 			pemohon_telpField.setValue(record.data.pemohon_telp);
 			pemohon_alamatField.setValue(record.data.pemohon_alamat);
+			RETRIBUSIField.setValue(record.data.RETRIBUSI);
+			if(record.data.RETRIBUSI != 0){
+				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['1'] });
+			}else{
+				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['0'] });
+			}
 			otoar_syaratDataStore.proxy.extraParams = { 
 				trotoar_id : record.data.ID_TROTOAR,
 				currentAction : 'update',
@@ -567,6 +575,7 @@
 				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
 				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
 				{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+				{ name : 'RETRIBUSI', type : 'float', mapping : 'RETRIBUSI' }
 				]
 		});
 /* End DataStore declaration */
@@ -736,7 +745,7 @@
 						ID_TROTOAR : record.get('ID_TROTOAR'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('<?php echo base_url("index.php/c_trotoar/printBP/"); ?>' + record.get('ID_TROTOAR'));
+						window.open('<?php echo base_url() ?>print/trotoar_bp.html');
 					}
 				});
 			}
@@ -753,13 +762,13 @@
 							ID_TROTOAR : record.get('ID_TROTOAR'),
 							action : 'CETAKLK'
 						},success : function(){
-							window.open('../print/idam_sk.html');
+							window.open('<?php echo base_url() ?>print/trotoar_lk.html');
 						}
 					});
 				}
 			});
 			var otoar_sk_printCM = Ext.create('Ext.menu.Item',{
-				text : 'SK',
+				text : 'Lembar SK',
 				tooltip : 'Cetak Lembar SK',
 				handler : function(){
 					var record = otoar_gridPanel.getSelectionModel().getSelection()[0];
@@ -770,7 +779,7 @@
 							ID_TROTOAR : record.get('ID_TROTOAR'),
 							action : 'CETAKSK'
 						},success : function(){
-							window.open('../print/idam_lembarkontrol.html');
+							window.open('<?php echo base_url() ?>print/trotoar_sk.html');
 						}
 					});
 				}
@@ -788,6 +797,7 @@
 					params: {
 						trotoar_id : record.get('ID_TROTOAR'),
 						proses : proses,
+						no_sk : record.get('NO_SK'),
 						action : 'UBAHPROSES'
 					},success : function(){
 						otoar_dataStore.reload();
@@ -974,6 +984,30 @@
 		});
 /* End GridPanel declaration */
 /* Start FormPanel declaration */
+		var RETRIBUSI_STATUSField = Ext.create('Ext.form.RadioGroup',{
+			fieldLabel : 'Retribusi ',
+			vertical : false,
+			items : [
+				{ boxLabel : 'Gratis', name : 's_retribusi', inputValue : '0', checked : true},
+				{ boxLabel : 'Bayar', name : 's_retribusi', inputValue : '1'}
+			],
+			listeners : {
+				change : function(com, newval, oldval, e){
+					if(newval.s_retribusi == 1){
+						RETRIBUSIField.show();
+					}else{
+						RETRIBUSIField.hide();
+					}
+				}
+			}
+		});
+		RETRIBUSIField = Ext.create('Ext.form.TextField',{
+			id : 'RETRIBUSIField',
+			name : 'RETRIBUSI',
+			fieldLabel : 'Nilai Retribusi',
+			maxLength : 50,
+			hidden : true,
+		});
 		ID_TROTOARField = Ext.create('Ext.form.NumberField',{
 			id : 'ID_TROTOARField',
 			name : 'ID_TROTOAR',
@@ -1381,11 +1415,16 @@
 						ALAMATField,
 						PERUNTUKANField,
 						ALAMAT_LOKASIField,
-						TGL_PERMOHONANField,
-						TGL_BERLAKUField,
-						STATUS_SURVEYField,
-						STATUSField,
-						TGL_BERAKHIRField,
+						// TGL_PERMOHONANField,
+						// TGL_BERLAKUField,
+						// STATUS_SURVEYField,
+						// STATUSField,
+						// TGL_BERAKHIRField,
+						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("TGL_BERAKHIRField,"); ?>
+						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("STATUS_SURVEYField,"); ?>
+						<?php echo ($_SESSION['IDHAK'] == 2) ? ("") : ("STATUSField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSI_STATUSField,"); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSIField,"); ?>
 					]
 				}, {
 					xtype : 'fieldset',

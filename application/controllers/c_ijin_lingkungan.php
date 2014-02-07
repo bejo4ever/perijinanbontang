@@ -92,7 +92,8 @@ class C_ijin_lingkungan extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		
+		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
+		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
 		/*Data Inti*/
 		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
 		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
@@ -269,6 +270,7 @@ class C_ijin_lingkungan extends CI_Controller{
 					'TGL_AKHIR'=>$TGL_AKHIR,
 					'STATUS'=>$STATUS,
 					'STATUS_SURVEY'=>$STATUS_SURVEY,
+					'RETRIBUSI'=>$RETRIBUSI,
 					);
 				$ID_IJIN = $this->m_ijin_lingkungan->__insert($data, '', 'insertId');
 			}
@@ -304,7 +306,8 @@ class C_ijin_lingkungan extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		
+		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
+		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
 		/*Data Inti*/
 		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
 		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
@@ -434,7 +437,7 @@ class C_ijin_lingkungan extends CI_Controller{
 					'NAMA_DIREKTUR'=>$NAMA_DIREKTUR,
 					'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
 					// 'TGL_PERMOHONAN'=>(($TGL_PERMOHONAN == NULL || $TGL_PERMOHONAN == "") ? (date("Y-m-d")) : ($TGL_PERMOHONAN)),
-					// 'TGL_AWAL'=>$TGL_AWAL,
+					'RETRIBUSI'=>$RETRIBUSI,
 					'TGL_AKHIR'=>$TGL_AKHIR,
 					'STATUS'=>$STATUS,
 					'STATUS_SURVEY'=>$STATUS_SURVEY,

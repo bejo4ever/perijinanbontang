@@ -19,7 +19,8 @@ class M_trotoar extends App_Model{
 				pemohon_nama,
 				pemohon_alamat,
 				pemohon_telp,
-				pemohon_nik
+				pemohon_nik,
+				RETRIBUSI
 				FROM trotoar
 				JOIN m_pemohon ON m_pemohon.pemohon_id = trotoar.ID_PEMOHON
 			WHERE ID_TROTOAR IS NOT NULL 
@@ -29,7 +30,7 @@ class M_trotoar extends App_Model{
         parent::__construct();
         $this->table_name = 'trotoar';
         $this->column_primary = 'ID_TROTOAR';
-        $this->column_order = '';
+        $this->column_order = 'ID_TROTOAR DESC';
 		$this->column_unique = '';
     }
 	
