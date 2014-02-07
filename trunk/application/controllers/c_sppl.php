@@ -108,7 +108,8 @@ class C_sppl extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-				
+		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
+		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;		
 		$pl_author = $this->m_sppl->__checkSession();
 		$pl_created_date = date('Y-m-d H:i:s');
 		if($pl_author == ''){
@@ -175,6 +176,7 @@ class C_sppl extends CI_Controller{
 					'LUAS_TAPAK_BANGUNAN'=>$LUAS_TAPAK_BANGUNAN,
 					'LUAS_KEGIATAN'=>$LUAS_KEGIATAN,
 					'LUAS_PARKIR'=>$LUAS_PARKIR,
+					'RETRIBUSI'=>$RETRIBUSI,
 					'TGL_PERMOHONAN'=>date("Y-m-d")
 					);
 				// }
@@ -264,7 +266,8 @@ class C_sppl extends CI_Controller{
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
 		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
-		
+		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
+		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;	
 		$pl_updated_by = $this->m_sppl->__checkSession();
 		$pl_updated_date = date('Y-m-d H:i:s');
 		
@@ -300,6 +303,7 @@ class C_sppl extends CI_Controller{
 				'LUAS_PARKIR'=>$LUAS_PARKIR,
 				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
 				'STATUS'=>$STATUS,
+				'RETRIBUSI'=>$RETRIBUSI,
 				'STATUS_SURVEY'=>$STATUS_SURVEY
 				);
 			$result = $this->m_sppl->__update($data, $ID_SPPL, FALSE, 'updateId', '');

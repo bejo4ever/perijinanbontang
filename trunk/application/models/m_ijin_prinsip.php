@@ -25,6 +25,7 @@ class M_ijin_prinsip extends App_Model{
 				PONDASI_BANGUNAN,
 				STATUS,
 				STATUS_SURVEY,
+				RETRIBUSI,
 				TGL_BERAKHIR
 				FROM ijin_prinsip
 				JOIN m_pemohon ON m_pemohon.pemohon_id = ijin_prinsip.ID_PEMOHON
@@ -35,7 +36,7 @@ class M_ijin_prinsip extends App_Model{
         parent::__construct();
         $this->table_name = 'ijin_prinsip';
         $this->column_primary = 'ID_IJIN_PRINSIP';
-        $this->column_order = '';
+        $this->column_order = 'ID_IJIN_PRINSIP';
 		$this->column_unique = '';
     }
 	

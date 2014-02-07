@@ -658,7 +658,7 @@
 				{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
 				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
 				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
-				{ name : 'RETRIBUSI', type : 'int', mapping : 'RETRIBUSI' }
+				{ name : 'RETRIBUSI', type : 'float', mapping : 'RETRIBUSI' }
 				]
 		});
 /* End DataStore declaration */

@@ -107,8 +107,10 @@ class C_sktr extends CI_Controller{
 		$LUAS_PERSIL = htmlentities($this->input->post('LUAS_PERSIL'),ENT_QUOTES);
 		$LUAS_BANGUNAN = htmlentities($this->input->post('LUAS_BANGUNAN'),ENT_QUOTES);
 		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
-		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
 		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
+		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
+		
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
 		
@@ -165,7 +167,7 @@ class C_sktr extends CI_Controller{
 						'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
 						'LUAS_PERSIL'=>$LUAS_PERSIL,
 						'LUAS_BANGUNAN'=>$LUAS_BANGUNAN,
-						'RETRIBUSI'=>$RETRIBUSI,
+						'RETRIBUSI'=>$RETRIBUSI
 						);
 					}
 					$result = $this->m_sktr->__insert($data, '', 'insertId');

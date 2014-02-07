@@ -10,8 +10,9 @@ class C_ijin_prinsip extends CI_Controller{
 	}
 	
 	function index(){
-		$this->load->view('home.php');
-		$this->load->view('main/v_ijin_prinsip');
+		
+		$data["content"]	= $this->load->view('main/v_ijin_prinsip',"",true);
+		$this->load->view('home.php',$data);
 	}
 	
 	function switchAction(){
@@ -40,6 +41,18 @@ class C_ijin_prinsip extends CI_Controller{
 			break;
 			case 'GETSYARAT':
 				$this->getSyarat();
+			break;
+			case 'CETAKBP':
+				$this->printBP();
+			break;
+			case 'CETAKLK':
+				$this->printLK();
+			break;
+			case 'CETAKSK':
+				$this->printSK();
+			break;
+			case 'UBAHPROSES':
+				$this->ubahProses();
 			break;
 			default :
 				echo '{ failure : true }';
@@ -87,7 +100,8 @@ class C_ijin_prinsip extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		
+		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
+		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
 		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
 		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
 		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
@@ -130,7 +144,9 @@ class C_ijin_prinsip extends CI_Controller{
 				'TIANG_BANGUNAN'=>$TIANG_BANGUNAN,
 				'PONDASI_BANGUNAN'=>$PONDASI_BANGUNAN,
 				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+				'TGL_PERMOHONAN'=>date("Y-m-d"),
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
+				'RETRIBUSI'=>$RETRIBUSI,
 				'STATUS'=>$STATUS,
 				);
 			$result = $this->m_ijin_prinsip->__insert($data, '', 'insertId');
@@ -177,7 +193,8 @@ class C_ijin_prinsip extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
 		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		
+		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
+		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
 		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
 		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
 		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
@@ -219,8 +236,10 @@ class C_ijin_prinsip extends CI_Controller{
 				'TIANG_BANGUNAN'=>$TIANG_BANGUNAN,
 				'PONDASI_BANGUNAN'=>$PONDASI_BANGUNAN,
 				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+				// 'TGL_PERMOHONAN'=>date("Y-m-d"),
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				'STATUS'=>$STATUS,
+				'RETRIBUSI'=>$RETRIBUSI,
 				);
 			$result = $this->m_ijin_prinsip->save($data, $ID_IJIN_PRINSIP);
 			$this->m_cek_list_prinsip->delete($result);
@@ -368,4 +387,54 @@ class C_ijin_prinsip extends CI_Controller{
 		$result = $this->m_ijin_prinsip->getSyarat($params);
 		echo $result;
 	}	
+	function printBP(){
+		$id_ijin_prinsip  = $this->input->post('ID_IJIN_PRINSIP');
+		$this->load->model("m_master_ijin");
+		$data["prinsip"]	= $this->m_ijin_prinsip->get_by(array("ID_IJIN_PRINSIP"=>$id_ijin_prinsip),FALSE,FALSE,TRUE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>12),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/prinsip_bp",$data,true);
+		$print_file=fopen('print/prinsip_bp.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printSK(){
+		$id_ijin_prinsip  = $this->input->post('ID_IJIN_PRINSIP');
+		$this->load->model("m_master_ijin");
+		$join	= array(array("table"=>"ijin_prinsip","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id"));
+		$data["prinsip"]	= $this->m_ijin_prinsip->get_join_by($join,array("ID_IJIN_PRINSIP"=>$id_ijin_prinsip),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>12),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/prinsip_sk",$data,true);
+		$print_file=fopen('print/prinsip_sk.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printLK(){
+		$ID_IJIN_PRINSIP  = $this->input->post('ID_IJIN_PRINSIP');
+		$join	= array(array("table"=>"ijin_prinsip","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id"));
+		$printrecord = $this->m_ijin_prinsip->get_join_by($join,array("ID_IJIN_PRINSIP"=>$ID_IJIN_PRINSIP),TRUE,FALSE);
+		$dataceklist = $this->m_ijin_prinsip->get_lk($ID_IJIN_PRINSIP);
+		$data['printrecord'] = $printrecord;
+		$data['dataceklist'] = $dataceklist;
+		$print_view=$this->load->view('template/prinsip_lk',$data,TRUE);
+		$print_file=fopen('print/prinsip_lk.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function ubahProses(){
+		$prinsip_id  = $this->input->post('prinsip_id');
+		$no_sk  = $this->input->post('no_sk');
+		$proses  = $this->input->post('proses');
+		($proses == "Selesai, belum diambil") ? ($proses = 2) : (($proses == "Selesai, sudah diambil") ? ($proses = 1) : ($proses = 0));
+		if (($no_sk == "" || $no_sk == NULL) && $proses != 0){
+			($proses == 2 || $proses == 1) ? ($nosk = $this->m_public_function->getNomorSk("prinsip")) : ($nosk = NULL);
+			$data = array(
+				"NO_SK"=>$nosk,
+				"STATUS"=>$proses,
+				"TGL_BERLAKU"=>date("Y-m-d")
+			);
+		} else {
+			$data = array(
+				"STATUS"=>$proses
+			);
+		}
+		$result = $this->m_ijin_prinsip->__update($data, $prinsip_id, '', '','');
+		echo $result;
+	}
 }
