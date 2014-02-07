@@ -443,6 +443,7 @@
 			sipd_det_dbTaskMessage = 'create';
 			sipd_det_formPanel.getForm().reset();
 			det_sipd_idField.setValue(0);
+			window.scrollTo(0,0);
 		}
 		
 		function sipd_det_setForm(){

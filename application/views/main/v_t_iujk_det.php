@@ -1272,7 +1272,7 @@
 				{
 					xtype:'actioncolumn',
 					text : 'Proses',
-					width:30,
+					width:45,
 					items: [{
 						iconCls : 'checked',
 						tooltip : 'Ubah Status',
