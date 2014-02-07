@@ -418,7 +418,7 @@ class C_ijin_prinsip extends CI_Controller{
 		fwrite($print_file, $print_view);
 	}
 	function ubahProses(){
-		$prinsip_id  = $this->input->post('prinsip_id');
+		$prinsip_id  = $this->input->post('ijin_prinsip_id');
 		$no_sk  = $this->input->post('no_sk');
 		$proses  = $this->input->post('proses');
 		($proses == "Selesai, belum diambil") ? ($proses = 2) : (($proses == "Selesai, sudah diambil") ? ($proses = 1) : ($proses = 0));
