@@ -113,6 +113,8 @@
                                 <a href="#" class="dropdown-toggle" data-hover="dropdown">Laporan <b class="caret"></b></a>								
                                 <ul class="dropdown-menu" id="mainmenu">
 									<li><a href="<?php echo base_url(); ?>index.php/c_t_laporan">Laporan</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/c_t_laporan_expired">Laporan Expired</a></li>
+									<li><a href="<?php echo base_url(); ?>index.php/c_t_laporan_bayar">Laporan Bayar</a></li>
                                 </ul>
                             </li>
                         </ul>
