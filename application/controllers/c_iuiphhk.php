@@ -276,17 +276,34 @@ class C_iuiphhk extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$TGL_BERLAKU = htmlentities($this->input->post('TGL_BERLAKU'),ENT_QUOTES);
 		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
-				
+		
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
+		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		
 		$iphhk_author = $this->m_iuiphhk->__checkSession();
 		$iphhk_created_date = date('Y-m-d H:i:s');
 		
 		if($iphhk_author == ''){
 			$result = 'sessionExpired';
 		}else{
+			if($pemohon_id != null || $pemohon_id != ""){
+					$pemohon	= $pemohon_id;
+			} else {
+				$data = array(
+					'pemohon_nama'=>$pemohon_nama,
+					'pemohon_alamat'=>$pemohon_alamat,
+					'pemohon_telp'=>$pemohon_telp,
+					'pemohon_user_id'=>$_SESSION['USERID']
+				);
+				$pemohon= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			}
 			$data = array(
 				'ID_IUIPHHK'=>$ID_IUIPHHK,
-				'ID_PEMOHON'=>$ID_PEMOHON,
-				'NO_SK'=>$NO_SK,
+				'ID_PEMOHON'=>$pemohon,
+				// 'NO_SK'=>$NO_SK,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
 				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
 				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
@@ -619,16 +636,32 @@ class C_iuiphhk extends CI_Controller{
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$TGL_BERLAKU = htmlentities($this->input->post('TGL_BERLAKU'),ENT_QUOTES);
 		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
-				
+		
+		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
+		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
+		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
+		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
+		
 		$iphhk_updated_by = $this->m_iuiphhk->__checkSession();
 		$iphhk_updated_date = date('Y-m-d H:i:s');
 		
 		if($iphhk_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
+			if($pemohon_id != null || $pemohon_id != ""){
+				$pemohon	= $pemohon_id;
+			} else {
+				$data = array(
+					'pemohon_nama'=>$pemohon_nama,
+					'pemohon_alamat'=>$pemohon_alamat,
+					'pemohon_telp'=>$pemohon_telp,
+					'pemohon_user_id'=>$_SESSION['USERID']
+				);
+				$pemohon= $this->m_m_pemohon->__insert($data, '', 'insertId');
+			}
 			$data = array(
-				'ID_PEMOHON'=>$ID_PEMOHON,
-				'NO_SK'=>$NO_SK,
+				'ID_PEMOHON'=>$pemohon,
+				// 'NO_SK'=>$NO_SK,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
 				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
 				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
