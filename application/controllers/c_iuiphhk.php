@@ -39,6 +39,24 @@ class C_iuiphhk extends CI_Controller{
 			case 'GETSYARAT':
 				$this->getSyarat();
 			break;
+			case 'GETR_ALAT':
+				$this->getR_Alat();
+			break;
+			case 'GETR_PRODUKSI':
+				$this->getR_Produksi();
+			break;
+			case 'CETAKLK':
+				$this->printLK();
+			break;
+			case 'CETAKSK':
+				$this->printSK();
+			break;
+			case 'UBAHPROSES':
+				$this->ubahProses();
+			break;
+			case 'CETAKBP':
+				$this->printBP();
+			break;
 			case 'EXCEL':
 				$this->printExcel();
 			break;
@@ -1368,6 +1386,67 @@ class C_iuiphhk extends CI_Controller{
 			"iuiphhk_id"=>$iuiphhk_id
 		);
 		$result = $this->m_iuiphhk->getSyarat($params);
+		echo $result;
+	}
+	function getR_Alat(){
+		$currentAction = $this->input->post('currentAction');
+		$iuiphhk_id = $this->input->post('iuiphhk_id');
+		// $idam_det_id = $this->input->post('idam_det_id');
+		$params = array(
+			"currentAction"=>$currentAction,
+			"iuiphhk_id"=>$iuiphhk_id
+		);
+		$result = $this->m_iuiphhk->getR_Alat($params);
+		echo $result;
+	}
+	function printBP(){
+		$id_iuiphhk  = $this->input->post('ID_IUIPHHK');
+		$this->load->model("m_master_ijin");
+		$data["iuiphhk"]	= $this->m_iuiphhk->get_by(array("ID_IUIPHHK"=>$id_iuiphhk),FALSE,FALSE,TRUE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>10),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/iuiphhk_bp",$data,true);
+		$print_file=fopen('print/iuiphhk_bp.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printSK(){
+		$id_iuiphhk  = $this->input->post('ID_IUIPHHK');
+		$this->load->model("m_master_ijin");
+		$join	= array(array("table"=>"iuiphhk","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id"));
+		$data["iuiphhk"]	= $this->m_iuiphhk->get_join_by($join,array("ID_IUIPHHK"=>$id_iuiphhk),TRUE,FALSE);
+		$data["ijin"]	= $this->m_master_ijin->get_by(array("ID_IJIN"=>10),FALSE,FALSE,TRUE);
+		$print_view		= $this->load->view("template/iuiphhk_sk",$data,true);
+		$print_file=fopen('print/iuiphhk_sk.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function printLK(){
+		$ID_IUIPHHK  = $this->input->post('ID_IUIPHHK');
+		$join	= array(array("table"=>"iuiphhk","join_key"=>"ID_PEMOHON","join_table"=>"m_pemohon","join_key2"=>"pemohon_id"));
+		$printrecord = $this->m_iuiphhk->get_join_by($join,array("ID_IUIPHHK"=>$ID_IUIPHHK),TRUE,FALSE);
+		$dataceklist = $this->m_iuiphhk->get_lk($ID_IUIPHHK);
+		$data['printrecord'] = $printrecord;
+		$data['dataceklist'] = $dataceklist;
+		$print_view=$this->load->view('template/iuiphhk_lk',$data,TRUE);
+		$print_file=fopen('print/iuiphhk_lk.html','w+');
+		fwrite($print_file, $print_view);
+	}
+	function ubahProses(){
+		$iuiphhk_id  = $this->input->post('iuiphhk_id');
+		$no_sk  = $this->input->post('no_sk');
+		$proses  = $this->input->post('proses');
+		($proses == "Selesai, belum diambil") ? ($proses = 2) : (($proses == "Selesai, sudah diambil") ? ($proses = 1) : ($proses = 0));
+		if (($no_sk == "" || $no_sk == NULL) && $proses != 0){
+			($proses == 2 || $proses == 1) ? ($nosk = $this->m_public_function->getNomorSk("iuiphhk")) : ($nosk = NULL);
+			$data = array(
+				"NO_SK"=>$nosk,
+				"STATUS"=>$proses,
+				"TGL_BERLAKU"=>date("Y-m-d")
+			);
+		} else {
+			$data = array(
+				"STATUS"=>$proses
+			);
+		}
+		$result = $this->m_iuiphhk->__update($data, $iuiphhk_id, '', '','');
 		echo $result;
 	}
 }

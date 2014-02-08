@@ -1004,12 +1004,33 @@
 			}else{
 				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['0'] });
 			}
+			det_iuiphhk_rencana_alat_dataStore.proxy.extraParams = { 
+				iuiphhk_id : record.data.ID_IUIPHHK,
+				currentAction : 'update',
+				action : 'GETR_ALAT',
+				jenis : '1'
+			};
+			det_iuiphhk_rencana_alat_e_dataStore.proxy.extraParams = { 
+				iuiphhk_id : record.data.ID_IUIPHHK,
+				currentAction : 'update',
+				action : 'GETR_ALAT',
+				jenis : '2'
+			};
+			det_iuiphhk_rencana_alat_e_dataStore.proxy.extraParams = { 
+				iuiphhk_id : record.data.ID_IUIPHHK,
+				currentAction : 'update',
+				action : 'GETR_PRODUKSI',
+				// jenis : '2'
+			};
 			iuiphhk_syaratDataStore.proxy.extraParams = { 
 				iuiphhk_id : record.data.ID_IUIPHHK,
 				currentAction : 'update',
 				action : 'GETSYARAT'
 			};
 			iuiphhk_syaratDataStore.load();
+			det_iuiphhk_rencana_alat_dataStore.load();
+			det_iuiphhk_rencana_alat_e_dataStore.load();
+			det_iuiphhk_rencana_produksi_dataStore.load();
 		}
 		
 		function iphhk_showSearchWindow(){
@@ -2021,7 +2042,7 @@
 			text : 'Bukti Penerimaan',
 			tooltip : 'Cetak Bukti Penerimaan',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = iphhk_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
 					url: 'c_iuiphhk/switchAction',
@@ -2029,7 +2050,7 @@
 						ID_IUIPHHK : record.get('ID_IUIPHHK'),
 						action : 'CETAKBP'
 					},success : function(){
-						window.open('<?php echo base_url("index.php/c_iuiphhk/printBP/"); ?>' + record.get('ID_IUIPHHK'));
+						window.open('<? echo base_url("print/iuiphhk_bp.html"); ?>');
 					}
 				});
 			}
@@ -2038,7 +2059,7 @@
 			text : 'Lembar Kontrol',
 			tooltip : 'Cetak Lembar Kontrol',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = iphhk_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
 					url: 'c_iuiphhk/switchAction',
@@ -2046,16 +2067,16 @@
 						ID_IUIPHHK : record.get('ID_IUIPHHK'),
 						action : 'CETAKLK'
 					},success : function(){
-						window.open('../print/idam_sk.html');
+						window.open('<? echo base_url("print/iuiphhk_lk.html"); ?>');
 					}
 				});
 			}
 		});
 		var iuiphhk_sk_printCM = Ext.create('Ext.menu.Item',{
-			text : 'IUIPHKK',
+			text : 'Lembar SK',
 			tooltip : 'Cetak Lembar SK',
 			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+				var record = iphhk_gridPanel.getSelectionModel().getSelection()[0];
 				Ext.Ajax.request({
 					waitMsg: 'Please wait...',
 					url: 'c_iuiphhk/switchAction',
@@ -2063,44 +2084,45 @@
 						ID_IUIPHHK : record.get('ID_IUIPHHK'),
 						action : 'CETAKSK'
 					},success : function(){
-						window.open('../print/idam_lembarkontrol.html');
+						window.open('<? echo base_url("print/iuiphhk_sk.html"); ?>');
 					}
 				});
 			}
 		});
-		var iuiphhk_rekom_printCM = Ext.create('Ext.menu.Item',{
-			text : 'IUIPHKK',
-			tooltip : 'Cetak Lembar Rekomendasi',
-			handler : function(){
-				var record = tr_gridPanel.getSelectionModel().getSelection()[0];
-				Ext.Ajax.request({
-					waitMsg: 'Please wait...',
-					url: 'c_iuiphhk/switchAction',
-					params: {
-						ID_IUIPHHK : record.get('ID_IUIPHHK'),
-						action : 'CETAKREKOM'
-					},success : function(){
-						window.open('../print/idam_lembarkontrol.html');
-					}
-				});
-			}
-		});
+		// var iuiphhk_rekom_printCM = Ext.create('Ext.menu.Item',{
+			// text : 'Lembar Rekomendasi',
+			// tooltip : 'Cetak Lembar Rekomendasi',
+			// handler : function(){
+				// var record = iphhk_gridPanel.getSelectionModel().getSelection()[0];
+				// Ext.Ajax.request({
+					// waitMsg: 'Please wait...',
+					// url: 'c_iuiphhk/switchAction',
+					// params: {
+						// ID_IUIPHHK : record.get('ID_IUIPHHK'),
+						// action : 'CETAKREKOM'
+					// },success : function(){
+						// window.open('../print/idam_lembarkontrol.html');
+					// }
+				// });
+			// }
+		// });
 		var iuiphhk_printContextMenu = Ext.create('Ext.menu.Menu',{
 			items: [
-				<?php echo ($_SESSION["IDHAK"] == 2) ? ("iuiphhk_bp_printCM") : ("iuiphhk_bp_printCM,iuiphhk_lk_printCM,iuiphhk_sk_printCM,iuiphhk_rekom_printCM"); ?>
+				<?php echo ($_SESSION["IDHAK"] == 2) ? ("iuiphhk_bp_printCM") : ("iuiphhk_bp_printCM,iuiphhk_lk_printCM,iuiphhk_sk_printCM"); ?>
 			]
 		});
 		function iuiphhk_ubahProses(proses){
-			var record = tr_gridPanel.getSelectionModel().getSelection()[0];
+			var record = iphhk_gridPanel.getSelectionModel().getSelection()[0];
 			Ext.Ajax.request({
 				waitMsg: 'Please wait...',
 				url: 'c_iuiphhk/switchAction',
 				params: {
 					iuiphhk_id : record.get('ID_IUIPHHK'),
+					no_sk : record.get('NO_SK'),
 					proses : proses,
 					action : 'UBAHPROSES'
 				},success : function(){
-					tr_dataStore.reload();
+					iphhk_dataStore.reload();
 				}
 			});
 		}

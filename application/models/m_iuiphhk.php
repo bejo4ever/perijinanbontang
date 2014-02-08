@@ -116,7 +116,7 @@ class M_iuiphhk extends App_Model{
         parent::__construct();
         $this->table_name = 'iuiphhk';
         $this->column_primary = 'ID_IUIPHHK';
-        $this->column_order = '';
+        $this->column_order = 'ID_IUIPHHK ASC';
 		$this->column_unique = '';
     }
 	
