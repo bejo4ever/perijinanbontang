@@ -36,9 +36,9 @@
 			<td align="center" style="background-color : #8edac7;">Pemohon</td>
 			<td align="center" style="background-color : #8edac7;">Telp</td>
 			<td align="center" style="background-color : #8edac7;">Alamat</td>
-			<td align="center" style="background-color : #8edac7;">Retribusi</td>
+			<td align="center" style="background-color : #8edac7;">Retribusi (Rp)</td>
 		</tr>
-		<?php $n=0; if(count($printrecord)>0){ 
+		<?php $n=0; $total=0; if(count($printrecord)>0){ 
 		foreach($printrecord AS $subrecord){ $n++; ?>
 			<tr>
 				<td><?php echo $n; ?></td>
@@ -46,12 +46,13 @@
 				<td><?php echo $subrecord->pemohon_nama; ?></td>
 				<td><?php echo $subrecord->pemohon_telp; ?></td>
 				<td><?php echo $subrecord->pemohon_alamat; ?></td>
-				<td><?php echo number_format($subrecord->permohonan_retribusi,0,'.',','); ?>&nbsp;</td>
+				<td align="right"><?php echo number_format($subrecord->permohonan_retribusi,0,'.',','); $total+=$subrecord->permohonan_retribusi; ?>&nbsp;</td>
 			</tr>
 		<?php } ?>
 		<tr>
 			<td colspan="2" style="background-color : #8edac7;"><b>Total</b></td>
-			<td colspan="4" style="background-color : #8edac7;"><b><?php echo $n; ?> Data</b></td>
+			<td colspan="3" style="background-color : #8edac7;"><b><?php echo $n; ?> Data</b></td>
+			<td style="background-color : #8edac7;" align="right"><b><?php echo number_format($total,0,'.',','); ?></b></td>
 		</tr>
 		<?php }else{ ?>
 		<tr>
