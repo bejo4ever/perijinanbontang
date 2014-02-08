@@ -107,8 +107,25 @@ class M_iuiphhk extends App_Model{
 				STATUS,
 				TGL_BERLAKU,
 				TGL_BERAKHIR,
-				RETRIBUSI
+				RETRIBUSI,
+				pemohon_id,
+				pemohon_nama,
+				pemohon_alamat,
+				pemohon_telp,
+				pemohon_npwp,
+				pemohon_rt,
+				pemohon_rw,
+				pemohon_kel,
+				pemohon_kec,
+				pemohon_nik,
+				pemohon_stra,
+				pemohon_surattugas,
+				pemohon_pekerjaan,
+				pemohon_tempatlahir,
+				pemohon_tanggallahir,
+				pemohon_user_id
 				FROM iuiphhk 
+				JOIN m_pemohon ON m_pemohon.pemohon_id = iuiphhk.ID_PEMOHON
 			WHERE ID_IUIPHHK IS NOT NULL 
 	";
 	

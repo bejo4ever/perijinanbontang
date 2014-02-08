@@ -434,6 +434,7 @@
 					var TGL_BERLAKUValue = '';
 					var TGL_BERAKHIRValue = '';
 					
+					/*Syarat*/
 					var array_iuiphhk_keterangan=new Array();
 					if(iuiphhk_syaratDataStore.getCount() > 0){
 						for(var i=0;i<iuiphhk_syaratDataStore.getCount();i++){
@@ -441,6 +442,37 @@
 						}
 					}					
 					var encoded_array_iuiphhk_keterangan = Ext.encode(array_iuiphhk_keterangan);
+					/*End*/
+					
+					/*Produksi Impor*/
+					var array_iuiphhk_rencana_alat=new Array();
+					if(det_iuiphhk_rencana_alat_dataStore.getCount() > 0){
+						for(var i=0;i<det_iuiphhk_rencana_alat_dataStore.getCount();i++){
+							array_iuiphhk_rencana_alat.push(det_iuiphhk_rencana_alat_dataStore.getAt(i).data.KETERANGAN);
+						}
+					}					
+					var encoded_array_iuiphhk_keterangan = Ext.encode(array_iuiphhk_rencana_alat);
+					/*End*/
+					
+					/*Produksi Ekspor*/
+					var array_iuiphhk_keterangan=new Array();
+					if(iuiphhk_syaratDataStore.getCount() > 0){
+						for(var i=0;i<iuiphhk_syaratDataStore.getCount();i++){
+							array_iuiphhk_keterangan.push(iuiphhk_syaratDataStore.getAt(i).data.KETERANGAN);
+						}
+					}					
+					var encoded_array_iuiphhk_keterangan = Ext.encode(array_iuiphhk_keterangan);
+					/*End*/
+					
+					/*Jenis Produksi*/
+					var array_iuiphhk_keterangan=new Array();
+					if(iuiphhk_syaratDataStore.getCount() > 0){
+						for(var i=0;i<iuiphhk_syaratDataStore.getCount();i++){
+							array_iuiphhk_keterangan.push(iuiphhk_syaratDataStore.getAt(i).data.KETERANGAN);
+						}
+					}					
+					var encoded_array_iuiphhk_keterangan = Ext.encode(array_iuiphhk_keterangan);
+					/*End*/
 					
 					ID_IUIPHHKValue = ID_IUIPHHKField.getValue();
 					ID_PEMOHONValue = ID_PEMOHONField.getValue();
@@ -571,6 +603,11 @@
 					TGL_BERLAKUValue = TGL_BERLAKUField.getValue();
 					TGL_BERAKHIRValue = TGL_BERAKHIRField.getValue();
 					RETRIBUSIValue = RETRIBUSIField.getValue();
+					pemohon_namaValue = pemohon_namaField.getValue();
+					pemohon_telpValue = pemohon_telpField.getValue();
+					pemohon_alamatValue = pemohon_alamatField.getValue();
+					pemohon_idValue = pemohon_idField.getValue();
+					pemohon_nikValue = pemohon_nikField.getValue();
 					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
@@ -707,6 +744,11 @@
 							TGL_BERAKHIR : TGL_BERAKHIRValue,
 							RETRIBUSI : RETRIBUSIValue,
 							KETERANGAN_SYARAT : encoded_array_iuiphhk_keterangan,
+							pemohon_nama : pemohon_namaValue,
+							pemohon_telp : pemohon_telpValue,
+							pemohon_alamat : pemohon_alamatValue,
+							pemohon_id : pemohon_idValue,
+							pemohon_nik : pemohon_nikValue,
 							action : iphhk_dbTask
 						},
 						success: function(response){
@@ -942,6 +984,12 @@
 			BP_DN_ASALField.setValue(record.data.BP_DN_ASAL);
 			BP_DN_HARGAField.setValue(record.data.BP_DN_HARGA);
 			BP_DN_KETERANGANField.setValue(record.data.BP_DN_KETERANGAN);
+			
+			pemohon_idField.setValue(record.data.pemohon_id);
+			pemohon_nikField.setValue(record.data.pemohon_nik);
+			pemohon_namaField.setValue(record.data.pemohon_nama);
+			pemohon_telpField.setValue(record.data.pemohon_telp);
+			pemohon_alamatField.setValue(record.data.pemohon_alamat);
 			
 			BBKB_I_JUMLAHField.setValue(record.data.BBKB_I_JUMLAH);
 			BBKB_I_SATUANField.setValue(record.data.BBKB_I_SATUAN);
@@ -3208,7 +3256,7 @@
 		DN_JENIS_PRODUK1Field = Ext.create('Ext.form.TextField',{
 			id : 'DN_JENIS_PRODUK1Field',
 			name : 'DN_JENIS_PRODUK1',
-			fieldLabel : 'Jenis Produk',
+			fieldLabel : 'Jenis Produk ke-1',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
@@ -3216,7 +3264,7 @@
 		DN_JENIS_PRODUK2Field = Ext.create('Ext.form.TextField',{
 			id : 'DN_JENIS_PRODUK2Field',
 			name : 'DN_JENIS_PRODUK2',
-			fieldLabel : 'Jenis Produk',
+			fieldLabel : 'Jenis Produk ke-2',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
@@ -3224,7 +3272,7 @@
 		DN_JENIS_PRODUK3Field = Ext.create('Ext.form.TextField',{
 			id : 'DN_JENIS_PRODUK3Field',
 			name : 'DN_JENIS_PRODUK3',
-			fieldLabel : 'Jenis Produk',
+			fieldLabel : 'Jenis Produk ke-3',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
@@ -3232,7 +3280,7 @@
 		E_JENIS_PRODUK1Field = Ext.create('Ext.form.TextField',{
 			id : 'E_JENIS_PRODUK1Field',
 			name : 'E_JENIS_PRODUK1',
-			fieldLabel : 'Jenis Produk',
+			fieldLabel : 'Jenis Produk ke-1',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
@@ -3240,7 +3288,7 @@
 		E_JENIS_PRODUK2Field = Ext.create('Ext.form.TextField',{
 			id : 'E_JENIS_PRODUK2Field',
 			name : 'E_JENIS_PRODUK2',
-			fieldLabel : 'Jenis Produk',
+			fieldLabel : 'Jenis Produk ke-2',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
@@ -3248,7 +3296,7 @@
 		E_JENIS_PRODUK3Field = Ext.create('Ext.form.TextField',{
 			id : 'E_JENIS_PRODUK3Field',
 			name : 'E_JENIS_PRODUK3',
-			fieldLabel : 'Jenis Produk',
+			fieldLabel : 'Jenis Produk ke-3',
 			allowNegatife : false,
 			blankText : '0',
 			allowDecimals : false,
