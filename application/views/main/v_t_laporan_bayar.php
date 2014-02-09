@@ -1,4 +1,4 @@
-<h4>Laporan Bayar</h4>
+<h4 class="container">Laporan Bayar</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -233,4 +233,4 @@
 /* End FormPanel declaration */
 });
 </script>
-<div id="laporan_bayarSaveWindow"></div>
+<div class="container" id="laporan_bayarSaveWindow"></div>

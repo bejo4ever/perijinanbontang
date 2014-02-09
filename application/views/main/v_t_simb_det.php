@@ -3,7 +3,7 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
 </style>
-<h4>IZIN MINUMAN BERALKOHOL</h4>
+<h4 class="container">IZIN MINUMAN BERALKOHOL</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -2133,4 +2133,4 @@
 </script>
 <div id="simb_detSaveWindow"></div>
 <div id="simb_detSearchWindow"></div>
-<div class="span12" id="simb_detGrid"></div>
+<div class="container col-md-12" id="simb_detGrid"></div>

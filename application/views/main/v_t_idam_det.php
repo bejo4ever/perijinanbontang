@@ -3,7 +3,7 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
 </style>
-<h4>IZIN DEPO AIR MINUM</h4>
+<h4 class="container">IZIN DEPO AIR MINUM</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -2158,4 +2158,4 @@
 </script>
 <div id="idam_detSaveWindow"></div>
 <div id="idam_detSearchWindow"></div>
-<div class="col-md-12" id="idam_detGrid"></div>
+<div class="container col-md-12" id="idam_detGrid"></div>

@@ -1,4 +1,4 @@
-<h4>Laporan Expired</h4>
+<h4 class="container">Laporan Expired</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -237,4 +237,4 @@
 /* End FormPanel declaration */
 });
 </script>
-<div id="laporan_expiredSaveWindow"></div>
+<div class="container" id="laporan_expiredSaveWindow"></div>

@@ -3,7 +3,7 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
 </style>
-<h4>IZIN PRAKTEK DOKTER</h4>
+<h4 class="container">IZIN PRAKTEK DOKTER</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -2150,4 +2150,4 @@
 </script>
 <div id="sipd_detSaveWindow"></div>
 <div id="sipd_detSearchWindow"></div>
-<div class="span12" id="sipd_detGrid"></div>
+<div class="container col-md-12" id="sipd_detGrid"></div>

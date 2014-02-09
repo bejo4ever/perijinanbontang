@@ -3,7 +3,7 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
 </style>
-<h4>IZIN USAHA JASA KONSTRUKSI</h4>
+<h4 class="container">IZIN USAHA JASA KONSTRUKSI</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -2279,4 +2279,4 @@
 </script>
 <div id="iujk_detSaveWindow"></div>
 <div id="iujk_detSearchWindow"></div>
-<div class="span12" id="iujk_detGrid"></div>
+<div class="container col-md-12" id="iujk_detGrid"></div>
