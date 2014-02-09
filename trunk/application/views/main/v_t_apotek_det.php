@@ -3,7 +3,7 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
 </style>
-<h4>IZIN APOTEK</h4>
+<h4 class="container">IZIN APOTEK</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -4100,4 +4100,4 @@
 </script>
 <div id="apotek_detSaveWindow"></div>
 <div id="apotek_detSearchWindow"></div>
-<div class="span12" id="apotek_detGrid"></div>
+<div class="container col-md-12" id="apotek_detGrid"></div>

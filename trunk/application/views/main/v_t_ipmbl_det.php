@@ -3,7 +3,7 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 	}
 </style>
-<h4>IZIN PENGAMBILAN MINERAL BUKAN LOGAM DAN BATUAN</h4>
+<h4 class="container">IZIN PENGAMBILAN MINERAL BUKAN LOGAM DAN BATUAN</h4>
 <script>
 	Ext.onReady(function(){
 /* Start variabel declaration */
@@ -2541,4 +2541,4 @@
 </script>
 <div id="ipmbl_detSaveWindow"></div>
 <div id="ipmbl_detSearchWindow"></div>
-<div class="span12" id="ipmbl_detGrid"></div>
+<div class="container col-md-12" id="ipmbl_detGrid"></div>
