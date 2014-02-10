@@ -1383,30 +1383,36 @@
 			fieldLabel : 'Alamat',
 			maxLength : 100
 		});
-		ID_KOTAField = Ext.create('Ext.form.NumberField',{
+		ID_KOTAField = Ext.create('Ext.form.TextField',{
 			id : 'ID_KOTAField',
 			name : 'ID_KOTA',
 			fieldLabel : 'Kota',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		ID_KECAMATANField = Ext.create('Ext.form.NumberField',{
+			// allowNegatife : false,
+			// blankText : '0',
+			// allowDecimals : false,
+			// maskRe : /([0-9]+)$/
+			maxLength : 50
+			});
+		ID_KECAMATANField = Ext.create('Ext.form.TextField',{
 			id : 'ID_KECAMATANField',
 			name : 'ID_KECAMATAN',
 			fieldLabel : 'Kecamatan',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
-		ID_KELURAHANField = Ext.create('Ext.form.NumberField',{
+			// allowNegatife : false,
+			// blankText : '0',
+			// allowDecimals : false,
+			// maskRe : /([0-9]+)$/
+			maxLength : 50
+			});
+		ID_KELURAHANField = Ext.create('Ext.form.TextField',{
 			id : 'ID_KELURAHANField',
 			name : 'ID_KELURAHAN',
 			fieldLabel : 'Kelurahan',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,
-			maskRe : /([0-9]+)$/});
+			// allowNegatife : false,
+			// blankText : '0',
+			// allowDecimals : false,
+			// maskRe : /([0-9]+)$/
+			maxLength : 50
+			});
 		NAMA_KEGIATANField = Ext.create('Ext.form.TextField',{
 			id : 'NAMA_KEGIATANField',
 			name : 'NAMA_KEGIATAN',

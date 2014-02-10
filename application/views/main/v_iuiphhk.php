@@ -1919,7 +1919,7 @@
 				{ name : 'TGL_TERLAMPIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_TERLAMPIR' },
 				{ name : 'TGL_PERMOHONAN', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_PERMOHONAN' },
 				{ name : 'STATUS_SURVEY', type : 'string', mapping : 'STATUS_SURVEY' },
-				{ name : 'STATUS', type : 'string', mapping : 'STATUS' },
+				{ name : 'STATUS', type : 'int', mapping : 'STATUS' },
 				{ name : 'TGL_BERLAKU', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERLAKU' },
 				{ name : 'TGL_BERAKHIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERAKHIR' },
 				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
@@ -2276,7 +2276,7 @@
 								return 'Disetujui, sudah diambil';
 							}else if (value == 2){
 								return 'Disetujui, belum diambil';
-							} else if (value == null || value == ""){
+							} else if (value == null || value ==""){
 								return '-';
 							} else {
 								return 'Ditolak';

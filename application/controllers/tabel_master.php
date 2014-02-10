@@ -15,8 +15,9 @@ class Tabel_master extends CI_Controller {
 	
 	public function index()
     {
-		$this->load->view('home.php');
-        $this->load->view('vmastermenu.php');
+		
+        $data["content"]	= $this->load->view('vmastermenu.php',"",true);
+		$this->load->view('home.php',$data);
     }
 
 

@@ -56,22 +56,35 @@
                         </button>
                         <a class="navbar-brand" href="about.html">BERANDA</a>
                     </div>			
-                        
-                   
                     <div class="collapse navbar-collapse main-navbar-collapse">
+						<?php
+						foreach($grup as $row){
+						?>
 						<ul class="nav navbar-nav" >
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-hover="dropdown">Informasi <b class="caret"></b></a>								
+                                <a href="#" class="dropdown-toggle" data-hover="dropdown"><?php echo $row["menu"]; ?> <b class="caret"></b></a>								
                                 <ul class="dropdown-menu" id="mainmenu">
-									<li><a href="<?php echo base_url(); ?>index.php/info_perijinan">Perijinan</a></li>
-									<li><a href="<?php echo base_url(); ?>index.php/info_cekpermohonan">Cek Permohonan</a></li>
+									<?php
+									$join	= array(
+										array("table"=>"useracl","join_key"=>"acl_id","join_table"=>"acl","join_key2"=>"id")
+									);
+									$acl	= $this->m_useracl->get_join_by($join,array("groupmenu_id"=>$row["id"],"user_id"=>$_SESSION['USERID']),FALSE,FALSE);
+									foreach($acl as $r){
+									?>
+									<li><a href="<?php echo base_url(); ?>index.php/<?php echo $r["link"]; ?>"><?php echo $r["nama"]; ?></a></li>
+									<!--<li><a href="<?php echo base_url(); ?>index.php/info_cekpermohonan">Cek Permohonan</a></li>
 									<li><a href="<?php echo base_url(); ?>index.php/info_tambahpengaduan">Pengaduan</a></li>
-									<li><a href="<?php echo base_url(); ?>index.php/info_daftarpengaduan">Daftar Pengaduan</a></li>
-									
+									<li><a href="<?php echo base_url(); ?>index.php/info_daftarpengaduan">Daftar Pengaduan</a></li>-->
+									<?php
+									}
+									?>
                                 </ul>
                             </li>
                         </ul>
-                        <ul class="nav navbar-nav" >
+						<?
+						}
+						?>
+                        <!--<ul class="nav navbar-nav" >
                             <li class="dropdown">
                                 <a href="#" class="dropdown-toggle" data-hover="dropdown">Perijinan <b class="caret"></b></a>								
                                 <ul class="dropdown-menu" id="mainmenu">
@@ -117,7 +130,7 @@
 									<li><a href="<?php echo base_url(); ?>index.php/c_t_laporan_bayar">Laporan Bayar</a></li>
                                 </ul>
                             </li>
-                        </ul>
+                        </ul>-->
                     </div><!-- /.navbar-collapse -->
                 </div>
             </div><!-- /.container -->

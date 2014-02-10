@@ -92,6 +92,9 @@ a:hover
     <td width="301">&nbsp;* <a href="<?php echo base_url(); ?>index.php/master_jusaha">Jenis Usaha</a></td>
     <td width="301">&nbsp;* <a href="<?php echo base_url(); ?>index.php/c_master_user">Setting Menu User</a></td>
   </tr>
+  <tr>
+    <td width="301">&nbsp;* <a href="<?php echo base_url(); ?>index.php/c_groupmenu">Setting Grup Menu</a></td>
+  </tr>
 </table>
 
 </body>
