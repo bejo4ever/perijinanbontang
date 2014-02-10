@@ -58,6 +58,7 @@
                     </div>			
                     <div class="collapse navbar-collapse main-navbar-collapse">
 						<?php
+						$grup	= $this->m_groupmenu->get_by(array("publik"=>1),FALSE,FALSE,FALSE,"order ASC");
 						foreach($grup as $row){
 						?>
 						<ul class="nav navbar-nav" >
@@ -65,6 +66,7 @@
                                 <a href="#" class="dropdown-toggle" data-hover="dropdown"><?php echo $row["menu"]; ?> <b class="caret"></b></a>								
                                 <ul class="dropdown-menu" id="mainmenu">
 									<?php
+									
 									$join	= array(
 										array("table"=>"useracl","join_key"=>"acl_id","join_table"=>"acl","join_key2"=>"id")
 									);
