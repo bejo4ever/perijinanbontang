@@ -81,7 +81,7 @@
                                 </ul>
                             </li>
                         </ul>
-						<?
+						<?php
 						}
 						?>
                         <!--<ul class="nav navbar-nav" >
