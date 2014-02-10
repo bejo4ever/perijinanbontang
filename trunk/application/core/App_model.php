@@ -125,7 +125,7 @@ class App_model extends CI_Model{
 			return 'fail';
 		}
 	}
-	public function get_by ($key, $val = FALSE, $orwhere = FALSE, $single = FALSE) {
+	public function get_by ($key, $val = FALSE, $orwhere = FALSE, $single = FALSE, $order=FALSE) {
         
         // Limit results
         if ($val == TRUE) {
@@ -140,13 +140,16 @@ class App_model extends CI_Model{
 				$this->db->$where_method($key);
 			}           
         }
-        count($this->db->ar_orderby) || $this->db->order_by($this->table_name . "." . $this->column_order);
+		if($order == FALSE){
+			$order = $this->column_order;
+		}
+        count($this->db->ar_orderby) || $this->db->order_by($this->table_name . "." . $order);
         // Return results
         $single == FALSE || $this->db->limit(1);
         $method = $single ? 'row_array' : 'result_array';
         return $this->db->get($this->table_name)->$method();
     }
-	function get_join_by($data,$key=FALSE,$single=FALSE,$column=FALSE){ //Zulmi Adi Rizki 23 Juli 2013
+	function get_join_by($data,$key=FALSE,$single=FALSE,$column=FALSE,$order=FALSE){ //Zulmi Adi Rizki 23 Juli 2013
 		foreach($data as $row){
 			$join_key	= (isset($row["join_key2"])) ? ($row["join_key2"]) : ($row["join_key"]);
 			if(isset($row["join_type"])){
@@ -163,7 +166,11 @@ class App_model extends CI_Model{
 				$this->db->where($key);
 			}
 		}
-		count($this->db->ar_orderby) || $this->db->order_by($this->column_order);
+		if($order == FALSE){
+			$order = $this->column_order;
+		}
+		count($this->db->ar_orderby) || $this->db->order_by($this->table_name . "." . $order);
+		// count($this->db->ar_orderby) || $this->db->order_by($this->column_order);
 		$this->db->select($column == FALSE ? "*" : $column)->from($this->table_name);
 		$single == FALSE || $this->db->limit(1);
 		$method = $single ? 'row_array' : 'result_array';
