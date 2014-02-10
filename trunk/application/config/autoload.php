@@ -109,7 +109,7 @@ $autoload['language'] = array();
 |
 */
 
-$autoload['model'] = array('m_public_function');
+$autoload['model'] = array('m_public_function','m_acl','m_useracl','m_groupmenu');
 
 
 /* End of file autoload.php */
