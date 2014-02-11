@@ -34,7 +34,7 @@
                             <li class="dropdown">
                                 <a href="#" role="button" class="dropdown-toggle" data-hover="dropdown"> <i class="glyphicon glyphicon-user"></i> Username <i class="caret"></i></a>
                                 <ul class="dropdown-menu">
-                                    <li><a href="#">Ubah Password <?php echo $_SESSION['PERIJINAN_USERNAME']; ?></a></li>
+                                    <li id="mn-ubahpass"><a href="#">Ubah Password <?php echo $_SESSION['PERIJINAN_USERNAME']; ?></a></li>
                                     <li role="presentation" class="divider"></li>
                                     <li><a href="<?php echo site_url("c_login/logout"); ?>">Logout</a></li>
                                 </ul>
@@ -149,6 +149,74 @@
                 </div>
             </div>           
         </div>
+		<div class="modal fade" id="ubahpass" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+						<h4 class="modal-title">Ubah Password</h4>
+					</div>
+					<div class="modal-body">
+						<form role="form">
+							<div class="form-group">
+								<label for="password_old">Password Lama</label>
+								<input type="text" class="form-control" id="password_old" placeholder="Password Lama">
+							</div>
+							<div class="form-group">
+								<label for="password_new">Password Baru</label>
+								<input type="text" class="form-control" id="password_new" placeholder="Password Baru">
+							</div>
+							<div class="form-group">
+								<label for="password_new2">Ulangi Password</label>
+								<input type="text" class="form-control" id="password_new2" placeholder="Ulangi Password">
+							</div>
+						</form>
+					</div>
+					<div class="modal-footer">
+						<button type="button" id="btn-ubahpass" class="btn btn-primary">Ubah</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+					</div>
+				</div>
+			</div>
+		</div>
         <!--/.fluid-container-->
+		<script>
+			$('#ubahpass').modal({
+				keyboard : false,
+				show : false
+			});
+			$("#mn-ubahpass").click(function(){
+				$('#ubahpass').modal('toggle');
+			});
+			$("#btn-ubahpass").click(function(){
+				var password_old = $("#password_old").val();
+				var password_new = $("#password_new").val();
+				var password_new2 = $("#password_new2").val();
+				if(password_new == password_new2){
+					$.ajax({
+						url : '<?php echo base_url(); ?>index.php/c_home/ubahpassword',
+						type : 'POST',
+						data : {
+							password_old:password_old,
+							password_new:password_new,
+							password_new2:password_new2
+						}, success : function(response){
+							console.log(response);
+							if(response == 'success'){
+								alert("Password berhasil diubah.");
+								$('#ubahpass').modal('hide');
+							}else if(response == 'fail'){
+								alert("Password gagal diubah.");
+							}else{
+								alert("Password lama tidak sama.");
+							}
+						}
+					});
+				}else{
+					alert("Password baru tidak sama.");
+					$("#password_new2").focus();
+				}
+			});
+		</script>
     </body>
 </html>
