@@ -530,12 +530,8 @@ class C_t_sipd_det extends CI_Controller{
 		$sipddet_id  = $this->input->post('sipddet_id');
 		$sipddet_nosk  = $this->input->post('sipddet_nosk');
 		$proses  = $this->input->post('proses');
-		$this->firephp->log($proses);
-		$this->firephp->log($sipddet_nosk);
-		$this->firephp->log($sipddet_id);
 		if($proses == 'Selesai, belum diambil' && $sipddet_nosk == ''){
 			$nosk = $this->m_public_function->getNomorSk(1);
-			$this->firephp->log($nosk);
 			$data_sk = array(
 				"det_sipd_sk"=>$nosk,
 				"det_sipd_berlaku"=>date('Y-m-d')
