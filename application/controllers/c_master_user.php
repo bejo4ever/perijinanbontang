@@ -10,7 +10,7 @@ class C_master_user extends CI_Controller{
 	function index(){
 		
 		$data["content"]	= $this->load->view('main/v_master_user',"",true);
-		$this->load->view('front',$data);
+		$this->load->view('home',$data);
 	}
 	
 	function switchAction(){

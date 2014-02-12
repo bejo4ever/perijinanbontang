@@ -588,7 +588,7 @@
 			keys : oupmenu_shorcut,
 			columns : [
 				{
-					text : 'menu',
+					text : 'Nama Menu',
 					dataIndex : 'menu',
 					width : 100,
 					sortable : false
@@ -597,25 +597,33 @@
 					text : 'icon',
 					dataIndex : 'icon',
 					width : 100,
-					sortable : false
+					sortable : false,
+					hidden : true
 				},
 				{
-					text : 'order',
+					text : 'Order',
 					dataIndex : 'order',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'link',
+					text : 'Link',
 					dataIndex : 'link',
 					width : 100,
 					sortable : false
 				},
 				{
-					text : 'publik',
+					text : 'Publik',
 					dataIndex : 'publik',
 					width : 100,
-					sortable : false
+					sortable : false,
+					renderer : function(value){
+							if(value == 1){
+								return 'Tampilkan';
+							}else{
+								return 'Sembunyikan';
+							}
+						}
 				},
 							
 			],
@@ -646,37 +654,62 @@
 			name : 'id',
 			fieldLabel : 'id<font color=red>*</font>',
 			allowBlank : false,
-			maxLength : 0
+			maxLength : 0,
+			hidden : true
 		});
 		menuField = Ext.create('Ext.form.TextField',{
 			id : 'menuField',
 			name : 'menu',
-			fieldLabel : 'menu',
+			fieldLabel : 'Nama Menu',
 			maxLength : 45
 		});
 		iconField = Ext.create('Ext.form.TextField',{
 			id : 'iconField',
 			name : 'icon',
 			fieldLabel : 'icon',
-			maxLength : 45
+			maxLength : 45,
+			hidden : true
 		});
 		orderField = Ext.create('Ext.form.TextField',{
 			id : 'orderField',
 			name : 'order',
-			fieldLabel : 'order',
-			maxLength : 0
+			fieldLabel : 'Order',
+			maxLength : 10
 		});
 		linkField = Ext.create('Ext.form.TextField',{
 			id : 'linkField',
 			name : 'link',
-			fieldLabel : 'link',
+			fieldLabel : 'Link',
 			maxLength : 45
 		});
-		publikField = Ext.create('Ext.form.TextField',{
+		// publikField = Ext.create('Ext.form.TextField',{
+			// id : 'publikField',
+			// name : 'publik',
+			// fieldLabel : 'publik',
+			// maxLength : 10
+		// });
+		publikField = Ext.create('Ext.form.ComboBox',{
 			id : 'publikField',
 			name : 'publik',
-			fieldLabel : 'publik',
-			maxLength : 0
+			fieldLabel : 'Publik',
+			store : new Ext.data.ArrayStore({
+				fields : ['publik_id', 'publik'],
+				data : [[1,'Tampilkan'],[2,'Sembunyikan']]
+			}),
+			displayField : 'publik',
+			valueField : 'publik_id',
+			queryMode : 'local',
+			triggerAction : 'all',
+			forceSelection : true,
+			// listeners : {
+				// select : function(cmb, rec){
+					// if(cmb.getValue() == '2'){
+						// NO_SK_LAMAField.show();
+					// }else{
+						// NO_SK_LAMAField.hide();
+					// }
+				// }
+			// }
 		});
 		var oupmenu_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
@@ -709,7 +742,7 @@
 					layout : 'anchor',
 					flex : 2,
 					items : [
-						idField,
+						// idField,
 						menuField,
 						iconField,
 						orderField,

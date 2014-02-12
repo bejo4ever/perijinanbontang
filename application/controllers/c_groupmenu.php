@@ -56,7 +56,7 @@ class C_groupmenu extends CI_Controller{
 	}
 	
 	function create(){
-		$id = htmlentities($this->input->post('id'),ENT_QUOTES);
+		// $id = htmlentities($this->input->post('id'),ENT_QUOTES);
 		$menu = htmlentities($this->input->post('menu'),ENT_QUOTES);
 		$icon = htmlentities($this->input->post('icon'),ENT_QUOTES);
 		$order = htmlentities($this->input->post('order'),ENT_QUOTES);
@@ -66,11 +66,11 @@ class C_groupmenu extends CI_Controller{
 		$oupmenu_author = $this->m_groupmenu->__checkSession();
 		$oupmenu_created_date = date('Y-m-d H:i:s');
 		
-		if($oupmenu_author != ''){
+		if($oupmenu_author == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
-				'id'=>$id,
+				// 'id'=>$id,
 				'menu'=>$menu,
 				'icon'=>$icon,
 				'order'=>$order,
@@ -93,7 +93,7 @@ class C_groupmenu extends CI_Controller{
 		$oupmenu_updated_by = $this->m_groupmenu->__checkSession();
 		$oupmenu_updated_date = date('Y-m-d H:i:s');
 		
-		if($oupmenu_updated_by != ''){
+		if($oupmenu_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
 			$data = array(
