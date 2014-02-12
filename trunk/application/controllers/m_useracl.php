@@ -1,21 +1,18 @@
 <?php
 class M_useracl extends App_model{
 	var $mainSql = "SELECT 
-				useracl.id,
+				id,
 				user_id,
-				acl_id,
-				acl.nama,
-				acl.link
+				acl_id
 				FROM useracl 
-				JOIN acl ON acl.id = useracl.acl_id
-			WHERE useracl.id IS NOT NULL 
+			WHERE id IS NOT NULL 
 	";
 	
 	function __construct(){
         parent::__construct();
         $this->table_name = 'useracl';
         $this->column_primary = 'id';
-        $this->column_order = 'id ASC';
+        $this->column_order = '';
 		$this->column_unique = '';
     }
 	
@@ -27,15 +24,6 @@ class M_useracl extends App_model{
 				AND (
 					user_id LIKE '%".$searchText."%' OR 
 					acl_id LIKE '%".$searchText."%'
-					)
-				AND (
-					user_id = '" . $id . "'
-					)
-			";
-		} else {
-			$sql .= "
-				AND (
-					user_id = '" . $id . "'
 					)
 			";
 		}

@@ -673,7 +673,7 @@
 								grid.getSelectionModel().select(rowIndex);
 								var record = grid.getSelectionModel().getSelection()[0];
 								user_id = record.get('ID_USER');
-								window.location = "<?php echo site_url(); ?>/";
+								window.location = "<?php echo site_url("c_useracl/index"); ?>/"+user_id;
 							}
 						}],
 						<?php //php echo ($_SESSION["IDHAK"] == 2) ? ("hidden:true") : (""); ?>
