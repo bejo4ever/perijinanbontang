@@ -1,21 +1,16 @@
 <?php
 class M_master_ijin extends App_Model{
 	var $mainSql = "SELECT 
-				ID_IJIN,
-				NAMA_IJIN,
-				NAMA_PEJABAT,
-				NIP_PEJABAT,
-				JABATAN,
-				PANGKAT
-				FROM master_ijin 
-			WHERE ID_IJIN IS NOT NULL 
+				*
+				FROM ijin 
+			WHERE id IS NOT NULL 
 	";
 	
 	function __construct(){
         parent::__construct();
         $this->table_name = 'master_ijin';
-        $this->column_primary = 'ID_IJIN';
-        $this->column_order = 'ID_IJIN ASC';
+        $this->column_primary = 'id';
+        $this->column_order = 'id ASC';
 		$this->column_unique = '';
     }
 	
@@ -25,12 +20,7 @@ class M_master_ijin extends App_Model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					NAMA_IJIN LIKE '%".$searchText."%' OR 
-					NAMA_PEJABAT LIKE '%".$searchText."%' OR 
-					NIP_PEJABAT LIKE '%".$searchText."%' OR 
-					JABATAN LIKE '%".$searchText."%' OR 
-					PANGKAT LIKE '%".$searchText."%' OR 
-					ATASNAMA LIKE '%".$searchText."%'
+					nama LIKE '%".$searchText."%'
 					)
 			";
 		}

@@ -691,7 +691,7 @@ class C_t_ipmbl_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_ipmbl_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$data['dataijin'] = $this->db->where('ID_IJIN',2)->get('master_ijin')->row();
+		$data['dataijin'] = $this->db->where('id',23)->get('ijin')->row();
 		$print_view=$this->load->view('template/p_ipmbl_buktiterima.php',$data,TRUE);
 		$print_file=fopen('print/ipmbl_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);
@@ -705,7 +705,7 @@ class C_t_ipmbl_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_ipmbl_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$data['dataijin'] = $this->db->where('ID_IJIN',2)->get('master_ijin')->row();
+		$data['dataijin'] = $this->db->where('id',23)->get('ijin')->row();
 		$sub = $data['printrecord'][0];
 		if($sub->det_ipmbl_sk == ''){
 			echo 'nosk';

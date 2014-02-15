@@ -89,7 +89,7 @@
 					root : 'results',
 					rootProperty : 'results',
 					totalProperty : 'total',
-					idProperty : 'ID_IJIN'
+					idProperty : 'id'
 				},
 				actionMethods : {
 					read : 'POST'
@@ -99,8 +99,8 @@
 				}
 			}),
 			fields : [
-				{ name : 'ID_IJIN', type : 'int', mapping : 'ID_IJIN' },
-				{ name : 'NAMA_IJIN', type : 'string', mapping : 'NAMA_IJIN' }
+				{ name : 'id', type : 'int', mapping : 'id' },
+				{ name : 'nama', type : 'string', mapping : 'nama' }
 			]
 		});
 /* End DataStore declaration */
@@ -109,8 +109,8 @@
 			fieldLabel:'<b>Perijinan </b>',
 			store : laporan_expired_ijindataStore,
 			mode: 'local',
-			displayField: 'NAMA_IJIN',
-			valueField: 'ID_IJIN',
+			displayField: 'nama',
+			valueField: 'id',
 			width: 100,
 			triggerAction: 'all',
 			labelWidth : 135

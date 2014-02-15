@@ -1184,7 +1184,7 @@ class C_t_apotek_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_apotek_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$data['dataijin'] = $this->db->where('ID_IJIN',5)->get('master_ijin')->row();
+		$data['dataijin'] = $this->db->where('id',25)->get('ijin')->row();
 		$print_view=$this->load->view('template/p_apotek_buktiterima.php',$data,TRUE);
 		$print_file=fopen('print/apotek_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);

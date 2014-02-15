@@ -156,7 +156,7 @@ class C_t_iujk_det extends CI_Controller{
 		
 		$bidang=$this->m_t_iujk_det->getBidang();
 		$bidangsub=$this->m_t_iujk_det->getSubBidang();
-		
+		$noreg = $this->m_public_function->getNomorReg(1);
 		$datapemohon = array(
 			'pemohon_nama'=>$pemohon_nama,
 			'pemohon_alamat'=>$pemohon_alamat,
@@ -227,7 +227,8 @@ class C_t_iujk_det extends CI_Controller{
 					'det_iujk_pjtbu'=>$det_iujk_pjtbu,
 					'det_iujk_surveylulus'=>$det_iujk_surveylulus,
 					'det_iujk_pemohon_id'=>$resultpemohon,
-					'det_iujk_retribusi'=>$det_iujk_retribusi
+					'det_iujk_retribusi'=>$det_iujk_retribusi,
+					'det_iujk_nomorreg'=>$noreg
 					);
 				$resultdet = $this->m_t_iujk_det->__insert($data, '', 'insertId');
 				foreach($bidang AS $sub_bidang){ 
@@ -620,7 +621,7 @@ class C_t_iujk_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_iujk_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$data['dataijin'] = $this->db->where('ID_IJIN',1)->get('master_ijin')->row();
+		$data['dataijin'] = $this->db->where('id',5)->get('ijin')->row();
 		$print_view=$this->load->view('template/p_iujk_buktiterima.php',$data,TRUE);
 		$print_file=fopen('print/iujk_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);

@@ -13,7 +13,7 @@ class M_t_laporan extends App_Model{
 		extract($params);
 		$sql = "";
 		switch($laporan_ijin){
-			case 1:
+			case 22:
 				$sql = "
 					SELECT CASE WHEN det_idam_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, det_idam_proses AS permohonan_proses,
@@ -32,7 +32,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_idam_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 2:
+			case 23:
 				$sql = "
 					SELECT CASE WHEN det_ipmbl_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, det_ipmbl_proses AS permohonan_proses,
@@ -51,7 +51,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_ipmbl_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 3:
+			case 24:
 				$sql = "
 					SELECT CASE WHEN det_iujt_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, det_iujt_proses AS permohonan_proses,
@@ -70,7 +70,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_iujt_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 4:
+			case 5:
 				$sql = "
 					SELECT CASE WHEN det_iujk_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, det_iujk_proses AS permohonan_proses,
@@ -89,7 +89,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_iujk_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 5:
+			case 25:
 				$sql = "
 					SELECT CASE WHEN det_apotek_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, det_apotek_proses AS permohonan_proses,
@@ -108,7 +108,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_apotek_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 8:
+			case 28:
 				$sql = "
 					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
@@ -127,7 +127,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 9:
+			case 29:
 				$sql = "
 					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
@@ -145,7 +145,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 10:
+			case 30:
 				$sql = "
 					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
@@ -163,7 +163,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 11:
+			case 31:
 				$sql = "
 					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
@@ -181,7 +181,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 12:
+			case 32:
 				$sql = "
 					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
@@ -199,7 +199,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 13:
+			case 33:
 				$sql = "
 					SELECT CASE WHEN JENIS_PERMOHONAN = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, STATUS AS permohonan_proses,
@@ -217,7 +217,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 14:
+			case 27:
 				$sql = "
 					SELECT CASE WHEN det_simb_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, det_simb_proses AS permohonan_proses,
@@ -236,7 +236,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_simb_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 15:
+			case 26:
 				$sql = "
 					SELECT CASE WHEN det_sipd_jenis = 1 THEN 'BARU' ELSE 'PERPANJANGAN' END AS permohonan_jenis,
 						pemohon_nama, pemohon_alamat, det_sipd_proses AS permohonan_proses,
@@ -264,7 +264,7 @@ class M_t_laporan extends App_Model{
 		extract($params);
 		$sql = "";
 		switch($laporan_ijin){
-			case 1:
+			case 22:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -288,7 +288,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_idam_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 2:
+			case 23:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -312,7 +312,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_ipmbl_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 3:
+			case 24:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -336,7 +336,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_iujt_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 4:
+			case 5:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -360,7 +360,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_iujk_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 5:
+			case 25:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -384,7 +384,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_apotek_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 8:
+			case 28:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -408,7 +408,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 9:
+			case 29:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -431,7 +431,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 10:
+			case 30:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -454,7 +454,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 11:
+			case 31:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -477,7 +477,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 12:
+			case 32:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -500,7 +500,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 13:
+			case 33:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -523,7 +523,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(TGL_PERMOHONAN,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 14:
+			case 27:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -547,7 +547,7 @@ class M_t_laporan extends App_Model{
 					$sql .= " AND DATE_FORMAT(det_simb_tanggal,'%Y-%m') = '".$laporan_tahun.'-'.$laporan_bulan."' ";
 				}
 			break;
-			case 15:
+			case 26:
 				$sql = "
 					SELECT 
 						pemohon_nama, pemohon_alamat,
@@ -580,7 +580,7 @@ class M_t_laporan extends App_Model{
 		extract($params);
 		$sql = "";
 		switch($laporan_ijin){
-			case 1:
+			case 22:
 				$sql = "
 					SELECT
 						induk.det_idam_tanggal AS permohonan_tanggal,
@@ -601,7 +601,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.det_idam_tanggal ";
 			break;
-			case 2:
+			case 23:
 				$sql = "
 					SELECT
 						induk.det_ipmbl_tanggal AS permohonan_tanggal,
@@ -622,7 +622,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.det_ipmbl_tanggal ";
 			break;
-			case 3:
+			case 24:
 				$sql = "
 					SELECT
 						induk.det_iujt_tanggal AS permohonan_tanggal,
@@ -643,7 +643,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.det_iujt_tanggal ";
 			break;
-			case 4:
+			case 5:
 				$sql = "
 					SELECT
 						induk.det_iujk_tanggal AS permohonan_tanggal,
@@ -664,7 +664,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.det_iujk_tanggal ";
 			break;
-			case 5:
+			case 25:
 				$sql = "
 					SELECT
 						induk.det_apotek_tanggal AS permohonan_tanggal,
@@ -685,7 +685,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.det_apotek_tanggal ";
 			break;
-			case 8:
+			case 28:
 				$sql = "
 					SELECT
 						induk.TGL_PERMOHONAN AS permohonan_tanggal,
@@ -706,7 +706,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
 			break;
-			case 9:
+			case 29:
 				$sql = "
 					SELECT
 						induk.TGL_PERMOHONAN AS permohonan_tanggal,
@@ -727,7 +727,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
 			break;
-			case 10:
+			case 30:
 				$sql = "
 					SELECT
 						induk.TGL_PERMOHONAN AS permohonan_tanggal,
@@ -748,7 +748,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
 			break;
-			case 11:
+			case 31:
 				$sql = "
 					SELECT
 						induk.TGL_PERMOHONAN AS permohonan_tanggal,
@@ -769,7 +769,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
 			break;
-			case 12:
+			case 32:
 				$sql = "
 					SELECT
 						induk.TGL_PERMOHONAN AS permohonan_tanggal,
@@ -790,7 +790,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
 			break;
-			case 13:
+			case 33:
 				$sql = "
 					SELECT
 						induk.TGL_PERMOHONAN AS permohonan_tanggal,
@@ -811,7 +811,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.TGL_PERMOHONAN ";
 			break;
-			case 14:
+			case 27:
 				$sql = "
 					SELECT
 						induk.det_simb_tanggal AS permohonan_tanggal,
@@ -832,7 +832,7 @@ class M_t_laporan extends App_Model{
 				}
 				$sql .= " GROUP BY induk.det_simb_tanggal ";
 			break;
-			case 15:
+			case 26:
 				$sql = "
 					SELECT
 						induk.det_sipd_tanggal AS permohonan_tanggal,

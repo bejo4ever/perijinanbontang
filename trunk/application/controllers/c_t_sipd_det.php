@@ -553,7 +553,7 @@ class C_t_sipd_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_sipd_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$data['dataijin'] = $this->db->where('ID_IJIN',1)->get('master_ijin')->row();
+		$data['dataijin'] = $this->db->where('id',26)->get('ijin')->row();
 		$print_view=$this->load->view('template/p_sipd_buktiterima.php',$data,TRUE);
 		$print_file=fopen('print/sipd_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);
@@ -581,7 +581,7 @@ class C_t_sipd_det extends CI_Controller{
 			"return_type"=>'array',
 		);
 		$printrecord = $this->m_t_sipd_det->search($params);
-		$data['dataijin'] = $this->db->where('ID_IJIN',1)->get('master_ijin')->row();
+		$data['dataijin'] = $this->db->where('id',26)->get('ijin')->row();
 		$data['printrecord'] = $printrecord[1];
 		$sub = $data['printrecord'][0];
 		if($sub->det_sipd_sk == ''){
