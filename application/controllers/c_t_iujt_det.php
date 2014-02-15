@@ -530,7 +530,7 @@ class C_t_iujt_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_iujt_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$data['dataijin'] = $this->db->where('ID_IJIN',3)->get('master_ijin')->row();
+		$data['dataijin'] = $this->db->where('id',24)->get('ijin')->row();
 		$sub = $data['printrecord'][0];
 		if($sub->det_iujt_sk == ''){
 			echo 'nosk';
@@ -551,7 +551,7 @@ class C_t_iujt_det extends CI_Controller{
 		);
 		$printrecord = $this->m_t_iujt_det->search($params);
 		$data['printrecord'] = $printrecord[1];
-		$data['dataijin'] = $this->db->where('ID_IJIN',3)->get('master_ijin')->row();
+		$data['dataijin'] = $this->db->where('id',24)->get('ijin')->row();
 		$print_view=$this->load->view('template/p_iujt_buktiterima.php',$data,TRUE);
 		$print_file=fopen('print/iujt_buktipenerimaan.html','w+');
 		fwrite($print_file, $print_view);

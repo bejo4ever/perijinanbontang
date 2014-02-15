@@ -391,7 +391,7 @@ class M_t_apotek_det extends App_Model{
 					NAMA_SYARAT AS apotek_cek_syarat_nama
 				FROM dt_syarat 
 				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT
-				WHERE ID_IJIN = 5
+				WHERE ID_IJIN = 25
 			";
 		}
 		$result = $this->__listCore($sql, $params);

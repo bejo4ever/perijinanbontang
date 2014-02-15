@@ -186,7 +186,7 @@ class M_t_iujt_det extends App_Model{
 					NAMA_SYARAT AS iujt_cek_syarat_nama
 				FROM dt_syarat 
 				LEFT JOIN master_syarat ON dt_syarat.ID_SYARAT = master_syarat.ID_SYARAT
-				WHERE ID_IJIN = 3
+				WHERE ID_IJIN = 24
 			";
 		}
 		$result = $this->__listCore($sql, $params);

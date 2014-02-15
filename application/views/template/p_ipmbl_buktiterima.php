@@ -37,7 +37,7 @@
 		</tr>
 		<tr>
 			<td colspan="2"><span style="margin-left:50px">Perkiraan Selesai</span></td>
-			<td colspan="3">: <?php echo $dataijin->WAKTUSELESAI; ?></td>
+			<td colspan="3">: <?php echo $dataijin->perkiraan_selesai; ?></td>
 		</tr>
 		<tr>
 			<td width="75px">&nbsp;</td>
