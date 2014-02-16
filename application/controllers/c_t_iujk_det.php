@@ -156,7 +156,7 @@ class C_t_iujk_det extends CI_Controller{
 		
 		$bidang=$this->m_t_iujk_det->getBidang();
 		$bidangsub=$this->m_t_iujk_det->getSubBidang();
-		$noreg = $this->m_public_function->getNomorReg(1);
+		$noreg = $this->m_public_function->getNomorReg(5);
 		$datapemohon = array(
 			'pemohon_nama'=>$pemohon_nama,
 			'pemohon_alamat'=>$pemohon_alamat,
