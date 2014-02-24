@@ -35,28 +35,27 @@ class M_t_idam_det extends App_Model{
 				CONCAT(5 * (DATEDIFF(NOW(), det_idam_tanggal) DIV 7) + 
 					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_idam_tanggal) + 
 						1, 1),' Hari') as lamaproses,
-				pemohon_id,
-				pemohon_nama,
-				pemohon_alamat,
-				pemohon_telp,
-				pemohon_npwp,
-				pemohon_rt,
-				pemohon_rw,
-				pemohon_kel,
-				pemohon_kec,
-				pemohon_nik,
-				pemohon_stra,
-				pemohon_surattugas,
-				pemohon_pekerjaan,
-				pemohon_tempatlahir,
-				pemohon_tanggallahir,
-				pemohon_user_id,
-				pemohon_pendidikan,
-				pemohon_tahunlulus,
+				id AS pemohon_id,
+				nama AS pemohon_nama,
+				alamat AS pemohon_alamat,
+				telp AS pemohon_telp,
+				npwp AS pemohon_npwp,
+				rt AS pemohon_rt,
+				rw AS pemohon_rw,
+				desa_id AS pemohon_kel,
+				kecamatan_id AS pemohon_kec,
+				ktp AS pemohon_nik,
+				stra AS pemohon_stra,
+				surattugas AS pemohon_surattugas,
+				pekerjaan AS pemohon_pekerjaan,
+				tempatlahir AS pemohon_tempatlahir,
+				tgllahir AS pemohon_tanggallahir,
+				pendidikan AS pemohon_pendidikan,
+				tahunlulus AS pemohon_tahunlulus,
 				det_idam_retribusi
 				FROM t_idam_det 
 				JOIN t_idam ON t_idam_det.det_idam_idam_id = t_idam.idam_id
-				JOIN m_pemohon ON t_idam_det.det_idam_pemohon_id = m_pemohon.pemohon_id
+				JOIN pemohon ON t_idam_det.det_idam_pemohon_id = pemohon.id
 			WHERE det_idam_id IS NOT NULL 
 	";
 	
@@ -67,6 +66,33 @@ class M_t_idam_det extends App_Model{
         $this->column_order = '';
 		$this->column_unique = '';
     }
+	
+	function search($params){
+		extract($params);
+		
+		$sql = $this->mainSql;
+		if(@$_SESSION['IDHAK'] == 2){
+			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID'];
+		}
+		
+		if(@$det_idam_id != ''){
+			$sql .= " AND det_idam_id = ".$det_idam_id." ";
+		}
+		if(@$det_idam_idam_id != ''){
+			$sql .= " AND det_idam_idam_id LIKE '%".$det_idam_idam_id."%' ";
+		}
+		if(@$det_idam_sk != ''){
+			$sql .= " AND det_idam_sk LIKE '%".$det_idam_sk."%' ";
+		}
+		if(@$det_idam_nomorreg != ''){
+			$sql .= " AND det_idam_nomorreg LIKE '%".$det_idam_nomorreg."%' ";
+		}
+		if(@$limit_start != 0 && @$limit_start != 0){
+			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
+		}
+		$result = $this->__listCore($sql, $params);
+		return $result;
+	}
 	
 	function getList($params){
 		extract($params);
@@ -92,93 +118,10 @@ class M_t_idam_det extends App_Model{
 		return $result;
 	}
 	
-	function search($params){
-		extract($params);
-		
-		$sql = $this->mainSql;
-		if(@$_SESSION['IDHAK'] == 2){
-			$sql .= " AND pemohon_user_id = ".$_SESSION['USERID'];
-		}
-		
-		if(@$det_idam_id != ''){
-			$sql .= " AND det_idam_id = ".$det_idam_id." ";
-		}
-		if(@$det_idam_idam_id != ''){
-			$sql .= " AND det_idam_idam_id LIKE '%".$det_idam_idam_id."%' ";
-		}
-		if(@$det_idam_jenis != ''){
-			$sql .= " AND det_idam_jenis LIKE '%".$det_idam_jenis."%' ";
-		}
-		if(@$det_idam_tanggal != ''){
-			$sql .= " AND det_idam_tanggal LIKE '%".$det_idam_tanggal."%' ";
-		}
-		if(@$det_idam_nama != ''){
-			$sql .= " AND det_idam_nama LIKE '%".$det_idam_nama."%' ";
-		}
-		if(@$det_idam_alamat != ''){
-			$sql .= " AND det_idam_alamat LIKE '%".$det_idam_alamat."%' ";
-		}
-		if(@$det_idam_telp != ''){
-			$sql .= " AND det_idam_telp LIKE '%".$det_idam_telp."%' ";
-		}
-		if(@$det_idam_tempatlahir != ''){
-			$sql .= " AND det_idam_tempatlahir LIKE '%".$det_idam_tempatlahir."%' ";
-		}
-		if(@$det_idam_tanggallahir != ''){
-			$sql .= " AND det_idam_tanggallahir LIKE '%".$det_idam_tanggallahir."%' ";
-		}
-		if(@$det_idam_pendidikan != ''){
-			$sql .= " AND det_idam_pendidikan LIKE '%".$det_idam_pendidikan."%' ";
-		}
-		if(@$det_idam_tahunlulus != ''){
-			$sql .= " AND det_idam_tahunlulus LIKE '%".$det_idam_tahunlulus."%' ";
-		}
-		if(@$det_idam_status != ''){
-			$sql .= " AND det_idam_status LIKE '%".$det_idam_status."%' ";
-		}
-		if(@$det_idam_keterangan != ''){
-			$sql .= " AND det_idam_keterangan LIKE '%".$det_idam_keterangan."%' ";
-		}
-		if(@$det_idam_bap != ''){
-			$sql .= " AND det_idam_bap LIKE '%".$det_idam_bap."%' ";
-		}
-		if(@$det_idam_baptanggal != ''){
-			$sql .= " AND det_idam_baptanggal LIKE '%".$det_idam_baptanggal."%' ";
-		}
-		if(@$det_idam_kelengkapan != ''){
-			$sql .= " AND det_idam_kelengkapan LIKE '%".$det_idam_kelengkapan."%' ";
-		}
-		if(@$det_idam_terima != ''){
-			$sql .= " AND det_idam_terima LIKE '%".$det_idam_terima."%' ";
-		}
-		if(@$det_idam_terimatanggal != ''){
-			$sql .= " AND det_idam_terimatanggal LIKE '%".$det_idam_terimatanggal."%' ";
-		}
-		if(@$det_idam_sk != ''){
-			$sql .= " AND det_idam_sk LIKE '%".$det_idam_sk."%' ";
-		}
-		if(@$det_idam_berlaku != ''){
-			$sql .= " AND det_idam_berlaku LIKE '%".$det_idam_berlaku."%' ";
-		}
-		if(@$det_idam_kadaluarsa != ''){
-			$sql .= " AND det_idam_kadaluarsa LIKE '%".$det_idam_kadaluarsa."%' ";
-		}
-		if(@$det_idam_nomorreg != ''){
-			$sql .= " AND det_idam_nomorreg LIKE '%".$det_idam_nomorreg."%' ";
-		}
-		if(@$limit_start != 0 && @$limit_start != 0){
-			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
-		}
-		$result = $this->__listCore($sql, $params);
-		return $result;
-	}
-	
 	function printExcel($params){
 		extract($params);
 		if(@$currentAction == "GETLIST"){
 			$result = $this->getList($params);
-		}else if(@$currentAction == "SEARCH"){
-			$result = $this->search($params);
 		}
 		return $result;
 	}

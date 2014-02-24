@@ -1,29 +1,28 @@
 <?php
 class M_m_pemohon extends App_Model{
 	var $mainSql = "SELECT 
-				pemohon_id,
-				pemohon_nama,
-				pemohon_alamat,
-				pemohon_telp,
-				pemohon_npwp,
-				pemohon_rt,
-				pemohon_rw,
-				pemohon_kel,
-				pemohon_kec,
-				pemohon_kota,
-				pemohon_nik,
-				pemohon_stra,
-				pemohon_surattugas,
-				pemohon_pekerjaan,
-				pemohon_tempatlahir,
-				pemohon_tanggallahir,
-				pemohon_user_id,
-				pemohon_pendidikan,
-				pemohon_tahunlulus,
-				pemohon_wn,
-				pemohon_hp
-				FROM m_pemohon 
-			WHERE pemohon_id IS NOT NULL 
+				id AS pemohon_id,
+				nama AS pemohon_nama,
+				alamat AS pemohon_alamat,
+				telp AS pemohon_telp,
+				npwp AS pemohon_npwp,
+				rt AS pemohon_rt,
+				rw AS pemohon_rw,
+				desa_id AS pemohon_kel,
+				kecamatan_id AS pemohon_kec,
+				kabkota_id AS pemohon_kota,
+				ktp AS pemohon_nik,
+				stra AS pemohon_stra,
+				surattugas AS pemohon_surattugas,
+				pekerjaan AS pemohon_pekerjaan,
+				tempatlahir AS pemohon_tempatlahir,
+				tgllahir AS pemohon_tanggallahir,
+				pendidikan AS pemohon_pendidikan,
+				tahunlulus AS pemohon_tahunlulus,
+				warga_id AS pemohon_wn,
+				hp AS pemohon_hp
+				FROM pemohon 
+			WHERE id IS NOT NULL 
 	";
 	
 	function __construct(){
@@ -43,30 +42,13 @@ class M_m_pemohon extends App_Model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					pemohon_nama LIKE '%".$searchText."%' OR 
-					pemohon_alamat LIKE '%".$searchText."%' OR 
-					pemohon_telp LIKE '%".$searchText."%' OR 
-					pemohon_npwp LIKE '%".$searchText."%' OR 
-					pemohon_rt LIKE '%".$searchText."%' OR 
-					pemohon_rw LIKE '%".$searchText."%' OR 
-					pemohon_kel LIKE '%".$searchText."%' OR 
-					pemohon_kec LIKE '%".$searchText."%' OR 
-					pemohon_kota LIKE '%".$searchText."%' OR 
-					pemohon_nik LIKE '%".$searchText."%' OR 
-					pemohon_stra LIKE '%".$searchText."%' OR 
-					pemohon_surattugas LIKE '%".$searchText."%' OR 
-					pemohon_pekerjaan LIKE '%".$searchText."%' OR 
-					pemohon_tempatlahir LIKE '%".$searchText."%' OR 
-					pemohon_tanggallahir LIKE '%".$searchText."%' OR 
-					pemohon_user_id LIKE '%".$searchText."%' OR 
-					pemohon_pendidikan LIKE '%".$searchText."%' OR 
-					pemohon_tahunlulus LIKE '%".$searchText."%' OR 
-					pemohon_wn LIKE '%".$searchText."%' OR 
-					pemohon_hp LIKE '%".$searchText."%'
+					nama LIKE '%".$searchText."%' OR 
+					alamat LIKE '%".$searchText."%' OR 
+					ktp LIKE '%".$searchText."%' 
 					)
 			";
 		}
-				if(@$limit_start != 0 && @$limit_start != 0){
+		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
 		$result = $this->__listCore($sql, $params);
@@ -79,68 +61,26 @@ class M_m_pemohon extends App_Model{
 		$sql = $this->mainSql;
 		
 		if(@$pemohon_nama != ''){
-			$sql .= " AND pemohon_nama LIKE '%".$pemohon_nama."%' ";
+			$sql .= " AND nama LIKE '%".$pemohon_nama."%' ";
 		}
 		if(@$pemohon_alamat != ''){
-			$sql .= " AND pemohon_alamat LIKE '%".$pemohon_alamat."%' ";
-		}
-		if(@$pemohon_telp != ''){
-			$sql .= " AND pemohon_telp LIKE '%".$pemohon_telp."%' ";
+			$sql .= " AND alamat LIKE '%".$pemohon_alamat."%' ";
 		}
 		if(@$pemohon_npwp != ''){
-			$sql .= " AND pemohon_npwp LIKE '%".$pemohon_npwp."%' ";
-		}
-		if(@$pemohon_rt != ''){
-			$sql .= " AND pemohon_rt LIKE '%".$pemohon_rt."%' ";
-		}
-		if(@$pemohon_rw != ''){
-			$sql .= " AND pemohon_rw LIKE '%".$pemohon_rw."%' ";
-		}
-		if(@$pemohon_kel != ''){
-			$sql .= " AND pemohon_kel LIKE '%".$pemohon_kel."%' ";
-		}
-		if(@$pemohon_kec != ''){
-			$sql .= " AND pemohon_kec LIKE '%".$pemohon_kec."%' ";
-		}
-		if(@$pemohon_kota != ''){
-			$sql .= " AND pemohon_kota LIKE '%".$pemohon_kota."%' ";
+			$sql .= " AND npwp LIKE '%".$pemohon_npwp."%' ";
 		}
 		if(@$pemohon_nik != ''){
-			$sql .= " AND pemohon_nik LIKE '%".$pemohon_nik."%' ";
+			$sql .= " AND ktp LIKE '%".$pemohon_nik."%' ";
 		}
 		if(@$pemohon_stra != ''){
-			$sql .= " AND pemohon_stra LIKE '%".$pemohon_stra."%' ";
+			$sql .= " AND stra LIKE '%".$pemohon_stra."%' ";
 		}
 		if(@$pemohon_surattugas != ''){
-			$sql .= " AND pemohon_surattugas LIKE '%".$pemohon_surattugas."%' ";
+			$sql .= " AND surattugas LIKE '%".$pemohon_surattugas."%' ";
 		}
-		if(@$pemohon_pekerjaan != ''){
-			$sql .= " AND pemohon_pekerjaan LIKE '%".$pemohon_pekerjaan."%' ";
-		}
-		if(@$pemohon_tempatlahir != ''){
-			$sql .= " AND pemohon_tempatlahir LIKE '%".$pemohon_tempatlahir."%' ";
-		}
-		if(@$pemohon_tanggallahir != ''){
-			$sql .= " AND pemohon_tanggallahir LIKE '%".$pemohon_tanggallahir."%' ";
-		}
-		if(@$pemohon_user_id != ''){
-			$sql .= " AND pemohon_user_id LIKE '%".$pemohon_user_id."%' ";
-		}
-		if(@$pemohon_pendidikan != ''){
-			$sql .= " AND pemohon_pendidikan LIKE '%".$pemohon_pendidikan."%' ";
-		}
-		if(@$pemohon_tahunlulus != ''){
-			$sql .= " AND pemohon_tahunlulus LIKE '%".$pemohon_tahunlulus."%' ";
-		}
-		if(@$pemohon_wn != ''){
-			$sql .= " AND pemohon_wn LIKE '%".$pemohon_wn."%' ";
-		}
-		if(@$pemohon_hp != ''){
-			$sql .= " AND pemohon_hp LIKE '%".$pemohon_hp."%' ";
-		}
-		if(@$limit_start != 0 && @$limit_start != 0){
+		// if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
-		}
+		// }
 		if($_SESSION["IDHAK"] == 2){
 			$sql .= " AND pemohon_user_id = " . $_SESSION["USERID"];
 		}

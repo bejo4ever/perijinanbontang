@@ -27,9 +27,6 @@ class C_t_idam_det extends CI_Controller{
 			case 'DELETE':
 				$this->delete();
 			break;
-			case 'SEARCH':
-				$this->search();
-			break;
 			case 'PRINT':
 				$this->printExcel();
 			break;
@@ -71,26 +68,22 @@ class C_t_idam_det extends CI_Controller{
 	}
 	
 	function create(){
-		$det_idam_namausaha = htmlentities($this->input->post('det_idam_namausaha'),ENT_QUOTES);
+		
+		/* $det_idam_namausaha = htmlentities($this->input->post('det_idam_namausaha'),ENT_QUOTES);
 		$det_idam_jenisusaha = htmlentities($this->input->post('det_idam_jenisusaha'),ENT_QUOTES);
 		$det_idam_alamatusaha = htmlentities($this->input->post('det_idam_alamatusaha'),ENT_QUOTES);
 		$det_idam_nospkp = htmlentities($this->input->post('det_idam_nospkp'),ENT_QUOTES);
 		
-		$det_idam_id = htmlentities($this->input->post('det_idam_id'),ENT_QUOTES);
-		$det_idam_id = is_numeric($det_idam_id) ? $det_idam_id : 0;
-		$det_idam_idam_id = htmlentities($this->input->post('det_idam_idam_id'),ENT_QUOTES);
-		$det_idam_idam_id = is_numeric($det_idam_idam_id) ? $det_idam_idam_id : 0;
-		$det_idam_jenis = htmlentities($this->input->post('det_idam_jenis'),ENT_QUOTES);
-		$det_idam_jenis = is_numeric($det_idam_jenis) ? $det_idam_jenis : 0;
-		$det_idam_lama = htmlentities($this->input->post('det_idam_lama'),ENT_QUOTES);
-		$det_idam_lama = is_numeric($det_idam_lama) ? $det_idam_lama : 0;
+		$det_idam_id = $this->input->numericpost('det_idam_id');
+		$det_idam_idam_id = $this->input->numericpost('det_idam_idam_id');
+		$det_idam_jenis = $this->input->numericpost('det_idam_jenis');
+		$det_idam_lama = $this->input->numericpost('det_idam_lama');
 		$det_idam_tanggal = htmlentities($this->input->post('det_idam_tanggal'),ENT_QUOTES);
 		$det_idam_status = htmlentities($this->input->post('det_idam_status'),ENT_QUOTES);
 		$det_idam_keterangan = htmlentities($this->input->post('det_idam_keterangan'),ENT_QUOTES);
 		$det_idam_bap = htmlentities($this->input->post('det_idam_bap'),ENT_QUOTES);
 		$det_idam_baptanggal = htmlentities($this->input->post('det_idam_baptanggal'),ENT_QUOTES);
-		$det_idam_kelengkapan = htmlentities($this->input->post('det_idam_kelengkapan'),ENT_QUOTES);
-		$det_idam_kelengkapan = is_numeric($det_idam_kelengkapan) ? $det_idam_kelengkapan : 0;
+		$det_idam_kelengkapan = $this->input->numericpost('det_idam_kelengkapan');
 		$det_idam_terima = htmlentities($this->input->post('det_idam_terima'),ENT_QUOTES);
 		$det_idam_terimatanggal = htmlentities($this->input->post('det_idam_terimatanggal'),ENT_QUOTES);
 		$det_idam_sk = htmlentities($this->input->post('det_idam_sk'),ENT_QUOTES);
@@ -103,71 +96,27 @@ class C_t_idam_det extends CI_Controller{
 		$idam_cek_status = json_decode($this->input->post('idam_cek_status'));
 		$idam_cek_keterangan = json_decode($this->input->post('idam_cek_keterangan'));
 		
-		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
-		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
-		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
-		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
-		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
-		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
-		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
-		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
-		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
-		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
-		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
-		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
-		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
-		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
-		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
-		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
-		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
-		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
-		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
-		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
-		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
-		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
-		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
-		
-		$det_idam_retribusi = htmlentities($this->input->post('det_idam_retribusi'),ENT_QUOTES);
-		$det_idam_retribusi = is_numeric($det_idam_retribusi) ? $det_idam_retribusi : 0;
+		$det_idam_retribusi = $this->input->numericpost('det_idam_retribusi');
+		 */
+		$params = json_decode($this->input->post('params'));
+		extract(get_object_vars($params));
 		
 		$idam_det_author = $this->m_t_idam_det->__checkSession();
 		$idam_det_created_date = date('Y-m-d H:i:s');
 		
-		$datapemohon = array(
-			'pemohon_nama'=>$pemohon_nama,
-			'pemohon_alamat'=>$pemohon_alamat,
-			'pemohon_telp'=>$pemohon_telp,
-			'pemohon_npwp'=>$pemohon_npwp,
-			'pemohon_rt'=>$pemohon_rt,
-			'pemohon_rw'=>$pemohon_rw,
-			'pemohon_kel'=>$pemohon_kel,
-			'pemohon_kec'=>$pemohon_kec,
-			'pemohon_nik'=>$pemohon_nik,
-			'pemohon_stra'=>$pemohon_stra,
-			'pemohon_surattugas'=>$pemohon_surattugas,
-			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
-			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
-			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_pendidikan'=>$pemohon_pendidikan,
-			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
-		);
-		if($pemohon_id != 0){
-			$resultpemohon = $this->m_t_idam_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
-			$resultpemohon = $pemohon_id;
-		}else{
-			$datapemohon["pemohon_user_id"]=$idam_det_author;
-			$resultpemohon = $this->m_t_idam_det->__insert($datapemohon, 'm_pemohon', 'insertId');
-		}
+		$resultperusahaan = $this->m_t_idam_det->cuperusahaan($params);
+		$resultpemohon = $this->m_t_idam_det->cupemohon($params);
 		
 		if($idam_det_author != ''){
 			if($det_idam_lama != 0 && $det_idam_jenis == 2){
 				$resultInti = $det_idam_lama;
 			}else{
 				$dataInti = array(
-					'idam_usaha'=>$det_idam_namausaha,
-					'idam_jenisusaha'=>$det_idam_jenisusaha,
-					'idam_alamat'=>$det_idam_alamatusaha,
-					'idam_sertifikatpkp'=>$det_idam_nospkp
+					'idam_usaha'=>$perusahaan_nama,
+					'idam_jenisusaha'=>$perusahaan_jusaha_id,
+					'idam_alamat'=>$perusahaan_alamat,
+					'idam_sertifikatpkp'=>$det_idam_nospkp,
+					'idam_perusahaan_id'=>$resultperusahaan
 				);
 				$resultInti = $this->m_t_idam_det->__insert($dataInti, 't_idam', 'insertId');
 			}
@@ -176,17 +125,17 @@ class C_t_idam_det extends CI_Controller{
 				$data = array(
 					'det_idam_idam_id'=>$resultInti,
 					'det_idam_jenis'=>$det_idam_jenis,
-					'det_idam_tanggal'=>$det_idam_tanggal,
+					'det_idam_tanggal'=>date('Y-m-d', strtotime($det_idam_tanggal)),
 					'det_idam_status'=>$det_idam_status,
 					'det_idam_keterangan'=>$det_idam_keterangan,
 					'det_idam_bap'=>$det_idam_bap,
-					'det_idam_baptanggal'=>$det_idam_baptanggal,
+					'det_idam_baptanggal'=>date('Y-m-d', strtotime($det_idam_baptanggal)),
 					'det_idam_kelengkapan'=>$det_idam_kelengkapan,
 					'det_idam_terima'=>$det_idam_terima,
-					'det_idam_terimatanggal'=>$det_idam_terimatanggal,
+					'det_idam_terimatanggal'=>date('Y-m-d', strtotime($det_idam_terimatanggal)),
 					'det_idam_sk'=>$det_idam_sk,
-					'det_idam_berlaku'=>$det_idam_berlaku,
-					'det_idam_kadaluarsa'=>$det_idam_kadaluarsa,
+					// 'det_idam_berlaku'=>date('Y-m-d', strtotime($det_idam_berlaku)),
+					'det_idam_kadaluarsa'=>date('Y-m-d', strtotime($det_idam_kadaluarsa)),
 					'det_idam_nomorreg'=>$det_idam_nomorreg,
 					'det_idam_pemohon_id'=>$resultpemohon,
 					'det_idam_retribusi'=>$det_idam_retribusi
@@ -214,24 +163,22 @@ class C_t_idam_det extends CI_Controller{
 	}
 	
 	function update(){
+		$params = json_decode($this->input->post('params'));
+		extract(get_object_vars($params));
 		$det_idam_namausaha = htmlentities($this->input->post('det_idam_namausaha'),ENT_QUOTES);
 		$det_idam_jenisusaha = htmlentities($this->input->post('det_idam_jenisusaha'),ENT_QUOTES);
 		$det_idam_alamatusaha = htmlentities($this->input->post('det_idam_alamatusaha'),ENT_QUOTES);
 		$det_idam_nospkp = htmlentities($this->input->post('det_idam_nospkp'),ENT_QUOTES);
 		
-		$det_idam_id = htmlentities($this->input->post('det_idam_id'),ENT_QUOTES);
-		$det_idam_id = is_numeric($det_idam_id) ? $det_idam_id : 0;
-		$det_idam_idam_id = htmlentities($this->input->post('det_idam_idam_id'),ENT_QUOTES);
-		$det_idam_idam_id = is_numeric($det_idam_idam_id) ? $det_idam_idam_id : 0;
-		$det_idam_jenis = htmlentities($this->input->post('det_idam_jenis'),ENT_QUOTES);
-		$det_idam_jenis = is_numeric($det_idam_jenis) ? $det_idam_jenis : 0;
+		$det_idam_id = $this->input->numericpost('det_idam_id');
+		$det_idam_idam_id = $this->input->numericpost('det_idam_idam_id');
+		$det_idam_jenis = $this->input->numericpost('det_idam_jenis');
 		$det_idam_tanggal = htmlentities($this->input->post('det_idam_tanggal'),ENT_QUOTES);
 		$det_idam_status = htmlentities($this->input->post('det_idam_status'),ENT_QUOTES);
 		$det_idam_keterangan = htmlentities($this->input->post('det_idam_keterangan'),ENT_QUOTES);
 		$det_idam_bap = htmlentities($this->input->post('det_idam_bap'),ENT_QUOTES);
 		$det_idam_baptanggal = htmlentities($this->input->post('det_idam_baptanggal'),ENT_QUOTES);
-		$det_idam_kelengkapan = htmlentities($this->input->post('det_idam_kelengkapan'),ENT_QUOTES);
-		$det_idam_kelengkapan = is_numeric($det_idam_kelengkapan) ? $det_idam_kelengkapan : 0;
+		$det_idam_kelengkapan = $this->input->numericpost('det_idam_kelengkapan');
 		$det_idam_terima = htmlentities($this->input->post('det_idam_terima'),ENT_QUOTES);
 		$det_idam_terimatanggal = htmlentities($this->input->post('det_idam_terimatanggal'),ENT_QUOTES);
 		$det_idam_sk = htmlentities($this->input->post('det_idam_sk'),ENT_QUOTES);
@@ -244,68 +191,21 @@ class C_t_idam_det extends CI_Controller{
 		$idam_cek_status = json_decode($this->input->post('idam_cek_status'));
 		$idam_cek_keterangan = json_decode($this->input->post('idam_cek_keterangan'));
 		
-		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
-		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
-		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
-		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
-		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
-		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
-		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
-		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
-		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
-		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
-		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
-		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
-		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
-		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
-		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
-		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
-		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
-		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
-		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
-		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
-		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
-		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
-		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
-		
-		$det_idam_retribusi = htmlentities($this->input->post('det_idam_retribusi'),ENT_QUOTES);
-		$det_idam_retribusi = is_numeric($det_idam_retribusi) ? $det_idam_retribusi : 0;
+		$det_idam_retribusi = $this->input->numericpost('det_idam_retribusi');
 		
 		$idam_det_updated_by = $this->m_t_idam_det->__checkSession();
 		$idam_det_updated_date = date('Y-m-d H:i:s');
 		
-		$datapemohon = array(
-			'pemohon_nama'=>$pemohon_nama,
-			'pemohon_alamat'=>$pemohon_alamat,
-			'pemohon_telp'=>$pemohon_telp,
-			'pemohon_npwp'=>$pemohon_npwp,
-			'pemohon_rt'=>$pemohon_rt,
-			'pemohon_rw'=>$pemohon_rw,
-			'pemohon_kel'=>$pemohon_kel,
-			'pemohon_kec'=>$pemohon_kec,
-			'pemohon_nik'=>$pemohon_nik,
-			'pemohon_stra'=>$pemohon_stra,
-			'pemohon_surattugas'=>$pemohon_surattugas,
-			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
-			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
-			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_pendidikan'=>$pemohon_pendidikan,
-			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
-		);
-		if($pemohon_id != 0){
-			$resultpemohon = $this->m_t_idam_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
-			$resultpemohon = $pemohon_id;
-		}else{
-			$datapemohon["pemohon_user_id"]=$idam_det_updated_by;
-			$resultpemohon = $this->m_t_idam_det->__insert($datapemohon, 'm_pemohon', 'insertId');
-		}
+		$resultperusahaan = $this->m_t_idam_det->cuperusahaan($params);
+		$resultpemohon = $this->m_t_idam_det->cupemohon($params);
 		
 		if($idam_det_updated_by != ''){
 			$dataInti = array(
 				'idam_usaha'=>$det_idam_namausaha,
 				'idam_jenisusaha'=>$det_idam_jenisusaha,
 				'idam_alamat'=>$det_idam_alamatusaha,
-				'idam_sertifikatpkp'=>$det_idam_nospkp
+				'idam_sertifikatpkp'=>$det_idam_nospkp,
+				'idam_perusahaan_id'=>$resultperusahaan
 			);
 			$resultInti = $this->m_t_idam_det->__update($dataInti, $det_idam_idam_id, 't_idam', 'updateId', 'idam_id');
 			$result = 'success';
@@ -352,119 +252,14 @@ class C_t_idam_det extends CI_Controller{
 		echo $result;
 	}
 	
-	function search(){
-		$limit_start = (integer)$this->input->post('start');
-		$limit_end = (integer)$this->input->post('limit');
-		$det_idam_idam_id = htmlentities($this->input->post('det_idam_idam_id'),ENT_QUOTES);
-		$det_idam_idam_id = is_numeric($det_idam_idam_id) ? $det_idam_idam_id : 0;
-		$det_idam_jenis = htmlentities($this->input->post('det_idam_jenis'),ENT_QUOTES);
-		$det_idam_jenis = is_numeric($det_idam_jenis) ? $det_idam_jenis : 0;
-		$det_idam_tanggal = htmlentities($this->input->post('det_idam_tanggal'),ENT_QUOTES);
-		$det_idam_nama = htmlentities($this->input->post('det_idam_nama'),ENT_QUOTES);
-		$det_idam_alamat = htmlentities($this->input->post('det_idam_alamat'),ENT_QUOTES);
-		$det_idam_telp = htmlentities($this->input->post('det_idam_telp'),ENT_QUOTES);
-		$det_idam_tempatlahir = htmlentities($this->input->post('det_idam_tempatlahir'),ENT_QUOTES);
-		$det_idam_tanggallahir = htmlentities($this->input->post('det_idam_tanggallahir'),ENT_QUOTES);
-		$det_idam_pendidikan = htmlentities($this->input->post('det_idam_pendidikan'),ENT_QUOTES);
-		$det_idam_tahunlulus = htmlentities($this->input->post('det_idam_tahunlulus'),ENT_QUOTES);
-		$det_idam_tahunlulus = is_numeric($det_idam_tahunlulus) ? $det_idam_tahunlulus : 0;
-		$det_idam_status = htmlentities($this->input->post('det_idam_status'),ENT_QUOTES);
-		$det_idam_keterangan = htmlentities($this->input->post('det_idam_keterangan'),ENT_QUOTES);
-		$det_idam_bap = htmlentities($this->input->post('det_idam_bap'),ENT_QUOTES);
-		$det_idam_baptanggal = htmlentities($this->input->post('det_idam_baptanggal'),ENT_QUOTES);
-		$det_idam_kelengkapan = htmlentities($this->input->post('det_idam_kelengkapan'),ENT_QUOTES);
-		$det_idam_kelengkapan = is_numeric($det_idam_kelengkapan) ? $det_idam_kelengkapan : 0;
-		$det_idam_terima = htmlentities($this->input->post('det_idam_terima'),ENT_QUOTES);
-		$det_idam_terimatanggal = htmlentities($this->input->post('det_idam_terimatanggal'),ENT_QUOTES);
-		$det_idam_sk = htmlentities($this->input->post('det_idam_sk'),ENT_QUOTES);
-		$det_idam_berlaku = htmlentities($this->input->post('det_idam_berlaku'),ENT_QUOTES);
-		$det_idam_kadaluarsa = htmlentities($this->input->post('det_idam_kadaluarsa'),ENT_QUOTES);
-		$det_idam_nomorreg = htmlentities($this->input->post('det_idam_nomorreg'),ENT_QUOTES);
-				
-		$params = array(
-			'det_idam_idam_id'=>$det_idam_idam_id,
-			'det_idam_jenis'=>$det_idam_jenis,
-			'det_idam_tanggal'=>$det_idam_tanggal,
-			'det_idam_nama'=>$det_idam_nama,
-			'det_idam_alamat'=>$det_idam_alamat,
-			'det_idam_telp'=>$det_idam_telp,
-			'det_idam_tempatlahir'=>$det_idam_tempatlahir,
-			'det_idam_tanggallahir'=>$det_idam_tanggallahir,
-			'det_idam_pendidikan'=>$det_idam_pendidikan,
-			'det_idam_tahunlulus'=>$det_idam_tahunlulus,
-			'det_idam_status'=>$det_idam_status,
-			'det_idam_keterangan'=>$det_idam_keterangan,
-			'det_idam_bap'=>$det_idam_bap,
-			'det_idam_baptanggal'=>$det_idam_baptanggal,
-			'det_idam_kelengkapan'=>$det_idam_kelengkapan,
-			'det_idam_terima'=>$det_idam_terima,
-			'det_idam_terimatanggal'=>$det_idam_terimatanggal,
-			'det_idam_sk'=>$det_idam_sk,
-			'det_idam_berlaku'=>$det_idam_berlaku,
-			'det_idam_kadaluarsa'=>$det_idam_kadaluarsa,
-			'det_idam_nomorreg'=>$det_idam_nomorreg,
-			'limit_start' => $limit_start,
-			'limit_end' => $limit_end
-		);
-		
-		$result = $this->m_t_idam_det->search($params);
-		echo $result;
-	}
-	
 	function printExcel(){
 		$outputType = $this->input->post('action');
 		
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
-		$det_idam_idam_id = htmlentities($this->input->post('det_idam_idam_id'),ENT_QUOTES);
-		$det_idam_idam_id = is_numeric($det_idam_idam_id) ? $det_idam_idam_id : 0;
-		$det_idam_jenis = htmlentities($this->input->post('det_idam_jenis'),ENT_QUOTES);
-		$det_idam_jenis = is_numeric($det_idam_jenis) ? $det_idam_jenis : 0;
-		$det_idam_tanggal = htmlentities($this->input->post('det_idam_tanggal'),ENT_QUOTES);
-		$det_idam_nama = htmlentities($this->input->post('det_idam_nama'),ENT_QUOTES);
-		$det_idam_alamat = htmlentities($this->input->post('det_idam_alamat'),ENT_QUOTES);
-		$det_idam_telp = htmlentities($this->input->post('det_idam_telp'),ENT_QUOTES);
-		$det_idam_tempatlahir = htmlentities($this->input->post('det_idam_tempatlahir'),ENT_QUOTES);
-		$det_idam_tanggallahir = htmlentities($this->input->post('det_idam_tanggallahir'),ENT_QUOTES);
-		$det_idam_pendidikan = htmlentities($this->input->post('det_idam_pendidikan'),ENT_QUOTES);
-		$det_idam_tahunlulus = htmlentities($this->input->post('det_idam_tahunlulus'),ENT_QUOTES);
-		$det_idam_tahunlulus = is_numeric($det_idam_tahunlulus) ? $det_idam_tahunlulus : 0;
-		$det_idam_status = htmlentities($this->input->post('det_idam_status'),ENT_QUOTES);
-		$det_idam_keterangan = htmlentities($this->input->post('det_idam_keterangan'),ENT_QUOTES);
-		$det_idam_bap = htmlentities($this->input->post('det_idam_bap'),ENT_QUOTES);
-		$det_idam_baptanggal = htmlentities($this->input->post('det_idam_baptanggal'),ENT_QUOTES);
-		$det_idam_kelengkapan = htmlentities($this->input->post('det_idam_kelengkapan'),ENT_QUOTES);
-		$det_idam_kelengkapan = is_numeric($det_idam_kelengkapan) ? $det_idam_kelengkapan : 0;
-		$det_idam_terima = htmlentities($this->input->post('det_idam_terima'),ENT_QUOTES);
-		$det_idam_terimatanggal = htmlentities($this->input->post('det_idam_terimatanggal'),ENT_QUOTES);
-		$det_idam_sk = htmlentities($this->input->post('det_idam_sk'),ENT_QUOTES);
-		$det_idam_berlaku = htmlentities($this->input->post('det_idam_berlaku'),ENT_QUOTES);
-		$det_idam_kadaluarsa = htmlentities($this->input->post('det_idam_kadaluarsa'),ENT_QUOTES);
-		$det_idam_nomorreg = htmlentities($this->input->post('det_idam_nomorreg'),ENT_QUOTES);
 				
 		$params = array(
 			'searchText' => $searchText,
-			'det_idam_idam_id'=>$det_idam_idam_id,
-			'det_idam_jenis'=>$det_idam_jenis,
-			'det_idam_tanggal'=>$det_idam_tanggal,
-			'det_idam_nama'=>$det_idam_nama,
-			'det_idam_alamat'=>$det_idam_alamat,
-			'det_idam_telp'=>$det_idam_telp,
-			'det_idam_tempatlahir'=>$det_idam_tempatlahir,
-			'det_idam_tanggallahir'=>$det_idam_tanggallahir,
-			'det_idam_pendidikan'=>$det_idam_pendidikan,
-			'det_idam_tahunlulus'=>$det_idam_tahunlulus,
-			'det_idam_status'=>$det_idam_status,
-			'det_idam_keterangan'=>$det_idam_keterangan,
-			'det_idam_bap'=>$det_idam_bap,
-			'det_idam_baptanggal'=>$det_idam_baptanggal,
-			'det_idam_kelengkapan'=>$det_idam_kelengkapan,
-			'det_idam_terima'=>$det_idam_terima,
-			'det_idam_terimatanggal'=>$det_idam_terimatanggal,
-			'det_idam_sk'=>$det_idam_sk,
-			'det_idam_berlaku'=>$det_idam_berlaku,
-			'det_idam_kadaluarsa'=>$det_idam_kadaluarsa,
-			'det_idam_nomorreg'=>$det_idam_nomorreg,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
