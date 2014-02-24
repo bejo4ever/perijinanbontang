@@ -59,6 +59,8 @@ class App_model extends CI_Model{
 		$sqls="";
 		$split_order=preg_split("/ORDER/i",$sql);
 		$sqls=$split_order[0];
+		$split_order=preg_split("/LIMIT/i",$sql);
+		$sqls=$split_order[0];
 		$split_sql=preg_split("/FROM/i",$sqls);
 		$sqli.="SELECT count(1) as jumlah ";
 		for($i=1;$i<sizeof($split_sql);$i++){
@@ -245,4 +247,78 @@ class App_model extends CI_Model{
         $method = $single ? 'row_array' : 'result_array';
         return $this->db->get($this->table_name)->$method();
     }
+	
+	public function cuperusahaan($params){
+		extract(get_object_vars($params));
+		$dataperusahaan = array(
+			'id'=>$perusahaan_id,
+			'npwp'=>$perusahaan_npwp,
+			'nama'=>$perusahaan_nama,
+			'noakta'=>$perusahaan_noakta,
+			'notaris'=>$perusahaan_notaris,
+			'tglakta'=>$perusahaan_tglakta,
+			'bentuk_id'=>$perusahaan_bentuk_id,
+			'kualifikasi_id'=>$perusahaan_kualifikasi_id,
+			'alamat'=>$perusahaan_alamat,
+			'rt'=>$perusahaan_rt,
+			'rw'=>$perusahaan_rw,
+			'propinsi_id'=>$perusahaan_propinsi_id,
+			'kabkota_id'=>$perusahaan_kabkota_id,
+			'kecamatan_id'=>$perusahaan_kecamatan_id,
+			'desa_id'=>$perusahaan_desa_id,
+			'kodepos'=>$perusahaan_kodepos,
+			'telp'=>$perusahaan_telp,
+			'fax'=>$perusahaan_fax,
+			'stempat_id'=>$perusahaan_stempat_id,
+			'sperusahaan_id'=>$perusahaan_sperusahaan_id,
+			'usaha'=>$perusahaan_usaha,
+			'butara'=>$perusahaan_butara,
+			'bselatan'=>$perusahaan_bselatan,
+			'btimur'=>$perusahaan_btimur,
+			'bbarat'=>$perusahaan_bbarat,
+			'modal'=>$perusahaan_modal,
+			'merk'=>$perusahaan_merk,
+			'jusaha_id'=>$perusahaan_jusaha_id
+		);
+		if($perusahaan_id != 0){
+			$resultperusahaan = $this->db->where('id', $perusahaan_id)->update('perusahaan', $dataperusahaan);
+			$resultperusahaan = $perusahaan_id;
+		}else{
+			$this->db->insert('perusahaan', $dataperusahaan);
+			$resultperusahaan = $this->db->insert_id();
+		}
+		return $resultperusahaan;
+	}
+	
+	public function cupemohon($params){
+		extract(get_object_vars($params));
+		$datapemohon = array(
+			'tahun'=>date('Y'),
+			'nama'=>$pemohon_nama,
+			'alamat'=>$pemohon_alamat,
+			'telp'=>$pemohon_telp,
+			'npwp'=>$pemohon_npwp,
+			'rt'=>$pemohon_rt,
+			'rw'=>$pemohon_rw,
+			'desa_id'=>$pemohon_kel,
+			'kecamatan_id'=>$pemohon_kec,
+			'ktp'=>$pemohon_nik,
+			'stra'=>$pemohon_stra,
+			'surattugas'=>$pemohon_surattugas,
+			'pekerjaan'=>$pemohon_pekerjaan,
+			'tempatlahir'=>$pemohon_tempatlahir,
+			'tgllahir'=>date('Y-m-d', strtotime($pemohon_tanggallahir)),
+			'pendidikan'=>$pemohon_pendidikan,
+			'tahunlulus'=>$pemohon_tahunlulus,
+		);
+		if($pemohon_id != 0){
+			$resultpemohon = $this->db->where('id', $pemohon_id)->update('pemohon', $datapemohon);
+			$resultpemohon = $pemohon_id;
+		}else{
+			$this->db->insert('pemohon', $datapemohon);
+			$resultpemohon = $this->db->insert_id();
+		}
+		return $resultpemohon;
+	}
+	
 }

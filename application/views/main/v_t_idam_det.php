@@ -17,20 +17,12 @@
 		var idam_det_gridPanel;
 		var idam_det_formPanel;
 		var idam_det_formWindow;
-		var idam_det_searchPanel;
 		var idam_det_searchWindow;
 		
 		var det_idam_idField;
 		var det_idam_idam_idField;
 		var det_idam_jenisField;
 		var det_idam_tanggalField;
-		var det_idam_namaField;
-		var det_idam_alamatField;
-		var det_idam_telpField;
-		var det_idam_tempatlahirField;
-		var det_idam_tanggallahirField;
-		var det_idam_pendidikanField;
-		var det_idam_tahunlulusField;
 		var det_idam_namausahaField;
 		var det_idam_jenisusahaField;
 		var det_idam_alamatusahaField;
@@ -46,28 +38,6 @@
 		var det_idam_berlakuField;
 		var det_idam_kadaluarsaField;
 		var det_idam_nomorregField;
-				
-		var det_idam_idam_idSearchField;
-		var det_idam_jenisSearchField;
-		var det_idam_tanggalSearchField;
-		var det_idam_namaSearchField;
-		var det_idam_alamatSearchField;
-		var det_idam_telpSearchField;
-		var det_idam_tempatlahirSearchField;
-		var det_idam_tanggallahirSearchField;
-		var det_idam_pendidikanSearchField;
-		var det_idam_tahunlulusSearchField;
-		var det_idam_statusSearchField;
-		var det_idam_keteranganSearchField;
-		var det_idam_bapSearchField;
-		var det_idam_baptanggalSearchField;
-		var det_idam_kelengkapanSearchField;
-		var det_idam_terimaSearchField;
-		var det_idam_terimatanggalSearchField;
-		var det_idam_skSearchField;
-		var det_idam_berlakuSearchField;
-		var det_idam_kadaluarsaSearchField;
-		var det_idam_nomorregSearchField;
 				
 		var idam_det_dbTask = 'CREATE';
 		var idam_det_dbTaskMessage = 'Tambah';
@@ -146,61 +116,26 @@
 				});
 			}else{
 				if(idam_det_confirmFormValid()){
-					var det_idam_idValue = '';
-					var det_idam_idam_idValue = '';
-					var det_idam_jenisValue = '';
-					var det_idam_lamaValue = '';
-					var det_idam_tanggalValue = '';
-					var det_idam_namaValue = '';
-					var det_idam_alamatValue = '';
-					var det_idam_telpValue = '';
-					var det_idam_tempatlahirValue = '';
-					var det_idam_tanggallahirValue = '';
-					var det_idam_pendidikanValue = '';
-					var det_idam_tahunlulusValue = '';
-					var det_idam_namausahaValue = '';
-					var det_idam_jenisusahaValue = '';
-					var det_idam_alamatusahaValue = '';
-					var det_idam_nospkpValue = '';
-					var det_idam_statusValue = '';
-					var det_idam_keteranganValue = '';
-					var det_idam_bapValue = '';
-					var det_idam_baptanggalValue = '';
-					var det_idam_kelengkapanValue = '';
-					var det_idam_terimaValue = '';
-					var det_idam_terimatanggalValue = '';
-					var det_idam_skValue = '';
-					var det_idam_berlakuValue = '';
-					var det_idam_kadaluarsaValue = '';
-					var det_idam_nomorregValue = '';
-										
-					det_idam_idValue = det_idam_idField.getValue();
-					det_idam_idam_idValue = det_idam_idam_idField.getValue();
-					det_idam_jenisValue = det_idam_jenisField.getValue();
-					det_idam_lamaValue = det_idam_sklamaField.getValue();
-					det_idam_tanggalValue = det_idam_tanggalField.getValue();
-					det_idam_namaValue = det_idam_namaField.getValue();
-					det_idam_alamatValue = det_idam_alamatField.getValue();
-					det_idam_telpValue = det_idam_telpField.getValue();
-					det_idam_tempatlahirValue = det_idam_tempatlahirField.getValue();
-					det_idam_tanggallahirValue = det_idam_tanggallahirField.getValue();
-					det_idam_pendidikanValue = det_idam_pendidikanField.getValue();
-					det_idam_tahunlulusValue = det_idam_tahunlulusField.getValue();
-					det_idam_namausahaValue = det_idam_namausahaField.getValue();
-					det_idam_jenisusahaValue = det_idam_jenisusahaField.getValue();
-					det_idam_alamatusahaValue = det_idam_alamatusahaField.getValue();
-					det_idam_nospkpValue = det_idam_nospkpField.getValue();
-					det_idam_statusValue = det_idam_statusField.getValue();
-					det_idam_keteranganValue = det_idam_keteranganField.getValue();
-					det_idam_bapValue = det_idam_bapField.getValue();
-					det_idam_baptanggalValue = det_idam_baptanggalField.getValue();
-					det_idam_kelengkapanValue = det_idam_kelengkapanField.getValue();
-					det_idam_terimaValue = det_idam_terimaField.getValue();
-					det_idam_terimatanggalValue = det_idam_terimatanggalField.getValue();
-					det_idam_skValue = det_idam_skField.getValue();
-					det_idam_berlakuValue = det_idam_berlakuField.getValue();
-					det_idam_kadaluarsaValue = det_idam_kadaluarsaField.getValue();
-					det_idam_nomorregValue = det_idam_nomorregField.getValue();
+					var det_idam_idValue = det_idam_idField.getValue();
+					var det_idam_idam_idValue = det_idam_idam_idField.getValue();
+					var det_idam_jenisValue = det_idam_jenisField.getValue();
+					var det_idam_lamaValue = det_idam_sklamaField.getValue();
+					var det_idam_tanggalValue = det_idam_tanggalField.getValue();
+					var det_idam_namausahaValue = det_idam_namausahaField.getValue();
+					var det_idam_jenisusahaValue = det_idam_jenisusahaField.getValue();
+					var det_idam_alamatusahaValue = det_idam_alamatusahaField.getValue();
+					var det_idam_nospkpValue = det_idam_nospkpField.getValue();
+					var det_idam_statusValue = det_idam_statusField.getValue();
+					var det_idam_keteranganValue = det_idam_keteranganField.getValue();
+					var det_idam_bapValue = det_idam_bapField.getValue();
+					var det_idam_baptanggalValue = det_idam_baptanggalField.getValue();
+					var det_idam_kelengkapanValue = det_idam_kelengkapanField.getValue();
+					var det_idam_terimaValue = det_idam_terimaField.getValue();
+					var det_idam_terimatanggalValue = det_idam_terimatanggalField.getValue();
+					var det_idam_skValue = det_idam_skField.getValue();
+					var det_idam_berlakuValue = det_idam_berlakuField.getValue();
+					var det_idam_kadaluarsaValue = det_idam_kadaluarsaField.getValue();
+					var det_idam_nomorregValue = det_idam_nomorregField.getValue();
 					
 					var array_idam_cek_id=new Array();
 					var array_idam_cek_syarat_id=new Array();
@@ -215,11 +150,6 @@
 							array_idam_cek_keterangan.push(idam_det_syaratDataStore.getAt(i).data.idam_cek_keterangan);
 						}
 					}
-					
-					var encoded_idam_cek_id = Ext.encode(array_idam_cek_id);
-					var encoded_idam_cek_syarat_id = Ext.encode(array_idam_cek_syarat_id);
-					var encoded_idam_cek_status = Ext.encode(array_idam_cek_status);
-					var encoded_idam_cek_keterangan = Ext.encode(array_idam_cek_keterangan);
 					
 					var pemohon_idValue = idam_det_pemohon_idField.getValue();
 					var pemohon_namaValue = idam_det_pemohon_namaField.getValue();
@@ -241,61 +171,19 @@
 					var pemohon_tahunlulusValue = idam_det_pemohon_tahunlulusField.getValue();
 					
 					var det_idam_retribusiValue = idam_det_retibusiNilaiField.getValue();
+					var params = idam_det_formPanel.getForm().getValues();
+					params.action = idam_det_dbTask;
+					params.idam_cek_id = array_idam_cek_id;
+					params.idam_cek_syarat_id = array_idam_cek_syarat_id;
+					params.idam_cek_status = array_idam_cek_status;
+					params.idam_cek_keterangan = array_idam_cek_keterangan;
 					
+					params = Ext.encode(params);
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_idam_det/switchAction',
-						params: {							
-							det_idam_id : det_idam_idValue,
-							det_idam_idam_id : det_idam_idam_idValue,
-							det_idam_jenis : det_idam_jenisValue,
-							det_idam_lama : det_idam_lamaValue,
-							det_idam_tanggal : det_idam_tanggalValue,
-							det_idam_nama : det_idam_namaValue,
-							det_idam_alamat : det_idam_alamatValue,
-							det_idam_telp : det_idam_telpValue,
-							det_idam_tempatlahir : det_idam_tempatlahirValue,
-							det_idam_tanggallahir : det_idam_tanggallahirValue,
-							det_idam_pendidikan : det_idam_pendidikanValue,
-							det_idam_tahunlulus : det_idam_tahunlulusValue,
-							det_idam_namausaha : det_idam_namausahaValue,
-							det_idam_jenisusaha : det_idam_jenisusahaValue,
-							det_idam_alamatusaha : det_idam_alamatusahaValue,
-							det_idam_nospkp : det_idam_nospkpValue,
-							det_idam_status : det_idam_statusValue,
-							det_idam_keterangan : det_idam_keteranganValue,
-							det_idam_bap : det_idam_bapValue,
-							det_idam_baptanggal : det_idam_baptanggalValue,
-							det_idam_kelengkapan : det_idam_kelengkapanValue,
-							det_idam_terima : det_idam_terimaValue,
-							det_idam_terimatanggal : det_idam_terimatanggalValue,
-							det_idam_sk : det_idam_skValue,
-							det_idam_berlaku : det_idam_berlakuValue,
-							det_idam_kadaluarsa : det_idam_kadaluarsaValue,
-							det_idam_nomorreg : det_idam_nomorregValue,
-							idam_cek_id : encoded_idam_cek_id,
-							idam_cek_syarat_id : encoded_idam_cek_syarat_id,
-							idam_cek_status : encoded_idam_cek_status,
-							idam_cek_keterangan : encoded_idam_cek_keterangan,
-							pemohon_id : pemohon_idValue,
-							pemohon_nama : pemohon_namaValue,
-							pemohon_alamat : pemohon_alamatValue,
-							pemohon_telp : pemohon_telpValue,
-							pemohon_npwp : pemohon_npwpValue,
-							pemohon_rt : pemohon_rtValue,
-							pemohon_rw : pemohon_rwValue,
-							pemohon_kel : pemohon_kelValue,
-							pemohon_kec : pemohon_kecValue,
-							pemohon_nik : pemohon_nikValue,
-							pemohon_stra : pemohon_straValue,
-							pemohon_surattugas : pemohon_surattugasValue,
-							pemohon_pekerjaan : pemohon_pekerjaanValue,
-							pemohon_tempatlahir : pemohon_tempatlahirValue,
-							pemohon_tanggallahir : pemohon_tanggallahirValue,
-							pemohon_user_id : pemohon_user_idValue,
-							pemohon_pendidikan : pemohon_pendidikanValue,
-							pemohon_tahunlulus : pemohon_tahunlulusValue,
-							det_idam_retribusi : det_idam_retribusiValue,
+						params: {			
+							params : params,
 							action : idam_det_dbTask
 						},
 						success: function(response){
@@ -303,13 +191,13 @@
 							var result = response.responseText;
 							switch(result){
 								case 'success':
-									idam_det_dataStore.reload();
+									/* idam_det_dataStore.reload();
 									idam_det_resetForm();
 									Ext.MessageBox.alert(globalSuccessSaveTitle,globalSuccessSave, function(){
 										window.scrollTo(0,0);
 									});
 									idam_det_switchToGrid();
-									idam_det_gridPanel.getSelectionModel().deselectAll();
+									idam_det_gridPanel.getSelectionModel().deselectAll();*/
 									break;
 								case 'duplicateCode':
 									Ext.MessageBox.show({
@@ -427,7 +315,6 @@
 		function idam_det_refresh(){
 			idam_det_dbListAction = "GETLIST";
 			idam_det_gridSearchField.reset();
-			idam_det_searchPanel.getForm().reset();
 			idam_det_dataStore.proxy.extraParams = { action : 'GETLIST' };
 			idam_det_dataStore.proxy.extraParams.query = "";
 			idam_det_dataStore.currentPage = 1;
@@ -456,13 +343,6 @@
 			det_idam_idam_idField.setValue(record.data.det_idam_idam_id);
 			det_idam_jenisField.setValue(record.data.det_idam_jenis);
 			det_idam_tanggalField.setValue(record.data.det_idam_tanggal);
-			det_idam_namaField.setValue(record.data.det_idam_nama);
-			det_idam_alamatField.setValue(record.data.det_idam_alamat);
-			det_idam_telpField.setValue(record.data.det_idam_telp);
-			det_idam_tempatlahirField.setValue(record.data.det_idam_tempatlahir);
-			det_idam_tanggallahirField.setValue(record.data.det_idam_tanggallahir);
-			det_idam_pendidikanField.setValue(record.data.det_idam_pendidikan);
-			det_idam_tahunlulusField.setValue(record.data.det_idam_tahunlulus);
 			det_idam_namausahaField.setValue(record.data.det_idam_namausaha);
 			det_idam_jenisusahaField.setValue(record.data.det_idam_jenisusaha);
 			det_idam_alamatusahaField.setValue(record.data.det_idam_alamatusaha);
@@ -523,132 +403,10 @@
 			idam_det_searchWindow.show();
 		}
 		
-		function idam_det_search(){
-			idam_det_gridSearchField.reset();
-			
-			var det_idam_idam_idValue = '';
-			var det_idam_jenisValue = '';
-			var det_idam_tanggalValue = '';
-			var det_idam_namaValue = '';
-			var det_idam_alamatValue = '';
-			var det_idam_telpValue = '';
-			var det_idam_tempatlahirValue = '';
-			var det_idam_tanggallahirValue = '';
-			var det_idam_pendidikanValue = '';
-			var det_idam_tahunlulusValue = '';
-			var det_idam_statusValue = '';
-			var det_idam_keteranganValue = '';
-			var det_idam_bapValue = '';
-			var det_idam_baptanggalValue = '';
-			var det_idam_kelengkapanValue = '';
-			var det_idam_terimaValue = '';
-			var det_idam_terimatanggalValue = '';
-			var det_idam_skValue = '';
-			var det_idam_berlakuValue = '';
-			var det_idam_kadaluarsaValue = '';
-			var det_idam_nomorregValue = '';
-						
-			det_idam_idam_idValue = det_idam_idam_idSearchField.getValue();
-			det_idam_jenisValue = det_idam_jenisSearchField.getValue();
-			det_idam_tanggalValue = det_idam_tanggalSearchField.getValue();
-			det_idam_namaValue = det_idam_namaSearchField.getValue();
-			det_idam_alamatValue = det_idam_alamatSearchField.getValue();
-			det_idam_telpValue = det_idam_telpSearchField.getValue();
-			det_idam_tempatlahirValue = det_idam_tempatlahirSearchField.getValue();
-			det_idam_tanggallahirValue = det_idam_tanggallahirSearchField.getValue();
-			det_idam_pendidikanValue = det_idam_pendidikanSearchField.getValue();
-			det_idam_tahunlulusValue = det_idam_tahunlulusSearchField.getValue();
-			det_idam_statusValue = det_idam_statusSearchField.getValue();
-			det_idam_keteranganValue = det_idam_keteranganSearchField.getValue();
-			det_idam_bapValue = det_idam_bapSearchField.getValue();
-			det_idam_baptanggalValue = det_idam_baptanggalSearchField.getValue();
-			det_idam_kelengkapanValue = det_idam_kelengkapanSearchField.getValue();
-			det_idam_terimaValue = det_idam_terimaSearchField.getValue();
-			det_idam_terimatanggalValue = det_idam_terimatanggalSearchField.getValue();
-			det_idam_skValue = det_idam_skSearchField.getValue();
-			det_idam_berlakuValue = det_idam_berlakuSearchField.getValue();
-			det_idam_kadaluarsaValue = det_idam_kadaluarsaSearchField.getValue();
-			det_idam_nomorregValue = det_idam_nomorregSearchField.getValue();
-			idam_det_dbListAction = "SEARCH";
-			idam_det_dataStore.proxy.extraParams = { 
-				det_idam_idam_id : det_idam_idam_idValue,
-				det_idam_jenis : det_idam_jenisValue,
-				det_idam_tanggal : det_idam_tanggalValue,
-				det_idam_nama : det_idam_namaValue,
-				det_idam_alamat : det_idam_alamatValue,
-				det_idam_telp : det_idam_telpValue,
-				det_idam_tempatlahir : det_idam_tempatlahirValue,
-				det_idam_tanggallahir : det_idam_tanggallahirValue,
-				det_idam_pendidikan : det_idam_pendidikanValue,
-				det_idam_tahunlulus : det_idam_tahunlulusValue,
-				det_idam_status : det_idam_statusValue,
-				det_idam_keterangan : det_idam_keteranganValue,
-				det_idam_bap : det_idam_bapValue,
-				det_idam_baptanggal : det_idam_baptanggalValue,
-				det_idam_kelengkapan : det_idam_kelengkapanValue,
-				det_idam_terima : det_idam_terimaValue,
-				det_idam_terimatanggal : det_idam_terimatanggalValue,
-				det_idam_sk : det_idam_skValue,
-				det_idam_berlaku : det_idam_berlakuValue,
-				det_idam_kadaluarsa : det_idam_kadaluarsaValue,
-				det_idam_nomorreg : det_idam_nomorregValue,
-				action : 'SEARCH'
-			};
-			idam_det_dataStore.currentPage = 1;
-			idam_det_gridPanel.store.reload({
-				params : {
-					start : 0,
-					limit : globalPageSize
-				}
-			});
-		}
-		
 		function idam_det_printExcel(outputType){
 			var searchText = "";
-			var det_idam_idam_idValue = '';
-			var det_idam_jenisValue = '';
-			var det_idam_tanggalValue = '';
-			var det_idam_namaValue = '';
-			var det_idam_alamatValue = '';
-			var det_idam_telpValue = '';
-			var det_idam_tempatlahirValue = '';
-			var det_idam_tanggallahirValue = '';
-			var det_idam_pendidikanValue = '';
-			var det_idam_tahunlulusValue = '';
-			var det_idam_statusValue = '';
-			var det_idam_keteranganValue = '';
-			var det_idam_bapValue = '';
-			var det_idam_baptanggalValue = '';
-			var det_idam_kelengkapanValue = '';
-			var det_idam_terimaValue = '';
-			var det_idam_terimatanggalValue = '';
-			var det_idam_skValue = '';
-			var det_idam_berlakuValue = '';
-			var det_idam_kadaluarsaValue = '';
-			var det_idam_nomorregValue = '';
 			
 			if(idam_det_dataStore.proxy.extraParams.query!==null){searchText = idam_det_dataStore.proxy.extraParams.query;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_idam_id!==null){det_idam_idam_idValue = idam_det_dataStore.proxy.extraParams.det_idam_idam_id;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_jenis!==null){det_idam_jenisValue = idam_det_dataStore.proxy.extraParams.det_idam_jenis;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_tanggal!==null){det_idam_tanggalValue = idam_det_dataStore.proxy.extraParams.det_idam_tanggal;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_nama!==null){det_idam_namaValue = idam_det_dataStore.proxy.extraParams.det_idam_nama;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_alamat!==null){det_idam_alamatValue = idam_det_dataStore.proxy.extraParams.det_idam_alamat;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_telp!==null){det_idam_telpValue = idam_det_dataStore.proxy.extraParams.det_idam_telp;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_tempatlahir!==null){det_idam_tempatlahirValue = idam_det_dataStore.proxy.extraParams.det_idam_tempatlahir;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_tanggallahir!==null){det_idam_tanggallahirValue = idam_det_dataStore.proxy.extraParams.det_idam_tanggallahir;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_pendidikan!==null){det_idam_pendidikanValue = idam_det_dataStore.proxy.extraParams.det_idam_pendidikan;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_tahunlulus!==null){det_idam_tahunlulusValue = idam_det_dataStore.proxy.extraParams.det_idam_tahunlulus;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_status!==null){det_idam_statusValue = idam_det_dataStore.proxy.extraParams.det_idam_status;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_keterangan!==null){det_idam_keteranganValue = idam_det_dataStore.proxy.extraParams.det_idam_keterangan;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_bap!==null){det_idam_bapValue = idam_det_dataStore.proxy.extraParams.det_idam_bap;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_baptanggal!==null){det_idam_baptanggalValue = idam_det_dataStore.proxy.extraParams.det_idam_baptanggal;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_kelengkapan!==null){det_idam_kelengkapanValue = idam_det_dataStore.proxy.extraParams.det_idam_kelengkapan;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_terima!==null){det_idam_terimaValue = idam_det_dataStore.proxy.extraParams.det_idam_terima;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_terimatanggal!==null){det_idam_terimatanggalValue = idam_det_dataStore.proxy.extraParams.det_idam_terimatanggal;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_sk!==null){det_idam_skValue = idam_det_dataStore.proxy.extraParams.det_idam_sk;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_berlaku!==null){det_idam_berlakuValue = idam_det_dataStore.proxy.extraParams.det_idam_berlaku;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_kadaluarsa!==null){det_idam_kadaluarsaValue = idam_det_dataStore.proxy.extraParams.det_idam_kadaluarsa;}
-			if(idam_det_dataStore.proxy.extraParams.det_idam_nomorreg!==null){det_idam_nomorregValue = idam_det_dataStore.proxy.extraParams.det_idam_nomorreg;}
 			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
 			Ext.Ajax.request({
 				waitMsg : 'Please Wait...',
@@ -656,27 +414,6 @@
 				params : {
 					action : outputType,
 					query : searchText,
-					det_idam_idam_id : det_idam_idam_idValue,
-					det_idam_jenis : det_idam_jenisValue,
-					det_idam_tanggal : det_idam_tanggalValue,
-					det_idam_nama : det_idam_namaValue,
-					det_idam_alamat : det_idam_alamatValue,
-					det_idam_telp : det_idam_telpValue,
-					det_idam_tempatlahir : det_idam_tempatlahirValue,
-					det_idam_tanggallahir : det_idam_tanggallahirValue,
-					det_idam_pendidikan : det_idam_pendidikanValue,
-					det_idam_tahunlulus : det_idam_tahunlulusValue,
-					det_idam_status : det_idam_statusValue,
-					det_idam_keterangan : det_idam_keteranganValue,
-					det_idam_bap : det_idam_bapValue,
-					det_idam_baptanggal : det_idam_baptanggalValue,
-					det_idam_kelengkapan : det_idam_kelengkapanValue,
-					det_idam_terima : det_idam_terimaValue,
-					det_idam_terimatanggal : det_idam_terimatanggalValue,
-					det_idam_sk : det_idam_skValue,
-					det_idam_berlaku : det_idam_berlakuValue,
-					det_idam_kadaluarsa : det_idam_kadaluarsaValue,
-					det_idam_nomorreg : det_idam_nomorregValue,
 					currentAction : idam_det_dbListAction
 				},
 				success: function(response){
@@ -1314,7 +1051,7 @@
 			}
 		});
 		det_idam_sklamaField = Ext.create('Ext.form.ComboBox',{
-			name : 'det_idam_sklamaField',
+			name : 'det_idam_lama',
 			fieldLabel : 'Nomor SK Lama',
 			store : idam_det_dataStore,
 			displayField : 'det_idam_sk',
@@ -1372,51 +1109,7 @@
 			name : 'det_idam_tanggal',
 			fieldLabel : 'Tanggal <font color=red>*</font>',
 			format : 'd-m-Y',
-			disabled : true,
 			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
-		});
-		det_idam_namaField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_namaField',
-			name : 'det_idam_nama',
-			fieldLabel : 'Nama Pemohon',
-			maxLength : 50
-		});
-		det_idam_alamatField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_alamatField',
-			name : 'det_idam_alamat',
-			fieldLabel : 'Alamat',
-			maxLength : 100
-		});
-		det_idam_telpField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_telpField',
-			name : 'det_idam_telp',
-			fieldLabel : 'No. Telp',
-			maxLength : 20
-		});
-		det_idam_tempatlahirField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_tempatlahirField',
-			name : 'det_idam_tempatlahir',
-			fieldLabel : 'Tempat Lahir',
-			maxLength : 100
-		});
-		det_idam_tanggallahirField = Ext.create('Ext.form.field.Date',{
-			id : 'det_idam_tanggallahirField',
-			name : 'det_idam_tanggallahir',
-			fieldLabel : 'Tanggal Lahir',
-			format : 'd-m-Y'
-		});
-		det_idam_pendidikanField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_pendidikanField',
-			name : 'det_idam_pendidikan',
-			fieldLabel : 'Pendidikan',
-			maxLength : 100
-		});
-		det_idam_tahunlulusField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_tahunlulusField',
-			name : 'det_idam_tahunlulus',
-			fieldLabel : 'Tahun Lulus',
-			maxLength : 4,
-			maskRe : /([0-9]+)$/
 		});
 		det_idam_namausahaField = Ext.create('Ext.form.TextField',{
 			id : 'det_idam_namausahaField',
@@ -1663,8 +1356,9 @@
 			maxLength : 50
 		});
 		var idam_det_pemohon_nikField = Ext.create('Ext.form.ComboBox',{
-			name : 'idam_det_pemohon_nik',
+			name : 'pemohon_nik',
 			fieldLabel : 'NIK',
+			pageSize : 15,
 			store : Ext.create('Ext.data.Store',{
 				pageSize : globalPageSize,
 				proxy : Ext.create('Ext.data.HttpProxy',{
@@ -1789,6 +1483,7 @@
 			collapsible : false,
 			layout :'form',
 			items : [
+				det_idam_nospkpField,
 				det_idam_terimaField,
 				det_idam_terimatanggalField,
 				det_idam_kelengkapanField,
@@ -1822,7 +1517,7 @@
 			}
 		});
 		var idam_det_retibusiNilaiField = Ext.create('Ext.form.TextField',{
-			name : 'idam_det_retibusiNilai',
+			name : 'det_idam_retribusi',
 			fieldLabel : 'Nominal Retribusi ',
 			maxLength : 100,
 			hidden : true,
@@ -1840,6 +1535,167 @@
 			]
 		});
 		/* END DATA RETRIBUSI */
+		/* START DATA PERUSAHAAN */
+		perusahaan_idField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_id',
+			hidden : true
+		});
+		perusahaan_npwpField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_npwp',
+			fieldLabel : 'NPWP',
+			maxLength : 100
+		});
+		perusahaan_namaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_nama',
+			fieldLabel : 'Nama',
+			maxLength : 100
+		});
+		perusahaan_noaktaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_noakta',
+			fieldLabel : 'No. Akta',
+			maxLength : 100
+		});
+		perusahaan_notarisField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_notaris',
+			fieldLabel : 'Notaris',
+			maxLength : 100
+		});
+		perusahaan_tglaktaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_tglakta',
+			fieldLabel : 'Tgl Akta',
+			maxLength : 0
+		});
+		perusahaan_bentuk_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_bentuk_id',
+			fieldLabel : 'Bentuk',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_kualifikasi_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_kualifikasi_id',
+			fieldLabel : 'Kualifikasi',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_alamatField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		perusahaan_rtField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_rt',
+			fieldLabel : 'Rt',
+			maxLength : 10
+		});
+		perusahaan_rwField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_rw',
+			fieldLabel : 'Rw',
+			maxLength : 10
+		});
+		perusahaan_propinsi_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_propinsi_id',
+			fieldLabel : 'Propinsi',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_kabkota_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_kabkota_id',
+			fieldLabel : 'Kota',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_kecamatan_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_kecamatan_id',
+			fieldLabel : 'Kecamatan',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_desa_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_desa_id',
+			fieldLabel : 'Desa',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_kodeposField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_kodepos',
+			fieldLabel : 'Kodepos',
+			maxLength : 20
+		});
+		perusahaan_telpField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_telp',
+			fieldLabel : 'Telp',
+			maxLength : 50
+		});
+		perusahaan_faxField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_fax',
+			fieldLabel : 'Fax',
+			maxLength : 50
+		});
+		perusahaan_stempat_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_stempat_id',
+			fieldLabel : 'Status Tempat',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_sperusahaan_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_sperusahaan_id',
+			fieldLabel : 'Status Perusahaan',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_usahaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_usaha',
+			fieldLabel : 'Usaha',
+			maxLength : 100
+		});
+		perusahaan_butaraField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_butara',
+			fieldLabel : 'Batas Utara',
+			maxLength : 100
+		});
+		perusahaan_bselatanField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_bselatan',
+			fieldLabel : 'Batas Selatan',
+			maxLength : 100
+		});
+		perusahaan_btimurField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_btimur',
+			fieldLabel : 'Batas Timur',
+			maxLength : 100
+		});
+		perusahaan_bbaratField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_bbarat',
+			fieldLabel : 'Batas Barat',
+			maxLength : 100
+		});
+		perusahaan_modalField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_modal',
+			fieldLabel : 'Modal',
+			maxLength : 50
+		});
+		perusahaan_merkField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_merk',
+			fieldLabel : 'Merk',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		perusahaan_jusaha_idField = Ext.create('Ext.form.NumberField',{
+			name : 'perusahaan_jusaha_id',
+			fieldLabel : 'Jenis Usaha',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			maskRe : /([0-9]+)$/});
+		/* END DATA PERUSAHAAN */
 		idam_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -1897,10 +1753,37 @@
 					collapsible : false,
 					layout :'form',
 					items : [
-						det_idam_namausahaField,
+						/* det_idam_namausahaField,
 						det_idam_jenisusahaField,
-						det_idam_alamatusahaField,
-						det_idam_nospkpField
+						det_idam_alamatusahaField, */
+						perusahaan_idField,
+						perusahaan_npwpField,
+						perusahaan_namaField,
+						perusahaan_noaktaField,
+						perusahaan_notarisField,
+						perusahaan_tglaktaField,
+						perusahaan_bentuk_idField,
+						perusahaan_kualifikasi_idField,
+						perusahaan_alamatField,
+						perusahaan_rtField,
+						perusahaan_rwField,
+						perusahaan_propinsi_idField,
+						perusahaan_kabkota_idField,
+						perusahaan_kecamatan_idField,
+						perusahaan_desa_idField,
+						perusahaan_kodeposField,
+						perusahaan_telpField,
+						perusahaan_faxField,
+						perusahaan_stempat_idField,
+						perusahaan_sperusahaan_idField,
+						perusahaan_usahaField,
+						perusahaan_butaraField,
+						perusahaan_bselatanField,
+						perusahaan_btimurField,
+						perusahaan_bbaratField,
+						perusahaan_modalField,
+						perusahaan_merkField,
+						perusahaan_jusaha_idField
 					]
 				},{
 					xtype : 'fieldset',
@@ -1931,220 +1814,7 @@
 			items : [idam_det_formPanel]
 		});
 /* End FormPanel declaration */
-/* Start SearchPanel declaration */
-		det_idam_idam_idSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'det_idam_idam_idSearchField',
-			name : 'det_idam_idam_id',
-			fieldLabel : 'Id Idam',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		det_idam_jenisSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'det_idam_jenisSearchField',
-			name : 'det_idam_jenis',
-			fieldLabel : 'Jenis',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		det_idam_tanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_tanggalSearchField',
-			name : 'det_idam_tanggal',
-			fieldLabel : 'Tanggal',
-			maxLength : 0
-		
-		});
-		det_idam_namaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_namaSearchField',
-			name : 'det_idam_nama',
-			fieldLabel : 'Nama',
-			maxLength : 50
-		
-		});
-		det_idam_alamatSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_alamatSearchField',
-			name : 'det_idam_alamat',
-			fieldLabel : 'Alamat',
-			maxLength : 100
-		
-		});
-		det_idam_telpSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_telpSearchField',
-			name : 'det_idam_telp',
-			fieldLabel : 'Telp',
-			maxLength : 20
-		
-		});
-		det_idam_tempatlahirSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_tempatlahirSearchField',
-			name : 'det_idam_tempatlahir',
-			fieldLabel : 'Tempat Lahir',
-			maxLength : 100
-		
-		});
-		det_idam_tanggallahirSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_tanggallahirSearchField',
-			name : 'det_idam_tanggallahir',
-			fieldLabel : 'Tanggal Lahir',
-			maxLength : 0
-		
-		});
-		det_idam_pendidikanSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_pendidikanSearchField',
-			name : 'det_idam_pendidikan',
-			fieldLabel : 'Pendidikan',
-			maxLength : 100
-		
-		});
-		det_idam_tahunlulusSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'det_idam_tahunlulusSearchField',
-			name : 'det_idam_tahunlulus',
-			fieldLabel : 'Tahun Lulus',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		det_idam_statusSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_statusSearchField',
-			name : 'det_idam_status',
-			fieldLabel : 'Status',
-			maxLength : 50
-		
-		});
-		det_idam_keteranganSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_keteranganSearchField',
-			name : 'det_idam_keterangan',
-			fieldLabel : 'Keterangan',
-			maxLength : 255
-		
-		});
-		det_idam_bapSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_bapSearchField',
-			name : 'det_idam_bap',
-			fieldLabel : 'BAP',
-			maxLength : 50
-		
-		});
-		det_idam_baptanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_baptanggalSearchField',
-			name : 'det_idam_baptanggal',
-			fieldLabel : 'Tanggal BAP',
-			maxLength : 0
-		
-		});
-		det_idam_kelengkapanSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'det_idam_kelengkapanSearchField',
-			name : 'det_idam_kelengkapan',
-			fieldLabel : 'Kelengkapan',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		det_idam_terimaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_terimaSearchField',
-			name : 'det_idam_terima',
-			fieldLabel : 'Penerima',
-			maxLength : 50
-		
-		});
-		det_idam_terimatanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_terimatanggalSearchField',
-			name : 'det_idam_terimatanggal',
-			fieldLabel : 'Tanggal Terima',
-			maxLength : 0
-		
-		});
-		det_idam_skSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_skSearchField',
-			name : 'det_idam_sk',
-			fieldLabel : 'SK',
-			maxLength : 255
-		
-		});
-		det_idam_berlakuSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_berlakuSearchField',
-			name : 'det_idam_berlaku',
-			fieldLabel : 'Tanggal Berlaku',
-			maxLength : 0
-		
-		});
-		det_idam_kadaluarsaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_kadaluarsaSearchField',
-			name : 'det_idam_kadaluarsa',
-			fieldLabel : 'Kadaluarsa',
-			maxLength : 0
-		
-		});
-		det_idam_nomorregSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_idam_nomorregSearchField',
-			name : 'det_idam_nomorreg',
-			fieldLabel : 'Nomor Reg',
-			maxLength : 50
-		
-		});
-		var idam_det_searchingButton = Ext.create('Ext.Button',{
-			text : globalSearchingButtonTitle,
-			handler : idam_det_search
-		});
-		var idam_det_cancelSearchButton = Ext.create('Ext.Button',{
-			text : globalSearchCloseButtonTitle,
-			handler : function(){
-				idam_det_searchWindow.hide();
-			}
-		});
-		idam_det_searchPanel = Ext.create('Ext.form.Panel', {
-			layout : {
-				type : 'vbox',
-				align : 'stretch',
-				padding : 5
-			},
-			items: [
-				{
-					xtype : 'container',
-					layout : 'hbox',
-					style : {borderWidth :'0px'},
-					defaultType : 'textfield',
-					defaults : {anchor : '95%'},
-					layout : 'anchor',
-					flex : 2,
-					items : [
-						det_idam_idam_idSearchField,
-						det_idam_jenisSearchField,
-						det_idam_tanggalSearchField,
-						det_idam_namaSearchField,
-						det_idam_alamatSearchField,
-						det_idam_telpSearchField,
-						det_idam_tempatlahirSearchField,
-						det_idam_tanggallahirSearchField,
-						det_idam_pendidikanSearchField,
-						det_idam_tahunlulusSearchField,
-						det_idam_statusSearchField,
-						det_idam_keteranganSearchField,
-						det_idam_bapSearchField,
-						det_idam_baptanggalSearchField,
-						det_idam_kelengkapanSearchField,
-						det_idam_terimaSearchField,
-						det_idam_terimatanggalSearchField,
-						det_idam_skSearchField,
-						det_idam_berlakuSearchField,
-						det_idam_kadaluarsaSearchField,
-						det_idam_nomorregSearchField,
-						]
-				}],
-			buttons : [idam_det_searchingButton,idam_det_cancelSearchButton]
-		});
-		idam_det_searchWindow = Ext.create('Ext.window.Window',{
-			id : 'idam_det_searchWindow',
-			renderTo : 'idam_detSearchWindow',
-			title : globalFormSearchTitle + ' ' + idam_det_componentItemTitle,
-			width : 500,
-			minHeight : 300,
-			autoHeight : true,
-			constrain : true,
-			closeAction : 'hide',
-			items : [idam_det_searchPanel]
-		});
+
 		<?php if(@$_SESSION['IDHAK'] == 2){ ?>
 			idam_det_lk_printCM.hide();
 			idam_det_bap_printCM.hide();
@@ -2153,9 +1823,7 @@
 			idam_det_gridPanel.columns[16].setVisible(false);
 			idam_det_gridPanel.columns[17].setVisible(false);
 		<?php } ?>
-/* End SearchPanel declaration */
 });
 </script>
 <div id="idam_detSaveWindow"></div>
-<div id="idam_detSearchWindow"></div>
 <div class="container col-md-12" id="idam_detGrid"></div>
