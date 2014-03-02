@@ -256,7 +256,7 @@ class App_model extends CI_Model{
 			'nama'=>$perusahaan_nama,
 			'noakta'=>$perusahaan_noakta,
 			'notaris'=>$perusahaan_notaris,
-			'tglakta'=>$perusahaan_tglakta,
+			'tglakta'=>date('Y-m-d', strtotime($perusahaan_tglakta)),
 			'bentuk_id'=>$perusahaan_bentuk_id,
 			'kualifikasi_id'=>$perusahaan_kualifikasi_id,
 			'alamat'=>$perusahaan_alamat,
@@ -319,6 +319,40 @@ class App_model extends CI_Model{
 			$resultpemohon = $this->db->insert_id();
 		}
 		return $resultpemohon;
+	}
+	
+	public function cupermohonan($params, $pemohon_id, $noreg){
+		extract(get_object_vars($params));
+		$datapermohonan = array(
+			'jpermohonan_id'=>$permohonan_jenis,
+			'tahun'=>date('Y', strtotime($permohonan_tanggal)),
+			'noregistrasi'=>$noreg,
+			'ijin_id'=>$ijin_id,
+			'pemohon_id'=>$pemohon_id,
+			'tglpermohonan'=>date('Y-m-d', strtotime($permohonan_tanggal)),
+			'tglexpired'=>date('Y-m-d', strtotime($permohonan_kadaluarsa)),
+			/* 'pejabat'=>$pemohon_nik,
+			'nip'=>$pemohon_stra,
+			'jabatan'=>$pemohon_surattugas,
+			'pangkat'=>$pemohon_pekerjaan,
+			'atasnama'=>$pemohon_tempatlahir, 
+			'sbayar'=>$asd,
+			'tglbayar'=>$pemohon_pendidikan,
+			'ketbayar'=>$pemohon_tahunlulus, */
+			'retribusi'=>$permohonan_retribusi,
+			/* 'spermohonan_id'=>$pemohon_tahunlulus,
+			'no_agenda'=>$pemohon_tahunlulus, */
+			'sdata'=>1,
+			/* 'catatan_bo'=>$pemohon_tahunlulus */
+		);
+		if($permohonan_id != 0){
+			$resultpermohonan = $this->db->where('id', $permohonan_id)->update('permohonan', $datapermohonan);
+			$resultpermohonan = $permohonan_id;
+		}else{
+			$this->db->insert('permohonan', $datapermohonan);
+			$resultpermohonan = $this->db->insert_id();
+		}
+		return $resultpermohonan;
 	}
 	
 }

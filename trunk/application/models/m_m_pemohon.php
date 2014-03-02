@@ -42,13 +42,13 @@ class M_m_pemohon extends App_Model{
 		if(@$searchText != ''){
 			$sql .= "
 				AND (
-					nama LIKE '%".$searchText."%' OR 
-					alamat LIKE '%".$searchText."%' OR 
-					ktp LIKE '%".$searchText."%' 
+					lower(nama) LIKE '%".strtolower($searchText)."%' OR 
+					lower(alamat) LIKE '%".strtolower($searchText)."%' OR 
+					lower(ktp) LIKE '%".strtolower($searchText)."%' 
 					)
 			";
 		}
-		if(@$limit_start != 0 && @$limit_start != 0){
+		if(@$limit_end != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
 		}
 		$result = $this->__listCore($sql, $params);
