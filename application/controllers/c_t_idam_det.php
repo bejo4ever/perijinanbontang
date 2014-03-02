@@ -104,8 +104,10 @@ class C_t_idam_det extends CI_Controller{
 		$idam_det_author = $this->m_t_idam_det->__checkSession();
 		$idam_det_created_date = date('Y-m-d H:i:s');
 		
+		$noreg = $this->m_public_function->getNomorReg(22);
 		$resultperusahaan = $this->m_t_idam_det->cuperusahaan($params);
 		$resultpemohon = $this->m_t_idam_det->cupemohon($params);
+		$resultpermohonan = $this->m_t_idam_det->cupermohonan($params, $resultpemohon, $noreg);
 		
 		if($idam_det_author != ''){
 			if($det_idam_lama != 0 && $det_idam_jenis == 2){
@@ -124,8 +126,8 @@ class C_t_idam_det extends CI_Controller{
 				$result = 'success';
 				$data = array(
 					'det_idam_idam_id'=>$resultInti,
-					'det_idam_jenis'=>$det_idam_jenis,
-					'det_idam_tanggal'=>date('Y-m-d', strtotime($det_idam_tanggal)),
+					'det_idam_jenis'=>$permohonan_jenis,
+					'det_idam_tanggal'=>date('Y-m-d', strtotime($permohonan_tanggal)),
 					'det_idam_status'=>$det_idam_status,
 					'det_idam_keterangan'=>$det_idam_keterangan,
 					'det_idam_bap'=>$det_idam_bap,
@@ -135,11 +137,11 @@ class C_t_idam_det extends CI_Controller{
 					'det_idam_terimatanggal'=>date('Y-m-d', strtotime($det_idam_terimatanggal)),
 					'det_idam_sk'=>$det_idam_sk,
 					// 'det_idam_berlaku'=>date('Y-m-d', strtotime($det_idam_berlaku)),
-					'det_idam_kadaluarsa'=>date('Y-m-d', strtotime($det_idam_kadaluarsa)),
+					'det_idam_kadaluarsa'=>date('Y-m-d', strtotime($permohonan_kadaluarsa)),
 					'det_idam_nomorreg'=>$det_idam_nomorreg,
 					'det_idam_pemohon_id'=>$resultpemohon,
-					'det_idam_retribusi'=>$det_idam_retribusi
-					);
+					'det_idam_retribusi'=>$permohonan_retribusi
+				);
 				$resultdet = $this->m_t_idam_det->__insert($data, false, 'insertId');
 				for($i=0;$i<count($idam_cek_syarat_id);$i++){
 					$datacek = array(
