@@ -39,28 +39,57 @@ class M_t_iujk_det extends App_Model{
 				CONCAT(5 * (DATEDIFF(NOW(), det_iujk_tanggal) DIV 7) + 
 					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_iujk_tanggal) + 
 						1, 1),' Hari') as lamaproses,
-				pemohon_id,
-				pemohon_nama,
-				pemohon_alamat,
-				pemohon_telp,
-				pemohon_npwp,
-				pemohon_rt,
-				pemohon_rw,
-				pemohon_kel,
-				pemohon_kec,
-				pemohon_nik,
-				pemohon_stra,
-				pemohon_surattugas,
-				pemohon_pekerjaan,
-				pemohon_tempatlahir,
-				pemohon_tanggallahir,
-				pemohon_user_id,
-				pemohon_pendidikan,
-				pemohon_tahunlulus,
-				det_iujk_retribusi
+				det_iujk_retribusi,
+				det_iujk_permohonan_id AS permohonan_id,
+				pemohon.id AS pemohon_id,
+				pemohon.nama AS pemohon_nama,
+				pemohon.alamat AS pemohon_alamat,
+				pemohon.telp AS pemohon_telp,
+				pemohon.npwp AS pemohon_npwp,
+				pemohon.rt AS pemohon_rt,
+				pemohon.rw AS pemohon_rw,
+				pemohon.desa_id AS pemohon_kel,
+				pemohon.kecamatan_id AS pemohon_kec,
+				pemohon.ktp AS pemohon_nik,
+				pemohon.stra AS pemohon_stra,
+				pemohon.surattugas AS pemohon_surattugas,
+				pemohon.pekerjaan AS pemohon_pekerjaan,
+				pemohon.tempatlahir AS pemohon_tempatlahir,
+				pemohon.tgllahir AS pemohon_tanggallahir,
+				pemohon.pendidikan AS pemohon_pendidikan,
+				pemohon.tahunlulus AS pemohon_tahunlulus,
+				perusahaan.id AS perusahaan_id,
+				perusahaan.npwp AS perusahaan_npwp,
+				perusahaan.nama AS perusahaan_nama,
+				perusahaan.noakta AS perusahaan_noakta,
+				perusahaan.notaris AS perusahaan_notaris,
+				perusahaan.tglakta AS perusahaan_tglakta,
+				perusahaan.bentuk_id AS perusahaan_bentuk_id,
+				perusahaan.kualifikasi_id AS perusahaan_kualifikasi_id,
+				perusahaan.alamat AS perusahaan_alamat,
+				perusahaan.rt AS perusahaan_rt,
+				perusahaan.rw AS perusahaan_rw,
+				perusahaan.propinsi_id AS perusahaan_propinsi_id,
+				perusahaan.kabkota_id AS perusahaan_kabkota_id,
+				perusahaan.kecamatan_id AS perusahaan_kecamatan_id,
+				perusahaan.desa_id AS perusahaan_desa_id,
+				perusahaan.kodepos AS perusahaan_kodepos,
+				perusahaan.telp AS perusahaan_telp,
+				perusahaan.fax AS perusahaan_fax,
+				perusahaan.stempat_id AS perusahaan_stempat_id,
+				perusahaan.sperusahaan_id AS perusahaan_sperusahaan_id,
+				perusahaan.usaha AS perusahaan_usaha,
+				perusahaan.butara AS perusahaan_butara,
+				perusahaan.bselatan AS perusahaan_bselatan,
+				perusahaan.btimur AS perusahaan_btimur,
+				perusahaan.bbarat AS perusahaan_bbarat,
+				perusahaan.modal AS perusahaan_modal,
+				perusahaan.merk AS perusahaan_merk,
+				perusahaan.jusaha_id AS perusahaan_jusaha_id
 				FROM t_iujk_det 
 				JOIN t_iujk ON t_iujk_det.det_iujk_iujk_id = t_iujk.iujk_id
-				JOIN m_pemohon ON t_iujk_det.det_iujk_pemohon_id = m_pemohon.pemohon_id
+				JOIN pemohon ON t_iujk_det.det_iujk_pemohon_id = pemohon.id
+				JOIN perusahaan ON t_iujk.iujk_perusahaan_id = perusahaan.id
 			WHERE det_iujk_id IS NOT NULL 
 	";
 	
@@ -110,44 +139,11 @@ class M_t_iujk_det extends App_Model{
 		if(@$det_iujk_iujk_id != ''){
 			$sql .= " AND det_iujk_iujk_id LIKE '%".$det_iujk_iujk_id."%' ";
 		}
-		if(@$det_iujk_jenis != ''){
-			$sql .= " AND det_iujk_jenis LIKE '%".$det_iujk_jenis."%' ";
-		}
-		if(@$det_iujk_tanggal != ''){
-			$sql .= " AND det_iujk_tanggal LIKE '%".$det_iujk_tanggal."%' ";
-		}
-		if(@$det_iujk_nama != ''){
-			$sql .= " AND det_iujk_nama LIKE '%".$det_iujk_nama."%' ";
+		if(@$det_iujk_sk != ''){
+			$sql .= " AND det_iujk_sk LIKE '%".$det_iujk_sk."%' ";
 		}
 		if(@$det_iujk_nomorreg != ''){
 			$sql .= " AND det_iujk_nomorreg LIKE '%".$det_iujk_nomorreg."%' ";
-		}
-		if(@$det_iujk_rekomnomor != ''){
-			$sql .= " AND det_iujk_rekomnomor LIKE '%".$det_iujk_rekomnomor."%' ";
-		}
-		if(@$det_iujk_rekomtanggal != ''){
-			$sql .= " AND det_iujk_rekomtanggal LIKE '%".$det_iujk_rekomtanggal."%' ";
-		}
-		if(@$det_iujk_berlaku != ''){
-			$sql .= " AND det_iujk_berlaku LIKE '%".$det_iujk_berlaku."%' ";
-		}
-		if(@$det_iujk_kadaluarsa != ''){
-			$sql .= " AND det_iujk_kadaluarsa LIKE '%".$det_iujk_kadaluarsa."%' ";
-		}
-		if(@$det_iujk_pj1 != ''){
-			$sql .= " AND det_iujk_pj1 LIKE '%".$det_iujk_pj1."%' ";
-		}
-		if(@$det_iujk_pj2 != ''){
-			$sql .= " AND det_iujk_pj2 LIKE '%".$det_iujk_pj2."%' ";
-		}
-		if(@$det_iujk_pj3 != ''){
-			$sql .= " AND det_iujk_pj3 LIKE '%".$det_iujk_pj3."%' ";
-		}
-		if(@$det_iujk_pjteknis != ''){
-			$sql .= " AND det_iujk_pjteknis LIKE '%".$det_iujk_pjteknis."%' ";
-		}
-		if(@$det_iujk_pjtbu != ''){
-			$sql .= " AND det_iujk_pjtbu LIKE '%".$det_iujk_pjtbu."%' ";
 		}
 		if(@$det_iujk_surveylulus != ''){
 			$sql .= " AND det_iujk_surveylulus LIKE '%".$det_iujk_surveylulus."%' ";

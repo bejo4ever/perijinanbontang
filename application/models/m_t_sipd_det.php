@@ -35,33 +35,57 @@ class M_t_sipd_det extends App_Model{
 				CONCAT(5 * (DATEDIFF(NOW(), det_sipd_tanggal) DIV 7) + 
 					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_sipd_tanggal) + 
 						1, 1),' Hari') as lamaproses,
-				sipd_nama,
-				sipd_alamat,
-				sipd_telp,
-				sipd_urutan,
-				sipd_jenisdokter,
-				pemohon_id,
-				pemohon_nama,
-				pemohon_alamat,
-				pemohon_telp,
-				pemohon_npwp,
-				pemohon_rt,
-				pemohon_rw,
-				pemohon_kel,
-				pemohon_kec,
-				pemohon_nik,
-				pemohon_stra,
-				pemohon_surattugas,
-				pemohon_pekerjaan,
-				pemohon_tempatlahir,
-				pemohon_tanggallahir,
-				pemohon_user_id,
-				pemohon_pendidikan,
-				pemohon_tahunlulus,
-				det_sipd_retribusi
+				det_sipd_retribusi,
+				det_sipd_permohonan_id AS permohonan_id,
+				pemohon.id AS pemohon_id,
+				pemohon.nama AS pemohon_nama,
+				pemohon.alamat AS pemohon_alamat,
+				pemohon.telp AS pemohon_telp,
+				pemohon.npwp AS pemohon_npwp,
+				pemohon.rt AS pemohon_rt,
+				pemohon.rw AS pemohon_rw,
+				pemohon.desa_id AS pemohon_kel,
+				pemohon.kecamatan_id AS pemohon_kec,
+				pemohon.ktp AS pemohon_nik,
+				pemohon.stra AS pemohon_stra,
+				pemohon.surattugas AS pemohon_surattugas,
+				pemohon.pekerjaan AS pemohon_pekerjaan,
+				pemohon.tempatlahir AS pemohon_tempatlahir,
+				pemohon.tgllahir AS pemohon_tanggallahir,
+				pemohon.pendidikan AS pemohon_pendidikan,
+				pemohon.tahunlulus AS pemohon_tahunlulus,
+				perusahaan.id AS perusahaan_id,
+				perusahaan.npwp AS perusahaan_npwp,
+				perusahaan.nama AS perusahaan_nama,
+				perusahaan.noakta AS perusahaan_noakta,
+				perusahaan.notaris AS perusahaan_notaris,
+				perusahaan.tglakta AS perusahaan_tglakta,
+				perusahaan.bentuk_id AS perusahaan_bentuk_id,
+				perusahaan.kualifikasi_id AS perusahaan_kualifikasi_id,
+				perusahaan.alamat AS perusahaan_alamat,
+				perusahaan.rt AS perusahaan_rt,
+				perusahaan.rw AS perusahaan_rw,
+				perusahaan.propinsi_id AS perusahaan_propinsi_id,
+				perusahaan.kabkota_id AS perusahaan_kabkota_id,
+				perusahaan.kecamatan_id AS perusahaan_kecamatan_id,
+				perusahaan.desa_id AS perusahaan_desa_id,
+				perusahaan.kodepos AS perusahaan_kodepos,
+				perusahaan.telp AS perusahaan_telp,
+				perusahaan.fax AS perusahaan_fax,
+				perusahaan.stempat_id AS perusahaan_stempat_id,
+				perusahaan.sperusahaan_id AS perusahaan_sperusahaan_id,
+				perusahaan.usaha AS perusahaan_usaha,
+				perusahaan.butara AS perusahaan_butara,
+				perusahaan.bselatan AS perusahaan_bselatan,
+				perusahaan.btimur AS perusahaan_btimur,
+				perusahaan.bbarat AS perusahaan_bbarat,
+				perusahaan.modal AS perusahaan_modal,
+				perusahaan.merk AS perusahaan_merk,
+				perusahaan.jusaha_id AS perusahaan_jusaha_id
 				FROM t_sipd_det 
 				JOIN t_sipd ON t_sipd.sipd_id = t_sipd_det.det_sipd_sipd_id
-				JOIN m_pemohon ON t_sipd_det.det_sipd_pemohon_id = m_pemohon.pemohon_id
+				JOIN pemohon ON t_sipd_det.det_sipd_pemohon_id = pemohon.id
+				JOIN perusahaan ON t_sipd.sipd_perusahaan_id = perusahaan.id
 			WHERE det_sipd_id IS NOT NULL 
 	";
 	
@@ -110,65 +134,11 @@ class M_t_sipd_det extends App_Model{
 		if(@$det_sipd_sipd_id != ''){
 			$sql .= " AND det_sipd_sipd_id LIKE '%".$det_sipd_sipd_id."%' ";
 		}
-		if(@$det_sipd_jenis != ''){
-			$sql .= " AND det_sipd_jenis LIKE '%".$det_sipd_jenis."%' ";
-		}
-		if(@$det_sipd_tanggal != ''){
-			$sql .= " AND det_sipd_tanggal LIKE '%".$det_sipd_tanggal."%' ";
-		}
-		if(@$det_sipd_pemohon_id != ''){
-			$sql .= " AND det_sipd_pemohon_id LIKE '%".$det_sipd_pemohon_id."%' ";
-		}
-		if(@$det_sipd_nomorreg != ''){
-			$sql .= " AND det_sipd_nomorreg LIKE '%".$det_sipd_nomorreg."%' ";
-		}
-		if(@$det_sipd_proses != ''){
-			$sql .= " AND det_sipd_proses LIKE '%".$det_sipd_proses."%' ";
-		}
 		if(@$det_sipd_sk != ''){
 			$sql .= " AND det_sipd_sk LIKE '%".$det_sipd_sk."%' ";
 		}
-		if(@$det_sipd_skurut != ''){
-			$sql .= " AND det_sipd_skurut LIKE '%".$det_sipd_skurut."%' ";
-		}
-		if(@$det_sipd_berlaku != ''){
-			$sql .= " AND det_sipd_berlaku LIKE '%".$det_sipd_berlaku."%' ";
-		}
-		if(@$det_sipd_kadaluarsa != ''){
-			$sql .= " AND det_sipd_kadaluarsa LIKE '%".$det_sipd_kadaluarsa."%' ";
-		}
-		if(@$det_sipd_terima != ''){
-			$sql .= " AND det_sipd_terima LIKE '%".$det_sipd_terima."%' ";
-		}
-		if(@$det_sipd_terimatanggal != ''){
-			$sql .= " AND det_sipd_terimatanggal LIKE '%".$det_sipd_terimatanggal."%' ";
-		}
-		if(@$det_sipd_kelengkapan != ''){
-			$sql .= " AND det_sipd_kelengkapan LIKE '%".$det_sipd_kelengkapan."%' ";
-		}
-		if(@$det_sipd_bap != ''){
-			$sql .= " AND det_sipd_bap LIKE '%".$det_sipd_bap."%' ";
-		}
-		if(@$det_sipd_keputusan != ''){
-			$sql .= " AND det_sipd_keputusan LIKE '%".$det_sipd_keputusan."%' ";
-		}
-		if(@$det_sipd_baptanggal != ''){
-			$sql .= " AND det_sipd_baptanggal LIKE '%".$det_sipd_baptanggal."%' ";
-		}
-		if(@$det_sipd_sip != ''){
-			$sql .= " AND det_sipd_sip LIKE '%".$det_sipd_sip."%' ";
-		}
-		if(@$det_sipd_nrop != ''){
-			$sql .= " AND det_sipd_nrop LIKE '%".$det_sipd_nrop."%' ";
-		}
-		if(@$det_sipd_str != ''){
-			$sql .= " AND det_sipd_str LIKE '%".$det_sipd_str."%' ";
-		}
-		if(@$det_sipd_kompetensi != ''){
-			$sql .= " AND det_sipd_kompetensi LIKE '%".$det_sipd_kompetensi."%' ";
-		}
-		if(@$limit_start != 0 && @$limit_start != 0){
-			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
+		if(@$det_sipd_nomorreg != ''){
+			$sql .= " AND det_sipd_nomorreg LIKE '%".$det_sipd_nomorreg."%' ";
 		}
 		$result = $this->__listCore($sql, $params);
 		return $result;

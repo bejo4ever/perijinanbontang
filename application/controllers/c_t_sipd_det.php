@@ -71,137 +71,54 @@ class C_t_sipd_det extends CI_Controller{
 	}
 	
 	function create(){
-		$det_sipd_id = htmlentities($this->input->post('det_sipd_id'),ENT_QUOTES);
-		$det_sipd_id = is_numeric($det_sipd_id) ? $det_sipd_id : 0;
-		$det_sipd_sipd_id = htmlentities($this->input->post('det_sipd_sipd_id'),ENT_QUOTES);
-		$det_sipd_sipd_id = is_numeric($det_sipd_sipd_id) ? $det_sipd_sipd_id : 0;
-		$det_sipd_jenis = htmlentities($this->input->post('det_sipd_jenis'),ENT_QUOTES);
-		$det_sipd_jenis = is_numeric($det_sipd_jenis) ? $det_sipd_jenis : 0;
-		$det_sipd_tanggal = htmlentities($this->input->post('det_sipd_tanggal'),ENT_QUOTES);
-		$det_sipd_pemohon_id = htmlentities($this->input->post('det_sipd_pemohon_id'),ENT_QUOTES);
-		$det_sipd_pemohon_id = is_numeric($det_sipd_pemohon_id) ? $det_sipd_pemohon_id : 0;
-		$det_sipd_nomorreg = htmlentities($this->input->post('det_sipd_nomorreg'),ENT_QUOTES);
-		$det_sipd_proses = htmlentities($this->input->post('det_sipd_proses'),ENT_QUOTES);
-		$det_sipd_sk = htmlentities($this->input->post('det_sipd_sk'),ENT_QUOTES);
-		$det_sipd_skurut = htmlentities($this->input->post('det_sipd_skurut'),ENT_QUOTES);
-		$det_sipd_skurut = is_numeric($det_sipd_skurut) ? $det_sipd_skurut : 0;
-		$det_sipd_berlaku = htmlentities($this->input->post('det_sipd_berlaku'),ENT_QUOTES);
-		$det_sipd_kadaluarsa = htmlentities($this->input->post('det_sipd_kadaluarsa'),ENT_QUOTES);
-		$det_sipd_terima = htmlentities($this->input->post('det_sipd_terima'),ENT_QUOTES);
-		$det_sipd_terimatanggal = htmlentities($this->input->post('det_sipd_terimatanggal'),ENT_QUOTES);
-		$det_sipd_kelengkapan = htmlentities($this->input->post('det_sipd_kelengkapan'),ENT_QUOTES);
-		$det_sipd_kelengkapan = is_numeric($det_sipd_kelengkapan) ? $det_sipd_kelengkapan : 0;
-		$det_sipd_bap = htmlentities($this->input->post('det_sipd_bap'),ENT_QUOTES);
-		$det_sipd_keputusan = htmlentities($this->input->post('det_sipd_keputusan'),ENT_QUOTES);
-		$det_sipd_keputusan = is_numeric($det_sipd_keputusan) ? $det_sipd_keputusan : 0;
-		$det_sipd_baptanggal = htmlentities($this->input->post('det_sipd_baptanggal'),ENT_QUOTES);
-		$det_sipd_sip = htmlentities($this->input->post('det_sipd_sip'),ENT_QUOTES);
-		$det_sipd_nrop = htmlentities($this->input->post('det_sipd_nrop'),ENT_QUOTES);
-		$det_sipd_str = htmlentities($this->input->post('det_sipd_str'),ENT_QUOTES);
-		$det_sipd_kompetensi = htmlentities($this->input->post('det_sipd_kompetensi'),ENT_QUOTES);
-		
-		$sipd_nama = htmlentities($this->input->post('sipd_nama'),ENT_QUOTES);
-		$sipd_alamat = htmlentities($this->input->post('sipd_alamat'),ENT_QUOTES);
-		$sipd_telp = htmlentities($this->input->post('sipd_telp'),ENT_QUOTES);
-		$sipd_urutan = htmlentities($this->input->post('sipd_urutan'),ENT_QUOTES);
-		$sipd_urutan = is_numeric($sipd_urutan) ? $sipd_urutan : 0;
-		$sipd_jenisdokter = htmlentities($this->input->post('sipd_jenisdokter'),ENT_QUOTES);
-		
-		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
-		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
-		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
-		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
-		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
-		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
-		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
-		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
-		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
-		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
-		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
-		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
-		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
-		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
-		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
-		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
-		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
-		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
-		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
-		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
-		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
-		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
-		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
-		
-		$sipd_cek_id = json_decode($this->input->post('sipd_cek_id'));
-		$sipd_cek_syarat_id = json_decode($this->input->post('sipd_cek_syarat_id'));
-		$sipd_cek_status = json_decode($this->input->post('sipd_cek_status'));
-		$sipd_cek_keterangan = json_decode($this->input->post('sipd_cek_keterangan'));
-		
-		$det_sipd_retribusi = htmlentities($this->input->post('det_sipd_retribusi'),ENT_QUOTES);
-		$det_sipd_retribusi = is_numeric($det_sipd_retribusi) ? $det_sipd_retribusi : 0;
+		$params = json_decode($this->input->post('params'));
+		extract(get_object_vars($params));
 		
 		$sipd_det_author = $this->m_t_sipd_det->__checkSession();
 		$sipd_det_created_date = date('Y-m-d H:i:s');
 		
-		$datapemohon = array(
-			'pemohon_nama'=>$pemohon_nama,
-			'pemohon_alamat'=>$pemohon_alamat,
-			'pemohon_telp'=>$pemohon_telp,
-			'pemohon_npwp'=>$pemohon_npwp,
-			'pemohon_rt'=>$pemohon_rt,
-			'pemohon_rw'=>$pemohon_rw,
-			'pemohon_kel'=>$pemohon_kel,
-			'pemohon_kec'=>$pemohon_kec,
-			'pemohon_nik'=>$pemohon_nik,
-			'pemohon_stra'=>$pemohon_stra,
-			'pemohon_surattugas'=>$pemohon_surattugas,
-			'pemohon_pekerjaan'=>$pemohon_pekerjaan,
-			'pemohon_tempatlahir'=>$pemohon_tempatlahir,
-			'pemohon_tanggallahir'=>$pemohon_tanggallahir,
-			'pemohon_pendidikan'=>$pemohon_pendidikan,
-			'pemohon_tahunlulus'=>$pemohon_tahunlulus,
-		);
-		if($pemohon_id != 0){
-			$resultpemohon = $this->m_t_sipd_det->__update($datapemohon, $pemohon_id, 'm_pemohon', 'updateId','pemohon_id');
-			$resultpemohon = $pemohon_id;
-		}else{
-			$datapemohon["pemohon_user_id"]=$sipd_det_author;
-			$resultpemohon = $this->m_t_sipd_det->__insert($datapemohon, 'm_pemohon', 'insertId');
-		}
+		$noreg = $this->m_public_function->getNomorReg(22);
+		$resultperusahaan = $this->m_t_sipd_det->cuperusahaan($params);
+		$resultpemohon = $this->m_t_sipd_det->cupemohon($params);
+		$resultpermohonan = $this->m_t_sipd_det->cupermohonan($params, $resultpemohon, $noreg);
 		
 		if($sipd_det_author != ''){
-			$dataInti = array(
-				'sipd_nama'=>$sipd_nama,
-				'sipd_alamat'=>$sipd_alamat,
-				'sipd_telp'=>$sipd_telp,
-				'sipd_urutan'=>$sipd_urutan,
-				'sipd_jenisdokter'=>$sipd_jenisdokter,
-			);
-			$resultInti = $this->m_t_sipd_det->__insert($dataInti, 't_sipd', 'insertId');
+			if($det_sipd_lama != 0 && $permohonan_jenis == 2){
+				$resultInti = $det_sipd_lama;
+			}else{
+				$dataInti = array(
+					'sipd_nama'=>$sipd_nama,
+					'sipd_alamat'=>$sipd_alamat,
+					'sipd_telp'=>$sipd_telp,
+					'sipd_urutan'=>$sipd_urutan,
+					'sipd_jenisdokter'=>$sipd_jenisdokter,
+				);
+				$resultInti = $this->m_t_sipd_det->__insert($dataInti, 't_sipd', 'insertId');
+			}
 			if($resultInti != 0){
 				$result = 'success';
 				$data = array(
 					'det_sipd_id'=>$det_sipd_id,
 					'det_sipd_sipd_id'=>$resultInti,
-					'det_sipd_jenis'=>$det_sipd_jenis,
-					'det_sipd_tanggal'=>$det_sipd_tanggal,
+					'det_sipd_jenis'=>$permohonan_jenis,
+					'det_sipd_tanggal'=>date('Y-m-d', strtotime($permohonan_tanggal)),
 					'det_sipd_pemohon_id'=>$resultpemohon,
 					'det_sipd_nomorreg'=>$det_sipd_nomorreg,
 					'det_sipd_proses'=>$det_sipd_proses,
-					'det_sipd_sk'=>$det_sipd_sk,
 					'det_sipd_skurut'=>$det_sipd_skurut,
-					'det_sipd_berlaku'=>$det_sipd_berlaku,
-					'det_sipd_kadaluarsa'=>$det_sipd_kadaluarsa,
+					'det_sipd_kadaluarsa'=>date('Y-m-d', strtotime($permohonan_kadaluarsa)),
 					'det_sipd_terima'=>$det_sipd_terima,
-					'det_sipd_terimatanggal'=>$det_sipd_terimatanggal,
+					'det_sipd_terimatanggal'=>date('Y-m-d', strtotime($det_sipd_terimatanggal)),
 					'det_sipd_kelengkapan'=>$det_sipd_kelengkapan,
 					'det_sipd_bap'=>$det_sipd_bap,
 					'det_sipd_keputusan'=>$det_sipd_keputusan,
-					'det_sipd_baptanggal'=>$det_sipd_baptanggal,
+					'det_sipd_baptanggal'=>date('Y-m-d', strtotime($det_sipd_baptanggal)),
 					'det_sipd_sip'=>$det_sipd_sip,
 					'det_sipd_nrop'=>$det_sipd_nrop,
 					'det_sipd_str'=>$det_sipd_str,
 					'det_sipd_kompetensi'=>$det_sipd_kompetensi,
-					'det_sipd_retribusi'=>$det_sipd_retribusi
+					'det_sipd_retribusi'=>$permohonan_retribusi,
+					'det_sipd_nomorreg'=>$noreg
 					);
 				$resultdet = $this->m_t_sipd_det->__insert($data, false, 'insertId');
 				for($i=0;$i<count($sipd_cek_syarat_id);$i++){
@@ -225,76 +142,15 @@ class C_t_sipd_det extends CI_Controller{
 	}
 	
 	function update(){
-		$det_sipd_id = htmlentities($this->input->post('det_sipd_id'),ENT_QUOTES);
-		$det_sipd_id = is_numeric($det_sipd_id) ? $det_sipd_id : 0;
-		$det_sipd_sipd_id = htmlentities($this->input->post('det_sipd_sipd_id'),ENT_QUOTES);
-		$det_sipd_sipd_id = is_numeric($det_sipd_sipd_id) ? $det_sipd_sipd_id : 0;
-		$det_sipd_jenis = htmlentities($this->input->post('det_sipd_jenis'),ENT_QUOTES);
-		$det_sipd_jenis = is_numeric($det_sipd_jenis) ? $det_sipd_jenis : 0;
-		$det_sipd_tanggal = htmlentities($this->input->post('det_sipd_tanggal'),ENT_QUOTES);
-		$det_sipd_pemohon_id = htmlentities($this->input->post('det_sipd_pemohon_id'),ENT_QUOTES);
-		$det_sipd_pemohon_id = is_numeric($det_sipd_pemohon_id) ? $det_sipd_pemohon_id : 0;
-		$det_sipd_nomorreg = htmlentities($this->input->post('det_sipd_nomorreg'),ENT_QUOTES);
-		$det_sipd_proses = htmlentities($this->input->post('det_sipd_proses'),ENT_QUOTES);
-		$det_sipd_sk = htmlentities($this->input->post('det_sipd_sk'),ENT_QUOTES);
-		$det_sipd_skurut = htmlentities($this->input->post('det_sipd_skurut'),ENT_QUOTES);
-		$det_sipd_skurut = is_numeric($det_sipd_skurut) ? $det_sipd_skurut : 0;
-		$det_sipd_berlaku = htmlentities($this->input->post('det_sipd_berlaku'),ENT_QUOTES);
-		$det_sipd_kadaluarsa = htmlentities($this->input->post('det_sipd_kadaluarsa'),ENT_QUOTES);
-		$det_sipd_terima = htmlentities($this->input->post('det_sipd_terima'),ENT_QUOTES);
-		$det_sipd_terimatanggal = htmlentities($this->input->post('det_sipd_terimatanggal'),ENT_QUOTES);
-		$det_sipd_kelengkapan = htmlentities($this->input->post('det_sipd_kelengkapan'),ENT_QUOTES);
-		$det_sipd_kelengkapan = is_numeric($det_sipd_kelengkapan) ? $det_sipd_kelengkapan : 0;
-		$det_sipd_bap = htmlentities($this->input->post('det_sipd_bap'),ENT_QUOTES);
-		$det_sipd_keputusan = htmlentities($this->input->post('det_sipd_keputusan'),ENT_QUOTES);
-		$det_sipd_keputusan = is_numeric($det_sipd_keputusan) ? $det_sipd_keputusan : 0;
-		$det_sipd_baptanggal = htmlentities($this->input->post('det_sipd_baptanggal'),ENT_QUOTES);
-		$det_sipd_sip = htmlentities($this->input->post('det_sipd_sip'),ENT_QUOTES);
-		$det_sipd_nrop = htmlentities($this->input->post('det_sipd_nrop'),ENT_QUOTES);
-		$det_sipd_str = htmlentities($this->input->post('det_sipd_str'),ENT_QUOTES);
-		$det_sipd_kompetensi = htmlentities($this->input->post('det_sipd_kompetensi'),ENT_QUOTES);
-		
-		$sipd_nama = htmlentities($this->input->post('sipd_nama'),ENT_QUOTES);
-		$sipd_alamat = htmlentities($this->input->post('sipd_alamat'),ENT_QUOTES);
-		$sipd_telp = htmlentities($this->input->post('sipd_telp'),ENT_QUOTES);
-		$sipd_urutan = htmlentities($this->input->post('sipd_urutan'),ENT_QUOTES);
-		$sipd_urutan = is_numeric($sipd_urutan) ? $sipd_urutan : 0;
-		$sipd_jenisdokter = htmlentities($this->input->post('sipd_jenisdokter'),ENT_QUOTES);
-		
-		$pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES);
-		$pemohon_id = is_numeric($pemohon_id) ? $pemohon_id : 0;
-		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
-		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
-		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
-		$pemohon_npwp = htmlentities($this->input->post('pemohon_npwp'),ENT_QUOTES);
-		$pemohon_rt = htmlentities($this->input->post('pemohon_rt'),ENT_QUOTES);
-		$pemohon_rt = is_numeric($pemohon_rt) ? $pemohon_rt : 0;
-		$pemohon_rw = htmlentities($this->input->post('pemohon_rw'),ENT_QUOTES);
-		$pemohon_rw = is_numeric($pemohon_rw) ? $pemohon_rw : 0;
-		$pemohon_kel = htmlentities($this->input->post('pemohon_kel'),ENT_QUOTES);
-		$pemohon_kec = htmlentities($this->input->post('pemohon_kec'),ENT_QUOTES);
-		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
-		$pemohon_stra = htmlentities($this->input->post('pemohon_stra'),ENT_QUOTES);
-		$pemohon_surattugas = htmlentities($this->input->post('pemohon_surattugas'),ENT_QUOTES);
-		$pemohon_pekerjaan = htmlentities($this->input->post('pemohon_pekerjaan'),ENT_QUOTES);
-		$pemohon_tempatlahir = htmlentities($this->input->post('pemohon_tempatlahir'),ENT_QUOTES);
-		$pemohon_tanggallahir = htmlentities($this->input->post('pemohon_tanggallahir'),ENT_QUOTES);
-		$pemohon_user_id = htmlentities($this->input->post('pemohon_user_id'),ENT_QUOTES);
-		$pemohon_user_id = is_numeric($pemohon_user_id) ? $pemohon_user_id : 0;
-		$pemohon_pendidikan = htmlentities($this->input->post('pemohon_pendidikan'),ENT_QUOTES);
-		$pemohon_tahunlulus = htmlentities($this->input->post('pemohon_tahunlulus'),ENT_QUOTES);
-		$pemohon_tahunlulus = is_numeric($pemohon_tahunlulus) ? $pemohon_tahunlulus : 0;
-		
-		$sipd_cek_id = json_decode($this->input->post('sipd_cek_id'));
-		$sipd_cek_syarat_id = json_decode($this->input->post('sipd_cek_syarat_id'));
-		$sipd_cek_status = json_decode($this->input->post('sipd_cek_status'));
-		$sipd_cek_keterangan = json_decode($this->input->post('sipd_cek_keterangan'));
-		
-		$det_sipd_retribusi = htmlentities($this->input->post('det_sipd_retribusi'),ENT_QUOTES);
-		$det_sipd_retribusi = is_numeric($det_sipd_retribusi) ? $det_sipd_retribusi : 0;
+		$params = json_decode($this->input->post('params'));
+		extract(get_object_vars($params));
 		
 		$sipd_det_updated_by = $this->m_t_sipd_det->__checkSession();
 		$sipd_det_updated_date = date('Y-m-d H:i:s');
+		
+		$resultperusahaan = $this->m_t_sipd_det->cuperusahaan($params);
+		$resultpemohon = $this->m_t_sipd_det->cupemohon($params);
+		$resultpermohonan = $this->m_t_sipd_det->cupermohonan($params, $resultpemohon, '');
 		
 		$datapemohon = array(
 			'pemohon_nama'=>$pemohon_nama,
@@ -334,26 +190,23 @@ class C_t_sipd_det extends CI_Controller{
 			$result = 'success';
 			$data = array(
 				'det_sipd_sipd_id'=>$det_sipd_sipd_id,
-				'det_sipd_jenis'=>$det_sipd_jenis,
-				'det_sipd_tanggal'=>$det_sipd_tanggal,
+				'det_sipd_jenis'=>$permohonan_jenis,
+				'det_sipd_tanggal'=>date('Y-m-d', strtotime($permohonan_tanggal)),
 				'det_sipd_pemohon_id'=>$resultpemohon,
 				'det_sipd_nomorreg'=>$det_sipd_nomorreg,
 				'det_sipd_proses'=>$det_sipd_proses,
-				'det_sipd_sk'=>$det_sipd_sk,
-				'det_sipd_skurut'=>$det_sipd_skurut,
-				'det_sipd_berlaku'=>$det_sipd_berlaku,
-				'det_sipd_kadaluarsa'=>$det_sipd_kadaluarsa,
+				'det_sipd_kadaluarsa'=>date('Y-m-d', strtotime($permohonan_kadaluarsa)),
 				'det_sipd_terima'=>$det_sipd_terima,
-				'det_sipd_terimatanggal'=>$det_sipd_terimatanggal,
+				'det_sipd_terimatanggal'=>date('Y-m-d', strtotime($det_sipd_terimatanggal)),
 				'det_sipd_kelengkapan'=>$det_sipd_kelengkapan,
 				'det_sipd_bap'=>$det_sipd_bap,
 				'det_sipd_keputusan'=>$det_sipd_keputusan,
-				'det_sipd_baptanggal'=>$det_sipd_baptanggal,
+				'det_sipd_baptanggal'=>date('Y-m-d', strtotime($det_sipd_baptanggal)),
 				'det_sipd_sip'=>$det_sipd_sip,
 				'det_sipd_nrop'=>$det_sipd_nrop,
 				'det_sipd_str'=>$det_sipd_str,
 				'det_sipd_kompetensi'=>$det_sipd_kompetensi,
-				'det_sipd_retribusi'=>$det_sipd_retribusi
+				'det_sipd_retribusi'=>$permohonan_retribusi
 				);
 			$resultdet = $this->m_t_sipd_det->__update($data, $det_sipd_id, '', 'updateId','');
 			for($i=0;$i<count($sipd_cek_syarat_id);$i++){
@@ -444,55 +297,9 @@ class C_t_sipd_det extends CI_Controller{
 		
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
-		$det_sipd_sipd_id = htmlentities($this->input->post('det_sipd_sipd_id'),ENT_QUOTES);
-		$det_sipd_sipd_id = is_numeric($det_sipd_sipd_id) ? $det_sipd_sipd_id : 0;
-		$det_sipd_jenis = htmlentities($this->input->post('det_sipd_jenis'),ENT_QUOTES);
-		$det_sipd_jenis = is_numeric($det_sipd_jenis) ? $det_sipd_jenis : 0;
-		$det_sipd_tanggal = htmlentities($this->input->post('det_sipd_tanggal'),ENT_QUOTES);
-		$det_sipd_pemohon_id = htmlentities($this->input->post('det_sipd_pemohon_id'),ENT_QUOTES);
-		$det_sipd_pemohon_id = is_numeric($det_sipd_pemohon_id) ? $det_sipd_pemohon_id : 0;
-		$det_sipd_nomorreg = htmlentities($this->input->post('det_sipd_nomorreg'),ENT_QUOTES);
-		$det_sipd_proses = htmlentities($this->input->post('det_sipd_proses'),ENT_QUOTES);
-		$det_sipd_sk = htmlentities($this->input->post('det_sipd_sk'),ENT_QUOTES);
-		$det_sipd_skurut = htmlentities($this->input->post('det_sipd_skurut'),ENT_QUOTES);
-		$det_sipd_skurut = is_numeric($det_sipd_skurut) ? $det_sipd_skurut : 0;
-		$det_sipd_berlaku = htmlentities($this->input->post('det_sipd_berlaku'),ENT_QUOTES);
-		$det_sipd_kadaluarsa = htmlentities($this->input->post('det_sipd_kadaluarsa'),ENT_QUOTES);
-		$det_sipd_terima = htmlentities($this->input->post('det_sipd_terima'),ENT_QUOTES);
-		$det_sipd_terimatanggal = htmlentities($this->input->post('det_sipd_terimatanggal'),ENT_QUOTES);
-		$det_sipd_kelengkapan = htmlentities($this->input->post('det_sipd_kelengkapan'),ENT_QUOTES);
-		$det_sipd_kelengkapan = is_numeric($det_sipd_kelengkapan) ? $det_sipd_kelengkapan : 0;
-		$det_sipd_bap = htmlentities($this->input->post('det_sipd_bap'),ENT_QUOTES);
-		$det_sipd_keputusan = htmlentities($this->input->post('det_sipd_keputusan'),ENT_QUOTES);
-		$det_sipd_keputusan = is_numeric($det_sipd_keputusan) ? $det_sipd_keputusan : 0;
-		$det_sipd_baptanggal = htmlentities($this->input->post('det_sipd_baptanggal'),ENT_QUOTES);
-		$det_sipd_sip = htmlentities($this->input->post('det_sipd_sip'),ENT_QUOTES);
-		$det_sipd_nrop = htmlentities($this->input->post('det_sipd_nrop'),ENT_QUOTES);
-		$det_sipd_str = htmlentities($this->input->post('det_sipd_str'),ENT_QUOTES);
-		$det_sipd_kompetensi = htmlentities($this->input->post('det_sipd_kompetensi'),ENT_QUOTES);
-				
+		
 		$params = array(
 			'searchText' => $searchText,
-			'det_sipd_sipd_id'=>$det_sipd_sipd_id,
-			'det_sipd_jenis'=>$det_sipd_jenis,
-			'det_sipd_tanggal'=>$det_sipd_tanggal,
-			'det_sipd_pemohon_id'=>$det_sipd_pemohon_id,
-			'det_sipd_nomorreg'=>$det_sipd_nomorreg,
-			'det_sipd_proses'=>$det_sipd_proses,
-			'det_sipd_sk'=>$det_sipd_sk,
-			'det_sipd_skurut'=>$det_sipd_skurut,
-			'det_sipd_berlaku'=>$det_sipd_berlaku,
-			'det_sipd_kadaluarsa'=>$det_sipd_kadaluarsa,
-			'det_sipd_terima'=>$det_sipd_terima,
-			'det_sipd_terimatanggal'=>$det_sipd_terimatanggal,
-			'det_sipd_kelengkapan'=>$det_sipd_kelengkapan,
-			'det_sipd_bap'=>$det_sipd_bap,
-			'det_sipd_keputusan'=>$det_sipd_keputusan,
-			'det_sipd_baptanggal'=>$det_sipd_baptanggal,
-			'det_sipd_sip'=>$det_sipd_sip,
-			'det_sipd_nrop'=>$det_sipd_nrop,
-			'det_sipd_str'=>$det_sipd_str,
-			'det_sipd_kompetensi'=>$det_sipd_kompetensi,
 			'currentAction' => $currentAction,
 			'return_type' => 'array',
 			'limit_start' => 0,
@@ -538,6 +345,12 @@ class C_t_sipd_det extends CI_Controller{
 			);
 			$this->db->where('det_sipd_id', $sipddet_id);
 			$this->db->update('t_sipd_det', $data_sk);
+			$data_sk_permohonan = array(
+				"nosk"=>$nosk,
+				"tglsk"=>date('Y-m-d')
+			);
+			$this->db->where('id', $permohonan_id);
+			$this->db->update('permohonan', $data_sk_permohonan);
 		}
 		$data = array(
 			"det_sipd_proses"=>$proses

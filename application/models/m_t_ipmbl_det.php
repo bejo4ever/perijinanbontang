@@ -40,31 +40,31 @@ class M_t_ipmbl_det extends App_Model{
 				ipmbl_usaha,
 				ipmbl_alamatusaha,
 				ipmbl_lokasi,
-				pemohon_id,
-				pemohon_nama,
-				pemohon_alamat,
-				pemohon_telp,
-				pemohon_npwp,
-				pemohon_rt,
-				pemohon_rw,
-				pemohon_kel,
-				pemohon_kec,
-				pemohon_nik,
-				pemohon_stra,
-				pemohon_surattugas,
-				pemohon_pekerjaan,
-				pemohon_tempatlahir,
-				pemohon_tanggallahir,
-				pemohon_user_id,
-				pemohon_pendidikan,
-				pemohon_tahunlulus,
+				id AS pemohon_id,
+				nama AS pemohon_nama,
+				alamat AS pemohon_alamat,
+				telp AS pemohon_telp,
+				npwp AS pemohon_npwp,
+				rt AS pemohon_rt,
+				rw AS pemohon_rw,
+				desa_id AS pemohon_kel,
+				kecamatan_id AS pemohon_kec,
+				ktp AS pemohon_nik,
+				stra AS pemohon_stra,
+				surattugas AS pemohon_surattugas,
+				pekerjaan AS pemohon_pekerjaan,
+				tempatlahir AS pemohon_tempatlahir,
+				tgllahir AS pemohon_tanggallahir,
+				pendidikan AS pemohon_pendidikan,
+				tahunlulus AS pemohon_tahunlulus,
 				CONCAT(5 * (DATEDIFF(NOW(), det_ipmbl_tanggal) DIV 7) + 
 					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_ipmbl_tanggal) + 
 						1, 1),' Hari') as lamaproses,
-				det_ipmbl_retribusi
+				det_ipmbl_retribusi,
+				det_ipmbl_permohonan_id AS permohonan_id
 				FROM t_ipmbl_det 
 				JOIN t_ipmbl ON t_ipmbl.ipmbl_id = t_ipmbl_det.det_ipmbl_ipmbl_id
-				JOIN m_pemohon ON t_ipmbl_det.det_ipmbl_pemohon_id = m_pemohon.pemohon_id
+				JOIN pemohon ON t_ipmbl_det.det_ipmbl_pemohon_id = pemohon.id
 			WHERE det_ipmbl_id IS NOT NULL 
 	";
 	
@@ -115,83 +115,11 @@ class M_t_ipmbl_det extends App_Model{
 		if(@$det_ipmbl_ipmbl_id != ''){
 			$sql .= " AND det_ipmbl_ipmbl_id LIKE '%".$det_ipmbl_ipmbl_id."%' ";
 		}
-		if(@$det_ipmbl_jenis != ''){
-			$sql .= " AND det_ipmbl_jenis LIKE '%".$det_ipmbl_jenis."%' ";
-		}
-		if(@$det_ipmbl_tanggal != ''){
-			$sql .= " AND det_ipmbl_tanggal LIKE '%".$det_ipmbl_tanggal."%' ";
-		}
-		if(@$det_ipmbl_nama != ''){
-			$sql .= " AND det_ipmbl_nama LIKE '%".$det_ipmbl_nama."%' ";
-		}
-		if(@$det_ipmbl_alamat != ''){
-			$sql .= " AND det_ipmbl_alamat LIKE '%".$det_ipmbl_alamat."%' ";
-		}
-		if(@$det_ipmbl_kelurahan != ''){
-			$sql .= " AND det_ipmbl_kelurahan LIKE '%".$det_ipmbl_kelurahan."%' ";
-		}
-		if(@$det_ipmbl_kecamatan != ''){
-			$sql .= " AND det_ipmbl_kecamatan LIKE '%".$det_ipmbl_kecamatan."%' ";
-		}
-		if(@$det_ipmbl_kota != ''){
-			$sql .= " AND det_ipmbl_kota LIKE '%".$det_ipmbl_kota."%' ";
-		}
-		if(@$det_ipmbl_telp != ''){
-			$sql .= " AND det_ipmbl_telp LIKE '%".$det_ipmbl_telp."%' ";
-		}
-		if(@$det_ipmbl_nomoragenda != ''){
-			$sql .= " AND det_ipmbl_nomoragenda LIKE '%".$det_ipmbl_nomoragenda."%' ";
-		}
-		if(@$det_ipmbl_berkasmasuk != ''){
-			$sql .= " AND det_ipmbl_berkasmasuk LIKE '%".$det_ipmbl_berkasmasuk."%' ";
-		}
-		if(@$det_ipmbl_surveytanggal != ''){
-			$sql .= " AND det_ipmbl_surveytanggal LIKE '%".$det_ipmbl_surveytanggal."%' ";
-		}
-		if(@$det_ipmbl_surveylulus != ''){
-			$sql .= " AND det_ipmbl_surveylulus LIKE '%".$det_ipmbl_surveylulus."%' ";
-		}
-		if(@$det_ipmbl_status != ''){
-			$sql .= " AND det_ipmbl_status LIKE '%".$det_ipmbl_status."%' ";
-		}
-		if(@$det_ipmbl_surveypetugas != ''){
-			$sql .= " AND det_ipmbl_surveypetugas LIKE '%".$det_ipmbl_surveypetugas."%' ";
-		}
-		if(@$det_ipmbl_surveydinas != ''){
-			$sql .= " AND det_ipmbl_surveydinas LIKE '%".$det_ipmbl_surveydinas."%' ";
-		}
-		if(@$det_ipmbl_surveynip != ''){
-			$sql .= " AND det_ipmbl_surveynip LIKE '%".$det_ipmbl_surveynip."%' ";
-		}
-		if(@$det_ipmbl_surveypendapat != ''){
-			$sql .= " AND det_ipmbl_surveypendapat LIKE '%".$det_ipmbl_surveypendapat."%' ";
-		}
-		if(@$det_ipmbl_rekombl != ''){
-			$sql .= " AND det_ipmbl_rekombl LIKE '%".$det_ipmbl_rekombl."%' ";
-		}
-		if(@$det_ipmbl_rekomblhtanggal != ''){
-			$sql .= " AND det_ipmbl_rekomblhtanggal LIKE '%".$det_ipmbl_rekomblhtanggal."%' ";
-		}
-		if(@$det_ipmbl_rekomkel != ''){
-			$sql .= " AND det_ipmbl_rekomkel LIKE '%".$det_ipmbl_rekomkel."%' ";
-		}
-		if(@$det_ipmbl_rekomkeltanggal != ''){
-			$sql .= " AND det_ipmbl_rekomkeltanggal LIKE '%".$det_ipmbl_rekomkeltanggal."%' ";
-		}
-		if(@$det_ipmbl_rekomkec != ''){
-			$sql .= " AND det_ipmbl_rekomkec LIKE '%".$det_ipmbl_rekomkec."%' ";
-		}
-		if(@$det_ipmbl_rekomkectanggal != ''){
-			$sql .= " AND det_ipmbl_rekomkectanggal LIKE '%".$det_ipmbl_rekomkectanggal."%' ";
-		}
 		if(@$det_ipmbl_sk != ''){
 			$sql .= " AND det_ipmbl_sk LIKE '%".$det_ipmbl_sk."%' ";
 		}
-		if(@$det_ipmbl_kadaluarsa != ''){
-			$sql .= " AND det_ipmbl_kadaluarsa LIKE '%".$det_ipmbl_kadaluarsa."%' ";
-		}
-		if(@$det_ipmbl_berlaku != ''){
-			$sql .= " AND det_ipmbl_berlaku LIKE '%".$det_ipmbl_berlaku."%' ";
+		if(@$det_ipmbl_nomorreg != ''){
+			$sql .= " AND det_ipmbl_nomorreg LIKE '%".$det_ipmbl_nomorreg."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

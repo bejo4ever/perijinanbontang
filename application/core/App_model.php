@@ -323,10 +323,10 @@ class App_model extends CI_Model{
 	
 	public function cupermohonan($params, $pemohon_id, $noreg){
 		extract(get_object_vars($params));
+		$sbayar = ($permohonan_retribusi != 0 && $permohonan_retribusi != '') ? 1 : 0;
 		$datapermohonan = array(
 			'jpermohonan_id'=>$permohonan_jenis,
 			'tahun'=>date('Y', strtotime($permohonan_tanggal)),
-			'noregistrasi'=>$noreg,
 			'ijin_id'=>$ijin_id,
 			'pemohon_id'=>$pemohon_id,
 			'tglpermohonan'=>date('Y-m-d', strtotime($permohonan_tanggal)),
@@ -335,16 +335,15 @@ class App_model extends CI_Model{
 			'nip'=>$pemohon_stra,
 			'jabatan'=>$pemohon_surattugas,
 			'pangkat'=>$pemohon_pekerjaan,
-			'atasnama'=>$pemohon_tempatlahir, 
-			'sbayar'=>$asd,
-			'tglbayar'=>$pemohon_pendidikan,
-			'ketbayar'=>$pemohon_tahunlulus, */
+			'atasnama'=>$pemohon_tempatlahir, */
+			'sbayar'=>$sbayar,
+			'tglbayar'=>date('Y-m-d', strtotime($permohonan_retribusi_tanggal)),
 			'retribusi'=>$permohonan_retribusi,
-			/* 'spermohonan_id'=>$pemohon_tahunlulus,
-			'no_agenda'=>$pemohon_tahunlulus, */
-			'sdata'=>1,
-			/* 'catatan_bo'=>$pemohon_tahunlulus */
+			'sdata'=>1
 		);
+		if($noreg != ''){
+			$datapermohonan['noregistrasi']=$noreg;
+		}
 		if($permohonan_id != 0){
 			$resultpermohonan = $this->db->where('id', $permohonan_id)->update('permohonan', $datapermohonan);
 			$resultpermohonan = $permohonan_id;

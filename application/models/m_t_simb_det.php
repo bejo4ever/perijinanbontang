@@ -67,29 +67,57 @@ class M_t_simb_det extends App_Model{
 				simb_batastimur,
 				simb_batasselatan,
 				simb_batasbarat,
-				pemohon_id,
-				pemohon_nama,
-				pemohon_alamat,
-				pemohon_telp,
-				pemohon_npwp,
-				pemohon_rt,
-				pemohon_rw,
-				pemohon_kel,
-				pemohon_kec,
-				pemohon_nik,
-				pemohon_stra,
-				pemohon_surattugas,
-				pemohon_pekerjaan,
-				pemohon_tempatlahir,
-				pemohon_tanggallahir,
-				pemohon_user_id,
-				pemohon_pendidikan,
-				pemohon_tahunlulus,
-				pemohon_wn,
-				det_simb_retribusi
+				det_simb_retribusi,
+				det_simb_permohonan_id AS permohonan_id,
+				pemohon.id AS pemohon_id,
+				pemohon.nama AS pemohon_nama,
+				pemohon.alamat AS pemohon_alamat,
+				pemohon.telp AS pemohon_telp,
+				pemohon.npwp AS pemohon_npwp,
+				pemohon.rt AS pemohon_rt,
+				pemohon.rw AS pemohon_rw,
+				pemohon.desa_id AS pemohon_kel,
+				pemohon.kecamatan_id AS pemohon_kec,
+				pemohon.ktp AS pemohon_nik,
+				pemohon.stra AS pemohon_stra,
+				pemohon.surattugas AS pemohon_surattugas,
+				pemohon.pekerjaan AS pemohon_pekerjaan,
+				pemohon.tempatlahir AS pemohon_tempatlahir,
+				pemohon.tgllahir AS pemohon_tanggallahir,
+				pemohon.pendidikan AS pemohon_pendidikan,
+				pemohon.tahunlulus AS pemohon_tahunlulus,
+				perusahaan.id AS perusahaan_id,
+				perusahaan.npwp AS perusahaan_npwp,
+				perusahaan.nama AS perusahaan_nama,
+				perusahaan.noakta AS perusahaan_noakta,
+				perusahaan.notaris AS perusahaan_notaris,
+				perusahaan.tglakta AS perusahaan_tglakta,
+				perusahaan.bentuk_id AS perusahaan_bentuk_id,
+				perusahaan.kualifikasi_id AS perusahaan_kualifikasi_id,
+				perusahaan.alamat AS perusahaan_alamat,
+				perusahaan.rt AS perusahaan_rt,
+				perusahaan.rw AS perusahaan_rw,
+				perusahaan.propinsi_id AS perusahaan_propinsi_id,
+				perusahaan.kabkota_id AS perusahaan_kabkota_id,
+				perusahaan.kecamatan_id AS perusahaan_kecamatan_id,
+				perusahaan.desa_id AS perusahaan_desa_id,
+				perusahaan.kodepos AS perusahaan_kodepos,
+				perusahaan.telp AS perusahaan_telp,
+				perusahaan.fax AS perusahaan_fax,
+				perusahaan.stempat_id AS perusahaan_stempat_id,
+				perusahaan.sperusahaan_id AS perusahaan_sperusahaan_id,
+				perusahaan.usaha AS perusahaan_usaha,
+				perusahaan.butara AS perusahaan_butara,
+				perusahaan.bselatan AS perusahaan_bselatan,
+				perusahaan.btimur AS perusahaan_btimur,
+				perusahaan.bbarat AS perusahaan_bbarat,
+				perusahaan.modal AS perusahaan_modal,
+				perusahaan.merk AS perusahaan_merk,
+				perusahaan.jusaha_id AS perusahaan_jusaha_id
 				FROM t_simb_det 
 				JOIN t_simb ON t_simb.simb_id = t_simb_det.det_simb_simb_id
-				JOIN m_pemohon ON t_simb_det.det_simb_pemohon_id = m_pemohon.pemohon_id
+				JOIN pemohon ON t_simb_det.det_simb_pemohon_id = pemohon.id
+				JOIN perusahaan ON t_simb.simb_perusahaan_id = perusahaan.id
 			WHERE det_simb_id IS NOT NULL 
 	";
 	
@@ -127,41 +155,17 @@ class M_t_simb_det extends App_Model{
 		
 		$sql = $this->mainSql;
 		
+		if(@$det_simb_id != ''){
+			$sql .= " AND det_simb_id LIKE '%".$det_simb_id."%' ";
+		}
 		if(@$det_simb_simb_id != ''){
 			$sql .= " AND det_simb_simb_id LIKE '%".$det_simb_simb_id."%' ";
-		}
-		if(@$det_simb_jenis != ''){
-			$sql .= " AND det_simb_jenis LIKE '%".$det_simb_jenis."%' ";
-		}
-		if(@$det_simb_tanggal != ''){
-			$sql .= " AND det_simb_tanggal LIKE '%".$det_simb_tanggal."%' ";
-		}
-		if(@$det_simb_pemohon_id != ''){
-			$sql .= " AND det_simb_pemohon_id LIKE '%".$det_simb_pemohon_id."%' ";
-		}
-		if(@$det_simb_nomorreg != ''){
-			$sql .= " AND det_simb_nomorreg LIKE '%".$det_simb_nomorreg."%' ";
-		}
-		if(@$det_simb_proses != ''){
-			$sql .= " AND det_simb_proses LIKE '%".$det_simb_proses."%' ";
 		}
 		if(@$det_simb_sk != ''){
 			$sql .= " AND det_simb_sk LIKE '%".$det_simb_sk."%' ";
 		}
-		if(@$det_simb_berlaku != ''){
-			$sql .= " AND det_simb_berlaku LIKE '%".$det_simb_berlaku."%' ";
-		}
-		if(@$det_simb_kadaluarsa != ''){
-			$sql .= " AND det_simb_kadaluarsa LIKE '%".$det_simb_kadaluarsa."%' ";
-		}
-		if(@$det_simb_penerima != ''){
-			$sql .= " AND det_simb_penerima LIKE '%".$det_simb_penerima."%' ";
-		}
-		if(@$det_simb_tanggalterima != ''){
-			$sql .= " AND det_simb_tanggalterima LIKE '%".$det_simb_tanggalterima."%' ";
-		}
-		if(@$det_simb_keterangan != ''){
-			$sql .= " AND det_simb_keterangan LIKE '%".$det_simb_keterangan."%' ";
+		if(@$det_simb_nomorreg != ''){
+			$sql .= " AND det_simb_nomorreg LIKE '%".$det_simb_nomorreg."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";
