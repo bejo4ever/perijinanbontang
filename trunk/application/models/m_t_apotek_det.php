@@ -84,28 +84,57 @@ class M_t_apotek_det extends App_Model{
 				CONCAT(5 * (DATEDIFF(NOW(), det_apotek_tanggal) DIV 7) + 
 					MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(det_apotek_tanggal) + 
 						1, 1),' Hari') as lamaproses,
-				pemohon_id,
-				pemohon_nama,
-				pemohon_alamat,
-				pemohon_telp,
-				pemohon_npwp,
-				pemohon_rt,
-				pemohon_rw,
-				pemohon_kel,
-				pemohon_kec,
-				pemohon_nik,
-				pemohon_stra,
-				pemohon_surattugas,
-				pemohon_pekerjaan,
-				pemohon_tempatlahir,
-				pemohon_tanggallahir,
-				pemohon_user_id,
-				pemohon_pendidikan,
-				pemohon_tahunlulus,
-				det_apotek_retribusi
+				det_apotek_retribusi,
+				det_apotek_permohonan_id AS permohonan_id,
+				pemohon.id AS pemohon_id,
+				pemohon.nama AS pemohon_nama,
+				pemohon.alamat AS pemohon_alamat,
+				pemohon.telp AS pemohon_telp,
+				pemohon.npwp AS pemohon_npwp,
+				pemohon.rt AS pemohon_rt,
+				pemohon.rw AS pemohon_rw,
+				pemohon.desa_id AS pemohon_kel,
+				pemohon.kecamatan_id AS pemohon_kec,
+				pemohon.ktp AS pemohon_nik,
+				pemohon.stra AS pemohon_stra,
+				pemohon.surattugas AS pemohon_surattugas,
+				pemohon.pekerjaan AS pemohon_pekerjaan,
+				pemohon.tempatlahir AS pemohon_tempatlahir,
+				pemohon.tgllahir AS pemohon_tanggallahir,
+				pemohon.pendidikan AS pemohon_pendidikan,
+				pemohon.tahunlulus AS pemohon_tahunlulus,
+				perusahaan.id AS perusahaan_id,
+				perusahaan.npwp AS perusahaan_npwp,
+				perusahaan.nama AS perusahaan_nama,
+				perusahaan.noakta AS perusahaan_noakta,
+				perusahaan.notaris AS perusahaan_notaris,
+				perusahaan.tglakta AS perusahaan_tglakta,
+				perusahaan.bentuk_id AS perusahaan_bentuk_id,
+				perusahaan.kualifikasi_id AS perusahaan_kualifikasi_id,
+				perusahaan.alamat AS perusahaan_alamat,
+				perusahaan.rt AS perusahaan_rt,
+				perusahaan.rw AS perusahaan_rw,
+				perusahaan.propinsi_id AS perusahaan_propinsi_id,
+				perusahaan.kabkota_id AS perusahaan_kabkota_id,
+				perusahaan.kecamatan_id AS perusahaan_kecamatan_id,
+				perusahaan.desa_id AS perusahaan_desa_id,
+				perusahaan.kodepos AS perusahaan_kodepos,
+				perusahaan.telp AS perusahaan_telp,
+				perusahaan.fax AS perusahaan_fax,
+				perusahaan.stempat_id AS perusahaan_stempat_id,
+				perusahaan.sperusahaan_id AS perusahaan_sperusahaan_id,
+				perusahaan.usaha AS perusahaan_usaha,
+				perusahaan.butara AS perusahaan_butara,
+				perusahaan.bselatan AS perusahaan_bselatan,
+				perusahaan.btimur AS perusahaan_btimur,
+				perusahaan.bbarat AS perusahaan_bbarat,
+				perusahaan.modal AS perusahaan_modal,
+				perusahaan.merk AS perusahaan_merk,
+				perusahaan.jusaha_id AS perusahaan_jusaha_id
 				FROM t_apotek_det 
 				JOIN t_apotek ON t_apotek.apotek_id = t_apotek_det.det_apotek_apotek_id
-				JOIN m_pemohon ON t_apotek_det.det_apotek_pemohon_id = m_pemohon.pemohon_id
+				JOIN pemohon ON t_apotek_det.det_apotek_pemohon_id = pemohon.id
+				LEFT JOIN perusahaan ON t_apotek.apotek_perusahaan_id = perusahaan.id
 			WHERE det_apotek_id IS NOT NULL 
 	";
 	
@@ -155,200 +184,11 @@ class M_t_apotek_det extends App_Model{
 		if(@$det_apotek_apotek_id != ''){
 			$sql .= " AND det_apotek_apotek_id LIKE '%".$det_apotek_apotek_id."%' ";
 		}
-		if(@$det_apotek_jenis != ''){
-			$sql .= " AND det_apotek_jenis LIKE '%".$det_apotek_jenis."%' ";
-		}
-		if(@$det_apotek_surveylulus != ''){
-			$sql .= " AND det_apotek_surveylulus LIKE '%".$det_apotek_surveylulus."%' ";
-		}
-		if(@$det_apotek_nama != ''){
-			$sql .= " AND det_apotek_nama LIKE '%".$det_apotek_nama."%' ";
-		}
-		if(@$det_apotek_alamat != ''){
-			$sql .= " AND det_apotek_alamat LIKE '%".$det_apotek_alamat."%' ";
-		}
-		if(@$det_apotek_telp != ''){
-			$sql .= " AND det_apotek_telp LIKE '%".$det_apotek_telp."%' ";
-		}
-		if(@$det_apotek_sp != ''){
-			$sql .= " AND det_apotek_sp LIKE '%".$det_apotek_sp."%' ";
-		}
-		if(@$det_apotek_ktp != ''){
-			$sql .= " AND det_apotek_ktp LIKE '%".$det_apotek_ktp."%' ";
-		}
-		if(@$det_apotek_tempatlahir != ''){
-			$sql .= " AND det_apotek_tempatlahir LIKE '%".$det_apotek_tempatlahir."%' ";
-		}
-		if(@$det_apotek_tanggallahir != ''){
-			$sql .= " AND det_apotek_tanggallahir LIKE '%".$det_apotek_tanggallahir."%' ";
-		}
-		if(@$det_apotek_pekerjaan != ''){
-			$sql .= " AND det_apotek_pekerjaan LIKE '%".$det_apotek_pekerjaan."%' ";
-		}
-		if(@$det_apotek_npwp != ''){
-			$sql .= " AND det_apotek_npwp LIKE '%".$det_apotek_npwp."%' ";
-		}
-		if(@$det_apotek_stra != ''){
-			$sql .= " AND det_apotek_stra LIKE '%".$det_apotek_stra."%' ";
-		}
-		if(@$det_apotek_pendidikan != ''){
-			$sql .= " AND det_apotek_pendidikan LIKE '%".$det_apotek_pendidikan."%' ";
-		}
-		if(@$det_apotek_tahunlulus != ''){
-			$sql .= " AND det_apotek_tahunlulus LIKE '%".$det_apotek_tahunlulus."%' ";
-		}
-		if(@$det_apotek_terima != ''){
-			$sql .= " AND det_apotek_terima LIKE '%".$det_apotek_terima."%' ";
-		}
-		if(@$det_apotek_terimatanggal != ''){
-			$sql .= " AND det_apotek_terimatanggal LIKE '%".$det_apotek_terimatanggal."%' ";
-		}
-		if(@$det_apotek_kelengkapan != ''){
-			$sql .= " AND det_apotek_kelengkapan LIKE '%".$det_apotek_kelengkapan."%' ";
-		}
-		if(@$det_apotek_bap != ''){
-			$sql .= " AND det_apotek_bap LIKE '%".$det_apotek_bap."%' ";
-		}
-		if(@$det_apotek_baptanggal != ''){
-			$sql .= " AND det_apotek_baptanggal LIKE '%".$det_apotek_baptanggal."%' ";
-		}
-		if(@$det_apotek_keputusan != ''){
-			$sql .= " AND det_apotek_keputusan LIKE '%".$det_apotek_keputusan."%' ";
-		}
-		if(@$det_apotek_keterangan != ''){
-			$sql .= " AND det_apotek_keterangan LIKE '%".$det_apotek_keterangan."%' ";
-		}
-		if(@$det_apotek_jarak != ''){
-			$sql .= " AND det_apotek_jarak LIKE '%".$det_apotek_jarak."%' ";
-		}
-		if(@$det_apotek_rracik != ''){
-			$sql .= " AND det_apotek_rracik LIKE '%".$det_apotek_rracik."%' ";
-		}
-		if(@$det_apotek_radmin != ''){
-			$sql .= " AND det_apotek_radmin LIKE '%".$det_apotek_radmin."%' ";
-		}
-		if(@$det_apotek_rkerja != ''){
-			$sql .= " AND det_apotek_rkerja LIKE '%".$det_apotek_rkerja."%' ";
-		}
-		if(@$det_apotek_rtunggu != ''){
-			$sql .= " AND det_apotek_rtunggu LIKE '%".$det_apotek_rtunggu."%' ";
-		}
-		if(@$det_apotek_rwc != ''){
-			$sql .= " AND det_apotek_rwc LIKE '%".$det_apotek_rwc."%' ";
-		}
-		if(@$det_apotek_air != ''){
-			$sql .= " AND det_apotek_air LIKE '%".$det_apotek_air."%' ";
-		}
-		if(@$det_apotek_listrik != ''){
-			$sql .= " AND det_apotek_listrik LIKE '%".$det_apotek_listrik."%' ";
-		}
-		if(@$det_apotek_apk != ''){
-			$sql .= " AND det_apotek_apk LIKE '%".$det_apotek_apk."%' ";
-		}
-		if(@$det_apotek_apkukuran != ''){
-			$sql .= " AND det_apotek_apkukuran LIKE '%".$det_apotek_apkukuran."%' ";
-		}
-		if(@$det_apotek_jendela != ''){
-			$sql .= " AND det_apotek_jendela LIKE '%".$det_apotek_jendela."%' ";
-		}
-		if(@$det_apotek_limbah != ''){
-			$sql .= " AND det_apotek_limbah LIKE '%".$det_apotek_limbah."%' ";
-		}
-		if(@$det_apotek_baksampah != ''){
-			$sql .= " AND det_apotek_baksampah LIKE '%".$det_apotek_baksampah."%' ";
-		}
-		if(@$det_apotek_parkir != ''){
-			$sql .= " AND det_apotek_parkir LIKE '%".$det_apotek_parkir."%' ";
-		}
-		if(@$det_apotek_papannama != ''){
-			$sql .= " AND det_apotek_papannama LIKE '%".$det_apotek_papannama."%' ";
-		}
-		if(@$det_apotek_pengelola != ''){
-			$sql .= " AND det_apotek_pengelola LIKE '%".$det_apotek_pengelola."%' ";
-		}
-		if(@$det_apotek_pendamping != ''){
-			$sql .= " AND det_apotek_pendamping LIKE '%".$det_apotek_pendamping."%' ";
-		}
-		if(@$det_apotek_asisten != ''){
-			$sql .= " AND det_apotek_asisten LIKE '%".$det_apotek_asisten."%' ";
-		}
-		if(@$det_apotek_luas != ''){
-			$sql .= " AND det_apotek_luas LIKE '%".$det_apotek_luas."%' ";
-		}
-		if(@$det_apotek_statustanah != ''){
-			$sql .= " AND det_apotek_statustanah LIKE '%".$det_apotek_statustanah."%' ";
-		}
-		if(@$det_apotek_sewalama != ''){
-			$sql .= " AND det_apotek_sewalama LIKE '%".$det_apotek_sewalama."%' ";
-		}
-		if(@$det_apotek_sewaawal != ''){
-			$sql .= " AND det_apotek_sewaawal LIKE '%".$det_apotek_sewaawal."%' ";
-		}
-		if(@$det_apotek_sewaakhir != ''){
-			$sql .= " AND det_apotek_sewaakhir LIKE '%".$det_apotek_sewaakhir."%' ";
-		}
-		if(@$det_apotek_shnomor != ''){
-			$sql .= " AND det_apotek_shnomor LIKE '%".$det_apotek_shnomor."%' ";
-		}
-		if(@$det_apotek_shtahun != ''){
-			$sql .= " AND det_apotek_shtahun LIKE '%".$det_apotek_shtahun."%' ";
-		}
-		if(@$det_apotek_shgssu != ''){
-			$sql .= " AND det_apotek_shgssu LIKE '%".$det_apotek_shgssu."%' ";
-		}
-		if(@$det_apotek_shtanggal != ''){
-			$sql .= " AND det_apotek_shtanggal LIKE '%".$det_apotek_shtanggal."%' ";
-		}
-		if(@$det_apotek_shan != ''){
-			$sql .= " AND det_apotek_shan LIKE '%".$det_apotek_shan."%' ";
-		}
-		if(@$det_apotek_aktano != ''){
-			$sql .= " AND det_apotek_aktano LIKE '%".$det_apotek_aktano."%' ";
-		}
-		if(@$det_apotek_aktatahun != ''){
-			$sql .= " AND det_apotek_aktatahun LIKE '%".$det_apotek_aktatahun."%' ";
-		}
-		if(@$det_apotek_aktanotaris != ''){
-			$sql .= " AND det_apotek_aktanotaris LIKE '%".$det_apotek_aktanotaris."%' ";
-		}
-		if(@$det_apotek_aktaan != ''){
-			$sql .= " AND det_apotek_aktaan LIKE '%".$det_apotek_aktaan."%' ";
-		}
-		if(@$det_apotek_ckutipan != ''){
-			$sql .= " AND det_apotek_ckutipan LIKE '%".$det_apotek_ckutipan."%' ";
-		}
-		if(@$det_apotek_ckec != ''){
-			$sql .= " AND det_apotek_ckec LIKE '%".$det_apotek_ckec."%' ";
-		}
-		if(@$det_apotek_ctanggal != ''){
-			$sql .= " AND det_apotek_ctanggal LIKE '%".$det_apotek_ctanggal."%' ";
-		}
-		if(@$det_apotek_cpetok != ''){
-			$sql .= " AND det_apotek_cpetok LIKE '%".$det_apotek_cpetok."%' ";
-		}
-		if(@$det_apotek_cpersil != ''){
-			$sql .= " AND det_apotek_cpersil LIKE '%".$det_apotek_cpersil."%' ";
-		}
-		if(@$det_apotek_ckelas != ''){
-			$sql .= " AND det_apotek_ckelas LIKE '%".$det_apotek_ckelas."%' ";
-		}
-		if(@$det_apotek_can != ''){
-			$sql .= " AND det_apotek_can LIKE '%".$det_apotek_can."%' ";
-		}
-		if(@$det_apotek_sppihak1 != ''){
-			$sql .= " AND det_apotek_sppihak1 LIKE '%".$det_apotek_sppihak1."%' ";
-		}
-		if(@$det_apotek_sppihak2 != ''){
-			$sql .= " AND det_apotek_sppihak2 LIKE '%".$det_apotek_sppihak2."%' ";
-		}
-		if(@$det_apotek_spnomor != ''){
-			$sql .= " AND det_apotek_spnomor LIKE '%".$det_apotek_spnomor."%' ";
-		}
-		if(@$det_apotek_sptanggal != ''){
-			$sql .= " AND det_apotek_sptanggal LIKE '%".$det_apotek_sptanggal."%' ";
-		}
-		if(@$det_apotek_notaris != ''){
-			$sql .= " AND det_apotek_notaris LIKE '%".$det_apotek_notaris."%' ";
+		if(@$det_apotek_sk != ''){
+			$sql .= " AND det_apotek_sk LIKE '%".$det_apotek_sk."%' ";
+		}
+		if(@$det_apotek_nomorreg != ''){
+			$sql .= " AND det_apotek_nomorreg LIKE '%".$det_apotek_nomorreg."%' ";
 		}
 		if(@$limit_start != 0 && @$limit_start != 0){
 			$sql .= " LIMIT ".@$limit_start.", ".@$limit_end." ";

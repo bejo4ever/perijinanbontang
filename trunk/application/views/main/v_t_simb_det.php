@@ -32,44 +32,7 @@
 		var det_simb_penerimaField;
 		var det_simb_tanggalterimaField;
 		var det_simb_keteranganField;
-		var simb_per_npwpSearchField;
-		var simb_per_namaSearchField;
-		var simb_per_aktaSearchField;
-		var simb_per_bentukSearchField;
-		var simb_per_alamatSearchField;
-		var simb_per_kelSearchField;
-		var simb_per_kecSearchField;
-		var simb_per_kotaSearchField;
-		var simb_per_telpSearchField;
-		var simb_jenisSearchField;
-		var simb_statusSearchField;
-		var simb_jenisusahaSearchField;
-		var simb_panjangSearchField;
-		var simb_lebarSearchField;
-		var simb_alamatSearchField;
-		var simb_kelSearchField;
-		var simb_kecSearchField;
-		var simb_bentukSearchField;
-		var simb_lokasiSearchField;
-		var simb_gangguanSearchField;
-		var simb_batasutaraSearchField;
-		var simb_batastimurSearchField;
-		var simb_batasselatanSearchField;
-		var simb_batasbaratSearchField;
-				
-		var det_simb_simb_idSearchField;
-		var det_simb_jenisSearchField;
-		var det_simb_tanggalSearchField;
-		var det_simb_pemohon_idSearchField;
-		var det_simb_nomorregSearchField;
-		var det_simb_prosesSearchField;
-		var det_simb_skSearchField;
-		var det_simb_berlakuSearchField;
-		var det_simb_kadaluarsaSearchField;
-		var det_simb_penerimaSearchField;
-		var det_simb_tanggalterimaSearchField;
-		var det_simb_keteranganSearchField;
-				
+		
 		var simb_det_dbTask = 'CREATE';
 		var simb_det_dbTaskMessage = 'Tambah';
 		var simb_det_dbPermission = 'CRUD';
@@ -147,105 +110,10 @@
 				});
 			}else{
 				if(simb_det_confirmFormValid()){
-					var det_simb_idValue = '';
-					var det_simb_simb_idValue = '';
-					var det_simb_jenisValue = '';
-					var det_simb_tanggalValue = '';
-					var det_simb_pemohon_idValue = '';
-					var det_simb_nomorregValue = '';
-					var det_simb_prosesValue = '';
-					var det_simb_skValue = '';
-					var det_simb_berlakuValue = '';
-					var det_simb_kadaluarsaValue = '';
-					var det_simb_penerimaValue = '';
-					var det_simb_tanggalterimaValue = '';
-					var det_simb_keteranganValue = '';
-					var simb_per_npwpValue = '';
-					var simb_per_namaValue = '';
-					var simb_per_aktaValue = '';
-					var simb_per_bentukValue = '';
-					var simb_per_alamatValue = '';
-					var simb_per_kelValue = '';
-					var simb_per_kecValue = '';
-					var simb_per_kotaValue = '';
-					var simb_per_telpValue = '';
-					var simb_jenisValue = '';
-					var simb_statusValue = '';
-					var simb_jenisusahaValue = '';
-					var simb_panjangValue = '';
-					var simb_lebarValue = '';
-					var simb_alamatValue = '';
-					var simb_kelValue = '';
-					var simb_kecValue = '';
-					var simb_bentukValue = '';
-					var simb_lokasiValue = '';
-					var simb_gangguanValue = '';
-					var simb_batasutaraValue = '';
-					var simb_batastimurValue = '';
-					var simb_batasselatanValue = '';
-					var simb_batasbaratValue = '';
-										
-					det_simb_idValue = det_simb_idField.getValue();
-					det_simb_simb_idValue = det_simb_simb_idField.getValue();
-					det_simb_jenisValue = det_simb_jenisField.getValue();
-					det_simb_tanggalValue = det_simb_tanggalField.getValue();
-					det_simb_pemohon_idValue = det_simb_pemohon_idField.getValue();
-					det_simb_nomorregValue = det_simb_nomorregField.getValue();
-					det_simb_prosesValue = det_simb_prosesField.getValue();
-					det_simb_skValue = det_simb_skField.getValue();
-					det_simb_berlakuValue = det_simb_berlakuField.getValue();
-					det_simb_kadaluarsaValue = det_simb_kadaluarsaField.getValue();
-					det_simb_penerimaValue = det_simb_penerimaField.getValue();
-					det_simb_tanggalterimaValue = det_simb_tanggalterimaField.getValue();
-					det_simb_keteranganValue = det_simb_keteranganField.getValue();
-					simb_per_npwpValue = simb_per_npwpField.getValue();
-					simb_per_namaValue = simb_per_namaField.getValue();
-					simb_per_aktaValue = simb_per_aktaField.getValue();
-					simb_per_bentukValue = simb_per_bentukField.getValue();
-					simb_per_alamatValue = simb_per_alamatField.getValue();
-					simb_per_kelValue = simb_per_kelField.getValue();
-					simb_per_kecValue = simb_per_kecField.getValue();
-					simb_per_kotaValue = simb_per_kotaField.getValue();
-					simb_per_telpValue = simb_per_telpField.getValue();
-					simb_jenisValue = simb_jenisField.getValue();
-					simb_statusValue = simb_statusField.getValue();
-					simb_jenisusahaValue = simb_jenisusahaField.getValue();
-					simb_panjangValue = simb_panjangField.getValue();
-					simb_lebarValue = simb_lebarField.getValue();
-					simb_alamatValue = simb_alamatField.getValue();
-					simb_kelValue = simb_kelField.getValue();
-					simb_kecValue = simb_kecField.getValue();
-					simb_bentukValue = simb_bentukField.getValue();
-					simb_lokasiValue = simb_lokasiField.getValue();
-					simb_gangguanValue = simb_gangguanField.getValue();
-					simb_batasutaraValue = simb_batasutaraField.getValue();
-					simb_batastimurValue = simb_batastimurField.getValue();
-					simb_batasselatanValue = simb_batasselatanField.getValue();
-					simb_batasbaratValue = simb_batasbaratField.getValue();
-					
-					var pemohon_idValue = simb_det_pemohon_idField.getValue();
-					var pemohon_namaValue = simb_det_pemohon_namaField.getValue();
-					var pemohon_alamatValue = simb_det_pemohon_alamatField.getValue();
-					var pemohon_telpValue = simb_det_pemohon_telpField.getValue();
-					var pemohon_npwpValue = simb_det_pemohon_npwpField.getValue();
-					var pemohon_rtValue = simb_det_pemohon_rtField.getValue();
-					var pemohon_rwValue = simb_det_pemohon_rwField.getValue();
-					var pemohon_kelValue = simb_det_pemohon_kelField.getValue();
-					var pemohon_kecValue = simb_det_pemohon_kecField.getValue();
-					var pemohon_nikValue = simb_det_pemohon_nikField.getValue();
-					var pemohon_straValue = simb_det_pemohon_straField.getValue();
-					var pemohon_surattugasValue = simb_det_pemohon_surattugasField.getValue();
-					var pemohon_pekerjaanValue = simb_det_pemohon_pekerjaanField.getValue();
-					var pemohon_tempatlahirValue = simb_det_pemohon_tempatlahirField.getValue();
-					var pemohon_tanggallahirValue = simb_det_pemohon_tanggallahirField.getValue();
-					var pemohon_user_idValue = simb_det_pemohon_user_idField.getValue();
-					var pemohon_pendidikanValue = simb_det_pemohon_pendidikanField.getValue();
-					var pemohon_tahunlulusValue = simb_det_pemohon_tahunlulusField.getValue();
 					var array_simb_cek_id=new Array();
 					var array_simb_cek_syarat_id=new Array();
 					var array_simb_cek_status=new Array();
 					var array_simb_cek_keterangan=new Array();
-					
 					if(simb_det_syaratDataStore.getCount() > 0){
 						for(var i=0;i<simb_det_syaratDataStore.getCount();i++){
 							array_simb_cek_id.push(simb_det_syaratDataStore.getAt(i).data.simb_cek_id);
@@ -254,77 +122,21 @@
 							array_simb_cek_keterangan.push(simb_det_syaratDataStore.getAt(i).data.simb_cek_keterangan);
 						}
 					}
+					var params = simb_det_formPanel.getForm().getValues();
+					params.ijin_id = 27;
+					params.action = simb_det_dbTask;
+					params.simb_cek_id = array_simb_cek_id;
+					params.simb_cek_syarat_id = array_simb_cek_syarat_id;
+					params.simb_cek_status = array_simb_cek_status;
+					params.simb_cek_keterangan = array_simb_cek_keterangan;
+					params = Ext.encode(params);
 					
-					var encoded_simb_cek_id = Ext.encode(array_simb_cek_id);
-					var encoded_simb_cek_syarat_id = Ext.encode(array_simb_cek_syarat_id);
-					var encoded_simb_cek_status = Ext.encode(array_simb_cek_status);
-					var encoded_simb_cek_keterangan = Ext.encode(array_simb_cek_keterangan);
-					var det_simb_retribusiValue = simb_det_retibusiNilaiField.getValue();
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_t_simb_det/switchAction',
-						params: {							
-							det_simb_id : det_simb_idValue,
-							det_simb_simb_id : det_simb_simb_idValue,
-							det_simb_jenis : det_simb_jenisValue,
-							det_simb_tanggal : det_simb_tanggalValue,
-							det_simb_pemohon_id : det_simb_pemohon_idValue,
-							det_simb_nomorreg : det_simb_nomorregValue,
-							det_simb_proses : det_simb_prosesValue,
-							det_simb_sk : det_simb_skValue,
-							det_simb_berlaku : det_simb_berlakuValue,
-							det_simb_kadaluarsa : det_simb_kadaluarsaValue,
-							det_simb_penerima : det_simb_penerimaValue,
-							det_simb_tanggalterima : det_simb_tanggalterimaValue,
-							det_simb_keterangan : det_simb_keteranganValue,
-							simb_per_npwp : simb_per_npwpValue,
-							simb_per_nama : simb_per_namaValue,
-							simb_per_akta : simb_per_aktaValue,
-							simb_per_bentuk : simb_per_bentukValue,
-							simb_per_alamat : simb_per_alamatValue,
-							simb_per_kel : simb_per_kelValue,
-							simb_per_kec : simb_per_kecValue,
-							simb_per_kota : simb_per_kotaValue,
-							simb_per_telp : simb_per_telpValue,
-							simb_jenis : simb_jenisValue,
-							simb_status : simb_statusValue,
-							simb_jenisusaha : simb_jenisusahaValue,
-							simb_panjang : simb_panjangValue,
-							simb_lebar : simb_lebarValue,
-							simb_alamat : simb_alamatValue,
-							simb_kel : simb_kelValue,
-							simb_kec : simb_kecValue,
-							simb_bentuk : simb_bentukValue,
-							simb_lokasi : simb_lokasiValue,
-							simb_gangguan : simb_gangguanValue,
-							simb_batasutara : simb_batasutaraValue,
-							simb_batastimur : simb_batastimurValue,
-							simb_batasselatan : simb_batasselatanValue,
-							simb_batasbarat : simb_batasbaratValue,
-							pemohon_id : pemohon_idValue,
-							pemohon_nama : pemohon_namaValue,
-							pemohon_alamat : pemohon_alamatValue,
-							pemohon_telp : pemohon_telpValue,
-							pemohon_npwp : pemohon_npwpValue,
-							pemohon_rt : pemohon_rtValue,
-							pemohon_rw : pemohon_rwValue,
-							pemohon_kel : pemohon_kelValue,
-							pemohon_kec : pemohon_kecValue,
-							pemohon_nik : pemohon_nikValue,
-							pemohon_stra : pemohon_straValue,
-							pemohon_surattugas : pemohon_surattugasValue,
-							pemohon_pekerjaan : pemohon_pekerjaanValue,
-							pemohon_tempatlahir : pemohon_tempatlahirValue,
-							pemohon_tanggallahir : pemohon_tanggallahirValue,
-							pemohon_user_id : pemohon_user_idValue,
-							pemohon_pendidikan : pemohon_pendidikanValue,
-							pemohon_tahunlulus : pemohon_tahunlulusValue,
-							simb_cek_id : encoded_simb_cek_id,
-							simb_cek_syarat_id : encoded_simb_cek_syarat_id,
-							simb_cek_status : encoded_simb_cek_status,
-							simb_cek_keterangan : encoded_simb_cek_keterangan,
-							det_simb_retribusi : det_simb_retribusiValue,
-							action : simb_det_dbTask
+						params: {
+							action : simb_det_dbTask,
+							params : params
 						},
 						success: function(response){
 							ajaxWaitMessage.hide();
@@ -455,7 +267,6 @@
 		function simb_det_refresh(){
 			simb_det_dbListAction = "GETLIST";
 			simb_det_gridSearchField.reset();
-			simb_det_searchPanel.getForm().reset();
 			simb_det_dataStore.proxy.extraParams = { action : 'GETLIST' };
 			simb_det_dataStore.proxy.extraParams.query = "";
 			simb_det_dataStore.currentPage = 1;
@@ -479,70 +290,17 @@
             simb_det_dbTaskMessage = 'update';
 			
 			var record = simb_det_gridPanel.getSelectionModel().getSelection()[0];
+			simb_det_formPanel.loadRecord(record);
 			det_simb_idField.setValue(record.data.det_simb_id);
 			det_simb_simb_idField.setValue(record.data.det_simb_simb_id);
 			det_simb_jenisField.setValue(record.data.det_simb_jenis);
 			det_simb_tanggalField.setValue(record.data.det_simb_tanggal);
-			det_simb_pemohon_idField.setValue(record.data.det_simb_pemohon_id);
-			det_simb_nomorregField.setValue(record.data.det_simb_nomorreg);
-			det_simb_prosesField.setValue(record.data.det_simb_proses);
-			det_simb_skField.setValue(record.data.det_simb_sk);
-			det_simb_berlakuField.setValue(record.data.det_simb_berlaku);
-			det_simb_kadaluarsaField.setValue(record.data.det_simb_kadaluarsa);
-			det_simb_penerimaField.setValue(record.data.det_simb_penerima);
-			det_simb_tanggalterimaField.setValue(record.data.det_simb_tanggalterima);
-			det_simb_keteranganField.setValue(record.data.det_simb_keterangan);
-			simb_per_npwpField.setValue(record.data.simb_per_npwp);
-			simb_per_namaField.setValue(record.data.simb_per_nama);
-			simb_per_aktaField.setValue(record.data.simb_per_akta);
-			simb_per_bentukField.setValue(record.data.simb_per_bentuk);
-			simb_per_alamatField.setValue(record.data.simb_per_alamat);
-			simb_per_kelField.setValue(record.data.simb_per_kel);
-			simb_per_kecField.setValue(record.data.simb_per_kec);
-			simb_per_kotaField.setValue(record.data.simb_per_kota);
-			simb_per_telpField.setValue(record.data.simb_per_telp);
-			simb_jenisField.setValue(record.data.simb_jenis);
-			simb_statusField.setValue(record.data.simb_status);
-			simb_jenisusahaField.setValue(record.data.simb_jenisusaha);
-			simb_panjangField.setValue(record.data.simb_panjang);
-			simb_lebarField.setValue(record.data.simb_lebar);
-			simb_alamatField.setValue(record.data.simb_alamat);
-			simb_kelField.setValue(record.data.simb_kel);
-			simb_kecField.setValue(record.data.simb_kec);
-			simb_bentukField.setValue(record.data.simb_bentuk);
-			simb_lokasiField.setValue(record.data.simb_lokasi);
-			simb_gangguanField.setValue(record.data.simb_gangguan);
-			simb_batasutaraField.setValue(record.data.simb_batasutara);
-			simb_batastimurField.setValue(record.data.simb_batastimur);
-			simb_batasselatanField.setValue(record.data.simb_batasselatan);
-			simb_batasbaratField.setValue(record.data.simb_batasbarat);
-			
 			if(record.data.det_simb_retribusi != 0){
 				simb_det_retribusiField.setValue({ simb_retribusi : ['1'] });
 			}else{
 				simb_det_retribusiField.setValue({ simb_retribusi : ['0'] });
 			}
 			simb_det_retibusiNilaiField.setValue(record.data.det_simb_retribusi);
-			
-			simb_det_pemohon_idField.setValue(record.data.pemohon_id);
-			simb_det_pemohon_namaField.setValue(record.data.pemohon_nama);
-			simb_det_pemohon_alamatField.setValue(record.data.pemohon_alamat);
-			simb_det_pemohon_telpField.setValue(record.data.pemohon_telp);
-			simb_det_pemohon_npwpField.setValue(record.data.pemohon_npwp);
-			simb_det_pemohon_rtField.setValue(record.data.pemohon_rt);
-			simb_det_pemohon_rwField.setValue(record.data.pemohon_rw);
-			simb_det_pemohon_kelField.setValue(record.data.pemohon_kel);
-			simb_det_pemohon_kecField.setValue(record.data.pemohon_kec);
-			simb_det_pemohon_nikField.setValue(record.data.pemohon_nik);
-			simb_det_pemohon_straField.setValue(record.data.pemohon_stra);
-			simb_det_pemohon_surattugasField.setValue(record.data.pemohon_surattugas);
-			simb_det_pemohon_pekerjaanField.setValue(record.data.pemohon_pekerjaan);
-			simb_det_pemohon_tempatlahirField.setValue(record.data.pemohon_tempatlahir);
-			simb_det_pemohon_tanggallahirField.setValue(record.data.pemohon_tanggallahir);
-			simb_det_pemohon_user_idField.setValue(record.data.pemohon_user_id);
-			simb_det_pemohon_pendidikanField.setValue(record.data.pemohon_pendidikan);
-			simb_det_pemohon_tahunlulusField.setValue(record.data.pemohon_tahunlulus);
-			
 			simb_det_syaratDataStore.proxy.extraParams = { 
 				simb_id : record.data.det_simb_simb_id,
 				simb_det_id : record.data.det_simb_id,
@@ -556,87 +314,9 @@
 			simb_det_searchWindow.show();
 		}
 		
-		function simb_det_search(){
-			simb_det_gridSearchField.reset();
-			
-			var det_simb_simb_idValue = '';
-			var det_simb_jenisValue = '';
-			var det_simb_tanggalValue = '';
-			var det_simb_pemohon_idValue = '';
-			var det_simb_nomorregValue = '';
-			var det_simb_prosesValue = '';
-			var det_simb_skValue = '';
-			var det_simb_berlakuValue = '';
-			var det_simb_kadaluarsaValue = '';
-			var det_simb_penerimaValue = '';
-			var det_simb_tanggalterimaValue = '';
-			var det_simb_keteranganValue = '';
-						
-			det_simb_simb_idValue = det_simb_simb_idSearchField.getValue();
-			det_simb_jenisValue = det_simb_jenisSearchField.getValue();
-			det_simb_tanggalValue = det_simb_tanggalSearchField.getValue();
-			det_simb_pemohon_idValue = det_simb_pemohon_idSearchField.getValue();
-			det_simb_nomorregValue = det_simb_nomorregSearchField.getValue();
-			det_simb_prosesValue = det_simb_prosesSearchField.getValue();
-			det_simb_skValue = det_simb_skSearchField.getValue();
-			det_simb_berlakuValue = det_simb_berlakuSearchField.getValue();
-			det_simb_kadaluarsaValue = det_simb_kadaluarsaSearchField.getValue();
-			det_simb_penerimaValue = det_simb_penerimaSearchField.getValue();
-			det_simb_tanggalterimaValue = det_simb_tanggalterimaSearchField.getValue();
-			det_simb_keteranganValue = det_simb_keteranganSearchField.getValue();
-			simb_det_dbListAction = "SEARCH";
-			simb_det_dataStore.proxy.extraParams = { 
-				det_simb_simb_id : det_simb_simb_idValue,
-				det_simb_jenis : det_simb_jenisValue,
-				det_simb_tanggal : det_simb_tanggalValue,
-				det_simb_pemohon_id : det_simb_pemohon_idValue,
-				det_simb_nomorreg : det_simb_nomorregValue,
-				det_simb_proses : det_simb_prosesValue,
-				det_simb_sk : det_simb_skValue,
-				det_simb_berlaku : det_simb_berlakuValue,
-				det_simb_kadaluarsa : det_simb_kadaluarsaValue,
-				det_simb_penerima : det_simb_penerimaValue,
-				det_simb_tanggalterima : det_simb_tanggalterimaValue,
-				det_simb_keterangan : det_simb_keteranganValue,
-				action : 'SEARCH'
-			};
-			simb_det_dataStore.currentPage = 1;
-			simb_det_gridPanel.store.reload({
-				params : {
-					start : 0,
-					limit : globalPageSize
-				}
-			});
-		}
-		
 		function simb_det_printExcel(outputType){
 			var searchText = "";
-			var det_simb_simb_idValue = '';
-			var det_simb_jenisValue = '';
-			var det_simb_tanggalValue = '';
-			var det_simb_pemohon_idValue = '';
-			var det_simb_nomorregValue = '';
-			var det_simb_prosesValue = '';
-			var det_simb_skValue = '';
-			var det_simb_berlakuValue = '';
-			var det_simb_kadaluarsaValue = '';
-			var det_simb_penerimaValue = '';
-			var det_simb_tanggalterimaValue = '';
-			var det_simb_keteranganValue = '';
-			
 			if(simb_det_dataStore.proxy.extraParams.query!==null){searchText = simb_det_dataStore.proxy.extraParams.query;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_simb_id!==null){det_simb_simb_idValue = simb_det_dataStore.proxy.extraParams.det_simb_simb_id;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_jenis!==null){det_simb_jenisValue = simb_det_dataStore.proxy.extraParams.det_simb_jenis;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_tanggal!==null){det_simb_tanggalValue = simb_det_dataStore.proxy.extraParams.det_simb_tanggal;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_pemohon_id!==null){det_simb_pemohon_idValue = simb_det_dataStore.proxy.extraParams.det_simb_pemohon_id;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_nomorreg!==null){det_simb_nomorregValue = simb_det_dataStore.proxy.extraParams.det_simb_nomorreg;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_proses!==null){det_simb_prosesValue = simb_det_dataStore.proxy.extraParams.det_simb_proses;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_sk!==null){det_simb_skValue = simb_det_dataStore.proxy.extraParams.det_simb_sk;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_berlaku!==null){det_simb_berlakuValue = simb_det_dataStore.proxy.extraParams.det_simb_berlaku;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_kadaluarsa!==null){det_simb_kadaluarsaValue = simb_det_dataStore.proxy.extraParams.det_simb_kadaluarsa;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_penerima!==null){det_simb_penerimaValue = simb_det_dataStore.proxy.extraParams.det_simb_penerima;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_tanggalterima!==null){det_simb_tanggalterimaValue = simb_det_dataStore.proxy.extraParams.det_simb_tanggalterima;}
-			if(simb_det_dataStore.proxy.extraParams.det_simb_keterangan!==null){det_simb_keteranganValue = simb_det_dataStore.proxy.extraParams.det_simb_keterangan;}
 			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
 			Ext.Ajax.request({
 				waitMsg : 'Please Wait...',
@@ -644,18 +324,6 @@
 				params : {
 					action : outputType,
 					query : searchText,
-					det_simb_simb_id : det_simb_simb_idValue,
-					det_simb_jenis : det_simb_jenisValue,
-					det_simb_tanggal : det_simb_tanggalValue,
-					det_simb_pemohon_id : det_simb_pemohon_idValue,
-					det_simb_nomorreg : det_simb_nomorregValue,
-					det_simb_proses : det_simb_prosesValue,
-					det_simb_sk : det_simb_skValue,
-					det_simb_berlaku : det_simb_berlakuValue,
-					det_simb_kadaluarsa : det_simb_kadaluarsaValue,
-					det_simb_penerima : det_simb_penerimaValue,
-					det_simb_tanggalterima : det_simb_tanggalterimaValue,
-					det_simb_keterangan : det_simb_keteranganValue,
 					currentAction : simb_det_dbListAction
 				},
 				success: function(response){
@@ -753,6 +421,8 @@
 				{ name : 'simb_batastimur', type : 'string', mapping : 'simb_batastimur' },
 				{ name : 'simb_batasselatan', type : 'string', mapping : 'simb_batasselatan' },
 				{ name : 'simb_batasbarat', type : 'string', mapping : 'simb_batasbarat' },
+				{ name : 'det_simb_retribusi', type : 'int', mapping : 'det_simb_retribusi' },
+				{ name : 'permohonan_id', type : 'int', mapping : 'permohonan_id' },
 				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
 				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
 				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
@@ -771,8 +441,75 @@
 				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
 				{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
 				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
-				{ name : 'det_simb_retribusi', type : 'int', mapping : 'det_simb_retribusi' }
+				{ name : 'perusahaan_id', type : 'int', mapping : 'perusahaan_id' },
+				{ name : 'perusahaan_npwp', type : 'string', mapping : 'perusahaan_npwp' },
+				{ name : 'perusahaan_nama', type : 'string', mapping : 'perusahaan_nama' },
+				{ name : 'perusahaan_noakta', type : 'string', mapping : 'perusahaan_noakta' },
+				{ name : 'perusahaan_notaris', type : 'string', mapping : 'perusahaan_notaris' },
+				{ name : 'perusahaan_tglakta', type : 'date', dateFormat : 'Y-m-d', mapping : 'perusahaan_tglakta' },
+				{ name : 'perusahaan_bentuk_id', type : 'int', mapping : 'perusahaan_bentuk_id' },
+				{ name : 'perusahaan_kualifikasi_id', type : 'int', mapping : 'perusahaan_kualifikasi_id' },
+				{ name : 'perusahaan_alamat', type : 'string', mapping : 'perusahaan_alamat' },
+				{ name : 'perusahaan_rt', type : 'int', mapping : 'perusahaan_rt' },
+				{ name : 'perusahaan_rw', type : 'int', mapping : 'perusahaan_rw' },
+				{ name : 'perusahaan_propinsi_id', type : 'int', mapping : 'perusahaan_propinsi_id' },
+				{ name : 'perusahaan_kabkota_id', type : 'int', mapping : 'perusahaan_kabkota_id' },
+				{ name : 'perusahaan_kecamatan_id', type : 'int', mapping : 'perusahaan_kecamatan_id' },
+				{ name : 'perusahaan_desa_id', type : 'int', mapping : 'perusahaan_desa_id' },
+				{ name : 'perusahaan_kodepos', type : 'string', mapping : 'perusahaan_kodepos' },
+				{ name : 'perusahaan_telp', type : 'string', mapping : 'perusahaan_telp' },
+				{ name : 'perusahaan_fax', type : 'string', mapping : 'perusahaan_fax' },
+				{ name : 'perusahaan_stempat_id', type : 'int', mapping : 'perusahaan_stempat_id' },
+				{ name : 'perusahaan_sperusahaan_id', type : 'int', mapping : 'perusahaan_sperusahaan_id' },
+				{ name : 'perusahaan_usaha', type : 'string', mapping : 'perusahaan_usaha' },
+				{ name : 'perusahaan_butara', type : 'string', mapping : 'perusahaan_butara' },
+				{ name : 'perusahaan_bselatan', type : 'string', mapping : 'perusahaan_bselatan' },
+				{ name : 'perusahaan_btimur', type : 'string', mapping : 'perusahaan_btimur' },
+				{ name : 'perusahaan_bbarat', type : 'string', mapping : 'perusahaan_bbarat' },
+				{ name : 'perusahaan_modal', type : 'float', mapping : 'perusahaan_modal' },
+				{ name : 'perusahaan_merk', type : 'int', mapping : 'perusahaan_merk' },
+				{ name : 'perusahaan_jusaha_id', type : 'int', mapping : 'perusahaan_jusaha_id' }
 				]
+		});
+		kelurahan_dataStore = Ext.create('Ext.data.Store',{
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_public_function/get_kelurahan',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total',
+					idProperty : 'id'
+				},
+				actionMethods : {
+					read : 'POST'
+				}
+			}),
+			fields : [
+				{ name : 'id', type : 'int', mapping : 'id' },
+				{ name : 'desa', type : 'string', mapping : 'desa' }
+			]
+		});
+		kecamatan_dataStore = Ext.create('Ext.data.Store',{
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_public_function/get_kecamatan',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total',
+					idProperty : 'id'
+				},
+				actionMethods : {
+					read : 'POST'
+				}
+			}),
+			fields : [
+				{ name : 'id', type : 'int', mapping : 'id' },
+				{ name : 'kecamatan', type : 'string', mapping : 'kecamatan' }
+			]
 		});
 /* End DataStore declaration */
 /* Start Shorcut Declaration */
@@ -1224,17 +961,16 @@
 			bbar : Ext.create('Ext.PagingToolbar', {
 				store : simb_det_dataStore,
 				displayInfo : true
-			}),
+			})/* ,
 			listeners : {
 				afterrender : function(){
 					simb_det_dataStore.reload({params: {start: 0, limit: globalPageSize}});
 				}
-			}
+			} */
 		});
 /* End GridPanel declaration */
 /* Start FormPanel declaration */
 		det_simb_idField = Ext.create('Ext.form.NumberField',{
-			id : 'det_simb_idField',
 			name : 'det_simb_id',
 			fieldLabel : 'Id <font color=red>*</font>',
 			allowBlank : false,
@@ -1242,17 +978,28 @@
 			blankText : '0',
 			allowDecimals : false,
 			hidden : true,
-			maskRe : /([0-9]+)$/});
-		det_simb_simb_idField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_simb_idField',
+			maskRe : /([0-9]+)$/
+		});
+		det_simb_simb_idField = Ext.create('Ext.form.NumberField',{
 			name : 'det_simb_simb_id',
-			fieldLabel : 'det_simb_simb_id',
+			fieldLabel : 'Id <font color=red>*</font>',
+			allowBlank : false,
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
 			hidden : true,
-			maxLength : 255
+			maskRe : /([0-9]+)$/
+		});
+		permohonan_idField = Ext.create('Ext.form.NumberField',{
+			name : 'permohonan_id',
+			allowNegatife : false,
+			blankText : '0',
+			allowDecimals : false,
+			hidden : true,
+			maskRe : /([0-9]+)$/
 		});
 		det_simb_jenisField = Ext.create('Ext.form.ComboBox',{
-			id : 'det_simb_jenisField',
-			name : 'det_simb_jenis',
+			name : 'permohonan_jenis',
 			fieldLabel : 'Jenis',
 			store : new Ext.data.ArrayStore({
 				fields : ['jenispermohonan_id', 'jenispermohonan_nama'],
@@ -1274,7 +1021,7 @@
 			}
 		});
 		det_simb_sklamaField = Ext.create('Ext.form.ComboBox',{
-			name : 'det_simb_sklamaField',
+			name : 'det_simb_lama',
 			fieldLabel : 'Nomor SK Lama',
 			store : simb_det_dataStore,
 			displayField : 'det_simb_sk',
@@ -1307,15 +1054,13 @@
 			}
 		});
 		det_simb_tanggalField = Ext.create('Ext.form.field.Date',{
-			id : 'det_simb_tanggalField',
-			name : 'det_simb_tanggal',
+			name : 'permohonan_tanggal',
 			fieldLabel : 'Tanggal <font color=red>*</font>',
 			format : 'd-m-Y',
-			disabled : true,
+			readOnly : true,
 			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		det_simb_pemohon_idField = Ext.create('Ext.form.NumberField',{
-			id : 'det_simb_pemohon_idField',
 			name : 'det_simb_pemohon_id',
 			fieldLabel : 'det_simb_pemohon_id',
 			allowNegatife : false,
@@ -1324,78 +1069,66 @@
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
 		det_simb_nomorregField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_nomorregField',
 			name : 'det_simb_nomorreg',
 			fieldLabel : 'det_simb_nomorreg',
 			hidden : true,
 			maxLength : 255
 		});
 		det_simb_prosesField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_prosesField',
 			name : 'det_simb_proses',
 			fieldLabel : 'det_simb_proses',
 			hidden : true,
 			maxLength : 255
 		});
 		det_simb_skField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_skField',
 			name : 'det_simb_sk',
 			fieldLabel : 'det_simb_sk',
 			hidden : true,
 			maxLength : 255
 		});
 		det_simb_berlakuField = Ext.create('Ext.form.field.Date',{
-			id : 'det_simb_berlakuField',
 			name : 'det_simb_berlaku',
 			fieldLabel : 'Berlaku',
 			hidden : true,
 			format : 'd-m-Y'
 		});
 		det_simb_kadaluarsaField = Ext.create('Ext.form.field.Date',{
-			id : 'det_simb_kadaluarsaField',
-			name : 'det_simb_kadaluarsa',
+			name : 'permohonan_kadaluarsa',
 			fieldLabel : 'Kadaluarsa',
 			format : 'd-m-Y'
 		});
 		det_simb_penerimaField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_penerimaField',
 			name : 'det_simb_penerima',
 			fieldLabel : 'Penerima',
 			maxLength : 255
 		});
 		det_simb_tanggalterimaField = Ext.create('Ext.form.field.Date',{
-			id : 'det_simb_tanggalterimaField',
 			name : 'det_simb_tanggalterima',
 			fieldLabel : 'Tanggal Terima',
 			format : 'd-m-Y'
 		});
 		det_simb_keteranganField = Ext.create('Ext.form.TextArea',{
-			id : 'det_simb_keteranganField',
 			name : 'det_simb_keterangan',
 			fieldLabel : 'Keterangan',
 			maxLength : 255
 		});
 		
 		simb_per_npwpField = Ext.create('Ext.form.TextField',{
-			id : 'simb_per_npwpField',
 			name : 'simb_per_npwp',
 			fieldLabel : 'NPWP/NPWPD',
 			maxLength : 50
 		});
 		simb_per_namaField = Ext.create('Ext.form.TextField',{
-			id : 'simb_per_namaField',
 			name : 'simb_per_nama',
 			fieldLabel : 'Nama Perusahaan',
 			maxLength : 50
 		});
 		simb_per_aktaField = Ext.create('Ext.form.TextField',{
-			id : 'simb_per_aktaField',
 			name : 'simb_per_akta',
 			fieldLabel : 'Akta Pendirian',
 			maxLength : 50
 		});
 		simb_per_bentukField = Ext.create('Ext.form.ComboBox',{
-			id : 'simb_per_bentukField',
 			name : 'simb_per_bentuk',
 			fieldLabel : 'Bentuk Perusahaan',
 			store : new Ext.data.ArrayStore({
@@ -1409,43 +1142,36 @@
 			forceSelection : true
 		});
 		simb_per_alamatField = Ext.create('Ext.form.TextField',{
-			id : 'simb_per_alamatField',
 			name : 'simb_per_alamat',
 			fieldLabel : 'Alamat',
 			maxLength : 200
 		});
 		simb_per_kelField = Ext.create('Ext.form.TextField',{
-			id : 'simb_per_kelField',
 			name : 'simb_per_kel',
 			fieldLabel : 'Kelurahan',
 			maxLength : 50
 		});
 		simb_per_kecField = Ext.create('Ext.form.TextField',{
-			id : 'simb_per_kecField',
 			name : 'simb_per_kec',
 			fieldLabel : 'Kecamatan',
 			maxLength : 50
 		});
 		simb_per_kotaField = Ext.create('Ext.form.TextField',{
-			id : 'simb_per_kotaField',
 			name : 'simb_per_kota',
 			fieldLabel : 'Kota',
 			maxLength : 50
 		});
 		simb_per_telpField = Ext.create('Ext.form.TextField',{
-			id : 'simb_per_telpField',
 			name : 'simb_per_telp',
 			fieldLabel : 'Telepon',
 			maxLength : 20
 		});
 		simb_jenisField = Ext.create('Ext.form.TextField',{
-			id : 'simb_jenisField',
 			name : 'simb_jenis',
 			fieldLabel : 'Jenis Perusahaan',
 			maxLength : 50
 		});
 		simb_statusField = Ext.create('Ext.form.ComboBox',{
-			id : 'simb_statusField',
 			name : 'simb_status',
 			fieldLabel : 'Status Tempat Usaha',
 			store : new Ext.data.ArrayStore({
@@ -1459,43 +1185,36 @@
 			forceSelection : true
 		});
 		simb_jenisusahaField = Ext.create('Ext.form.TextField',{
-			id : 'simb_jenisusahaField',
 			name : 'simb_jenisusaha',
 			fieldLabel : 'Jenis Usaha',
 			maxLength : 50
 		});
 		simb_panjangField = Ext.create('Ext.form.TextField',{
-			id : 'simb_panjangField',
 			name : 'simb_panjang',
 			fieldLabel : 'Panjang Tempat Usaha',
 			maskRe : /([0-9]+)$/
 		});
 		simb_lebarField = Ext.create('Ext.form.TextField',{
-			id : 'simb_lebarField',
 			name : 'simb_lebar',
 			fieldLabel : 'Lebar Tempat Usaha',
 			maskRe : /([0-9]+)$/
 		});
 		simb_alamatField = Ext.create('Ext.form.TextField',{
-			id : 'simb_alamatField',
 			name : 'simb_alamat',
 			fieldLabel : 'Alamat',
 			maxLength : 100
 		});
 		simb_kelField = Ext.create('Ext.form.TextField',{
-			id : 'simb_kelField',
 			name : 'simb_kel',
 			fieldLabel : 'Kelurahan',
 			maxLength : 50
 		});
 		simb_kecField = Ext.create('Ext.form.TextField',{
-			id : 'simb_kecField',
 			name : 'simb_kec',
 			fieldLabel : 'Kecamatan',
 			maxLength : 50
 		});
 		simb_bentukField = Ext.create('Ext.form.ComboBox',{
-			id : 'simb_bentukField',
 			name : 'simb_bentuk',
 			fieldLabel : 'Bentuk',
 			store : new Ext.data.ArrayStore({
@@ -1509,7 +1228,6 @@
 			forceSelection : true
 		});
 		simb_lokasiField = Ext.create('Ext.form.ComboBox',{
-			id : 'simb_lokasiField',
 			name : 'simb_lokasi',
 			fieldLabel : 'Indeks Lokasi',
 			store : new Ext.data.ArrayStore({
@@ -1523,7 +1241,6 @@
 			forceSelection : true
 		});
 		simb_gangguanField = Ext.create('Ext.form.ComboBox',{
-			id : 'simb_gangguanField',
 			name : 'simb_gangguan',
 			fieldLabel : 'Indeks Gangguan',
 			store : new Ext.data.ArrayStore({
@@ -1537,25 +1254,21 @@
 			forceSelection : true
 		});
 		simb_batasutaraField = Ext.create('Ext.form.TextField',{
-			id : 'simb_batasutaraField',
 			name : 'simb_batasutara',
 			fieldLabel : 'Batas Utara',
 			maxLength : 100
 		});
 		simb_batastimurField = Ext.create('Ext.form.TextField',{
-			id : 'simb_batastimurField',
 			name : 'simb_batastimur',
 			fieldLabel : 'Batas Timur',
 			maxLength : 100
 		});
 		simb_batasselatanField = Ext.create('Ext.form.TextField',{
-			id : 'simb_batasselatanField',
 			name : 'simb_batasselatan',
 			fieldLabel : 'Batas Selatan',
 			maxLength : 100
 		});
 		simb_batasbaratField = Ext.create('Ext.form.TextField',{
-			id : 'simb_batasbaratField',
 			name : 'simb_batasbarat',
 			fieldLabel : 'Batas Barat',
 			maxLength : 100
@@ -1594,18 +1307,36 @@
 			fieldLabel : 'RW',
 			maskRe : /([0-9]+)$/
 		});
-		var simb_det_pemohon_kelField = Ext.create('Ext.form.TextField',{
+		var simb_det_pemohon_kelField = Ext.create('Ext.form.ComboBox',{
 			name : 'pemohon_kel',
 			fieldLabel : 'Kelurahan',
-			maxLength : 50
+			store : kelurahan_dataStore,
+			displayField : 'desa',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kelurahan_dataStore.load();
+				}
+			}
 		});
-		var simb_det_pemohon_kecField = Ext.create('Ext.form.TextField',{
+		var simb_det_pemohon_kecField = Ext.create('Ext.form.ComboBox',{
 			name : 'pemohon_kec',
 			fieldLabel : 'Kecamatan',
-			maxLength : 50
+			store : kecamatan_dataStore,
+			displayField : 'kecamatan',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kecamatan_dataStore.load();
+				}
+			}
 		});
 		var simb_det_pemohon_nikField = Ext.create('Ext.form.ComboBox',{
-			name : 'simb_det_pemohon_nik',
+			name : 'pemohon_nik',
 			fieldLabel : 'NIK',
 			store : Ext.create('Ext.data.Store',{
 				pageSize : globalPageSize,
@@ -1863,11 +1594,18 @@
 			}
 		});
 		var simb_det_retibusiNilaiField = Ext.create('Ext.form.TextField',{
-			name : 'simb_det_retibusiNilai',
+			name : 'permohonan_retribusi',
 			fieldLabel : 'Nominal Retribusi ',
 			maxLength : 100,
 			hidden : true,
 			value : 0
+		});
+		simb_det_retibusiTanggalField = Ext.create('Ext.form.field.Date',{
+			name : 'permohonan_retribusi_tanggal',
+			fieldLabel : 'Tanggal',
+			format : 'd-m-Y',
+			hidden : true,
+			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
 		});
 		var simb_det_retribusifieldset = Ext.create('Ext.form.FieldSet',{
 			title : '6. Data Retribusi',
@@ -1877,10 +1615,481 @@
 			layout :'form',
 			items : [
 				simb_det_retribusiField,
-				simb_det_retibusiNilaiField
+				simb_det_retibusiNilaiField,
+				simb_det_retibusiTanggalField
 			]
 		});
 		/* END DATA RETRIBUSI */
+		
+		/* START DATA PERUSAHAAN */
+		perusahaan_idField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_id',
+			hidden : true
+		});
+		perusahaan_npwpField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_npwp',
+			fieldLabel : 'NPWP/NPWPD',
+			pageSize : 15,
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_perusahaan/switchAction',
+					reader : {
+						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'id'
+					},
+					actionMethods : { read : 'POST' },
+					extraParams : { action : 'GETLIST' }
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'npwp', type : 'string', mapping : 'npwp' },
+					{ name : 'nama', type : 'string', mapping : 'nama' },
+					{ name : 'noakta', type : 'string', mapping : 'noakta' },
+					{ name : 'notaris', type : 'string', mapping : 'notaris' },
+					{ name : 'tglakta', type : 'date',dateFormat : 'Y-m-d', mapping : 'tglakta' },
+					{ name : 'bentuk_id', type : 'int', mapping : 'bentuk_id' },
+					{ name : 'kualifikasi_id', type : 'int', mapping : 'kualifikasi_id' },
+					{ name : 'alamat', type : 'string', mapping : 'alamat' },
+					{ name : 'rt', type : 'int', mapping : 'rt' },
+					{ name : 'rw', type : 'int', mapping : 'rw' },
+					{ name : 'propinsi_id', type : 'int', mapping : 'propinsi_id' },
+					{ name : 'kabkota_id', type : 'int', mapping : 'kabkota_id' },
+					{ name : 'kecamatan_id', type : 'int', mapping : 'kecamatan_id' },
+					{ name : 'desa_id', type : 'int', mapping : 'desa_id' },
+					{ name : 'kodepos', type : 'string', mapping : 'kodepos' },
+					{ name : 'telp', type : 'string', mapping : 'telp' },
+					{ name : 'fax', type : 'string', mapping : 'fax' },
+					{ name : 'stempat_id', type : 'int', mapping : 'stempat_id' },
+					{ name : 'sperusahaan_id', type : 'int', mapping : 'sperusahaan_id' },
+					{ name : 'usaha', type : 'string', mapping : 'usaha' },
+					{ name : 'butara', type : 'string', mapping : 'butara' },
+					{ name : 'bselatan', type : 'string', mapping : 'bselatan' },
+					{ name : 'btimur', type : 'string', mapping : 'btimur' },
+					{ name : 'bbarat', type : 'string', mapping : 'bbarat' },
+					{ name : 'modal', type : 'float', mapping : 'modal' },
+					{ name : 'merk', type : 'int', mapping : 'merk' },
+					{ name : 'jusaha_id', type : 'int', mapping : 'jusaha_id' }
+				]
+			}),
+			displayField : 'npwp',
+			valueField : 'id',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
+			onTriggerClick: function(event){
+				var store = perusahaan_npwpField.getStore();
+				var val = perusahaan_npwpField.getRawValue();
+				store.proxy.extraParams = {action : 'GETLIST',query : val};
+				store.load();
+				perusahaan_npwpField.expand();
+				perusahaan_npwpField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">NPWP : {npwp}<br>Nama : {nama}<br>Alamat : {alamat}</div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					perusahaan_idField.setValue(rec.get('id'));
+					perusahaan_npwpField.setValue(rec.get('npwp'));
+					perusahaan_namaField.setValue(rec.get('nama'));
+					perusahaan_noaktaField.setValue(rec.get('noakta'));
+					perusahaan_notarisField.setValue(rec.get('notaris'));
+					perusahaan_tglaktaField.setValue(rec.get('tglakta'));
+					perusahaan_bentuk_idField.setValue(rec.get('bentuk_id'));
+					perusahaan_kualifikasi_idField.setValue(rec.get('kualifikasi_id'));
+					perusahaan_alamatField.setValue(rec.get('alamat'));
+					perusahaan_rtField.setValue(rec.get('rt'));
+					perusahaan_rwField.setValue(rec.get('rw'));
+					perusahaan_propinsi_idField.setValue(rec.get('propinsi_id'));
+					perusahaan_kabkota_idField.setValue(rec.get('kabkota_id'));
+					perusahaan_desa_idField.setValue(rec.get('desa_id'));
+					perusahaan_kecamatan_idField.setValue(rec.get('kecamatan_id'));
+					perusahaan_kodeposField.setValue(rec.get('kodepos'));
+					perusahaan_telpField.setValue(rec.get('telp'));
+					perusahaan_faxField.setValue(rec.get('fax'));
+					perusahaan_stempat_idField.setValue(rec.get('stempat_id'));
+					perusahaan_sperusahaan_idField.setValue(rec.get('sperusahaan_id'));
+					perusahaan_usahaField.setValue(rec.get('usaha'));
+					perusahaan_butaraField.setValue(rec.get('butara'));
+					perusahaan_bselatanField.setValue(rec.get('bselatan'));
+					perusahaan_btimurField.setValue(rec.get('btimur'));
+					perusahaan_bbaratField.setValue(rec.get('bbarat'));
+					perusahaan_modalField.setValue(rec.get('modal'));
+					perusahaan_merkField.setValue(rec.get('merk'));
+					perusahaan_jusaha_idField.setValue(rec.get('jusaha_id'));
+				}
+			}
+		});
+		perusahaan_namaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_nama',
+			fieldLabel : 'Nama',
+			maxLength : 100
+		});
+		perusahaan_noaktaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_noakta',
+			fieldLabel : 'No. Akta',
+			maxLength : 100
+		});
+		perusahaan_notarisField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_notaris',
+			fieldLabel : 'Notaris',
+			maxLength : 100
+		});
+		perusahaan_tglaktaField = Ext.create('Ext.form.field.Date',{
+			name : 'perusahaan_tglakta',
+			fieldLabel : 'Tgl Akta',
+			format : 'd-m-Y',
+			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+		});
+		perusahaan_bentuk_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_bentuk_id',
+			fieldLabel : 'Bentuk',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_bentuk_perusahaan',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'nama', type : 'string', mapping : 'nama' }
+				]
+			}),
+			displayField : 'nama',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_bentuk_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_kualifikasi_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_kualifikasi_id',
+			fieldLabel : 'Kualifikasi',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_kualifikasi',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'kualifikasi', type : 'string', mapping : 'kualifikasi' }
+				]
+			}),
+			displayField : 'kualifikasi',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_kualifikasi_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_alamatField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		perusahaan_rtField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_rt',
+			fieldLabel : 'RT',
+			maxLength : 10
+		});
+		perusahaan_rwField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_rw',
+			fieldLabel : 'RW',
+			maxLength : 10
+		});
+		perusahaan_propinsi_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_propinsi_id',
+			fieldLabel : 'Propinsi',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_propinsi',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'propinsi', type : 'string', mapping : 'propinsi' }
+				]
+			}),
+			displayField : 'propinsi',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_propinsi_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_kabkota_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_kabkota_id',
+			fieldLabel : 'Kota',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_kabkota',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'kabkota', type : 'string', mapping : 'kabkota' }
+				]
+			}),
+			displayField : 'kabkota',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_kabkota_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_desa_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_desa_id',
+			fieldLabel : 'Desa',
+			store : kelurahan_dataStore,
+			displayField : 'desa',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local'
+		});
+		perusahaan_kecamatan_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_kecamatan_id',
+			fieldLabel : 'Kecamatan',
+			store : kecamatan_dataStore,
+			displayField : 'kecamatan',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local'
+		});
+		perusahaan_kodeposField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_kodepos',
+			fieldLabel : 'Kodepos',
+			maxLength : 20
+		});
+		perusahaan_telpField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_telp',
+			fieldLabel : 'Telp',
+			maxLength : 50
+		});
+		perusahaan_faxField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_fax',
+			fieldLabel : 'Fax',
+			maxLength : 50
+		});
+		perusahaan_stempat_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_stempat_id',
+			fieldLabel : 'Status Tempat',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_status_tempat',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'status', type : 'string', mapping : 'status' }
+				]
+			}),
+			displayField : 'status',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_stempat_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_sperusahaan_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_sperusahaan_id',
+			fieldLabel : 'Status Usaha',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_status_usaha',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'status', type : 'string', mapping : 'status' }
+				]
+			}),
+			displayField : 'status',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_sperusahaan_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_usahaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_usaha',
+			fieldLabel : 'Usaha',
+			maxLength : 100
+		});
+		perusahaan_butaraField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_butara',
+			fieldLabel : 'Batas Utara',
+			maxLength : 100
+		});
+		perusahaan_bselatanField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_bselatan',
+			fieldLabel : 'Batas Selatan',
+			maxLength : 100
+		});
+		perusahaan_btimurField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_btimur',
+			fieldLabel : 'Batas Timur',
+			maxLength : 100
+		});
+		perusahaan_bbaratField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_bbarat',
+			fieldLabel : 'Batas Barat',
+			maxLength : 100
+		});
+		perusahaan_modalField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_modal',
+			fieldLabel : 'Modal',
+			maxLength : 50
+		});
+		perusahaan_merkField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_merk',
+			fieldLabel : 'Merk',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_merk',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'merk', type : 'string', mapping : 'merk' }
+				]
+			}),
+			displayField : 'merk',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_merkField.getStore().load();
+				}
+			}
+		});
+		perusahaan_jusaha_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_jusaha_id',
+			fieldLabel : 'Jenis Usaha',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_jenis_usaha',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'usaha', type : 'string', mapping : 'usaha' }
+				]
+			}),
+			displayField : 'usaha',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_jusaha_idField.getStore().load();
+				}
+			}
+		});
+		/* END DATA PERUSAHAAN */
 		simb_det_formPanel = Ext.create('Ext.form.Panel', {
 			disabled : true,
 			frame : true,
@@ -1900,6 +2109,7 @@
 					items : [								
 						det_simb_idField,
 						det_simb_simb_idField,
+						permohonan_idField,
 						det_simb_jenisField,
 						det_simb_tanggalField,
 						det_simb_pemohon_idField,
@@ -1941,7 +2151,7 @@
 					collapsible : false,
 					layout :'form',
 					items : [
-						simb_per_npwpField,
+						/* simb_per_npwpField,
 						simb_per_namaField,
 						simb_per_aktaField,
 						simb_per_bentukField,
@@ -1949,7 +2159,35 @@
 						simb_per_kelField,
 						simb_per_kecField,
 						simb_per_kotaField,
-						simb_per_telpField,
+						simb_per_telpField, */
+						perusahaan_idField,
+						perusahaan_npwpField,
+						perusahaan_namaField,
+						perusahaan_noaktaField,
+						perusahaan_notarisField,
+						perusahaan_tglaktaField,
+						perusahaan_bentuk_idField,
+						perusahaan_kualifikasi_idField,
+						perusahaan_alamatField,
+						perusahaan_rtField,
+						perusahaan_rwField,
+						perusahaan_propinsi_idField,
+						perusahaan_kabkota_idField,
+						perusahaan_kecamatan_idField,
+						perusahaan_desa_idField,
+						perusahaan_kodeposField,
+						perusahaan_telpField,
+						perusahaan_faxField,
+						perusahaan_stempat_idField,
+						perusahaan_sperusahaan_idField,
+						perusahaan_usahaField,
+						perusahaan_butaraField,
+						perusahaan_bselatanField,
+						perusahaan_btimurField,
+						perusahaan_bbaratField,
+						perusahaan_modalField,
+						perusahaan_merkField,
+						perusahaan_jusaha_idField
 					]
 				},
 				{
@@ -1981,146 +2219,6 @@
 			items : [simb_det_formPanel]
 		});
 /* End FormPanel declaration */
-/* Start SearchPanel declaration */
-		det_simb_simb_idSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_simb_idSearchField',
-			name : 'det_simb_simb_id',
-			fieldLabel : 'det_simb_simb_id',
-			maxLength : 255
-		
-		});
-		det_simb_jenisSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_jenisSearchField',
-			name : 'det_simb_jenis',
-			fieldLabel : 'det_simb_jenis',
-			maxLength : 255
-		
-		});
-		det_simb_tanggalSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_tanggalSearchField',
-			name : 'det_simb_tanggal',
-			fieldLabel : 'det_simb_tanggal',
-			maxLength : 255
-		
-		});
-		det_simb_pemohon_idSearchField = Ext.create('Ext.form.NumberField',{
-			id : 'det_simb_pemohon_idSearchField',
-			name : 'det_simb_pemohon_id',
-			fieldLabel : 'det_simb_pemohon_id',
-			allowNegatife : false,
-			blankText : '0',
-			allowDecimals : false,maskRe : /([0-9]+)$/
-		});
-		det_simb_nomorregSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_nomorregSearchField',
-			name : 'det_simb_nomorreg',
-			fieldLabel : 'det_simb_nomorreg',
-			maxLength : 255
-		
-		});
-		det_simb_prosesSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_prosesSearchField',
-			name : 'det_simb_proses',
-			fieldLabel : 'det_simb_proses',
-			maxLength : 255
-		
-		});
-		det_simb_skSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_skSearchField',
-			name : 'det_simb_sk',
-			fieldLabel : 'det_simb_sk',
-			maxLength : 255
-		
-		});
-		det_simb_berlakuSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_berlakuSearchField',
-			name : 'det_simb_berlaku',
-			fieldLabel : 'det_simb_berlaku',
-			maxLength : 255
-		
-		});
-		det_simb_kadaluarsaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_kadaluarsaSearchField',
-			name : 'det_simb_kadaluarsa',
-			fieldLabel : 'det_simb_kadaluarsa',
-			maxLength : 255
-		
-		});
-		det_simb_penerimaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_penerimaSearchField',
-			name : 'det_simb_penerima',
-			fieldLabel : 'det_simb_penerima',
-			maxLength : 255
-		
-		});
-		det_simb_tanggalterimaSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_tanggalterimaSearchField',
-			name : 'det_simb_tanggalterima',
-			fieldLabel : 'det_simb_tanggalterima',
-			maxLength : 255
-		
-		});
-		det_simb_keteranganSearchField = Ext.create('Ext.form.TextField',{
-			id : 'det_simb_keteranganSearchField',
-			name : 'det_simb_keterangan',
-			fieldLabel : 'det_simb_keterangan',
-			maxLength : 255
-		
-		});
-		var simb_det_searchingButton = Ext.create('Ext.Button',{
-			text : globalSearchingButtonTitle,
-			handler : simb_det_search
-		});
-		var simb_det_cancelSearchButton = Ext.create('Ext.Button',{
-			text : globalSearchCloseButtonTitle,
-			handler : function(){
-				simb_det_searchWindow.hide();
-			}
-		});
-		simb_det_searchPanel = Ext.create('Ext.form.Panel', {
-			layout : {
-				type : 'vbox',
-				align : 'stretch',
-				padding : 5
-			},
-			items: [
-				{
-					xtype : 'container',
-					layout : 'hbox',
-					style : {borderWidth :'0px'},
-					defaultType : 'textfield',
-					defaults : {anchor : '95%'},
-					layout : 'anchor',
-					flex : 2,
-					items : [
-						det_simb_simb_idSearchField,
-						det_simb_jenisSearchField,
-						det_simb_tanggalSearchField,
-						det_simb_pemohon_idSearchField,
-						det_simb_nomorregSearchField,
-						det_simb_prosesSearchField,
-						det_simb_skSearchField,
-						det_simb_berlakuSearchField,
-						det_simb_kadaluarsaSearchField,
-						det_simb_penerimaSearchField,
-						det_simb_tanggalterimaSearchField,
-						det_simb_keteranganSearchField,
-						]
-				}],
-			buttons : [simb_det_searchingButton,simb_det_cancelSearchButton]
-		});
-		simb_det_searchWindow = Ext.create('Ext.window.Window',{
-			id : 'simb_det_searchWindow',
-			renderTo : 'simb_detSearchWindow',
-			title : globalFormSearchTitle + ' ' + simb_det_componentItemTitle,
-			width : 500,
-			minHeight : 300,
-			autoHeight : true,
-			constrain : true,
-			closeAction : 'hide',
-			items : [simb_det_searchPanel]
-		});
-/* End SearchPanel declaration */
 	<?php if(@$_SESSION['IDHAK'] == 2){ ?>
 		simb_det_lk_printCM.hide();
 		simb_det_bap_printCM.hide();
@@ -2132,5 +2230,4 @@
 });
 </script>
 <div id="simb_detSaveWindow"></div>
-<div id="simb_detSearchWindow"></div>
 <div class="container col-md-12" id="simb_detGrid"></div>
