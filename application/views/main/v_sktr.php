@@ -538,6 +538,7 @@
 			if(tr_dataStore.proxy.extraParams.BATAS_DEPAN!==null){BATAS_DEPANValue = tr_dataStore.proxy.extraParams.BATAS_DEPAN;}
 			if(tr_dataStore.proxy.extraParams.BATAS_BELAKANG!==null){BATAS_BELAKANGValue = tr_dataStore.proxy.extraParams.BATAS_BELAKANG;}
 			if(tr_dataStore.proxy.extraParams.TGL_PERMOHONAN!==null){TGL_PERMOHONANValue = tr_dataStore.proxy.extraParams.TGL_PERMOHONAN;}
+			if(tr_dataStore.proxy.extraParams.lama_proses!==null){lama_prosesValue = tr_dataStore.proxy.extraParams.lama_proses;}
 			if(tr_dataStore.proxy.extraParams.STATUS!==null){STATUSValue = tr_dataStore.proxy.extraParams.STATUS;}
 			if(tr_dataStore.proxy.extraParams.STATUS_SURVEY!==null){STATUS_SURVEYValue = tr_dataStore.proxy.extraParams.STATUS_SURVEY;}
 			var ajaxWaitMessage = Ext.MessageBox.wait(globalWaitMessage, globalWaitMessageTitle);
@@ -560,6 +561,7 @@
 					BATAS_DEPAN : BATAS_DEPANValue,
 					BATAS_BELAKANG : BATAS_BELAKANGValue,
 					TGL_PERMOHONAN : TGL_PERMOHONANValue,
+					lama_proses : lama_prosesValue,
 					STATUS : STATUSValue,
 					STATUS_SURVEY : STATUS_SURVEYValue,
 					currentAction : tr_dbListAction
@@ -570,9 +572,9 @@
 					switch(result){
 						case 'success':
 							if(outputType == 'EXCEL'){
-								window.open('./print/sktr_list.xls');
+								document.location='<?php echo base_url(); ?>/print/sktr_list.xls';
 							}else{
-								window.open('./print/sktr_list.html','trlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
+								window.open('<?php echo base_url(); ?>/print/sktr_list.html','trlist','height=600,width=800,resizable=1,scrollbars=1, menubar=0');
 							}
 						break;
 						default:

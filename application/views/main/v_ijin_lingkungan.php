@@ -718,6 +718,66 @@
 				{ name : 'pemohon_id', type : 'string', mapping : 'pemohon_id' },
 				]
 		});
+		kelurahan_dataStore = Ext.create('Ext.data.Store',{
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_public_function/get_kelurahan',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total',
+					idProperty : 'id'
+				},
+				actionMethods : {
+					read : 'POST'
+				}
+			}),
+			fields : [
+				{ name : 'id', type : 'int', mapping : 'id' },
+				{ name : 'desa', type : 'string', mapping : 'desa' }
+			]
+		});
+		kecamatan_dataStore = Ext.create('Ext.data.Store',{
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_public_function/get_kecamatan',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total',
+					idProperty : 'id'
+				},
+				actionMethods : {
+					read : 'POST'
+				}
+			}),
+			fields : [
+				{ name : 'id', type : 'int', mapping : 'id' },
+				{ name : 'kecamatan', type : 'string', mapping : 'kecamatan' }
+			]
+		});
+		kabkota_dataStore = Ext.create('Ext.data.Store',{
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_public_function/get_kabkota',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total',
+					idProperty : 'id'
+				},
+				actionMethods : {
+					read : 'POST'
+				}
+			}),
+			fields : [
+				{ name : 'id', type : 'int', mapping : 'id' },
+				{ name : 'kabkota', type : 'string', mapping : 'kabkota' }
+			]
+		});
 /* End DataStore declaration */
 /* Start Shorcut Declaration */
 		in_lingkungan_shorcut = {
@@ -1383,7 +1443,7 @@
 			fieldLabel : 'Alamat',
 			maxLength : 100
 		});
-		ID_KOTAField = Ext.create('Ext.form.TextField',{
+		/* ID_KOTAField = Ext.create('Ext.form.TextField',{
 			id : 'ID_KOTAField',
 			name : 'ID_KOTA',
 			fieldLabel : 'Kota',
@@ -1412,7 +1472,35 @@
 			// allowDecimals : false,
 			// maskRe : /([0-9]+)$/
 			maxLength : 50
-			});
+			}); */
+		var ID_KELURAHANField = Ext.create('Ext.form.ComboBox',{
+			name : 'ID_KELURAHAN',
+			fieldLabel : 'Kelurahan',
+			store : kelurahan_dataStore,
+			displayField : 'desa',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kelurahan_dataStore.load();
+				}
+			}
+		});
+		var ID_KECAMATANField = Ext.create('Ext.form.ComboBox',{
+			name : 'ID_KECAMATAN',
+			fieldLabel : 'Kecamatan',
+			store : kecamatan_dataStore,
+			displayField : 'kecamatan',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kecamatan_dataStore.load();
+				}
+			}
+		});
 		NAMA_KEGIATANField = Ext.create('Ext.form.TextField',{
 			id : 'NAMA_KEGIATANField',
 			name : 'NAMA_KEGIATAN',
@@ -1806,7 +1894,50 @@
 			//blankText : '0',
 			allowDecimals : false,
 			maskRe : /([0-9]+)$/});
-		pemohon_kelField = Ext.create('Ext.form.TextField',{
+		/***********************Start**********************/
+		var pemohon_kelField = Ext.create('Ext.form.ComboBox',{
+			name : 'pemohon_kel',
+			fieldLabel : 'Kelurahan',
+			store : kelurahan_dataStore,
+			displayField : 'desa',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kelurahan_dataStore.load();
+				}
+			}
+		});
+		var pemohon_kecField = Ext.create('Ext.form.ComboBox',{
+			name : 'pemohon_kec',
+			fieldLabel : 'Kecamatan',
+			store : kecamatan_dataStore,
+			displayField : 'kecamatan',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kecamatan_dataStore.load();
+				}
+			}
+		});
+		var pemohon_kotaField = Ext.create('Ext.form.ComboBox',{
+			name : 'pemohon_kota',
+			fieldLabel : 'Kota',
+			store : kabkota_dataStore,
+			displayField : 'kabkota',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kabkota_dataStore.load();
+				}
+			}
+		});
+		/* pemohon_kelField = Ext.create('Ext.form.TextField',{
 			id : 'pemohon_kelField',
 			name : 'pemohon_kel',
 			fieldLabel : 'Kelurahan',
@@ -1823,7 +1954,8 @@
 			name : 'pemohon_kota',
 			fieldLabel : 'Kota',
 			maxLength : 50
-		});
+		}); */
+		/*********************End***********************/
 		pemohon_wnField = Ext.create('Ext.form.TextField',{
 			id : 'pemohon_wnField',
 			name : 'pemohon_wn',
@@ -1958,7 +2090,7 @@
 						]
 				},{
 					xtype : 'fieldset',
-					title : '1. Data Permohon',
+					title : '1. Data Pemohon',
 					checkboxToggle : false,
 					collapsible : false,
 					layout :'form',
