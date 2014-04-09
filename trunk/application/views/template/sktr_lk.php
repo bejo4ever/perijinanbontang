@@ -46,7 +46,7 @@
 		<tr>
 			<td valign="top"><?php echo $i; ?></td>
 			<td><?php echo $subdataceklist["NAMA_SYARAT"]; ?></td>
-			<td valign="top">: <?php echo ($subdataceklist["STATUS"] == 1) ? 'ADA' : 'TIDAK ADA'; ?></td>
+			<td valign="top">: <?//php echo ($subdataceklist["STATUS"] == 1) ? 'ADA' : 'TIDAK ADA'; ?></td>
 			<td><?php echo $subdataceklist["KETERANGAN"]; ?></td>
 		</tr>
 		<?php $i++; } ?>

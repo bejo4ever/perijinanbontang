@@ -1219,8 +1219,8 @@
 			forceSelection : false,
 			onTriggerClick: function(event){
 				var store = pemohon_nikField.getStore();
-				var val = pemohon_nikField.getRawValue();
-				store.proxy.extraParams = {action : 'SEARCH',pemohon_nik : val};
+				var val	= pemohon_nikField.getRawValue();
+				store.proxy.extraParams = {action : 'SEARCH',pemohon_nik : val,pemohon_nama : val,pemohon_alamat : val,pemohon_telp : val};
 				store.load();
 				pemohon_nikField.expand();
 				pemohon_nikField.fireEvent("ontriggerclick", this, event);
@@ -1287,7 +1287,7 @@
 			id : 'pemohon_alamatField',
 			name : 'pemohon_alamat',
 			fieldLabel : 'Alamat Pemohon',
-			maxLength : 20
+			maxLength : 100
 		});
 		STATUS_LAHANField = Ext.create('Ext.form.ComboBox',{
 			id : 'STATUS_LAHANField',
@@ -1508,7 +1508,7 @@
 											]
 				},{
 					xtype : 'fieldset',
-					title : '1. Data Permohonan',
+					title : '2. Data Perusahaan',
 					checkboxToggle : false,
 					collapsible : false,
 					layout :'form',
@@ -1523,6 +1523,14 @@
 						NO_AKTAField,
 						TANGGALField,
 						MULAI_KEGIATANField,
+											]
+				},{
+					xtype : 'fieldset',
+					title : '3. Data Permohonan',
+					checkboxToggle : false,
+					collapsible : false,
+					layout :'form',
+					items : [
 						LUAS_LAHANField,
 						LUAS_TAPAK_BANGUNANField,
 						LUAS_KEGIATANField,
@@ -1535,7 +1543,7 @@
 											]
 				},{
 					xtype : 'fieldset',
-					title : '2. Data Kelengkapan',
+					title : '4. Data Kelengkapan',
 					columnWidth : 0.5,
 					checkboxToggle : false,
 					collapsible : false,
