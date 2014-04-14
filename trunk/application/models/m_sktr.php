@@ -19,22 +19,51 @@ class M_sktr extends App_Model{
 						LUAS_BANGUNAN,
 						FUNGSI,
 						ALAMAT_BANGUNAN,
-						pemohon_id,
-						pemohon_nama,
-						pemohon_alamat,
-						pemohon_telp,
-						pemohon_npwp,
-						pemohon_rt,
-						pemohon_rw,
-						pemohon_kel,
-						pemohon_kec,
-						pemohon_nik,
-						pemohon_stra,
-						pemohon_surattugas,
-						pemohon_pekerjaan,
-						pemohon_tempatlahir,
-						pemohon_tanggallahir,
-						pemohon_user_id,
+						pemohon.id AS pemohon_id,
+						pemohon.nama AS pemohon_nama,
+						pemohon.alamat AS pemohon_alamat,
+						pemohon.telp AS pemohon_telp,
+						pemohon.npwp AS pemohon_npwp,
+						pemohon.rt AS pemohon_rt,
+						pemohon.rw AS pemohon_rw,
+						pemohon.desa_id AS pemohon_kel,
+						pemohon.kecamatan_id AS pemohon_kec,
+						pemohon.ktp AS pemohon_nik,
+						pemohon.stra AS pemohon_stra,
+						pemohon.surattugas AS pemohon_surattugas,
+						pemohon.pekerjaan AS pemohon_pekerjaan,
+						pemohon.tempatlahir AS pemohon_tempatlahir,
+						pemohon.tgllahir AS pemohon_tanggallahir,
+						pemohon.pendidikan AS pemohon_pendidikan,
+						pemohon.tahunlulus AS pemohon_tahunlulus,
+						perusahaan.id AS perusahaan_id,
+						perusahaan.npwp AS perusahaan_npwp,
+						perusahaan.nama AS perusahaan_nama,
+						perusahaan.noakta AS perusahaan_noakta,
+						perusahaan.notaris AS perusahaan_notaris,
+						perusahaan.tglakta AS perusahaan_tglakta,
+						perusahaan.bentuk_id AS perusahaan_bentuk_id,
+						perusahaan.kualifikasi_id AS perusahaan_kualifikasi_id,
+						perusahaan.alamat AS perusahaan_alamat,
+						perusahaan.rt AS perusahaan_rt,
+						perusahaan.rw AS perusahaan_rw,
+						perusahaan.propinsi_id AS perusahaan_propinsi_id,
+						perusahaan.kabkota_id AS perusahaan_kabkota_id,
+						perusahaan.kecamatan_id AS perusahaan_kecamatan_id,
+						perusahaan.desa_id AS perusahaan_desa_id,
+						perusahaan.kodepos AS perusahaan_kodepos,
+						perusahaan.telp AS perusahaan_telp,
+						perusahaan.fax AS perusahaan_fax,
+						perusahaan.stempat_id AS perusahaan_stempat_id,
+						perusahaan.sperusahaan_id AS perusahaan_sperusahaan_id,
+						perusahaan.usaha AS perusahaan_usaha,
+						perusahaan.butara AS perusahaan_butara,
+						perusahaan.bselatan AS perusahaan_bselatan,
+						perusahaan.btimur AS perusahaan_btimur,
+						perusahaan.bbarat AS perusahaan_bbarat,
+						perusahaan.modal AS perusahaan_modal,
+						perusahaan.merk AS perusahaan_merk,
+						perusahaan.jusaha_id AS perusahaan_jusaha_id,
 						TGL_BERAKHIR,
 						STATUS_SURVEY,
 						RETRIBUSI,
@@ -42,7 +71,8 @@ class M_sktr extends App_Model{
 						MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
 						1, 1),' Hari') as lama_proses
 						FROM sktr
-						JOIN m_pemohon ON m_pemohon.pemohon_id = sktr.ID_PEMOHON
+						JOIN pemohon ON sktr.ID_PEMOHON = pemohon.id
+						JOIN perusahaan ON sktr.ID_PERUSAHAAN = perusahaan.id
 					WHERE ID_SKTR IS NOT NULL 
 	";
 	
@@ -56,47 +86,7 @@ class M_sktr extends App_Model{
 	
 	function getList($params){
 		extract($params);
-		if($_SESSION["IDHAK"] == 2){
-			$sql = "SELECT 
-						ID_SKTR,
-						ID_PEMOHON,
-						JENIS_PERMOHONAN,
-						NO_SK,
-						HAK_MILIK,
-						NAMA_PEMILIK,
-						NO_SURAT_TANAH,
-						BATAS_KIRI,
-						BATAS_KANAN,
-						BATAS_DEPAN,
-						BATAS_BELAKANG,
-						TGL_PERMOHONAN,
-						STATUS,
-						pemohon_id,
-						pemohon_nama,
-						pemohon_alamat,
-						pemohon_telp,
-						pemohon_npwp,
-						pemohon_rt,
-						pemohon_rw,
-						pemohon_kel,
-						pemohon_kec,
-						pemohon_nik,
-						pemohon_stra,
-						pemohon_surattugas,
-						pemohon_pekerjaan,
-						pemohon_tempatlahir,
-						pemohon_tanggallahir,
-						pemohon_user_id,
-						CONCAT(5 * (DATEDIFF(NOW(), TGL_PERMOHONAN) DIV 7) + 
-						MID('0123444401233334012222340111123400001234000123450', 7 * WEEKDAY(NOW()) + WEEKDAY(TGL_PERMOHONAN) + 
-						1, 1),' Hari') as lama_proses
-						FROM sktr
-						JOIN m_pemohon ON m_pemohon.pemohon_id = sktr.ID_PEMOHON
-					WHERE ID_SKTR IS NOT NULL 
-			";
-		} else {
-			$sql = $this->mainSql;
-		}
+		$sql = $this->mainSql;
 		if(@$searchText != ''){
 			$sql .= "
 				AND (

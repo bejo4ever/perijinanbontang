@@ -3,9 +3,6 @@
 		background-image:url(../assets/images/icons/check.png) !important;
 		margin:auto;
 	}
-	.unchecked{
-		background-image:url(../assets/images/icons/forward.png) !important;
-	}
 </style>
 <h4>IZIN USAHA INDUSTRI PRIMER HASIL HUTAN KAYU</h4>
 <hr>
@@ -130,113 +127,7 @@
 		var STATUSField;
 		var TGL_BERLAKUField;
 		var TGL_BERAKHIRField;
-				
-		var ID_PEMOHONSearchField;
-		var NO_SKSearchField;
-		var NO_SK_LAMASearchField;
-		var JENIS_PERMOHONANSearchField;
-		var NAMA_PERUSAHAANSearchField;
-		var NPWPSearchField;
-		var ALAMATSearchField;
-		var STATUS_MODALSearchField;
-		var NAMA_NOTARISSearchField;
-		var NO_AKTASearchField;
-		var PENANGGUNG_JAWABSearchField;
-		var NAMA_DIREKSISearchField;
-		var DEWAN_KOMISARISSearchField;
-		var TUJUAN_PRODUKSISearchField;
-		var LOKASI_PABRIKSearchField;
-		var LUAS_TANAHSearchField;
-		var ALAMAT_PABRIKSearchField;
-		var OLAH1_P_TAHUNSearchField;
-		var OLAH1_P_BULANSearchField;
-		var OLAH2_P_TAHUNSearchField;
-		var OLAH2_P_BULANSearchField;
-		var OLAH3_P_TAHUNSearchField;
-		var OLAH3_P_BULANSearchField;
-		var OLAH1_S_TAHUNSearchField;
-		var OLAH1_S_BULANSearchField;
-		var OLAH2_S_TAHUNSearchField;
-		var OLAH2_S_BULANSearchField;
-		var OLAH3_S_TAHUNSearchField;
-		var OLAH3_S_BULANSearchField;
-		var MT_TANAHSearchField;
-		var MT_BANGUNANSearchField;
-		var MT_MESINSearchField;
-		var MT_DLLSearchField;
-		var MK_BAHAN_BAKUSearchField;
-		var MK_UPAHSearchField;
-		var MK_DLLSearchField;
-		var SP_MODAL_SENDIRISearchField;
-		var SP_PINJAMANSearchField;
-		var TKI_L_JUMLAHSearchField;
-		var TKI_P_JUMLAHSearchField;
-		var TKA_JUMLAHSearchField;
-		var TKA_ASALSearchField;
-		var TKA_JABATANSearchField;
-		var TKA_JANGKA_WAKTUSearchField;
-		var DN_JENIS_PRODUK1SearchField;
-		var DN_JENIS_PRODUK2SearchField;
-		var DN_JENIS_PRODUK3SearchField;
-		var E_JENIS_PRODUK1SearchField;
-		var E_JENIS_PRODUK2SearchField;
-		var E_JENIS_PRODUK3SearchField;
-		var MERK_JENIS_PRODUKSearchField;
-		var BBKB_DN_JUMLAHSearchField;
-		var BBKB_DN_SATUANSearchField;
-		var BBKB_DN_ASALSearchField;
-		var BBKB_DN_HARGASearchField;
-		var BBKB_DN_KETERANGANSearchField;
-		var BBKO_DN_JUMLAHSearchField;
-		var BBKO_DN_SATUANSearchField;
-		var BBKO_DN_ASALSearchField;
-		var BBKO_DN_HARGASearchField;
-		var BBKO_DN_KETERANGANSearchField;
-		var BP_DN_JUMLAHSearchField;
-		var BP_DN_SATUANSearchField;
-		var BP_DN_ASALSearchField;
-		var BP_DN_HARGASearchField;
-		var BP_DN_KETERANGANSearchField;
-		var RBB_LUAS_GUDANGSearchField;
-		var RBB_KAYU_OLAHANSearchField;
-		var RBB_PENOLONGSearchField;
-		var RBB_HASIL_PRODUKSISearchField;
-		var RLPLY_LOKASISearchField;
-		var RLPLY_LUASSearchField;
-		var RLPLY_PERIZINANSearchField;
-		var RSD1_KAPASITASSearchField;
-		var RSD1_JUMLAHSearchField;
-		var RSD211_KAPASITASSearchField;
-		var RSD211_JUMLAHSearchField;
-		var RSD212_KAPASITASSearchField;
-		var RSD212_JUMLAHSearchField;
-		var RSD213_KAPASITASSearchField;
-		var RSD213_JUMLAHSearchField;
-		var RSD22_KAPASITASSearchField;
-		var RSD22_JUMLAHSearchField;
-		var RSD23_KAPASITASSearchField;
-		var RSD23_JUMLAHSearchField;
-		var RPL1_VOLUMESearchField;
-		var RPL1_SATUANSearchField;
-		var RPL1_PENANGANANSearchField;
-		var RPL2_VOLUMESearchField;
-		var RPL2_SATUANSearchField;
-		var RPL2_PENANGANANSearchField;
-		var RPL3_VOLUMESearchField;
-		var RPL3_SATUANSearchField;
-		var RPL3_PENANGANANSearchField;
-		var RPL4_VOLUMESearchField;
-		var RPL4_SATUANSearchField;
-		var RPL4_PENANGANANSearchField;
-		var PENYETUJUSearchField;
-		var NOMOR_SURATSearchField;
-		var TGL_TERLAMPIRSearchField;
-		var TGL_PERMOHONANSearchField;
-		var STATUS_SURVEYSearchField;
-		var STATUSSearchField;
-		var TGL_BERLAKUSearchField;
-		var TGL_BERAKHIRSearchField;
-				
+		
 		var iphhk_dbTask = 'CREATE';
 		var iphhk_dbTaskMessage = 'Tambah';
 		var iphhk_dbPermission = 'CRUD';
@@ -309,131 +200,6 @@
 				});
 			}else{
 				if(iphhk_confirmFormValid()){
-					var ID_IUIPHHKValue = '';
-					var ID_PEMOHONValue = '';
-					var NO_SKValue = '';
-					var NO_SK_LAMAValue = '';
-					var JENIS_PERMOHONANValue = '';
-					var NAMA_PERUSAHAANValue = '';
-					var NPWPValue = '';
-					var ALAMATValue = '';
-					var STATUS_MODALValue = '';
-					var NAMA_NOTARISValue = '';
-					var NO_AKTAValue = '';
-					var PENANGGUNG_JAWABValue = '';
-					var NAMA_DIREKSIValue = '';
-					var DEWAN_KOMISARISValue = '';
-					var TUJUAN_PRODUKSIValue = '';
-					var LOKASI_PABRIKValue = '';
-					var LUAS_TANAHValue = '';
-					var ALAMAT_PABRIKValue = '';
-					var OLAH1_P_TAHUNValue = '';
-					var OLAH1_P_BULANValue = '';
-					var OLAH2_P_TAHUNValue = '';
-					var OLAH2_P_BULANValue = '';
-					var OLAH3_P_TAHUNValue = '';
-					var OLAH3_P_BULANValue = '';
-					var OLAH1_S_TAHUNValue = '';
-					var OLAH1_S_BULANValue = '';
-					var OLAH2_S_TAHUNValue = '';
-					var OLAH2_S_BULANValue = '';
-					var OLAH3_S_TAHUNValue = '';
-					var OLAH3_S_BULANValue = '';
-					var MT_TANAHValue = '';
-					var MT_BANGUNANValue = '';
-					var MT_MESINValue = '';
-					var MT_DLLValue = '';
-					var MK_BAHAN_BAKUValue = '';
-					var MK_UPAHValue = '';
-					var MK_DLLValue = '';
-					var SP_MODAL_SENDIRIValue = '';
-					var SP_PINJAMANValue = '';
-					var TKI_L_JUMLAHValue = '';
-					var TKI_P_JUMLAHValue = '';
-					var TKA_JUMLAHValue = '';
-					var TKA_ASALValue = '';
-					var TKA_JABATANValue = '';
-					var TKA_JANGKA_WAKTUValue = '';
-					var DN_JENIS_PRODUK1Value = '';
-					var DN_JENIS_PRODUK2Value = '';
-					var DN_JENIS_PRODUK3Value = '';
-					var E_JENIS_PRODUK1Value = '';
-					var E_JENIS_PRODUK2Value = '';
-					var E_JENIS_PRODUK3Value = '';
-					var MERK_JENIS_PRODUKValue = '';
-					
-					var BBKB_DN_JUMLAHValue = '';
-					var BBKB_DN_SATUANValue = '';
-					var BBKB_DN_ASALValue = '';
-					var BBKB_DN_HARGAValue = '';
-					var BBKB_DN_KETERANGANValue = '';
-					var BBKO_DN_JUMLAHValue = '';
-					var BBKO_DN_SATUANValue = '';
-					var BBKO_DN_ASALValue = '';
-					var BBKO_DN_HARGAValue = '';
-					var BBKO_DN_KETERANGANValue = '';
-					var BP_DN_JUMLAHValue = '';
-					var BP_DN_SATUANValue = '';
-					var BP_DN_ASALValue = '';
-					var BP_DN_HARGAValue = '';
-					var BP_DN_KETERANGANValue = '';
-					
-					var BBKB_I_JUMLAHValue = '';
-					var BBKB_I_SATUANValue = '';
-					var BBKB_I_ASALValue = '';
-					var BBKB_I_HARGAValue = '';
-					var BBKB_I_KETERANGANValue = '';
-					var BBKO_I_JUMLAHValue = '';
-					var BBKO_I_SATUANValue = '';
-					var BBKO_I_ASALValue = '';
-					var BBKO_I_HARGAValue = '';
-					var BBKO_I_KETERANGANValue = '';
-					var BP_I_JUMLAHValue = '';
-					var BP_I_SATUANValue = '';
-					var BP_I_ASALValue = '';
-					var BP_I_HARGAValue = '';
-					var BP_I_KETERANGANValue = '';
-					
-					var RBB_LUAS_GUDANGValue = '';
-					var RBB_KAYU_OLAHANValue = '';
-					var RBB_PENOLONGValue = '';
-					var RBB_HASIL_PRODUKSIValue = '';
-					var RLPLY_LOKASIValue = '';
-					var RLPLY_LUASValue = '';
-					var RLPLY_PERIZINANValue = '';
-					var RSD1_KAPASITASValue = '';
-					var RSD1_JUMLAHValue = '';
-					var RSD211_KAPASITASValue = '';
-					var RSD211_JUMLAHValue = '';
-					var RSD212_KAPASITASValue = '';
-					var RSD212_JUMLAHValue = '';
-					var RSD213_KAPASITASValue = '';
-					var RSD213_JUMLAHValue = '';
-					var RSD22_KAPASITASValue = '';
-					var RSD22_JUMLAHValue = '';
-					var RSD23_KAPASITASValue = '';
-					var RSD23_JUMLAHValue = '';
-					var RPL1_VOLUMEValue = '';
-					var RPL1_SATUANValue = '';
-					var RPL1_PENANGANANValue = '';
-					var RPL2_VOLUMEValue = '';
-					var RPL2_SATUANValue = '';
-					var RPL2_PENANGANANValue = '';
-					var RPL3_VOLUMEValue = '';
-					var RPL3_SATUANValue = '';
-					var RPL3_PENANGANANValue = '';
-					var RPL4_VOLUMEValue = '';
-					var RPL4_SATUANValue = '';
-					var RPL4_PENANGANANValue = '';
-					var PENYETUJUValue = '';
-					var NOMOR_SURATValue = '';
-					var TGL_TERLAMPIRValue = '';
-					var TGL_PERMOHONANValue = '';
-					var STATUS_SURVEYValue = '';
-					var STATUSValue = '';
-					var TGL_BERLAKUValue = '';
-					var TGL_BERAKHIRValue = '';
-					
 					/*Syarat*/
 					var array_iuiphhk_keterangan=new Array();
 					if(iuiphhk_syaratDataStore.getCount() > 0){
@@ -473,282 +239,17 @@
 					}					
 					var encoded_array_iuiphhk_keterangan = Ext.encode(array_iuiphhk_keterangan);
 					/*End*/
-					
-					ID_IUIPHHKValue = ID_IUIPHHKField.getValue();
-					ID_PEMOHONValue = ID_PEMOHONField.getValue();
-					NO_SKValue = NO_SKField.getValue();
-					NO_SK_LAMAValue = NO_SK_LAMAField.getValue();
-					JENIS_PERMOHONANValue = JENIS_PERMOHONANField.getValue();
-					NAMA_PERUSAHAANValue = NAMA_PERUSAHAANField.getValue();
-					NPWPValue = NPWPField.getValue();
-					ALAMATValue = ALAMATField.getValue();
-					STATUS_MODALValue = STATUS_MODALField.getValue();
-					NAMA_NOTARISValue = NAMA_NOTARISField.getValue();
-					NO_AKTAValue = NO_AKTAField.getValue();
-					PENANGGUNG_JAWABValue = PENANGGUNG_JAWABField.getValue();
-					NAMA_DIREKSIValue = NAMA_DIREKSIField.getValue();
-					DEWAN_KOMISARISValue = DEWAN_KOMISARISField.getValue();
-					TUJUAN_PRODUKSIValue = TUJUAN_PRODUKSIField.getValue();
-					LOKASI_PABRIKValue = LOKASI_PABRIKField.getValue();
-					LUAS_TANAHValue = LUAS_TANAHField.getValue();
-					ALAMAT_PABRIKValue = ALAMAT_PABRIKField.getValue();
-					OLAH1_P_TAHUNValue = OLAH1_P_TAHUNField.getValue();
-					OLAH1_P_BULANValue = OLAH1_P_BULANField.getValue();
-					OLAH2_P_TAHUNValue = OLAH2_P_TAHUNField.getValue();
-					OLAH2_P_BULANValue = OLAH2_P_BULANField.getValue();
-					OLAH3_P_TAHUNValue = OLAH3_P_TAHUNField.getValue();
-					OLAH3_P_BULANValue = OLAH3_P_BULANField.getValue();
-					OLAH1_S_TAHUNValue = OLAH1_S_TAHUNField.getValue();
-					OLAH1_S_BULANValue = OLAH1_S_BULANField.getValue();
-					OLAH2_S_TAHUNValue = OLAH2_S_TAHUNField.getValue();
-					OLAH2_S_BULANValue = OLAH2_S_BULANField.getValue();
-					OLAH3_S_TAHUNValue = OLAH3_S_TAHUNField.getValue();
-					OLAH3_S_BULANValue = OLAH3_S_BULANField.getValue();
-					MT_TANAHValue = MT_TANAHField.getValue();
-					MT_BANGUNANValue = MT_BANGUNANField.getValue();
-					MT_MESINValue = MT_MESINField.getValue();
-					MT_DLLValue = MT_DLLField.getValue();
-					MK_BAHAN_BAKUValue = MK_BAHAN_BAKUField.getValue();
-					MK_UPAHValue = MK_UPAHField.getValue();
-					MK_DLLValue = MK_DLLField.getValue();
-					SP_MODAL_SENDIRIValue = SP_MODAL_SENDIRIField.getValue();
-					SP_PINJAMANValue = SP_PINJAMANField.getValue();
-					TKI_L_JUMLAHValue = TKI_L_JUMLAHField.getValue();
-					TKI_P_JUMLAHValue = TKI_P_JUMLAHField.getValue();
-					TKA_JUMLAHValue = TKA_JUMLAHField.getValue();
-					TKA_ASALValue = TKA_ASALField.getValue();
-					TKA_JABATANValue = TKA_JABATANField.getValue();
-					TKA_JANGKA_WAKTUValue = TKA_JANGKA_WAKTUField.getValue();
-					DN_JENIS_PRODUK1Value = DN_JENIS_PRODUK1Field.getValue();
-					DN_JENIS_PRODUK2Value = DN_JENIS_PRODUK2Field.getValue();
-					DN_JENIS_PRODUK3Value = DN_JENIS_PRODUK3Field.getValue();
-					E_JENIS_PRODUK1Value = E_JENIS_PRODUK1Field.getValue();
-					E_JENIS_PRODUK2Value = E_JENIS_PRODUK2Field.getValue();
-					E_JENIS_PRODUK3Value = E_JENIS_PRODUK3Field.getValue();
-					MERK_JENIS_PRODUKValue = MERK_JENIS_PRODUKField.getValue();
-					pemohon_namaValue = pemohon_namaField.getValue();
-					pemohon_telpValue = pemohon_telpField.getValue();
-					pemohon_alamatValue = pemohon_alamatField.getValue();
-					pemohon_idValue = pemohon_idField.getValue();
-					pemohon_nikValue = pemohon_nikField.getValue();
-					BBKB_DN_JUMLAHValue = BBKB_DN_JUMLAHField.getValue();
-					BBKB_DN_SATUANValue = BBKB_DN_SATUANField.getValue();
-					BBKB_DN_ASALValue = BBKB_DN_ASALField.getValue();
-					BBKB_DN_HARGAValue = BBKB_DN_HARGAField.getValue();
-					BBKB_DN_KETERANGANValue = BBKB_DN_KETERANGANField.getValue();
-					BBKO_DN_JUMLAHValue = BBKO_DN_JUMLAHField.getValue();
-					BBKO_DN_SATUANValue = BBKO_DN_SATUANField.getValue();
-					BBKO_DN_ASALValue = BBKO_DN_ASALField.getValue();
-					BBKO_DN_HARGAValue = BBKO_DN_HARGAField.getValue();
-					BBKO_DN_KETERANGANValue = BBKO_DN_KETERANGANField.getValue();
-					BP_DN_JUMLAHValue = BP_DN_JUMLAHField.getValue();
-					BP_DN_SATUANValue = BP_DN_SATUANField.getValue();
-					BP_DN_ASALValue = BP_DN_ASALField.getValue();
-					BP_DN_HARGAValue = BP_DN_HARGAField.getValue();
-					BP_DN_KETERANGANValue = BP_DN_KETERANGANField.getValue();
-					
-					BBKB_I_JUMLAHValue = BBKB_I_JUMLAHField.getValue();
-					BBKB_I_SATUANValue = BBKB_I_SATUANField.getValue();
-					BBKB_I_ASALValue = BBKB_I_ASALField.getValue();
-					BBKB_I_HARGAValue = BBKB_I_HARGAField.getValue();
-					BBKB_I_KETERANGANValue = BBKB_I_KETERANGANField.getValue();
-					BBKO_I_JUMLAHValue = BBKO_I_JUMLAHField.getValue();
-					BBKO_I_SATUANValue = BBKO_I_SATUANField.getValue();
-					BBKO_I_ASALValue = BBKO_I_ASALField.getValue();
-					BBKO_I_HARGAValue = BBKO_I_HARGAField.getValue();
-					BBKO_I_KETERANGANValue = BBKO_I_KETERANGANField.getValue();
-					BP_I_JUMLAHValue = BP_I_JUMLAHField.getValue();
-					BP_I_SATUANValue = BP_I_SATUANField.getValue();
-					BP_I_ASALValue = BP_I_ASALField.getValue();
-					BP_I_HARGAValue = BP_I_HARGAField.getValue();
-					BP_I_KETERANGANValue = BP_I_KETERANGANField.getValue();
-					
-					RBB_LUAS_GUDANGValue = RBB_LUAS_GUDANGField.getValue();
-					RBB_KAYU_OLAHANValue = RBB_KAYU_OLAHANField.getValue();
-					RBB_PENOLONGValue = RBB_PENOLONGField.getValue();
-					RBB_HASIL_PRODUKSIValue = RBB_HASIL_PRODUKSIField.getValue();
-					RLPLY_LOKASIValue = RLPLY_LOKASIField.getValue();
-					RLPLY_LUASValue = RLPLY_LUASField.getValue();
-					RLPLY_PERIZINANValue = RLPLY_PERIZINANField.getValue();
-					RSD1_KAPASITASValue = RSD1_KAPASITASField.getValue();
-					RSD1_JUMLAHValue = RSD1_JUMLAHField.getValue();
-					RSD211_KAPASITASValue = RSD211_KAPASITASField.getValue();
-					RSD211_JUMLAHValue = RSD211_JUMLAHField.getValue();
-					RSD212_KAPASITASValue = RSD212_KAPASITASField.getValue();
-					RSD212_JUMLAHValue = RSD212_JUMLAHField.getValue();
-					RSD213_KAPASITASValue = RSD213_KAPASITASField.getValue();
-					RSD213_JUMLAHValue = RSD213_JUMLAHField.getValue();
-					RSD22_KAPASITASValue = RSD22_KAPASITASField.getValue();
-					RSD22_JUMLAHValue = RSD22_JUMLAHField.getValue();
-					RSD23_KAPASITASValue = RSD23_KAPASITASField.getValue();
-					RSD23_JUMLAHValue = RSD23_JUMLAHField.getValue();
-					RPL1_VOLUMEValue = RPL1_VOLUMEField.getValue();
-					RPL1_SATUANValue = RPL1_SATUANField.getValue();
-					RPL1_PENANGANANValue = RPL1_PENANGANANField.getValue();
-					RPL2_VOLUMEValue = RPL2_VOLUMEField.getValue();
-					RPL2_SATUANValue = RPL2_SATUANField.getValue();
-					RPL2_PENANGANANValue = RPL2_PENANGANANField.getValue();
-					RPL3_VOLUMEValue = RPL3_VOLUMEField.getValue();
-					RPL3_SATUANValue = RPL3_SATUANField.getValue();
-					RPL3_PENANGANANValue = RPL3_PENANGANANField.getValue();
-					RPL4_VOLUMEValue = RPL4_VOLUMEField.getValue();
-					RPL4_SATUANValue = RPL4_SATUANField.getValue();
-					RPL4_PENANGANANValue = RPL4_PENANGANANField.getValue();
-					PENYETUJUValue = PENYETUJUField.getValue();
-					NOMOR_SURATValue = NOMOR_SURATField.getValue();
-					TGL_TERLAMPIRValue = TGL_TERLAMPIRField.getValue();
-					TGL_PERMOHONANValue = TGL_PERMOHONANField.getValue();
-					STATUS_SURVEYValue = STATUS_SURVEYField.getValue();
-					STATUSValue = STATUSField.getValue();
-					TGL_BERLAKUValue = TGL_BERLAKUField.getValue();
-					TGL_BERAKHIRValue = TGL_BERAKHIRField.getValue();
-					RETRIBUSIValue = RETRIBUSIField.getValue();
-					pemohon_namaValue = pemohon_namaField.getValue();
-					pemohon_telpValue = pemohon_telpField.getValue();
-					pemohon_alamatValue = pemohon_alamatField.getValue();
-					pemohon_idValue = pemohon_idField.getValue();
-					pemohon_nikValue = pemohon_nikField.getValue();
+					var params = iphhk_formPanel.getForm().getValues();
+					params.ijin_id = 28;
+					params.action = iphhk_dbTask;
+					params.KETERANGAN_SYARAT = array_iuiphhk_keterangan;
+					params = Ext.encode(params);
 					
 					Ext.Ajax.request({
 						waitMsg: 'Please wait...',
 						url: 'c_iuiphhk/switchAction',
 						params: {
-							pemohon_nama : pemohon_namaValue,
-							pemohon_telp : pemohon_telpValue,
-							pemohon_alamat : pemohon_alamatValue,
-							pemohon_id : pemohon_idValue,
-							pemohon_nik : pemohon_nikValue,
-							ID_IUIPHHK : ID_IUIPHHKValue,
-							ID_PEMOHON : ID_PEMOHONValue,
-							NO_SK : NO_SKValue,
-							NO_SK_LAMA : NO_SK_LAMAValue,
-							JENIS_PERMOHONAN : JENIS_PERMOHONANValue,
-							NAMA_PERUSAHAAN : NAMA_PERUSAHAANValue,
-							NPWP : NPWPValue,
-							ALAMAT : ALAMATValue,
-							STATUS_MODAL : STATUS_MODALValue,
-							NAMA_NOTARIS : NAMA_NOTARISValue,
-							NO_AKTA : NO_AKTAValue,
-							PENANGGUNG_JAWAB : PENANGGUNG_JAWABValue,
-							NAMA_DIREKSI : NAMA_DIREKSIValue,
-							DEWAN_KOMISARIS : DEWAN_KOMISARISValue,
-							TUJUAN_PRODUKSI : TUJUAN_PRODUKSIValue,
-							LOKASI_PABRIK : LOKASI_PABRIKValue,
-							LUAS_TANAH : LUAS_TANAHValue,
-							ALAMAT_PABRIK : ALAMAT_PABRIKValue,
-							OLAH1_P_TAHUN : OLAH1_P_TAHUNValue,
-							OLAH1_P_BULAN : OLAH1_P_BULANValue,
-							OLAH2_P_TAHUN : OLAH2_P_TAHUNValue,
-							OLAH2_P_BULAN : OLAH2_P_BULANValue,
-							OLAH3_P_TAHUN : OLAH3_P_TAHUNValue,
-							OLAH3_P_BULAN : OLAH3_P_BULANValue,
-							OLAH1_S_TAHUN : OLAH1_S_TAHUNValue,
-							OLAH1_S_BULAN : OLAH1_S_BULANValue,
-							OLAH2_S_TAHUN : OLAH2_S_TAHUNValue,
-							OLAH2_S_BULAN : OLAH2_S_BULANValue,
-							OLAH3_S_TAHUN : OLAH3_S_TAHUNValue,
-							OLAH3_S_BULAN : OLAH3_S_BULANValue,
-							MT_TANAH : MT_TANAHValue,
-							MT_BANGUNAN : MT_BANGUNANValue,
-							MT_MESIN : MT_MESINValue,
-							MT_DLL : MT_DLLValue,
-							MK_BAHAN_BAKU : MK_BAHAN_BAKUValue,
-							MK_UPAH : MK_UPAHValue,
-							MK_DLL : MK_DLLValue,
-							SP_MODAL_SENDIRI : SP_MODAL_SENDIRIValue,
-							SP_PINJAMAN : SP_PINJAMANValue,
-							TKI_L_JUMLAH : TKI_L_JUMLAHValue,
-							TKI_P_JUMLAH : TKI_P_JUMLAHValue,
-							TKA_JUMLAH : TKA_JUMLAHValue,
-							TKA_ASAL : TKA_ASALValue,
-							TKA_JABATAN : TKA_JABATANValue,
-							TKA_JANGKA_WAKTU : TKA_JANGKA_WAKTUValue,
-							DN_JENIS_PRODUK1 : DN_JENIS_PRODUK1Value,
-							DN_JENIS_PRODUK2 : DN_JENIS_PRODUK2Value,
-							DN_JENIS_PRODUK3 : DN_JENIS_PRODUK3Value,
-							E_JENIS_PRODUK1 : E_JENIS_PRODUK1Value,
-							E_JENIS_PRODUK2 : E_JENIS_PRODUK2Value,
-							E_JENIS_PRODUK3 : E_JENIS_PRODUK3Value,
-							MERK_JENIS_PRODUK : MERK_JENIS_PRODUKValue,
-							
-							BBKB_DN_JUMLAH : BBKB_DN_JUMLAHValue,
-							BBKB_DN_SATUAN : BBKB_DN_SATUANValue,
-							BBKB_DN_ASAL : BBKB_DN_ASALValue,
-							BBKB_DN_HARGA : BBKB_DN_HARGAValue,
-							BBKB_DN_KETERANGAN : BBKB_DN_KETERANGANValue,
-							BBKO_DN_JUMLAH : BBKO_DN_JUMLAHValue,
-							BBKO_DN_SATUAN : BBKO_DN_SATUANValue,
-							BBKO_DN_ASAL : BBKO_DN_ASALValue,
-							BBKO_DN_HARGA : BBKO_DN_HARGAValue,
-							BBKO_DN_KETERANGAN : BBKO_DN_KETERANGANValue,
-							BP_DN_JUMLAH : BP_DN_JUMLAHValue,
-							BP_DN_SATUAN : BP_DN_SATUANValue,
-							BP_DN_ASAL : BP_DN_ASALValue,
-							BP_DN_HARGA : BP_DN_HARGAValue,
-							BP_DN_KETERANGAN : BP_DN_KETERANGANValue,
-							
-							BBKB_I_JUMLAH : BBKB_I_JUMLAHValue,
-							BBKB_I_SATUAN : BBKB_I_SATUANValue,
-							BBKB_I_ASAL : BBKB_I_ASALValue,
-							BBKB_I_HARGA : BBKB_I_HARGAValue,
-							BBKB_I_KETERANGAN : BBKB_I_KETERANGANValue,
-							BBKO_I_JUMLAH : BBKO_I_JUMLAHValue,
-							BBKO_I_SATUAN : BBKO_I_SATUANValue,
-							BBKO_I_ASAL : BBKO_I_ASALValue,
-							BBKO_I_HARGA : BBKO_I_HARGAValue,
-							BBKO_I_KETERANGAN : BBKO_I_KETERANGANValue,
-							BP_I_JUMLAH : BP_I_JUMLAHValue,
-							BP_I_SATUAN : BP_I_SATUANValue,
-							BP_I_ASAL : BP_I_ASALValue,
-							BP_I_HARGA : BP_I_HARGAValue,
-							BP_I_KETERANGAN : BP_I_KETERANGANValue,
-							
-							RBB_LUAS_GUDANG : RBB_LUAS_GUDANGValue,
-							RBB_KAYU_OLAHAN : RBB_KAYU_OLAHANValue,
-							RBB_PENOLONG : RBB_PENOLONGValue,
-							RBB_HASIL_PRODUKSI : RBB_HASIL_PRODUKSIValue,
-							RLPLY_LOKASI : RLPLY_LOKASIValue,
-							RLPLY_LUAS : RLPLY_LUASValue,
-							RLPLY_PERIZINAN : RLPLY_PERIZINANValue,
-							RSD1_KAPASITAS : RSD1_KAPASITASValue,
-							RSD1_JUMLAH : RSD1_JUMLAHValue,
-							RSD211_KAPASITAS : RSD211_KAPASITASValue,
-							RSD211_JUMLAH : RSD211_JUMLAHValue,
-							RSD212_KAPASITAS : RSD212_KAPASITASValue,
-							RSD212_JUMLAH : RSD212_JUMLAHValue,
-							RSD213_KAPASITAS : RSD213_KAPASITASValue,
-							RSD213_JUMLAH : RSD213_JUMLAHValue,
-							RSD22_KAPASITAS : RSD22_KAPASITASValue,
-							RSD22_JUMLAH : RSD22_JUMLAHValue,
-							RSD23_KAPASITAS : RSD23_KAPASITASValue,
-							RSD23_JUMLAH : RSD23_JUMLAHValue,
-							RPL1_VOLUME : RPL1_VOLUMEValue,
-							RPL1_SATUAN : RPL1_SATUANValue,
-							RPL1_PENANGANAN : RPL1_PENANGANANValue,
-							RPL2_VOLUME : RPL2_VOLUMEValue,
-							RPL2_SATUAN : RPL2_SATUANValue,
-							RPL2_PENANGANAN : RPL2_PENANGANANValue,
-							RPL3_VOLUME : RPL3_VOLUMEValue,
-							RPL3_SATUAN : RPL3_SATUANValue,
-							RPL3_PENANGANAN : RPL3_PENANGANANValue,
-							RPL4_VOLUME : RPL4_VOLUMEValue,
-							RPL4_SATUAN : RPL4_SATUANValue,
-							RPL4_PENANGANAN : RPL4_PENANGANANValue,
-							PENYETUJU : PENYETUJUValue,
-							NOMOR_SURAT : NOMOR_SURATValue,
-							TGL_TERLAMPIR : TGL_TERLAMPIRValue,
-							TGL_PERMOHONAN : TGL_PERMOHONANValue,
-							STATUS_SURVEY : STATUS_SURVEYValue,
-							STATUS : STATUSValue,
-							TGL_BERLAKU : TGL_BERLAKUValue,
-							TGL_BERAKHIR : TGL_BERAKHIRValue,
-							RETRIBUSI : RETRIBUSIValue,
-							KETERANGAN_SYARAT : encoded_array_iuiphhk_keterangan,
-							pemohon_nama : pemohon_namaValue,
-							pemohon_telp : pemohon_telpValue,
-							pemohon_alamat : pemohon_alamatValue,
-							pemohon_id : pemohon_idValue,
-							pemohon_nik : pemohon_nikValue,
+							params : params,
 							action : iphhk_dbTask
 						},
 						success: function(response){
@@ -888,7 +389,6 @@
 		function iphhk_refresh(){
 			iphhk_dbListAction = "GETLIST";
 			iphhk_gridSearchField.reset();
-			iphhk_searchPanel.getForm().reset();
 			iphhk_dataStore.proxy.extraParams = { action : 'GETLIST' };
 			iphhk_dataStore.proxy.extraParams.query = "";
 			iphhk_dataStore.currentPage = 1;
@@ -911,7 +411,10 @@
             iphhk_dbTaskMessage = 'update';
 			
 			var record = iphhk_gridPanel.getSelectionModel().getSelection()[0];
-			pemohon_idField.setValue(record.data.pemohon_id);
+			iphhk_formPanel.loadRecord(record);
+			ID_SKTRField.setValue(record.data.ID_SKTR);
+			JENIS_PERMOHONANField.setValue(record.data.JENIS_PERMOHONAN);
+			/* pemohon_idField.setValue(record.data.pemohon_id);
 			pemohon_nikField.setValue(record.data.pemohon_nik);
 			pemohon_namaField.setValue(record.data.pemohon_nama);
 			pemohon_telpField.setValue(record.data.pemohon_telp);
@@ -1046,7 +549,7 @@
 			STATUSField.setValue(record.data.STATUS);
 			TGL_BERLAKUField.setValue(record.data.TGL_BERLAKU);
 			TGL_BERAKHIRField.setValue(record.data.TGL_BERAKHIR);
-			RETRIBUSIField.setValue(record.data.RETRIBUSI);
+			RETRIBUSIField.setValue(record.data.RETRIBUSI); */
 			if(record.data.RETRIBUSI != 0){
 				RETRIBUSI_STATUSField.setValue({ s_retribusi : ['1'] });
 			}else{
@@ -1055,19 +558,19 @@
 			det_iuiphhk_rencana_alat_dataStore.proxy.extraParams = { 
 				iuiphhk_id : record.data.ID_IUIPHHK,
 				currentAction : 'update',
-				action : 'GETR_ALAT',
+				action : 'GEiphhk_ALAT',
 				jenis : '1'
 			};
 			det_iuiphhk_rencana_alat_e_dataStore.proxy.extraParams = { 
 				iuiphhk_id : record.data.ID_IUIPHHK,
 				currentAction : 'update',
-				action : 'GETR_ALAT',
+				action : 'GEiphhk_ALAT',
 				jenis : '2'
 			};
 			det_iuiphhk_rencana_alat_e_dataStore.proxy.extraParams = { 
 				iuiphhk_id : record.data.ID_IUIPHHK,
 				currentAction : 'update',
-				action : 'GETR_PRODUKSI',
+				action : 'GEiphhk_PRODUKSI',
 				// jenis : '2'
 			};
 			iuiphhk_syaratDataStore.proxy.extraParams = { 
@@ -1922,13 +1425,93 @@
 				{ name : 'STATUS', type : 'int', mapping : 'STATUS' },
 				{ name : 'TGL_BERLAKU', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERLAKU' },
 				{ name : 'TGL_BERAKHIR', type : 'date', dateFormat : 'Y-m-d', mapping : 'TGL_BERAKHIR' },
+				{ name : 'lama_proses', type : 'string', mapping : 'lama_proses' },
 				{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
 				{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
 				{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
 				{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+				{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+				{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+				{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+				{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+				{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
 				{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
-				{ name : 'lama_proses', type : 'string', mapping : 'lama_proses' },
+				{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+				{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+				{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+				{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+				{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
+				{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+				{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
+				{ name : 'perusahaan_id', type : 'int', mapping : 'perusahaan_id' },
+				{ name : 'perusahaan_npwp', type : 'string', mapping : 'perusahaan_npwp' },
+				{ name : 'perusahaan_nama', type : 'string', mapping : 'perusahaan_nama' },
+				{ name : 'perusahaan_noakta', type : 'string', mapping : 'perusahaan_noakta' },
+				{ name : 'perusahaan_notaris', type : 'string', mapping : 'perusahaan_notaris' },
+				{ name : 'perusahaan_tglakta', type : 'date', dateFormat : 'Y-m-d', mapping : 'perusahaan_tglakta' },
+				{ name : 'perusahaan_bentuk_id', type : 'int', mapping : 'perusahaan_bentuk_id' },
+				{ name : 'perusahaan_kualifikasi_id', type : 'int', mapping : 'perusahaan_kualifikasi_id' },
+				{ name : 'perusahaan_alamat', type : 'string', mapping : 'perusahaan_alamat' },
+				{ name : 'perusahaan_rt', type : 'int', mapping : 'perusahaan_rt' },
+				{ name : 'perusahaan_rw', type : 'int', mapping : 'perusahaan_rw' },
+				{ name : 'perusahaan_propinsi_id', type : 'int', mapping : 'perusahaan_propinsi_id' },
+				{ name : 'perusahaan_kabkota_id', type : 'int', mapping : 'perusahaan_kabkota_id' },
+				{ name : 'perusahaan_kecamatan_id', type : 'int', mapping : 'perusahaan_kecamatan_id' },
+				{ name : 'perusahaan_desa_id', type : 'int', mapping : 'perusahaan_desa_id' },
+				{ name : 'perusahaan_kodepos', type : 'string', mapping : 'perusahaan_kodepos' },
+				{ name : 'perusahaan_telp', type : 'string', mapping : 'perusahaan_telp' },
+				{ name : 'perusahaan_fax', type : 'string', mapping : 'perusahaan_fax' },
+				{ name : 'perusahaan_stempat_id', type : 'int', mapping : 'perusahaan_stempat_id' },
+				{ name : 'perusahaan_sperusahaan_id', type : 'int', mapping : 'perusahaan_sperusahaan_id' },
+				{ name : 'perusahaan_usaha', type : 'string', mapping : 'perusahaan_usaha' },
+				{ name : 'perusahaan_butara', type : 'string', mapping : 'perusahaan_butara' },
+				{ name : 'perusahaan_bselatan', type : 'string', mapping : 'perusahaan_bselatan' },
+				{ name : 'perusahaan_btimur', type : 'string', mapping : 'perusahaan_btimur' },
+				{ name : 'perusahaan_bbarat', type : 'string', mapping : 'perusahaan_bbarat' },
+				{ name : 'perusahaan_modal', type : 'float', mapping : 'perusahaan_modal' },
+				{ name : 'perusahaan_merk', type : 'int', mapping : 'perusahaan_merk' },
+				{ name : 'perusahaan_jusaha_id', type : 'int', mapping : 'perusahaan_jusaha_id' }
 				]
+		});
+		kelurahan_dataStore = Ext.create('Ext.data.Store',{
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_public_function/get_kelurahan',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total',
+					idProperty : 'id'
+				},
+				actionMethods : {
+					read : 'POST'
+				}
+			}),
+			fields : [
+				{ name : 'id', type : 'int', mapping : 'id' },
+				{ name : 'desa', type : 'string', mapping : 'desa' }
+			]
+		});
+		kecamatan_dataStore = Ext.create('Ext.data.Store',{
+			pageSize : globalPageSize,
+			proxy : Ext.create('Ext.data.HttpProxy',{
+				url : 'c_public_function/get_kecamatan',
+				reader : {
+					type : 'json',
+					root : 'results',
+					rootProperty : 'results',
+					totalProperty : 'total',
+					idProperty : 'id'
+				},
+				actionMethods : {
+					read : 'POST'
+				}
+			}),
+			fields : [
+				{ name : 'id', type : 'int', mapping : 'id' },
+				{ name : 'kecamatan', type : 'string', mapping : 'kecamatan' }
+			]
 		});
 /* End DataStore declaration */
 /* Start Shorcut Declaration */
@@ -2370,7 +1953,7 @@
 					read : 'POST'
 				},
 				extraParams : {
-					action : 'GETR_ALAT'
+					action : 'GEiphhk_ALAT'
 				}
 			}),
 			fields : [
@@ -2533,7 +2116,7 @@
 					read : 'POST'
 				},
 				extraParams : {
-					action : 'GETR_ALAT'
+					action : 'GEiphhk_ALAT'
 				}
 			}),
 			fields : [
@@ -2696,7 +2279,7 @@
 					read : 'POST'
 				},
 				extraParams : {
-					action : 'GETR_PRODUKSI'
+					action : 'GEiphhk_PRODUKSI'
 				}
 			}),
 			fields : [
@@ -2879,13 +2462,20 @@
 		});
 		RETRIBUSIField = Ext.create('Ext.form.TextField',{
 			id : 'RETRIBUSIField',
-			name : 'RETRIBUSI',
+			name : 'permohonan_retribusi',
 			fieldLabel : 'Retribusi',
 			maxLength : 50
 		});
+		retibusiTanggalField = Ext.create('Ext.form.field.Date',{
+			name : 'permohonan_retribusi_tanggal',
+			fieldLabel : 'Tanggal',
+			format : 'd-m-Y',
+			hidden : true,
+			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+		});
 		ID_IUIPHHKField = Ext.create('Ext.form.NumberField',{
 			id : 'ID_IUIPHHKField',
-			name : 'ID_IUIPHHK',
+			name : 'permohonan_id',
 			fieldLabel : 'ID_IUIPHHK<font color=red>*</font>',
 			allowBlank : false,
 			allowNegatife : false,
@@ -2916,7 +2506,7 @@
 		});
 		JENIS_PERMOHONANField = Ext.create('Ext.form.ComboBox',{
 			id : 'JENIS_PERMOHONANField',
-			name : 'JENIS_PERMOHONAN',
+			name : 'permohonan_jenis',
 			fieldLabel : 'Jenis Permohonan',
 			store : new Ext.data.ArrayStore({
 				fields : ['jenis_id', 'jenis'],
@@ -3781,7 +3371,7 @@
 		});
 		TGL_PERMOHONANField = Ext.create('Ext.form.TextField',{
 			id : 'TGL_PERMOHONANField',
-			name : 'TGL_PERMOHONAN',
+			name : 'permohonan_tanggal',
 			fieldLabel : 'TGL_PERMOHONAN',
 			maxLength : 0,
 			hidden : true
@@ -3825,16 +3415,79 @@
 		});
 		TGL_BERAKHIRField = Ext.create('Ext.form.Date',{
 			id : 'TGL_BERAKHIRField',
-			name : 'TGL_BERAKHIR',
+			name : 'permohonan_kadaluarsa',
 			fieldLabel : 'Masa Berlaku',
 			format : 'd-m-Y',
 			maxLength : 10,
 			<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden : true,") : (""); ?>
 		});
-		/*Data Pemohon*/
-		var pemohon_nikField = Ext.create('Ext.form.ComboBox',{
-			name : 'pemohon_nikField',
+		/* START DATA PEMOHON */
+		var iphhk_det_pemohon_idField = Ext.create('Ext.form.Hidden',{
+			name : 'pemohon_id'
+		});
+		var iphhk_det_pemohon_namaField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_nama',
+			fieldLabel : 'Nama',
+			maxLength : 50
+		});
+		var iphhk_det_pemohon_alamatField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		var iphhk_det_pemohon_telpField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_telp',
+			fieldLabel : 'Telp',
+			maxLength : 20,
+			maskRe : /([0-9]+)$/
+		});
+		var iphhk_det_pemohon_npwpField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_npwp',
+			fieldLabel : 'NPWP',
+			maxLength : 50
+		});
+		var iphhk_det_pemohon_rtField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_rt',
+			fieldLabel : 'RT',
+			maskRe : /([0-9]+)$/
+		});
+		var iphhk_det_pemohon_rwField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_rw',
+			fieldLabel : 'RW',
+			maskRe : /([0-9]+)$/
+		});
+		var iphhk_det_pemohon_kelField = Ext.create('Ext.form.ComboBox',{
+			name : 'pemohon_kel',
+			fieldLabel : 'Kelurahan',
+			store : kelurahan_dataStore,
+			displayField : 'desa',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kelurahan_dataStore.load();
+				}
+			}
+		});
+		var iphhk_det_pemohon_kecField = Ext.create('Ext.form.ComboBox',{
+			name : 'pemohon_kec',
+			fieldLabel : 'Kecamatan',
+			store : kecamatan_dataStore,
+			displayField : 'kecamatan',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					kecamatan_dataStore.load();
+				}
+			}
+		});
+		var iphhk_det_pemohon_nikField = Ext.create('Ext.form.ComboBox',{
+			name : 'pemohon_nik',
 			fieldLabel : 'NIK',
+			pageSize : 15,
 			store : Ext.create('Ext.data.Store',{
 				pageSize : globalPageSize,
 				proxy : Ext.create('Ext.data.HttpProxy',{
@@ -3843,14 +3496,27 @@
 						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'pemohon_id'
 					},
 					actionMethods : { read : 'POST' },
-					extraParams : { action : 'SEARCH' }
+					extraParams : { action : 'GETLIST' }
 				}),
 				fields : [
 					{ name : 'pemohon_id', type : 'int', mapping : 'pemohon_id' },
 					{ name : 'pemohon_nama', type : 'string', mapping : 'pemohon_nama' },
 					{ name : 'pemohon_alamat', type : 'string', mapping : 'pemohon_alamat' },
 					{ name : 'pemohon_telp', type : 'string', mapping : 'pemohon_telp' },
+					{ name : 'pemohon_npwp', type : 'string', mapping : 'pemohon_npwp' },
+					{ name : 'pemohon_rt', type : 'int', mapping : 'pemohon_rt' },
+					{ name : 'pemohon_rw', type : 'int', mapping : 'pemohon_rw' },
+					{ name : 'pemohon_kel', type : 'string', mapping : 'pemohon_kel' },
+					{ name : 'pemohon_kec', type : 'string', mapping : 'pemohon_kec' },
 					{ name : 'pemohon_nik', type : 'string', mapping : 'pemohon_nik' },
+					{ name : 'pemohon_stra', type : 'string', mapping : 'pemohon_stra' },
+					{ name : 'pemohon_surattugas', type : 'string', mapping : 'pemohon_surattugas' },
+					{ name : 'pemohon_pekerjaan', type : 'string', mapping : 'pemohon_pekerjaan' },
+					{ name : 'pemohon_tempatlahir', type : 'string', mapping : 'pemohon_tempatlahir' },
+					{ name : 'pemohon_tanggallahir', type : 'date', dateFormat : 'Y-m-d', mapping : 'pemohon_tanggallahir' },
+					{ name : 'pemohon_user_id', type : 'int', mapping : 'pemohon_user_id' },
+					{ name : 'pemohon_pendidikan', type : 'string', mapping : 'pemohon_pendidikan' },
+					{ name : 'pemohon_tahunlulus', type : 'int', mapping : 'pemohon_tahunlulus' },
 				]
 			}),
 			displayField : 'pemohon_nik',
@@ -3862,12 +3528,12 @@
 			triggerCls : 'x-form-search-trigger',
 			forceSelection : false,
 			onTriggerClick: function(event){
-				var store = pemohon_nikField.getStore();
-				var val = pemohon_nikField.getRawValue();
-				store.proxy.extraParams = {action : 'SEARCH',pemohon_nik : val};
+				var store = iphhk_det_pemohon_nikField.getStore();
+				var val = iphhk_det_pemohon_nikField.getRawValue();
+				store.proxy.extraParams = {action : 'GETLIST',query : val};
 				store.load();
-				pemohon_nikField.expand();
-				pemohon_nikField.fireEvent("ontriggerclick", this, event);
+				iphhk_det_pemohon_nikField.expand();
+				iphhk_det_pemohon_nikField.fireEvent("ontriggerclick", this, event);
 			},  
 			tpl: Ext.create('Ext.XTemplate',
 				'<tpl for=".">',
@@ -3877,40 +3543,538 @@
 			listeners : {
 				select : function(cmb, record){
 					var rec=record[0];
-					pemohon_nikField.setValue(rec.get('pemohon_nik'));
-					pemohon_idField.setValue(rec.get('pemohon_id'));
-					pemohon_namaField.setValue(rec.get('pemohon_nama'));
-					pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
-					pemohon_telpField.setValue(rec.get('pemohon_telp'));
+					iphhk_det_pemohon_idField.setValue(rec.get('pemohon_id'));
+					iphhk_det_pemohon_nikField.setValue(rec.get('pemohon_nik'));
+					iphhk_det_pemohon_namaField.setValue(rec.get('pemohon_nama'));
+					iphhk_det_pemohon_alamatField.setValue(rec.get('pemohon_alamat'));
+					iphhk_det_pemohon_telpField.setValue(rec.get('pemohon_telp'));
+					iphhk_det_pemohon_npwpField.setValue(rec.get('pemohon_npwp'));
+					iphhk_det_pemohon_rtField.setValue(rec.get('pemohon_rt'));
+					iphhk_det_pemohon_rwField.setValue(rec.get('pemohon_rw'));
+					iphhk_det_pemohon_kelField.setValue(rec.get('pemohon_kel'));
+					iphhk_det_pemohon_kecField.setValue(rec.get('pemohon_kec'));
+					iphhk_det_pemohon_straField.setValue(rec.get('pemohon_stra'));
+					iphhk_det_pemohon_surattugasField.setValue(rec.get('pemohon_surattugas'));
+					iphhk_det_pemohon_pekerjaanField.setValue(rec.get('pemohon_pekerjaan'));
+					iphhk_det_pemohon_tempatlahirField.setValue(rec.get('pemohon_tempatlahir'));
+					iphhk_det_pemohon_tanggallahirField.setValue(rec.get('pemohon_tanggallahir'));
+					iphhk_det_pemohon_user_idField.setValue(rec.get('pemohon_user_id'));
+					iphhk_det_pemohon_pendidikanField.setValue(rec.get('pemohon_pendidikan'));
+					iphhk_det_pemohon_tahunlulusField.setValue(rec.get('pemohon_tahunlulus'));
 				}
 			}
 		});
-		pemohon_namaField = Ext.create('Ext.form.TextField',{
-			id : 'pemohon_namaField',
-			name : 'pemohon_nama',
-			fieldLabel : 'Nama Pemohon',
+		var iphhk_det_pemohon_straField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_stra',
+			fieldLabel : 'STRA',
+			hidden : true,
 			maxLength : 50
 		});
-		pemohon_telpField = Ext.create('Ext.form.TextField',{
-			id : 'pemohon_telpField',
-			name : 'pemohon_telp',
-			fieldLabel : 'No. Telp',
+		var iphhk_det_pemohon_surattugasField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_surattugas',
+			fieldLabel : 'Surat Tugas',
+			hidden : true,
+			maxLength : 50
+		});
+		var iphhk_det_pemohon_pekerjaanField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_pekerjaan',
+			fieldLabel : 'Pekerjaan',
+			maxLength : 50
+		});
+		var iphhk_det_pemohon_tempatlahirField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_tempatlahir',
+			fieldLabel : 'Tempat Lahir',
+			maxLength : 50
+		});
+		var iphhk_det_pemohon_tanggallahirField = Ext.create('Ext.form.field.Date',{
+			name : 'pemohon_tanggallahir',
+			fieldLabel : 'Tanggal Lahir',
+			format : 'd-m-Y'
+		});
+		var iphhk_det_pemohon_user_idField = Ext.create('Ext.form.Hidden',{
+			name : 'pemohon_user_id',
+		});
+		var iphhk_det_pemohon_pendidikanField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_pendidikan',
+			fieldLabel : 'Pendidikan',
+			maxLength : 50
+		});
+		var iphhk_det_pemohon_tahunlulusField = Ext.create('Ext.form.TextField',{
+			name : 'pemohon_tahunlulus',
+			fieldLabel : 'Tahun Lulus',
+			maxLength : 4,
+			maskRe : /([0-9]+)$/
+		});
+		
+		/* START DATA PERUSAHAAN */
+		perusahaan_idField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_id',
+			hidden : true
+		});
+		perusahaan_npwpField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_npwp',
+			fieldLabel : 'NPWP/NPWPD',
+			pageSize : 15,
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_perusahaan/switchAction',
+					reader : {
+						type : 'json', root : 'results', rootProperty : 'results', totalProperty : 'total', idProperty : 'id'
+					},
+					actionMethods : { read : 'POST' },
+					extraParams : { action : 'GETLIST' }
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'npwp', type : 'string', mapping : 'npwp' },
+					{ name : 'nama', type : 'string', mapping : 'nama' },
+					{ name : 'noakta', type : 'string', mapping : 'noakta' },
+					{ name : 'notaris', type : 'string', mapping : 'notaris' },
+					{ name : 'tglakta', type : 'date',dateFormat : 'Y-m-d', mapping : 'tglakta' },
+					{ name : 'bentuk_id', type : 'int', mapping : 'bentuk_id' },
+					{ name : 'kualifikasi_id', type : 'int', mapping : 'kualifikasi_id' },
+					{ name : 'alamat', type : 'string', mapping : 'alamat' },
+					{ name : 'rt', type : 'int', mapping : 'rt' },
+					{ name : 'rw', type : 'int', mapping : 'rw' },
+					{ name : 'propinsi_id', type : 'int', mapping : 'propinsi_id' },
+					{ name : 'kabkota_id', type : 'int', mapping : 'kabkota_id' },
+					{ name : 'kecamatan_id', type : 'int', mapping : 'kecamatan_id' },
+					{ name : 'desa_id', type : 'int', mapping : 'desa_id' },
+					{ name : 'kodepos', type : 'string', mapping : 'kodepos' },
+					{ name : 'telp', type : 'string', mapping : 'telp' },
+					{ name : 'fax', type : 'string', mapping : 'fax' },
+					{ name : 'stempat_id', type : 'int', mapping : 'stempat_id' },
+					{ name : 'sperusahaan_id', type : 'int', mapping : 'sperusahaan_id' },
+					{ name : 'usaha', type : 'string', mapping : 'usaha' },
+					{ name : 'butara', type : 'string', mapping : 'butara' },
+					{ name : 'bselatan', type : 'string', mapping : 'bselatan' },
+					{ name : 'btimur', type : 'string', mapping : 'btimur' },
+					{ name : 'bbarat', type : 'string', mapping : 'bbarat' },
+					{ name : 'modal', type : 'float', mapping : 'modal' },
+					{ name : 'merk', type : 'int', mapping : 'merk' },
+					{ name : 'jusaha_id', type : 'int', mapping : 'jusaha_id' }
+				]
+			}),
+			displayField : 'npwp',
+			valueField : 'id',
+			queryMode : 'remote',
+			triggerAction : 'query',
+			repeatTriggerClick : true,
+			minChars : 100,
+			triggerCls : 'x-form-search-trigger',
+			forceSelection : false,
+			onTriggerClick: function(event){
+				var store = perusahaan_npwpField.getStore();
+				var val = perusahaan_npwpField.getRawValue();
+				store.proxy.extraParams = {action : 'GETLIST',query : val};
+				store.load();
+				perusahaan_npwpField.expand();
+				perusahaan_npwpField.fireEvent("ontriggerclick", this, event);
+			},  
+			tpl: Ext.create('Ext.XTemplate',
+				'<tpl for=".">',
+					'<div class="x-boundlist-item">NPWP : {npwp}<br>Nama : {nama}<br>Alamat : {alamat}</div>',
+				'</tpl>'
+			),
+			listeners : {
+				select : function(cmb, record){
+					var rec=record[0];
+					perusahaan_idField.setValue(rec.get('id'));
+					perusahaan_npwpField.setValue(rec.get('npwp'));
+					perusahaan_namaField.setValue(rec.get('nama'));
+					perusahaan_noaktaField.setValue(rec.get('noakta'));
+					perusahaan_notarisField.setValue(rec.get('notaris'));
+					perusahaan_tglaktaField.setValue(rec.get('tglakta'));
+					perusahaan_bentuk_idField.setValue(rec.get('bentuk_id'));
+					perusahaan_kualifikasi_idField.setValue(rec.get('kualifikasi_id'));
+					perusahaan_alamatField.setValue(rec.get('alamat'));
+					perusahaan_rtField.setValue(rec.get('rt'));
+					perusahaan_rwField.setValue(rec.get('rw'));
+					perusahaan_propinsi_idField.setValue(rec.get('propinsi_id'));
+					perusahaan_kabkota_idField.setValue(rec.get('kabkota_id'));
+					perusahaan_desa_idField.setValue(rec.get('desa_id'));
+					perusahaan_kecamatan_idField.setValue(rec.get('kecamatan_id'));
+					perusahaan_kodeposField.setValue(rec.get('kodepos'));
+					perusahaan_telpField.setValue(rec.get('telp'));
+					perusahaan_faxField.setValue(rec.get('fax'));
+					perusahaan_stempat_idField.setValue(rec.get('stempat_id'));
+					perusahaan_sperusahaan_idField.setValue(rec.get('sperusahaan_id'));
+					perusahaan_usahaField.setValue(rec.get('usaha'));
+					perusahaan_butaraField.setValue(rec.get('butara'));
+					perusahaan_bselatanField.setValue(rec.get('bselatan'));
+					perusahaan_btimurField.setValue(rec.get('btimur'));
+					perusahaan_bbaratField.setValue(rec.get('bbarat'));
+					perusahaan_modalField.setValue(rec.get('modal'));
+					perusahaan_merkField.setValue(rec.get('merk'));
+					perusahaan_jusaha_idField.setValue(rec.get('jusaha_id'));
+				}
+			}
+		});
+		perusahaan_namaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_nama',
+			fieldLabel : 'Nama',
+			maxLength : 100
+		});
+		perusahaan_noaktaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_noakta',
+			fieldLabel : 'No. Akta',
+			maxLength : 100
+		});
+		perusahaan_notarisField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_notaris',
+			fieldLabel : 'Notaris',
+			maxLength : 100
+		});
+		perusahaan_tglaktaField = Ext.create('Ext.form.field.Date',{
+			name : 'perusahaan_tglakta',
+			fieldLabel : 'Tgl Akta',
+			format : 'd-m-Y',
+			value : new Date('<?php echo date('Y-m-d').'T'.date('H:i:s'); ?>')
+		});
+		perusahaan_bentuk_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_bentuk_id',
+			fieldLabel : 'Bentuk',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_bentuk_perusahaan',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'nama', type : 'string', mapping : 'nama' }
+				]
+			}),
+			displayField : 'nama',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_bentuk_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_kualifikasi_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_kualifikasi_id',
+			fieldLabel : 'Kualifikasi',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_kualifikasi',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'kualifikasi', type : 'string', mapping : 'kualifikasi' }
+				]
+			}),
+			displayField : 'kualifikasi',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_kualifikasi_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_alamatField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_alamat',
+			fieldLabel : 'Alamat',
+			maxLength : 100
+		});
+		perusahaan_rtField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_rt',
+			fieldLabel : 'RT',
+			maxLength : 10
+		});
+		perusahaan_rwField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_rw',
+			fieldLabel : 'RW',
+			maxLength : 10
+		});
+		perusahaan_propinsi_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_propinsi_id',
+			fieldLabel : 'Propinsi',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_propinsi',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'propinsi', type : 'string', mapping : 'propinsi' }
+				]
+			}),
+			displayField : 'propinsi',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_propinsi_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_kabkota_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_kabkota_id',
+			fieldLabel : 'Kota',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_kabkota',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'kabkota', type : 'string', mapping : 'kabkota' }
+				]
+			}),
+			displayField : 'kabkota',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_kabkota_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_desa_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_desa_id',
+			fieldLabel : 'Desa',
+			store : kelurahan_dataStore,
+			displayField : 'desa',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local'
+		});
+		perusahaan_kecamatan_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_kecamatan_id',
+			fieldLabel : 'Kecamatan',
+			store : kecamatan_dataStore,
+			displayField : 'kecamatan',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local'
+		});
+		perusahaan_kodeposField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_kodepos',
+			fieldLabel : 'Kodepos',
 			maxLength : 20
 		});
-		pemohon_alamatField = Ext.create('Ext.form.TextField',{
-			id : 'pemohon_alamatField',
-			name : 'pemohon_alamat',
-			fieldLabel : 'Alamat Pemohon',
-			maxLength : 20
+		perusahaan_telpField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_telp',
+			fieldLabel : 'Telp',
+			maxLength : 50
 		});
-		pemohon_idField = Ext.create('Ext.form.TextField',{
-			id : 'pemohon_idField',
-			name : 'pemohon_id',
-			fieldLabel : '',
-			maxLength : 20,
-			hidden:true
+		perusahaan_faxField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_fax',
+			fieldLabel : 'Fax',
+			maxLength : 50
 		});
-		/*End Data Pemohon*/
+		perusahaan_stempat_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_stempat_id',
+			fieldLabel : 'Status Tempat',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_status_tempat',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'status', type : 'string', mapping : 'status' }
+				]
+			}),
+			displayField : 'status',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_stempat_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_sperusahaan_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_sperusahaan_id',
+			fieldLabel : 'Status Usaha',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_status_usaha',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'status', type : 'string', mapping : 'status' }
+				]
+			}),
+			displayField : 'status',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_sperusahaan_idField.getStore().load();
+				}
+			}
+		});
+		perusahaan_usahaField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_usaha',
+			fieldLabel : 'Usaha',
+			maxLength : 100
+		});
+		perusahaan_butaraField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_butara',
+			fieldLabel : 'Batas Utara',
+			maxLength : 100
+		});
+		perusahaan_bselatanField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_bselatan',
+			fieldLabel : 'Batas Selatan',
+			maxLength : 100
+		});
+		perusahaan_btimurField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_btimur',
+			fieldLabel : 'Batas Timur',
+			maxLength : 100
+		});
+		perusahaan_bbaratField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_bbarat',
+			fieldLabel : 'Batas Barat',
+			maxLength : 100
+		});
+		perusahaan_modalField = Ext.create('Ext.form.TextField',{
+			name : 'perusahaan_modal',
+			fieldLabel : 'Modal',
+			maxLength : 50
+		});
+		perusahaan_merkField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_merk',
+			fieldLabel : 'Merk',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_merk',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'merk', type : 'string', mapping : 'merk' }
+				]
+			}),
+			displayField : 'merk',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_merkField.getStore().load();
+				}
+			}
+		});
+		perusahaan_jusaha_idField = Ext.create('Ext.form.ComboBox',{
+			name : 'perusahaan_jusaha_id',
+			fieldLabel : 'Jenis Usaha',
+			store : Ext.create('Ext.data.Store',{
+				pageSize : globalPageSize,
+				proxy : Ext.create('Ext.data.HttpProxy',{
+					url : 'c_public_function/get_jenis_usaha',
+					reader : {
+						type : 'json',
+						root : 'results',
+						rootProperty : 'results',
+						totalProperty : 'total',
+						idProperty : 'id'
+					},
+					actionMethods : {
+						read : 'POST'
+					}
+				}),
+				fields : [
+					{ name : 'id', type : 'int', mapping : 'id' },
+					{ name : 'usaha', type : 'string', mapping : 'usaha' }
+				]
+			}),
+			displayField : 'usaha',
+			valueField : 'id',
+			triggerAction : 'all',
+			queryMode : 'local',
+			listeners : {
+				afterrender : function(){
+					perusahaan_jusaha_idField.getStore().load();
+				}
+			}
+		});
+		/* END DATA PERUSAHAAN */
 		var iphhk_saveButton = Ext.create('Ext.Button',{
 			text : globalSaveButtonTitle,
 			handler : iphhk_save
@@ -3940,6 +4104,7 @@
 					layout :'form',
 					items : [
 							JENIS_PERMOHONANField,
+							TGL_PERMOHONANField,
 							NO_SK_LAMAField
 							]
 				},{
@@ -3949,10 +4114,24 @@
 					collapsible : false,
 					layout :'form',
 					items : [
-							pemohon_nikField,
-							pemohon_namaField,
-							pemohon_alamatField,
-							pemohon_telpField,
+						iphhk_det_pemohon_idField,
+						iphhk_det_pemohon_nikField,
+						iphhk_det_pemohon_namaField,
+						iphhk_det_pemohon_alamatField,
+						iphhk_det_pemohon_telpField,
+						iphhk_det_pemohon_npwpField,
+						iphhk_det_pemohon_rtField,
+						iphhk_det_pemohon_rwField,
+						iphhk_det_pemohon_kelField,
+						iphhk_det_pemohon_kecField,
+						iphhk_det_pemohon_straField,
+						iphhk_det_pemohon_surattugasField,
+						iphhk_det_pemohon_pekerjaanField,
+						iphhk_det_pemohon_tempatlahirField,
+						iphhk_det_pemohon_tanggallahirField,
+						iphhk_det_pemohon_user_idField,
+						iphhk_det_pemohon_pendidikanField,
+						iphhk_det_pemohon_tahunlulusField
 							]
 				}, {
 					xtype : 'fieldset',
@@ -3961,7 +4140,7 @@
 					collapsible : false,
 					layout :'form',
 					items : [
-							NAMA_PERUSAHAANField,
+							/* NAMA_PERUSAHAANField,
 							NPWPField,
 							ALAMATField,
 							STATUS_MODALField,
@@ -3970,7 +4149,35 @@
 							PENANGGUNG_JAWABField,
 							NAMA_DIREKSIField,
 							DEWAN_KOMISARISField,
-							TUJUAN_PRODUKSIField
+							TUJUAN_PRODUKSIField */
+							perusahaan_idField,
+							perusahaan_npwpField,
+							perusahaan_namaField,
+							perusahaan_noaktaField,
+							perusahaan_notarisField,
+							perusahaan_tglaktaField,
+							perusahaan_bentuk_idField,
+							perusahaan_kualifikasi_idField,
+							perusahaan_alamatField,
+							perusahaan_rtField,
+							perusahaan_rwField,
+							perusahaan_propinsi_idField,
+							perusahaan_kabkota_idField,
+							perusahaan_kecamatan_idField,
+							perusahaan_desa_idField,
+							perusahaan_kodeposField,
+							perusahaan_telpField,
+							perusahaan_faxField,
+							perusahaan_stempat_idField,
+							perusahaan_sperusahaan_idField,
+							perusahaan_usahaField,
+							perusahaan_butaraField,
+							perusahaan_bselatanField,
+							perusahaan_btimurField,
+							perusahaan_bbaratField,
+							perusahaan_modalField,
+							perusahaan_merkField,
+							perusahaan_jusaha_idField
 							]
 				}, {
 					xtype : 'fieldset',
@@ -4513,7 +4720,7 @@
 						title : '14. Data Kelengkapan',
 						checkboxToggle : false,
 						collapsible : false,
-						<?//php echo ($_SESSION["IDHAK"] == 2) ? ("hidden : true,") : (""); ?>
+						<?php echo ($_SESSION["IDHAK"] == 2) ? ("hidden : true,") : (""); ?>
 						layout :'form',
 						items : [
 							iuiphhk_syaratGrid
@@ -4533,6 +4740,7 @@
 							TGL_BERAKHIRField,
 							<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSI_STATUSField,"); ?>
 							<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("RETRIBUSIField,"); ?>
+							<?php echo ($_SESSION["IDHAK"] == 2) ? ("") : ("retibusiTanggalField,"); ?>
 						]
 				}, {
 					xtype : 'splitter'

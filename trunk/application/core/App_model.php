@@ -250,44 +250,48 @@ class App_model extends CI_Model{
 	
 	public function cuperusahaan($params){
 		extract(get_object_vars($params));
-		$dataperusahaan = array(
-			'id'=>$perusahaan_id,
-			'npwp'=>$perusahaan_npwp,
-			'nama'=>$perusahaan_nama,
-			'noakta'=>$perusahaan_noakta,
-			'notaris'=>$perusahaan_notaris,
-			'tglakta'=>date('Y-m-d', strtotime($perusahaan_tglakta)),
-			'bentuk_id'=>$perusahaan_bentuk_id,
-			'kualifikasi_id'=>$perusahaan_kualifikasi_id,
-			'alamat'=>$perusahaan_alamat,
-			'rt'=>$perusahaan_rt,
-			'rw'=>$perusahaan_rw,
-			'propinsi_id'=>$perusahaan_propinsi_id,
-			'kabkota_id'=>$perusahaan_kabkota_id,
-			'kecamatan_id'=>$perusahaan_kecamatan_id,
-			'desa_id'=>$perusahaan_desa_id,
-			'kodepos'=>$perusahaan_kodepos,
-			'telp'=>$perusahaan_telp,
-			'fax'=>$perusahaan_fax,
-			'stempat_id'=>$perusahaan_stempat_id,
-			'sperusahaan_id'=>$perusahaan_sperusahaan_id,
-			'usaha'=>$perusahaan_usaha,
-			'butara'=>$perusahaan_butara,
-			'bselatan'=>$perusahaan_bselatan,
-			'btimur'=>$perusahaan_btimur,
-			'bbarat'=>$perusahaan_bbarat,
-			'modal'=>$perusahaan_modal,
-			'merk'=>$perusahaan_merk,
-			'jusaha_id'=>$perusahaan_jusaha_id
-		);
-		if($perusahaan_id != 0){
-			$resultperusahaan = $this->db->where('id', $perusahaan_id)->update('perusahaan', $dataperusahaan);
-			$resultperusahaan = $perusahaan_id;
+		if(isset($perusahaan_id)){
+			$dataperusahaan = array(
+				'id'=>$perusahaan_id,
+				'npwp'=>$perusahaan_npwp,
+				'nama'=>$perusahaan_nama,
+				'noakta'=>$perusahaan_noakta,
+				'notaris'=>$perusahaan_notaris,
+				'tglakta'=>date('Y-m-d', strtotime($perusahaan_tglakta)),
+				'bentuk_id'=>$perusahaan_bentuk_id,
+				'kualifikasi_id'=>$perusahaan_kualifikasi_id,
+				'alamat'=>$perusahaan_alamat,
+				'rt'=>$perusahaan_rt,
+				'rw'=>$perusahaan_rw,
+				'propinsi_id'=>$perusahaan_propinsi_id,
+				'kabkota_id'=>$perusahaan_kabkota_id,
+				'kecamatan_id'=>$perusahaan_kecamatan_id,
+				'desa_id'=>$perusahaan_desa_id,
+				'kodepos'=>$perusahaan_kodepos,
+				'telp'=>$perusahaan_telp,
+				'fax'=>$perusahaan_fax,
+				'stempat_id'=>$perusahaan_stempat_id,
+				'sperusahaan_id'=>$perusahaan_sperusahaan_id,
+				'usaha'=>$perusahaan_usaha,
+				'butara'=>$perusahaan_butara,
+				'bselatan'=>$perusahaan_bselatan,
+				'btimur'=>$perusahaan_btimur,
+				'bbarat'=>$perusahaan_bbarat,
+				'modal'=>$perusahaan_modal,
+				'merk'=>$perusahaan_merk,
+				'jusaha_id'=>$perusahaan_jusaha_id
+			);
+			if($perusahaan_id != 0){
+				$resultperusahaan = $this->db->where('id', $perusahaan_id)->update('perusahaan', $dataperusahaan);
+				$resultperusahaan = $perusahaan_id;
+			}else{
+				$this->db->insert('perusahaan', $dataperusahaan);
+				$resultperusahaan = $this->db->insert_id();
+			}
+			return $resultperusahaan;
 		}else{
-			$this->db->insert('perusahaan', $dataperusahaan);
-			$resultperusahaan = $this->db->insert_id();
+			return 0;
 		}
-		return $resultperusahaan;
 	}
 	
 	public function cupemohon($params){

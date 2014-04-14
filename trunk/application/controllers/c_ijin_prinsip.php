@@ -4,6 +4,15 @@ class C_ijin_prinsip extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		session_start();
+		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+			if(!isset($_SESSION['USERID'])){
+				$this->output->set_status_header('301');
+			}
+		}else{
+			if(!isset($_SESSION['USERID'])){
+				redirect('c_login');
+			}
+		}
 		$this->load->model('m_ijin_prinsip');
 		$this->load->model('m_m_pemohon');
 		$this->load->model('m_cek_list_prinsip');
@@ -74,64 +83,26 @@ class C_ijin_prinsip extends CI_Controller{
 	}
 	
 	function create(){
-		$ID_IJIN_PRINSIP = htmlentities($this->input->post('ID_IJIN_PRINSIP'),ENT_QUOTES);
-		$ID_IJIN_PRINSIP = is_numeric($ID_IJIN_PRINSIP) ? $ID_IJIN_PRINSIP : 0;
-		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
-		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
-		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
-		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
-		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
-		$NAMA_LOKASI = htmlentities($this->input->post('NAMA_LOKASI'),ENT_QUOTES);
-		$LONGITUDE = htmlentities($this->input->post('LONGITUDE'),ENT_QUOTES);
-		$LATITUDE = htmlentities($this->input->post('LATITUDE'),ENT_QUOTES);
-		$ALAMAT_LOKASI = htmlentities($this->input->post('ALAMAT_LOKASI'),ENT_QUOTES);
-		$JENIS_TOWER = htmlentities($this->input->post('JENIS_TOWER'),ENT_QUOTES);
-		$FUNGSI_BANGUNAN = htmlentities($this->input->post('FUNGSI_BANGUNAN'),ENT_QUOTES);
-		$JENIS_BANGUNAN = htmlentities($this->input->post('JENIS_BANGUNAN'),ENT_QUOTES);
-		$UKURAN_BANGUNAN = htmlentities($this->input->post('UKURAN_BANGUNAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = htmlentities($this->input->post('TINGGI_BANGUNAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = is_numeric($TINGGI_BANGUNAN) ? $TINGGI_BANGUNAN : 0;
-		$TIANG_BANGUNAN = htmlentities($this->input->post('TIANG_BANGUNAN'),ENT_QUOTES);
-		$PONDASI_BANGUNAN = htmlentities($this->input->post('PONDASI_BANGUNAN'),ENT_QUOTES);
-		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
-		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
-		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
-		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
-		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
-		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
-		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
-		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
-		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
-		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$params = json_decode($this->input->post('params'));
+		extract(get_object_vars($params));
 		
 		$in_prinsip_author = $this->m_ijin_prinsip->__checkSession();
 		$in_prinsip_created_date = date('Y-m-d H:i:s');
 		
+		$noreg = $this->m_public_function->getNomorReg(22);
+		$resultperusahaan = $this->m_ijin_prinsip->cuperusahaan($params);
+		$pemohon = $this->m_ijin_prinsip->cupemohon($params);
+		$resultpermohonan = $this->m_ijin_prinsip->cupermohonan($params, $pemohon, $noreg);
+		
 		if($in_prinsip_author == ''){
 			$result = 'sessionExpired';
 		}else{
-			$get_pemohon= $this->m_m_pemohon->get_by(array("pemohon_nik"=>$pemohon_nik));
-			$pemohon_id	= (count($get_pemohon) <= 0) ? ($pemohon_id = null) : ($pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES));
-			if($pemohon_id == null){
-				$data = array(
-					'pemohon_nama'=>$pemohon_nama,
-					'pemohon_alamat'=>$pemohon_alamat,
-					'pemohon_telp'=>$pemohon_telp,
-					'pemohon_nik'=>$pemohon_nik,
-					'pemohon_user_id'=>$_SESSION['USERID']
-				);
-				$pemohon_id	= $this->m_m_pemohon->__insert($data, '', 'insertId');
-			}
 			$data = array(
-				// 'ID_IJIN_PRINSIP'=>$ID_IJIN_PRINSIP,
-				'ID_PEMOHON'=>$pemohon_id,
-				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
-				// 'NO_SK'=>$NO_SK,
+				'ID_PEMOHON'=>$pemohon,
+				'ID_PERUSAHAAN'=>$resultperusahaan,
+				'NAMA_PERUSAHAAN'=>$perusahaan_nama,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
-				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+				'JENIS_PERMOHONAN'=>$permohonan_jenis,
 				'NAMA_LOKASI'=>$NAMA_LOKASI,
 				'LONGITUDE'=>$LONGITUDE,
 				'LATITUDE'=>$LATITUDE,
@@ -143,12 +114,12 @@ class C_ijin_prinsip extends CI_Controller{
 				'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
 				'TIANG_BANGUNAN'=>$TIANG_BANGUNAN,
 				'PONDASI_BANGUNAN'=>$PONDASI_BANGUNAN,
-				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+				'TGL_BERAKHIR'=>$permohonan_kadaluarsa,
 				'TGL_PERMOHONAN'=>date("Y-m-d"),
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
-				'RETRIBUSI'=>$RETRIBUSI,
+				'RETRIBUSI'=>$permohonan_retribusi,
 				'STATUS'=>$STATUS,
-				);
+			);
 			$result = $this->m_ijin_prinsip->__insert($data, '', 'insertId');
 			
 			$ijin_prinsip_ket = json_decode($this->input->post('KETERANGAN'));
@@ -167,63 +138,26 @@ class C_ijin_prinsip extends CI_Controller{
 	}
 	
 	function update(){
-		$ID_IJIN_PRINSIP = htmlentities($this->input->post('ID_IJIN_PRINSIP'),ENT_QUOTES);
-		$ID_IJIN_PRINSIP = is_numeric($ID_IJIN_PRINSIP) ? $ID_IJIN_PRINSIP : 0;
-		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
-		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
-		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
-		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
-		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
-		$NAMA_LOKASI = htmlentities($this->input->post('NAMA_LOKASI'),ENT_QUOTES);
-		$LONGITUDE = htmlentities($this->input->post('LONGITUDE'),ENT_QUOTES);
-		$LATITUDE = htmlentities($this->input->post('LATITUDE'),ENT_QUOTES);
-		$ALAMAT_LOKASI = htmlentities($this->input->post('ALAMAT_LOKASI'),ENT_QUOTES);
-		$JENIS_TOWER = htmlentities($this->input->post('JENIS_TOWER'),ENT_QUOTES);
-		$FUNGSI_BANGUNAN = htmlentities($this->input->post('FUNGSI_BANGUNAN'),ENT_QUOTES);
-		$JENIS_BANGUNAN = htmlentities($this->input->post('JENIS_BANGUNAN'),ENT_QUOTES);
-		$UKURAN_BANGUNAN = htmlentities($this->input->post('UKURAN_BANGUNAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = htmlentities($this->input->post('TINGGI_BANGUNAN'),ENT_QUOTES);
-		$TINGGI_BANGUNAN = is_numeric($TINGGI_BANGUNAN) ? $TINGGI_BANGUNAN : 0;
-		$TIANG_BANGUNAN = htmlentities($this->input->post('TIANG_BANGUNAN'),ENT_QUOTES);
-		$PONDASI_BANGUNAN = htmlentities($this->input->post('PONDASI_BANGUNAN'),ENT_QUOTES);
-		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
-		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
-		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
-		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
-		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
-		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
-		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
-		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
-		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
-		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$params = json_decode($this->input->post('params'));
+		extract(get_object_vars($params));
 		
 		$in_prinsip_updated_by = $this->m_ijin_prinsip->__checkSession();
 		$in_prinsip_updated_date = date('Y-m-d H:i:s');
 		
+		$resultperusahaan = $this->m_sktr->cuperusahaan($params);
+		$resultpemohon = $this->m_sktr->cupemohon($params);
+		$resultpermohonan = $this->m_sktr->cupermohonan($params, $resultpemohon, '');
+		
 		if($in_prinsip_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
-			$get_pemohon= $this->m_m_pemohon->get_by(array("pemohon_nik"=>$pemohon_nik));
-			$pemohon_id	= (count($get_pemohon) <= 0) ? ($pemohon_id = null) : ($pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES));
-			if($pemohon_id == null){
-				$data = array(
-					'pemohon_nama'=>$pemohon_nama,
-					'pemohon_alamat'=>$pemohon_alamat,
-					'pemohon_telp'=>$pemohon_telp,
-					'pemohon_nik'=>$pemohon_nik,
-					'pemohon_user_id'=>$_SESSION['USERID']
-				);
-				$pemohon_id	= $this->m_m_pemohon->__insert($data, '', 'insertId');
-			}
 			$data = array(
-				'ID_PEMOHON'=>$pemohon_id,
-				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
+				'ID_PEMOHON'=>$resultpemohon,
+				'ID_PERUSAHAAN'=>$resultperusahaan,
+				'NAMA_PERUSAHAAN'=>$perusahaan_nama,
 				'NO_SK'=>$NO_SK,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
-				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+				'JENIS_PERMOHONAN'=>$permohonan_jenis,
 				'NAMA_LOKASI'=>$NAMA_LOKASI,
 				'LONGITUDE'=>$LONGITUDE,
 				'LATITUDE'=>$LATITUDE,
@@ -235,11 +169,10 @@ class C_ijin_prinsip extends CI_Controller{
 				'TINGGI_BANGUNAN'=>$TINGGI_BANGUNAN,
 				'TIANG_BANGUNAN'=>$TIANG_BANGUNAN,
 				'PONDASI_BANGUNAN'=>$PONDASI_BANGUNAN,
-				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
-				// 'TGL_PERMOHONAN'=>date("Y-m-d"),
+				'TGL_BERAKHIR'=>$permohonan_kadaluarsa,
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
 				'STATUS'=>$STATUS,
-				'RETRIBUSI'=>$RETRIBUSI,
+				'RETRIBUSI'=>$permohonan_retribusi,
 				);
 			$result = $this->m_ijin_prinsip->save($data, $ID_IJIN_PRINSIP);
 			$this->m_cek_list_prinsip->delete($result);
@@ -268,13 +201,11 @@ class C_ijin_prinsip extends CI_Controller{
 	function search(){
 		$limit_start = (integer)$this->input->post('start');
 		$limit_end = (integer)$this->input->post('limit');
-		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
-		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
-		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
+		$perusahaan_nama = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
 		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$permohonan_jenis = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$permohonan_jenis = is_numeric($permohonan_jenis) ? $permohonan_jenis : 0;
 		$NAMA_LOKASI = htmlentities($this->input->post('NAMA_LOKASI'),ENT_QUOTES);
 		$LONGITUDE = htmlentities($this->input->post('LONGITUDE'),ENT_QUOTES);
 		$LATITUDE = htmlentities($this->input->post('LATITUDE'),ENT_QUOTES);
@@ -289,11 +220,10 @@ class C_ijin_prinsip extends CI_Controller{
 		$PONDASI_BANGUNAN = htmlentities($this->input->post('PONDASI_BANGUNAN'),ENT_QUOTES);
 				
 		$params = array(
-			'ID_PEMOHON'=>$ID_PEMOHON,
-			'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
+			'NAMA_PERUSAHAAN'=>$perusahaan_nama,
 			'NO_SK'=>$NO_SK,
 			'NO_SK_LAMA'=>$NO_SK_LAMA,
-			'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+			'JENIS_PERMOHONAN'=>$permohonan_jenis,
 			'NAMA_LOKASI'=>$NAMA_LOKASI,
 			'LONGITUDE'=>$LONGITUDE,
 			'LATITUDE'=>$LATITUDE,
@@ -318,13 +248,11 @@ class C_ijin_prinsip extends CI_Controller{
 		
 		$searchText = $this->input->post('query');
 		$currentAction = $this->input->post('currentAction');
-		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
-		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
-		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
+		$perusahaan_nama = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
 		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$permohonan_jenis = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$permohonan_jenis = is_numeric($permohonan_jenis) ? $permohonan_jenis : 0;
 		$NAMA_LOKASI = htmlentities($this->input->post('NAMA_LOKASI'),ENT_QUOTES);
 		$LONGITUDE = htmlentities($this->input->post('LONGITUDE'),ENT_QUOTES);
 		$LATITUDE = htmlentities($this->input->post('LATITUDE'),ENT_QUOTES);
@@ -340,11 +268,10 @@ class C_ijin_prinsip extends CI_Controller{
 				
 		$params = array(
 			'searchText' => $searchText,
-			'ID_PEMOHON'=>$ID_PEMOHON,
-			'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
+			'NAMA_PERUSAHAAN'=>$perusahaan_nama,
 			'NO_SK'=>$NO_SK,
 			'NO_SK_LAMA'=>$NO_SK_LAMA,
-			'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+			'JENIS_PERMOHONAN'=>$permohonan_jenis,
 			'NAMA_LOKASI'=>$NAMA_LOKASI,
 			'LONGITUDE'=>$LONGITUDE,
 			'LATITUDE'=>$LATITUDE,

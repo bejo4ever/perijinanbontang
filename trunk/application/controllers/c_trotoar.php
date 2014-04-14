@@ -4,6 +4,15 @@ class C_trotoar extends CI_Controller{
 	public function __construct(){
 		parent::__construct();
 		session_start();
+		if(!empty($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest') {
+			if(!isset($_SESSION['USERID'])){
+				$this->output->set_status_header('301');
+			}
+		}else{
+			if(!isset($_SESSION['USERID'])){
+				redirect('c_login');
+			}
+		}
 		$this->load->model('m_trotoar');
 		$this->load->model('m_m_pemohon');
 		$this->load->model('m_cek_list_trotoar');
@@ -73,66 +82,34 @@ class C_trotoar extends CI_Controller{
 	}
 	
 	function create(){
-		$ID_TROTOAR = htmlentities($this->input->post('ID_TROTOAR'),ENT_QUOTES);
-		$ID_TROTOAR = is_numeric($ID_TROTOAR) ? $ID_TROTOAR : 0;
-		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
-		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
-		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
-		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
-		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
-		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
-		$ALAMAT = htmlentities($this->input->post('ALAMAT'),ENT_QUOTES);
-		$PERUNTUKAN = htmlentities($this->input->post('PERUNTUKAN'),ENT_QUOTES);
-		$ALAMAT_LOKASI = htmlentities($this->input->post('ALAMAT_LOKASI'),ENT_QUOTES);
-		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
-		$TGL_BERLAKU = htmlentities($this->input->post('TGL_BERLAKU'),ENT_QUOTES);
-		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
-		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
-		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
-		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
-		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
-		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
-		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
-		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
-		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
-		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$params = json_decode($this->input->post('params'));
+		extract(get_object_vars($params));
 		
 		$otoar_author = $this->m_trotoar->__checkSession();
 		$otoar_created_date = date('Y-m-d H:i:s');
 		
+		$noreg = $this->m_public_function->getNomorReg(22);
+		$resultperusahaan = $this->m_trotoar->cuperusahaan($params);
+		$pemohon = $this->m_trotoar->cupemohon($params);
+		$resultpermohonan = $this->m_trotoar->cupermohonan($params, $pemohon, $noreg);
+		
 		if($otoar_author == ''){
 			$result = 'sessionExpired';
 		}else{
-			$get_pemohon= $this->m_m_pemohon->get_by(array("pemohon_nik"=>$pemohon_nik));
-			$pemohon_id	= (count($get_pemohon) <= 0) ? ($pemohon_id = null) : ($pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES));
-			if($pemohon_id == null){
-				$data = array(
-					'pemohon_nama'=>$pemohon_nama,
-					'pemohon_alamat'=>$pemohon_alamat,
-					'pemohon_telp'=>$pemohon_telp,
-					'pemohon_nik'=>$pemohon_nik,
-					'pemohon_user_id'=>$_SESSION['USERID']
-				);
-				$pemohon_id	= $this->m_m_pemohon->__insert($data, '', 'insertId');
-			}
 			$data = array(
-				'ID_TROTOAR'=>$ID_TROTOAR,
-				'ID_PEMOHON'=>$pemohon_id,
-				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
-				'NO_SK'=>$NO_SK,
+				'ID_PEMOHON'=>$pemohon,
+				'ID_PERUSAHAAN'=>$resultperusahaan,
+				'JENIS_PERMOHONAN'=>$permohonan_jenis,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
-				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
-				'ALAMAT'=>$ALAMAT,
+				'NAMA_PERUSAHAAN'=>$perusahaan_nama,
+				'ALAMAT'=>$perusahaan_alamat,
 				'PERUNTUKAN'=>$PERUNTUKAN,
 				'ALAMAT_LOKASI'=>$ALAMAT_LOKASI,
-				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
-				'TGL_BERLAKU'=>$TGL_BERLAKU,
-				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+				'TGL_PERMOHONAN'=>$permohonan_tanggal,
+				'TGL_BERAKHIR'=>$permohonan_kadaluarsa,
 				'STATUS'=>$STATUS,
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
-				'RETRIBUSI'=>$RETRIBUSI,
+				'RETRIBUSI'=>$permohonan_retribusi,
 				);
 			$result = $this->m_trotoar->__insert($data, '', 'insertId');
 			
@@ -152,67 +129,35 @@ class C_trotoar extends CI_Controller{
 	}
 	
 	function update(){
-		$ID_TROTOAR = htmlentities($this->input->post('ID_TROTOAR'),ENT_QUOTES);
-		$ID_TROTOAR = is_numeric($ID_TROTOAR) ? $ID_TROTOAR : 0;
-		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
-		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
-		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
-		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
-		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
-		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
-		$ALAMAT = htmlentities($this->input->post('ALAMAT'),ENT_QUOTES);
-		$PERUNTUKAN = htmlentities($this->input->post('PERUNTUKAN'),ENT_QUOTES);
-		$ALAMAT_LOKASI = htmlentities($this->input->post('ALAMAT_LOKASI'),ENT_QUOTES);
-		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
-		$TGL_BERLAKU = htmlentities($this->input->post('TGL_BERLAKU'),ENT_QUOTES);
-		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
-		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
-		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
-		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
-		$STATUS_SURVEY = is_numeric($STATUS_SURVEY) ? $STATUS_SURVEY : 0;
-		$RETRIBUSI = htmlentities($this->input->post('RETRIBUSI'),ENT_QUOTES);
-		$RETRIBUSI = is_numeric($RETRIBUSI) ? $RETRIBUSI : 0;
-		$pemohon_nama = htmlentities($this->input->post('pemohon_nama'),ENT_QUOTES);
-		$pemohon_alamat = htmlentities($this->input->post('pemohon_alamat'),ENT_QUOTES);
-		$pemohon_telp = htmlentities($this->input->post('pemohon_telp'),ENT_QUOTES);
-		$pemohon_nik = htmlentities($this->input->post('pemohon_nik'),ENT_QUOTES);
+		$params = json_decode($this->input->post('params'));
+		extract(get_object_vars($params));
 		
 		$otoar_updated_by = $this->m_trotoar->__checkSession();
 		$otoar_updated_date = date('Y-m-d H:i:s');
 		
+		$resultperusahaan = $this->m_sktr->cuperusahaan($params);
+		$resultpemohon = $this->m_sktr->cupemohon($params);
+		$resultpermohonan = $this->m_sktr->cupermohonan($params, $resultpemohon, '');
+		
 		if($otoar_updated_by == ''){
 			$result = 'sessionExpired';
 		}else{
-			$get_pemohon= $this->m_m_pemohon->get_by(array("pemohon_nik"=>$pemohon_nik));
-			$pemohon_id	= (count($get_pemohon) <= 0) ? ($pemohon_id = null) : ($pemohon_id = htmlentities($this->input->post('pemohon_id'),ENT_QUOTES));
-			if($pemohon_id == null){
-				$data = array(
-					'pemohon_nama'=>$pemohon_nama,
-					'pemohon_alamat'=>$pemohon_alamat,
-					'pemohon_telp'=>$pemohon_telp,
-					'pemohon_nik'=>$pemohon_nik,
-					'pemohon_user_id'=>$_SESSION['USERID']
-				);
-				$pemohon_id	= $this->m_m_pemohon->__insert($data, '', 'insertId');
-			}
 			$data = array(
-				'ID_PEMOHON'=>$pemohon_id,
-				'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
-				'NO_SK'=>$NO_SK,
+				'ID_PEMOHON'=>$resultpemohon,
+				'ID_PERUSAHAAN'=>$resultperusahaan,
+				'JENIS_PERMOHONAN'=>$permohonan_jenis,
 				'NO_SK_LAMA'=>$NO_SK_LAMA,
-				'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
-				'ALAMAT'=>$ALAMAT,
+				'NAMA_PERUSAHAAN'=>$perusahaan_nama,
+				'ALAMAT'=>$perusahaan_alamat,
 				'PERUNTUKAN'=>$PERUNTUKAN,
 				'ALAMAT_LOKASI'=>$ALAMAT_LOKASI,
-				'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
-				'TGL_BERLAKU'=>$TGL_BERLAKU,
-				'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+				'TGL_PERMOHONAN'=>$permohonan_tanggal,
+				'TGL_BERAKHIR'=>$permohonan_kadaluarsa,
 				'STATUS'=>$STATUS,
 				'STATUS_SURVEY'=>$STATUS_SURVEY,
-				'RETRIBUSI'=>$RETRIBUSI,
+				'RETRIBUSI'=>$permohonan_retribusi,
 				);
-			$result = $this->m_trotoar->save($data, $ID_TROTOAR);
+			$result = $this->m_trotoar->save($data, $permohonan_id);
 			$this->m_cek_list_trotoar->delete($result);
 			$trotoar_ket = json_decode($this->input->post('KETERANGAN'));
 			$syarat = $this->m_trotoar->getSyarat2();
@@ -241,17 +186,17 @@ class C_trotoar extends CI_Controller{
 		$limit_end = (integer)$this->input->post('limit');
 		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
 		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
-		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$permohonan_jenis = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$permohonan_jenis = is_numeric($permohonan_jenis) ? $permohonan_jenis : 0;
 		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
 		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
-		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
+		$perusahaan_nama = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$ALAMAT = htmlentities($this->input->post('ALAMAT'),ENT_QUOTES);
 		$PERUNTUKAN = htmlentities($this->input->post('PERUNTUKAN'),ENT_QUOTES);
 		$ALAMAT_LOKASI = htmlentities($this->input->post('ALAMAT_LOKASI'),ENT_QUOTES);
-		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$permohonan_tanggal = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
 		$TGL_BERLAKU = htmlentities($this->input->post('TGL_BERLAKU'),ENT_QUOTES);
-		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
+		$permohonan_kadaluarsa = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
 		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
@@ -259,16 +204,16 @@ class C_trotoar extends CI_Controller{
 				
 		$params = array(
 			'ID_PEMOHON'=>$ID_PEMOHON,
-			'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+			'JENIS_PERMOHONAN'=>$permohonan_jenis,
 			'NO_SK'=>$NO_SK,
 			'NO_SK_LAMA'=>$NO_SK_LAMA,
-			'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
+			'NAMA_PERUSAHAAN'=>$perusahaan_nama,
 			'ALAMAT'=>$ALAMAT,
 			'PERUNTUKAN'=>$PERUNTUKAN,
 			'ALAMAT_LOKASI'=>$ALAMAT_LOKASI,
-			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+			'TGL_PERMOHONAN'=>$permohonan_tanggal,
 			'TGL_BERLAKU'=>$TGL_BERLAKU,
-			'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+			'TGL_BERAKHIR'=>$permohonan_kadaluarsa,
 			'STATUS'=>$STATUS,
 			'STATUS_SURVEY'=>$STATUS_SURVEY,
 			'limit_start' => $limit_start,
@@ -286,17 +231,17 @@ class C_trotoar extends CI_Controller{
 		$currentAction = $this->input->post('currentAction');
 		$ID_PEMOHON = htmlentities($this->input->post('ID_PEMOHON'),ENT_QUOTES);
 		$ID_PEMOHON = is_numeric($ID_PEMOHON) ? $ID_PEMOHON : 0;
-		$JENIS_PERMOHONAN = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
-		$JENIS_PERMOHONAN = is_numeric($JENIS_PERMOHONAN) ? $JENIS_PERMOHONAN : 0;
+		$permohonan_jenis = htmlentities($this->input->post('JENIS_PERMOHONAN'),ENT_QUOTES);
+		$permohonan_jenis = is_numeric($permohonan_jenis) ? $permohonan_jenis : 0;
 		$NO_SK = htmlentities($this->input->post('NO_SK'),ENT_QUOTES);
 		$NO_SK_LAMA = htmlentities($this->input->post('NO_SK_LAMA'),ENT_QUOTES);
-		$NAMA_PERUSAHAAN = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
+		$perusahaan_nama = htmlentities($this->input->post('NAMA_PERUSAHAAN'),ENT_QUOTES);
 		$ALAMAT = htmlentities($this->input->post('ALAMAT'),ENT_QUOTES);
 		$PERUNTUKAN = htmlentities($this->input->post('PERUNTUKAN'),ENT_QUOTES);
 		$ALAMAT_LOKASI = htmlentities($this->input->post('ALAMAT_LOKASI'),ENT_QUOTES);
-		$TGL_PERMOHONAN = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
+		$permohonan_tanggal = htmlentities($this->input->post('TGL_PERMOHONAN'),ENT_QUOTES);
 		$TGL_BERLAKU = htmlentities($this->input->post('TGL_BERLAKU'),ENT_QUOTES);
-		$TGL_BERAKHIR = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
+		$permohonan_kadaluarsa = htmlentities($this->input->post('TGL_BERAKHIR'),ENT_QUOTES);
 		$STATUS = htmlentities($this->input->post('STATUS'),ENT_QUOTES);
 		$STATUS = is_numeric($STATUS) ? $STATUS : 0;
 		$STATUS_SURVEY = htmlentities($this->input->post('STATUS_SURVEY'),ENT_QUOTES);
@@ -305,16 +250,16 @@ class C_trotoar extends CI_Controller{
 		$params = array(
 			'searchText' => $searchText,
 			'ID_PEMOHON'=>$ID_PEMOHON,
-			'JENIS_PERMOHONAN'=>$JENIS_PERMOHONAN,
+			'JENIS_PERMOHONAN'=>$permohonan_jenis,
 			'NO_SK'=>$NO_SK,
 			'NO_SK_LAMA'=>$NO_SK_LAMA,
-			'NAMA_PERUSAHAAN'=>$NAMA_PERUSAHAAN,
+			'NAMA_PERUSAHAAN'=>$perusahaan_nama,
 			'ALAMAT'=>$ALAMAT,
 			'PERUNTUKAN'=>$PERUNTUKAN,
 			'ALAMAT_LOKASI'=>$ALAMAT_LOKASI,
-			'TGL_PERMOHONAN'=>$TGL_PERMOHONAN,
+			'TGL_PERMOHONAN'=>$permohonan_tanggal,
 			'TGL_BERLAKU'=>$TGL_BERLAKU,
-			'TGL_BERAKHIR'=>$TGL_BERAKHIR,
+			'TGL_BERAKHIR'=>$permohonan_kadaluarsa,
 			'STATUS'=>$STATUS,
 			'STATUS_SURVEY'=>$STATUS_SURVEY,
 			'currentAction' => $currentAction,
