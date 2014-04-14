@@ -1,11 +1,6 @@
 <?php
 class M_ijin_prinsip extends App_Model{
 	var $mainSql = "SELECT 
-				m_pemohon.pemohon_id,
-				m_pemohon.pemohon_nik,
-				m_pemohon.pemohon_nama,
-				m_pemohon.pemohon_alamat,
-				m_pemohon.pemohon_telp,
 				ID_IJIN_PRINSIP,
 				ID_PEMOHON,
 				NAMA_PERUSAHAAN,
@@ -26,9 +21,55 @@ class M_ijin_prinsip extends App_Model{
 				STATUS,
 				STATUS_SURVEY,
 				RETRIBUSI,
-				TGL_BERAKHIR
+				TGL_BERAKHIR,
+				pemohon.id AS pemohon_id,
+				pemohon.nama AS pemohon_nama,
+				pemohon.alamat AS pemohon_alamat,
+				pemohon.telp AS pemohon_telp,
+				pemohon.npwp AS pemohon_npwp,
+				pemohon.rt AS pemohon_rt,
+				pemohon.rw AS pemohon_rw,
+				pemohon.desa_id AS pemohon_kel,
+				pemohon.kecamatan_id AS pemohon_kec,
+				pemohon.ktp AS pemohon_nik,
+				pemohon.stra AS pemohon_stra,
+				pemohon.surattugas AS pemohon_surattugas,
+				pemohon.pekerjaan AS pemohon_pekerjaan,
+				pemohon.tempatlahir AS pemohon_tempatlahir,
+				pemohon.tgllahir AS pemohon_tanggallahir,
+				pemohon.pendidikan AS pemohon_pendidikan,
+				pemohon.tahunlulus AS pemohon_tahunlulus,
+				perusahaan.id AS perusahaan_id,
+				perusahaan.npwp AS perusahaan_npwp,
+				perusahaan.nama AS perusahaan_nama,
+				perusahaan.noakta AS perusahaan_noakta,
+				perusahaan.notaris AS perusahaan_notaris,
+				perusahaan.tglakta AS perusahaan_tglakta,
+				perusahaan.bentuk_id AS perusahaan_bentuk_id,
+				perusahaan.kualifikasi_id AS perusahaan_kualifikasi_id,
+				perusahaan.alamat AS perusahaan_alamat,
+				perusahaan.rt AS perusahaan_rt,
+				perusahaan.rw AS perusahaan_rw,
+				perusahaan.propinsi_id AS perusahaan_propinsi_id,
+				perusahaan.kabkota_id AS perusahaan_kabkota_id,
+				perusahaan.kecamatan_id AS perusahaan_kecamatan_id,
+				perusahaan.desa_id AS perusahaan_desa_id,
+				perusahaan.kodepos AS perusahaan_kodepos,
+				perusahaan.telp AS perusahaan_telp,
+				perusahaan.fax AS perusahaan_fax,
+				perusahaan.stempat_id AS perusahaan_stempat_id,
+				perusahaan.sperusahaan_id AS perusahaan_sperusahaan_id,
+				perusahaan.usaha AS perusahaan_usaha,
+				perusahaan.butara AS perusahaan_butara,
+				perusahaan.bselatan AS perusahaan_bselatan,
+				perusahaan.btimur AS perusahaan_btimur,
+				perusahaan.bbarat AS perusahaan_bbarat,
+				perusahaan.modal AS perusahaan_modal,
+				perusahaan.merk AS perusahaan_merk,
+				perusahaan.jusaha_id AS perusahaan_jusaha_id
 				FROM ijin_prinsip
-				JOIN m_pemohon ON m_pemohon.pemohon_id = ijin_prinsip.ID_PEMOHON
+				JOIN pemohon ON ijin_prinsip.ID_PEMOHON = pemohon.id
+				JOIN perusahaan ON ijin_prinsip.ID_PERUSAHAAN = perusahaan.id
 			WHERE ID_IJIN_PRINSIP IS NOT NULL 
 	";
 	
